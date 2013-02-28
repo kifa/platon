@@ -1,0 +1,64 @@
+{**
+ * My Application layout template.
+ *
+ * @param string   $basePath web base path
+ * @param string   $robots   tell robots how to index the content of a page (optional)
+ * @param array    $flashes  flash messages
+ *}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="">
+        <meta name="robots" content="{$robots}" n:ifset="$robots">
+
+      {*  <title>{block title|striptags|upper}BirneShop{/block}</title> *}
+
+        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
+        <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
+        <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap.css">
+        <link rel="stylesheet" href="{$basePath}/css/font-awesome.min.css">
+        <link rel="shortcut icon" href="{$basePath}/favicon.ico">
+        
+	{block head}{/block}
+    </head>
+
+    <body>
+        <script> document.body.className+=' js' </script>
+
+        <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+
+        <div class="container">
+
+            <div class="masterhead">
+                <h1 n:block=title>BirneShop!</h1>
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <ul class="nav">
+                                <li class="active"><a href="#">Home</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        {include #content}
+
+
+            <div class="footer">
+                &COPY; Birne shop 2013
+            </div>
+
+        </div>
+	{block scripts}
+        <script src="{$basePath}/js/jquery.js"></script>
+        <script src="{$basePath}/js/netteForms.js"></script>
+        <script src="{$basePath}/js/main.js"></script>
+        <script src="{$basePath}/js/bootstrap.min.js"></script>
+        
+	{/block}
+    </body>
+</html>
