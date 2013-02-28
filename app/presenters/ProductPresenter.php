@@ -39,7 +39,7 @@ class ProductPresenter extends BasePresenter {
      * načítá produkty pro zobrazení katalogu
      */
     public function renderProducts() {
-        $this->template->products = $this->productModel->nactiProdukty();
+     //   $this->template->products = $this->productModel->nactiProdukty();
     }
     
     
@@ -49,9 +49,13 @@ class ProductPresenter extends BasePresenter {
      */
     
     public function renderProduct() {
-        $this->template->product = $this->productModel->nactiProdukt();
+       // $this->template->product = $this->productModel->nactiProdukt();
     }
 
+    public function renderDefault()
+	{
+		$this->template->anyVariable = 'any value';
+	}
 
 }
 ?>
