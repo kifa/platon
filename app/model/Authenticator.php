@@ -5,15 +5,6 @@ use Nette\Security,
 	Nette\Utils\Strings;
 
 
-/*
-CREATE TABLE users (
-	id int(11) NOT NULL AUTO_INCREMENT,
-	username varchar(50) NOT NULL,
-	password char(60) NOT NULL,
-	role varchar(20) NOT NULL,
-	PRIMARY KEY (id)
-);
-*/
 
 /**
  * Users authenticator.
