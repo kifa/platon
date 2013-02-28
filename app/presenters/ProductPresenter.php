@@ -1,6 +1,5 @@
 <?php
 
-use Nette;
 /*
  * class ProductPresenter
  * předkládá informace o produktech
