@@ -5,27 +5,24 @@
  * and open the template in the editor.
  */
 
-class ShopModel extends Nette\Object {
-
-   /*
-    * Load shop info
-    * -name, meta,.. 
-    */
-    
+class OrderModel extends Nette\Object {
     
     /*
-     * Load shipping info
+     * Show orders
+     * 
+     */
+    
+    /*
+     * Check and save order
+     */
+    
+    /*
+     * Change order status
      */
     
     
-    
     /*
-     * Load VAT etc
-     */
-    
-    
-    /*
-     * ETC...
+     * Generate emails
      */
     
 }

@@ -35,7 +35,7 @@ class ProductPresenter extends BasePresenter {
     
     /*
      * renderProducts();
-     * načítá produkty pro zobrazení katalogu
+     * rendering Product Catalog
      */
     public function renderProducts() {
      //   $this->template->products = $this->productModel->nactiProdukty();
@@ -44,7 +44,7 @@ class ProductPresenter extends BasePresenter {
     
      /*
      * renderProduct();
-     * načítá jeden produkt pro zobrazení zboží
+     * rendering Product with full info
      */
     
     public function renderProduct() {

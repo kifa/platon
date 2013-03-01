@@ -13,10 +13,10 @@
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
     /*
      * @var shopModel
-     * zpřístupňuje informace o obchodu a jeho nastavení
+     * accessing info about shop like name, meta, shipping
      * 
      * @var categoryModel
-     * přístup ke kategoriím pro načtení struktury menu atp
+     * accessing category model
      */
 
     private $shopModel;
@@ -32,7 +32,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
         /*
          *  beforeRender()
-         *  Načítá informace, které se ukazují na každé stránce
+         *  rendering info used on every page
          */
         
     public function beforeRender() {

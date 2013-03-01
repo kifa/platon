@@ -11,25 +11,25 @@ class CategoryModel extends Nette\Object {
     
     
     /*
-     * Načítá kategorie
+     * Load Categories
      */
     
     
     
     /*
-     * Vytvořit kategorii
+     * Create Category
      */
     
     
     
     /*
-     * Aktualizovat kategorii
+     * Update Category
      */
     
     
     
     /*
-     * Smazat kategorii
+     * Delete Category
      */
     
 }

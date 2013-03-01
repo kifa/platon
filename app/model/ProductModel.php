@@ -9,28 +9,28 @@
 class ProductModel extends Nette\Object {
 
     /**
-     * Načtení produktů z DB
+     * Load Product Catalog
      */
     
     
     /*
-     * Načtení 1 produktu z DB
+     * Load 1 Product
      */
     
     
     
     /*
-     * Aktualizace produktu
+     * Insert Product
      */
     
     
     /*
-     * Nový produkt do db
+     * Update Product
      */
     
     
     /*
-     * Odstanění produktu
+     * Delete Produkt
      */
 
 }
