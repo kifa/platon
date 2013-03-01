@@ -1,32 +1,39 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Class ShopModel
+ * ShopModel is managing all basic Shop informations and settings.
  */
 
 class ShopModel extends Nette\Object {
+    /*
+     * Load shop info
+     * @param ?
+     * @param ? example: pozice počátečního znaku
+     * @return string 
+     */
 
-   /*
-    * Load shop info
-    * -name, meta,.. 
-    */
-    
-    
+
     /*
      * Load shipping info
+     *  @param ?
+     * @param ? example: pozice počátečního znaku
+     * @return string
      */
-    
-    
-    
+
+
+
     /*
      * Load VAT etc
+     * @param ?
+     * @param ? example: pozice počátečního znaku
+     * @return string
      */
-    
-    
+
+
     /*
      * ETC...
      */
-    
 }
+
 ?>

@@ -2,8 +2,7 @@
 
 /*
  * class ProductPresenter
- * předkládá informace o produktech
- * předkládá informace o jednom produktu
+ * ProductPresenter rendering product info, and catalog info
  */
 
 class ProductPresenter extends BasePresenter {
@@ -34,8 +33,10 @@ class ProductPresenter extends BasePresenter {
     
     
     /*
-     * renderProducts();
-     * rendering Product Catalog
+     * renderProducts
+     * @param ?
+    * @param ? example: pozice počátečního znaku
+       * @return string
      */
     public function renderProducts() {
      //   $this->template->products = $this->productModel->nactiProdukty();
@@ -45,12 +46,23 @@ class ProductPresenter extends BasePresenter {
      /*
      * renderProduct();
      * rendering Product with full info
+      * * @param ?
+* @param ? example: pozice počátečního znaku
+* @return string
      */
     
     public function renderProduct() {
        // $this->template->product = $this->productModel->nactiProdukt();
     }
 
+    
+    /*
+     * renderDefault()
+     * rendering default product catalog
+     *  @param ?
+* @param ? example: pozice počátečního znaku
+* @return string
+     */
     public function renderDefault()
 	{
 		$this->template->anyVariable = 'any value';

@@ -4,9 +4,9 @@
  * Base presenter for eshop.
  * Presenting skeleton of shop - header - content link - footer
  * 
- * zobrazuje celé záhlaví
- * zobrazuje celé zápatí
- * nastavuje rozložení stránky
+ * Rendering whole HEADER
+ * Rendering whole FOOTER
+ * Setting shop layout, css, scripts
 
 
  */
