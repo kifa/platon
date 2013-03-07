@@ -37,6 +37,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         
     public function beforeRender() {
         parent::beforeRender();
+        
        // $this->template->infos = $this->shopModel->nactidata();
        // $this->template->categories = $this->categoryModel->nactidata();
     }
