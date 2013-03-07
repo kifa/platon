@@ -7,7 +7,7 @@
  * @author lukas
  */
 class ProductModel extends Nette\Object {
-    
+
     /**
      * Load Product Catalog
      * @param ?

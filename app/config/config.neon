@@ -16,9 +16,9 @@ common:
 			errorPresenter: Error
 
 		database:
-			dsn: 'mysql:host=localhost;dbname=test'
-			user:
-			password:
+			dsn: 'mysql:host=localhost;dbname=shop'
+			user: 'shop'
+			password: 'shop'
 
 		session:
 			expiration: 14 days
