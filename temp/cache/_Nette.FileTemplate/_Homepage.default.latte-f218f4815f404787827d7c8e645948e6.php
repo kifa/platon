@@ -1,23 +1,23 @@
-<?php //netteCache[01]000385a:2:{s:4:"time";s:21:"0.41972000 1362168844";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:63:"I:\xampp\htdocs\GIT\platon\app\templates\Homepage\default.latte";i:2;i:1362090639;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000385a:2:{s:4:"time";s:21:"0.91093600 1362839886";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:63:"I:\xampp\htdocs\GIT\platon\app\templates\Homepage\default.latte";i:2;i:1362839058;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: I:\xampp\htdocs\GIT\platon\app\templates\Homepage\default.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'p3i8ntizv0')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '3q2w3y3l74')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb598bf158fa_head')) { function _lb598bf158fa_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lb51a224f8bc_head')) { function _lb51a224f8bc_head($_l, $_args) { extract($_args)
 ?><title>Kategorie</title><?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb8daa2c7eb4_content')) { function _lb8daa2c7eb4_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb1e0b73c1f9_content')) { function _lb1e0b73c1f9_content($_l, $_args) { extract($_args)
 ?><div id="myCarousel" class="carousel slide">
     <ol class="carousel-indicators">
         <li data-target= "#myCarousel"  data-slide-to="0" class="active"></li>
@@ -74,9 +74,10 @@ if (!function_exists($_l->blocks['content'][] = '_lb8daa2c7eb4_content')) { func
                     <div class="caption">
                         <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
                             <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-                        <a href="#" class="btn btn-primary"><i class="icon-info-sign"></i> Prohlédnout</a>
+                        <a class="btn btn-primary" href="<?php echo htmlSpecialChars($_control->link("Product:product")) ?>
+"><i class="icon-info-sign"></i> Prohlédnout</a>
                         <hr />
-                        <p class="text-success lead"><a class="btn btn-success" href="<?php echo htmlSpecialChars($_control->link("Product:product")) ?>
+                        <p class="text-success lead"><a class="btn btn-success" href="<?php echo htmlSpecialChars($_control->link("Order:cart")) ?>
 "><i class="icon-shopping-cart"></i> Koupit</a> 5000,- </p>
                     </div>
                 </div>

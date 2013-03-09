@@ -26,7 +26,6 @@ $container = $configurator->createContainer();
 
 // Session cart
 $session = $container->session;
-$cart = $session->getSection('cart');
-        
+       
 
 return $container;
