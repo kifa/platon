@@ -25,7 +25,7 @@ $configurator->addConfig(__DIR__ . '/config/config.local.neon', $configurator::N
 $container = $configurator->createContainer();
 
 // Session cart
-$session = $container->session;
+//$session = $container->session;
        
 
 return $container;

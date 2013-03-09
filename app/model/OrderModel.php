@@ -35,6 +35,12 @@ class OrderModel extends Nette\Object {
      * @param ? example: pozice počátečního znaku
      * @return string
      */
+    
+    /*
+     * Card session
+     */
+    
+   
 }
 
 ?>

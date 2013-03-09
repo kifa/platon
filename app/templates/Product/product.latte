@@ -1,4 +1,69 @@
 {block content}
 <h1 n:block="title">Galaxy Nexus</h1>
 
-<div>Velmi důležitý text</div>
+<div class="row">
+    <div class="span10">
+
+        <div class="span5">
+            <img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="width: 400px;"/>
+        </div>
+        <div class="span4">
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
+                    <li><a href="#spec" data-toggle="tab">Spec</a></li>
+                    <li><a href="#other" data-toggle="tab">Other</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="info">
+                        <p>With your favorite Google Apps, an amazing Photo Sphere camera, cutting edge hardware,
+                            and access to your favorite entertainment on Google Play – Nexus 4 puts the best of 
+                            Google in the palm of your hand.</p>
+                    </div>
+                    <div class="tab-pane" id="spec">
+                        <ul class="icons">
+                            <li><i class="icon-ok"></i>Width:</li>
+                            <li><i class="icon-ok"></i>Height:</li>
+                            <li><i class="icon-ok"></i>Weight:</li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="other">
+                        <p>Other infos</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="span4">
+                <h2 class="text-info span2">4999,-</h2>
+                <p class="span1">In stock: <span class="badge badge-info">2</span></p>
+                <a n:href="Order:cart produkt" class="span2 btn btn-primary">
+                        <i class="icon-shopping-cart"></i> Buy</a>
+                <a n:href="Order:cart produkt" class="span1 btn btn-success">
+                        <i class="icon-info-sign"></i> Ask</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="span2">
+        
+        <ul class="nav nav-list">
+            <li class="nav-header">Menu</li>
+            <li class="active"><a href="#"><i class="icon-home"></i>Domů</a></li>
+            <li><a href="#"><i class="icon-book"></i>Jak nakupovat</a></li>
+            <li><a href="#"><i class="icon-heart"></i>Jak prodávat</a></li>
+            <li><a href="#"><i class="icon-comment"></i>Jak cokoliv</a></li>
+            <li class="divider"></li>
+        </ul>
+
+        <i class="icon-camera-retro icon-2x"></i><strong>Google Nexus</strong>
+        <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
+            <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
+
+    </div>
+
+
+
+
+</div>
+
+{/block}

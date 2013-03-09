@@ -1,23 +1,23 @@
-<?php //netteCache[01]000385a:2:{s:4:"time";s:21:"0.91093600 1362839886";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:63:"I:\xampp\htdocs\GIT\platon\app\templates\Homepage\default.latte";i:2;i:1362839058;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000385a:2:{s:4:"time";s:21:"0.86209800 1362858420";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:63:"I:\xampp\htdocs\GIT\platon\app\templates\Homepage\default.latte";i:2;i:1362858324;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: I:\xampp\htdocs\GIT\platon\app\templates\Homepage\default.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '3q2w3y3l74')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'jh0q83v9pr')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb51a224f8bc_head')) { function _lb51a224f8bc_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lb01687f1b7a_head')) { function _lb01687f1b7a_head($_l, $_args) { extract($_args)
 ?><title>Kategorie</title><?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb1e0b73c1f9_content')) { function _lb1e0b73c1f9_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb0514a1ab91_content')) { function _lb0514a1ab91_content($_l, $_args) { extract($_args)
 ?><div id="myCarousel" class="carousel slide">
     <ol class="carousel-indicators">
         <li data-target= "#myCarousel"  data-slide-to="0" class="active"></li>
@@ -77,7 +77,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb1e0b73c1f9_content')) { func
                         <a class="btn btn-primary" href="<?php echo htmlSpecialChars($_control->link("Product:product")) ?>
 "><i class="icon-info-sign"></i> Prohlédnout</a>
                         <hr />
-                        <p class="text-success lead"><a class="btn btn-success" href="<?php echo htmlSpecialChars($_control->link("Order:cart")) ?>
+                        <p class="text-success lead"><a class="btn btn-success" href="<?php echo htmlSpecialChars($_control->link("Order:cart", array('produkt'))) ?>
 "><i class="icon-shopping-cart"></i> Koupit</a> 5000,- </p>
                     </div>
                 </div>

@@ -18,19 +18,35 @@ class OrderPresenter extends BasePresenter
         parent::startup();
         $this->orderModel = $this->context->orderModel;
         $this->cart = $this->getSession('cart');
+        
+        
     }
 
+     
+    public function actionCart($produkt) {
+        
+        if (isset($this->cart)) {
+            $this->setView('Cart');
+        }
+        else {
+                $this->setView('CartEmpty');
 
+        }
+    }
+
+    
     /*
      * renderCart rendering cart
      * including order form, payment, etc.
      */
     
-    public function renderCart() {
-        
-        if (isset($cart)) {
-        $this->template->cart = $cart;
-        unset($cart->userName);
+    public function renderCart($produkt) {
+
+        if (isset($produkt)) {
+            
+        $this->cart->userName = "super nový".$produkt;
+        $this->template->cart = $this->cart;
+       // unset($cart->userName);
         }
         
         else {
@@ -47,7 +63,7 @@ class OrderPresenter extends BasePresenter
     public function renderCartEmpty() {
             
         //$this->template->anyVariable = 'any value';
-        $cart->userName = 'pepík';
+        $this->cart->userName = 'pepík';
     }
 
 
@@ -62,7 +78,7 @@ class OrderPresenter extends BasePresenter
 
         public function renderDefault()
 	{
-		$this->template->anyVariable = 'any value';
+		$this->setView('CartEmpty');
 	}
 
 }

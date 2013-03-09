@@ -37,11 +37,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         
     public function beforeRender() {
         parent::beforeRender();
-        $cart = $this->getSession('cart');
-       // $cart->userName = 'franta';
-       // $cart->time = date('H:i:s');
-        //$this->template->cart = $this->getSession('cart');
-        
+      
        // $this->template->infos = $this->shopModel->nactidata();
        // $this->template->categories = $this->categoryModel->nactidata();
     }
