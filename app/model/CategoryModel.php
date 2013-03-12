@@ -7,24 +7,31 @@
  * CRUD functions.
  */
 
-class CategoryModel extends Nette\Object {
+class CategoryModel extends Authenticator {
     /*
      * Load Categories
      * @param ?
      * @param ? example: pozice počátečního znaku
      * @return string
      */
-   
-
-
-
+    public function loadCategory($id){
+        return $this->getTable('Category');
+    }
     /*
      * Create Category
      * @param ?
      * @param ? example: pozice počátečního znaku
      * @return string
      */
-
+    public function createCategory($id, $name, $description, $higher){
+        $insert = array(
+            'CategoryID' => $id,
+            'CategoryName' => $name,
+            'CategoryDescription' => $description,
+            'HigherCategoryID' => $higher
+        );
+        return $this->getTable('Category')->insert($insert);
+    }
 
 
     /*

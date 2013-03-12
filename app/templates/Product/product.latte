@@ -1,6 +1,5 @@
 {block content}
 <h1 n:block="title">{$product->ProductName}</h1>
-
 <div class="row">
     <div class="span10">
 
@@ -17,6 +16,7 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="info">
                         <p>{$product->ProductDescription}</p>
+                        <p>{$product->FinalPrice}</p>
                     </div>
                     <div class="tab-pane" id="spec">
                         <ul class="icons">

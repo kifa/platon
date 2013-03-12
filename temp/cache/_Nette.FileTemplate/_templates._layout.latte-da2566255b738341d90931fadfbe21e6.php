@@ -1,30 +1,30 @@
-<?php //netteCache[01]000372a:2:{s:4:"time";s:21:"0.81083500 1362858664";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:50:"C:\xampp\htdocs\platon\app\templates\@layout.latte";i:2;i:1362858628;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000372a:2:{s:4:"time";s:21:"0.05266100 1363122705";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:50:"C:\xampp\htdocs\platon\app\templates\@layout.latte";i:2;i:1363122690;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: C:\xampp\htdocs\platon\app\templates\@layout.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'v7m7lp9tiu')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'nkge822d3y')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block title
 //
-if (!function_exists($_l->blocks['title'][] = '_lb014e7d8072_title')) { function _lb014e7d8072_title($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['title'][] = '_lb6f3bafe5ba_title')) { function _lb6f3bafe5ba_title($_l, $_args) { extract($_args)
 ?>BirneShop<?php
 }}
 
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb7390347f2d_head')) { function _lb7390347f2d_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lb15bb347118_head')) { function _lb15bb347118_head($_l, $_args) { extract($_args)
 ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_l->blocks['scripts'][] = '_lb75471d1df1_scripts')) { function _lb75471d1df1_scripts($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['scripts'][] = '_lbdee34e4210_scripts')) { function _lbdee34e4210_scripts($_l, $_args) { extract($_args)
 ?>        <script src="<?php echo htmlSpecialChars($basePath) ?>/js/jquery.js"></script>
         <script src="<?php echo htmlSpecialChars($basePath) ?>/js/netteForms.js"></script>
         <script src="<?php echo htmlSpecialChars($basePath) ?>/js/main.js"></script>
@@ -92,6 +92,8 @@ ob_start(); call_user_func(reset($_l->blocks['title']), $_l, get_defined_vars())
                             <ul class="nav">
                                 <li class="active"><a href="<?php echo htmlSpecialChars($_control->link("Homepage:default")) ?>
 ">Home</a></li>
+                                <li class=""><a href="<?php echo htmlSpecialChars($_control->link("Product:default")) ?>
+">Kategorie</a></li>
                             </ul>
                         </div>
                     </div>

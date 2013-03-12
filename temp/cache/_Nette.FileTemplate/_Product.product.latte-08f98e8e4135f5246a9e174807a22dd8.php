@@ -1,18 +1,17 @@
-<?php //netteCache[01]000380a:2:{s:4:"time";s:21:"0.65482700 1363099955";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:58:"C:\xampp\htdocs\platon\app\templates\Product\product.latte";i:2;i:1363099951;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000380a:2:{s:4:"time";s:21:"0.73666900 1363123570";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:58:"C:\xampp\htdocs\platon\app\templates\Product\product.latte";i:2;i:1363123565;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: C:\xampp\htdocs\platon\app\templates\Product\product.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'ny1vv12ywd')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'r25fnuc246')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb711254f304_content')) { function _lb711254f304_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lbeed56f3cc7_content')) { function _lbeed56f3cc7_content($_l, $_args) { extract($_args)
 ;call_user_func(reset($_l->blocks['title']), $_l, get_defined_vars())  ?>
-
 <div class="row">
     <div class="span10">
 
@@ -29,6 +28,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb711254f304_content')) { func
                 <div class="tab-content">
                     <div class="tab-pane active" id="info">
                         <p><?php echo Nette\Templating\Helpers::escapeHtml($product->ProductDescription, ENT_NOQUOTES) ?></p>
+                        <p><?php echo Nette\Templating\Helpers::escapeHtml($product->FinalPrice, ENT_NOQUOTES) ?></p>
                     </div>
                     <div class="tab-pane" id="spec">
                         <ul class="icons">
@@ -84,7 +84,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb711254f304_content')) { func
 //
 // block title
 //
-if (!function_exists($_l->blocks['title'][] = '_lbfbdc8ac58c_title')) { function _lbfbdc8ac58c_title($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['title'][] = '_lb77a3d4187b_title')) { function _lb77a3d4187b_title($_l, $_args) { extract($_args)
 ?><h1><?php echo Nette\Templating\Helpers::escapeHtml($product->ProductName, ENT_NOQUOTES) ?></h1>
 <?php
 }}

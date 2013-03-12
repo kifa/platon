@@ -49,14 +49,10 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator {
         }
         return crypt($password, $salt ? : '$2a$07$' . Strings::random(22));
     }
-    
-    
-    
+          
     protected function getTable($table)
     {
         
         return $this->database->table($table);
     }
-
-
 }
