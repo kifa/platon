@@ -1,16 +1,16 @@
-<?php //netteCache[01]000380a:2:{s:4:"time";s:21:"0.08468500 1362858689";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:58:"C:\xampp\htdocs\platon\app\templates\Product\product.latte";i:2;i:1362858628;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000380a:2:{s:4:"time";s:21:"0.65482700 1363099955";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:58:"C:\xampp\htdocs\platon\app\templates\Product\product.latte";i:2;i:1363099951;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: C:\xampp\htdocs\platon\app\templates\Product\product.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '6nsf1006qi')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'ny1vv12ywd')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lbb362e49d43_content')) { function _lbb362e49d43_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb711254f304_content')) { function _lb711254f304_content($_l, $_args) { extract($_args)
 ;call_user_func(reset($_l->blocks['title']), $_l, get_defined_vars())  ?>
 
 <div class="row">
@@ -28,9 +28,7 @@ if (!function_exists($_l->blocks['content'][] = '_lbb362e49d43_content')) { func
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="info">
-                        <p>With your favorite Google Apps, an amazing Photo Sphere camera, cutting edge hardware,
-                            and access to your favorite entertainment on Google Play – Nexus 4 puts the best of 
-                            Google in the palm of your hand.</p>
+                        <p><?php echo Nette\Templating\Helpers::escapeHtml($product->ProductDescription, ENT_NOQUOTES) ?></p>
                     </div>
                     <div class="tab-pane" id="spec">
                         <ul class="icons">
@@ -47,7 +45,7 @@ if (!function_exists($_l->blocks['content'][] = '_lbb362e49d43_content')) { func
             
             <div class="span4">
                 <h2 class="text-info span2">4999,-</h2>
-                <p class="span1">In stock: <span class="badge badge-info">2</span></p>
+                <p class="span1">In stock: <span class="badge badge-info"><?php echo Nette\Templating\Helpers::escapeHtml($product->PiecesAvailable, ENT_NOQUOTES) ?></span></p>
                 <a class="span2 btn btn-primary" href="<?php echo htmlSpecialChars($_control->link("Order:cart", array('produkt'))) ?>
 ">
                         <i class="icon-shopping-cart"></i> Buy</a>
@@ -86,8 +84,8 @@ if (!function_exists($_l->blocks['content'][] = '_lbb362e49d43_content')) { func
 //
 // block title
 //
-if (!function_exists($_l->blocks['title'][] = '_lb2a7e5ef34e_title')) { function _lb2a7e5ef34e_title($_l, $_args) { extract($_args)
-?><h1>Galaxy Nexus</h1>
+if (!function_exists($_l->blocks['title'][] = '_lbfbdc8ac58c_title')) { function _lbfbdc8ac58c_title($_l, $_args) { extract($_args)
+?><h1><?php echo Nette\Templating\Helpers::escapeHtml($product->ProductName, ENT_NOQUOTES) ?></h1>
 <?php
 }}
 

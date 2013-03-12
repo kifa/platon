@@ -1,5 +1,5 @@
 {block content}
-<h1 n:block="title">Galaxy Nexus</h1>
+<h1 n:block="title">{$product->ProductName}</h1>
 
 <div class="row">
     <div class="span10">
@@ -16,9 +16,7 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="info">
-                        <p>With your favorite Google Apps, an amazing Photo Sphere camera, cutting edge hardware,
-                            and access to your favorite entertainment on Google Play – Nexus 4 puts the best of 
-                            Google in the palm of your hand.</p>
+                        <p>{$product->ProductDescription}</p>
                     </div>
                     <div class="tab-pane" id="spec">
                         <ul class="icons">
@@ -35,7 +33,7 @@
             
             <div class="span4">
                 <h2 class="text-info span2">4999,-</h2>
-                <p class="span1">In stock: <span class="badge badge-info">2</span></p>
+                <p class="span1">In stock: <span class="badge badge-info">{$product->PiecesAvailable}</span></p>
                 <a n:href="Order:cart produkt" class="span2 btn btn-primary">
                         <i class="icon-shopping-cart"></i> Buy</a>
                 <a n:href="Order:cart produkt" class="span1 btn btn-success">

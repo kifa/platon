@@ -38,8 +38,9 @@ class ProductPresenter extends BasePresenter {
     * @param ? example: pozice počátečního znaku
        * @return string
      */
-    public function renderProducts() {
-     //   $this->template->products = $this->productModel->nactiProdukty();
+    public function renderProducts($id) {
+   
+        $this->template->products = $this->productModel->loadCatalog($id);
     }
     
     
@@ -51,8 +52,9 @@ class ProductPresenter extends BasePresenter {
 * @return string
      */
     
-    public function renderProduct() {
-       // $this->template->product = $this->productModel->nactiProdukt();
+    public function renderProduct($id) {
+       //$id = '1';
+       $this->template->product = $this->productModel->loadProduct($id);
     }
 
     

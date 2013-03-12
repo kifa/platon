@@ -1,23 +1,23 @@
-<?php //netteCache[01]000381a:2:{s:4:"time";s:21:"0.77569800 1362858664";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:59:"C:\xampp\htdocs\platon\app\templates\Homepage\default.latte";i:2;i:1362858628;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000381a:2:{s:4:"time";s:21:"0.80984200 1363099666";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:59:"C:\xampp\htdocs\platon\app\templates\Homepage\default.latte";i:2;i:1363099664;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: C:\xampp\htdocs\platon\app\templates\Homepage\default.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'zcpsj5z2bd')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'ru2anih247')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb656e2cb704_head')) { function _lb656e2cb704_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lb9b94be74d5_head')) { function _lb9b94be74d5_head($_l, $_args) { extract($_args)
 ?><title>Kategorie</title><?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb600b4e6d75_content')) { function _lb600b4e6d75_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lbfcfe56e840_content')) { function _lbfcfe56e840_content($_l, $_args) { extract($_args)
 ?><div id="myCarousel" class="carousel slide">
     <ol class="carousel-indicators">
         <li data-target= "#myCarousel"  data-slide-to="0" class="active"></li>
@@ -67,14 +67,17 @@ if (!function_exists($_l->blocks['content'][] = '_lb600b4e6d75_content')) { func
 
 <div class="row">
     <div class="span10">
+        
         <ul class="thumbnails">
+<?php while ($product = $products->fetch()): ?>
             <li class="span3">
                 <div class="thumbnail">
                     <img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="height: 200px; width: auto;" /><h2>Google Nexus</h2>
                     <div class="caption">
                         <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
                             <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-                        <a class="btn btn-primary" href="<?php echo htmlSpecialChars($_control->link("Product:product")) ?>
+                       
+                        <a class="btn btn-primary" href="<?php echo htmlSpecialChars($_control->link("Product:product", array($product->ProductID))) ?>
 "><i class="icon-info-sign"></i> Prohlédnout</a>
                         <hr />
                         <p class="text-success lead"><a class="btn btn-success" href="<?php echo htmlSpecialChars($_control->link("Order:cart", array('produkt'))) ?>
@@ -82,6 +85,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb600b4e6d75_content')) { func
                     </div>
                 </div>
             </li>
+<?php endwhile ?>
 
             <li class="span3">
                 <div class="thumbnail">
