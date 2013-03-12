@@ -1,23 +1,23 @@
-<?php //netteCache[01]000385a:2:{s:4:"time";s:21:"0.75036700 1363122314";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:63:"G:\xampp\htdocs\GIT\platon\app\templates\Homepage\default.latte";i:2;i:1363121099;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000385a:2:{s:4:"time";s:21:"0.26576800 1363123169";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:63:"G:\xampp\htdocs\GIT\platon\app\templates\Homepage\default.latte";i:2;i:1363123166;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\Homepage\default.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'fd6ggwirok')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 't6eskxnwl1')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lbb1dcaf44b3_head')) { function _lbb1dcaf44b3_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lb206d1c036d_head')) { function _lb206d1c036d_head($_l, $_args) { extract($_args)
 ?><title>Kategorie</title><?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb015bb8ab00_content')) { function _lb015bb8ab00_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb5de7f9b4f0_content')) { function _lb5de7f9b4f0_content($_l, $_args) { extract($_args)
 ?><div id="myCarousel" class="carousel slide">
     <ol class="carousel-indicators">
         <li data-target= "#myCarousel"  data-slide-to="0" class="active"></li>
@@ -67,78 +67,8 @@ if (!function_exists($_l->blocks['content'][] = '_lb015bb8ab00_content')) { func
 
 <div class="row">
     <div class="span10">
+<?php $_ctrl = $_control->getComponent("product"); if ($_ctrl instanceof Nette\Application\UI\IRenderable) $_ctrl->validateControl(); $_ctrl->render() ?>
         
-        <ul class="thumbnails">
-<?php while ($product = $products->fetch()): ?>
-            <li class="span3">
-                <div class="thumbnail">
-                    <img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="height: 200px; width: auto;" /><h2>Google Nexus</h2>
-                    <div class="caption">
-                        <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-                            <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-                       
-                        <a class="btn btn-primary" href="<?php echo htmlSpecialChars($_control->link("Product:product", array($product->ProductID))) ?>
-"><i class="icon-info-sign"></i> Prohlédnout</a>
-                        <hr />
-                        <p class="text-success lead"><a class="btn btn-success" href="<?php echo htmlSpecialChars($_control->link("Order:cart", array('produkt'))) ?>
-"><i class="icon-shopping-cart"></i> Koupit</a> 5000,- </p>
-                    </div>
-                </div>
-            </li>
-<?php endwhile ?>
-
-            <li class="span3">
-                <div class="thumbnail">
-                    <img src="http://www.designmagazin.cz/foto/2012/07/google-nexus-7-0.jpg" class="img-circle" style="height: 200px; width: auto;" /><h2>Google Nexus</h2>
-                    <div class="caption">
-                        <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-                            <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-                        <a href="#" class="btn btn-medium btn-primary"><i class="icon-info-sign"></i> Prohlédnout</a>
-                        <hr />
-                        <p class="text-success lead"><a href="#" class="btn btn-success"><i class="icon-shopping-cart"></i> Koupit</a> 5000,- </p>
-                    </div>
-                </div>
-            </li>
-
-            <li class="span3">
-                <div class="thumbnail">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZqDghqWLSPVWxjlAouGPDXgXCKpE-x2QbY1XcPhQnHVbcuVat" class="img-circle" style="height: 200px; width: auto;" /><h2>Google Nexus</h2>
-                    <div class="caption">
-                        <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-                            <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-                        <a href="#" class="btn btn-medium btn-primary"><i class="icon-info-sign"></i> Prohlédnout</a>
-                        <hr />
-                        <p class="text-success lead"><a href="#" class="btn btn-success"><i class="icon-shopping-cart"></i> Koupit</a> 5000,- </p>
-                    </div>
-                </div>
-            </li>
-
-            <li class="span3">
-                <div class="thumbnail">
-                    <img src="http://www.google.com/intl/en/chrome/assets/common/images/content/samsung-chromebook-frontview.jpg" class="img-circle" style="height: 200px; width: auto;" /><h2>Google Nexus</h2>
-                    <div class="caption">
-                        <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-                            <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-                        <a href="#" class="btn btn-medium btn-primary"><i class="icon-info-sign"></i> Prohlédnout</a>
-                        <hr />
-                        <p class="text-success lead"><a href="#" class="btn btn-success"><i class="icon-shopping-cart"></i> Koupit</a> 5000,- </p>
-                    </div>
-                </div>
-            </li>
-
-            <li class="span3">
-                <div class="thumbnail">
-                    <img src="http://static.guim.co.uk/sys-images/Observer/Columnist/Columnists/2011/5/27/1306522339031/Googles-Chromebook-007.jpg" class="img-circle" style="height: 200px; width: auto;" /><h2>Google Nexus</h2>
-                    <div class="caption">
-                        <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-                            <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-                        <a href="#" class="btn btn-medium btn-primary"><i class="icon-info-sign"></i> Prohlédnout</a>
-                        <hr />
-                        <p class="text-success lead"><a href="#" class="btn btn-success"><i class="icon-shopping-cart"></i> Koupit</a> 5000,- </p>
-                    </div>
-                </div>
-            </li>
-        </ul>
     </div>
 
     <div class="span2">

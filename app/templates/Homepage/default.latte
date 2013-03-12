@@ -50,76 +50,8 @@
 
 <div class="row">
     <div class="span10">
+      {control product}  
         
-        <ul class="thumbnails">
-            {while $product = $products->fetch()}
-            <li class="span3">
-                <div class="thumbnail">
-                    <img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="height: 200px; width: auto;"/><h2>Google Nexus</h2>
-                    <div class="caption">
-                        <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-                            <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-                       
-                        <a n:href="Product:product $product->ProductID" class="btn btn-primary"><i class="icon-info-sign"></i> Prohlédnout</a>
-                        <hr>
-                        <p class="text-success lead"><a n:href="Order:cart produkt" class="btn btn-success"><i class="icon-shopping-cart"></i> Koupit</a> 5000,- </p>
-                    </div>
-                </div>
-            </li>
-            {/while}
-
-            <li class="span3">
-                <div class="thumbnail">
-                    <img src="http://www.designmagazin.cz/foto/2012/07/google-nexus-7-0.jpg" class="img-circle" style="height: 200px; width: auto;"/><h2>Google Nexus</h2>
-                    <div class="caption">
-                        <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-                            <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-                        <a href="#" class="btn btn-medium btn-primary"><i class="icon-info-sign"></i> Prohlédnout</a>
-                        <hr>
-                        <p class="text-success lead"><a href="#" class="btn btn-success"><i class="icon-shopping-cart"></i> Koupit</a> 5000,- </p>
-                    </div>
-                </div>
-            </li>
-
-            <li class="span3">
-                <div class="thumbnail">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZqDghqWLSPVWxjlAouGPDXgXCKpE-x2QbY1XcPhQnHVbcuVat" class="img-circle" style="height: 200px; width: auto;"/><h2>Google Nexus</h2>
-                    <div class="caption">
-                        <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-                            <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-                        <a href="#" class="btn btn-medium btn-primary"><i class="icon-info-sign"></i> Prohlédnout</a>
-                        <hr>
-                        <p class="text-success lead"><a href="#" class="btn btn-success"><i class="icon-shopping-cart"></i> Koupit</a> 5000,- </p>
-                    </div>
-                </div>
-            </li>
-
-            <li class="span3">
-                <div class="thumbnail">
-                    <img src="http://www.google.com/intl/en/chrome/assets/common/images/content/samsung-chromebook-frontview.jpg" class="img-circle" style="height: 200px; width: auto;"/><h2>Google Nexus</h2>
-                    <div class="caption">
-                        <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-                            <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-                        <a href="#" class="btn btn-medium btn-primary"><i class="icon-info-sign"></i> Prohlédnout</a>
-                        <hr>
-                        <p class="text-success lead"><a href="#" class="btn btn-success"><i class="icon-shopping-cart"></i> Koupit</a> 5000,- </p>
-                    </div>
-                </div>
-            </li>
-
-            <li class="span3">
-                <div class="thumbnail">
-                    <img src="http://static.guim.co.uk/sys-images/Observer/Columnist/Columnists/2011/5/27/1306522339031/Googles-Chromebook-007.jpg" class="img-circle" style="height: 200px; width: auto;"/><h2>Google Nexus</h2>
-                    <div class="caption">
-                        <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-                            <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-                        <a href="#" class="btn btn-medium btn-primary"><i class="icon-info-sign"></i> Prohlédnout</a>
-                        <hr>
-                        <p class="text-success lead"><a href="#" class="btn btn-success"><i class="icon-shopping-cart"></i> Koupit</a> 5000,- </p>
-                    </div>
-                </div>
-            </li>
-        </ul>
     </div>
 
     <div class="span2">
