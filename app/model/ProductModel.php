@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Class ProductModel
  * ProductModel is used for manipulating and managing products.
@@ -7,8 +8,7 @@
  * @author lukas
  */
 class ProductModel extends Nette\Object {
-
-    /**
+     /**
      * Load Product Catalog
      * @param ?
      * @param ? example: pozice počátečního znaku

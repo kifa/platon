@@ -17,8 +17,8 @@ common:
 
 		database:
 			dsn: 'mysql:host=localhost;dbname=shop'
-			user: 'shop'
-			password: 'shop'
+			user: 'root'
+			password: ''
 
 		session:
 			expiration: 14 days
@@ -32,6 +32,7 @@ common:
 		shopModel: ShopModel
 		categoryModel: CategoryModel
 		orderModel: OrderModel
+		#repository: Repository
 
 
 	factories:

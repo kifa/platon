@@ -2,4 +2,28 @@
 {block content}
 
 {$cart->userName}
+<div class="row">
+    <div class="span12">
+        <h2>Your cart</h2>
+        <div class="span5">
+            <fieldset>
+                <legend>About you</legend>
+
+    {control cartForm}
+            </fieldset>
+        </div>
+            <div class="span5">
+                <fieldset>
+                    <legend>Shiping info</legend>
+
+    {control shippingForm}
+                </fieldset>
+            </div> 
+        </div> 
+    </div>
+</div>
+
+
+
+
 {/block}

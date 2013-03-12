@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * Class CategoryModel
  * CategoryModel is used for manipulating with categories.
