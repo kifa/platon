@@ -31,16 +31,20 @@ class ProductPresenter extends BasePresenter {
           } */
     }
     
-    
+    protected function createComponentProduct() {
+        $control = new ProductControl();
+        $control->setService($this->context->productModel);
+        return $control;
+    }
     /*
      * renderProducts
      * @param ?
     * @param ? example: pozice počátečního znaku
        * @return string
      */
-    public function renderProducts($id) {
+    public function renderProducts() {
    
-        $this->template->products = $this->productModel->loadCatalog($id);
+        $this->template->products = $this->productModel->loadCatalog('2');
     }
     
     
@@ -54,6 +58,8 @@ class ProductPresenter extends BasePresenter {
     
     public function renderProduct($id) {
        //$id = '1';
+        $control = $this->getComponent('product');
+        $this->template->control = $control;
        $this->template->product = $this->productModel->loadProduct($id);
     }
 
