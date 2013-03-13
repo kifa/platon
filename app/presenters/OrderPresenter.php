@@ -13,6 +13,8 @@ class OrderPresenter extends BasePresenter {
     private $orderModel;
     private $productModel;
     private $cart;
+    private $c2;
+    private $c3;
 
     protected function startup() {
         parent::startup();
@@ -21,12 +23,36 @@ class OrderPresenter extends BasePresenter {
         $this->cart = $this->getSession('cart');
     }
 
-    public function actionCart($produkt) {
+    /*
+     * Action for removing item from Cart
+     */
 
-        if (isset($this->cart)) {
-            $this->setView('Cart');
+    public function actionRemoveItem($id) {
+        unset($this->cart->prd[$id]);
+        $this->cart->numberItems = Count($this->cart->prd);
+        
+        if ($this->cart->numberItems > 0) {
+             $this->setView('Cart');
         } else {
             $this->setView('CartEmpty');
+        }
+    }
+
+    public function actionCart($product, $amnt) {
+        $row = $this->productModel->loadProduct($product);
+        if (!$row || !$product) {
+            $this->setView('CartEmpty');
+        } else {
+            if (isset($this->cart->prd[$product])) {
+                $mnt = $this->cart->prd[$product];
+                $mnt += $amnt;
+                $this->cart->prd[$product] = $mnt;
+            } else {
+                $this->cart->prd[$product] = $amnt;
+            }
+            $this->cart->lastItem = $product;
+            $this->cart->numberItems = Count($this->cart->prd);
+            $this->setView('Cart');
         }
     }
 
@@ -36,18 +62,21 @@ class OrderPresenter extends BasePresenter {
      * @row is used for "unknown" product id
      */
 
-    public function renderCart($produkt) {
+    public function renderCart() {
 
-        if (isset($produkt)) {
-            $row = $this->productModel->loadProduct($produkt);
-            if (!$row) {
-                $this->setView('CartEmpty');
-            } else {
-                // $produkt = $this->product;
-                $this->template->cart = $this->productModel->loadProduct($produkt);
+        $product = $this->cart->lastItem;
+        
+        if ($this->cart->numberItems > 0) {
+            foreach ($this->cart->prd as $id => $amnt) {
+
+                $amnt = $this->cart->prd[$id];
+                $product2 = $this->productModel->loadProduct($id);
+
+                $this->c2[$id][$amnt] = $product2;
+         
             }
+            $this->template->cart = $this->c2;
 
-            // unset($cart->userName);
         } else {
             $this->setView('CartEmpty');
         }
@@ -93,7 +122,7 @@ class OrderPresenter extends BasePresenter {
     public function renderCartEmpty() {
 
         //$this->template->anyVariable = 'any value';
-        $this->cart->userName = 'pepík';
+        
     }
 
     /*
@@ -106,7 +135,7 @@ class OrderPresenter extends BasePresenter {
     }
 
     public function renderDefault() {
-        $this->setView('CartEmpty');
+        $this->setView('Cart');
     }
 
 }

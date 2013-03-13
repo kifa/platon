@@ -57,9 +57,7 @@ class ProductPresenter extends BasePresenter {
      */
     
     public function renderProduct($id) {
-       //$id = '1';
-        $control = $this->getComponent('product');
-        $this->template->control = $control;
+       
        $this->template->product = $this->productModel->loadProduct($id);
     }
 

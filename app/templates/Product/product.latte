@@ -36,7 +36,7 @@
                 <p class="span1">In stock: <span class="badge badge-info">{$product->PiecesAvailable}</span></p>
                 <a n:href="Order:cart produkt" class="span2 btn btn-primary">
                         <i class="icon-shopping-cart"></i> Buy</a>
-                <a n:href="Order:cart produkt" class="span1 btn btn-success">
+                <a href="{$product->ProductID}" class="span1 btn btn-success">
                         <i class="icon-info-sign"></i> Ask</a>
             </div>
         </div>

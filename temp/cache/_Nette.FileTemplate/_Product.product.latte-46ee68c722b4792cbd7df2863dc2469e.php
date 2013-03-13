@@ -1,16 +1,16 @@
-<?php //netteCache[01]000384a:2:{s:4:"time";s:21:"0.29428100 1363123878";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:62:"G:\xampp\htdocs\GIT\platon\app\templates\Product\product.latte";i:2;i:1363123853;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000384a:2:{s:4:"time";s:21:"0.82019300 1363181632";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:62:"G:\xampp\htdocs\GIT\platon\app\templates\Product\product.latte";i:2;i:1363181629;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\Product\product.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'yh5gmptuz3')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '9g342iroi6')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb53a6c59cf5_content')) { function _lb53a6c59cf5_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lbf27ec08aef_content')) { function _lbf27ec08aef_content($_l, $_args) { extract($_args)
 ;call_user_func(reset($_l->blocks['title']), $_l, get_defined_vars())  ?>
 <div class="row">
     <div class="span10">
@@ -49,8 +49,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb53a6c59cf5_content')) { func
                 <a class="span2 btn btn-primary" href="<?php echo htmlSpecialChars($_control->link("Order:cart", array('produkt'))) ?>
 ">
                         <i class="icon-shopping-cart"></i> Buy</a>
-                <a class="span1 btn btn-success" href="<?php echo htmlSpecialChars($_control->link("Order:cart", array('produkt'))) ?>
-">
+                <a href="<?php echo htmlSpecialChars($product->ProductID) ?>" class="span1 btn btn-success">
                         <i class="icon-info-sign"></i> Ask</a>
             </div>
         </div>
@@ -84,7 +83,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb53a6c59cf5_content')) { func
 //
 // block title
 //
-if (!function_exists($_l->blocks['title'][] = '_lb88abe97402_title')) { function _lb88abe97402_title($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['title'][] = '_lb92761d2405_title')) { function _lb92761d2405_title($_l, $_args) { extract($_args)
 ?><h1><?php echo Nette\Templating\Helpers::escapeHtml($product->ProductName, ENT_NOQUOTES) ?></h1>
 <?php
 }}
