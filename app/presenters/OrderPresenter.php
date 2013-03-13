@@ -30,13 +30,47 @@ class OrderPresenter extends BasePresenter {
     public function actionRemoveItem($id) {
         unset($this->cart->prd[$id]);
         $this->cart->numberItems = Count($this->cart->prd);
-        
+
         if ($this->cart->numberItems > 0) {
-             $this->setView('Cart');
+            $this->setView('Cart');
         } else {
             $this->setView('CartEmpty');
         }
     }
+
+    /*
+     * Action for adding amount of goods
+     */
+
+    public function actionAddAmount($id) {
+        $mnt = $this->cart->prd[$id];
+        $mnt += 1;
+        $this->cart->prd[$id] = $mnt;
+        
+        $this->setView('Cart');
+       
+    }
+
+    /*
+     * Action for removing amount of goods
+     * 
+     */
+    public function actionRemoveAmount($id) {
+        $mnt = $this->cart->prd[$id];
+        $mnt -= 1;
+       
+        if($mnt > 0){
+        $this->cart->prd[$id] = $mnt;
+        $this->setView('Cart');
+        }
+        else {
+            $this->actionRemoveItem($id);
+        }
+    }
+    
+    /*
+     * Action for pre-view cart processing
+     */
 
     public function actionCart($product, $amnt) {
         $row = $this->productModel->loadProduct($product);
@@ -65,7 +99,7 @@ class OrderPresenter extends BasePresenter {
     public function renderCart() {
 
         $product = $this->cart->lastItem;
-        
+
         if ($this->cart->numberItems > 0) {
             foreach ($this->cart->prd as $id => $amnt) {
 
@@ -73,10 +107,8 @@ class OrderPresenter extends BasePresenter {
                 $product2 = $this->productModel->loadProduct($id);
 
                 $this->c2[$id][$amnt] = $product2;
-         
             }
             $this->template->cart = $this->c2;
-
         } else {
             $this->setView('CartEmpty');
         }
@@ -122,7 +154,6 @@ class OrderPresenter extends BasePresenter {
     public function renderCartEmpty() {
 
         //$this->template->anyVariable = 'any value';
-        
     }
 
     /*

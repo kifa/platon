@@ -1,23 +1,23 @@
-<?php //netteCache[01]000384a:2:{s:4:"time";s:21:"0.31406800 1363166964";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:62:"G:\xampp\htdocs\GIT\platon\app\templates\Product\default.latte";i:2;i:1363121043;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000384a:2:{s:4:"time";s:21:"0.36831900 1363182720";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:62:"G:\xampp\htdocs\GIT\platon\app\templates\Product\default.latte";i:2;i:1363121043;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\Product\default.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'pewn0dxwgc')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'dxlkc82j8a')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb49758306d5_head')) { function _lb49758306d5_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lb61db245c06_head')) { function _lb61db245c06_head($_l, $_args) { extract($_args)
 ?><title>Kategorie</title><?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb415924eaf2_content')) { function _lb415924eaf2_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lbe76067ec66_content')) { function _lbe76067ec66_content($_l, $_args) { extract($_args)
 ?><div id="content">
     <h2>Zde přijdou produkty a doprava novinky a infomace.</h2>
 

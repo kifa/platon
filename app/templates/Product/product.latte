@@ -34,9 +34,9 @@
             <div class="span4">
                 <h2 class="text-info span2">{$product->FinalPrice},-</h2>
                 <p class="span1">In stock: <span class="badge badge-info">{$product->PiecesAvailable}</span></p>
-                <a n:href="Order:cart produkt" class="span2 btn btn-primary">
+                <a href="{plink Order:cart $product->ProductID, "1"}" class="span2 btn btn-primary">
                         <i class="icon-shopping-cart"></i> Buy</a>
-                <a href="{$product->ProductID}" class="span1 btn btn-success">
+                <a n:href="Order:cart produkt" class="span1 btn btn-success">
                         <i class="icon-info-sign"></i> Ask</a>
             </div>
         </div>

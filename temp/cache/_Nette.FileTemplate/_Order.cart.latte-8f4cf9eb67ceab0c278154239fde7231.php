@@ -1,16 +1,16 @@
-<?php //netteCache[01]000379a:2:{s:4:"time";s:21:"0.08781800 1363180890";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:57:"G:\xampp\htdocs\GIT\platon\app\templates\Order\cart.latte";i:2;i:1363180885;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000379a:2:{s:4:"time";s:21:"0.91664800 1363182508";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:57:"G:\xampp\htdocs\GIT\platon\app\templates\Order\cart.latte";i:2;i:1363182276;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\Order\cart.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'odp2l1y4t8')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'ioi95bpkgd')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb62830e4d96_content')) { function _lb62830e4d96_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb8126351a3d_content')) { function _lb8126351a3d_content($_l, $_args) { extract($_args)
 ?><div class="row">
     <div class="span12">
         <h2>Your cart</h2>
@@ -32,11 +32,13 @@ if (!function_exists($_l->blocks['content'][] = '_lb62830e4d96_content')) { func
                 <tr>
                   <td>1</td>
                   <td><?php echo Nette\Templating\Helpers::escapeHtml($product->ProductName, ENT_NOQUOTES) ?></td>
-                  <td><?php echo Nette\Templating\Helpers::escapeHtml($amnt, ENT_NOQUOTES) ?> ks</td>
+                  <td><?php echo Nette\Templating\Helpers::escapeHtml($amnt, ENT_NOQUOTES) ?> ks
+                        <a href="<?php echo htmlSpecialChars($_presenter->link("Order:addAmount", array($id))) ?>"><i class="icon-plus-sign"></i></a>
+                        <a href="<?php echo htmlSpecialChars($_presenter->link("Order:removeAmount", array($id))) ?>"><i class="icon-minus-sign"></i></a></td>
                   <td><?php echo Nette\Templating\Helpers::escapeHtml($product->FinalPrice, ENT_NOQUOTES) ?>,-</td>
                   <td><?php echo Nette\Templating\Helpers::escapeHtml($product->FinalPrice, ENT_NOQUOTES) ?>,-</td>
-                  <td><i class="icon-bin"></i><a href="<?php echo htmlSpecialChars($_control->link("Order:removeItem", array($id))) ?>
-">SMAZAT</a></td>
+                  <td><i class="icon-trash"></i><a href="<?php echo htmlSpecialChars($_control->link("Order:removeItem", array($id))) ?>
+"> SMAZAT</a></td>
                 </tr>            
 <?php $iterations++; endforeach ;$iterations++; endforeach ?>
               </tbody>

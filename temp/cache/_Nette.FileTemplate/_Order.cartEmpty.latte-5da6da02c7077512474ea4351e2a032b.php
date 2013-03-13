@@ -1,16 +1,16 @@
-<?php //netteCache[01]000384a:2:{s:4:"time";s:21:"0.73277300 1363166975";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:62:"G:\xampp\htdocs\GIT\platon\app\templates\Order\cartEmpty.latte";i:2;i:1362839904;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000384a:2:{s:4:"time";s:21:"0.26606300 1363182717";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:62:"G:\xampp\htdocs\GIT\platon\app\templates\Order\cartEmpty.latte";i:2;i:1362839904;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\Order\cartEmpty.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'p0wz0zhuai')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'kiu3ajgizu')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb9554a885b0_content')) { function _lb9554a885b0_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lbd42e725a91_content')) { function _lbd42e725a91_content($_l, $_args) { extract($_args)
 ?>Prázdný košík
 <?php
 }}

@@ -26,10 +26,12 @@
                 <tr>
                   <td>1</td>
                   <td>{$product->ProductName}</td>
-                  <td>{$amnt} ks</td>
+                  <td>{$amnt} ks
+                        <a href="{plink Order:addAmount $id}"><i class="icon-plus-sign"></i></a>
+                        <a href="{plink Order:removeAmount $id}"><i class="icon-minus-sign"></i></a></td>
                   <td>{$product->FinalPrice},-</td>
                   <td>{$product->FinalPrice},-</td>
-                  <td><i class="icon-bin"></i><a n:href="Order:removeItem $id">SMAZAT</a></td>
+                  <td><i class="icon-trash"></i><a n:href="Order:removeItem $id"> SMAZAT</a></td>
                 </tr>            
     {/foreach}
 {/foreach}
