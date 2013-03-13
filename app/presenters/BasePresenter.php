@@ -42,6 +42,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
        // $this->template->categories = $this->categoryModel->nactidata();
     }
     
+    protected function createComponentMenu() {
+        $menuControl = new MenuControl();
+        return $menuControl;
+    }
     
     
 

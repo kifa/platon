@@ -32,9 +32,9 @@ class OrderPresenter extends BasePresenter {
         $this->cart->numberItems = Count($this->cart->prd);
 
         if ($this->cart->numberItems > 0) {
-            $this->setView('Cart');
+            $this->redirect('Order:cart');
         } else {
-            $this->setView('CartEmpty');
+            $this->redirect('Order:cartEmpty');
         }
     }
 
@@ -47,7 +47,7 @@ class OrderPresenter extends BasePresenter {
         $mnt += 1;
         $this->cart->prd[$id] = $mnt;
         
-        $this->setView('Cart');
+        $this->redirect('Order:cart');
        
     }
 
@@ -61,7 +61,8 @@ class OrderPresenter extends BasePresenter {
        
         if($mnt > 0){
         $this->cart->prd[$id] = $mnt;
-        $this->setView('Cart');
+        $this->redirect('Order:cart');
+
         }
         else {
             $this->actionRemoveItem($id);
@@ -75,7 +76,11 @@ class OrderPresenter extends BasePresenter {
     public function actionCart($product, $amnt) {
         $row = $this->productModel->loadProduct($product);
         if (!$row || !$product) {
+            if ($this->cart->numberItems > 0 ) {
+                 $this->setView('Cart');
+            }  else {
             $this->setView('CartEmpty');
+            }
         } else {
             if (isset($this->cart->prd[$product])) {
                 $mnt = $this->cart->prd[$product];
@@ -86,7 +91,7 @@ class OrderPresenter extends BasePresenter {
             }
             $this->cart->lastItem = $product;
             $this->cart->numberItems = Count($this->cart->prd);
-            $this->setView('Cart');
+            $this->redirect('Order:cart');
         }
     }
 
@@ -98,7 +103,7 @@ class OrderPresenter extends BasePresenter {
 
     public function renderCart() {
 
-        $product = $this->cart->lastItem;
+      //  $product = $this->cart->lastItem;
 
         if ($this->cart->numberItems > 0) {
             foreach ($this->cart->prd as $id => $amnt) {

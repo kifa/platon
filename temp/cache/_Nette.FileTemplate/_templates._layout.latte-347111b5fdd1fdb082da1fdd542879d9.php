@@ -1,30 +1,30 @@
-<?php //netteCache[01]000376a:2:{s:4:"time";s:21:"0.11797200 1363181723";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:54:"G:\xampp\htdocs\GIT\platon\app\templates\@layout.latte";i:2;i:1363122323;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000376a:2:{s:4:"time";s:21:"0.67511500 1363183828";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:54:"G:\xampp\htdocs\GIT\platon\app\templates\@layout.latte";i:2;i:1363183826;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\@layout.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'qc9qjtvtjt')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'y0t4mz0bqw')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block title
 //
-if (!function_exists($_l->blocks['title'][] = '_lbfd1cac1e07_title')) { function _lbfd1cac1e07_title($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['title'][] = '_lb588136ca7d_title')) { function _lb588136ca7d_title($_l, $_args) { extract($_args)
 ?>BirneShop<?php
 }}
 
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb2026c2cdcf_head')) { function _lb2026c2cdcf_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lb1344f7d57d_head')) { function _lb1344f7d57d_head($_l, $_args) { extract($_args)
 ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_l->blocks['scripts'][] = '_lbfbb8e53792_scripts')) { function _lbfbb8e53792_scripts($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['scripts'][] = '_lb982bc35379_scripts')) { function _lb982bc35379_scripts($_l, $_args) { extract($_args)
 ?>        <script src="<?php echo htmlSpecialChars($basePath) ?>/js/jquery.js"></script>
         <script src="<?php echo htmlSpecialChars($basePath) ?>/js/netteForms.js"></script>
         <script src="<?php echo htmlSpecialChars($basePath) ?>/js/main.js"></script>
@@ -85,19 +85,10 @@ ob_start(); call_user_func(reset($_l->blocks['title']), $_l, get_defined_vars())
         <div class="container">
 
             <div class="masterhead">
-                <h1>BirneShop!</h1>
-                <div class="navbar">
-                    <div class="navbar-inner">
-                        <div class="container">
-                            <ul class="nav">
-                                <li class="active"><a href="<?php echo htmlSpecialChars($_control->link("Homepage:default")) ?>
-">Home</a></li>
-                                <li class=""><a href="<?php echo htmlSpecialChars($_control->link("Product:default")) ?>
-">Kategorie</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <a href="<?php echo htmlSpecialChars($_presenter->link("Homepage:default")) ?>"><h1>BirneShop!</h1></a>
+            
+<?php $_ctrl = $_control->getComponent("menu"); if ($_ctrl instanceof Nette\Application\UI\IRenderable) $_ctrl->validateControl(); $_ctrl->render() ?>
+                
             </div>
             
             

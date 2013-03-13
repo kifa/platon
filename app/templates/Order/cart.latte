@@ -23,15 +23,16 @@
               <tbody>
 {foreach $cart as $id => $products}
     {foreach $products as $amnt => $product}
+        {var $total = $amnt * $product->FinalPrice}
                 <tr>
                   <td>1</td>
                   <td>{$product->ProductName}</td>
-                  <td>{$amnt} ks
+                  <td>{$amnt} pcs
                         <a href="{plink Order:addAmount $id}"><i class="icon-plus-sign"></i></a>
                         <a href="{plink Order:removeAmount $id}"><i class="icon-minus-sign"></i></a></td>
                   <td>{$product->FinalPrice},-</td>
-                  <td>{$product->FinalPrice},-</td>
-                  <td><i class="icon-trash"></i><a n:href="Order:removeItem $id"> SMAZAT</a></td>
+                  <td>{$total},-</td>
+                  <td><i class="icon-trash"></i><a n:href="Order:removeItem $id"> remove</a></td>
                 </tr>            
     {/foreach}
 {/foreach}
