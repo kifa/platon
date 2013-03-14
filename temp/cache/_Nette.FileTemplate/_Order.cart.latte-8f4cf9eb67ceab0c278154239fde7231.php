@@ -1,16 +1,16 @@
-<?php //netteCache[01]000379a:2:{s:4:"time";s:21:"0.16872300 1363265919";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:57:"G:\xampp\htdocs\GIT\platon\app\templates\Order\cart.latte";i:2;i:1363265908;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000379a:2:{s:4:"time";s:21:"0.06334400 1363268930";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:57:"G:\xampp\htdocs\GIT\platon\app\templates\Order\cart.latte";i:2;i:1363268927;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\Order\cart.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '678464s9tq')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'hhpjxgyleh')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb588d420dde_content')) { function _lb588d420dde_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb6ab5508add_content')) { function _lb6ab5508add_content($_l, $_args) { extract($_args)
 ?><div class="row">
     <div class="span12">
         <h2>Your cart</h2>
@@ -19,7 +19,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb588d420dde_content')) { func
 <div class="flash <?php echo htmlSpecialChars($flash->type) ?>"><?php echo Nette\Templating\Helpers::escapeHtml($flash->message, ENT_NOQUOTES) ?></div>
 <?php $iterations++; endforeach ?>
 
-<table class="table table-hover span12">
+<table class="table table-hover span11">
               <thead>
                 <tr>
                   <th>#</th>
@@ -31,7 +31,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb588d420dde_content')) { func
                 </tr>
               </thead>
               <tbody>
-<?php $iterations = 0; foreach ($cart as $id => $products): $iterations = 0; foreach ($products as $amnt => $product): $total = $amnt * $product->FinalPrice ?>
+<?php $grandtotal = 0 ;$iterations = 0; foreach ($cart as $id => $products): $iterations = 0; foreach ($products as $amnt => $product): $subtotal = $amnt * $product->FinalPrice ?>
                 <tr>
                   <td><?php echo Nette\Templating\Helpers::escapeHtml($product->ProductNumber, ENT_NOQUOTES) ?></td>
                   <td><?php echo Nette\Templating\Helpers::escapeHtml($product->ProductName, ENT_NOQUOTES) ?></td>
@@ -39,18 +39,26 @@ if (!function_exists($_l->blocks['content'][] = '_lb588d420dde_content')) { func
                         <a href="<?php echo htmlSpecialChars($_presenter->link("addAmount!", array($id))) ?>"><i class="icon-plus-sign"></i></a>
                         <a href="<?php echo htmlSpecialChars($_presenter->link("removeAmount!", array($id))) ?>"><i class="icon-minus-sign"></i></a></td>
                   <td><?php echo Nette\Templating\Helpers::escapeHtml($product->FinalPrice, ENT_NOQUOTES) ?>,-</td>
-                  <td><?php echo Nette\Templating\Helpers::escapeHtml($total, ENT_NOQUOTES) ?>,-</td>
+                  <td><?php echo Nette\Templating\Helpers::escapeHtml($subtotal, ENT_NOQUOTES) ?>,-</td>
                   <td><a href="<?php echo htmlSpecialChars($_control->link("removeItem!", array($id))) ?>
 "><i class="icon-trash"></i> remove</a></td>
-                </tr>            
-<?php $iterations++; endforeach ;$iterations++; endforeach ?>
+                </tr>
+<?php $grandtotal = $grandtotal + $subtotal ;$iterations++; endforeach ;$iterations++; endforeach ?>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>Sub total</td>
+                  <td><?php echo Nette\Templating\Helpers::escapeHtml($grandtotal, ENT_NOQUOTES) ?>,-</td>
+                  <td></td>
+                </tr>
               </tbody>
             </table>
 
 
-        <div class="span12">
+        <div class="span11">
             <fieldset>
-                <legend>About you</legend>
+   
 
 <?php $_ctrl = $_control->getComponent("cartForm"); if ($_ctrl instanceof Nette\Application\UI\IRenderable) $_ctrl->validateControl(); $_ctrl->render() ?>
             </fieldset>
@@ -85,9 +93,6 @@ if ($_l->extends) {
 // main template
 //
 ?>
-
-
-
 
 
 <?php if ($_l->extends) { ob_end_clean(); return Nette\Latte\Macros\CoreMacros::includeTemplate($_l->extends, get_defined_vars(), $template)->render(); }
