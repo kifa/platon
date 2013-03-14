@@ -152,8 +152,13 @@ class OrderPresenter extends BasePresenter {
      */
     protected function createComponentCartForm() {
         $shippers = array(
-            'cp' => 'Czech postal service',
-            'dpd' => 'DPD'
+            'cp' => 'Česká pošta | Delivery time 1-2day | 150,-',
+            'dpd' => 'DPD | Delivery time 1 day | 190,-'
+        );
+        
+        $payment = array(
+            'cash' => 'Cash',
+            'bankwire' => 'Bankwire | -50,-'
         );
         
         $cartForm = new Form();
@@ -176,11 +181,24 @@ class OrderPresenter extends BasePresenter {
                 ->addRule(Form::FILLED);
         $cartForm->addGroup('Shipping')
                 ->setOption('container', 'div class="span5"');
-        $cartForm->addRadioList('shippers','', $shippers);
+        $cartForm->addRadioList('shippers','', $shippers)
+                ->setAttribute('class', '.span1 radio');
         $cartForm->addGroup('Payment')
                 ->setOption('container', 'div class="span5"');
-        $cartForm->addRadioList('payment','', $shippers);
-        $cartForm->addSubmit('sendOrder', 'Checkout');
+        $cartForm->addRadioList('payment','', $payment)
+                ->setAttribute('class', '.span1 radio');;
+        $cartForm->addGroup('Terms')
+                ->setOption('container', 'div class="span5"');
+        $cartForm->addCheckbox('terms', 'I accept Terms and condition.')
+                ->setAttribute('class', 'checkbox inline')
+                ->setRequired()
+                ->setDefaultValue('TRUE')
+                ->addRule(Form::FILLED, 'In order to continue checkout, you have to agree with Term.');
+        $cartForm->addGroup('Checkout')
+                ->setOption('container', 'div class="span5"');
+        $cartForm->addSubmit('sendOrder', 'Checkout')
+                ->setOption('description', 'span class="span12"')
+                ->setAttribute('class', 'btn btn-warning .span4');
         return $cartForm;
     }
 
