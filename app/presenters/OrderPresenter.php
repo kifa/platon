@@ -1,6 +1,7 @@
 <?php
 
-use Nette\Forms\Form;
+use Nette\Forms\Form,
+ Nette\Utils\Html;
 
 /**
  * Order presenter.
@@ -14,7 +15,7 @@ class OrderPresenter extends BasePresenter {
     private $productModel;
     private $cart;
     private $c2;
-    private $c3;
+
 
     protected function startup() {
         parent::startup();
@@ -24,53 +25,77 @@ class OrderPresenter extends BasePresenter {
     }
 
     /*
-     * Action for removing item from Cart
+     * Handle for removing item from Cart
      */
 
-    public function actionRemoveItem($id) {
+    public function handleRemoveItem($id) {
         unset($this->cart->prd[$id]);
+        $this->cart->graveItem = $id;
         $this->cart->numberItems = Count($this->cart->prd);
 
+        
+        
         if ($this->cart->numberItems > 0) {
-            $this->redirect('Order:cart');
+            
+            $el1 = Html::el('span', 'Product was removed. Isn´t it pitty?! ');
+            $el2 = Html::el('a', 'Take it Back!')->href($this->link('graveItem!'));
+            $el1->add( $el2 );
+            $this->flashMessage($el1, 'alert alert-success');
+            $this->presenter->redirect("this");
         } else {
             $this->redirect('Order:cartEmpty');
         }
     }
 
     /*
-     * Action for adding amount of goods
+     * Handle for adding amount of goods
      */
 
-    public function actionAddAmount($id) {
+    public function handleAddAmount($id) {
         $mnt = $this->cart->prd[$id];
         $mnt += 1;
         $this->cart->prd[$id] = $mnt;
         
-        $this->redirect('Order:cart');
+        $this->presenter->redirect('this');
        
     }
 
     /*
-     * Action for removing amount of goods
+     * Handle for removing amount of goods
      * 
      */
-    public function actionRemoveAmount($id) {
+    public function handleRemoveAmount($id) {
         $mnt = $this->cart->prd[$id];
         $mnt -= 1;
-       
+        
         if($mnt > 0){
         $this->cart->prd[$id] = $mnt;
-        $this->redirect('Order:cart');
+        $this->presenter->redirect('this');
 
         }
         else {
-            $this->actionRemoveItem($id);
+            $this->handleRemoveItem($id);
         }
+        
+        
     }
     
     /*
+     * Handle for moving dead product back to cart
+     */
+    
+    public function handleGraveItem() {
+        $id = $this->cart->graveItem;
+        $this->actionCart($id, "1");
+    }
+
+
+    /*
      * Action for pre-view cart processing
+     * 
+     * 
+     * 
+     * 
      */
 
     public function actionCart($product, $amnt) {
@@ -103,7 +128,7 @@ class OrderPresenter extends BasePresenter {
 
     public function renderCart() {
 
-      //  $product = $this->cart->lastItem;
+        //$product = $this->cart->lastItem;
 
         if ($this->cart->numberItems > 0) {
             foreach ($this->cart->prd as $id => $amnt) {
@@ -113,44 +138,53 @@ class OrderPresenter extends BasePresenter {
 
                 $this->c2[$id][$amnt] = $product2;
             }
+            
             $this->template->cart = $this->c2;
         } else {
             $this->setView('CartEmpty');
         }
     }
 
+    /*
+     * Rendering Customer form in cart
+     * 
+     * @return $cartForm
+     */
     protected function createComponentCartForm() {
+        $shippers = array(
+            'cp' => 'Czech postal service',
+            'dpd' => 'DPD'
+        );
+        
         $cartForm = new Form();
         $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
-        $cartForm->addGroup('Delivery info');
+        $cartForm->addGroup('Delivery info')
+                ->setOption('container', 'div class="span5"');
         $cartForm->addText('name', 'Name:', 40, 100)
                 ->addRule(Form::FILLED, 'Would you fill your name, please?');
         $cartForm->addText('phone', 'Phone:', 40, 100);
         $cartForm->addText('email', 'Email:', 40, 100)
                 ->addRule(Form::EMAIL, 'Would you fill your email, please?')
                 ->addRule(Form::FILLED, 'Would you fill your name, please?');
-        $cartForm->addGroup('Address');
+        $cartForm->addGroup('Address')
+                   ->setOption('container', 'div class="span5"');
         $cartForm->addText('address', 'Address:', 60, 100)
                 ->addRule(Form::FILLED);
         $cartForm->addText('city', 'City:', 40, 100)
                 ->addRule(Form::FILLED);
         $cartForm->addText('psc', 'PSC:', 40, 100)
                 ->addRule(Form::FILLED);
+        $cartForm->addGroup('Shipping')
+                ->setOption('container', 'div class="span5"');
+        $cartForm->addRadioList('shippers','', $shippers);
+        $cartForm->addGroup('Payment')
+                ->setOption('container', 'div class="span5"');
+        $cartForm->addRadioList('payment','', $shippers);
         $cartForm->addSubmit('sendOrder', 'Checkout');
         return $cartForm;
     }
 
-    protected function createComponentShippingForm() {
-
-        $shippers = array(
-            'cp' => 'Czech postal service',
-            'dpd' => 'DPD'
-        );
-        $shippingForm = new Form();
-        $shippingForm->addRadioList('shippers', 'Delivery options: ', $shippers);
-        return $shippingForm;
-    }
-
+    
     /*
      * renderCartEmpty()
      * rendering empty cart

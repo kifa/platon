@@ -8,8 +8,11 @@
     <div class="span12">
         <h2>Your cart</h2>
 
+{foreach $flashes as $flash}
+<div class="flash {$flash->type}">{$flash->message}</div>
+{/foreach}
 
-<table class="table table-hover">
+<table class="table table-hover span12">
               <thead>
                 <tr>
                   <th>#</th>
@@ -25,14 +28,14 @@
     {foreach $products as $amnt => $product}
         {var $total = $amnt * $product->FinalPrice}
                 <tr>
-                  <td>1</td>
+                  <td>{$product->ProductNumber}</td>
                   <td>{$product->ProductName}</td>
                   <td>{$amnt} pcs
-                        <a href="{plink Order:addAmount $id}"><i class="icon-plus-sign"></i></a>
-                        <a href="{plink Order:removeAmount $id}"><i class="icon-minus-sign"></i></a></td>
+                        <a href="{plink addAmount! $id}"><i class="icon-plus-sign"></i></a>
+                        <a href="{plink removeAmount! $id}"><i class="icon-minus-sign"></i></a></td>
                   <td>{$product->FinalPrice},-</td>
                   <td>{$total},-</td>
-                  <td><i class="icon-trash"></i><a n:href="Order:removeItem $id"> remove</a></td>
+                  <td><a n:href="removeItem! $id"><i class="icon-trash"></i> remove</a></td>
                 </tr>            
     {/foreach}
 {/foreach}
@@ -40,19 +43,12 @@
             </table>
 
 
-        <div class="span5">
+        <div class="span12">
             <fieldset>
                 <legend>About you</legend>
 
     {control cartForm}
             </fieldset>
-        </div>
-            <div class="span5">
-                <fieldset>
-                    <legend>Shiping info</legend>
-
-    {control shippingForm}
-                </fieldset>
             </div> 
         </div> 
     </div>
