@@ -1,24 +1,24 @@
-<?php //netteCache[01]000384a:2:{s:4:"time";s:21:"0.97068900 1363386112";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:62:"I:\xampp\htdocs\GIT\platon\app\templates\Product\product.latte";i:2;i:1363386107;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000384a:2:{s:4:"time";s:21:"0.99135600 1363386677";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:62:"I:\xampp\htdocs\GIT\platon\app\templates\Product\product.latte";i:2;i:1363386673;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: I:\xampp\htdocs\GIT\platon\app\templates\Product\product.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '31mybc1pqv')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '5p8icsqa7c')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb31b90858cf_content')) { function _lb31b90858cf_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb3c96faf68e_content')) { function _lb3c96faf68e_content($_l, $_args) { extract($_args)
 ;call_user_func(reset($_l->blocks['title']), $_l, get_defined_vars())  ?>
 <div class="row">
     <div class="span10">
 
-        <div class="span5">
+        <div class=".span5">
             <img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="width: 400px;" />
         </div>
-        <div class="span4">
+        <div class=".span4">
             <div class="tabbable">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
@@ -46,11 +46,11 @@ if (!function_exists($_l->blocks['content'][] = '_lb31b90858cf_content')) { func
             <div class="span4">
                 <h2 class="text-info span2"><?php echo Nette\Templating\Helpers::escapeHtml($product->FinalPrice, ENT_NOQUOTES) ?>,-</h2>
                 <p class="span1">In stock:
-<?php if ($product->PiecesAvailable >= 6): ?>
+<?php if ($product->PiecesAvailable >= 5): ?>
                 <span class="badge badge-info">
-<?php elseif ($product->PiecesAvailable < 8 && $product->PiecesAvailable > 5): ?>
+<?php elseif ($product->PiecesAvailable < 5 && $product->PiecesAvailable > 0): ?>
                 <span class="badge badge-warning">
-<?php elseif ($product->PiecesAvailable < 5): ?>
+<?php elseif ($product->PiecesAvailable = 0): ?>
                 <span class="badge">
 <?php endif ?>
                 <?php echo Nette\Templating\Helpers::escapeHtml($product->PiecesAvailable, ENT_NOQUOTES) ?></span></p>
@@ -91,7 +91,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb31b90858cf_content')) { func
 //
 // block title
 //
-if (!function_exists($_l->blocks['title'][] = '_lb7fc6be96ac_title')) { function _lb7fc6be96ac_title($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['title'][] = '_lbaf84ae0793_title')) { function _lbaf84ae0793_title($_l, $_args) { extract($_args)
 ?><h1><?php echo Nette\Templating\Helpers::escapeHtml($product->ProductName, ENT_NOQUOTES) ?></h1>
 <?php
 }}

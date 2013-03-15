@@ -1,16 +1,16 @@
-<?php //netteCache[01]000379a:2:{s:4:"time";s:21:"0.77668100 1363386359";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:57:"I:\xampp\htdocs\GIT\platon\app\templates\Order\cart.latte";i:2;i:1363386354;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000379a:2:{s:4:"time";s:21:"0.57896200 1363386577";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:57:"I:\xampp\htdocs\GIT\platon\app\templates\Order\cart.latte";i:2;i:1363386392;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: I:\xampp\htdocs\GIT\platon\app\templates\Order\cart.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'bcy4vdj2dv')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'r0kcm13cpw')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lbec01f83c11_content')) { function _lbec01f83c11_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lbb1985c405d_content')) { function _lbb1985c405d_content($_l, $_args) { extract($_args)
 ?><div class="row">
     <div class="span12">
         <h2>Your cart</h2>
@@ -35,7 +35,7 @@ if (!function_exists($_l->blocks['content'][] = '_lbec01f83c11_content')) { func
               <tbody>
 <?php $grandtotal = 0 ;$iterations = 0; foreach ($cart as $id => $products): $iterations = 0; foreach ($products as $amnt => $product): $subtotal = $amnt * $product->FinalPrice ?>
                 <tr>
-                  <td><img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="width: 60px;" />
+                  <td><img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="width: 38px;" />
                         <?php echo Nette\Templating\Helpers::escapeHtml($product->ProductNumber, ENT_NOQUOTES) ?></td>
                   <td><?php echo Nette\Templating\Helpers::escapeHtml($product->ProductName, ENT_NOQUOTES) ?></td>
                   <td><?php echo Nette\Templating\Helpers::escapeHtml($amnt, ENT_NOQUOTES) ?> pcs

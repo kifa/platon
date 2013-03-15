@@ -1,25 +1,34 @@
-<?php //netteCache[01]000384a:2:{s:4:"time";s:21:"0.46278900 1363383636";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:62:"I:\xampp\htdocs\GIT\platon\app\templates\Product\default.latte";i:2;i:1363121043;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000384a:2:{s:4:"time";s:21:"0.72132000 1363387374";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:62:"I:\xampp\htdocs\GIT\platon\app\templates\Product\default.latte";i:2;i:1363387372;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: I:\xampp\htdocs\GIT\platon\app\templates\Product\default.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'nz2v956en1')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'wnkop9r7am')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb0cb346bcbd_head')) { function _lb0cb346bcbd_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lbd7eaf578de_head')) { function _lbd7eaf578de_head($_l, $_args) { extract($_args)
 ?><title>Kategorie</title><?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb6be1aa4d06_content')) { function _lb6be1aa4d06_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb4f4797805f_content')) { function _lb4f4797805f_content($_l, $_args) { extract($_args)
 ?><div id="content">
-    <h2>Zde přijdou produkty a doprava novinky a infomace.</h2>
+    <div class="page-header">
+  <h1>Google Nexus <small>Best products with Android ever</small></h1>
+</div>
+    <p class="text-left">Nexus 4 comes with the latest version of Google Now to bring you just the
+        right information at just the right time. It shows you how much traffic
+        to expect before you leave for work, or when the next train will arrive
+        as you’re standing on the platform.
+With the latest version, Google Now keeps you even more organized – get reminders
+about upcoming flights, restaurant reservations, hotel confirmations and even
+nearby photo opportunities – when and where you need them.</p>
 
 <div class="row">
     <div class="span10">
