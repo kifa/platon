@@ -40,7 +40,7 @@ class OrderPresenter extends BasePresenter {
             $el1 = Html::el('span', 'Product was removed. Isn´t it pitty?! ');
             $el2 = Html::el('a', 'Take it Back!')->href($this->link('graveItem!'));
             $el1->add( $el2 );
-            $this->flashMessage($el1, 'alert alert-success');
+            $this->flashMessage($el1, 'alert');
             $this->presenter->redirect("this");
         } else {
             $this->redirect('Order:cartEmpty');

@@ -33,7 +33,15 @@
             
             <div class="span4">
                 <h2 class="text-info span2">{$product->FinalPrice},-</h2>
-                <p class="span1">In stock: <span class="badge badge-info">{$product->PiecesAvailable}</span></p>
+                <p class="span1">In stock:
+                {if $product->PiecesAvailable >= 5}
+                <span class="badge badge-info">
+                {elseif $product->PiecesAvailable < 5 && $product->PiecesAvailable > 0}
+                <span class="badge badge-warning">
+                {elseif $product->PiecesAvailable = 0 }
+                <span class="badge">
+                    {/if}
+                {$product->PiecesAvailable}</span></p>
                 <a href="{plink Order:cart $product->ProductID, "1"}" class="span2 btn btn-primary">
                         <i class="icon-shopping-cart"></i> Buy</a>
                 <a n:href="Order:cart produkt" class="span1 btn btn-success">
