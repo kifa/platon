@@ -23,6 +23,7 @@
         <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap-responsive.css">
         <link rel="stylesheet" href="{$basePath}/css/font-awesome.min.css">
         <link rel="shortcut icon" href="{$basePath}/favicon.ico">
+        <script src="{$basePath}/js/jquery.js"></script>
         
 	{block head}{/block}
     </head>
@@ -50,14 +51,15 @@
             
         {include #content}
 
-
+            
+            
             <div class="footer">
                 &COPY; Birne shop 2013
             </div>
 
         </div>
 	{block scripts}
-        <script src="{$basePath}/js/jquery.js"></script>
+        
         <script src="{$basePath}/js/netteForms.js"></script>
         <script src="{$basePath}/js/main.js"></script>
         <script src="{$basePath}/js/bootstrap.min.js"></script>

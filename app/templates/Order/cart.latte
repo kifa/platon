@@ -6,65 +6,118 @@
         <h2>Your cart</h2>
 
 {foreach $flashes as $flash}
-<div class="{$flash->type}">
-<button type="button" class="close" data-dismiss="alert">&times;</button>
+        <div class="{$flash->type}">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
 {$flash->message}</div>
 {/foreach}
 
-<table class="table table-hover span11">
-              <thead>
+        <table class="table table-hover span11">
+            <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Product Name</th>
-                  <th>Amount</th>
-                  <th>Unite price</th>
-                  <th>Total price</th>
-                  <th>X</th>
+                    <th>#</th>
+                    <th>Product Name</th>
+                    <th>Amount</th>
+                    <th>Unite price</th>
+                    <th>Total price</th>
+                    <th>X</th>
                 </tr>
-              </thead>
-              <tbody>
+            </thead>
+            <tbody>
 {var $grandtotal = 0}
 {foreach $cart as $id => $products}
     {foreach $products as $amnt => $product}
         {var $subtotal = $amnt * $product->FinalPrice}
                 <tr>
-                  <td><img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="width: 38px;">
+                    <td><img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="width: 38px;">
                         {$product->ProductNumber}</td>
-                  <td>{$product->ProductName}</td>
-                  <td>{$amnt} pcs
-                        <a href="{plink addAmount! $id}"><i class="icon-plus-sign"></i></a>
+                    <td>{$product->ProductName}</td>
+                    <td><a href="{plink addAmount! $id}"><i class="icon-plus-sign"></i></a> {$amnt} pcs
+                        
                         <a href="{plink removeAmount! $id}"><i class="icon-minus-sign"></i></a></td>
-                  <td>{$product->FinalPrice},-</td>
-                  <td>{$subtotal},-</td>
-                  <td><a n:href="removeItem! $id"><i class="icon-trash"></i> remove</a></td>
+                    <td>{$product->FinalPrice},-</td>
+                    <td>{$subtotal},-</td>
+                    <td><a n:href="removeItem! $id"><i class="icon-trash"></i> remove</a></td>
                 </tr>
            {var $grandtotal = $grandtotal + $subtotal}
     {/foreach}
 {/foreach}
                 <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>Sub total</td>
-                  <td>{$grandtotal},-</td>
-                  <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Sub total</td>
+                    <td>{$grandtotal},-</td>
+                    <td></td>
                 </tr>
-              </tbody>
-            </table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Shipping</td>
+                    <td class="shipping">0,-</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Total</td>
+                    <td class="ordertotal">{$grandtotal},-</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
 
 
         <div class="span11">
             <fieldset>
-   
+
 
     {control cartForm}
+                
+                <div class="span5 offset5 label label-info">   
+                        <div class="span1">                    
+                            <i class="icon-shopping-cart icon-4x"></i></div>
+                        <div class="span3">
+                            <div class="span3"><strong class="span1">Products:</strong>
+                                <span class="span1">{$grandtotal},-</span></div>
+                            <div class="span3"><strong class="span1">Shipping:</strong> 
+                                <span class="shipping span1">0,-</span></div>
+                            <div class="span3"><strong class="span1">Total:</strong>
+                                <span class="ordertotal span1">{$grandtotal},-</span></div>
+                        </div>
+                    </div>
             </fieldset>
-            </div> 
         </div> 
-    </div>
+    </div> 
 </div>
 
+<script>
+    $(document).ready(function() {
+        var sp = new Array(); 
+        sp[1] = 150; sp[2] = 190;
+        
+        var pm = new Array(); 
+        pm[1] = 0; pm[2] = -50;
+        
+        
+        $('input[name=shippers]').click(function() {
+            i = $('input[name=shippers]:radio:checked').val();
+            var shipping = sp[i];
+             var grandtotal = shipping + {$grandtotal};
+        $('.shipping').html(shipping + ',-');
+        $('.ordertotal').html(grandtotal + ',-'); 
+        });
+        
+        $('input[name=payment]').click(function() {
+            i = $('input[name=payment]:radio:checked').val();
+            var payment = pm[i];
+             var grandtotal = payment + {$grandtotal};
+        $('.ordertotal').html(grandtotal + ',-'); 
+        });
 
+});
 
+</script>
 
 {/block}

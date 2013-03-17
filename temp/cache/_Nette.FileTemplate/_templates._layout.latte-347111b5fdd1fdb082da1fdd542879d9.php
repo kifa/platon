@@ -1,31 +1,31 @@
-<?php //netteCache[01]000376a:2:{s:4:"time";s:21:"0.96741900 1363191579";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:54:"G:\xampp\htdocs\GIT\platon\app\templates\@layout.latte";i:2;i:1363191576;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000376a:2:{s:4:"time";s:21:"0.72809600 1363559038";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:54:"G:\xampp\htdocs\GIT\platon\app\templates\@layout.latte";i:2;i:1363559013;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\@layout.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '7dp5cuidnp')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '6fmzv3kefg')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block title
 //
-if (!function_exists($_l->blocks['title'][] = '_lb77207ee00f_title')) { function _lb77207ee00f_title($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['title'][] = '_lb13540b078b_title')) { function _lb13540b078b_title($_l, $_args) { extract($_args)
 ?>BirneShop<?php
 }}
 
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb5c5e9dfa4a_head')) { function _lb5c5e9dfa4a_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lb4be9d6d2f5_head')) { function _lb4be9d6d2f5_head($_l, $_args) { extract($_args)
 ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_l->blocks['scripts'][] = '_lbd9b9ae5088_scripts')) { function _lbd9b9ae5088_scripts($_l, $_args) { extract($_args)
-?>        <script src="<?php echo htmlSpecialChars($basePath) ?>/js/jquery.js"></script>
+if (!function_exists($_l->blocks['scripts'][] = '_lbfdbf6d9132_scripts')) { function _lbfdbf6d9132_scripts($_l, $_args) { extract($_args)
+?>        
         <script src="<?php echo htmlSpecialChars($basePath) ?>/js/netteForms.js"></script>
         <script src="<?php echo htmlSpecialChars($basePath) ?>/js/main.js"></script>
         <script src="<?php echo htmlSpecialChars($basePath) ?>/js/bootstrap.min.js"></script>
@@ -70,6 +70,7 @@ ob_start(); call_user_func(reset($_l->blocks['title']), $_l, get_defined_vars())
         <link rel="stylesheet" media="screen" href="<?php echo htmlSpecialChars($basePath) ?>/css/bootstrap-responsive.css" />
         <link rel="stylesheet" href="<?php echo htmlSpecialChars($basePath) ?>/css/font-awesome.min.css" />
         <link rel="shortcut icon" href="<?php echo htmlSpecialChars($basePath) ?>/favicon.ico" />
+        <script src="<?php echo htmlSpecialChars($basePath) ?>/js/jquery.js"></script>
         
 	<?php call_user_func(reset($_l->blocks['head']), $_l, get_defined_vars())  ?>
 
@@ -88,10 +89,18 @@ ob_start(); call_user_func(reset($_l->blocks['title']), $_l, get_defined_vars())
                 
             </div>
             
+            <ul class="breadcrumb">
+  <li><a href="#">Home</a> <span class="divider">/</span></li>
+  <li><a href="#">Your</a> <span class="divider">/</span></li>
+  <li><a href="#">Are</a> <span class="divider">/</span></li>
+  <li class="active">Here</li>
+</ul>
+            
             
 <?php Nette\Latte\Macros\UIMacros::callBlock($_l, 'content', $template->getParameters()) ?>
 
-
+            
+            
             <div class="footer">
                 &COPY; Birne shop 2013
             </div>

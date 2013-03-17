@@ -152,14 +152,15 @@ class OrderPresenter extends BasePresenter {
      */
     protected function createComponentCartForm() {
         $shippers = array(
-            'cp' => 'Česká pošta | Delivery time 1-2day | 150,-',
-            'dpd' => 'DPD | Delivery time 1 day | 190,-'
+            '1' => 'Česká pošta | Delivery time 1-2day | 150,-',
+            '2' => 'DPD | Delivery time 1 day | 190,-'
         );
         
         $payment = array(
-            'cash' => 'Cash',
-            'bankwire' => 'Bankwire | -50,-'
+            '1' => 'Cash',
+            '2' => 'Bankwire | -50,-'
         );
+        $ico = Html::el('i', 'class=""'); 
         
         $cartForm = new Form();
         $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
@@ -196,9 +197,8 @@ class OrderPresenter extends BasePresenter {
                 ->addRule(Form::FILLED, 'In order to continue checkout, you have to agree with Term.');
         $cartForm->addGroup('Checkout')
                 ->setOption('container', 'div class="span5"');
-        $cartForm->addSubmit('sendOrder', 'Checkout')
-                ->setOption('description', 'span class="span12"')
-                ->setAttribute('class', 'btn btn-warning .span4');
+        $cartForm->addSubmit('sendOrder', 'Checkout here!')
+                ->setAttribute('class', 'btn btn-warning btn-large');
         return $cartForm;
     }
 
