@@ -17,7 +17,7 @@
                     <th>#</th>
                     <th>Product Name</th>
                     <th>Amount</th>
-                    <th>Unite price</th>
+                    <th>Item price</th>
                     <th>Total price</th>
                     <th>X</th>
                 </tr>
@@ -30,7 +30,7 @@
                 <tr>
                     <td><img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="width: 38px;">
                         {$product->ProductNumber}</td>
-                    <td>{$product->ProductName}</td>
+                    <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
                     <td><a href="{plink addAmount! $id}"><i class="icon-plus-sign"></i></a> {$amnt} pcs
                         
                         <a href="{plink removeAmount! $id}"><i class="icon-minus-sign"></i></a></td>
@@ -77,19 +77,21 @@
         var pm = new Array(); 
         pm[1] = 0; pm[2] = -50;
         
+        var shipping = 0;
+        var payment = 0;
         
         $('input[name=shippers]').click(function() {
             i = $('input[name=shippers]:radio:checked').val();
-            var shipping = sp[i];
-             var grandtotal = shipping + {$grandtotal};
+            shipping = sp[i];
+             var grandtotal = shipping + {$grandtotal} + payment;
         $('.shipping').html(shipping + ',-');
         $('.ordertotal').html(grandtotal + ',-'); 
         });
         
         $('input[name=payment]').click(function() {
             i = $('input[name=payment]:radio:checked').val();
-            var payment = pm[i];
-             var grandtotal = payment + {$grandtotal};
+            payment = pm[i];
+             var grandtotal = payment + {$grandtotal} + shipping;
         $('.ordertotal').html(grandtotal + ',-'); 
         });
 
