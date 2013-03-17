@@ -1,16 +1,16 @@
-<?php //netteCache[01]000379a:2:{s:4:"time";s:21:"0.08815800 1363559114";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:57:"G:\xampp\htdocs\GIT\platon\app\templates\Order\cart.latte";i:2;i:1363559111;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000379a:2:{s:4:"time";s:21:"0.34837200 1363560170";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:57:"G:\xampp\htdocs\GIT\platon\app\templates\Order\cart.latte";i:2;i:1363560167;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\Order\cart.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'dx68jvejpt')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'lrux94mh3a')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb3b999ea3a2_content')) { function _lb3b999ea3a2_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb7044efbb8f_content')) { function _lb7044efbb8f_content($_l, $_args) { extract($_args)
 ?><div class="row">
     <div class="span12">
         <h2>Your cart</h2>
@@ -48,52 +48,29 @@ if (!function_exists($_l->blocks['content'][] = '_lb3b999ea3a2_content')) { func
 "><i class="icon-trash"></i> remove</a></td>
                 </tr>
 <?php $grandtotal = $grandtotal + $subtotal ;$iterations++; endforeach ;$iterations++; endforeach ?>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Sub total</td>
-                    <td><?php echo Nette\Templating\Helpers::escapeHtml($grandtotal, ENT_NOQUOTES) ?>,-</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Shipping</td>
-                    <td class="shipping">0,-</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Total</td>
-                    <td class="ordertotal"><?php echo Nette\Templating\Helpers::escapeHtml($grandtotal, ENT_NOQUOTES) ?>,-</td>
-                    <td></td>
-                </tr>
+                
             </tbody>
         </table>
 
-
+<div class="span9 offset1 alert alert-info">   
+                        <div class="span1">                    
+                            <i class="icon-shopping-cart icon-4x"></i></div>
+                        <div class="span7">
+                            <h3 class="span2"><strong class="span1">Products:</strong>
+                                <span class="span1"><?php echo Nette\Templating\Helpers::escapeHtml($grandtotal, ENT_NOQUOTES) ?>,-</span></h3>
+                            <h3 class="span2"><strong class="span1">Shipping:</strong> 
+                                <span class="shipping span1">0,-</span></h3>
+                            <h3 class="span2"><strong class="span1">Total:</strong>
+                                <span class="ordertotal span1"><?php echo Nette\Templating\Helpers::escapeHtml($grandtotal, ENT_NOQUOTES) ?>,-</span></h3>
+                        </div>
+                    </div>
+        
+        
         <div class="span11">
             <fieldset>
 
 
 <?php $_ctrl = $_control->getComponent("cartForm"); if ($_ctrl instanceof Nette\Application\UI\IRenderable) $_ctrl->validateControl(); $_ctrl->render() ?>
-                
-                <div class="span5 offset5 label label-info">   
-                        <div class="span1">                    
-                            <i class="icon-shopping-cart icon-4x"></i></div>
-                        <div class="span3">
-                            <div class="span3"><strong class="span1">Products:</strong>
-                                <span class="span1"><?php echo Nette\Templating\Helpers::escapeHtml($grandtotal, ENT_NOQUOTES) ?>,-</span></div>
-                            <div class="span3"><strong class="span1">Shipping:</strong> 
-                                <span class="shipping span1">0,-</span></div>
-                            <div class="span3"><strong class="span1">Total:</strong>
-                                <span class="ordertotal span1"><?php echo Nette\Templating\Helpers::escapeHtml($grandtotal, ENT_NOQUOTES) ?>,-</span></div>
-                        </div>
-                    </div>
             </fieldset>
         </div> 
     </div> 
