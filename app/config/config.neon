@@ -32,7 +32,11 @@ common:
 		shopModel: ShopModel
 		categoryModel: CategoryModel
 		orderModel: OrderModel
-		#repository: Repository
+	netteTranslator:
+		lang: en
+		files:
+			front: %appDir%/lang
+		#translatorModel: TranslatorModel
 
 
 	factories:

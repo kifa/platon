@@ -1,30 +1,30 @@
-<?php //netteCache[01]000376a:2:{s:4:"time";s:21:"0.72809600 1363559038";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:54:"G:\xampp\htdocs\GIT\platon\app\templates\@layout.latte";i:2;i:1363559013;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000376a:2:{s:4:"time";s:21:"0.63518900 1363643814";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:54:"G:\xampp\htdocs\GIT\platon\app\templates\@layout.latte";i:2;i:1363643809;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\@layout.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '6fmzv3kefg')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'wig6wrylqr')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block title
 //
-if (!function_exists($_l->blocks['title'][] = '_lb13540b078b_title')) { function _lb13540b078b_title($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['title'][] = '_lb20082955f9_title')) { function _lb20082955f9_title($_l, $_args) { extract($_args)
 ?>BirneShop<?php
 }}
 
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb4be9d6d2f5_head')) { function _lb4be9d6d2f5_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lbb25788ae85_head')) { function _lbb25788ae85_head($_l, $_args) { extract($_args)
 ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_l->blocks['scripts'][] = '_lbfdbf6d9132_scripts')) { function _lbfdbf6d9132_scripts($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['scripts'][] = '_lb58d18cb2f9_scripts')) { function _lb58d18cb2f9_scripts($_l, $_args) { extract($_args)
 ?>        
         <script src="<?php echo htmlSpecialChars($basePath) ?>/js/netteForms.js"></script>
         <script src="<?php echo htmlSpecialChars($basePath) ?>/js/main.js"></script>
@@ -84,16 +84,22 @@ ob_start(); call_user_func(reset($_l->blocks['title']), $_l, get_defined_vars())
 
             <div class="masterhead">
                 <a href="<?php echo htmlSpecialChars($_presenter->link("Homepage:default")) ?>"><h1>BirneShop!</h1></a>
+                
+                Vyberte jazyk:
+<a href="<?php echo htmlSpecialChars($_control->link("this", array('lang' => 'en'))) ?>
+">English</a>
+<a href="<?php echo htmlSpecialChars($_control->link("this", array('lang' => 'cs'))) ?>
+">Česky</a>
             
 <?php $_ctrl = $_control->getComponent("menu"); if ($_ctrl instanceof Nette\Application\UI\IRenderable) $_ctrl->validateControl(); $_ctrl->render() ?>
                 
             </div>
             
             <ul class="breadcrumb">
-  <li><a href="#">Home</a> <span class="divider">/</span></li>
-  <li><a href="#">Your</a> <span class="divider">/</span></li>
-  <li><a href="#">Are</a> <span class="divider">/</span></li>
-  <li class="active">Here</li>
+  <li><a href="#"><?php echo Nette\Templating\Helpers::escapeHtml($template->translate("Home"), ENT_NOQUOTES) ?></a> <span class="divider">/</span></li>
+  <li><a href="#"><?php echo Nette\Templating\Helpers::escapeHtml($template->translate("You"), ENT_NOQUOTES) ?></a> <span class="divider">/</span></li>
+  <li><a href="#"><?php echo Nette\Templating\Helpers::escapeHtml($template->translate("Are"), ENT_NOQUOTES) ?></a> <span class="divider">/</span></li>
+  <li class="active"><?php echo Nette\Templating\Helpers::escapeHtml($template->translate("Here"), ENT_NOQUOTES) ?></li>
 </ul>
             
             
