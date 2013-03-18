@@ -19,13 +19,18 @@ $configurator->createRobotLoader()
 	->addDirectory(__DIR__ . '/../libs')
 	->register();
 
+// Translation setup
+$configurator->onCompile[] = function ($configurator, $compiler) {
+    $compiler->addExtension('netteTranslator', new NetteTranslator\NetteTranslatorExtension);
+};
+
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon', $configurator::NONE); // none section
 $container = $configurator->createContainer();
 
-// Session cart
-//$session = $container->session;
+
+
        
 
 return $container;

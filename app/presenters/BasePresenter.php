@@ -21,32 +21,59 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     private $shopModel;
     private $categoryModel;
-    
+
+    /** @persistent */
+    public $lang;
+
+    /** @var NetteTranslator\Gettext */
+    protected $translator;
+
     protected function startup() {
         parent::startup();
         $this->shopModel = $this->context->shopModel;
         $this->categoryModel = $this->context->categoryModel;
-        
+    }
+
+    /**
+     * Inject translator
+     * @param NetteTranslator\Gettext
+     */
+    public function injectTranslator(NetteTranslator\Gettext $translator) {
+        $this->translator = $translator;
+    }
+
+    public function createTemplate($class = NULL) {
+        $template = parent::createTemplate($class);
+
+        // pokud není nastaven, použijeme defaultní z configu
+        if (!isset($this->lang)) {
+            $this->lang = $this->translator->getLang();
         }
 
+        $this->translator->setLang($this->lang); // nastavíme jazyk
+        $template->setTranslator($this->translator);
 
-        /*
-         *  beforeRender()
-         *  rendering info used on every page
-         */
-        
+        return $template;
+    }
+
+    /*
+     *  beforeRender()
+     *  rendering info used on every page
+     */
+
     public function beforeRender() {
         parent::beforeRender();
-      
-       // $this->template->infos = $this->shopModel->nactidata();
-       // $this->template->categories = $this->categoryModel->nactidata();
+        //$translator = $this->getTranslator('default');
+        //  $this->template->setTranslator($translator);
+        // $this->template->infos = $this->shopModel->nactidata();
+        // $this->template->categories = $this->categoryModel->nactidata();
     }
-    
+
     protected function createComponentMenu() {
-        $menuControl = new MenuControl();
+        $menuControl = new MenuControl($this->translator);
         return $menuControl;
     }
-    
+
     
 
 }
