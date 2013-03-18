@@ -1,16 +1,16 @@
-<?php //netteCache[01]000375a:2:{s:4:"time";s:21:"0.36726900 1363560451";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:53:"C:\xampp\htdocs\platon\app\templates\Order\cart.latte";i:2;i:1363560404;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000375a:2:{s:4:"time";s:21:"0.06126100 1363644497";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:53:"C:\xampp\htdocs\platon\app\templates\Order\cart.latte";i:2;i:1363563294;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: C:\xampp\htdocs\platon\app\templates\Order\cart.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 't7jemqmzxq')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '28e39c93xn')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb2d8e74c335_content')) { function _lb2d8e74c335_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lbe946f339de_content')) { function _lbe946f339de_content($_l, $_args) { extract($_args)
 ?><div class="row">
     <div class="span12">
         <h2>Your cart</h2>
@@ -27,7 +27,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb2d8e74c335_content')) { func
                     <th>#</th>
                     <th>Product Name</th>
                     <th>Amount</th>
-                    <th>Unite price</th>
+                    <th>Item price</th>
                     <th>Total price</th>
                     <th>X</th>
                 </tr>
@@ -37,7 +37,8 @@ if (!function_exists($_l->blocks['content'][] = '_lb2d8e74c335_content')) { func
                 <tr>
                     <td><img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="width: 38px;" />
                         <?php echo Nette\Templating\Helpers::escapeHtml($product->ProductNumber, ENT_NOQUOTES) ?></td>
-                    <td><?php echo Nette\Templating\Helpers::escapeHtml($product->ProductName, ENT_NOQUOTES) ?></td>
+                    <td><a href="<?php echo htmlSpecialChars($_presenter->link("Product:product", array($product->ProductID))) ?>
+"><?php echo Nette\Templating\Helpers::escapeHtml($product->ProductName, ENT_NOQUOTES) ?></a></td>
                     <td><a href="<?php echo htmlSpecialChars($_presenter->link("addAmount!", array($id))) ?>
 "><i class="icon-plus-sign"></i></a> <?php echo Nette\Templating\Helpers::escapeHtml($amnt, ENT_NOQUOTES) ?> pcs
                         
@@ -84,19 +85,21 @@ if (!function_exists($_l->blocks['content'][] = '_lb2d8e74c335_content')) { func
         var pm = new Array(); 
         pm[1] = 0; pm[2] = -50;
         
+        var shipping = 0;
+        var payment = 0;
         
         $('input[name=shippers]').click(function() {
             i = $('input[name=shippers]:radio:checked').val();
-            var shipping = sp[i];
-             var grandtotal = shipping + <?php echo Nette\Templating\Helpers::escapeJs($grandtotal) ?>;
+            shipping = sp[i];
+             var grandtotal = shipping + <?php echo Nette\Templating\Helpers::escapeJs($grandtotal) ?> + payment;
         $('.shipping').html(shipping + ',-');
         $('.ordertotal').html(grandtotal + ',-'); 
         });
         
         $('input[name=payment]').click(function() {
             i = $('input[name=payment]:radio:checked').val();
-            var payment = pm[i];
-             var grandtotal = payment + <?php echo Nette\Templating\Helpers::escapeJs($grandtotal) ?>;
+            payment = pm[i];
+             var grandtotal = payment + <?php echo Nette\Templating\Helpers::escapeJs($grandtotal) ?> + shipping;
         $('.ordertotal').html(grandtotal + ',-'); 
         });
 
