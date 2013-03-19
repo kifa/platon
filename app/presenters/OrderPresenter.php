@@ -276,6 +276,8 @@ class OrderPresenter extends BasePresenter {
         $this->template->orderdetails = $this->orderModel->loadOrderDetails($orderNo);
         $this->template->products = $this->orderModel->loadOrderProduct($orderNo);
         $this->template->order = $this->orderModel->loadOrder($orderNo);
+        
+        dump($this->orderModel->loadOrder($orderNo));
         $this->flashMessage('Order sent.');
         unset($this->cart->prd);
         $this->cart->numberItems = 0;

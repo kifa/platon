@@ -39,7 +39,7 @@
                             <h3 class="span2"><strong class="span1">Products:</strong>
                                 <span class="span1">{$grandtotal},-</span></h3>
                             <h3 class="span2"><strong class="span1">Shipping:</strong> 
-                                <span class="shipping span1">{$shipping = $order->DeliveryID}</span></h3>
+                                <span class="shipping span1">{$shipping = $order->PaymentPrice}</span></h3>
                             <h3 class="span2"><strong class="span1">Total:</strong>
                                 <span class="ordertotal span1">{$grandtotal += $shipping},-</span></h3>
                         </div>
@@ -70,7 +70,32 @@
         <dl>
             <dt>Payment:</dt>
             <dd>{$order->PaymentMethodName}</dd>
-
+        </dl>
+    </div>
+    
+    <div class="span5">
+        <dl>
+            <dt>Contact:</dt>
+            <dd>{$order->FirstName} {$order->SureName}</dd>
+            <dd>{$order->Email}</dd>
+            <dd>{$order->PhoneNumber}</dd>
+        </dl>
+        {if $order->CompanyName != ""}
+        <dl>
+            <dt>Company:</dt>
+            <dd>{$order->CompanyName}</dd>
+        </dl>
+        {/if}
+    </div>
+    
+    <div class="span5">
+        <dl>
+            <dt>Status:</dt>
+            <dd>{$order->StatusID}</dd>
+        </dl>
+        <dl>
+            <dt>Payment:</dt>
+            <dd>{$order->PaymentMethodName}</dd>
         </dl>
     </div>
 
