@@ -8,15 +8,21 @@
 
 class OrderModel extends Authenticator {
     /*
-     * Show orders
+     * Show orderdetails
      * @param ?
      * @param ? example: pozice počátečního znaku
      * @return string 
      */
-    public function loadOrders(){
-        return $this->getTable('order')->select('order.*,orderdetails.*');
+    public function loadOrderDetails($id){
+        if($id==''){
+            return $this->getTable('orderdetails')->fetch();
         }
-
+        else
+        {
+            return $this->getTable('orderdetails')->where('orderID',$id)->fetch();
+        }
+    }
+        
     /*
      * Show one order
      * @param ?
@@ -24,9 +30,16 @@ class OrderModel extends Authenticator {
      * @return string 
      */
     public function loadOrder($id){
-        return $this->getTable('orderdetails')->where('OrderID',$id)->fetch();
+        return $this->getTable('order')->where('OrderID',$id)->fetch();
     }
     
+    /*
+     * Show product in order
+     */
+    public function loadOrderProduct($id){
+        return $this->getTable('orderdetails')->select('orderdetails.* ,product.*')
+                ->where('orderdetails.OrderID',$id);
+    }
     /*
      * Check and save order
      * @param ?

@@ -1,23 +1,23 @@
-<?php //netteCache[01]000384a:2:{s:4:"time";s:21:"0.91958700 1363644388";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:62:"G:\xampp\htdocs\GIT\platon\app\templates\Product\default.latte";i:2;i:1363387372;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000380a:2:{s:4:"time";s:21:"0.96881200 1363703967";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:58:"C:\xampp\htdocs\platon\app\templates\Product\default.latte";i:2;i:1363387550;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
-// source file: G:\xampp\htdocs\GIT\platon\app\templates\Product\default.latte
+// source file: C:\xampp\htdocs\platon\app\templates\Product\default.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'h5j91v9hng')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'jlk4rvrc8e')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb9d328f9f91_head')) { function _lb9d328f9f91_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lbe5dda65ee9_head')) { function _lbe5dda65ee9_head($_l, $_args) { extract($_args)
 ?><title>Kategorie</title><?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb715c4a15a6_content')) { function _lb715c4a15a6_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb214cc36b4b_content')) { function _lb214cc36b4b_content($_l, $_args) { extract($_args)
 ?><div id="content">
     <div class="page-header">
   <h1>Google Nexus <small>Best products with Android ever</small></h1>

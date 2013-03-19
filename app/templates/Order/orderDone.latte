@@ -17,13 +17,18 @@
         <tbody>
         </tbody>
     </table>
-{$order->ProductName}
+
 
     <div class="span5">
-
+        
         <dl>
-            <dt></dt>
-            <dd></dd>
+            <dt>Date created:</dt>
+            <dd>{$order->DateCreated|date:'%d.%m.%Y'}</dd>
+        </dl>
+        <dl>
+            <dt>Shipping:</dt>
+            <dd>{$order->DeliveryID}</dd>
+                
         </dl>
     </div>
 

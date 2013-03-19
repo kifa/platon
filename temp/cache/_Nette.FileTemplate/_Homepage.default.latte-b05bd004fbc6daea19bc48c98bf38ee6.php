@@ -1,23 +1,23 @@
-<?php //netteCache[01]000385a:2:{s:4:"time";s:21:"0.30692000 1363643390";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:63:"G:\xampp\htdocs\GIT\platon\app\templates\Homepage\default.latte";i:2;i:1363123166;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000381a:2:{s:4:"time";s:21:"0.11059000 1363703961";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:59:"C:\xampp\htdocs\platon\app\templates\Homepage\default.latte";i:2;i:1363126393;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
-// source file: G:\xampp\htdocs\GIT\platon\app\templates\Homepage\default.latte
+// source file: C:\xampp\htdocs\platon\app\templates\Homepage\default.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'mvjcqs67wg')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'op8q9v8ys7')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb71286eed17_head')) { function _lb71286eed17_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lbc94ea264b3_head')) { function _lbc94ea264b3_head($_l, $_args) { extract($_args)
 ?><title>Kategorie</title><?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lbf87e9ba082_content')) { function _lbf87e9ba082_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb63854b6789_content')) { function _lb63854b6789_content($_l, $_args) { extract($_args)
 ?><div id="myCarousel" class="carousel slide">
     <ol class="carousel-indicators">
         <li data-target= "#myCarousel"  data-slide-to="0" class="active"></li>
