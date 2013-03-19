@@ -151,7 +151,8 @@ class OrderPresenter extends BasePresenter {
      * 
      * @return $cartForm
      */
-    protected function createComponentCartForm() {
+    protected function createComponentCartForm()
+    {
         
         $shippers = array();
         $payment = array();
@@ -279,6 +280,11 @@ class OrderPresenter extends BasePresenter {
         unset($this->cart->prd);
         $this->cart->numberItems = 0;
         
+    }
+
+    
+    public function renderOrders() {
+        //$this->template->orders = $this->orderModel->loadOrders;
     }
 
     public function renderDefault() {
