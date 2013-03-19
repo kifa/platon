@@ -115,7 +115,7 @@ class OrderModel extends Authenticator {
      */
     public function loadPaymentMethod($id){
         if($id==''){
-            return $this->getTable('paymentmethod');
+            return $this->getTable('paymentmethod')->fetchPairs('PaymentMethodID');
         }
         else
         {
@@ -144,7 +144,7 @@ class OrderModel extends Authenticator {
     public function loadDelivery($id)
     {
         if($id==''){
-            return $this->getTable('delivery');
+            return $this->getTable('delivery')->fetchPairs('DeliveryID');
         }
         else
         {
@@ -177,6 +177,11 @@ class OrderModel extends Authenticator {
     public function countOrderDetail()
     {
         return $this->getTable('orderdetails')->count();
+    }
+    
+    public function countDelivery()
+    {
+        return $this->getTable('delivery')->count();
     }
     /*
      * Change order status

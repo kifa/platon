@@ -28,7 +28,7 @@ class ProductControl extends UI\Control {
     public function render() {
 
         $this->template->setFile(__DIR__ . '/ProductControl.latte');
-        $this->template->products = $this->service->loadCatalog('2');
+        $this->template->products = $this->service->loadCatalog('');
         $this->template->render();
     }
 

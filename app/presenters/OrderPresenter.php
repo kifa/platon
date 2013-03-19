@@ -152,15 +152,18 @@ class OrderPresenter extends BasePresenter {
      * @return $cartForm
      */
     protected function createComponentCartForm() {
-        $shippers = array(
-            '1' => 'Česká pošta | Delivery time 1-2day | 150,-',
-            '2' => 'DPD | Delivery time 1 day | 190,-'
-        );
         
-        $payment = array(
-            '1' => 'Cash',
-            '2' => 'Bankwire | -50,-'
-        );
+        $shippers = array();
+        $payment = array();
+        
+        foreach ($this->orderModel->loadDelivery('') as $key => $value) {
+            $shippers[$key] = $value->DeliveryName; 
+        };
+        
+        foreach ($this->orderModel->loadPaymentMethod('') as $key => $value) {
+            $payment[$key] = $value->PaymentMethodName;
+        };
+        
        // $ico = Html::el('i', 'class=""'); 
         
         $cartForm = new Nette\Application\UI\Form;
@@ -185,11 +188,13 @@ class OrderPresenter extends BasePresenter {
         $cartForm->addGroup('Shipping')
                 ->setOption('container', 'div class="span5"');
         $cartForm->addRadioList('shippers','', $shippers)
-                ->setAttribute('class', '.span1 radio');
+                ->setAttribute('class', '.span1 radio')
+                ->setRequired('Please select Shipping method');
         $cartForm->addGroup('Payment')
                 ->setOption('container', 'div class="span5"');
         $cartForm->addRadioList('payment','', $payment)
-                ->setAttribute('class', '.span1 radio');;
+                ->setAttribute('class', '.span1 radio')
+                ->setRequired('Please select Payment method');;
         $cartForm->addGroup('Terms')
                 ->setOption('container', 'div class="span5"');
         $cartForm->addCheckbox('terms', 'I accept Terms and condition.')
