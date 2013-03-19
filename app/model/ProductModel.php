@@ -17,8 +17,15 @@ class ProductModel extends Authenticator {
     public function loadCatalog($id) {
         //$id = '2';
         //return $this->getTable('Product')->select('Product.*,Price.*')->where('CategoryID', $id);
+        if($id==''){
+            return $this->getTable('product')->select('product.ProductID, product.ProductName,
+                product.ProductDescription, price.FinalPrice');            
+        }
+        else
+        {
         return $this->getTable('product')->select('product.ProductID, product.ProductName, 
             product.ProductDescription,product.CategoryID,price.FinalPrice')->where('CategoryID', $id);        
+        }
     }
 
     /*

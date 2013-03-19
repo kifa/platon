@@ -13,6 +13,7 @@ class OrderPresenter extends BasePresenter {
 
     private $orderModel;
     private $productModel;
+    private $orderNo;
     private $cart;
     private $c2;
 
@@ -160,9 +161,9 @@ class OrderPresenter extends BasePresenter {
             '1' => 'Cash',
             '2' => 'Bankwire | -50,-'
         );
-        $ico = Html::el('i', 'class=""'); 
+       // $ico = Html::el('i', 'class=""'); 
         
-        $cartForm = new Form();
+        $cartForm = new Nette\Application\UI\Form;
         $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
         $cartForm->addGroup('Delivery info')
                 ->setOption('container', 'div class="span5"');
@@ -170,6 +171,7 @@ class OrderPresenter extends BasePresenter {
                 ->addRule(Form::FILLED, 'Would you fill your name, please?');
         $cartForm->addText('phone', 'Phone:', 40, 100);
         $cartForm->addText('email', 'Email:', 40, 100)
+                 ->setEmptyValue('@')
                 ->addRule(Form::EMAIL, 'Would you fill your email, please?')
                 ->addRule(Form::FILLED, 'Would you fill your name, please?');
         $cartForm->addGroup('Address')
@@ -197,12 +199,57 @@ class OrderPresenter extends BasePresenter {
                 ->addRule(Form::FILLED, 'In order to continue checkout, you have to agree with Term.');
         $cartForm->addGroup('Checkout')
                 ->setOption('container', 'div class="span5"');
-        $cartForm->addSubmit('sendOrder', 'Checkout here!')
+        $cartForm->addSubmit('send', 'Checkout here!')
                 ->setAttribute('class', 'btn btn-warning btn-large');
+        $cartForm->onSuccess[] = $this->cartFormSubmitted;
         return $cartForm;
     }
 
-    
+    /*
+     * Getting values from CartForm
+     */
+    public function cartFormSubmitted($form)
+    {
+       // $order = $form->getValues();
+   
+        $total = 0;
+        foreach ($this->cart->prd as $id => $amnt){
+
+                $price = $this->productModel->loadProduct($id)->FinalPrice;
+                $amnt = $this->cart->prd[$id];
+             
+                  $total += $price * $amnt;
+            }
+            $this->orderNo = $this->orderModel->countOrder() + 1;
+
+        $this->orderModel->insertOrder(
+                                $this->orderNo,
+                                1,
+                                "novak",
+                                $total,
+                                89,
+                                88,
+                                99,
+                                FALSE,
+                                $form->values->shippers,
+                                $form->values->payment
+
+                                );
+       
+        $cislo = $this->orderModel->countOrderDetail() + 1;
+        
+        
+        foreach ($this->cart->prd as $id => $amnt){
+
+                $price = $this->productModel->loadProduct($id)->FinalPrice;
+                $amnt = $this->cart->prd[$id];
+                $this->orderModel->insertOrderDetails($cislo, $this->orderNo, $id, $amnt, $price );
+                        $cislo++;
+            }
+
+        $this->redirect('Order:orderDone');
+    }
+
     /*
      * renderCartEmpty()
      * rendering empty cart
@@ -218,7 +265,11 @@ class OrderPresenter extends BasePresenter {
      * rendering Thank you for your order page
      */
 
-    public function renderOrderDone() {
+    public function renderOrderDone($orderNo) {
+        $this->template->order = $this->orderModel->loadOrder($orderNo);
+        $this->flashMessage('Order sent.');
+        unset($this->cart->prd);
+        $this->cart->numberItems = 0;
         
     }
 

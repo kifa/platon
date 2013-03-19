@@ -24,27 +24,27 @@ class OrderModel extends Authenticator {
      * @return string 
      */
     public function loadOrder($id){
-        return $this->getTable('orderdetails')->select('orderdetails.*,order.*')
-                ->where('orderdetails.OrderID',$id)->fetch();
+        return $this->getTable('orderdetails')->where('OrderID',$id)->fetch();
     }
+    
     /*
      * Check and save order
      * @param ?
-     * @param ? example: pozice počátečního znaku
+     * @param ? 
      * @return string
      */
     public function insertOrder($id, $status, $user, $price, $pricetax, $created, 
             $lastchange, $finished, $delivery, $payment)
     {
             $insert =  array(
-                'OrderID' => $id,
-                'StatusID' => $status,
-                'UserID' => $user,
-                'TotalPrice' => $price,
+                'OrderID' => $id, //automaticky!
+                'StatusID' => $status, //automaticky!
+                'UserID' => $user,  //nepraktické, aby se pouzivalo "novak", "admin"
+                'TotalPrice' => $price, //
                 'TotalPriceTax' => $pricetax,
-                'DateCreated' => $created,
-                'DateOfLastChange' => $lastchange,
-                'DateFinished' => $finished,
+                'DateCreated' => $created,  //automaticky zde
+                'DateOfLastChange' => $lastchange, //?
+                'DateFinished' => $finished, //? spolu s předchozí řešit až v administraci obj.
                 'DeliveryID' => $delivery,
                 'PaymentMethodID' => $payment,
                 'IP' => NULL,
@@ -153,6 +153,17 @@ class OrderModel extends Authenticator {
         );
         
         return $this->getTable('delivery')->insert($insert);
+    }
+    
+    
+    public function countOrder()
+    {
+        return $this->getTable('order')->count();
+    }
+    
+    public function countOrderDetail()
+    {
+        return $this->getTable('orderdetails')->count();
     }
     /*
      * Change order status
