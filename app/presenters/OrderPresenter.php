@@ -286,7 +286,7 @@ class OrderPresenter extends BasePresenter {
 
     
     public function renderOrders() {
-        //$this->template->orders = $this->orderModel->loadOrders;
+        $this->template->orders = $this->orderModel->loadOrders();
     }
 
     public function renderDefault() {
