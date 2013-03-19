@@ -30,7 +30,7 @@ class OrderModel extends Authenticator {
      * @return string 
      */
     public function loadOrder($id){
-        return $this->getTable('order')->select('order.*,delivery.*')->where('order.OrderID',$id)->fetch();
+        return $this->getTable('order')->select('order.*,delivery.*,payment.*,orderstatus.*')->where('order.OrderID',$id)->fetch();
     }
     
     /*

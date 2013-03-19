@@ -71,18 +71,16 @@ INSERT INTO `currency` (`CurrencyID`, `CurrencyCode`, `CurrencyName`, `CurrencyR
 DROP TABLE IF EXISTS `delivery`;
 CREATE TABLE `delivery` (
   `DeliveryID` int(11) NOT NULL AUTO_INCREMENT,
-  `TypeOfDelivery` varchar(45) DEFAULT NULL,
+  `DeliveryName` varchar(45) DEFAULT NULL,
   `DeliveryDescription` varchar(45) DEFAULT NULL,
-  `PriceID` int(11) DEFAULT NULL,
-  `FreeFromPrice` float DEFAULT NULL,
-  PRIMARY KEY (`DeliveryID`),
-  KEY `PriceID_idx` (`PriceID`),
-  CONSTRAINT `FKDeliveryPrice` FOREIGN KEY (`PriceID`) REFERENCES `price` (`PriceID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `DeliveryPrice` float DEFAULT '0',
+  `FreeFromPrice` float DEFAULT '0',
+  PRIMARY KEY (`DeliveryID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
-INSERT INTO `delivery` (`DeliveryID`, `TypeOfDelivery`, `DeliveryDescription`, `PriceID`, `FreeFromPrice`) VALUES
-(1,	'Personal pick up',	'Personal in the shop',	NULL,	NULL),
-(2,	'Cash on delivery',	'Send by transport company',	1,	1000);
+INSERT INTO `delivery` (`DeliveryID`, `DeliveryName`, `DeliveryDescription`, `DeliveryPrice`, `FreeFromPrice`) VALUES
+(1,	'Personal pick up',	'Personal in the shop',	0,	0),
+(2,	'Cash on delivery',	'Send by transport company',	99,	1000);
 
 DROP TABLE IF EXISTS `documentation`;
 CREATE TABLE `documentation` (
@@ -108,20 +106,28 @@ CREATE TABLE `order` (
   `DateOfLastChange` date DEFAULT NULL,
   `DateFinished` date DEFAULT NULL,
   `DeliveryID` int(11) DEFAULT NULL,
-  `PaymentMethodID` int(11) DEFAULT NULL,
+  `PaymentID` int(11) DEFAULT NULL,
   `IP` varchar(15) DEFAULT NULL,
   `SessionID` int(11) DEFAULT NULL,
   PRIMARY KEY (`OrderID`),
   KEY `UserID_idx` (`UserID`),
   KEY `StatusID_idx` (`StatusID`),
   KEY `DeliveryID_idx` (`DeliveryID`),
-  KEY `PaymentMethodID_idx` (`PaymentMethodID`),
+  KEY `PaymentID` (`PaymentID`),
+  CONSTRAINT `order_ibfk_1` FOREIGN KEY (`PaymentID`) REFERENCES `payment` (`PaymentID`),
   CONSTRAINT `FKOrderDelivery` FOREIGN KEY (`DeliveryID`) REFERENCES `delivery` (`DeliveryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FKOrderPaymentMethod` FOREIGN KEY (`PaymentMethodID`) REFERENCES `paymentmethod` (`PaymentMethodID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKOrderStatus` FOREIGN KEY (`StatusID`) REFERENCES `orderstatus` (`OrderStatusID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKOrderUser` FOREIGN KEY (`UserID`) REFERENCES `users` (`Login`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
+INSERT INTO `order` (`OrderID`, `StatusID`, `UserID`, `TotalPrice`, `TotalPriceTax`, `DateCreated`, `DateOfLastChange`, `DateFinished`, `DeliveryID`, `PaymentID`, `IP`, `SessionID`) VALUES
+(1,	1,	'novak',	26997,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	1,	NULL,	NULL),
+(2,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	NULL,	NULL,	NULL,	NULL),
+(3,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	NULL,	NULL,	NULL),
+(4,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	NULL,	NULL,	NULL),
+(5,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	NULL,	NULL,	NULL),
+(6,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	NULL,	NULL,	NULL),
+(7,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	NULL,	NULL,	NULL);
 
 DROP TABLE IF EXISTS `orderdetails`;
 CREATE TABLE `orderdetails` (
@@ -135,8 +141,11 @@ CREATE TABLE `orderdetails` (
   KEY `ProductID_idx` (`ProductID`),
   CONSTRAINT `FKOrderDetailsOrder` FOREIGN KEY (`OrderID`) REFERENCES `order` (`OrderID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKOrderDetailsProduct` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+INSERT INTO `orderdetails` (`OrderDetailsID`, `OrderID`, `ProductID`, `Quantity`, `UnitPrice`) VALUES
+(2,	7,	2,	1,	8999),
+(3,	5,	2,	1,	8999);
 
 DROP TABLE IF EXISTS `orderstatus`;
 CREATE TABLE `orderstatus` (
@@ -144,8 +153,10 @@ CREATE TABLE `orderstatus` (
   `StatusName` varchar(45) DEFAULT NULL,
   `StatusDescription` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`OrderStatusID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+INSERT INTO `orderstatus` (`OrderStatusID`, `StatusName`, `StatusDescription`) VALUES
+(1,	'Pending',	'Pending order');
 
 DROP TABLE IF EXISTS `parametersalbum`;
 CREATE TABLE `parametersalbum` (
@@ -158,17 +169,17 @@ INSERT INTO `parametersalbum` (`ParametersAlbumID`) VALUES
 (2),
 (3);
 
-DROP TABLE IF EXISTS `paymentmethod`;
-CREATE TABLE `paymentmethod` (
-  `PaymentMethodID` int(11) NOT NULL AUTO_INCREMENT,
-  `PaymentMethodName` varchar(45) DEFAULT NULL,
-  `PriceID` float DEFAULT NULL,
-  PRIMARY KEY (`PaymentMethodID`)
+DROP TABLE IF EXISTS `payment`;
+CREATE TABLE `payment` (
+  `PaymentID` int(11) NOT NULL AUTO_INCREMENT,
+  `PaymentName` varchar(45) DEFAULT NULL,
+  `PaymentPrice` float DEFAULT '0',
+  PRIMARY KEY (`PaymentID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
-INSERT INTO `paymentmethod` (`PaymentMethodID`, `PaymentMethodName`, `PriceID`) VALUES
-(1,	'Cash',	1),
-(2,	'Banwire',	2);
+INSERT INTO `payment` (`PaymentID`, `PaymentName`, `PaymentPrice`) VALUES
+(1,	'Cash',	0),
+(2,	'Banwire',	-50);
 
 DROP TABLE IF EXISTS `photo`;
 CREATE TABLE `photo` (
@@ -286,5 +297,4 @@ INSERT INTO `users` (`Login`, `Password`, `FirstName`, `SureName`, `Email`, `Pho
 ('novak',	'novak',	'Jan',	'Novak',	'jan.novak@company.com',	999888777,	2,	'Company',	'819281293',	0),
 ('test',	'test',	'Testovaci',	'Subjekt',	'testovaci@subjekt.cz',	777888999,	1,	'0',	'0',	0);
 
-DROP VIEW IF EXISTS `productsview`;
--- 2013-03-18 22:21:02
+-- 2013-03-19 20:32:08
