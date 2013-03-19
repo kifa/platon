@@ -98,7 +98,7 @@ CREATE TABLE `documentation` (
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `OrderID` int(11) NOT NULL AUTO_INCREMENT,
-  `StatusID` int(11) DEFAULT NULL,
+  `StatusID` int(11) NOT NULL DEFAULT '1',
   `UserID` varchar(30) DEFAULT NULL,
   `TotalPrice` float DEFAULT NULL,
   `TotalPriceTax` float DEFAULT NULL,
@@ -114,7 +114,7 @@ CREATE TABLE `order` (
   KEY `StatusID_idx` (`StatusID`),
   KEY `DeliveryID_idx` (`DeliveryID`),
   KEY `PaymentID` (`PaymentID`),
-  CONSTRAINT `order_ibfk_4` FOREIGN KEY (`StatusID`) REFERENCES `status` (`StatusID`) ON DELETE SET NULL ON UPDATE SET NULL,
+  CONSTRAINT `order_ibfk_2` FOREIGN KEY (`StatusID`) REFERENCES `orderstatus` (`StatusID`),
   CONSTRAINT `FKOrderDelivery` FOREIGN KEY (`DeliveryID`) REFERENCES `delivery` (`DeliveryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKOrderUser` FOREIGN KEY (`UserID`) REFERENCES `users` (`Login`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `order_ibfk_1` FOREIGN KEY (`PaymentID`) REFERENCES `payment` (`PaymentID`)
@@ -122,12 +122,12 @@ CREATE TABLE `order` (
 
 INSERT INTO `order` (`OrderID`, `StatusID`, `UserID`, `TotalPrice`, `TotalPriceTax`, `DateCreated`, `DateOfLastChange`, `DateFinished`, `DeliveryID`, `PaymentID`, `IP`, `SessionID`) VALUES
 (1,	1,	'novak',	26997,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	1,	NULL,	NULL),
-(2,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	NULL,	NULL,	NULL,	NULL),
-(3,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	NULL,	NULL,	NULL),
-(4,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	NULL,	NULL,	NULL),
-(5,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	NULL,	NULL,	NULL),
-(6,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	NULL,	NULL,	NULL),
-(7,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	NULL,	NULL,	NULL);
+(2,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	NULL,	2,	NULL,	NULL),
+(3,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	1,	NULL,	NULL),
+(4,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	2,	NULL,	NULL),
+(5,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	1,	NULL,	NULL),
+(6,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	1,	1,	NULL,	NULL),
+(7,	1,	'novak',	8999,	89,	'0000-00-00',	'0000-00-00',	'0000-00-00',	2,	NULL,	NULL,	NULL);
 
 DROP TABLE IF EXISTS `orderdetails`;
 CREATE TABLE `orderdetails` (
@@ -146,6 +146,17 @@ CREATE TABLE `orderdetails` (
 INSERT INTO `orderdetails` (`OrderDetailsID`, `OrderID`, `ProductID`, `Quantity`, `UnitPrice`) VALUES
 (2,	7,	2,	1,	8999),
 (3,	5,	2,	1,	8999);
+
+DROP TABLE IF EXISTS `orderstatus`;
+CREATE TABLE `orderstatus` (
+  `StatusID` int(11) NOT NULL AUTO_INCREMENT,
+  `StatusName` varchar(50) NOT NULL,
+  `StatusDescription` varchar(255) NOT NULL,
+  PRIMARY KEY (`StatusID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+INSERT INTO `orderstatus` (`StatusID`, `StatusName`, `StatusDescription`) VALUES
+(1,	'Pending',	'Pending for something');
 
 DROP TABLE IF EXISTS `parametersalbum`;
 CREATE TABLE `parametersalbum` (
@@ -270,10 +281,11 @@ CREATE TABLE `status` (
   `StatusName` varchar(255) NOT NULL,
   `StatusDescription` varchar(255) NOT NULL,
   PRIMARY KEY (`StatusID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 INSERT INTO `status` (`StatusID`, `StatusName`, `StatusDescription`) VALUES
-(1,	'Pending',	'Pending');
+(1,	'Pending',	'Pending'),
+(2,	'Ready to send',	'Ready to send');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -297,4 +309,4 @@ INSERT INTO `users` (`Login`, `Password`, `FirstName`, `SureName`, `Email`, `Pho
 ('novak',	'novak',	'Jan',	'Novak',	'jan.novak@company.com',	999888777,	2,	'Company',	'819281293',	0),
 ('test',	'test',	'Testovaci',	'Subjekt',	'testovaci@subjekt.cz',	777888999,	1,	'0',	'0',	0);
 
--- 2013-03-19 22:11:48
+-- 2013-03-19 22:55:56
