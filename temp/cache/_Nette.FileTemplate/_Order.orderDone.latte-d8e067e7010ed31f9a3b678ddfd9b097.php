@@ -1,16 +1,16 @@
-<?php //netteCache[01]000380a:2:{s:4:"time";s:21:"0.80918500 1363708696";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:58:"C:\xampp\htdocs\platon\app\templates\Order\orderDone.latte";i:2;i:1363708692;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000380a:2:{s:4:"time";s:21:"0.04843700 1363709300";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:58:"C:\xampp\htdocs\platon\app\templates\Order\orderDone.latte";i:2;i:1363709260;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: C:\xampp\htdocs\platon\app\templates\Order\orderDone.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'cu1s7rzhv9')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'gch5jgoax8')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb67edc362df_content')) { function _lb67edc362df_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb7e36bc1f59_content')) { function _lb7e36bc1f59_content($_l, $_args) { extract($_args)
 ?><h1>Order summary</h1>
 <div class="span12">
 
@@ -38,7 +38,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb67edc362df_content')) { func
         </dl>
         <dl>
             <dt>Shipping:</dt>
-            <dd><?php echo Nette\Templating\Helpers::escapeHtml($order->DeliveryID, ENT_NOQUOTES) ?></dd>
+            <dd><?php echo Nette\Templating\Helpers::escapeHtml($order->DeliveryName, ENT_NOQUOTES) ?></dd>
                 
         </dl>
     </div>
