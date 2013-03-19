@@ -22,7 +22,17 @@ class OrderModel extends Authenticator {
             return $this->getTable('orderdetails')->where('orderID',$id)->fetch();
         }
     }
-        
+      
+    /*
+     * Show all orders
+     * @param ?
+     * @param ? example: pozice počátečního znaku
+     * @return string 
+     */  
+    public function loadOrders(){
+        return $this->getTable('order')->select('order.*,delivery.*,payment.*,orderstatus.*,user.*')->fetch();
+    }
+    
     /*
      * Show one order
      * @param ?
@@ -30,7 +40,7 @@ class OrderModel extends Authenticator {
      * @return string 
      */
     public function loadOrder($id){
-        return $this->getTable('order')->select('order.*,delivery.*')->where('order.OrderID',$id)->fetch();
+        return $this->getTable('order')->select('order.*,delivery.*,payment.*,orderstatus.*,user.*')->where('order.OrderID',$id)->fetch();
     }
     
     /*

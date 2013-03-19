@@ -50,32 +50,23 @@
         </table>
 
 
-        <div class="span5">
+    <div class="span5">
+        
+        <dl>
+            <dt>Date created:</dt>
+            <dd>{$order->DateCreated|date:'%d.%m.%Y'}</dd>
+        </dl>
+        <dl>
+            <dt>Shipping:</dt>
+            <dd>{$order->DeliveryName}</dd>
+                         
+        </dl>
+    </div>
 
-            <dl>
-                <dt>Date created:</dt>
-                <dd>{$order->DateCreated|date:'%d.%m.%Y'}</dd>
-            </dl>
-            <dl>
-                <dt>Shipping:</dt>
-                <dd>{$order->DeliveryName}</dd>
-
-            </dl>
-        </div>
-
-        <div class="span5">
-            <dl>
-                <dt>Status:</dt>
-                <dd>{$order->StatusID}</dd>
-            </dl>
-            <dl>
-                <dt>Payment:</dt>
-                <dd>{$order->PaymentMethodName}</dd>
-
-            </dl>
-        </div>
-
+    <div class="span5">
 
     </div>
+
+
 </div>
 {/block}
