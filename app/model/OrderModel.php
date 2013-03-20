@@ -30,7 +30,7 @@ class OrderModel extends Authenticator {
      * @return string 
      */  
     public function loadOrders(){
-        return $this->getTable('order')->select('order.*,delivery.*,payment.*,orderstatus.*,user.*')->fetch();
+        return $this->getTable('order')->select('order.*,delivery.*,payment.*,status.*,user.*')->fetch();
     }
     
     /*
@@ -40,7 +40,8 @@ class OrderModel extends Authenticator {
      * @return string 
      */
     public function loadOrder($id){
-        return $this->getTable('order')->select('order.*,delivery.*,payment.*,orderstatus.*,user.*')->where('order.OrderID',$id)->fetch();
+        //return $this->getTable('order')->select('order.*,delivery.*,payment.*,Status.*,user.*')->where('order.OrderID',$id)->fetch();
+        return $this->getTable('order')->select('order.*,payment.*,delivery.*,user.*,status.*')->where('order.OrderID',$id)->fetch();
     }
     
     /*
@@ -95,29 +96,29 @@ class OrderModel extends Authenticator {
     /*
      * Load order statuses
      */
-    public function loadOrderStatus($id)
+    public function loadStatus($id)
     {
         if($id==''){
-            return $this->getTable('orderstatus');
+            return $this->getTable('status');
         }
         else
         {
-            return $this->getTable('orderstatus')->where('StatusID',$id);
+            return $this->getTable('status')->where('StatusID',$id);
         }
     }
     
     /*
      * Insert new order status
      */
-    public function insertOrderStatus($id,$name,$description)
+    public function insertStatus($id,$name,$description)
     {
         $insert = array(
-            'OrderStatusID' => $id,
-            'OrderStatusName' => $name,
-            'OrderStatusDescription' => $description
+            'StatusID' => $id,
+            'StatusName' => $name,
+            'StatusDescription' => $description
         );
         
-        return $this->getTable('orderstatus')->insert($insert);
+        return $this->getTable('Status')->insert($insert);
     }
 
     /*
