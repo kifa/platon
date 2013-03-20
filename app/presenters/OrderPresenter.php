@@ -93,10 +93,6 @@ class OrderPresenter extends BasePresenter {
 
     /*
      * Action for pre-view cart processing
-     * 
-     * 
-     * 
-     * 
      */
 
     public function actionCart($product, $amnt) {
@@ -117,6 +113,11 @@ class OrderPresenter extends BasePresenter {
             }
             $this->cart->lastItem = $product;
             $this->cart->numberItems = Count($this->cart->prd);
+            
+            $ico = HTML::el('i')->class('icon-ok-sign left');
+            $message = HTML::el('span',' ' . $row->ProductName.' was successfully added to your cart.');
+            $message -> insert(0, $ico);
+            $this->flashMessage($message, 'alert alert-info');
             $this->redirect('Order:cart');
         }
     }
@@ -139,6 +140,20 @@ class OrderPresenter extends BasePresenter {
 
                 $this->c2[$id][$amnt] = $product2;
             }
+            
+            $shippers = array();
+        $payment = array();
+        
+        foreach ($this->orderModel->loadDelivery('') as $key => $value) {
+            $shippers[$key] = $value->PriceID; 
+        };
+        
+        foreach ($this->orderModel->loadPaymentMethod('') as $key => $value) {
+            $payment[$key] = $value->PriceID;
+        };
+            
+        $this->template->shippers = $shippers;
+        $this->template->payment = $payment;
             
             $this->template->cart = $this->c2;
         } else {
@@ -164,8 +179,7 @@ class OrderPresenter extends BasePresenter {
         foreach ($this->orderModel->loadPaymentMethod('') as $key => $value) {
             $payment[$key] = $value->PaymentMethodName;
         };
-        
-       // $ico = Html::el('i', 'class=""'); 
+         
         
         $cartForm = new Nette\Application\UI\Form;
         $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
@@ -186,6 +200,9 @@ class OrderPresenter extends BasePresenter {
                 ->addRule(Form::FILLED);
         $cartForm->addText('psc', 'PSC:', 40, 100)
                 ->addRule(Form::FILLED);
+       
+        $cartForm->addGroup('Shipping')
+                ->setOption('container', 'div class="row"');
         $cartForm->addGroup('Shipping')
                 ->setOption('container', 'div class="span5"');
         $cartForm->addRadioList('shippers','', $shippers)
@@ -196,6 +213,7 @@ class OrderPresenter extends BasePresenter {
         $cartForm->addRadioList('payment','', $payment)
                 ->setAttribute('class', '.span1 radio')
                 ->setRequired('Please select Payment method');;
+       
         $cartForm->addGroup('Terms')
                 ->setOption('container', 'div class="span5"');
         $cartForm->addCheckbox('terms', 'I accept Terms and condition.')
@@ -253,7 +271,7 @@ class OrderPresenter extends BasePresenter {
                         $cislo++;
             }
 
-        $this->redirect('Order:orderDone');
+        $this->redirect('Order:orderDone',  $this->orderNo);
     }
 
     /*
@@ -272,13 +290,15 @@ class OrderPresenter extends BasePresenter {
      */
 
     public function renderOrderDone($orderNo) {
-        $orderNo = 1;
-        $this->template->orderdetails = $this->orderModel->loadOrderDetails($orderNo);
+       // $orderNo = 1;
+        
         $this->template->products = $this->orderModel->loadOrderProduct($orderNo);
         $this->template->order = $this->orderModel->loadOrder($orderNo);
         
-        dump($this->orderModel->loadOrder($orderNo));
-        $this->flashMessage('Order sent.');
+        $ico = HTML::el('i')->class('icon-ok-sign left');
+        $message = HTML::el('span',' Order has been successfully sent.');
+        $message -> insert(0, $ico);
+        $this->flashMessage($message, 'alert alert-info');
         unset($this->cart->prd);
         $this->cart->numberItems = 0;
         
@@ -287,6 +307,7 @@ class OrderPresenter extends BasePresenter {
     
     public function renderOrders() {
         $this->template->orders = $this->orderModel->loadOrders();
+        
     }
 
     public function renderDefault() {

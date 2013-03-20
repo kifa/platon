@@ -53,7 +53,7 @@ CREATE TABLE `comment` (
 
 INSERT INTO `comment` (`CommentID`, `CommentTittle`, `CommentContent`, `DateOfAdded`, `AuthorID`, `PreviousCommentID`) VALUES
 (1,	'First Comment',	'This is first comment ever',	'2012-03-20',	1,	NULL),
-(2,	'Reakce na koment',	'Piš èesky pitomo',	'2012-03-20',	2,	1);
+(2,	'Reakce na koment',	'Piï¿½ ï¿½esky pitomo',	'2012-03-20',	2,	1);
 
 DROP TABLE IF EXISTS `currency`;
 CREATE TABLE `currency` (
@@ -65,7 +65,7 @@ CREATE TABLE `currency` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 INSERT INTO `currency` (`CurrencyID`, `CurrencyCode`, `CurrencyName`, `CurrencyRate`) VALUES
-(1,	'CZK',	'Koruna èeská',	NULL),
+(1,	'CZK',	'Koruna ï¿½eskï¿½',	NULL),
 (2,	'EUR',	'Euro',	NULL);
 
 DROP TABLE IF EXISTS `delivery`;
@@ -310,3 +310,4 @@ INSERT INTO `users` (`Login`, `Password`, `FirstName`, `SureName`, `Email`, `Pho
 ('test',	'test',	'Testovaci',	'Subjekt',	'testovaci@subjekt.cz',	777888999,	1,	'0',	'0',	0);
 
 -- 2013-03-19 22:55:56
+    

@@ -13,7 +13,7 @@ class ProductControl extends UI\Control {
     private $service;
 
     /**
-     * Vstříkne službu, kterou tato komponenta bude používat pro práci s komentáři.
+     * Vstříkne službu, kterou tato komponenta bude používat pro práci.
      *
      * @param    ProductModel
      * @return   void

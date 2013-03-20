@@ -18,11 +18,12 @@
             </thead>
             <tbody>
                 {foreach $orders as $id => $order}
-                <tr class="success">
-                    <td>{$order}</td>
-                    <td>TB - Monthly</td>
-                    <td>01/04/2012</td>
-                    <td>Approved</td>
+                <tr class="{if $order->StatusID == 3}success {elseif $order->StatusID == 2} info {else} warning {/if}">
+                    <td>{$id}</td>
+                    <td>{$order->DateCreated|date:'%d.%m.%Y'}</td>
+                    <td>{$order->FirstName} {$order->SureName}</td>
+                    <td>{$order->TotalPrice},-</td>
+                    <td>{$order->StatusName}</td>
                 </tr>
                 {/foreach}
             </tbody>

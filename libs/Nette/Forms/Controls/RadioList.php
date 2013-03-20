@@ -46,7 +46,7 @@ class RadioList extends BaseControl
 	{
 		parent::__construct($label);
 		$this->control->type = 'radio';
-		$this->container = Html::el();
+		$this->container = Html::el('label')->class('radio');
 		$this->separator = Html::el('br');
 		if ($items !== NULL) {
 			$this->setItems($items);

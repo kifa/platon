@@ -1,0 +1,23 @@
+/* 
+    Document   : flag
+    Created on : 20.3.2013, 10:27:47
+    Author     : lukas
+    Description:
+        Showing national flags
+*/
+
+.flag {
+	width: 16px;
+	height: 11px;
+	background:url("../img/flags.png") no-repeat
+}
+
+.flag.flag-br {background-position: -16px 0}
+.flag.flag-cz {background-position: 0 -11px}
+.flag.flag-gb {background-position: -16px -11px}
+
+.form-error-message {
+    font-size: 70%;
+margin: 5px;
+float: right;
+}

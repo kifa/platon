@@ -13,11 +13,14 @@ class MenuControl extends UI\Control {
 
     /** @var NetteTranslator\Gettext */
     protected $translator;
-    
-       
-     public function __construct($translator)
+    private $cart;
+
+
+    public function __construct($translator, $cart)
     {
         $this->translator = $translator;
+        $this->cart = $cart;
+        
         
     }
     
@@ -30,9 +33,10 @@ class MenuControl extends UI\Control {
     return $template;
 }
     
+   
     public function render() {
         $this->template->setFile(__DIR__ . '/MenuControl.latte');
-        
+        $this->template->cart = $this->cart->numberItems;
       //  $this->template->menuItems = $this->ShopModel->getMenu();
         $this->template->render();
     }

@@ -22,6 +22,7 @@
         <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap.css">
         <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap-responsive.css">
         <link rel="stylesheet" href="{$basePath}/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{$basePath}/css/flag.css">
         <link rel="shortcut icon" href="{$basePath}/favicon.ico">
         <script src="{$basePath}/js/jquery.js"></script>
         
@@ -35,13 +36,21 @@
         <div class="container">
 
             <div class="masterhead">
-                <a href="{plink Homepage:default}"><h1>BirneShop!</h1></a>
+                <div class="row">
+                <a href="{plink Homepage:default}" class="span5"><h1>BirneShop!</h1></a>
                 
-                Vyberte jazyk:
-<a n:href="this, lang => en">English</a>
-<a n:href="this, lang => cs">Česky</a>
-            
+                <div class="span3">
+                {_'Choose language:'}
+<a n:href="this, lang => br"><img src="{$basePath}/img/blank.gif" class="flag flag-br" alt="Brazil" /></a>
+<a n:href="this, lang => en"><img src="{$basePath}/img/blank.gif" class="flag flag-gb" alt="English" /></a>
+<a n:href="this, lang => cs"><img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" /></a>
+                </div>
+            </div>
+                <div class="row">
+                    <div class="span12">
                     {control menu}
+                    </div>
+                </div>
                 
             </div>
             
@@ -67,6 +76,8 @@
         <script src="{$basePath}/js/netteForms.js"></script>
         <script src="{$basePath}/js/main.js"></script>
         <script src="{$basePath}/js/bootstrap.min.js"></script>
+        <script src="{$basePath}/js/live-form-validation.js"></script>
+        
         
 	{/block}
     </body>
