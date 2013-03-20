@@ -141,9 +141,9 @@ class OrderModel extends Authenticator {
     public function insertPaymentMethod($id,$name,$price)
     {
         $insert = array(
-            'PaymentMethodID' => $id,
-            'PaymentMethodName' => $name,
-            'PaymentPriceID' => $price
+            'PaymentID' => $id,
+            'PaymentName' => $name,
+            'PaymentPrice' => $price
         );
                 
         return $this->getTable('paymentmethod')->insert($insert);
@@ -170,9 +170,9 @@ class OrderModel extends Authenticator {
     {
         $insert = array(
             'DeliveryID' => $id,
-            'TypeOfDelivery' => $type,
+            'DeliveryName' => $type,
             'DeliveryDescription' => $description,
-            'PriceID' => $price,
+            'DeliveryPrice' => $price,
             'FreeFromPrice' => $free
         );
         
