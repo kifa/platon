@@ -1,7 +1,9 @@
 
 {block content}
-<h1 n:block="title">Orders</h1>
-
+<div class="container">
+<div class="page-header">
+<h1 n:block="title">Orders <small>Here you see all orders placed in your shop.</small></h1>
+</div>
 <div class="row">
 
     <div class="span12">
@@ -18,13 +20,15 @@
             </thead>
             <tbody>
                 {foreach $orders as $id => $order}
+                
                 <tr class="{if $order->StatusID == 3}success {elseif $order->StatusID == 2} info {else} warning {/if}">
                     <td>{$id}</td>
                     <td>{$order->DateCreated|date:'%d.%m.%Y'}</td>
-                    <td>{$order->FirstName} {$order->SureName}</td>
+                    <td><a href="{plink Order:orderDone $id}">{$order->FirstName} {$order->SureName}</a></td>
                     <td>{$order->TotalPrice},-</td>
                     <td>{$order->StatusName}</td>
                 </tr>
+                
                 {/foreach}
             </tbody>
         </table>
@@ -32,6 +36,6 @@
 
     </div>
 
-
+</div>
 </div>
 {/block}
