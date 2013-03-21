@@ -249,7 +249,7 @@ class OrderPresenter extends BasePresenter {
         $this->orderModel->insertOrder(
                                 $this->orderNo,
                                 1,
-                                "novak",
+                                "novak", //nastavitz na email
                                 $total,
                                 89,
                                 88,

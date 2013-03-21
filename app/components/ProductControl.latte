@@ -2,17 +2,30 @@
             {while $product = $products->fetch()}
             <li class="span3">
                 <div class="thumbnail">
-                    <img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="height: 200px; width: auto;"/>
-                    <h2>{$product->ProductName}</h2>
-                    <div class="caption">
-                        <p>
-                            {$product->ProductDescription}
-                        </p>
-                       
-                        <a href="{plink Product:product $product->ProductID}" class="btn btn-primary"><i class="icon-info-sign"></i> View</a>
-                        <hr>
-                        <p class="text-success lead"><a href="{plink Order:cart $product->ProductID, "1"}" class="btn btn-success"><i class="icon-shopping-cart"></i> Buy</a> {$product->FinalPrice},- </p>
+                    <img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" class="span2" style="height: 200px; width: auto;"/>
+                    <h4>{$product->ProductName}</h4>
+                    <div class="caption">{var $desc = $product->ProductDescription}
+                        <p>{$desc|truncate:30}</p>
                     </div>
+                     <hr>
+                    <div class="row">
+                        <div class="span3">
+                            <div class="span3">
+                            <a href="{plink Product:product $product->ProductID}" class="pull-left btn btn-primary"><i class="icon-info-sign"></i> View</a>
+                        <p class="span1">In stock
+                    {if $product->PiecesAvailable > 5}
+                    <span class="badge badge-info">{$product->PiecesAvailable}</span>
+                    {else}
+                    <span class="badge badge-warning">{$product->PiecesAvailable}</span>
+                    {/if}</p>
+                            </div>
+                       
+                        <div class="span3">
+                        <p class="text-success lead"><a href="{plink Order:cart $product->ProductID, "1"}" class="btn btn-success"><i class="icon-shopping-cart"></i> Buy</a> {$product->FinalPrice},- </p>
+                        </div>
+                    </div>
+                    </div>
+                
                 </div>
             </li>
             {/while}
