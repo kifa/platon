@@ -1,32 +1,34 @@
 <ul class="thumbnails">
             {while $product = $products->fetch()}
-            <li class="span3">
-                <div class="thumbnail">
-                    <img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" class="span2" style="height: 200px; width: auto;"/>
-                    <h4>{$product->ProductName}</h4>
-                    <div class="caption">{var $desc = $product->ProductDescription}
-                        <p>{$desc|truncate:30}</p>
-                    </div>
-                     <hr>
-                    <div class="row">
-                        <div class="span3">
-                            <div class="span3">
-                            <a href="{plink Product:product $product->ProductID}" class="pull-left btn btn-primary"><i class="icon-info-sign"></i> View</a>
-                        <p class="span1">In stock
+    <li class="span3">
+        <div class="thumbnail">
                     {if $product->PiecesAvailable > 5}
-                    <span class="badge badge-info">{$product->PiecesAvailable}</span>
+            <span class="badge badge-info">{$product->PiecesAvailable}</span>
                     {else}
-                    <span class="badge badge-warning">{$product->PiecesAvailable}</span>
-                    {/if}</p>
-                            </div>
-                       
-                        <div class="span3">
-                        <p class="text-success lead"><a href="{plink Order:cart $product->ProductID, "1"}" class="btn btn-success"><i class="icon-shopping-cart"></i> Buy</a> {$product->FinalPrice},- </p>
-                        </div>
+            <span class="badge badge-warning">{$product->PiecesAvailable}</span>
+                    {/if}
+            <img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" class="span2" style="height: 200px; width: auto;"/>
+            <h4>{$product->ProductName}</h4>
+            <div class="caption">{var $desc = $product->ProductDescription}
+                <p>{$desc|truncate:30}</p>
+            </div>
+            <hr>
+            <div class="row">
+                    <div class="span3">
+                    <div class="span3 btn-toolbar">
+                        <div class="btn-group">
+                            <a href="{plink Product:product $product->ProductID}" class="btn btn-primary btn-large"><i class="icon-info-sign"></i> View</a>              
+                            <a href="{plink Order:cart $product->ProductID, "1"}" class="btn btn-success btn-large"><i class="icon-shopping-cart"></i> Buy</a>
+                        </div>  
                     </div>
+
+                    <div class="span3">
+                        <p class="text-success text-center lead"> {$product->FinalPrice},- </p>
                     </div>
-                
                 </div>
-            </li>
+            </div>
+
+        </div>
+    </li>
             {/while}
 </ul>

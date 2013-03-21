@@ -11,6 +11,7 @@ use Nette\Application\UI;
 class ProductControl extends UI\Control {
 
     private $service;
+    private $id;
 
     /**
      * Vstříkne službu, kterou tato komponenta bude používat pro práci.
@@ -22,13 +23,19 @@ class ProductControl extends UI\Control {
         $this->service = $service;
     }
 
+    public function __construct($id)
+    {
+        $this->id = $id;
+        
+        
+    }
     /*
      * Vykreslí komponentu Product z makra ProductControl.latte
      */
     public function render() {
 
         $this->template->setFile(__DIR__ . '/ProductControl.latte');
-        $this->template->products = $this->service->loadCatalog('');
+        $this->template->products = $this->service->loadCatalog($this->id);
         $this->template->render();
     }
 

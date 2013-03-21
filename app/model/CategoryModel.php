@@ -15,7 +15,7 @@ class CategoryModel extends Authenticator {
      * @return string
      */
     public function loadCategory($id){
-        return $this->getTable('Category');
+        return $this->getTable('Category')->fetch();
     }
     /*
      * Create Category

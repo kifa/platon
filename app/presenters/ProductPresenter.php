@@ -17,12 +17,14 @@ class ProductPresenter extends BasePresenter {
     private $productModel;
     private $categoryModel;
 
+    private $id;
 
     protected function startup() {
         parent::startup();
         
         $this->productModel = $this->context->productModel;
         $this->categoryModel = $this->context->categoryModel;
+        
 
         /* Kontrola přihlášení
          * 
@@ -32,7 +34,7 @@ class ProductPresenter extends BasePresenter {
     }
     
     protected function createComponentProduct() {
-        $control = new ProductControl();
+        $control = new ProductControl($this->id);
         $control->setService($this->context->productModel);
         return $control;
     }
@@ -42,9 +44,12 @@ class ProductPresenter extends BasePresenter {
     * @param ? example: pozice počátečního znaku
        * @return string
      */
-    public function renderProducts() {
-   
-        $this->template->products = $this->productModel->loadCatalog('2');
+    public function renderProducts($id) {
+        $this->id = $id;
+        $this->template->products = $this->productModel->loadCatalog($id);
+         $this->template->category = $this->categoryModel->loadCategory($id);
+        
+        
     }
     
     
@@ -71,7 +76,8 @@ class ProductPresenter extends BasePresenter {
      */
     public function renderDefault()
 	{
-		$this->template->anyVariable = 'any value';
+            $this->redirect('Products');
+            $this->template->anyVariable = 'any value';
 	}
 
 }
