@@ -34,6 +34,7 @@ class ProductPresenter extends BasePresenter {
           } */
     }
     
+ 
     protected function createComponentProduct() {
         
         $control = new ProductControl();
@@ -48,11 +49,10 @@ class ProductPresenter extends BasePresenter {
        * @return string
      */
     public function renderProducts($id) {
+        
         $this->catId = $id;
         $this->template->products = $this->productModel->loadCatalog($id);
-        $this->template->category = $this->categoryModel->loadCategory($id);
-        
-        
+        $this->template->category = $this->categoryModel->loadCategory($id); 
     }
     
     

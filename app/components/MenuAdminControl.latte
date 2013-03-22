@@ -1,0 +1,12 @@
+
+<ul class="nav nav-list">
+            <li class="nav-header">Admin Menu</li>
+        {foreach $category as $id => $cat}
+            <li class="active"><a href="{plink product:products $id}"><i class="icon-spinner"></i>{$cat->CategoryName}</a></li>    
+        {/foreach}
+            <li class="divider"></li>
+            <li class="active"><a href="#"><i class="icon-spinner"></i>Orders</a></li>
+            <li><a href="#"><i class="icon-truck"></i>Shipping</a></li>
+            <li><a href="#"><i class="icon-money"></i>Payment</a></li>
+            <li><a href="#"><i class="icon-comment"></i>Other</a></li>
+</ul>

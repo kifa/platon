@@ -3,10 +3,14 @@
     <div class="navbar-inner">
         <div class="container">
             <ul class="nav">
-                <li class="active"><a href="{plink Homepage:default}">{_"Home"}</a></li>
-                <li class=""><a href="{plink Product:products "3"}">{_"Category"} 2</a></li>
-                <li class=""><a href="{plink Order:cart}">{_"Cart"} {if $cart > 0}<span class="badge badge-info">{$cart}</span>{else}<span class="badge">{$cart}</span>{/if}</a></li>
-                <li class=""><a href="{plink Order:orders}">{_"Orders"}</a></li>
+                <li class="{ifCurrent Homepage:default}active{/ifCurrent}"><a href="{plink Homepage:default}">{_"Home"}</a></li>
+                {foreach $category as $id => $cat}
+                <li class="{ifCurrent product:products $id}active{/ifCurrent}"><a href="{plink product:products $id}"><i class="icon-spinner"></i>{$cat->CategoryName}</a></li> 
+                {/foreach}
+                
+                
+                <li class="{ifCurrent Order:cart}active{/ifCurrent}"><a href="{plink Order:cart}">{_"Cart"} {if $cart > 0}<span class="badge badge-info">{$cart}</span>{else}<span class="badge">{$cart}</span>{/if}</a></li>
+                <li class="{ifCurrent Order:orders}active{/ifCurrent}"><a href="{plink Order:orders}">{_"Orders"}</a></li>
             </ul>
         </div>
     </div>

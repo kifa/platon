@@ -14,9 +14,17 @@ class CategoryModel extends Authenticator {
      * @param ? example: pozice počátečního znaku
      * @return string
      */
+    public function loadCategoryList(){
+        return $this->getTable('Category')->fetchPairs('CategoryID');
+    }
+    /*
+     * Load Category info
+     */
+    
     public function loadCategory($id){
         return $this->getTable('Category')->fetch();
     }
+    
     /*
      * Create Category
      * @param ?

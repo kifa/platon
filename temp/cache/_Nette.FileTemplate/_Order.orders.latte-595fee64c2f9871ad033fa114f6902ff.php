@@ -1,19 +1,19 @@
-<?php //netteCache[01]000381a:2:{s:4:"time";s:21:"0.09481900 1363970515";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:59:"G:\xampp\htdocs\GIT\platon\app\templates\Order\orders.latte";i:2;i:1363970512;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000381a:2:{s:4:"time";s:21:"0.03668600 1363972222";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:59:"G:\xampp\htdocs\GIT\platon\app\templates\Order\orders.latte";i:2;i:1363971303;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\Order\orders.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '5x2769vunb')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '5wbwaakgwc')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb8bdaa50b38_content')) { function _lb8bdaa50b38_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lba5c9ae5427_content')) { function _lba5c9ae5427_content($_l, $_args) { extract($_args)
 ?><div class="container">
 
-  
+<?php if ($user->isLoggedIn()): ?>
 <div class="page-header">
 <?php call_user_func(reset($_l->blocks['title']), $_l, get_defined_vars())  ?>
 </div>
@@ -53,7 +53,8 @@ if (!function_exists($_l->blocks['content'][] = '_lb8bdaa50b38_content')) { func
     </div>
 
 </div>
-<?php if ($user->isLoggedIn()): else: endif ?>
+     
+<?php else: Nette\Latte\Macros\CoreMacros::includeTemplate('../Sign/in.latte', $template->getParameters(), $_l->templates['5wbwaakgwc'])->render() ;endif ?>
 </div>
 <?php
 }}
@@ -61,7 +62,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb8bdaa50b38_content')) { func
 //
 // block title
 //
-if (!function_exists($_l->blocks['title'][] = '_lb79f20309a0_title')) { function _lb79f20309a0_title($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['title'][] = '_lb97a8c08c89_title')) { function _lb97a8c08c89_title($_l, $_args) { extract($_args)
 ?><h1>Orders <small>Here you see all orders placed in your shop.</small></h1>
 <?php
 }}

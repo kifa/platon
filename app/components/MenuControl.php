@@ -14,16 +14,23 @@ class MenuControl extends UI\Control {
     /** @var NetteTranslator\Gettext */
     protected $translator;
     private $cart;
+    private $category;
 
 
-    public function __construct($translator, $cart)
-    {
-        $this->translator = $translator;
+
+    public function setCart($cart) {
         $this->cart = $cart;
-        
-        
     }
-    
+
+    public function setTranslator($translator) {
+        $this->translator = $translator;
+    }
+
+    public function setCategory($cat) {
+        $this->category = $cat;
+
+    }
+
     public function createTemplate($class = NULL)
 {
     $template = parent::createTemplate($class);
@@ -34,9 +41,16 @@ class MenuControl extends UI\Control {
 }
     
    
+    public function renderAdmin() {
+        $this->template->setFile(__DIR__.'/MenuAdminControl.latte');
+        $this->template->category = $this->category->loadCategoryList(); 
+        $this->template->render();
+    }
+    
     public function render() {
         $this->template->setFile(__DIR__ . '/MenuControl.latte');
         $this->template->cart = $this->cart->numberItems;
+        $this->template->category = $this->category->loadCategoryList(); 
       //  $this->template->menuItems = $this->ShopModel->getMenu();
         $this->template->render();
     }

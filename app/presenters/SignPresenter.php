@@ -1,6 +1,7 @@
 <?php
 
 use Nette\Application\UI;
+use Nette\Application\UI\Form;
 
 
 /**
@@ -14,10 +15,21 @@ class SignPresenter extends BasePresenter
 	 * Sign-in form factory.
 	 * @return Nette\Application\UI\Form
 	 */
+    
+    
+    private $authenticator;
+    
+    protected function startup()
+    {
+        parent::startup();
+        
+        $this->authenticator = $this->context->authenticator;
+    }
+    
 	protected function createComponentSignInForm()
 	{
 		$form = new UI\Form;
-		$form->addText('username', 'Username:')
+		$form->addText('username', 'Uživatelské jméno:')
 			->setRequired('Please enter your username.');
 
 		$form->addPassword('password', 'Password:')
@@ -60,7 +72,61 @@ class SignPresenter extends BasePresenter
 	{
 		$this->getUser()->logout();
 		$this->flashMessage('You have been signed out.');
-		$this->redirect('in');
+		$this->redirect('pryc');
 	}
+        
+        protected function createComponentPasswordForm()
+    {
+        $form = new Form();
+        $form->addText('id', 'ID:', 3);
+        $form->addPassword('newPassword', 'Nové heslo:', 30)
+            ->addRule(Form::MIN_LENGTH, 'Nové heslo musí mít alespoň %d znaků.', 6);
+        $form->addPassword('confirmPassword', 'Potvrzení hesla:', 30)
+            ->addRule(Form::FILLED, 'Nové heslo je nutné zadat ještě jednou pro potvrzení.')
+            ->addRule(Form::EQUAL, 'Zadná hesla se musejí shodovat.', $form['newPassword']);
+        $form->addSubmit('set', 'Změnit heslo');
+        $form->onSuccess[] = $this->passwordFormSubmitted;
+        return $form;
+    }
+
+
+    public function passwordFormSubmitted(Form $form)
+    {
+        $values = $form->getValues();
+        $user = $form->getValues('id');
+        try {
+           // $this->authenticator->authenticate(array($user->getIdentity()->username, $values->oldPassword));
+            $this->authenticator->setPassword($values->id, $values->newPassword);
+            $this->flashMessage('Heslo bylo změněno.', 'success');
+            $this->redirect('Homepage:');
+        } catch (NS\AuthenticationException $e) {
+            $form->addError('Zadané heslo není správné.');
+        }
+    }
+    
+    protected function createComponentNewUserForm() {
+        $form = new Form();
+        $form ->addText('username', 'Uživatelské jméno:', 10);
+        $form  ->addText('name', 'Vaše jméno', 30);
+        $form ->addPassword('password', 'Heslo:', 30)
+                ->addRule(Form::MIN_LENGTH, 'Nové heslo musí mí alespoň %d znaků', 6);
+        $form ->addPassword('confirmPassword', 'Heslo pro kontrolu', 30)
+                ->addRule(Form::FILLED, 'Je nutné vyplnit!')
+                ->addRule(Form::EQUAL, 'Zadaná hesla se musí shodovat', $form['password']);
+        $form ->addSubmit('add', 'Zaregistrovat');
+        $form->onSuccess[] = $this->newUserFormSubmitted;
+        return $form;
+    }
+    
+    public function newUserFormSubmitted(Form $form) {
+        $value = $form->getValues();
+        try {
+           $this->authenticator->userAdd($value->name, $value->username, $value->password);
+           $this->flashMessage('Jste zaregistrováni. Můžete se přihlásit', 'success') ;
+           $this->redirect('Sign:in');
+    }   catch (NS\AuthenticationException $e) {
+            $form ->addError('Prostě nám to nejde');
+        }
+    }
 
 }

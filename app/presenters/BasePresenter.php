@@ -29,6 +29,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     /** @var NetteTranslator\Gettext */
     protected $translator;
 
+    
     protected function startup() {
         parent::startup();
         $this->shopModel = $this->context->shopModel;
@@ -44,6 +45,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->translator = $translator;
     }
 
+   
+    
     public function createTemplate($class = NULL) {
         $template = parent::createTemplate($class);
 
@@ -72,10 +75,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     }
 
     protected function createComponentMenu() {
-        $menuControl = new MenuControl($this->translator, $this->cart);
+        $menuControl = new MenuControl();
+        $menuControl->setCart($this->cart);
+        $menuControl->setCategory($this->categoryModel);
+        $menuControl->setTranslator($this->translator);
         return $menuControl;
     }
-
-    
-
 }

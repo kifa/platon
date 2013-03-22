@@ -305,8 +305,12 @@ class OrderPresenter extends BasePresenter {
 
     
     public function renderOrders() {
+        if (!$this->getUser()->isLoggedIn()) {
+        $this->redirect('Sign:in');
+        }
+        else {
         $this->template->orders = $this->orderModel->loadOrders();
-        
+       } 
     }
 
     public function renderDefault() {
