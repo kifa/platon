@@ -1,23 +1,23 @@
-<?php //netteCache[01]000385a:2:{s:4:"time";s:21:"0.43976300 1363897732";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:63:"G:\xampp\htdocs\GIT\platon\app\templates\Product\products.latte";i:2;i:1363897612;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000385a:2:{s:4:"time";s:21:"0.19929000 1363970742";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:63:"G:\xampp\htdocs\GIT\platon\app\templates\Product\products.latte";i:2;i:1363970182;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\Product\products.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'oitz9qqn0q')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'jk2nynr1dj')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lbafd9560542_head')) { function _lbafd9560542_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lb1e401bf825_head')) { function _lb1e401bf825_head($_l, $_args) { extract($_args)
 ?><title>Kategorie</title><?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb7425e4f5e1_content')) { function _lb7425e4f5e1_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lbfb0712eb09_content')) { function _lbfb0712eb09_content($_l, $_args) { extract($_args)
 ?><div id="content">
     <div class="page-header">
   <h1><?php echo Nette\Templating\Helpers::escapeHtml($category->CategoryName, ENT_NOQUOTES) ?>

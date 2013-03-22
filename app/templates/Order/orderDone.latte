@@ -48,7 +48,7 @@
                     <h3 class="span2"><strong class="span1">Products:</strong>
                             <span class="span1">{$grandtotal},-</span></h3>
                     <h3 class="span2"><strong class="span1">Shipping:</strong> 
-                            <span class="shipping span1">{$shipping = 0}</span></h3>
+                            <span class="shipping span1">{$shipping = $order->DeliveryPrice},-</span></h3>
                     <h3 class="span2"><strong class="span1">Total:</strong>
                             <span class="ordertotal span1">{$grandtotal += $shipping},-</span></h3>
                 </div>
@@ -77,7 +77,7 @@
             <div class="span5">
                 <p>
                 <i class="icon-money icon-large left"></i><strong> Payment:</strong>&nbsp;
-            {$order->PaymentMethodName}
+            {$order->PaymentName}
                 </p>
             </div>
         </div>
@@ -117,7 +117,7 @@
             </dl>
             <dl>
                 <dt>Payment:</dt>
-                <dd>{$order->PaymentMethodName}</dd>
+                <dd>{$order->PaymentName}</dd>
             </dl>
         </div>
         </div>

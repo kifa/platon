@@ -70,7 +70,7 @@ class OrderModel extends Authenticator {
                 'DateOfLastChange' => $lastchange, //?
                 'DateFinished' => $finished, //? spolu s předchozí řešit až v administraci obj.
                 'DeliveryID' => $delivery,
-                'PaymentMethodID' => $payment,
+                'PaymentID' => $payment,
                 'IP' => NULL,
                 'SessionID' => NULL
             );
@@ -122,23 +122,23 @@ class OrderModel extends Authenticator {
     }
 
     /*
-     * Load payment method for order
+     * Load payment  for order
      */
-    public function loadPaymentMethod($id){
+    public function loadPayment($id){
         if($id==''){
-            return $this->getTable('paymentmethod')->fetchPairs('PaymentMethodID');
+            return $this->getTable('payment')->fetchPairs('PaymentID');
         }
         else
         {
-            return $this->getTable('paymentmethod')->select('paymentmethod.*,price.finalprice')
-                    ->where('PaymentMethodID',$id);
+            return $this->getTable('payment')->select('payment.*,price.finalprice')
+                    ->where('PaymentID',$id);
         }
     }
     
     /*
      * Insert new payment method
      */
-    public function insertPaymentMethod($id,$name,$price)
+    public function insertPayment($id,$name,$price)
     {
         $insert = array(
             'PaymentID' => $id,
@@ -146,11 +146,11 @@ class OrderModel extends Authenticator {
             'PaymentPrice' => $price
         );
                 
-        return $this->getTable('paymentmethod')->insert($insert);
+        return $this->getTable('payment')->insert($insert);
     }
     
     /*
-     * Load delivery method
+     * Load delivery 
      */
     public function loadDelivery($id)
     {
@@ -164,7 +164,7 @@ class OrderModel extends Authenticator {
     }
     
     /*
-     * Insert new delivery method
+     * Insert new delivery 
      */
     public function insertDelivery($id,$type,$description,$price,$free)
     {

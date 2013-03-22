@@ -30,6 +30,7 @@ class HomepagePresenter extends BasePresenter {
     public function renderDefault() {
 
         $this->template->products = $this->productModel->loadCatalog('');
+        $this->template->category = $this->categoryModel->loadCategory("");
         $this->template->anyVariable = 'any value';
     }
 

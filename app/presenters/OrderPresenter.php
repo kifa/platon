@@ -145,11 +145,11 @@ class OrderPresenter extends BasePresenter {
         $payment = array();
         
         foreach ($this->orderModel->loadDelivery('') as $key => $value) {
-            $shippers[$key] = $value->PriceID; 
+            $shippers[$key] = $value->DeliveryPrice; 
         };
         
-        foreach ($this->orderModel->loadPaymentMethod('') as $key => $value) {
-            $payment[$key] = $value->PriceID;
+        foreach ($this->orderModel->loadPayment('') as $key => $value) {
+            $payment[$key] = $value->PaymentPrice;
         };
             
         $this->template->shippers = $shippers;
@@ -176,8 +176,8 @@ class OrderPresenter extends BasePresenter {
             $shippers[$key] = $value->DeliveryName; 
         };
         
-        foreach ($this->orderModel->loadPaymentMethod('') as $key => $value) {
-            $payment[$key] = $value->PaymentMethodName;
+        foreach ($this->orderModel->loadPayment('') as $key => $value) {
+            $payment[$key] = $value->PaymentName;
         };
          
         
@@ -290,8 +290,7 @@ class OrderPresenter extends BasePresenter {
      */
 
     public function renderOrderDone($orderNo) {
-       // $orderNo = 1;
-        
+              
         $this->template->products = $this->orderModel->loadOrderProduct($orderNo);
         $this->template->order = $this->orderModel->loadOrder($orderNo);
         

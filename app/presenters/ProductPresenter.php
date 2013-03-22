@@ -17,7 +17,8 @@ class ProductPresenter extends BasePresenter {
     private $productModel;
     private $categoryModel;
 
-    private $id;
+    private $catId;
+
 
     protected function startup() {
         parent::startup();
@@ -34,8 +35,10 @@ class ProductPresenter extends BasePresenter {
     }
     
     protected function createComponentProduct() {
-        $control = new ProductControl($this->id);
+        
+        $control = new ProductControl();
         $control->setService($this->context->productModel);
+        $control->setCategoryID($this->catId);
         return $control;
     }
     /*
@@ -45,9 +48,9 @@ class ProductPresenter extends BasePresenter {
        * @return string
      */
     public function renderProducts($id) {
-        $this->id = $id;
+        $this->catId = $id;
         $this->template->products = $this->productModel->loadCatalog($id);
-         $this->template->category = $this->categoryModel->loadCategory($id);
+        $this->template->category = $this->categoryModel->loadCategory($id);
         
         
     }
