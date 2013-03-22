@@ -2,6 +2,7 @@
 
 use Nette\Application\UI;
 use Nette\Application\UI\Form;
+use  Nette\Utils\Html;
 
 
 /**
@@ -49,6 +50,7 @@ class SignPresenter extends BasePresenter
 	public function signInFormSucceeded($form)
 	{
 		$values = $form->getValues();
+ 
 
 		if ($values->remember) {
 			$this->getUser()->setExpiration('+ 14 days', FALSE);
@@ -57,7 +59,8 @@ class SignPresenter extends BasePresenter
 		}
 
 		try {
-			$this->getUser()->login($values->username, $values->password);
+                        
+			 $this->getUser()->login($values->username, $values->password);
 		} catch (Nette\Security\AuthenticationException $e) {
 			$form->addError($e->getMessage());
 			return;
@@ -72,13 +75,13 @@ class SignPresenter extends BasePresenter
 	{
 		$this->getUser()->logout();
 		$this->flashMessage('You have been signed out.');
-		$this->redirect('pryc');
+		$this->redirect('Sign:in');
 	}
         
         protected function createComponentPasswordForm()
     {
         $form = new Form();
-        $form->addText('id', 'ID:', 3);
+        $form->addText('id', 'Login:', 3);
         $form->addPassword('newPassword', 'Nové heslo:', 30)
             ->addRule(Form::MIN_LENGTH, 'Nové heslo musí mít alespoň %d znaků.', 6);
         $form->addPassword('confirmPassword', 'Potvrzení hesla:', 30)
@@ -97,8 +100,11 @@ class SignPresenter extends BasePresenter
         try {
            // $this->authenticator->authenticate(array($user->getIdentity()->username, $values->oldPassword));
             $this->authenticator->setPassword($values->id, $values->newPassword);
-            $this->flashMessage('Heslo bylo změněno.', 'success');
-            $this->redirect('Homepage:');
+            $ico = HTML::el('i')->class('icon-ok-sign left');
+            $message = HTML::el('span', ' Your password was successfully changed.');
+            $message -> insert(0, $ico);
+            $this->flashMessage($message, 'alert alert-info');
+            $this->redirect('this');
         } catch (NS\AuthenticationException $e) {
             $form->addError('Zadané heslo není správné.');
         }

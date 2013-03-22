@@ -1,20 +1,53 @@
 <?php
 
-use Nette\Security,
-    Nette\Utils\Strings;
+
+use Nette\Utils\Strings;
+use Nette\Security as NS;
+
+/*
+  CREATE TABLE users (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  username varchar(50) NOT NULL,
+  password char(60) NOT NULL,
+  role varchar(20) NOT NULL,
+  PRIMARY KEY (id)
+  );
+ */
 
 /**
- * Class Authenticator
- * Authenticator is used for loging in, logout, changing password,
- * working with $SESSION etc.
+ * Users authenticator.
  */
-class Authenticator extends Nette\Object implements Security\IAuthenticator {
+class Authenticator extends Nette\Object implements NS\IAuthenticator {
 
     /** @var Nette\Database\Connection */
     private $database;
 
     public function __construct(Nette\Database\Connection $database) {
         $this->database = $database;
+    }
+
+    public function setPassword($id, $password) {
+        $this->getTable('users')->where(array('Login' => $id))->update(array(
+            'Password' => $this->calculateHash($password)
+        ));
+    }
+
+    protected function getTable($table) {
+        // název tabulky odvodíme z názvu třídy
+
+        return $this->database->table($table);
+    }
+
+    /**
+     * Vrací všechny řádky z tabulky.
+     * @return Nette\Database\Table\Selection
+     */
+    public function findAll() {
+        return $this->getTable();
+    }
+
+    public function findByName($username) {
+        return $this->getTable('users')->where('Login', $username)->fetch();
     }
 
     /**
@@ -24,18 +57,18 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator {
      */
     public function authenticate(array $credentials) {
         list($username, $password) = $credentials;
-        $row = $this->database->table('users')->where('username', $username)->fetch();
+        $row = $this->findByName($username);
 
         if (!$row) {
-            throw new Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
+            throw new NS\AuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);
         }
 
-        if ($row->password !== $this->calculateHash($password, $row->password)) {
-            throw new Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
+        if ($row->password !== self::calculateHash($password, $row->password)) {
+            throw new NS\AuthenticationException("Invalid password.", self::INVALID_CREDENTIAL);
         }
 
         unset($row->password);
-        return new Security\Identity($row->id, $row->role, $row->toArray());
+        return new NS\Identity($row->id, NULL, $row->toArray());
     }
 
     /**
@@ -43,16 +76,25 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator {
      * @param  string
      * @return string
      */
-    public static function calculateHash($password, $salt = NULL) {
-        if ($password === Strings::upper($password)) { // perhaps caps lock is on
-            $password = Strings::lower($password);
+    public static function calculateHash($password, $salt = null) {
+        if ($salt === null) {
+            $salt = '$2a$07$' . Nette\Utils\Strings::random(32) . '$';
         }
-        return crypt($password, $salt ? : '$2a$07$' . Strings::random(22));
+        return crypt($password, $salt);
     }
-          
-    protected function getTable($table)
-    {
-        
-        return $this->database->table($table);
+
+    public function userPocet() {
+        $pocet = $this->findAll()->count();
+        return $pocet;
     }
+
+    public function userAdd($name, $username, $password) {
+        // $userId = $this->userPocet();
+
+        $this->getTable('users')->insert(array(
+                                            'Login' => $username,
+                                            'Password' => $this->calculateHash($password),
+                                             'FirstName' => $name));
+    }
+
 }

@@ -45,6 +45,11 @@
 <a n:href="this, lang => en"><img src="{$basePath}/img/blank.gif" class="flag flag-gb" alt="English" /></a>
 <a n:href="this, lang => cs"><img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" /></a>
                 </div>
+                <div class="span3">
+                {if $user->isLoggedIn()}
+                    <a href="{plink Sign:out}">Logout</a>
+                    {/if}
+                </div>
             </div>
                 <div class="row">
                     <div class="span12">
