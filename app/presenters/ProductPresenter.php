@@ -58,8 +58,15 @@ class ProductPresenter extends BasePresenter {
                 ->setRequired();
         $addProduct->addText('price', 'Price:')
                 ->setRequired();
+        $addProduct->addText('amount', 'Amount')
+                ->setDefaultValue('1')
+                ->setRequired();
+        $addProduct->addButton('plusItem', '+');
+        $addProduct->addButton('minusItem', '-');
         $addProduct->addTextArea('desc', 'Description: ', 10)
                 ->setRequired();
+        $addProduct->addText('producer', 'Producer: ')
+                ->setDefaultValue('neuvedeno');
         $addProduct->addSubmit('add', 'Add Product');
         $addProduct->onSuccess[] = $this->addProductFormSubmitted;
         return $addProduct;
@@ -76,7 +83,7 @@ class ProductPresenter extends BasePresenter {
         $this->productModel->insertProduct(
                 $id, //ID
                 $form->values->name, //Name
-                'producer', //Producer
+                $form->values->producer, //Producer
                 '1', //Album
                 '11111', //Product Number
                 $form->values->desc, //Description
@@ -84,7 +91,7 @@ class ProductPresenter extends BasePresenter {
                 '123456', //Ean
                 '122', //QR
                 'rok', //Warranty
-                15, //Pieces
+                $form->values->amount, //Pieces
                 $form->values->catID, //CatID
                 2, //PriceID
                 '', //Date of avail.

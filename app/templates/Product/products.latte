@@ -43,5 +43,37 @@ nearby photo opportunities – when and where you need them.</p>
 
 </div>
 
+<script>
+    $(document).ready(function() {
+        var amount = 1;
+        
+    $('input[name=plusItem]').click(function() {
+            var i = $('input[name=amount]').val();
+            amount = parseInt(i) + 1;
+        $('#frmaddProductForm-amount').val(amount);
+        
+        });
+        
+     $('input[name=minusItem]').click(function() {
+            var i = $('input[name=amount]').val();
+            
+            amount = parseInt(i);
+            
+            if(amount <= 0) {
+                $('#frmaddProductForm-amount').val(0);
+            }
+            else {
+                amount = amount -1;
+                $('#frmaddProductForm-amount').val(amount);
+            }
+        
+        
+        });   
+    
 
+
+});
+     
+    </script>
+    
 {/block}
