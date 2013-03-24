@@ -4,7 +4,7 @@
 
 <div id="content">
     <div class="page-header">
-  <h1>{$category->CategoryName}<small> {$category->CategoryDescription}</small></h1>
+        <h1>{$category->CategoryName}<small> {$category->CategoryDescription}</small></h1><a href="#" ><i id="showNew" class="icon-2x icon-plus"></i></a>
 </div>
     <p class="text-left">Nexus 4 comes with the latest version of Google Now to bring you just the
         right information at just the right time. It shows you how much traffic
@@ -14,7 +14,9 @@ With the latest version, Google Now keeps you even more organized – get remind
 about upcoming flights, restaurant reservations, hotel confirmations and even
 nearby photo opportunities – when and where you need them.</p>
 
+    <div class="span10" style="display: none;" id="addProduct">
 {control addProductForm}
+    </div>
     
 <div class="row">
     <div class="span10">
@@ -69,6 +71,22 @@ nearby photo opportunities – when and where you need them.</p>
         
         
         });   
+        
+      $('#showNew').toggle(function(){
+           
+            
+          $('#addProduct').fadeIn();
+           $(this).attr('class', 'icon-2x icon-minus');
+        },
+        function() {
+            $('#addProduct').fadeOut();
+            $(this).attr('class', 'icon-2x icon-plus');
+        });
+        
+        
+        
+        
+       
     
 
 

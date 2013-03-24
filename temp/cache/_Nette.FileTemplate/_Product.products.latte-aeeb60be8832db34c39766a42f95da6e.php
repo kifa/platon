@@ -1,27 +1,27 @@
-<?php //netteCache[01]000385a:2:{s:4:"time";s:21:"0.58150200 1364160526";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:63:"G:\xampp\htdocs\GIT\platon\app\templates\Product\products.latte";i:2;i:1364160523;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000385a:2:{s:4:"time";s:21:"0.25619800 1364161897";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:63:"G:\xampp\htdocs\GIT\platon\app\templates\Product\products.latte";i:2;i:1364161894;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\Product\products.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'rqoqnmo9ic')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'ypkbmfimn2')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb7baf4c6761_head')) { function _lb7baf4c6761_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lb2650b4c3e7_head')) { function _lb2650b4c3e7_head($_l, $_args) { extract($_args)
 ?><title>Kategorie</title><?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb512b5ab076_content')) { function _lb512b5ab076_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lba71c8e47c5_content')) { function _lba71c8e47c5_content($_l, $_args) { extract($_args)
 ?><div id="content">
     <div class="page-header">
-  <h1><?php echo Nette\Templating\Helpers::escapeHtml($category->CategoryName, ENT_NOQUOTES) ?>
-<small> <?php echo Nette\Templating\Helpers::escapeHtml($category->CategoryDescription, ENT_NOQUOTES) ?></small></h1>
+        <h1><?php echo Nette\Templating\Helpers::escapeHtml($category->CategoryName, ENT_NOQUOTES) ?>
+<small> <?php echo Nette\Templating\Helpers::escapeHtml($category->CategoryDescription, ENT_NOQUOTES) ?></small></h1><a href="#" ><i id="showNew" class="icon-2x icon-plus"></i></a>
 </div>
     <p class="text-left">Nexus 4 comes with the latest version of Google Now to bring you just the
         right information at just the right time. It shows you how much traffic
@@ -31,7 +31,9 @@ With the latest version, Google Now keeps you even more organized – get remind
 about upcoming flights, restaurant reservations, hotel confirmations and even
 nearby photo opportunities – when and where you need them.</p>
 
+    <div class="span10" style="display: none;" id="addProduct">
 <?php $_ctrl = $_control->getComponent("addProductForm"); if ($_ctrl instanceof Nette\Application\UI\IRenderable) $_ctrl->validateControl(); $_ctrl->render() ?>
+    </div>
     
 <div class="row">
     <div class="span10">
@@ -86,6 +88,22 @@ nearby photo opportunities – when and where you need them.</p>
         
         
         });   
+        
+      $('#showNew').toggle(function(){
+           
+            
+          $('#addProduct').fadeIn();
+           $(this).attr('class', 'icon-2x icon-minus');
+        },
+        function() {
+            $('#addProduct').fadeOut();
+            $(this).attr('class', 'icon-2x icon-plus');
+        });
+        
+        
+        
+        
+       
     
 
 
