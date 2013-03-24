@@ -5,7 +5,7 @@
  * ShopModel is managing all basic Shop informations and settings.
  */
 
-class ShopModel extends Nette\Object {
+class ShopModel extends Authenticator {
     /*
      * Load shop info
      * @param ?

@@ -1,23 +1,23 @@
-<?php //netteCache[01]000385a:2:{s:4:"time";s:21:"0.96747200 1363987878";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:63:"G:\xampp\htdocs\GIT\platon\app\templates\Homepage\default.latte";i:2;i:1363977818;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000385a:2:{s:4:"time";s:21:"0.83382900 1363989992";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:63:"G:\xampp\htdocs\GIT\platon\app\templates\Homepage\default.latte";i:2;i:1363977818;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\Homepage\default.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '71am6j6fd5')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'p24task6zd')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lbf92dab7e44_head')) { function _lbf92dab7e44_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lbf5e03c06c9_head')) { function _lbf5e03c06c9_head($_l, $_args) { extract($_args)
 ?><title>Kategorie</title><?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lbdab225cc68_content')) { function _lbdab225cc68_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lbb866fa10a2_content')) { function _lbb866fa10a2_content($_l, $_args) { extract($_args)
 ?><div id="myCarousel" class="carousel slide">
     <ol class="carousel-indicators">
         <li data-target= "#myCarousel"  data-slide-to="0" class="active"></li>

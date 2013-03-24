@@ -1,16 +1,16 @@
-<?php //netteCache[01]000376a:2:{s:4:"time";s:21:"0.76876600 1363988561";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:54:"G:\xampp\htdocs\GIT\platon\app\templates\Sign\in.latte";i:2;i:1363988552;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000376a:2:{s:4:"time";s:21:"0.00396000 1363989998";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:54:"G:\xampp\htdocs\GIT\platon\app\templates\Sign\in.latte";i:2;i:1363988552;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: G:\xampp\htdocs\GIT\platon\app\templates\Sign\in.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '0gq29f7m3k')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '1zzvcv6t1e')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb0945e2a850_content')) { function _lb0945e2a850_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lba2cf98ad44_content')) { function _lba2cf98ad44_content($_l, $_args) { extract($_args)
 ?><div class="page-header">
 <?php call_user_func(reset($_l->blocks['title']), $_l, get_defined_vars())  ?>
 </div>
@@ -37,7 +37,7 @@ if (!function_exists($_l->blocks['content'][] = '_lb0945e2a850_content')) { func
 //
 // block title
 //
-if (!function_exists($_l->blocks['title'][] = '_lbd00203d6ce_title')) { function _lbd00203d6ce_title($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['title'][] = '_lbcc1833b898_title')) { function _lbcc1833b898_title($_l, $_args) { extract($_args)
 ?>    <h1>Sign in <small>To continue, you need to be logged in!</small></h1>
 <?php
 }}
