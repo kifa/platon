@@ -81,9 +81,17 @@ class ProductModel extends Authenticator {
 
 
     /*
-     * Delete Produkt
+     * Delete Product
      * @param ?
      * @param ? example: pozice počátečního znaku
      * @return string 
      */
+    
+    /*
+     * Count number of product
+     */
+    public function countProducts()
+    {
+        return $this->getTable('product')->count();
+    }
 }

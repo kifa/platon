@@ -22,7 +22,7 @@ class CategoryModel extends Authenticator {
      */
     
     public function loadCategory($id){
-        return $this->getTable('Category')->fetch();
+        return $this->getTable('Category')->where('CategoryID', $id)->fetch();
     }
     
     /*

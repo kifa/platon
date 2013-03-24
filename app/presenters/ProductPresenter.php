@@ -52,6 +52,7 @@ class ProductPresenter extends BasePresenter {
     
     public function createComponentAddProductForm() {
         $addProduct = new Nette\Application\UI\Form;
+        $addProduct->addHidden('catID', $this->catId);
         $addProduct->addGroup('AddProduct');
         $addProduct->addText('name', 'Name:')
                 ->setRequired();
@@ -70,9 +71,10 @@ class ProductPresenter extends BasePresenter {
     
     public function addProductFormSubmitted($form) {
         //$values = $form->getValues();
+        $id = $this->productModel->countProducts() + 1;
         
         $this->productModel->insertProduct(
-                15, //ID
+                $id, //ID
                 $form->values->name, //Name
                 'producer', //Producer
                 '1', //Album
@@ -83,7 +85,7 @@ class ProductPresenter extends BasePresenter {
                 '122', //QR
                 'rok', //Warranty
                 15, //Pieces
-                1, //CatID
+                $form->values->catID, //CatID
                 2, //PriceID
                 '', //Date of avail.
                 '', //Date added
@@ -92,7 +94,7 @@ class ProductPresenter extends BasePresenter {
                 
         );
         
-        $this->redirect('Product:products',  1);
+        $this->redirect('Product:products', $form->values->catID);
     }
 
     /*
