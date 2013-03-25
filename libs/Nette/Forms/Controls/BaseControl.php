@@ -276,6 +276,7 @@ abstract class BaseControl extends Nette\ComponentModel\Component implements ICo
 		return $translator === NULL || $s == NULL ? $s : $translator->translate($s, $count); // intentionally ==
 	}
 
+        
 
 
 	/********************* interface IFormControl ****************d*g**/

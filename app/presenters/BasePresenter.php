@@ -27,7 +27,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     public $lang;
 
     /** @var NetteTranslator\Gettext */
-    protected $translator;
+    public   $translator;
 
     
     protected function startup() {
@@ -80,5 +80,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $menuControl->setCategory($this->categoryModel);
         $menuControl->setTranslator($this->translator);
         return $menuControl;
+    }
+    
+    protected function createComponentBaseControl() {
+            $base = new BaseControl();
+           // $base->setTranslator($this->translator);
+            return $base;
     }
 }

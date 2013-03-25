@@ -21,10 +21,9 @@ class ProductPresenter extends BasePresenter {
 
     private $catId;
 
-
+    
     protected function startup() {
         parent::startup();
-        
         $this->productModel = $this->context->productModel;
         $this->categoryModel = $this->context->categoryModel;
         
@@ -36,9 +35,9 @@ class ProductPresenter extends BasePresenter {
           } */
     }
     
- 
+    
     protected function createComponentProduct() {
-        
+
         $control = new ProductControl();
         $control->setService($this->context->productModel);
         $control->setCategoryID($this->catId);
@@ -57,9 +56,11 @@ class ProductPresenter extends BasePresenter {
         $addProduct->addText('name', 'Name:')
                 ->setRequired();
         $addProduct->addText('price', 'Price:')
-                ->setRequired();
+                ->setRequired()
+                ->addRule(FORM::FLOAT, 'It has to be a number!');
         $addProduct->addText('amount', 'Amount')
                 ->setDefaultValue('1')
+                ->addRule(FORM::INTEGER, 'It has to be a number!')
                 ->setRequired();
         $addProduct->addButton('plusItem', '+');
         $addProduct->addButton('minusItem', '-');
@@ -102,6 +103,17 @@ class ProductPresenter extends BasePresenter {
         );
         
         $this->redirect('Product:products', $form->values->catID);
+    }
+
+
+    /*
+     * Handle for removing products 
+     */
+    
+    public function handleDeleteProduct($id, $catID) {
+      //  $this->productModel->removeProduct($id);
+        $this->redirect('Product:products', $catID);
+                
     }
 
     /*
