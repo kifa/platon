@@ -16,7 +16,7 @@ use Nette\Security as NS;
 /**
  * Users authenticator.
  */
-class Authenticator extends Repository implements NS\IAuthenticator {
+class Authenticator extends Nette\Object implements NS\IAuthenticator {
 
     private $users;
 
@@ -34,10 +34,7 @@ class Authenticator extends Repository implements NS\IAuthenticator {
         $row = $this->users->findByName($username);
 
 
-        dump($password);
-        dump($row);
-        dump($row->Password);
-        dump(crypt($password, $row->Password));
+
         if (!$row) {
             throw new NS\AuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);
         }
@@ -48,7 +45,7 @@ class Authenticator extends Repository implements NS\IAuthenticator {
 
         unset($row->Password);
 
-        return new NS\Identity($row->id, NULL, $row->toArray());
+        return new NS\Identity($row->Login, NULL, $row->toArray());
     }
 
     /**
