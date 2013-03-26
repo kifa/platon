@@ -47,9 +47,9 @@ class SignPresenter extends BasePresenter
 
 
 
-	public function signInFormSucceeded($form)
+	public function signInFormSucceeded(Form $form)
 	{
-		$values = $form->getValues();
+		/*$values = $form->getValues();
  
 
 		if ($values->remember) {
@@ -66,7 +66,20 @@ class SignPresenter extends BasePresenter
 			return;
 		}
 
-		$this->redirect('Homepage:');
+		$this->redirect('Homepage:'); */
+            
+            try {
+        $user = $this->getUser();
+        $values = $form->getValues();
+        if ($values->remember) {
+            $user->setExpiration('+30 days', FALSE);
+        }
+        $user->login($values->username, $values->password);
+        $this->flashMessage('Přihlášení bylo úspěšné.', 'success');
+        $this->redirect('Homepage:');
+    } catch (NS\AuthenticationException $e) {
+        $form->addError('Neplatné uživatelské jméno nebo heslo.');
+    }
 	}
 
 

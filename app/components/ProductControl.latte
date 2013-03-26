@@ -20,7 +20,7 @@
             <span class="badge badge-warning">{$product->PiecesAvailable}</span>
                     {/if}
             
-            <img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" class="span2" style="height: 200px; width: auto;"/>
+            <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$photo->PhotoURL}" class="img-circle" class="span2" style="height: 200px; width: auto;"/>
             <h4>{$product->ProductName}</h4>
             <div class="caption">{var $desc = $product->ProductDescription}
                 <p>{$desc|truncate:30}</p>

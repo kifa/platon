@@ -237,24 +237,27 @@ class OrderPresenter extends BasePresenter {
        // $order = $form->getValues();
    
         $total = 0;
-        foreach ($this->cart->prd as $id => $amnt){
+        $today = date("Y-m-d");
+                
+                foreach ($this->cart->prd as $id => $amnt){
 
                 $price = $this->productModel->loadProduct($id)->FinalPrice;
                 $amnt = $this->cart->prd[$id];
-             
-                  $total += $price * $amnt;
+                                 
+                  $total += $price * $amnt;                 
+                  $taxFreePrice = $total*0.79;                      
+                  
             }
             $this->orderNo = $this->orderModel->countOrder() + 1;
 
         $this->orderModel->insertOrder(
                                 $this->orderNo,
-                                1,
+                                //1,
                                 "novak", //nastavitz na email
                                 $total,
-                                89,
-                                88,
-                                99,
-                                FALSE,
+                                $taxFreePrice,
+                                $today,
+                                $today,
                                 $form->values->shippers,
                                 $form->values->payment
 

@@ -36,7 +36,8 @@ class ProductPresenter extends BasePresenter {
     }
     
     
-    protected function createComponentProduct() {
+
+        protected function createComponentProduct() {
 
         $control = new ProductControl();
         $control->setService($this->context->productModel);
@@ -111,11 +112,14 @@ class ProductPresenter extends BasePresenter {
      */
     
     public function handleDeleteProduct($id, $catID) {
-      //  $this->productModel->removeProduct($id);
+        $this->productModel->deleteProduct($id);
         $this->redirect('Product:products', $catID);
                 
     }
 
+    
+    
+    
     /*
      * renderProducts
      * @param ?

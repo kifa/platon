@@ -57,18 +57,18 @@ class OrderModel extends Authenticator {
      * @param ? 
      * @return string
      */
-    public function insertOrder($id, $status, $user, $price, $pricetax, $created, 
-            $lastchange, $finished, $delivery, $payment)
+    public function insertOrder($id, $user, $price, $pricetax, $created, 
+            $lastchange, $delivery, $payment)
     {
             $insert =  array(
                 'OrderID' => $id, //automaticky!
-                'StatusID' => $status, //automaticky!
+                //'StatusID' => $status, //automaticky!
                 'UserID' => $user,  //nepraktické, aby se pouzivalo "novak", "admin"
                 'TotalPrice' => $price, //
                 'TotalPriceTax' => $pricetax,
-                'DateCreated' => $created,  //automaticky zde
-                'DateOfLastChange' => $lastchange, //?
-                'DateFinished' => $finished, //? spolu s předchozí řešit až v administraci obj.
+                'DateCreated' => $created,  //automaticky presenter
+                'DateOfLastChange' => $lastchange, //pri vytvoreni stejne jako created
+                //'DateFinished' => '', //? spolu s předchozí řešit až v administraci obj.
                 'DeliveryID' => $delivery,
                 'PaymentID' => $payment,
                 'IP' => NULL,

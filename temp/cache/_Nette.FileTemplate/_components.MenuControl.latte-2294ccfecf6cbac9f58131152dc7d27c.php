@@ -1,10 +1,10 @@
-<?php //netteCache[01]000381a:2:{s:4:"time";s:21:"0.04758100 1364246141";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:59:"G:\xampp\htdocs\GIT\platon\app\components\MenuControl.latte";i:2;i:1363982751;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000377a:2:{s:4:"time";s:21:"0.89347400 1364294633";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:55:"C:\xampp\htdocs\platon\app\components\MenuControl.latte";i:2;i:1364165853;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
-// source file: G:\xampp\htdocs\GIT\platon\app\components\MenuControl.latte
+// source file: C:\xampp\htdocs\platon\app\components\MenuControl.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'kgdul7q14c')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'ii180bbvic')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 

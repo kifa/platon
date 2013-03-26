@@ -1,10 +1,10 @@
-<?php //netteCache[01]000384a:2:{s:4:"time";s:21:"0.43477200 1364246320";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:62:"G:\xampp\htdocs\GIT\platon\app\components\ProductControl.latte";i:2;i:1364246317;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000380a:2:{s:4:"time";s:21:"0.14456000 1364294978";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:58:"C:\xampp\htdocs\platon\app\components\ProductControl.latte";i:2;i:1364294933;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
-// source file: G:\xampp\htdocs\GIT\platon\app\components\ProductControl.latte
+// source file: C:\xampp\htdocs\platon\app\components\ProductControl.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '1k4d8unal4')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '8qbgfz4air')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 
@@ -39,7 +39,8 @@ if (!empty($_control->snippetMode)) {
             <span class="badge badge-warning"><?php echo Nette\Templating\Helpers::escapeHtml($product->PiecesAvailable, ENT_NOQUOTES) ?></span>
 <?php endif ?>
             
-            <img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" class="span2" style="height: 200px; width: auto;" />
+            <img src="<?php echo htmlSpecialChars($basePath) ?>/images/<?php echo htmlSpecialChars($product->PhotoAlbumID) ?>
+/<?php echo htmlSpecialChars($photo->PhotoURL) ?>" class="img-circle" class="span2" style="height: 200px; width: auto;" />
             <h4><?php echo Nette\Templating\Helpers::escapeHtml($product->ProductName, ENT_NOQUOTES) ?></h4>
             <div class="caption"><?php $desc = $product->ProductDescription ?>
 

@@ -24,7 +24,7 @@ class ProductModel extends Authenticator {
         else
         {
         return $this->getTable('product')->select('product.ProductID, product.ProductName, 
-            product.ProductDescription,product.CategoryID,product.PiecesAvailable,price.FinalPrice')->where('CategoryID', $id);        
+            product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice')->where('CategoryID', $id);        
         }
     }
 
@@ -38,7 +38,7 @@ class ProductModel extends Authenticator {
     public function loadProduct($id) {
         
     //return $this->getTable('Product')->where('ProductID', $id)->fetch();
-      return $this->getTable('Product')->select('Product.*,Price.*')->where('Product.ProductID',$id)->fetch();
+      return $this->getTable('Product')->select('Product.*,Price.*,PhotoAlbum.*')->where('Product.ProductID',$id)->fetch();
     }
 
     /*
@@ -58,6 +58,7 @@ class ProductModel extends Authenticator {
             'PhotoAlbumID' => $album,
             'ProductNumber' => $prodnumber,
             'ProductDescription' => $description,
+            //'ProductStatusID' => '',
             'ParametersAlbumID' => $parameters,
             'ProductEAN' => $ean,
             'ProductQR' => $qr,
@@ -86,6 +87,9 @@ class ProductModel extends Authenticator {
      * @param ? example: pozice počátečního znaku
      * @return string 
      */
+    public function deleteProduct($id){
+        return $this->getTable('Product')->where('ProductID',$id)->delete();
+    }
     
     /*
      * Count number of product
@@ -94,4 +98,35 @@ class ProductModel extends Authenticator {
     {
         return $this->getTable('product')->count();
     }
+    
+    /*
+     * Load Photo Album
+     */
+    public function loadPhotoAlbum($id){
+        if($id==''){
+            return $this->getTable('PhotoAlbum');
+        }
+        else{
+        return $this->getTable('PhotoAlbum')->where('PhotoAlbumID',$id);
+        }
+    }
+    
+    /*
+     * Load Photos
+     */
+    public function loadPhoto($id){
+        return $this->getTable('Photo')->where('PhotoAlbumID',$id);
+    }
+    
+    /*
+     * Load title photo
+     */
+    public function loadCoverPhoto($id){
+        return $this->getTable('Photo')->where('PhotoAlbumID',$id)->where('PhotoURL LIKE ?',"%main%")->fetch();
+    }
+
+    /*
+     * Insert Photo
+     */
+    
 }

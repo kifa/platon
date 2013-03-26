@@ -1,23 +1,23 @@
-<?php //netteCache[01]000385a:2:{s:4:"time";s:21:"0.92499500 1364246140";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:63:"G:\xampp\htdocs\GIT\platon\app\templates\Product\products.latte";i:2;i:1364161894;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000381a:2:{s:4:"time";s:21:"0.80583600 1364294633";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:59:"C:\xampp\htdocs\platon\app\templates\Product\products.latte";i:2;i:1364165854;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
-// source file: G:\xampp\htdocs\GIT\platon\app\templates\Product\products.latte
+// source file: C:\xampp\htdocs\platon\app\templates\Product\products.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '4hk8y9rb91')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '5i16ygakg7')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lbfe6b49ee90_head')) { function _lbfe6b49ee90_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lb3d0fbbec25_head')) { function _lb3d0fbbec25_head($_l, $_args) { extract($_args)
 ?><title>Kategorie</title><?php
 }}
 
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lb6d507c3a7a_content')) { function _lb6d507c3a7a_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb2cb1727b1b_content')) { function _lb2cb1727b1b_content($_l, $_args) { extract($_args)
 ?><div id="content">
     <div class="page-header">
         <h1><?php echo Nette\Templating\Helpers::escapeHtml($category->CategoryName, ENT_NOQUOTES) ?>

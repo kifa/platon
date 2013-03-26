@@ -26,30 +26,7 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
         $this->database = $database;
     }
 
-    public function setPassword($id, $password) {
-        $this->getTable('users')->where(array('Login' => $id))->update(array(
-            'Password' => $this->calculateHash($password)
-        ));
-    }
-
-    protected function getTable($table) {
-        // název tabulky odvodíme z názvu třídy
-
-        return $this->database->table($table);
-    }
-
-    /**
-     * Vrací všechny řádky z tabulky.
-     * @return Nette\Database\Table\Selection
-     */
-    public function findAll() {
-        return $this->getTable();
-    }
-
-    public function findByName($username) {
-        return $this->getTable('users')->where('Login', $username)->fetch();
-    }
-
+    
     /**
      * Performs an authentication.
      * @return Nette\Security\Identity
@@ -83,6 +60,33 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
         return crypt($password, $salt);
     }
 
+    
+    public function setPassword($id, $password) {
+        $this->getTable('users')->where(array('Login' => $id))->update(array(
+            'Password' => $this->calculateHash($password)
+        ));
+    }
+
+    protected function getTable($table) {
+        // název tabulky odvodíme z názvu třídy
+
+        return $this->database->table($table);
+    }
+
+    /**
+     * Vrací všechny řádky z tabulky.
+     * @return Nette\Database\Table\Selection
+     */
+    public function findAll() {
+        return $this->getTable();
+    }
+
+    public function findByName($username) {
+        return $this->getTable('users')->where('Login', $username)->fetch();
+    }
+
+    
+    
     public function userPocet() {
         $pocet = $this->findAll()->count();
         return $pocet;
