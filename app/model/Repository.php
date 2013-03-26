@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-class Repository extends Nette\Object{
+class Repository extends Nette\Object {
      /** @var Nette\Database\Connection */
      protected $database;
 
@@ -27,9 +27,9 @@ class Repository extends Nette\Object{
         return $this->getTable();
     }
     
-    public function findBy(array $by)
+    public function findBy($table, array $by)
     {
-        return $this->getTable()->where($by);
+        return $this->getTable($table)->where($by);
     }
 
 }

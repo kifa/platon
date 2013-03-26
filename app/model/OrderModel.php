@@ -209,11 +209,9 @@ class OrderModel extends Repository {
      * @return string
      */
     
-    /*
-     * Card session
-     */
+   
     
    
 }
 
-?>
+

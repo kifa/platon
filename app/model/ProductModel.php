@@ -122,7 +122,7 @@ class ProductModel extends Repository {
      * Load title photo
      */
     public function loadCoverPhoto(){
-        return $this->getTable('Photo')->where('CoverPhoto',1)->fetchPairs('PhotoAlbumID');
+        return $this->getTable('photo')->where('CoverPhoto', 1)->fetchPairs('PhotoAlbumID');
         //return $this->getTable('Product')->select('Product.ProductID,Product.PhotoAlbumID,Photo.PhotoAlbumID,Photo.PhotoID,Photo.PhotoURL')->fetchPairs('ProductID');
         
     }
