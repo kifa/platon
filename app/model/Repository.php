@@ -1,7 +1,5 @@
 <?php
 
-use Nette;
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -28,4 +26,10 @@ class Repository extends Nette\Object{
     public function findAll() {
         return $this->getTable();
     }
+    
+    public function findBy(array $by)
+    {
+        return $this->getTable()->where($by);
+    }
+
 }

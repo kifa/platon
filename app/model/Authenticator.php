@@ -1,6 +1,5 @@
 <?php
 
-
 use Nette\Utils\Strings;
 use Nette\Security as NS;
 
@@ -19,10 +18,10 @@ use Nette\Security as NS;
  */
 class Authenticator extends Nette\Object implements NS\IAuthenticator {
 
-    public $database;
+    private $users;
 
-    public function __construct(Nette\Database\Connection $database) {
-        $this->database = $database;
+    public function __construct(UserModel $users) {
+        $this->users = $users;
     }
     
     /**
@@ -32,7 +31,7 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
      */
     public function authenticate(array $credentials) {
         list($username, $password) = $credentials;
-        $row = $this->findByName($username);
+        $row = $this->users->findByName($username);
         
         if (!$row) {
             throw new NS\AuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);
@@ -45,24 +44,28 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
         unset($row->password);
         return new NS\Identity($row->id, NULL, $row->toArray());
     }
-
+    
+    public function setPassword($id, $password) {
+    //$this->getTable('users')->where(array('Login' => $id))->update(array(
+      //       'Password' => $this->calculateHash($password)        
+        $this->users->findBy(array('login' => $id))->update(array
+            ('password' => $this->calculateHash($password)));
+    }
     /**
      * Computes salted password hash.
      * @param  string
      * @return string
      */
     public static function calculateHash($password, $salt = null) {
-        if ($salt === null) {
-            $salt = '$2a$07$' . Nette\Utils\Strings::random(32) . '$';
+        //if ($salt === null) {
+          //  $salt = '$2a$07$' . Nette\Utils\Strings::random(32) . '$';
+        //}
+        //return crypt($password, $salt);
+        
+        if($password === Strings::upper($password)){
+            $password = Strings::lower($password);
         }
-        return crypt($password, $salt);
-    }
-
-    
-    public function setPassword($id, $password) {
-        $this->getTable('users')->where(array('Login' => $id))->update(array(
-             'Password' => $this->calculateHash($password)        
-        ));
+        return crypt($password, $salt ?: '$2a$07$' . Strings::random(22));
     }
     
     public function findByName($username) {
@@ -81,19 +84,5 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
                                             'Login' => $username,
                                             'Password' => $this->calculateHash($password),                                            
                                             'FirstName' => $name));
-    }  
-    
-    protected function getTable($table) {
-        // název tabulky odvodíme z názvu třídy
-
-        return $this->database->table($table);
-    }
-
-    /**
-     * Vrací všechny řádky z tabulky.
-     * @return Nette\Database\Table\Selection
-     */
-    public function findAll() {
-        return $this->getTable();
-    }
+    }      
 }

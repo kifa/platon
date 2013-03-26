@@ -33,6 +33,7 @@ common:
 		shopModel: ShopModel
 		categoryModel: CategoryModel
 		orderModel: OrderModel
+		userModel: UserModel
 	netteTranslator:
 		lang: en
 		files:
