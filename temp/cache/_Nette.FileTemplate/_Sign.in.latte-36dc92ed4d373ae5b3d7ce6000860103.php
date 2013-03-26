@@ -1,16 +1,16 @@
-<?php //netteCache[01]000372a:2:{s:4:"time";s:21:"0.04068300 1364295006";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:50:"C:\xampp\htdocs\platon\app\templates\Sign\in.latte";i:2;i:1364165855;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000372a:2:{s:4:"time";s:21:"0.60302200 1364309423";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:50:"C:\xampp\htdocs\platon\app\templates\Sign\in.latte";i:2;i:1364165855;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: C:\xampp\htdocs\platon\app\templates\Sign\in.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '7zu9lts7pt')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '2nys7crpji')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block content
 //
-if (!function_exists($_l->blocks['content'][] = '_lbd148939302_content')) { function _lbd148939302_content($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['content'][] = '_lb95dc1d99fc_content')) { function _lb95dc1d99fc_content($_l, $_args) { extract($_args)
 ?><div class="page-header">
 <?php call_user_func(reset($_l->blocks['title']), $_l, get_defined_vars())  ?>
 </div>
@@ -37,7 +37,7 @@ if (!function_exists($_l->blocks['content'][] = '_lbd148939302_content')) { func
 //
 // block title
 //
-if (!function_exists($_l->blocks['title'][] = '_lb8b215b7759_title')) { function _lb8b215b7759_title($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['title'][] = '_lb38731b1431_title')) { function _lb38731b1431_title($_l, $_args) { extract($_args)
 ?>    <h1>Sign in <small>To continue, you need to be logged in!</small></h1>
 <?php
 }}

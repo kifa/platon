@@ -19,13 +19,11 @@ use Nette\Security as NS;
  */
 class Authenticator extends Nette\Object implements NS\IAuthenticator {
 
-    /** @var Nette\Database\Connection */
-    private $database;
+    public $database;
 
     public function __construct(Nette\Database\Connection $database) {
         $this->database = $database;
     }
-
     
     /**
      * Performs an authentication.
@@ -35,7 +33,7 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
     public function authenticate(array $credentials) {
         list($username, $password) = $credentials;
         $row = $this->findByName($username);
-
+        
         if (!$row) {
             throw new NS\AuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);
         }
@@ -63,10 +61,28 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
     
     public function setPassword($id, $password) {
         $this->getTable('users')->where(array('Login' => $id))->update(array(
-            'Password' => $this->calculateHash($password)
+             'Password' => $this->calculateHash($password)        
         ));
     }
+    
+    public function findByName($username) {
+        return $this->getTable('users')->where('Login', $username)->fetch();
+    }
+    
+    public function userPocet() {
+        $pocet = $this->findAll()->count();
+        return $pocet;
+    }
 
+    public function userAdd($name, $username, $password) {
+        // $userId = $this->userPocet();
+
+        $this->getTable('users')->insert(array(
+                                            'Login' => $username,
+                                            'Password' => $this->calculateHash($password),                                            
+                                            'FirstName' => $name));
+    }  
+    
     protected function getTable($table) {
         // název tabulky odvodíme z názvu třídy
 
@@ -80,25 +96,4 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
     public function findAll() {
         return $this->getTable();
     }
-
-    public function findByName($username) {
-        return $this->getTable('users')->where('Login', $username)->fetch();
-    }
-
-    
-    
-    public function userPocet() {
-        $pocet = $this->findAll()->count();
-        return $pocet;
-    }
-
-    public function userAdd($name, $username, $password) {
-        // $userId = $this->userPocet();
-
-        $this->getTable('users')->insert(array(
-                                            'Login' => $username,
-                                            'Password' => $this->calculateHash($password),
-                                             'FirstName' => $name));
-    }
-
 }

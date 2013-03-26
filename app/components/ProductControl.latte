@@ -19,8 +19,19 @@
                     {else}
             <span class="badge badge-warning">{$product->PiecesAvailable}</span>
                     {/if}
+            {var $ph = 0}
+            {foreach $photos as $id => $photo}
+               
+                {if $id==$product->PhotoAlbumID}
+                   <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$photo->PhotoURL}" class="img-circle" class="span2" style="height: 200px; width: auto;"/>
+                   {var $ph = 1}
+                {/if}
+                   
+               {if $iterator->last && $ph == 0}
+                   <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="height: 200px; width: auto;"/>
+                   {/if}
+           {/foreach}
             
-            <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$photo->PhotoURL}" class="img-circle" class="span2" style="height: 200px; width: auto;"/>
             <h4>{$product->ProductName}</h4>
             <div class="caption">{var $desc = $product->ProductDescription}
                 <p>{$desc|truncate:30}</p>

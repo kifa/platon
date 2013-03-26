@@ -5,7 +5,7 @@
  * ShopModel is managing all basic Shop informations and settings.
  */
 
-class ShopModel extends Authenticator {
+class ShopModel extends Repository {
     /*
      * Load shop info
      * @param ?

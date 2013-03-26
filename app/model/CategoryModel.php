@@ -7,7 +7,7 @@
  * CRUD functions.
  */
 
-class CategoryModel extends Authenticator {
+class CategoryModel extends Repository {
     /*
      * Load Categories
      * @param ?

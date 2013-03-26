@@ -1,30 +1,30 @@
-<?php //netteCache[01]000372a:2:{s:4:"time";s:21:"0.85336400 1364294633";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:50:"C:\xampp\htdocs\platon\app\templates\@layout.latte";i:2;i:1364165854;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000372a:2:{s:4:"time";s:21:"0.40928600 1364308844";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:50:"C:\xampp\htdocs\platon\app\templates\@layout.latte";i:2;i:1364165854;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: C:\xampp\htdocs\platon\app\templates\@layout.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'nkrxq8wyns')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '8od7bfzgql')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 //
 // block title
 //
-if (!function_exists($_l->blocks['title'][] = '_lbc96a1de06d_title')) { function _lbc96a1de06d_title($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['title'][] = '_lbb00fb860ef_title')) { function _lbb00fb860ef_title($_l, $_args) { extract($_args)
 ?>BirneShop<?php
 }}
 
 //
 // block head
 //
-if (!function_exists($_l->blocks['head'][] = '_lb25cce85460_head')) { function _lb25cce85460_head($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['head'][] = '_lb6e88e6d4c3_head')) { function _lb6e88e6d4c3_head($_l, $_args) { extract($_args)
 ;
 }}
 
 //
 // block scripts
 //
-if (!function_exists($_l->blocks['scripts'][] = '_lbf0df076e93_scripts')) { function _lbf0df076e93_scripts($_l, $_args) { extract($_args)
+if (!function_exists($_l->blocks['scripts'][] = '_lbde95e7ba82_scripts')) { function _lbde95e7ba82_scripts($_l, $_args) { extract($_args)
 ?>        
         <script src="<?php echo htmlSpecialChars($basePath) ?>/js/netteForms.js"></script>
         <script src="<?php echo htmlSpecialChars($basePath) ?>/js/main.js"></script>

@@ -6,7 +6,7 @@
  * CRUD operations, etc.
  * @author lukas
  */
-class ProductModel extends Authenticator {
+class ProductModel extends Repository {
 
     /**
      * Load Product Catalog
@@ -19,7 +19,7 @@ class ProductModel extends Authenticator {
         //return $this->getTable('Product')->select('Product.*,Price.*')->where('CategoryID', $id);
         if($id==''){
             return $this->getTable('product')->select('product.ProductID, product.ProductName,
-                product.ProductDescription, product.PiecesAvailable, price.FinalPrice');            
+                product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice');            
         }
         else
         {
@@ -121,11 +121,13 @@ class ProductModel extends Authenticator {
     /*
      * Load title photo
      */
-    public function loadCoverPhoto($id){
-        return $this->getTable('Photo')->where('PhotoAlbumID',$id)->where('PhotoURL LIKE ?',"%main%")->fetch();
+    public function loadCoverPhoto(){
+        return $this->getTable('Photo')->where('CoverPhoto',1)->fetchPairs('PhotoAlbumID');
+        //return $this->getTable('Product')->select('Product.ProductID,Product.PhotoAlbumID,Photo.PhotoAlbumID,Photo.PhotoID,Photo.PhotoURL')->fetchPairs('ProductID');
+        
     }
 
-    /*
+        /*
      * Insert Photo
      */
     

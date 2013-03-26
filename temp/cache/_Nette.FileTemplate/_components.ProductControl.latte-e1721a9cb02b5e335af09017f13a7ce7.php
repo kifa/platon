@@ -1,10 +1,10 @@
-<?php //netteCache[01]000380a:2:{s:4:"time";s:21:"0.14456000 1364294978";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:58:"C:\xampp\htdocs\platon\app\components\ProductControl.latte";i:2;i:1364294933;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
+<?php //netteCache[01]000380a:2:{s:4:"time";s:21:"0.60563900 1364308844";s:9:"callbacks";a:2:{i:0;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:9:"checkFile";}i:1;s:58:"C:\xampp\htdocs\platon\app\components\ProductControl.latte";i:2;i:1364308775;}i:1;a:3:{i:0;a:2:{i:0;s:19:"Nette\Caching\Cache";i:1;s:10:"checkConst";}i:1;s:25:"Nette\Framework::REVISION";i:2;s:30:"b7f6732 released on 2013-01-01";}}}?><?php
 
 // source file: C:\xampp\htdocs\platon\app\components\ProductControl.latte
 
 ?><?php
 // prolog Nette\Latte\Macros\CoreMacros
-list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, '8qbgfz4air')
+list($_l, $_g) = Nette\Latte\Macros\CoreMacros::initRuntime($template, 'jgtvtiwnvj')
 ;
 // prolog Nette\Latte\Macros\UIMacros
 
@@ -37,10 +37,17 @@ if (!empty($_control->snippetMode)) {
             <span class="badge badge-info"><?php echo Nette\Templating\Helpers::escapeHtml($product->PiecesAvailable, ENT_NOQUOTES) ?></span>
 <?php else: ?>
             <span class="badge badge-warning"><?php echo Nette\Templating\Helpers::escapeHtml($product->PiecesAvailable, ENT_NOQUOTES) ?></span>
-<?php endif ?>
-            
-            <img src="<?php echo htmlSpecialChars($basePath) ?>/images/<?php echo htmlSpecialChars($product->PhotoAlbumID) ?>
+<?php endif ;$ph = 0 ;$iterations = 0; foreach ($iterator = $_l->its[] = new Nette\Iterators\CachingIterator($photos) as $id => $photo): ?>
+               
+<?php if ($id==$product->PhotoAlbumID): ?>
+                   <img src="<?php echo htmlSpecialChars($basePath) ?>/images/<?php echo htmlSpecialChars($product->PhotoAlbumID) ?>
 /<?php echo htmlSpecialChars($photo->PhotoURL) ?>" class="img-circle" class="span2" style="height: 200px; width: auto;" />
+<?php $ph = 1 ;endif ?>
+                   
+<?php if ($iterator->last && $ph == 0): ?>
+                   <img src="<?php echo htmlSpecialChars($basePath) ?>/images/no_image.jpg" class="img-circle" class="span2" style="height: 200px; width: auto;" />
+<?php endif ;$iterations++; endforeach; array_pop($_l->its); $iterator = end($_l->its) ?>
+            
             <h4><?php echo Nette\Templating\Helpers::escapeHtml($product->ProductName, ENT_NOQUOTES) ?></h4>
             <div class="caption"><?php $desc = $product->ProductDescription ?>
 

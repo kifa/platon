@@ -26,6 +26,7 @@ common:
 
 	services:
 		authenticator: Authenticator
+		repository: Repository
 		routerFactory: RouterFactory
 		router: @routerFactory::createRouter
 		productModel: ProductModel

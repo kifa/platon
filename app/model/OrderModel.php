@@ -6,7 +6,7 @@
  * CRUD operations.
  */
 
-class OrderModel extends Authenticator {
+class OrderModel extends Repository {
     /*
      * Show orderdetails
      * @param ?
