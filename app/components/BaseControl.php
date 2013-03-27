@@ -22,11 +22,11 @@ class BaseControl extends UI\Control {
     public function createTemplate($class = NULL)
 {
     $template = parent::createTemplate($class);
-    $template->setTranslator($this->parent->translator);
+    $template->setTranslator($this->translator);
     // případně $this->translator přes konstrukt/inject
 
     return $template;
-}*/
-    
+}
+    */
     
 }

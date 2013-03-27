@@ -27,7 +27,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     public $lang;
 
     /** @var NetteTranslator\Gettext */
-    public   $translator;
+    protected $translator;
 
     
     protected function startup() {

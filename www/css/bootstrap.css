@@ -6173,3 +6173,7 @@ a.badge:focus {
         font-size: 21px;
         padding: 14px 24px;
       }
+      
+ a:hover i {
+        text-decoration: none;
+        }

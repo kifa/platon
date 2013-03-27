@@ -1,10 +1,10 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-03-20 10:51:04
+# Created: 2013-03-27 12:46:25
 msgid ""
 msgstr ""
+"PO-Revision-Date: 2013-03-27 12:46+0100\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2013-03-20 10:51+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -12,8 +12,14 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));\n"
 
 
+msgid "Admin"
+msgstr "Admin"
+
 msgid "Are"
 msgstr "Are"
+
+msgid "Buy"
+msgstr "Buy"
 
 msgid "Cart"
 msgstr "Cart"
@@ -21,18 +27,30 @@ msgstr "Cart"
 msgid "Category"
 msgstr "Category"
 
+msgid "Choose language:"
+msgstr "Choose language:"
+
 msgid "Here"
 msgstr "Here"
 
 msgid "Home"
 msgstr "Home"
 
+msgid "Logout"
+msgstr "Logout"
+
 msgid "Orders"
 msgstr "Orders"
+
+msgid "View"
+msgstr "View"
 
 msgid "You"
 msgstr "You"
 
-msgid "Choose language:"
-msgstr "Choose language:"
+msgid "You cannot edit product here!"
+msgstr "You cannot edit product here!"
+
+msgid "Sign In"
+msgstr "Sign In"
 

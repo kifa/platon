@@ -2,18 +2,21 @@
             {while $product = $products->fetch()}
     <li class="span3">
         <div class="thumbnail">
-            
+           {if $user->isLoggedIn()}
+            <div class="row">
             {ifCurrent Homepage:}
             <div class="span3">
-                You cannot edit product here!
+                {_"You cannot edit product here!"}
             </div>
             {else}
             <div class="span3">
-                Admin: <a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" ><i id="deleteProduct" class="icon-large icon-trash"></i></a>
+                {_"Admin"}: <a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" ><i id="deleteProduct" class="icon-large icon-trash"></i></a>
             
             </div>
             {/ifCurrent}
+            </div>
             <hr>
+            {/if}
                     {if $product->PiecesAvailable > 5}
             <span class="badge badge-info">{$product->PiecesAvailable}</span>
                     {else}
@@ -38,19 +41,22 @@
             </div>
             <hr>
             <div class="row">
-                    <div class="span3">
-                    <div class="span3 btn-toolbar">
-                        <div class="btn-group">
-                            <a href="{plink Product:product $product->ProductID}" class="btn btn-primary btn-large"><i class="icon-info-sign"></i> View</a>              
-                            <a href="{plink Order:cart $product->ProductID, "1"}" class="btn btn-success btn-large"><i class="icon-shopping-cart"></i> Buy</a>
-                        </div>  
+                    <div class="span3 center">
+                            
+                    
+                        <a href="{plink Order:cart $product->ProductID, "1"}" class="btn btn-success"><i class="icon-shopping-cart"></i> {_"Buy"}</a>
+                        
+                         <a href="{plink Product:product $product->ProductID}" class="btn btn-primary"><i class="icon-info-sign"></i> {_"View"}</a>         
                     </div>
-
+              </div> 
+            <hr>
+            <div class="row">
                     <div class="span3">
-                        <p class="text-success text-center lead"> {$product->FinalPrice},- </p>
+                         
+                        <p class="text-success text-left lead"> {$product->FinalPrice},- </p>
                     </div>
-                </div>
-            </div>
+               
+            </div> 
 
         </div>
     </li>

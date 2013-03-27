@@ -52,7 +52,7 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
      * Computes salted password hash.
      * @param  string
      * @return string
-     */
+     
     public static function calculateHash($password, $salt = null) {
 
         if ($salt === null) {
@@ -60,6 +60,14 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
         }
 
         return crypt($password, $salt);
-    }
+    }*/
+    
+    public static function calculateHash($password, $salt = NULL)
+	{
+		if ($password === Strings::upper($password)) { // perhaps caps lock is on
+			$password = Strings::lower($password);
+		}
+		return crypt($password, $salt ?: '$2a$07$' . Strings::random(22));
+	}
 
 }

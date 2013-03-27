@@ -1,5 +1,7 @@
 
 {block content}
+
+{if $user->isLoggedIn()}
 <div class="container">
 
 
@@ -42,4 +44,5 @@
      
    
 </div>
+{/if}
 {/block}

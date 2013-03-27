@@ -46,8 +46,10 @@
 <a n:href="this, lang => cs"><img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" /></a>
                 </div>
                 <div class="span3">
-                {if $user->isLoggedIn()}
-                    <a href="{plink Sign:out}">Logout</a>
+                    {if $user->isLoggedIn()}
+                        <p>Hello {$user->id}! <a href="{plink Sign:out}">{_"Logout"}</a></p>
+                    {else}
+                        <a href="{plink Sign:in}">{_"Sign In"}</a>
                     {/if}
                 </div>
             </div>

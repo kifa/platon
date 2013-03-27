@@ -131,4 +131,23 @@ class ProductModel extends Repository {
      * Insert Photo
      */
     
+        public function insertPhoto($name){
+            $id = $this->countPhoto() + 1;
+            $insert = array(
+            'PhotoID' => $id,
+            'PhotoName' => $name,
+            'PhotoURL' => $name,
+            'PhotoAlbumID' => 4,
+            'PhotoAltText' => 's4',
+            'CoverPhoto' => 1
+                );
+            return $this->getTable('Photo')->insert($insert);
+        }
+    /*
+     * Counting number of photos to generate ID
+     * 
+     */
+        public function countPhoto(){
+            return $this->getTable('Photo')->count();
+        }
 }

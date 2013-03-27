@@ -7,6 +7,8 @@ class HomepagePresenter extends BasePresenter {
 
     private $productModel;
     private $categoryModel;
+    
+    protected $translator;
 
     protected function startup() {
         parent::startup();
@@ -20,12 +22,18 @@ class HomepagePresenter extends BasePresenter {
           $this->redirect('Sign:in');
           } */
     }
+    
+    public function injectTranslator(NetteTranslator\Gettext $translator) {
+        $this->translator = $translator;
+    }
 
     protected function createComponentProduct() {
         $control = new ProductControl();
         $control->setService($this->context->productModel);
+        $control->setTranslator($this->translator);
         return $control;
     }
+    
     
     public function renderDefault() {
 

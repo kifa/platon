@@ -12,6 +12,8 @@ class ProductControl extends BaseControl {
 
     private $service;
     private $id;
+    
+    protected $translator;
 
     
 
@@ -41,7 +43,19 @@ class ProductControl extends BaseControl {
      */
 
     
-   
+   public function setTranslator($translator) {
+        $this->translator = $translator;
+    }
+
+    public function createTemplate($class = NULL)
+{
+    $template = parent::createTemplate($class);
+    $template->setTranslator($this->translator);
+    // případně $this->translator přes konstrukt/inject
+
+    return $template;
+}
+
     /*
      * Vykreslí komponentu Product z makra ProductControl.latte
      */

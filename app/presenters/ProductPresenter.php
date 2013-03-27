@@ -20,8 +20,10 @@ class ProductPresenter extends BasePresenter {
     private $categoryModel;
 
     private $catId;
+    protected $translator;
 
-    
+
+
     protected function startup() {
         parent::startup();
         $this->productModel = $this->context->productModel;
@@ -35,13 +37,17 @@ class ProductPresenter extends BasePresenter {
           } */
     }
     
-    
+   public function injectTranslator(NetteTranslator\Gettext $translator) {
+        $this->translator = $translator;
+    }
+
 
         protected function createComponentProduct() {
 
         $control = new ProductControl();
         $control->setService($this->context->productModel);
         $control->setCategoryID($this->catId);
+        $control->setTranslator($this->translator);
         return $control;
     }
  
@@ -51,6 +57,7 @@ class ProductPresenter extends BasePresenter {
      */
     
     public function createComponentAddProductForm() {
+        if($this->getUser()->isLoggedIn()) {
         $addProduct = new Nette\Application\UI\Form;
         $addProduct->addHidden('catID', $this->catId);
         $addProduct->addGroup('AddProduct');
@@ -69,9 +76,13 @@ class ProductPresenter extends BasePresenter {
                 ->setRequired();
         $addProduct->addText('producer', 'Producer: ')
                 ->setDefaultValue('neuvedeno');
+        $addProduct->addUpload('image', 'Image:')
+                ->addRule(FORM::IMAGE , 'Je podporován pouze soubor JPG, PNG a GIF')
+                ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
         $addProduct->addSubmit('add', 'Add Product');
         $addProduct->onSuccess[] = $this->addProductFormSubmitted;
         return $addProduct;
+        }
     }
 
     /*
@@ -79,14 +90,14 @@ class ProductPresenter extends BasePresenter {
      */
     
     public function addProductFormSubmitted($form) {
-        //$values = $form->getValues();
+  
         $id = $this->productModel->countProducts() + 1;
         
         $this->productModel->insertProduct(
                 $id, //ID
                 $form->values->name, //Name
                 $form->values->producer, //Producer
-                '1', //Album
+                '4', //Album
                 '11111', //Product Number
                 $form->values->desc, //Description
                 1, //Parametr Album
@@ -103,6 +114,17 @@ class ProductPresenter extends BasePresenter {
                 
         );
         
+        if($form->values->image->isOK()){
+        
+         $this->productModel->insertPhoto(
+                        $form->values->image->name
+                );
+          $imgUrl = $this->context->params['wwwDir'] . '/images/4/' . $form->values->image->name;
+          $form->values->image->move($imgUrl);
+           //  dump($form->values->image->getName);
+           //  dump($form->values->image->getTemporaryFile);
+        }
+        
         $this->redirect('Product:products', $form->values->catID);
     }
 
@@ -112,8 +134,10 @@ class ProductPresenter extends BasePresenter {
      */
     
     public function handleDeleteProduct($id, $catID) {
+       if($this->getUser()->isLoggedIn()) {
         $this->productModel->deleteProduct($id);
         $this->redirect('Product:products', $catID);
+       }
                 
     }
 
