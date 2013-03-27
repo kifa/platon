@@ -1,18 +1,21 @@
 
-{block content}
-<div class="container">
-<div class="row">
-    <div class="span12">
+{block pageheader}
 <div class="page-header">
-        <h1>Order summary <small> Complete summary order.</small></h1>
+        <h1 n:block="title">Order summary <small> Complete summary order.</small></h1>
 </div>
+{/block}
+
+
+{block content}
+
 {foreach $flashes as $flash}
         <div class="{$flash->type}">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
 {$flash->message}</div>
 {/foreach}
+
         <div class="row">
-        <table class="table table-hover span11">
+        <table class="table table-hover span10">
             <thead>
                 <tr>
                     <th>#</th>
@@ -41,7 +44,7 @@
 
 {/foreach}
 
-            <div class="span9 offset1 alert alert-info">   
+            <div class="span9 alert alert-info">   
                 <div class="span1">                    
                     <i class="icon-shopping-cart icon-4x"></i></div>
                 <div class="span7">
@@ -124,4 +127,7 @@
     </div>
 </div>
 </div>
+{/block}
+
+{block sidebar}
 {/block}

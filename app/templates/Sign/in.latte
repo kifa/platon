@@ -1,14 +1,13 @@
 {var $robots = noindex}
-
-{block #content}
+{block pageheader}
 <div class="page-header">
-    <h1 n:block=title>Sign in <small>To continue, you need to be logged in!</small></h1>
+    <h1 n:block="title">Sign in <small>To continue, you need to be logged in!</small></h1>
 </div>
-<div class="row">
+{/block}
 
-    <div class="span12">
+{block content}
 
-        {foreach $flashes as $flash}
+{foreach $flashes as $flash}
         <div class="{$flash->type}">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
 {$flash->message}</div>
@@ -22,3 +21,7 @@
 
 
 {*include '../components/SignInForm.latte', SignInForm => $presenter[signInForm]*}
+{/block}
+
+{block sidebar}
+{/block}

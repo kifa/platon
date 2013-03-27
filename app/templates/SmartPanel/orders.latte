@@ -1,16 +1,14 @@
+{block pageheader}
+{if $user->isLoggedIn()}
+<div class="page-header">
+<h1 n:block="title">Orders <small>Here you see all orders placed in your shop.</small></h1>
+{/if}
+</div>
 
+{/block}
 {block content}
 
 {if $user->isLoggedIn()}
-<div class="container">
-
-
-<div class="page-header">
-<h1 n:block="title">Orders <small>Here you see all orders placed in your shop.</small></h1>
-</div>
-<div class="row">
-
-    <div class="span12">
 
         <table class="table">
             <thead>
@@ -28,7 +26,7 @@
                 <tr class="{if $order->StatusID == 3}success {elseif $order->StatusID == 2} info {else} warning {/if}">
                     <td>{$id}</td>
                     <td>{$order->DateCreated|date:'%d.%m.%Y'}</td>
-                    <td><a href="{plink Order:orderDone $id}">{$order->FirstName} {$order->SureName}</a></td>
+                    <td><a href="{plink SmartPanel:orderDetail $id}">{$order->FirstName} {$order->SureName}</a></td>
                     <td>{$order->TotalPrice},-</td>
                     <td>{$order->StatusName}</td>
                 </tr>
@@ -37,12 +35,12 @@
             </tbody>
         </table>
 
-
-    </div>
-
-</div>
-     
-   
-</div>
 {/if}
+{/block}
+
+{block sidebar}
+  {if $user->isLoggedIn()}
+        {control menu:admin}
+        {/if}
+
 {/block}

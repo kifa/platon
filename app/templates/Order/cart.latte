@@ -1,18 +1,21 @@
 
-{block content}
-<div id="content">
-<div class="row">
-    <div class="span12">
+{block pageheader}
+
         <div class="page-header">
-        <h1>Your cart <small>Here you can complete your order. Just fill fields bellow.</small></h1>
+        <h1 n:block="title">Your cart <small>Here you can complete your order. Just fill fields bellow.</small></h1>
         </div>
+
+{/block}
+    
+{block content}
+    
 {foreach $flashes as $flash}
         <div class="{$flash->type}">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
 {$flash->message}</div>
 {/foreach}
 
-        <table class="table table-hover span11">
+<table class="table table-hover span10">
             <thead>
                 <tr>
                     <th>#</th>
@@ -46,7 +49,7 @@
             </tbody>
         </table>
 
-<div class="span9 offset1 alert alert-info">   
+<div class="span9 alert alert-info">   
                         <div class="span1">                    
                             <i class="icon-shopping-cart icon-4x"></i></div>
                         <div class="span7">
@@ -60,16 +63,11 @@
                     </div>
         
         
-        <div class="span11">
+<div class="span10">
             <fieldset>
-
-
-    {control cartForm}
+                {control cartForm}
             </fieldset>
-        </div> 
-    </div> 
-</div>
-
+      </div> 
 
 <script>
     $(document).ready(function() {
@@ -103,5 +101,11 @@
 });
 
 </script>
-</div>
 {/block}
+
+{block sidebar}
+
+{/block}
+
+
+

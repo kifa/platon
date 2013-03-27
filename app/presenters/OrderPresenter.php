@@ -1,22 +1,27 @@
 <?php
 
 use Nette\Forms\Form,
- Nette\Utils\Html;
+    Nette\Utils\Html;
 
 /**
  * Order presenter.
  */
 class OrderPresenter extends BasePresenter {
-    /*
-     * @var OrderModel
-     */
-
+    
+    /* @var OrderModel */
     private $orderModel;
+    
+    /* @var ProductModel */
     private $productModel;
+    
+    /* @var int */
     private $orderNo;
+    
+    /* @var Session */
     private $cart;
+    
+    /* @var Session */
     private $c2;
-
 
     protected function startup() {
         parent::startup();
@@ -34,13 +39,13 @@ class OrderPresenter extends BasePresenter {
         $this->cart->graveItem = $id;
         $this->cart->numberItems = Count($this->cart->prd);
 
-        
-        
+
+
         if ($this->cart->numberItems > 0) {
-            
+
             $el1 = Html::el('span', 'Product was removed. Isn´t it pitty?! ');
             $el2 = Html::el('a', 'Take it Back!')->href($this->link('graveItem!'));
-            $el1->add( $el2 );
+            $el1->add($el2);
             $this->flashMessage($el1, 'alert');
             $this->presenter->redirect("this");
         } else {
@@ -56,52 +61,78 @@ class OrderPresenter extends BasePresenter {
         $mnt = $this->cart->prd[$id];
         $mnt += 1;
         $this->cart->prd[$id] = $mnt;
-        
+
         $this->presenter->redirect('this');
-       
     }
 
     /*
      * Handle for removing amount of goods
      * 
      */
+
     public function handleRemoveAmount($id) {
         $mnt = $this->cart->prd[$id];
         $mnt -= 1;
-        
-        if($mnt > 0){
-        $this->cart->prd[$id] = $mnt;
-        $this->presenter->redirect('this');
 
-        }
-        else {
+        if ($mnt > 0) {
+            $this->cart->prd[$id] = $mnt;
+            $this->presenter->redirect('this');
+        } else {
             $this->handleRemoveItem($id);
         }
-        
-        
     }
-    
+
     /*
      * Handle for moving dead product back to cart
      */
-    
+
     public function handleGraveItem() {
         $id = $this->cart->graveItem;
         $this->actionCart($id, "1");
     }
 
+    
 
-    /*
-     * Action for pre-view cart processing
-     */
+    
 
     public function actionCart($product, $amnt) {
-        $row = $this->productModel->loadProduct($product);
+     
+       $row = $this->productModel->loadProduct($product);
         if (!$row || !$product) {
-            if ($this->cart->numberItems > 0 ) {
-                 $this->setView('Cart');
-            }  else {
-            $this->setView('CartEmpty');
+             if ($this->cart->numberItems > 0) {
+                $this->setView('Cart');
+            } else {
+                $this->setView('CartEmpty');
+            }
+        }
+        else {
+            if (isset($this->cart->prd[$product])) {
+                $mnt = $this->cart->prd[$product];
+                $mnt += $amnt;
+                $this->cart->prd[$product] = $mnt;
+            } else {
+                $this->cart->prd[$product] = $amnt;
+            }
+            $this->cart->lastItem = $product;
+            $this->cart->numberItems = Count($this->cart->prd);
+
+            $ico = HTML::el('i')->class('icon-ok-sign left');
+            $message = HTML::el('span', ' ' . $row->ProductName . ' was successfully added to your cart.');
+            $message->insert(0, $ico);
+            $this->flashMessage($message, 'alert alert-info');
+           $this->redirect('Order:cart');
+       
+        }
+        
+     /*   $row = $this->productModel->loadProduct($product);
+        if (!$row || !$product) {
+            if ($this->cart->numberItems > 0) {
+            $ico = HTML::el('i')->class('icon-warning-sign left');
+            $message = HTML::el('span', 'Add to cart failed.');
+            $message->insert(0, $ico);
+             }
+            else {
+                $this->setView('CartEmpty');
             }
         } else {
             if (isset($this->cart->prd[$product])) {
@@ -113,14 +144,16 @@ class OrderPresenter extends BasePresenter {
             }
             $this->cart->lastItem = $product;
             $this->cart->numberItems = Count($this->cart->prd);
-            
+
             $ico = HTML::el('i')->class('icon-ok-sign left');
-            $message = HTML::el('span',' ' . $row->ProductName.' was successfully added to your cart.');
-            $message -> insert(0, $ico);
-            $this->flashMessage($message, 'alert alert-info');
-            $this->redirect('Order:cart');
+            $crt = HTML::el('a')->href('{plink Order:cart}');
+            $message = HTML::el('span', ' '. $row->ProductName . ' was successfully added to your cart.');
+            $message->insert(0, $ico);
+            $message->insert(2, $crt);
         }
+        $this->flashMessage($message, 'alert alert-info'); */
     }
+   
 
     /*
      * renderCart rendering cart
@@ -130,8 +163,6 @@ class OrderPresenter extends BasePresenter {
 
     public function renderCart() {
 
-        //$product = $this->cart->lastItem;
-
         if ($this->cart->numberItems > 0) {
             foreach ($this->cart->prd as $id => $amnt) {
 
@@ -140,21 +171,21 @@ class OrderPresenter extends BasePresenter {
 
                 $this->c2[$id][$amnt] = $product2;
             }
-            
+
             $shippers = array();
-        $payment = array();
-        
-        foreach ($this->orderModel->loadDelivery('') as $key => $value) {
-            $shippers[$key] = $value->DeliveryPrice; 
-        };
-        
-        foreach ($this->orderModel->loadPayment('') as $key => $value) {
-            $payment[$key] = $value->PaymentPrice;
-        };
-            
-        $this->template->shippers = $shippers;
-        $this->template->payment = $payment;
-            
+            $payment = array();
+
+            foreach ($this->orderModel->loadDelivery('') as $key => $value) {
+                $shippers[$key] = $value->DeliveryPrice;
+            };
+
+            foreach ($this->orderModel->loadPayment('') as $key => $value) {
+                $payment[$key] = $value->PaymentPrice;
+            };
+
+            $this->template->shippers = $shippers;
+            $this->template->payment = $payment;
+
             $this->template->cart = $this->c2;
         } else {
             $this->setView('CartEmpty');
@@ -166,63 +197,64 @@ class OrderPresenter extends BasePresenter {
      * 
      * @return $cartForm
      */
-    protected function createComponentCartForm()
-    {
-        
+
+    protected function createComponentCartForm() {
+
         $shippers = array();
         $payment = array();
-        
+
         foreach ($this->orderModel->loadDelivery('') as $key => $value) {
-            $shippers[$key] = $value->DeliveryName; 
+            $shippers[$key] = $value->DeliveryName;
         };
-        
+
         foreach ($this->orderModel->loadPayment('') as $key => $value) {
             $payment[$key] = $value->PaymentName;
         };
-         
-        
+
+
         $cartForm = new Nette\Application\UI\Form;
         $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
         $cartForm->addGroup('Delivery info')
-                ->setOption('container', 'div class="span5"');
+                ->setOption('container', 'div class="span4"');
         $cartForm->addText('name', 'Name:', 40, 100)
                 ->addRule(Form::FILLED, 'Would you fill your name, please?');
         $cartForm->addText('phone', 'Phone:', 40, 100);
         $cartForm->addText('email', 'Email:', 40, 100)
-                 ->setEmptyValue('@')
+                ->setEmptyValue('@')
                 ->addRule(Form::EMAIL, 'Would you fill your email, please?')
                 ->addRule(Form::FILLED, 'Would you fill your name, please?');
         $cartForm->addGroup('Address')
-                   ->setOption('container', 'div class="span5"');
+                ->setOption('container', 'div class="span4"');
         $cartForm->addText('address', 'Address:', 60, 100)
                 ->addRule(Form::FILLED);
         $cartForm->addText('city', 'City:', 40, 100)
                 ->addRule(Form::FILLED);
         $cartForm->addText('psc', 'PSC:', 40, 100)
                 ->addRule(Form::FILLED);
-       
+
         $cartForm->addGroup('Shipping')
                 ->setOption('container', 'div class="row"');
         $cartForm->addGroup('Shipping')
-                ->setOption('container', 'div class="span5"');
-        $cartForm->addRadioList('shippers','', $shippers)
+                ->setOption('container', 'div class="span4"');
+        $cartForm->addRadioList('shippers', '', $shippers)
                 ->setAttribute('class', '.span1 radio')
                 ->setRequired('Please select Shipping method');
         $cartForm->addGroup('Payment')
-                ->setOption('container', 'div class="span5"');
-        $cartForm->addRadioList('payment','', $payment)
+                ->setOption('container', 'div class="span4"');
+        $cartForm->addRadioList('payment', '', $payment)
                 ->setAttribute('class', '.span1 radio')
-                ->setRequired('Please select Payment method');;
-       
+                ->setRequired('Please select Payment method');
+        ;
+
         $cartForm->addGroup('Terms')
-                ->setOption('container', 'div class="span5"');
+                ->setOption('container', 'div class="span4"');
         $cartForm->addCheckbox('terms', 'I accept Terms and condition.')
                 ->setAttribute('class', 'checkbox inline')
                 ->setRequired()
                 ->setDefaultValue('TRUE')
                 ->addRule(Form::FILLED, 'In order to continue checkout, you have to agree with Term.');
         $cartForm->addGroup('Checkout')
-                ->setOption('container', 'div class="span5"');
+                ->setOption('container', 'div class="span4"');
         $cartForm->addSubmit('send', 'Checkout here!')
                 ->setAttribute('class', 'btn btn-warning btn-large');
         $cartForm->onSuccess[] = $this->cartFormSubmitted;
@@ -231,54 +263,49 @@ class OrderPresenter extends BasePresenter {
 
     /*
      * Getting values from CartForm
+     * 
+     * @param Form, CartForm
+     * @return void
      */
-    public function cartFormSubmitted($form)
-    {
-       // $order = $form->getValues();
-   
+
+    public function cartFormSubmitted($form) {
+
         $total = 0;
         $today = date("Y-m-d");
-                
-                foreach ($this->cart->prd as $id => $amnt){
 
-                $price = $this->productModel->loadProduct($id)->FinalPrice;
-                $amnt = $this->cart->prd[$id];
-                                 
-                  $total += $price * $amnt;                 
-                  $taxFreePrice = $total*0.79;                      
-                  
-            }
-            $this->orderNo = $this->orderModel->countOrder() + 1;
+        foreach ($this->cart->prd as $id => $amnt) {
+
+            $price = $this->productModel->loadProduct($id)->FinalPrice;
+            $amnt = $this->cart->prd[$id];
+
+            $total += $price * $amnt;
+            $taxFreePrice = $total * 0.79;
+        }
+        $this->orderNo = $this->orderModel->countOrder() + 1;
 
         $this->orderModel->insertOrder(
-                                $this->orderNo,
-                                //1,
-                                "novak", //nastavitz na email
-                                $total,
-                                $taxFreePrice,
-                                $today,
-                                $today,
-                                $form->values->shippers,
-                                $form->values->payment
+                $this->orderNo,
+                //1,
+                "novak", //nastavitz na email
+                $total, $taxFreePrice, $today, $today, $form->values->shippers, $form->values->payment
+        );
 
-                                );
-       
         $cislo = $this->orderModel->countOrderDetail() + 1;
-        
-        
-        foreach ($this->cart->prd as $id => $amnt){
 
-                $price = $this->productModel->loadProduct($id)->FinalPrice;
-                $amnt = $this->cart->prd[$id];
-                $this->orderModel->insertOrderDetails($cislo, $this->orderNo, $id, $amnt, $price );
-                        $cislo++;
-            }
 
-        $this->redirect('Order:orderDone',  $this->orderNo);
+        foreach ($this->cart->prd as $id => $amnt) {
+
+            $price = $this->productModel->loadProduct($id)->FinalPrice;
+            $amnt = $this->cart->prd[$id];
+            $this->orderModel->insertOrderDetails($cislo, $this->orderNo, $id, $amnt, $price);
+            $cislo++;
+        }
+
+        $this->redirect('Order:orderDone', $this->orderNo);
     }
 
     /*
-     * renderCartEmpty()
+     * Render for empty cart
      * rendering empty cart
      */
 
@@ -290,31 +317,30 @@ class OrderPresenter extends BasePresenter {
     /*
      * renderOrderDone()
      * rendering Thank you for your order page
+     * 
+     * @param int
+     * @return void
      */
 
     public function renderOrderDone($orderNo) {
-              
+
         $this->template->products = $this->orderModel->loadOrderProduct($orderNo);
         $this->template->order = $this->orderModel->loadOrder($orderNo);
-        
+
         $ico = HTML::el('i')->class('icon-ok-sign left');
-        $message = HTML::el('span',' Order has been successfully sent.');
-        $message -> insert(0, $ico);
+        $message = HTML::el('span', ' Order has been successfully sent.');
+        $message->insert(0, $ico);
         $this->flashMessage($message, 'alert alert-info');
         unset($this->cart->prd);
         $this->cart->numberItems = 0;
-        
     }
-
-    
-    public function renderOrders() {
-        if (!$this->getUser()->isLoggedIn()) {
-        $this->redirect('Sign:in');
-        }
-        else {
-        $this->template->orders = $this->orderModel->loadOrders();
-       } 
-    }
+   
+    /*
+     * Render default page
+     * 
+     * @param null
+     * @return void
+     */
 
     public function renderDefault() {
         $this->setView('Cart');

@@ -52,6 +52,8 @@ class ProductPresenter extends BasePresenter {
     }
  
     
+    
+    
     /*
      * Creating form for adding product
      */
@@ -141,8 +143,6 @@ class ProductPresenter extends BasePresenter {
                 
     }
 
-    
-    
     
     /*
      * renderProducts

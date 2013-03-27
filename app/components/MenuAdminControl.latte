@@ -1,12 +1,11 @@
-
+{if $user->isLoggedIn()}
 <ul class="nav nav-list">
-            <li class="nav-header">Admin Menu</li>
-        {foreach $category as $id => $cat}
-            <li class="active"><a href="{plink product:products $id}"><i class="icon-spinner"></i>{$cat->CategoryName}</a></li>    
-        {/foreach}
+        <li class="nav-header"><a href="{plink SmartPanel:default}">Admin Menu</a></li>
+        
             <li class="divider"></li>
-            <li class="active"><a href="#"><i class="icon-spinner"></i>Orders</a></li>
-            <li><a href="#"><i class="icon-truck"></i>Shipping</a></li>
-            <li><a href="#"><i class="icon-money"></i>Payment</a></li>
-            <li><a href="#"><i class="icon-comment"></i>Other</a></li>
+            <li class="{ifCurrent SmartPanel:orders}active{/ifCurrent}"><a href="{plink SmartPanel:orders}"><i class="icon-spinner"></i> {_"Orders"}</a></li>
+            <li class="{ifCurrent SmartPanel:shipping}active{/ifCurrent}"><a href="{plink SmartPanel:shipping}"><i class="icon-truck"></i> {_"Shipping"}</a></li>
+            <li class="{ifCurrent SmartPanel:payment}active{/ifCurrent}"><a href="{plink SmartPanel:payment}"><i class="icon-money"></i> {_"Payment"}</a></li>
+            <li class="{ifCurrent SmartPanel:default}active{/ifCurrent}"><a href="{plink SmartPanel:defaults}"><i class="icon-comment"></i> {_"Other"}</a></li>
 </ul>
+{/if}

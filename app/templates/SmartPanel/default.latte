@@ -1,0 +1,31 @@
+{block pageheader}
+{if $user->isLoggedIn()}
+<div class="page-header">
+        <h1 n:block="title">Smart Panel<small> Here you can customize your shop!</small></h1>
+        
+        <div class="row">
+            <div class="span10">
+            <a href="#" id="showNew" ><i id="addIco" class="icon-large icon-plus"></i> Add Product</a> |
+            <a href="#"><i class="icon-large icon-bar-chart"></i> Stats</a> |
+            <a href="#"><i class="icon-large icon-pencil"></i> Edit Category</a>
+            </div>
+        </div>
+        
+     </div>
+{/if}
+{/block}
+
+{block content}
+{if $user->isLoggedIn()}
+    
+    <h1>SMART PANEL</h1>
+{/if}
+{/block}
+
+{block sidebar}
+    
+    {if $user->isLoggedIn()}
+        {control menu:admin}
+    {/if}
+    
+{/block}

@@ -9,16 +9,20 @@ use Nette\Application\UI;
  */
 
 class ProductControl extends BaseControl {
-
+    
+    /* @var ProductModel  */
     private $service;
+    
+    /* @var CategoryID */
     private $id;
     
+    /* @var Gettext\translator */
     protected $translator;
 
     
 
     /**
-     * Vstříkne službu, kterou tato komponenta bude používat pro práci.
+     * Setting ProductModel service to access DB
      *
      * @param    ProductModel
      * @return   void
@@ -26,9 +30,13 @@ class ProductControl extends BaseControl {
     public function setService(ProductModel $service) {
         $this->service = $service;
     }
-
+    
     /*
-     * Předává Category ID
+     * Setting current CategoryID to be able to
+     * render products in category
+     * 
+     * @param int
+     * @return void
      */
 
     public function setCategoryID($id) {
@@ -38,26 +46,36 @@ class ProductControl extends BaseControl {
     
     
     
-    /* Set translator option
+    /* 
+     *Settin Translator to implement localization
      * 
+     * @param Nette\Gettext\translator
+     * @return void
      */
 
     
    public function setTranslator($translator) {
         $this->translator = $translator;
     }
+    
+    /*
+     * Create control template for localization
+     * 
+     * @param NULL
+     * @return Translator template
+     */
 
     public function createTemplate($class = NULL)
 {
     $template = parent::createTemplate($class);
     $template->setTranslator($this->translator);
-    // případně $this->translator přes konstrukt/inject
 
     return $template;
 }
 
+    
     /*
-     * Vykreslí komponentu Product z makra ProductControl.latte
+     * Rendering component Product from ProductControl.latte
      */
 
     public function render() {

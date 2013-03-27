@@ -23,6 +23,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     private $categoryModel;
     private $cart;
 
+    
+    public $backlink;
+    
     /** @persistent */
     public $lang;
 

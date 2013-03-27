@@ -42,9 +42,11 @@ class MenuControl extends UI\Control {
     
    
     public function renderAdmin() {
+        if($this->parent->getUser()->isLoggedIn()){
         $this->template->setFile(__DIR__.'/MenuAdminControl.latte');
         $this->template->category = $this->category->loadCategoryList(); 
         $this->template->render();
+        }
     }
     
     public function render() {

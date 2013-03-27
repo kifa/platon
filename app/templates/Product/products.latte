@@ -1,106 +1,95 @@
-{block head}<title>Kategorie</title>{/block}
 
-{block content}
-
-<div id="content">
-    <div class="page-header">
-        <h1>{$category->CategoryName}<small> {$category->CategoryDescription}</small></h1>
+{block pageheader}
+<div class="page-header">
+        <h1 n:block="title">{$category->CategoryName}<small> {$category->CategoryDescription}</small></h1>
         {if $user->isLoggedIn()}
         <div class="row">
-            <a href="#" id="showNew" ><i id="addIco" class="icon-large icon-plus"></i> Add Product</a> |
-            <a href="#"><i class="icon-large icon-bar-chart"></i> Stats</a> |
-            <a href="#"><i class="icon-large icon-pencil"></i> Edit Category</a>
+            <div class="span10">
+                <a href="#" id="showNew" ><i id="addIco" class="icon-large icon-plus"></i> {_"Add Product"}</a> |
+                <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> |
+                <a href="#"><i class="icon-large icon-pencil"></i> {_"Edit Category"}</a>
+            </div>
         </div>
         {/if}
-</div>
+    </div>
     <p class="text-left">Nexus 4 comes with the latest version of Google Now to bring you just the
         right information at just the right time. It shows you how much traffic
         to expect before you leave for work, or when the next train will arrive
         as you’re standing on the platform.
-With the latest version, Google Now keeps you even more organized – get reminders
-about upcoming flights, restaurant reservations, hotel confirmations and even
-nearby photo opportunities – when and where you need them.</p>
+        With the latest version, Google Now keeps you even more organized – get reminders
+        about upcoming flights, restaurant reservations, hotel confirmations and even
+        nearby photo opportunities – when and where you need them.</p>
 
     {if $user->isLoggedIn()}
     <div class="span10" style="display: none;" id="addProduct">
         {control addProductForm}
     </div>
     {/if}
+{/block}
     
-<div class="row">
-    <div class="span10">
-
+{block content}
+    
     {control product}
-
-    </div>
-
-    <div class="span2">
-
-        <ul class="nav nav-list">
-            <li class="nav-header">Menu</li>
-            <li class="active"><a href="#"><i class="icon-home"></i>Domů</a></li>
-            <li><a href="#"><i class="icon-book"></i>Jak nakupovat</a></li>
-            <li><a href="#"><i class="icon-heart"></i>Jak prodávat</a></li>
-            <li><a href="#"><i class="icon-comment"></i>Jak cokoliv</a></li>
-            <li class="divider"></li>
-        </ul>
-
-        <i class="icon-camera-retro icon-2x"></i><strong>Google Nexus</strong>
-        <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-            <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-    </div>
-
-</div>
-
-</div>
-
-<script>
-    $(document).ready(function() {
-        var amount = 1;
-        
-    $('input[name=plusItem]').click(function() {
-            var i = $('input[name=amount]').val();
-            amount = parseInt(i) + 1;
-        $('#frmaddProductForm-amount').val(amount);
-        
-        });
-        
-     $('input[name=minusItem]').click(function() {
-            var i = $('input[name=amount]').val();
-            
-            amount = parseInt(i);
-            
-            if(amount <= 0) {
-                $('#frmaddProductForm-amount').val(0);
-            }
-            else {
-                amount = amount -1;
-                $('#frmaddProductForm-amount').val(amount);
-            }
-        
-        
-        });   
-        
-      $('#showNew').toggle(function(){
-           
-            
-          $('#addProduct').fadeIn();
-           $('#addIco').attr('class', 'icon-large icon-minus');
-        },
-        function() {
-            $('#addProduct').fadeOut();
-            $('#addIco').attr('class', 'icon-large icon-plus');
-        });
-        
-        
-        
-        
-       
     
+{/block}
 
+{block sidebar}
+    
+    {if $user->isLoggedIn()}
+        {control menu:admin}
+    {/if}
+    <ul class="nav nav-list">
+                <li class="nav-header">Menu</li>
+                <li class="active"><a href="#"><i class="icon-home"></i>Domů</a></li>
+                <li><a href="#"><i class="icon-book"></i>Jak nakupovat</a></li>
+                <li><a href="#"><i class="icon-heart"></i>Jak prodávat</a></li>
+                <li><a href="#"><i class="icon-comment"></i>Jak cokoliv</a></li>
+                <li class="divider"></li>
+            </ul>
 
-});
-     
+            <i class="icon-camera-retro icon-2x"></i><strong>Google Nexus</strong>
+            <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
+                <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
+    
+{/block}
+            
+{block script}
+    {if $user->isLoggedIn()}
+    <script>
+        $(document).ready(function() {
+            var amount = 1;
+
+        $('input[name=plusItem]').click(function() {
+                var i = $('input[name=amount]').val();
+                amount = parseInt(i) + 1;
+            $('#frmaddProductForm-amount').val(amount);
+
+            });
+
+         $('input[name=minusItem]').click(function() {
+                var i = $('input[name=amount]').val();
+
+                amount = parseInt(i);
+
+                if(amount <= 0) {
+                    $('#frmaddProductForm-amount').val(0);
+                }
+                else {
+                    amount = amount -1;
+                    $('#frmaddProductForm-amount').val(amount);
+                }
+            });   
+
+          $('#showNew').toggle(function(){
+              $('#addProduct').fadeIn();
+               $('#addIco').attr('class', 'icon-large icon-minus');
+            },
+            function() {
+                $('#addProduct').fadeOut();
+                $('#addIco').attr('class', 'icon-large icon-plus');
+            });
+    });
+
     </script>
-    
+    {/if}
 {/block}

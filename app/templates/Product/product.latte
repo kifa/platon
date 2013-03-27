@@ -1,57 +1,78 @@
-{block content}
-<h1 n:block="title">{$product->ProductName}</h1>
-<div class="row">
-    <div class="span10">
-
-        <div class=".span5">
-            <img src="../../../images/1/1.png" class="img-circle" style="width: 400px;"/>
-        </div>
-        <div class=".span4">
-            <div class="tabbable">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
-                    <li><a href="#spec" data-toggle="tab">Spec</a></li>
-                    <li><a href="#other" data-toggle="tab">Other</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="info">
-                        <p>{$product->ProductDescription}</p>
-                     
-                    </div>
-                    <div class="tab-pane" id="spec">
-                        <ul class="icons">
-                            <li><i class="icon-ok"></i>Width:</li>
-                            <li><i class="icon-ok"></i>Height:</li>
-                            <li><i class="icon-ok"></i>Weight:</li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane" id="other">
-                        <p>Other infos</p>
-                    </div>
+{block pageheader}
+ <div class="page-header">
+            <h1 n:block="title">{$product->ProductName}</h1>
+            {if $user->isLoggedIn()}
+            <div class="row">
+                <div class="span10">
+                    <a href="#" id="showNew" ><i id="addIco" class="icon-large icon-plus"></i> {_"Add Product"}</a> |
+                    <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> |
+                    <a href="#"><i class="icon-large icon-pencil"></i> {_"Edit Category"}</a>
                 </div>
             </div>
-            
-            <div class="span4">
-                <h2 class="text-info span2">{$product->FinalPrice},-</h2>
-                <p class="span1">In stock:
-                {if $product->PiecesAvailable >= 5}
-                <span class="badge badge-info">
-                {elseif $product->PiecesAvailable < 5 && $product->PiecesAvailable > 0}
-                <span class="badge badge-warning">
-                {elseif $product->PiecesAvailable = 0 }
-                <span class="badge">
-                    {/if}
-                {$product->PiecesAvailable}</span></p>
-                <a href="{plink Order:cart $product->ProductID, "1"}" class="span2 btn btn-primary">
-                        <i class="icon-shopping-cart"></i> Buy</a>
-                <a n:href="Order:cart produkt" class="span1 btn btn-success">
-                        <i class="icon-info-sign"></i> Ask</a>
+            {/if}
+        </div>
+{/block}
+
+{block content}
+
+            <div class=".span5">
+                <img src="../../../images/1/1.png" class="img-circle" style="width: 400px;"/>
+            </div>
+            <div class=".span4">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
+                        <li><a href="#spec" data-toggle="tab">Spec</a></li>
+                        <li><a href="#other" data-toggle="tab">Other</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="info">
+                            <p>{$product->ProductDescription}</p>
+
+                        </div>
+                        <div class="tab-pane" id="spec">
+                            <ul class="icons">
+                                <li><i class="icon-ok"></i>Width:</li>
+                                <li><i class="icon-ok"></i>Height:</li>
+                                <li><i class="icon-ok"></i>Weight:</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="other">
+                            <p>Other infos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span4">
+                    <h2 class="text-info span2">{$product->FinalPrice},-</h2>
+                    <p class="span1">In stock:
+                    {if $product->PiecesAvailable >= 5}
+                    <span class="badge badge-info">
+                    {elseif $product->PiecesAvailable < 5 && $product->PiecesAvailable > 0}
+                    <span class="badge badge-warning">
+                    {elseif $product->PiecesAvailable = 0 }
+                    <span class="badge">
+                        {/if}
+                    {$product->PiecesAvailable}</span></p>
+                    <a href="{plink Order:cart $product->ProductID, "1"}" class="span2 btn btn-primary">
+                            <i class="icon-shopping-cart"></i> Buy</a>
+                    <a n:href="Order:cart produkt" class="span1 btn btn-success">
+                            <i class="icon-info-sign"></i> Ask</a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="span2">
         
+
+{/block}
+
+{block sidebar}
+
+    {if $user->isLoggedIn()}
+        {control menu:admin}
+    {/if}
+        
+
         <ul class="nav nav-list">
             <li class="nav-header">Menu</li>
             <li class="active"><a href="#"><i class="icon-home"></i>Domů</a></li>
@@ -64,12 +85,5 @@
         <i class="icon-camera-retro icon-2x"></i><strong>Google Nexus</strong>
         <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
             <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-
-    </div>
-
-
-
-
-</div>
 
 {/block}

@@ -1,6 +1,7 @@
 {* This is the welcome page, you can delete it *}
-{block head}<title>Kategorie</title>{/block}
-{block content}
+{block head}<title>Homepage</title>{/block}
+
+{block pageheader}
 <div id="myCarousel" class="carousel slide">
     <ol class="carousel-indicators">
         <li data-target= "#myCarousel"  data-slide-to="0" class="active"></li>
@@ -44,28 +45,21 @@
 </div>
 
 <hr>
-
-<div id="content">
     <h2>Zde přijdou produkty a doprava novinky a infomace.</h2>
+{/block}
 
-<div class="row">
-    <div class="span10">
+{block content}
+
       {control product}  
         
-    </div>
+{/block}
 
-    <div class="span2">
+{block sidebar}
 
+        {if $user->isLoggedIn()}
         {control menu:admin}
-
+        {/if}
         <i class="icon-camera-retro icon-2x"></i><strong>Google Nexus</strong>
         <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
             <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-    </div>
-
-</div>
-
-</div>
-
-
 {/block}

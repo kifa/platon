@@ -68,14 +68,23 @@
   <li class="active">{_"Here"}</li>
 </ul>
             
-            
-        {include #content}
-
-            
-            
-            <div class="footer">
-                &COPY; Birne shop 2013
+   <div id="content"> 
+       {include #pageheader}
+       
+        <div class="row">
+            <div class="span10">
+            {include #content}
             </div>
+            
+            <div class="span2">
+            {include #sidebar}
+            
+            </div>
+   </div>       
+   
+   <div class="footer">
+                &COPY; Birne shop 2013
+   </div>
 
         </div>
 	{block scripts}
