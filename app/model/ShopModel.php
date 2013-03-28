@@ -21,6 +21,13 @@ class ShopModel extends Repository {
      * @return string
      */
 
+    /*
+     * Load tax value
+     */
+    public function getTax()
+    {
+        return $this->getTable('settings')->where('Name','TAXte');
+    }
 
 
     /*

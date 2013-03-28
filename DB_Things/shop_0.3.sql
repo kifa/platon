@@ -205,12 +205,13 @@ CREATE TABLE `photo` (
   PRIMARY KEY (`PhotoID`),
   KEY `PhotoAlbumID_idx` (`PhotoAlbumID`),
   CONSTRAINT `FKPhotoPhotoAlbum` FOREIGN KEY (`PhotoAlbumID`) REFERENCES `photoalbum` (`PhotoAlbumID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 INSERT INTO `photo` (`PhotoID`, `PhotoName`, `PhotoURL`, `PhotoAlbumID`, `PhotoAltText`, `CoverPhoto`) VALUES
 (1,	'Foto Galaxy Nexus 01',	'main.png',	1,	'Foto Galaxy Nexus',	1),
 (2,	'Chromebook',	'main.jpg',	2,	'Chromebook',	1),
-(3,	'Sony Xperia Z',	'sony.jpg',	3,	'Xperia Z',	1);
+(3,	'Sony Xperia Z',	'sony.jpg',	3,	'Xperia Z',	1),
+(5,	'6658.jpg',	'6658.jpg',	4,	's4',	1);
 
 DROP TABLE IF EXISTS `photoalbum`;
 CREATE TABLE `photoalbum` (
@@ -282,14 +283,15 @@ CREATE TABLE `product` (
   CONSTRAINT `FKProductPrice` FOREIGN KEY (`PriceID`) REFERENCES `price` (`PriceID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `product_ibfk_2` FOREIGN KEY (`ParametersAlbumID`) REFERENCES `parametersalbum` (`ParametersAlbumID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `product_ibfk_3` FOREIGN KEY (`ProductStatusID`) REFERENCES `productstatus` (`ProductStatusID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 INSERT INTO `product` (`ProductID`, `ProductName`, `Producer`, `PhotoAlbumID`, `ProductNumber`, `ProductDescription`, `ProductStatusID`, `ParametersAlbumID`, `ProductEAN`, `ProductQR`, `ProductWarranty`, `PiecesAvailable`, `CategoryID`, `PriceID`, `DateOfAvailable`, `ProductDateOfAdded`, `DocumentationID`, `CommentID`) VALUES
 (1,	'Samsung Galaxy Nexus',	'Samsung',	1,	NULL,	'Smartphone ze serie Nexus',	NULL,	1,	NULL,	NULL,	NULL,	10,	2,	3,	NULL,	NULL,	NULL,	1),
 (2,	'Samsung Chromebook',	'Samsung',	2,	NULL,	'Chromebook od Samsungu',	NULL,	2,	NULL,	NULL,	NULL,	4,	2,	3,	NULL,	NULL,	NULL,	NULL),
 (3,	'Samsung Galaxy S4',	'Samsung',	4,	NULL,	'Hot news in smartphone world',	NULL,	1,	NULL,	NULL,	NULL,	99,	3,	4,	NULL,	NULL,	NULL,	NULL),
 (4,	'Sony Xperia Z',	'Sony',	3,	NULL,	'Best smartphone of present smarthone world',	NULL,	1,	NULL,	NULL,	NULL,	40,	3,	5,	NULL,	NULL,	NULL,	NULL),
-(5,	'Apple iPad',	'Apple Inc.',	5,	NULL,	'Tablet from company Apple',	NULL,	3,	NULL,	NULL,	NULL,	666,	4,	6,	NULL,	NULL,	NULL,	NULL);
+(5,	'Apple iPad',	'Apple Inc.',	5,	NULL,	'Tablet from company Apple',	NULL,	3,	NULL,	NULL,	NULL,	666,	4,	6,	NULL,	NULL,	NULL,	NULL),
+(6,	'Nokia 3310',	'neuvedeno',	4,	'11111',	'desc',	NULL,	1,	'123456',	'122',	'rok',	1,	2,	2,	'0000-00-00',	0,	1,	1);
 
 DROP TABLE IF EXISTS `productstatus`;
 CREATE TABLE `productstatus` (
@@ -302,10 +304,13 @@ CREATE TABLE `productstatus` (
 
 DROP TABLE IF EXISTS `settings`;
 CREATE TABLE `settings` (
-  `SettingID` int(11) NOT NULL,
-  PRIMARY KEY (`SettingID`)
+  `Name` varchar(100) NOT NULL,
+  `Value` varchar(255) NOT NULL,
+  PRIMARY KEY (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `settings` (`Name`, `Value`) VALUES
+('TAX',	'21');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -318,15 +323,17 @@ CREATE TABLE `users` (
   `AddressID` int(11) DEFAULT NULL,
   `CompanyName` varchar(45) DEFAULT NULL,
   `TIN` varchar(45) DEFAULT NULL,
-  `Permission` int(11) DEFAULT '0',
+  `Permission` varchar(6) NOT NULL DEFAULT 'user',
   PRIMARY KEY (`Login`),
   KEY `Address_idx` (`AddressID`),
   CONSTRAINT `FKUserAddress` FOREIGN KEY (`AddressID`) REFERENCES `addresses` (`AdressID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `users` (`Login`, `Password`, `FirstName`, `SureName`, `Email`, `PhoneNumber`, `AddressID`, `CompanyName`, `TIN`, `Permission`) VALUES
-('admin',	'$2a$07$wp2bo3gbrn7t6mz8n8mocOV',	'Admin',	'Admin',	'admin@admin.cz',	0,	1,	'0',	'0',	1),
-('novak',	'novak',	'Jan',	'Novak',	'jan.novak@company.com',	999888777,	2,	'Company',	'819281293',	0),
-('test',	'$2a$07$4q16fsnj90rgmitvbq24ouw',	'Testovaci',	'Subjekt',	'testovaci@subjekt.cz',	777888999,	1,	'0',	'0',	0);
+('admin',	'$2a$07$nta28l2g7n9ld4le56xpgeq',	'Admin',	'Admin',	'admin@admin.cz',	0,	1,	'0',	'0',	'admin'),
+('kifa',	'$2a$07$wllhgar90ofg24nsaywd3u2',	'Kifa',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	'0'),
+('novak',	'novak',	'Jan',	'Novak',	'jan.novak@company.com',	999888777,	2,	'Company',	'819281293',	'0'),
+('test',	'$2a$07$67p8256pml1lrn1a8d986eN',	'Testovaci',	'Subjekt',	'testovaci@subjekt.cz',	777888999,	1,	'0',	'0',	'0'),
+('tomik',	'$2a$07$xshgrgluo88ug5qvohjvme0',	'Tomas',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	'0');
 
--- 2013-03-26 19:23:23
+-- 2013-03-28 16:38:33
