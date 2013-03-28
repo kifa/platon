@@ -15,6 +15,12 @@ class OrderPresenter extends BasePresenter {
     /* @var ProductModel */
     private $productModel;
     
+    /* @var ShopModel */
+    private $shopModel;
+    
+    /* @var UserModel */
+    private $userModel;
+    
     /* @var int */
     private $orderNo;
     
@@ -28,6 +34,8 @@ class OrderPresenter extends BasePresenter {
         parent::startup();
         $this->orderModel = $this->context->orderModel;
         $this->productModel = $this->context->productModel;
+        $this->shopModel = $this->context->shopModel;
+        $this->userModel = $this->context->userModel;
         $this->cart = $this->getSession('cart');
     }
 
@@ -124,35 +132,6 @@ class OrderPresenter extends BasePresenter {
            $this->redirect('Order:cart');
        
         }
-        
-     /*   $row = $this->productModel->loadProduct($product);
-        if (!$row || !$product) {
-            if ($this->cart->numberItems > 0) {
-            $ico = HTML::el('i')->class('icon-warning-sign left');
-            $message = HTML::el('span', 'Add to cart failed.');
-            $message->insert(0, $ico);
-             }
-            else {
-                $this->setView('CartEmpty');
-            }
-        } else {
-            if (isset($this->cart->prd[$product])) {
-                $mnt = $this->cart->prd[$product];
-                $mnt += $amnt;
-                $this->cart->prd[$product] = $mnt;
-            } else {
-                $this->cart->prd[$product] = $amnt;
-            }
-            $this->cart->lastItem = $product;
-            $this->cart->numberItems = Count($this->cart->prd);
-
-            $ico = HTML::el('i')->class('icon-ok-sign left');
-            $crt = HTML::el('a')->href('{plink Order:cart}');
-            $message = HTML::el('span', ' '. $row->ProductName . ' was successfully added to your cart.');
-            $message->insert(0, $ico);
-            $message->insert(2, $crt);
-        }
-        $this->flashMessage($message, 'alert alert-info'); */
     }
    
 
@@ -214,56 +193,8 @@ class OrderPresenter extends BasePresenter {
         foreach ($this->orderModel->loadPayment('') as $key => $value) {
             $payment[$key] = $value->PaymentName;
         };
-
         
-   /*     $cartForm = new Nette\Application\UI\Form;
-        $cartForm->setRenderer(new BootstrapRenderer);
-        $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
-        $cartForm->addGroup('Delivery info')
-                ->setOption('container', 'div class="span4"');
-        $cartForm->addText('name', 'Name:', 40, 100)
-                ->addRule(Form::FILLED, 'Would you fill your name, please?');
-        $cartForm->addText('phone', 'Phone:', 40, 100);
-        $cartForm->addText('email', 'Email:', 40, 100)
-                ->setEmptyValue('@')
-                ->addRule(Form::EMAIL, 'Would you fill your email, please?')
-                ->addRule(Form::FILLED, 'Would you fill your name, please?');
-        $cartForm->addGroup('Address')
-                ->setOption('container', 'div class="span4"');
-        $cartForm->addText('address', 'Address:', 60, 100)
-                ->addRule(Form::FILLED);
-        $cartForm->addText('city', 'City:', 40, 100)
-                ->addRule(Form::FILLED);
-        $cartForm->addText('psc', 'PSC:', 40, 100)
-                ->addRule(Form::FILLED);
-
-        $cartForm->addGroup('Shipping')
-                ->setOption('container', 'div class="row"');
-        $cartForm->addGroup('Shipping')
-                ->setOption('container', 'div class="span4"');
-        $cartForm->addRadioList('shippers', '', $shippers)
-                ->setAttribute('class', '.span1 radio')
-                ->setRequired('Please select Shipping method');
-        $cartForm->addGroup('Payment')
-                ->setOption('container', 'div class="span4"');
-        $cartForm->addRadioList('payment', '', $payment)
-                ->setAttribute('class', '.span1 radio')
-                ->setRequired('Please select Payment method');
-        $cartForm->addGroup('Terms')
-                ->setOption('container', 'div class="span4"');
-        $cartForm->addCheckbox('terms', 'I accept Terms and condition.')
-                ->setAttribute('class', 'checkbox inline')
-                ->setRequired()
-                ->setDefaultValue('TRUE')
-                ->addRule(Form::FILLED, 'In order to continue checkout, you have to agree with Term.');
-        $cartForm->addGroup('Checkout')
-                ->setOption('container', 'div class="span4"');
-        $cartForm->addSubmit('send', 'Checkout here!')
-                ->setAttribute('class', 'btn btn-warning btn-large');
-        $cartForm->onSuccess[] = $this->cartFormSubmitted;
-        
-        */
-          $cartForm = new Nette\Application\UI\Form;
+        $cartForm = new Nette\Application\UI\Form;
         $cartForm->setRenderer(new BootstrapRenderer);
         $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
         $cartForm->addGroup('Delivery info');
@@ -317,17 +248,38 @@ class OrderPresenter extends BasePresenter {
         foreach ($this->cart->prd as $id => $amnt) {
 
             $price = $this->productModel->loadProduct($id)->FinalPrice;
+            
             $amnt = $this->cart->prd[$id];
 
             $total += $price * $amnt;
-            $taxFreePrice = $total * 0.79;
+            $tax = $this->shopModel->getTax()->value;
+           
+            settype($tax, "float");
+            $taxFreePrice = $total * (1 - ($tax / 100));
         }
         $this->orderNo = $this->orderModel->countOrder() + 1;
 
+        $addressID = $this->userModel->countAddress() + 1;
+        
+        $this->userModel->insertAddress(
+                    $addressID,
+                    $form->values->address,
+                    $form->values->city,
+                    $form->values->psc
+                    
+                );
+        
+        $this->userModel->insertUser(
+                    $form->values->email,
+                    $form->values->name,
+                    $form->values->phone,
+                    $addressID
+               );
+        
+        
         $this->orderModel->insertOrder(
                 $this->orderNo,
-                //1,
-                "novak", //nastavitz na email
+                $form->values->email,
                 $total, $taxFreePrice, $today, $today, $form->values->shippers, $form->values->payment
         );
 
