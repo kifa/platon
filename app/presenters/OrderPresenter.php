@@ -268,6 +268,8 @@ class OrderPresenter extends BasePresenter {
                     
                 );
         
+        
+        
         $this->userModel->insertUser(
                     $form->values->email,
                     $form->values->name,
@@ -277,12 +279,13 @@ class OrderPresenter extends BasePresenter {
         
         $tax = $this->shopModel->getTax()->value;
         settype($tax, "float");
-        $taxFreePrice = $total * (1 - ($tax / 100));
+        $finalTax = $total * ($tax / 100);
+        
         
         $this->orderModel->insertOrder(
                 $this->orderNo,
                 $form->values->email,
-                $total, $taxFreePrice, $today, $today, $form->values->shippers, $form->values->payment
+                $total, $finalTax, $today, $today, $form->values->shippers, $form->values->payment
         );
 
         $cislo = $this->orderModel->countOrderDetail() + 1;

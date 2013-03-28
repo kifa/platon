@@ -120,6 +120,8 @@ class SmartPanelPresenter extends BasePresenter {
     
     public function renderPayment() {
         
+        $this->template->payments = $this->orderModel->loadPayment('');
+        
     }
 
 

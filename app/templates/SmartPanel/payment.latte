@@ -9,7 +9,10 @@
 <div class="span10"> 
 {if $user->isLoggedIn()}
 
-
+{foreach $payments as $id => $payment}
+        id: {$id}
+        name: {$payment->PaymentName}
+    {/foreach}
 
 {/if}
 </div>
