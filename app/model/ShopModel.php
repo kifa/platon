@@ -26,7 +26,7 @@ class ShopModel extends Repository {
      */
     public function getTax()
     {
-        return $this->getTable('settings')->where('Name','TAXte');
+        return $this->getTable('settings')->where('Name','TAX');
     }
 
 
