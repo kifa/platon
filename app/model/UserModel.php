@@ -38,7 +38,7 @@ class UserModel extends Repository{
                 'AddressID' => $address
                 );
         
-        return $this->getTable('user')->insert($insert);
+        return $this->getTable('users')->insert($insert);
     }
     
     public function insertAddress($id,$street,$city,$zip){
