@@ -63,7 +63,7 @@ class OrderModel extends Repository {
             $insert =  array(
                 'OrderID' => $id, //automaticky!
                 //'StatusID' => $status, //automaticky!
-                'UserID' => $user,  //nepraktické, aby se pouzivalo "novak", "admin"
+                'Login' => $user,  //nepraktické, aby se pouzivalo "novak", "admin"
                 'TotalPrice' => $price, //
                 'TotalPriceTax' => $pricetax,
                 'DateCreated' => $created,  //automaticky presenter

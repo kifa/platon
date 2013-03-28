@@ -30,9 +30,9 @@ class UserModel extends Repository{
             ('Password' => Authenticator::calculateHash($password)));
     }
     
-    public function insertUser($email,$name,$phone,$address){
+    public function insertUser($login,$name,$phone,$address){
         $insert = array(
-                'Email' => $email,
+                'Login' => $login,
                 'Name' => $name,
                 'PhoneNumber' => $phone,
                 'AddressID' => $address
