@@ -17,43 +17,48 @@
             </div>
             <hr>
             {/if}
+            <div class="span3">
                     {if $product->PiecesAvailable > 5}
             <span class="badge badge-info">{$product->PiecesAvailable}</span>
                     {else}
             <span class="badge badge-warning">{$product->PiecesAvailable}</span>
                     {/if}
+            </div>
             {var $ph = 0}
+      
             {foreach $photos as $id => $photo}
-               
+             
                 {if $id==$product->PhotoAlbumID}
-                   <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$photo->PhotoURL}" class="img-circle" class="span2" style="height: 200px; width: auto;"/>
+                   <a class="" href="{plink Product:product $product->ProductID}">  
+                   <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$photo->PhotoURL}" class="img-circle" style="height: 200px; width: auto;"/>
+                   </a>
                    {var $ph = 1}
                 {/if}
                    
                {if $iterator->last && $ph == 0}
+                    <a class="" href="{plink Product:product $product->ProductID}">
                    <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="height: 200px; width: auto;"/>
+                    </a>
                    {/if}
+                 
            {/foreach}
-            
-            <h4>{$product->ProductName}</h4>
-            <div class="caption">{var $desc = $product->ProductDescription}
+         <div class="caption">
+            <h4><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></h4>
+            {var $desc = $product->ProductDescription}
                 <p>{$desc|truncate:30}</p>
             </div>
             <hr>
             <div class="row">
-                    <div class="span3 center">
-                            
-                    
-                        <a href="{plink Order:cart $product->ProductID, "1"}" class="btn btn-success"><i class="icon-shopping-cart"></i> {_"Buy"}</a>
-                        
-                         <a href="{plink Product:product $product->ProductID}" class="btn btn-primary"><i class="icon-info-sign"></i> {_"View"}</a>         
+                    <div class="span3 pr-btn">
+                        <a href="{plink Order:cart $product->ProductID, "1"}" class="btn btn-success span1"><i class="icon-shopping-cart icon-large"></i> {_"Buy"}</a>
+                         <a href="{plink Product:product $product->ProductID}" class="btn btn-primary span1"><i class="icon-info-sign icon-large"></i> {_"View"}</a>         
                     </div>
               </div> 
             <hr>
             <div class="row">
                     <div class="span3">
                          
-                        <p class="text-success text-left lead"> {$product->FinalPrice},- </p>
+                        <p class="text-success text-center lead"> {$product->FinalPrice},- </p>
                     </div>
                
             </div> 

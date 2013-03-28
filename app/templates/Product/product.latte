@@ -1,6 +1,6 @@
 {block pageheader}
  <div class="page-header">
-            <h1 n:block="title">{$product->ProductName}</h1>
+     <h1 n:block="title">{$product->ProductName} <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>
             {if $user->isLoggedIn()}
             <div class="row">
                 <div class="span10">
@@ -15,15 +15,16 @@
 
 {block content}
 <div class="span10">
-            <div class=".span5">
+            <div class="span5">
                 <img src="../../../images/1/1.png" class="img-circle" style="width: 400px;"/>
             </div>
-            <div class=".span4">
-                <div class="tabbable">
+            <div class="span4">
+                <div class="tabbable span4">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#info" data-toggle="tab">Info</a></li>
-                        <li><a href="#spec" data-toggle="tab">Spec</a></li>
+                        <li class="active"><a href="#info" data-toggle="tab"><i class="icon-info-sign"></i> Info</a></li>
+                        <li><a href="#spec" data-toggle="tab"><i class="icon-list"></i> Spec</a></li>
                         <li><a href="#other" data-toggle="tab">Other</a></li>
+                        <li><a href="#ask" data-toggle="tab"><i class="icon-comment"></i> Ask &AMP; share</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="info">
@@ -40,12 +41,20 @@
                         <div class="tab-pane" id="other">
                             <p>Other infos</p>
                         </div>
+                        <div class="tab-pane" id="ask">
+                            <p>ASK ABOUT!</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="span4">
+                <div class=".span4 alert alert-info">
                     <h2 class="text-info span2">{$product->FinalPrice},-</h2>
-                    <p class="span1">In stock:
+                    <a href="{plink Order:cart $product->ProductID, "1"}" class="span2 btn btn-primary">
+                            <i class="icon-shopping-cart"></i> Buy</a>
+
+
+                    <div class="span2 clearfix">
+                    <p class="">{_"In stock"}:
                     {if $product->PiecesAvailable >= 5}
                     <span class="badge badge-info">
                     {elseif $product->PiecesAvailable < 5 && $product->PiecesAvailable > 0}
@@ -54,16 +63,10 @@
                     <span class="badge">
                         {/if}
                     {$product->PiecesAvailable}</span></p>
-                    <a href="{plink Order:cart $product->ProductID, "1"}" class="span2 btn btn-primary">
-                            <i class="icon-shopping-cart"></i> Buy</a>
-                    <a n:href="Order:cart produkt" class="span1 btn btn-success">
-                            <i class="icon-info-sign"></i> Ask</a>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        
-</div> <!-- class="span10" -->
+        </div> <!-- class="span10" -->
 {/block}
 
 {block sidebar}

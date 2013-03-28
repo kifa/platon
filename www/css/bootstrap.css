@@ -6177,3 +6177,8 @@ a.badge:focus {
  a:hover i {
         text-decoration: none;
         }
+
+.pr-btn {
+        margin: 0 auto;
+        float: none;
+    }
