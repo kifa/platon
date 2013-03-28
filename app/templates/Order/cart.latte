@@ -8,7 +8,7 @@
 {/block}
     
 {block content}
-    
+<div class="span10">    
 {foreach $flashes as $flash}
         <div class="{$flash->type}">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -67,6 +67,14 @@
             <fieldset>
                 {control cartForm}
             </fieldset>
+    
+            {$cartForm->render('begin')}
+               {$cartForm->render('errors')}
+               {$cartForm->render('body')} 
+            
+            {$cartForm->render('end')}
+    
+    
       </div> 
 
 <script>
@@ -101,10 +109,12 @@
 });
 
 </script>
+</div>
 {/block}
 
 {block sidebar}
-
+<div class="span2">
+</div>
 {/block}
 
 

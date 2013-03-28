@@ -15,7 +15,7 @@
         <meta name="description" content="">
         <meta name="robots" content="{$robots}" n:ifset="$robots">
 
-        <title>{block title|striptags|upper}BirneShop{/block}</title>
+        <title>{block #title|striptags|upper}BirneShop{/block} | Birne Solutions</title>
 
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
         <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
@@ -69,17 +69,23 @@
 </ul>
             
    <div id="content"> 
-       {include #pageheader}
+       {block #pageheader}
+       {/block}
        
         <div class="row">
+            {block #content}
             <div class="span10">
-            {include #content}
-            </div>
             
+            </div>
+            {/block}
+            
+            {block #sidebar}
             <div class="span2">
-            {include #sidebar}
+            
+                
             
             </div>
+            {/block}
    </div>       
    
    <div class="footer">
@@ -93,7 +99,8 @@
         <script src="{$basePath}/js/main.js"></script>
         <script src="{$basePath}/js/bootstrap.min.js"></script>
         <script src="{$basePath}/js/live-form-validation.js"></script>
-        
+        {block #script}
+        {/block}
         
 	{/block}
     </body>

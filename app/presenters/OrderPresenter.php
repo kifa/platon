@@ -2,6 +2,7 @@
 
 use Nette\Forms\Form,
     Nette\Utils\Html;
+use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 
 /**
  * Order presenter.
@@ -187,6 +188,9 @@ class OrderPresenter extends BasePresenter {
             $this->template->payment = $payment;
 
             $this->template->cart = $this->c2;
+            
+            $this->template->cartForm = $this->createComponentCartForm();
+           
         } else {
             $this->setView('CartEmpty');
         }
@@ -211,8 +215,9 @@ class OrderPresenter extends BasePresenter {
             $payment[$key] = $value->PaymentName;
         };
 
-
-        $cartForm = new Nette\Application\UI\Form;
+        
+   /*     $cartForm = new Nette\Application\UI\Form;
+        $cartForm->setRenderer(new BootstrapRenderer);
         $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
         $cartForm->addGroup('Delivery info')
                 ->setOption('container', 'div class="span4"');
@@ -244,8 +249,6 @@ class OrderPresenter extends BasePresenter {
         $cartForm->addRadioList('payment', '', $payment)
                 ->setAttribute('class', '.span1 radio')
                 ->setRequired('Please select Payment method');
-        ;
-
         $cartForm->addGroup('Terms')
                 ->setOption('container', 'div class="span4"');
         $cartForm->addCheckbox('terms', 'I accept Terms and condition.')
@@ -255,6 +258,44 @@ class OrderPresenter extends BasePresenter {
                 ->addRule(Form::FILLED, 'In order to continue checkout, you have to agree with Term.');
         $cartForm->addGroup('Checkout')
                 ->setOption('container', 'div class="span4"');
+        $cartForm->addSubmit('send', 'Checkout here!')
+                ->setAttribute('class', 'btn btn-warning btn-large');
+        $cartForm->onSuccess[] = $this->cartFormSubmitted;
+        
+        */
+          $cartForm = new Nette\Application\UI\Form;
+        $cartForm->setRenderer(new BootstrapRenderer);
+        $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
+        $cartForm->addGroup('Delivery info');
+        $cartForm->addText('name', 'Name:', 40, 100)
+                ->addRule(Form::FILLED, 'Would you fill your name, please?');
+        $cartForm->addText('phone', 'Phone:', 40, 100);
+        $cartForm->addText('email', 'Email:', 40, 100)
+                ->setEmptyValue('@')
+                ->addRule(Form::EMAIL, 'Would you fill your email, please?')
+                ->addRule(Form::FILLED, 'Would you fill your name, please?');
+        $cartForm->addGroup('Address');
+        $cartForm->addText('address', 'Address:', 60, 100)
+                ->addRule(Form::FILLED);
+        $cartForm->addText('city', 'City:', 40, 100)
+                ->addRule(Form::FILLED);
+        $cartForm->addText('psc', 'PSC:', 40, 100)
+                ->addRule(Form::FILLED);
+        $cartForm->addGroup('Shipping');
+        $cartForm->addRadioList('shippers', '', $shippers)
+                ->setAttribute('class', '.span1 radio')
+                ->setRequired('Please select Shipping method');
+        $cartForm->addGroup('Payment');
+        $cartForm->addRadioList('payment', '', $payment)
+                ->setAttribute('class', '.span1 radio')
+                ->setRequired('Please select Payment method');
+        $cartForm->addGroup('Terms');
+        $cartForm->addCheckbox('terms', 'I accept Terms and condition.')
+                ->setAttribute('class', 'checkbox inline')
+                ->setRequired()
+                ->setDefaultValue('TRUE')
+                ->addRule(Form::FILLED, 'In order to continue checkout, you have to agree with Term.');
+        $cartForm->addGroup('Checkout');
         $cartForm->addSubmit('send', 'Checkout here!')
                 ->setAttribute('class', 'btn btn-warning btn-large');
         $cartForm->onSuccess[] = $this->cartFormSubmitted;

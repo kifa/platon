@@ -49,17 +49,18 @@
 {/block}
 
 {block content}
-
+<div class="span10">
       {control product}  
-        
+</div>       
 {/block}
 
 {block sidebar}
-
+<div class="span2">
         {if $user->isLoggedIn()}
         {control menu:admin}
         {/if}
         <i class="icon-camera-retro icon-2x"></i><strong>Google Nexus</strong>
         <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
             <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
+</div>
 {/block}

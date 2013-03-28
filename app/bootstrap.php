@@ -19,6 +19,9 @@ $configurator->createRobotLoader()
 	->addDirectory(__DIR__ . '/../libs')
 	->register();
 
+//Bootstrap forms
+Kdyby\BootstrapFormRenderer\DI\RendererExtension::register($configurator);
+
 // Translation setup
 $configurator->onCompile[] = function ($configurator, $compiler) {
     $compiler->addExtension('netteTranslator', new NetteTranslator\NetteTranslatorExtension);

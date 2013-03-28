@@ -7,127 +7,126 @@
 
 
 {block content}
+<div class="span10">
+    {foreach $flashes as $flash}
+            <div class="{$flash->type}">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {$flash->message}</div>
+    {/foreach}
 
-{foreach $flashes as $flash}
-        <div class="{$flash->type}">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-{$flash->message}</div>
-{/foreach}
+            <div class="row">
+            <table class="table table-hover span10">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Product Name</th>
+                        <th>Amount</th>
+                        <th>Item price</th>
+                        <th>Total price</th>
 
-        <div class="row">
-        <table class="table table-hover span10">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Product Name</th>
-                    <th>Amount</th>
-                    <th>Item price</th>
-                    <th>Total price</th>
-
-                </tr>
-            </thead>
-            <tbody>
-{var $grandtotal = 0}
-{foreach $products as $id => $product}
+                    </tr>
+                </thead>
+                <tbody>
+    {var $grandtotal = 0}
+    {foreach $products as $id => $product}
 
 
-                <tr>
-                    <td><img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="width: 38px;">
-                        {$product->ProductNumber}</td>
-                    <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
-                    <td>{$product->Quantity}</td>
-                    <td>{$product->UnitPrice},-</td>
-                    <td>{$subtotal = $product->Quantity * $product->UnitPrice},-</td>
+                    <tr>
+                        <td><img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="width: 38px;">
+                            {$product->ProductNumber}</td>
+                        <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
+                        <td>{$product->Quantity}</td>
+                        <td>{$product->UnitPrice},-</td>
+                        <td>{$subtotal = $product->Quantity * $product->UnitPrice},-</td>
 
-                </tr>
-   {var $grandtotal += $subtotal}
+                    </tr>
+       {var $grandtotal += $subtotal}
 
-{/foreach}
+    {/foreach}
 
-            <div class="span9 alert alert-info">   
-                <div class="span1">                    
-                    <i class="icon-shopping-cart icon-4x"></i></div>
-                <div class="span7">
-                    <h3 class="span2"><strong class="span1">Products:</strong>
-                            <span class="span1">{$grandtotal},-</span></h3>
-                    <h3 class="span2"><strong class="span1">Shipping:</strong> 
-                            <span class="shipping span1">{$shipping = $order->DeliveryPrice},-</span></h3>
-                    <h3 class="span2"><strong class="span1">Total:</strong>
-                            <span class="ordertotal span1">{$grandtotal += $shipping},-</span></h3>
+                <div class="span9 alert alert-info">   
+                    <div class="span1">                    
+                        <i class="icon-shopping-cart icon-4x"></i></div>
+                    <div class="span7">
+                        <h3 class="span2"><strong class="span1">Products:</strong>
+                                <span class="span1">{$grandtotal},-</span></h3>
+                        <h3 class="span2"><strong class="span1">Shipping:</strong> 
+                                <span class="shipping span1">{$shipping = $order->DeliveryPrice},-</span></h3>
+                        <h3 class="span2"><strong class="span1">Total:</strong>
+                                <span class="ordertotal span1">{$grandtotal += $shipping},-</span></h3>
+                    </div>
                 </div>
-            </div>
 
-            </tbody>
-        </table>
-    </div>
-        <div class="row">
-        <div class="span5 alert alert-block">
-
-            <div class="span5">
-                <p>
-                <i class="icon-calendar icon-large left"></i><strong> Date created:</strong>&nbsp;
-            {$order->DateCreated|date:'%d.%m.%Y'}
-                </p>
-            </div>
-          
-            <div class="span5">
-                <p>
-                <i class="icon-truck icon-large left"></i><strong> Shipping:</strong>&nbsp;
-            {$order->DeliveryName}
-                </p>
-            </div>
-            <br>
-            <div class="span5">
-                <p>
-                <i class="icon-money icon-large left"></i><strong> Payment:</strong>&nbsp;
-            {$order->PaymentName}
-                </p>
-            </div>
+                </tbody>
+            </table>
         </div>
             <div class="row">
-        <div class="span5 alert alert-block">
-            <div class="span5">
-                <p>
-                <i class="icon-spinner icon-spin left icon-large"></i><strong> Status:</strong>&nbsp;
-            {$order->StatusName}
-                </p>
+            <div class="span5 alert alert-block">
+
+                <div class="span5">
+                    <p>
+                    <i class="icon-calendar icon-large left"></i><strong> Date created:</strong>&nbsp;
+                {$order->DateCreated|date:'%d.%m.%Y'}
+                    </p>
+                </div>
+
+                <div class="span5">
+                    <p>
+                    <i class="icon-truck icon-large left"></i><strong> Shipping:</strong>&nbsp;
+                {$order->DeliveryName}
+                    </p>
+                </div>
+                <br>
+                <div class="span5">
+                    <p>
+                    <i class="icon-money icon-large left"></i><strong> Payment:</strong>&nbsp;
+                {$order->PaymentName}
+                    </p>
+                </div>
             </div>
-            <br>
-            <div class="progress progress-info active span5">
-                <div class="bar" style="width: 20%"></div>
+                <div class="row">
+            <div class="span5 alert alert-block">
+                <div class="span5">
+                    <p>
+                    <i class="icon-spinner icon-spin left icon-large"></i><strong> Status:</strong>&nbsp;
+                {$order->StatusName}
+                    </p>
+                </div>
+                <br>
+                <div class="progress progress-info active span5">
+                    <div class="bar" style="width: 20%"></div>
+                </div>
+            </div>
+        </div>
+            <div class="span5 alert alert-block">
+                <dl>
+                    <dt>Contact:</dt>
+                    <dd>{$order->FirstName} {$order->SureName}</dd>
+                    <dd>{$order->Email}</dd>
+                    <dd>{$order->PhoneNumber}</dd>
+                </dl>
+            {if $order->CompanyName != ""}
+                <dl>
+                    <dt>Company:</dt>
+                    <dd>{$order->CompanyName}</dd>
+                </dl>
+            {/if}
+            </div>
+
+            <div class="span5 alert alert-block">
+                <dl>
+                    <dt>Status:</dt>
+                    <dd>{$order->StatusID}</dd>
+                </dl>
+                <dl>
+                    <dt>Payment:</dt>
+                    <dd>{$order->PaymentName}</dd>
+                </dl>
+            </div>
             </div>
         </div>
     </div>
-        <div class="span5 alert alert-block">
-            <dl>
-                <dt>Contact:</dt>
-                <dd>{$order->FirstName} {$order->SureName}</dd>
-                <dd>{$order->Email}</dd>
-                <dd>{$order->PhoneNumber}</dd>
-            </dl>
-        {if $order->CompanyName != ""}
-            <dl>
-                <dt>Company:</dt>
-                <dd>{$order->CompanyName}</dd>
-            </dl>
-        {/if}
-        </div>
+   </div>
 
-        <div class="span5 alert alert-block">
-            <dl>
-                <dt>Status:</dt>
-                <dd>{$order->StatusID}</dd>
-            </dl>
-            <dl>
-                <dt>Payment:</dt>
-                <dd>{$order->PaymentName}</dd>
-            </dl>
-        </div>
-        </div>
-    </div>
-</div>
-</div>
-{/block}
-
-{block sidebar}
+</div> <!-- class="span10" -->
 {/block}

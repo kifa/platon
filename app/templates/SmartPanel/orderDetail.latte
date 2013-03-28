@@ -7,6 +7,7 @@
 {/block}
 
 {block content}
+<div class="span10"> 
 {if $user->isLoggedIn()}
 
 {foreach $flashes as $flash}
@@ -126,11 +127,13 @@
         </div>
 
 {/if}
+</div>
 {/block}
 
 {block sidebar}
+<div class="span2"> 
   {if $user->isLoggedIn()}
         {control menu:admin}
         {/if}
-
+</div>
 {/block}
