@@ -49,10 +49,10 @@ class UserModel extends Repository{
             'City' => $city
         );
         
-        return $this->getTable('addresses')->insert($insert);
+        return $this->getTable('address')->insert($insert);
     }
 
     public function countAddress(){
-        return $this->getTable('addresses')->count();
+        return $this->getTable('address')->count();
     }
 }
