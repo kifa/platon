@@ -252,11 +252,10 @@ class OrderPresenter extends BasePresenter {
             $amnt = $this->cart->prd[$id];
 
             $total += $price * $amnt;
-            $tax = $this->shopModel->getTax()->value;
-           
-            settype($tax, "float");
-            $taxFreePrice = $total * (1 - ($tax / 100));
+            
         }
+        
+        
         $this->orderNo = $this->orderModel->countOrder() + 1;
 
         $addressID = $this->userModel->countAddress() + 1;
@@ -276,6 +275,9 @@ class OrderPresenter extends BasePresenter {
                     $addressID
                );
         
+        $tax = $this->shopModel->getTax()->value;
+        settype($tax, "float");
+        $taxFreePrice = $total * (1 - ($tax / 100));
         
         $this->orderModel->insertOrder(
                 $this->orderNo,
