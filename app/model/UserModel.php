@@ -32,6 +32,7 @@ class UserModel extends Repository{
     
     public function insertUser($login,$name,$phone,$address){
         $insert = array(
+        //  'UserID' => $id,
                 'Login' => $login,
                 'Name' => $name,
                 'PhoneNumber' => $phone,

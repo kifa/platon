@@ -29,8 +29,8 @@ class OrderModel extends Repository {
      * @param ? example: pozice počátečního znaku
      * @return string 
      */  
-    public function loadOrders(){
-        return $this->getTable('order')->select('order.*,delivery.*,payment.*,status.*,user.*')->fetchPairs("OrderID");
+    public function loadOrders(){     
+        return $this->getTable('orders')->select('orders.*,delivery.*,payment.*,status.*,users.*')->fetchPairs('orders.OrderID');
     }
     
     /*
@@ -40,8 +40,7 @@ class OrderModel extends Repository {
      * @return string 
      */
     public function loadOrder($id){
-        //return $this->getTable('order')->select('order.*,delivery.*,payment.*,Status.*,user.*')->where('order.OrderID',$id)->fetch();
-        return $this->getTable('order')->select('order.*,payment.*,delivery.*,user.*,status.*')->where('order.OrderID',$id)->fetch();
+        return $this->getTable('orders')->select('orders.*,payment.*,delivery.*,users.*,status.*')->where('orders.OrderID',$id)->fetch();
     }
     
     /*
@@ -60,10 +59,12 @@ class OrderModel extends Repository {
     public function insertOrder($id, $user, $price, $pricetax, $created, 
             $lastchange, $delivery, $payment)
     {
+            $userid = $this->getTable('users')->select('UserID')->where('Login',$user);
+        
             $insert =  array(
                 'OrderID' => $id, //automaticky!
                 //'StatusID' => $status, //automaticky!
-                'Login' => $user,  //nepraktické, aby se pouzivalo "novak", "admin"
+                'UserID' => $userid,  //nepraktické, aby se pouzivalo "novak", "admin"
                 'TotalPrice' => $price, //
                 'TotalPriceTax' => $pricetax,
                 'DateCreated' => $created,  //automaticky presenter
@@ -74,7 +75,7 @@ class OrderModel extends Repository {
                 'IP' => NULL,
                 'SessionID' => NULL
             );
-            return $this->getTable('order')->insert($insert);
+            return $this->getTable('orders')->insert($insert);
             
     }
     
@@ -182,7 +183,7 @@ class OrderModel extends Repository {
     
     public function countOrder()
     {
-        return $this->getTable('order')->count();
+        return $this->getTable('orders')->count();
     }
     
     public function countOrderDetail()
