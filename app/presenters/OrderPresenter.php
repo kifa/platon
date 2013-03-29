@@ -277,8 +277,9 @@ class OrderPresenter extends BasePresenter {
                     $addressID
                );
         
+        //$tax = $this->shopModel->getTax()->value;
         $tax = $this->shopModel->getTax()->value;
-        settype($tax, "float");
+        settype($tax, 'float');
         $finalTax = $total * ($tax / 100);
         
         

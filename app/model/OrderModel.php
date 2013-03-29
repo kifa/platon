@@ -58,13 +58,11 @@ class OrderModel extends Repository {
      */
     public function insertOrder($id, $user, $price, $pricetax, $created, 
             $lastchange, $delivery, $payment)
-    {
-            $userid = $this->getTable('users')->select('UserID')->where('Login',$user);
-        
+    {                   
             $insert =  array(
                 'OrderID' => $id, //automaticky!
                 //'StatusID' => $status, //automaticky!
-                'UserID' => $userid,  //nepraktické, aby se pouzivalo "novak", "admin"
+                'UsersID' => $user,  //nepraktické, aby se pouzivalo "novak", "admin"
                 'TotalPrice' => $price, //
                 'TotalPriceTax' => $pricetax,
                 'DateCreated' => $created,  //automaticky presenter

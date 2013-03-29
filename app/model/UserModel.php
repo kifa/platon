@@ -10,9 +10,9 @@ class UserModel extends Repository{
     
     public function findByName($username)
     {
-       // return $this->findBy('users', array('Login' => $username))->fetch(); 
+       // return $this->findBy('users', array('UsersID' => $username))->fetch(); 
  
-        return $this->getTable('users')->where('login', $username)->fetch();
+        return $this->getTable('users')->where('UsersID', $username)->fetch();
     }
     
      
@@ -20,20 +20,20 @@ class UserModel extends Repository{
         // $userId = $this->userPocet();
 
         $this->getTable('users')->insert(array(
-                                            'Email' => $username,
+                                            'UsersID' => $username,
                                             'Password' => Authenticator::calculateHash($password),                                            
                                             'Name' => $name));
     } 
     
      public function setPassword($username, $password) {
-       $this->getTable('users')->where('Login', $username)->update(array
+       $this->getTable('users')->where('UsersID', $username)->update(array
             ('Password' => Authenticator::calculateHash($password)));
     }
     
-    public function insertUser($login,$name,$phone,$address){
+    public function insertUser($UsersID,$name,$phone,$address){
         $insert = array(
         //  'UserID' => $id,
-                'Login' => $login,
+                'UsersID' => $UsersID,
                 'Name' => $name,
                 'PhoneNumber' => $phone,
                 'AddressID' => $address
