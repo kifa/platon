@@ -1,11 +1,11 @@
 {if $user->isLoggedIn()}
 <ul class="nav nav-list">
-        <li class="nav-header"><a href="{plink SmartPanel:default}">Smart Panel</a></li>
+        <li class="nav-header"><a href="{plink SmartPanel:default}"><i class="icon-lightbulb icon-large"></i> Smart Panel</a></li>
         
             <li class="divider"></li>
             <li class="{ifCurrent SmartPanel:orders}active{/ifCurrent}"><a href="{plink SmartPanel:orders}"><i class="icon-spinner"></i> {_"Orders"}</a></li>
             <li class="{ifCurrent SmartPanel:shipping}active{/ifCurrent}"><a href="{plink SmartPanel:shipping}"><i class="icon-truck"></i> {_"Shipping"}</a></li>
             <li class="{ifCurrent SmartPanel:payment}active{/ifCurrent}"><a href="{plink SmartPanel:payment}"><i class="icon-money"></i> {_"Payment"}</a></li>
-            <li class="{ifCurrent SmartPanel:default}active{/ifCurrent}"><a href="{plink SmartPanel:defaults}"><i class="icon-comment"></i> {_"Other"}</a></li>
+            <li class="{ifCurrent SmartPanel:default}active{/ifCurrent}"><a href="{plink SmartPanel:default}"><i class="icon-comment"></i> {_"Other"}</a></li>
 </ul>
 {/if}

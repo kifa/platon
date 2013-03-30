@@ -158,6 +158,8 @@ class SmartPanelPresenter extends BasePresenter {
             $this->redirect('Sign:in');
         } else {
             $this->template->usr = $this->getUser()->getIdentity();
+            $this->template->ord = $this->orderModel->countOrder();
+            $this->template->orders = $this->orderModel->loadOrders();
             $this->template->anyVariable = 'any value';
         }
     }

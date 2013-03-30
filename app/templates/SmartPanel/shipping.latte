@@ -1,7 +1,7 @@
 {block pageheader}
 {if $user->isLoggedIn()}
 <div class="page-header">
-<h1 n:block="title">Shipping <small>Here you see all shipping methods.</small></h1>
+<h1 n:block="title"><i class="icon-truck"></i> Shipping <small>Here you see all shipping methods.</small></h1>
 {/if}
 {/block}
 
@@ -17,10 +17,8 @@
 
 {block sidebar}
 <div class="span2"> 
-{if $user->isLoggedIn()}
-
-
-
-{/if}
+  {if $user->isLoggedIn()}
+        {control menu:admin}
+        {/if}
 </div>
 {/block}
