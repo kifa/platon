@@ -140,7 +140,7 @@ final class Helpers
 				$optCount++;
 
 			} else {
-				throw new ServiceCreationException("$parameter has no type hint, so its value must be specified.");
+				throw new ServiceCreationException("Parameter $parameter has no type hint, so its value must be specified.");
 			}
 		}
 
@@ -156,5 +156,36 @@ final class Helpers
 
 		return $optCount ? array_slice($res, 0, -$optCount) : $res;
 	}
+
+
+
+	/**
+	 * Generates list of properties with annotation @inject.
+	 * @return array
+	 */
+	public static function getInjectProperties(Nette\Reflection\ClassType $class)
+	{
+		$res = array();
+		foreach ($class->getProperties(\ReflectionProperty::IS_PUBLIC) as $property) {
+			$type = $property->getAnnotation('var');
+			if (!$property->getAnnotation('inject')) {
+				continue;
+
+			} elseif (!$type) {
+				throw new Nette\InvalidStateException("Property $property has not @var annotation.");
+
+			} elseif (!class_exists($type) && !interface_exists($type)) {
+				if ($type[0] !== '\\') {
+					$type = $class->getNamespaceName() . '\\' . $type;
+				}
+				if (!class_exists($type) && !interface_exists($type)) {
+					throw new Nette\InvalidStateException("Please use a fully qualified name of class/interface in @var annotation at $property property. Class '$type' cannot be found.");
+				}
+			}
+			$res[$property->getName()] = $type;
+		}
+		return $res;
+	}
+
 
 }

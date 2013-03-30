@@ -22,11 +22,11 @@ use Nette,
  *
  * @author     David Grudl
  *
- * @property       IReflection          $databaseReflection
  * @property-read  ISupplementalDriver  $supplementalDriver
  * @property-read  string               $dsn
+ * @property-read  PDO                  $pdo
  */
-class Connection extends PDO
+class Connection extends Nette\Object
 {
 	/** @var string */
 	private $dsn;
@@ -37,33 +37,42 @@ class Connection extends PDO
 	/** @var SqlPreprocessor */
 	private $preprocessor;
 
-	/** @var IReflection */
-	private $databaseReflection;
+	/** @var Table\SelectionFactory */
+	private $selectionFactory;
 
-	/** @var Nette\Caching\Cache */
-	private $cache;
+	/** @var PDO */
+	private $pdo;
 
 	/** @var array of function(Statement $result, $params); Occurs after query is executed */
 	public $onQuery;
 
 
 
-	public function __construct($dsn, $username = NULL, $password = NULL, array $options = NULL, $driverClass = NULL)
+	public function __construct($dsn, $user = NULL, $password = NULL, array $options = NULL, $driverClass = NULL)
 	{
-		parent::__construct($this->dsn = $dsn, $username, $password, $options);
-		$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$this->setAttribute(PDO::ATTR_STATEMENT_CLASS, array('Nette\Database\Statement', array($this)));
+		$this->pdo = $pdo = new PDO($this->dsn = $dsn, $user, $password, $options);
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$pdo->setAttribute(PDO::ATTR_STATEMENT_CLASS, array('Nette\Database\Statement', array($this)));
 
-		$driverClass = $driverClass ?: 'Nette\Database\Drivers\\' . ucfirst(str_replace('sql', 'Sql', $this->getAttribute(PDO::ATTR_DRIVER_NAME))) . 'Driver';
+		$driverClass = $driverClass ?: 'Nette\Database\Drivers\\' . ucfirst(str_replace('sql', 'Sql', $pdo->getAttribute(PDO::ATTR_DRIVER_NAME))) . 'Driver';
 		$this->driver = new $driverClass($this, (array) $options);
 		$this->preprocessor = new SqlPreprocessor($this);
 	}
 
 
 
+	/** @return string */
 	public function getDsn()
 	{
 		return $this->dsn;
+	}
+
+
+
+	/** @return PDO */
+	public function getPdo()
+	{
+		return $this->pdo;
 	}
 
 
@@ -76,45 +85,49 @@ class Connection extends PDO
 
 
 
+	/** @return bool */
+	public function beginTransaction()
+	{
+		return $this->pdo->beginTransaction();
+	}
+
+
+
+	/** @return bool */
+	public function commit()
+	{
+		return $this->pdo->commit();
+	}
+
+
+
+	/** @return bool */
+	public function rollBack()
+	{
+		return $this->pdo->rollBack();
+	}
+
+
+
 	/**
-	 * Sets database reflection.
-	 * @return Connection   provides a fluent interface
+	 * @param  string  sequence object
+	 * @return string
 	 */
-	public function setDatabaseReflection(IReflection $databaseReflection)
+	public function getInsertId($name = NULL)
 	{
-		$databaseReflection->setConnection($this);
-		$this->databaseReflection = $databaseReflection;
-		return $this;
-	}
-
-
-
-	/** @return IReflection */
-	public function getDatabaseReflection()
-	{
-		if (!$this->databaseReflection) {
-			$this->setDatabaseReflection(new Reflection\ConventionalReflection);
-		}
-		return $this->databaseReflection;
+		return $this->pdo->lastInsertId($name);
 	}
 
 
 
 	/**
-	 * Sets cache storage engine.
-	 * @return Connection   provides a fluent interface
+	 * @param  string  string to be quoted
+	 * @param  int     data type hint
+	 * @return string
 	 */
-	public function setCacheStorage(Nette\Caching\IStorage $storage = NULL)
+	public function quote($string, $type = PDO::PARAM_STR)
 	{
-		$this->cache = $storage ? new Nette\Caching\Cache($storage, 'Nette.Database.' . md5($this->dsn)) : NULL;
-		return $this;
-	}
-
-
-
-	public function getCache()
-	{
-		return $this->cache;
+		return $this->pdo->quote($string, $type);
 	}
 
 
@@ -152,18 +165,12 @@ class Connection extends PDO
 	 * @param  array
 	 * @return Statement
 	 */
-	public function queryArgs($statement, $params)
+	public function queryArgs($statement, array $params)
 	{
-		foreach ($params as $value) {
-			if (is_array($value) || is_object($value)) {
-				$need = TRUE; break;
-			}
-		}
-		if (isset($need) && $this->preprocessor !== NULL) {
+		if ($params) {
 			list($statement, $params) = $this->preprocessor->process($statement, $params);
 		}
-
-		return $this->prepare($statement)->execute($params);
+		return $this->pdo->prepare($statement)->execute($params);
 	}
 
 
@@ -228,7 +235,7 @@ class Connection extends PDO
 
 
 
-	/********************* selector ****************d*g**/
+	/********************* Selection ****************d*g**/
 
 
 
@@ -239,56 +246,47 @@ class Connection extends PDO
 	 */
 	public function table($table)
 	{
-		return new Table\Selection($table, $this);
+		if (!$this->selectionFactory) {
+			$this->selectionFactory = new Table\SelectionFactory($this);
+		}
+		return $this->selectionFactory->create($table);
 	}
-
-
-
-	/********************* Nette\Object behaviour ****************d*g**/
 
 
 
 	/**
-	 * @return Nette\Reflection\ClassType
+	 * @return Connection   provides a fluent interface
 	 */
-	public static function getReflection()
+	public function setSelectionFactory(Table\SelectionFactory $selectionFactory)
 	{
-		return new Nette\Reflection\ClassType(get_called_class());
+		$this->selectionFactory = $selectionFactory;
+		return $this;
 	}
 
 
 
-	public function __call($name, $args)
+	/** @deprecated */
+	function setDatabaseReflection()
 	{
-		return ObjectMixin::call($this, $name, $args);
+		trigger_error(__METHOD__ . '() is deprecated; use setSelectionFactory() instead.', E_USER_DEPRECATED);
+		return $this;
 	}
 
 
 
-	public function &__get($name)
+	/** @deprecated */
+	function setCacheStorage()
 	{
-		return ObjectMixin::get($this, $name);
+		trigger_error(__METHOD__ . '() is deprecated; use setSelectionFactory() instead.', E_USER_DEPRECATED);
 	}
 
 
 
-	public function __set($name, $value)
+	/** @deprecated */
+	function lastInsertId($name = NULL)
 	{
-		return ObjectMixin::set($this, $name, $value);
-	}
-
-
-
-	public function __isset($name)
-	{
-		return ObjectMixin::has($this, $name);
-	}
-
-
-
-	public function __unset($name)
-	{
-		ObjectMixin::remove($this, $name);
+		trigger_error(__METHOD__ . '() is deprecated; use getInsertId() instead.', E_USER_DEPRECATED);
+		return $this->getInsertId($name);
 	}
 
 }

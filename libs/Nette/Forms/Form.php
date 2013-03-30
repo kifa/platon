@@ -86,9 +86,6 @@ class Form extends Container
 	/** @var array of function(Form $sender); Occurs when the form is submitted */
 	public $onSubmit;
 
-	/** @deprecated */
-	public $onInvalidSubmit;
-
 	/** @var mixed or NULL meaning: not detected yet */
 	private $submittedBy;
 
@@ -137,7 +134,7 @@ class Form extends Container
 	/**
 	 * This method will be called when the component (or component's parent)
 	 * becomes attached to a monitored object. Do not call this method yourself.
-	 * @param  IComponent
+	 * @param  Nette\ComponentModel\IComponent
 	 * @return void
 	 */
 	protected function attached($obj)
@@ -277,7 +274,7 @@ class Form extends Container
 		}
 
 		foreach ($group->getControls() as $control) {
-			$this->removeComponent($control);
+			$control->getParent()->removeComponent($control);
 		}
 
 		unset($this->groups[$name]);
@@ -357,8 +354,7 @@ class Form extends Container
 	final public function isSubmitted()
 	{
 		if ($this->submittedBy === NULL && count($this->getControls())) {
-			$this->getHttpData();
-			$this->submittedBy = $this->httpData !== NULL;
+			$this->submittedBy = (bool) $this->getHttpData();
 		}
 		return $this->submittedBy;
 	}
@@ -427,20 +423,8 @@ class Form extends Container
 			$this->onSuccess($this);
 		} else {
 			$this->onError($this);
-			if ($this->onInvalidSubmit) {
-				trigger_error(__CLASS__ . '->onInvalidSubmit is deprecated; use onError instead.', E_USER_WARNING);
-				$this->onInvalidSubmit($this);
-			}
 		}
-
-		if ($this->onSuccess) { // back compatibility
-			$this->onSubmit($this);
-		} elseif ($this->onSubmit) {
-			trigger_error(__CLASS__ . '->onSubmit changed its behavior; use onSuccess instead.', E_USER_WARNING);
-			if (isset($valid) || $this->isValid()) {
-				$this->onSubmit($this);
-			}
-		}
+		$this->onSubmit($this);
 	}
 
 
@@ -453,7 +437,7 @@ class Form extends Container
 	{
 		$httpRequest = $this->getHttpRequest();
 		if (strcasecmp($this->getMethod(), $httpRequest->getMethod())) {
-			return;
+			return array();
 		}
 
 		if ($httpRequest->isMethod('post')) {
@@ -464,7 +448,7 @@ class Form extends Container
 
 		if ($tracker = $this->getComponent(self::TRACKER_ID, FALSE)) {
 			if (!isset($data[self::TRACKER_ID]) || $data[self::TRACKER_ID] !== $tracker->getValue()) {
-				return;
+				return array();
 			}
 		}
 
@@ -495,27 +479,24 @@ class Form extends Container
 
 
 	/**
-	 * Adds error message to the list.
+	 * Adds global error message.
 	 * @param  string  error message
 	 * @return void
 	 */
 	public function addError($message)
 	{
-		$this->valid = FALSE;
-		if ($message !== NULL && !in_array($message, $this->errors, TRUE)) {
-			$this->errors[] = $message;
-		}
+		$this->errors[] = $message;
 	}
 
 
 
 	/**
-	 * Returns validation errors.
+	 * Returns global validation errors.
 	 * @return array
 	 */
 	public function getErrors()
 	{
-		return $this->errors;
+		return array_unique($this->errors);
 	}
 
 
@@ -536,7 +517,17 @@ class Form extends Container
 	public function cleanErrors()
 	{
 		$this->errors = array();
-		$this->valid = NULL;
+	}
+
+
+
+	/**
+	 * Returns all validation errors.
+	 * @return array
+	 */
+	public function getAllErrors()
+	{
+		return array_unique(array_merge($this->errors, parent::getAllErrors()));
 	}
 
 

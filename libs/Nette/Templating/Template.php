@@ -150,7 +150,7 @@ class Template extends Nette\Object implements ITemplate
 		$code = $this->getSource();
 		foreach ($this->filters as $filter) {
 			$code = self::extractPhp($code, $blocks);
-			$code = $filter($code);
+			$code = $filter/*5.2*->invoke*/($code);
 			$code = strtr($code, $blocks); // put PHP code back
 		}
 
@@ -170,11 +170,7 @@ class Template extends Nette\Object implements ITemplate
 	 */
 	public function registerFilter($callback)
 	{
-		$callback = new Nette\Callback($callback);
-		if (in_array($callback, $this->filters)) {
-			throw new Nette\InvalidStateException("Filter '$callback' was registered twice.");
-		}
-		$this->filters[] = $callback;
+		$this->filters[] = new Nette\Callback($callback);
 		return $this;
 	}
 
@@ -251,7 +247,7 @@ class Template extends Nette\Object implements ITemplate
 		$lname = strtolower($name);
 		if (!isset($this->helpers[$lname])) {
 			foreach ($this->helperLoaders as $loader) {
-				$helper = $loader($lname);
+				$helper = $loader/*5.2*->invoke*/($lname);
 				if ($helper) {
 					$this->registerHelper($lname, $helper);
 					return $this->helpers[$lname]->invokeArgs($args);
@@ -283,8 +279,6 @@ class Template extends Nette\Object implements ITemplate
 
 	/**
 	 * Adds new template parameter.
-	 * @param  string  name
-	 * @param  mixed   value
 	 * @return Template  provides a fluent interface
 	 */
 	public function add($name, $value)
@@ -324,28 +318,8 @@ class Template extends Nette\Object implements ITemplate
 
 
 
-	/** @deprecated */
-	function setParams(array $params)
-	{
-		trigger_error(__METHOD__ . '() is deprecated; use setParameters() instead.', E_USER_WARNING);
-		return $this->setParameters($params);
-	}
-
-
-
-	/** @deprecated */
-	function getParams()
-	{
-		trigger_error(__METHOD__ . '() is deprecated; use getParameters() instead.', E_USER_WARNING);
-		return $this->getParameters();
-	}
-
-
-
 	/**
 	 * Sets a template parameter. Do not call directly.
-	 * @param  string  name
-	 * @param  mixed   value
 	 * @return void
 	 */
 	public function __set($name, $value)
@@ -357,7 +331,6 @@ class Template extends Nette\Object implements ITemplate
 
 	/**
 	 * Returns a template parameter. Do not call directly.
-	 * @param  string  name
 	 * @return mixed  value
 	 */
 	public function &__get($name)
@@ -373,7 +346,6 @@ class Template extends Nette\Object implements ITemplate
 
 	/**
 	 * Determines whether parameter is defined. Do not call directly.
-	 * @param  string    name
 	 * @return bool
 	 */
 	public function __isset($name)

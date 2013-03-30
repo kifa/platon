@@ -47,9 +47,9 @@
                 </div>
                 <div class="span3">
                     {if $user->isLoggedIn()}
-                        <p>Hello {$user->id}! <a href="{plink Sign:out}">{_"Logout"}</a></p>
+                    <p>Hello {$user->id}! <a href="{plink Sign:out}">{_"Logout"} <i class="icon-signout"></i></a></p>
                     {else}
-                        <a href="{plink Sign:in}">{_"Sign In"}</a>
+                    <a href="{plink Sign:in}">{_"Sign In"} <i class="icon-signin"></i></a>
                     {/if}
                 </div>
             </div>

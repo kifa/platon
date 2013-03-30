@@ -164,9 +164,9 @@ final class Helpers
 		return Strings::replace(
 			$s,
 			'#(</textarea|</pre|</script|^).*?(?=<textarea|<pre|<script|\z)#si',
-			function($m) {
+			/*5.2* new Nette\Callback(*/function($m) {
 				return trim(preg_replace('#[ \t\r\n]+#', " ", $m[0]));
-			});
+			}/*5.2* )*/);
 	}
 
 
@@ -181,9 +181,9 @@ final class Helpers
 	public static function indent($s, $level = 1, $chars = "\t")
 	{
 		if ($level >= 1) {
-			$s = Strings::replace($s, '#<(textarea|pre).*?</\\1#si', function($m) {
+			$s = Strings::replace($s, '#<(textarea|pre).*?</\\1#si', /*5.2* new Nette\Callback(*/function($m) {
 				return strtr($m[0], " \t\r\n", "\x1F\x1E\x1D\x1A");
-			});
+			}/*5.2* )*/);
 			$s = Strings::indent($s, $level, $chars);
 			$s = strtr($s, "\x1F\x1E\x1D\x1A", " \t\r\n");
 		}
@@ -212,6 +212,22 @@ final class Helpers
 		return Strings::contains($format, '%')
 			? strftime($format, $time->format('U')) // formats according to locales
 			: $time->format($format); // formats using date()
+	}
+
+
+
+	/**
+	 * Date/time modification.
+	 * @param  string|int|DateTime
+	 * @param  string|int
+	 * @param  string
+	 * @return Nette\DateTime
+	 */
+	public static function modifyDate($time, $delta, $unit = NULL)
+	{
+		return $time == NULL // intentionally ==
+			? NULL
+			: Nette\DateTime::from($time)->modify($delta . $unit);
 	}
 
 

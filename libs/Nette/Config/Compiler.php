@@ -130,22 +130,8 @@ class Compiler extends Nette\Object
 		$this->parseServices($this->container, $this->config);
 
 		foreach ($this->extensions as $name => $extension) {
-			$this->container->addDefinition($name)
-				->setClass('Nette\DI\NestedAccessor', array('@container', $name))
-				->setAutowired(FALSE);
-
 			if (isset($this->config[$name])) {
 				$this->parseServices($this->container, $this->config[$name], $name);
-			}
-		}
-
-		foreach ($this->container->getDefinitions() as $name => $def) {
-			$factory = $name . 'Factory';
-			if (!$def->shared && !$def->internal && !$this->container->hasDefinition($factory)) {
-				$this->container->addDefinition($factory)
-					->setClass('Nette\Callback', array('@container', Nette\DI\Container::getMethodName($name, FALSE)))
-					->setAutowired(FALSE)
-					->tags = $def->tags;
 			}
 		}
 	}
@@ -159,35 +145,14 @@ class Compiler extends Nette\Object
 			$this->container->addDependency(Nette\Reflection\ClassType::from($extension)->getFileName());
 		}
 
-		$classes[] = $class = $this->container->generateClass($parentName);
-		$class->setName($className)
+		$classes = $this->container->generateClasses();
+		$classes[0]->setName($className)
+			->setExtends($parentName)
 			->addMethod('initialize');
 
 		foreach ($this->extensions as $extension) {
-			$extension->afterCompile($class);
+			$extension->afterCompile($classes[0]);
 		}
-
-		$defs = $this->container->getDefinitions();
-		ksort($defs);
-		$list = array_keys($defs);
-		foreach (array_reverse($defs, TRUE) as $name => $def) {
-			if ($def->class === 'Nette\DI\NestedAccessor' && ($found = preg_grep('#^'.$name.'\.#i', $list))) {
-				$list = array_diff($list, $found);
-				$def->class = $className . '_' . preg_replace('#\W+#', '_', $name);
-				$class->documents = preg_replace("#\\S+(?= \\$$name\\z)#", $def->class, $class->documents);
-				$classes[] = $accessor = new Nette\Utils\PhpGenerator\ClassType($def->class);
-				foreach ($found as $item) {
-					if ($defs[$item]->internal) {
-						continue;
-					}
-					$short = substr($item, strlen($name)  + 1);
-					$accessor->addDocument($defs[$item]->shared
-						? "@property {$defs[$item]->class} \$$short"
-						: "@method {$defs[$item]->class} create" . ucfirst("$short()"));
-				}
-			}
-		}
-
 		return implode("\n\n\n", $classes);
 	}
 
@@ -242,6 +207,13 @@ class Compiler extends Nette\Object
 			} catch (\Exception $e) {
 				throw new Nette\DI\ServiceCreationException("Service '$name': " . $e->getMessage(), NULL, $e);
 			}
+
+			if ($definition->class === 'self') {
+				$definition->class = $origName;
+			}
+			if ($definition->factory && $definition->factory->entity === 'self') {
+				$definition->factory->entity = $origName;
+			}
 		}
 	}
 
@@ -255,16 +227,28 @@ class Compiler extends Nette\Object
 	{
 		if ($config === NULL) {
 			return;
+
+		} elseif (!$shared && is_string($config) && interface_exists($config)) {
+			$config = array('class' => NULL, 'implement' => $config);
+
+		} elseif (!$shared && $config instanceof \stdClass && interface_exists($config->value)) {
+			$config = array('class' => NULL, 'implement' => $config->value, 'factory' => array_shift($config->attributes));
+
 		} elseif (!is_array($config)) {
-			$config = array('class' => NULL, 'factory' => $config);
+			$config = array('class' => NULL, 'create' => $config);
 		}
 
+		if (array_key_exists('factory', $config)) {
+			$config['create'] = $config['factory'];
+			unset($config['factory']);
+		};
+
 		$known = $shared
-			? array('class', 'factory', 'arguments', 'setup', 'autowired', 'run', 'tags')
-			: array('class', 'factory', 'arguments', 'setup', 'autowired', 'tags', 'internal', 'parameters');
+			? array('class', 'create', 'arguments', 'setup', 'autowired', 'inject', 'run', 'tags')
+			: array('class', 'create', 'arguments', 'setup', 'autowired', 'inject', 'parameters', 'implement');
 
 		if ($error = array_diff(array_keys($config), $known)) {
-			throw new Nette\InvalidStateException("Unknown key '" . implode("', '", $error) . "' in definition of service.");
+			throw new Nette\InvalidStateException("Unknown or deprecated key '" . implode("', '", $error) . "' in definition of service.");
 		}
 
 		$arguments = array();
@@ -274,7 +258,7 @@ class Compiler extends Nette\Object
 			$definition->setArguments($arguments);
 		}
 
-		if (array_key_exists('class', $config) || array_key_exists('factory', $config)) {
+		if (array_key_exists('class', $config) || array_key_exists('create', $config)) {
 			$definition->class = NULL;
 			$definition->factory = NULL;
 		}
@@ -288,12 +272,12 @@ class Compiler extends Nette\Object
 			}
 		}
 
-		if (array_key_exists('factory', $config)) {
-			Validators::assertField($config, 'factory', 'callable|stdClass|null');
-			if ($config['factory'] instanceof \stdClass) {
-				$definition->setFactory($config['factory']->value, self::filterArguments($config['factory']->attributes));
+		if (array_key_exists('create', $config)) {
+			Validators::assertField($config, 'create', 'callable|stdClass|null');
+			if ($config['create'] instanceof \stdClass) {
+				$definition->setFactory($config['create']->value, self::filterArguments($config['create']->attributes));
 			} else {
-				$definition->setFactory($config['factory'], $arguments);
+				$definition->setFactory($config['create'], $arguments);
 			}
 		}
 
@@ -319,14 +303,20 @@ class Compiler extends Nette\Object
 			$definition->setParameters($config['parameters']);
 		}
 
+		if (isset($config['implement'])) {
+			Validators::assertField($config, 'implement', 'string');
+			$definition->setImplement($config['implement']);
+			$definition->setAutowired(TRUE);
+		}
+
 		if (isset($config['autowired'])) {
 			Validators::assertField($config, 'autowired', 'bool');
 			$definition->setAutowired($config['autowired']);
 		}
 
-		if (isset($config['internal'])) {
-			Validators::assertField($config, 'internal', 'bool');
-			$definition->setInternal($config['internal']);
+		if (isset($config['inject'])) {
+			Validators::assertField($config, 'inject', 'bool');
+			$definition->setInject($config['inject']);
 		}
 
 		if (isset($config['run'])) {

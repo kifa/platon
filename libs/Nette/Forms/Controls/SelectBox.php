@@ -27,6 +27,9 @@ use Nette;
  */
 class SelectBox extends BaseControl
 {
+	/** validation rule */
+	const VALID = ':selectBoxValid';
+
 	/** @var array */
 	private $items = array();
 
@@ -54,6 +57,7 @@ class SelectBox extends BaseControl
 		if ($items !== NULL) {
 			$this->setItems($items);
 		}
+		$this->addRule($this->validateSelectBoxValid, Nette\Forms\Rules::$defaultMessages[self::VALID]);
 	}
 
 
@@ -100,20 +104,12 @@ class SelectBox extends BaseControl
 	public function setPrompt($prompt)
 	{
 		if ($prompt === TRUE) { // back compatibility
+			trigger_error(__METHOD__ . '(TRUE) is deprecated; argument must be string.', E_USER_DEPRECATED);
 			$prompt = reset($this->items);
 			unset($this->allowed[key($this->items)], $this->items[key($this->items)]);
 		}
 		$this->prompt = $prompt;
 		return $this;
-	}
-
-
-
-	/** @deprecated */
-	function skipFirst($v = NULL)
-	{
-		trigger_error(__METHOD__ . '() is deprecated; use setPrompt() instead.', E_USER_WARNING);
-		return $this->setPrompt($v);
 	}
 
 
@@ -237,6 +233,17 @@ class SelectBox extends BaseControl
 			}
 		}
 		return $control;
+	}
+
+
+
+	/**
+	 * Checks if a valid option was selected.
+	 * @return bool
+	 */
+	public static function validateSelectBoxValid(Nette\Forms\IControl $control)
+	{
+		return $control->prompt !== FALSE || $control->getValue() !== NULL;
 	}
 
 }

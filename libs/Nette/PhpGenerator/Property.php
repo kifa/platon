@@ -9,7 +9,7 @@
  * the file license.txt that was distributed with this source code.
  */
 
-namespace Nette\Utils\PhpGenerator;
+namespace Nette\PhpGenerator;
 
 use Nette;
 
@@ -42,6 +42,21 @@ class Property extends Nette\Object
 
 	/** @var array of string */
 	public $documents = array();
+
+
+	/** @return Property */
+	public static function from(\ReflectionProperty $from)
+	{
+		$prop = new static;
+		$prop->name = $from->getName();
+		$defaults = $from->getDeclaringClass()->getDefaultProperties();
+		$prop->value = isset($defaults[$from->name]) ? $defaults[$from->name] : NULL;
+		$prop->static = $from->isStatic();
+		$prop->visibility = $from->isPrivate() ? 'private' : ($from->isProtected() ? 'protected' : 'public');
+		$prop->documents = preg_replace('#^\s*\* ?#m', '', trim($from->getDocComment(), "/* \r\n"));
+		return $prop;
+	}
+
 
 
 	public function __call($name, $args)

@@ -67,6 +67,19 @@
             <fieldset>
                 {control cartForm}
             </fieldset>
+    <div class="span9 alert alert-info">   
+                        <div class="span1">                    
+                            <i class="icon-shopping-cart icon-4x"></i></div>
+                        <div class="span7">
+                            <h3 class="span2"><strong class="span1">Products:</strong>
+                                <span class="span1">{$grandtotal},-</span></h3>
+                            <h3 class="span2"><strong class="span1">Shipping:</strong> 
+                                <span class="shipping span1">0,-</span></h3>
+                            <h3 class="span2"><strong class="span1">Total:</strong>
+                                <span class="ordertotal span1">{$grandtotal},-</span></h3>
+                        </div>
+                    </div>
+    
     
             {$cartForm->render('begin')}
                {$cartForm->render('errors')}

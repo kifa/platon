@@ -244,32 +244,31 @@ class OrderPresenter extends BasePresenter {
 
         $total = 0;
         $today = date("Y-m-d");
-
-        foreach ($this->cart->prd as $id => $amnt) {
-
-            $price = $this->productModel->loadProduct($id)->FinalPrice;
-            
-            $amnt = $this->cart->prd[$id];
-
-            $total += $price * $amnt;
-            
-        }
         
+        $tax = $this->shopModel->getTax()->Value;
+        settype($tax, 'float');
+        $finalTax = $total * ($tax / 100);
         
         $this->orderNo = $this->orderModel->countOrder() + 1;
-
+                $orderDetCount = $this->orderModel->countOrderDetail() + 1;
         $addressID = $this->userModel->countAddress() + 1;
-        
+
+        foreach ($this->cart->prd as $id => $amnt) {
+            $price = $this->productModel->loadProduct($id)->FinalPrice;
+            $amnt = $this->cart->prd[$id];
+            $total += $price * $amnt;  
+        }
+
+        //STEP 1 - insert address
         $this->userModel->insertAddress(
                     $addressID,
                     $form->values->address,
                     $form->values->city,
                     $form->values->psc
-                    
                 );
         
         
-        
+        //STEP 2 - insert customer and assign address
         $this->userModel->insertUser(
                     $form->values->email,
                     $form->values->name,
@@ -277,29 +276,23 @@ class OrderPresenter extends BasePresenter {
                     $addressID
                );
         
-        //$tax = $this->shopModel->getTax()->value;
-        $tax = $this->shopModel->getTax()->value;
-        settype($tax, 'float');
-        $finalTax = $total * ($tax / 100);
-        
-        
+        //STEP 3 - insert order info, assign customer
         $this->orderModel->insertOrder(
                 $this->orderNo,
                 $form->values->email,
                 $total, $finalTax, $today, $today, $form->values->shippers, $form->values->payment
         );
 
-        $cislo = $this->orderModel->countOrderDetail() + 1;
-
-
+        //STEP 4 - insert Order Details and assign them to Order
         foreach ($this->cart->prd as $id => $amnt) {
 
             $price = $this->productModel->loadProduct($id)->FinalPrice;
             $amnt = $this->cart->prd[$id];
-            $this->orderModel->insertOrderDetails($cislo, $this->orderNo, $id, $amnt, $price);
-            $cislo++;
-        }
-
+            $this->orderModel->insertOrderDetails($orderDetCount, $this->orderNo, $id, $amnt, $price);
+            $orderDetCount++;
+           }
+           
+        //STEP 5 - redirect to Order Summary
         $this->redirect('Order:orderDone', $this->orderNo);
     }
 

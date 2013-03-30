@@ -45,7 +45,7 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
 
         unset($row->Password);
 
-        return new NS\Identity($row->Login, NULL, $row->toArray());
+        return new NS\Identity($row->UsersID, NULL, $row->toArray());
     }
 
     /**

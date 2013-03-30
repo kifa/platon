@@ -6182,3 +6182,7 @@ a.badge:focus {
         margin: 0 auto;
         float: none;
     }
+    
+    .masterhead a:hover {
+        text-decoration: none;
+    }

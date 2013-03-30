@@ -104,7 +104,6 @@ final class Request extends Nette\FreezableObject
 
 	/**
 	 * Sets variables provided to the presenter.
-	 * @param  array
 	 * @return Request  provides a fluent interface
 	 */
 	public function setParameters(array $params)
@@ -127,27 +126,8 @@ final class Request extends Nette\FreezableObject
 
 
 
-	/** @deprecated */
-	function setParams(array $params)
-	{
-		trigger_error(__METHOD__ . '() is deprecated; use setParameters() instead.', E_USER_WARNING);
-		return $this->setParameters($params);
-	}
-
-
-
-	/** @deprecated */
-	function getParams()
-	{
-		trigger_error(__METHOD__ . '() is deprecated; use getParameters() instead.', E_USER_WARNING);
-		return $this->getParameters();
-	}
-
-
-
 	/**
 	 * Sets variables provided to the presenter via POST.
-	 * @param  array
 	 * @return Request  provides a fluent interface
 	 */
 	public function setPost(array $params)
@@ -172,7 +152,6 @@ final class Request extends Nette\FreezableObject
 
 	/**
 	 * Sets all uploaded files.
-	 * @param  array
 	 * @return Request  provides a fluent interface
 	 */
 	public function setFiles(array $files)

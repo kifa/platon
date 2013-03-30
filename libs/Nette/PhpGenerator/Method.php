@@ -9,7 +9,7 @@
  * the file license.txt that was distributed with this source code.
  */
 
-namespace Nette\Utils\PhpGenerator;
+namespace Nette\PhpGenerator;
 
 use Nette;
 
@@ -62,6 +62,27 @@ class Method extends Nette\Object
 	public $documents = array();
 
 
+	/** @return Method */
+	public static function from($from)
+	{
+		$from = $from instanceof \ReflectionMethod ? $from : new \ReflectionMethod($from);
+		$method = new static;
+		$method->name = $from->getName();
+		foreach ($from->getParameters() as $param) {
+			$method->parameters[$param->getName()] = Parameter::from($param);
+		}
+		$method->static = $from->isStatic();
+		$method->visibility = $from->isPrivate() ? 'private' : ($from->isProtected() ? 'protected' : '');
+		$method->final = $from->isFinal();
+		$method->abstract = $from->isAbstract() && !$from->getDeclaringClass()->isInterface();
+		$method->body = $from->isAbstract() ? FALSE : '';
+		$method->returnReference = $from->returnsReference();
+		$method->documents = preg_replace('#^\s*\* ?#m', '', trim($from->getDocComment(), "/* \r\n"));
+		return $method;
+	}
+
+
+
 	/** @return Parameter */
 	public function addParameter($name, $defaultValue = NULL)
 	{
@@ -69,7 +90,7 @@ class Method extends Nette\Object
 		if (func_num_args() > 1) {
 			$param->setOptional(TRUE)->setDefaultValue($defaultValue);
 		}
-		return $this->parameters[] = $param->setName($name);
+		return $this->parameters[$name] = $param->setName($name);
 	}
 
 

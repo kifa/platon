@@ -1,6 +1,6 @@
 <ul class="thumbnails">
             {while $product = $products->fetch()}
-    <li class="span3">
+    <li class="span3 setview">
         <div class="thumbnail">
            {if $user->isLoggedIn()}
             <div class="row">
@@ -17,6 +17,7 @@
             </div>
             <hr>
             {/if}
+<div class="row">            
             <div class="span3">
                     {if $product->PiecesAvailable > 5}
             <span class="badge badge-info">{$product->PiecesAvailable}</span>
@@ -25,24 +26,20 @@
                     {/if}
             </div>
             {var $ph = 0}
-      
+      <a class="span3 text-center" href="{plink Product:product $product->ProductID}"> 
             {foreach $photos as $id => $photo}
-             
                 {if $id==$product->PhotoAlbumID}
-                   <a class="" href="{plink Product:product $product->ProductID}">  
-                   <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$photo->PhotoURL}" class="img-circle" style="height: 200px; width: auto;"/>
-                   </a>
+                     <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$photo->PhotoURL}" class="img-circle" style="height: 150px; width: auto;"/>
                    {var $ph = 1}
                 {/if}
+
+                {if $iterator->last && $ph == 0}
+                   <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="height: 150px; width: auto;"/>
+                {/if} 
+           {/foreach}      
+         </a>          
                    
-               {if $iterator->last && $ph == 0}
-                    <a class="" href="{plink Product:product $product->ProductID}">
-                   <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="height: 200px; width: auto;"/>
-                    </a>
-                   {/if}
-                 
-           {/foreach}
-         <div class="caption">
+         <div class="caption span3">
             <h4><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></h4>
             {var $desc = $product->ProductDescription}
                 <p>{$desc|truncate:30}</p>
@@ -64,6 +61,7 @@
             </div> 
 
         </div>
+        </div> <!--primary row -->
     </li>
             {/while}
 </ul>

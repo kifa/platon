@@ -11,7 +11,8 @@
 
 namespace Nette\Database\Table;
 
-use Nette;
+use Nette,
+	Nette\Database\Reflection\MissingReferenceException;
 
 
 
@@ -144,7 +145,7 @@ class ActiveRow extends Nette\Object implements \IteratorAggregate, \ArrayAccess
 	public function ref($key, $throughColumn = NULL)
 	{
 		if (!$throughColumn) {
-			list($key, $throughColumn) = $this->table->getConnection()->getDatabaseReflection()->getBelongsToReference($this->table->getName(), $key);
+			list($key, $throughColumn) = $this->table->getDatabaseReflection()->getBelongsToReference($this->table->getName(), $key);
 		}
 
 		return $this->getReference($key, $throughColumn);
@@ -163,7 +164,7 @@ class ActiveRow extends Nette\Object implements \IteratorAggregate, \ArrayAccess
 		if (strpos($key, '.') !== FALSE) {
 			list($key, $throughColumn) = explode('.', $key);
 		} elseif (!$throughColumn) {
-			list($key, $throughColumn) = $this->table->getConnection()->getDatabaseReflection()->getHasManyReference($this->table->getName(), $key);
+			list($key, $throughColumn) = $this->table->getDatabaseReflection()->getHasManyReference($this->table->getName(), $key);
 		}
 
 		return $this->table->getReferencingTable($key, $throughColumn, $this[$this->table->getPrimary()]);
@@ -183,7 +184,7 @@ class ActiveRow extends Nette\Object implements \IteratorAggregate, \ArrayAccess
 		}
 		return $this->table->getConnection()
 			->table($this->table->getName())
-			->find($this->getPrimary())
+			->wherePrimary($this->getPrimary())
 			->update($data);
 	}
 
@@ -197,7 +198,7 @@ class ActiveRow extends Nette\Object implements \IteratorAggregate, \ArrayAccess
 	{
 		$res = $this->table->getConnection()
 			->table($this->table->getName())
-			->find($this->getPrimary())
+			->wherePrimary($this->getPrimary())
 			->delete();
 
 		if ($res > 0 && ($signature = $this->getSignature(FALSE))) {
@@ -289,12 +290,14 @@ class ActiveRow extends Nette\Object implements \IteratorAggregate, \ArrayAccess
 			return $this->data[$key];
 		}
 
-		list($table, $column) = $this->table->getConnection()->getDatabaseReflection()->getBelongsToReference($this->table->getName(), $key);
-		$referenced = $this->getReference($table, $column);
-		if ($referenced !== FALSE) {
-			$this->accessColumn($key, FALSE);
-			return $referenced;
-		}
+		try {
+			list($table, $column) = $this->table->getDatabaseReflection()->getBelongsToReference($this->table->getName(), $key);
+			$referenced = $this->getReference($table, $column);
+			if ($referenced !== FALSE) {
+				$this->accessColumn($key, FALSE);
+				return $referenced;
+			}
+		} catch(MissingReferenceException $e) {}
 
 		$this->removeAccessColumn($key);
 		throw new Nette\MemberAccessException("Cannot read an undeclared column \"$key\".");

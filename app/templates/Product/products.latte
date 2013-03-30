@@ -2,15 +2,18 @@
 {block pageheader}
 <div class="page-header">
         <h1 n:block="title">{$category->CategoryName}<small> {$category->CategoryDescription}</small></h1>
-        {if $user->isLoggedIn()}
+        
         <div class="row">
             <div class="span10">
+                {if $user->isLoggedIn()}
                 <a href="#" id="showNew" ><i id="addIco" class="icon-large icon-plus"></i> {_"Add Product"}</a> |
                 <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> |
-                <a href="#"><i class="icon-large icon-pencil"></i> {_"Edit Category"}</a>
+                <a href="#"><i class="icon-large icon-pencil"></i> {_"Edit Category"}</a> |
+                {/if}
+                <a href="#" id="setView"><i class="icon-th-list icon-large"></i> {_"View as List"}</a>
             </div>
         </div>
-        {/if}
+        
     </div>
     <p class="text-left">Nexus 4 comes with the latest version of Google Now to bring you just the
         right information at just the right time. It shows you how much traffic
@@ -19,12 +22,12 @@
         With the latest version, Google Now keeps you even more organized – get reminders
         about upcoming flights, restaurant reservations, hotel confirmations and even
         nearby photo opportunities – when and where you need them.</p>
-
     {if $user->isLoggedIn()}
-    <div class="span10" style="display: none;" id="addProduct">
+    <div class="span5" style="display: none;" id="addProduct">
         {control addProductForm}
     </div>
     {/if}
+    
 {/block}
     
 {block content}
@@ -92,4 +95,23 @@
 
     </script>
     {/if}
+    
+    <script>
+        $(document).ready(function() {
+            $('#setView').toggle(function(){
+             
+              $('.setview').attr('class', 'span10 setview');
+              $('#setview').children('i').attr('class', 'icon-large icon-th');
+     
+            },
+            function() {
+
+              $('.setview').attr('class', 'span3 setview');
+              $('#setview').children('i').attr('class', 'icon-large icon-th-list');
+
+            });
+            
+        });
+    </script>
+
 {/block}

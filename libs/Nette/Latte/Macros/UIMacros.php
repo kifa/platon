@@ -49,6 +49,7 @@ class UIMacros extends MacroSet
 		$me->addMacro('extends', array($me, 'macroExtends'));
 		$me->addMacro('layout', array($me, 'macroExtends'));
 		$me->addMacro('block', array($me, 'macroBlock'), array($me, 'macroBlockEnd'));
+		$me->addMacro('#', array($me, 'macroBlock'), array($me, 'macroBlockEnd'));
 		$me->addMacro('define', array($me, 'macroBlock'), array($me, 'macroBlockEnd'));
 		$me->addMacro('snippet', array($me, 'macroBlock'), array($me, 'macroBlockEnd'));
 		$me->addMacro('ifset', array($me, 'macroIfset'), 'endif');
@@ -88,9 +89,9 @@ class UIMacros extends MacroSet
 	public function finalize()
 	{
 		// try close last block
-		try {
-			$this->getCompiler()->writeMacro('/block');
-		} catch (CompileException $e) {
+		$last = $this->getCompiler()->getMacroNode();
+		if ($last && ($last->name === 'block' || $last->name === '#')) {
+			$this->getCompiler()->writeMacro('/' . $last->name);
 		}
 
 		$epilog = $prolog = array();
@@ -242,7 +243,7 @@ if (!empty($_control->snippetMode)) {
 				$node->data->leave = TRUE;
 				$node->closingCode = "<?php \$_dynSnippets[\$_dynSnippetId] = ob_get_flush() ?>";
 
-				if ($node->htmlNode) {
+				if ($node->prefix) {
 					$node->attrCode = $writer->write("<?php echo ' id=\"' . (\$_dynSnippetId = \$_control->getSnippetId({$writer->formatWord($name)})) . '\"' ?>");
 					return $writer->write('ob_start()');
 				}
@@ -282,7 +283,7 @@ if (!empty($_control->snippetMode)) {
 		}
 
 		if ($node->name === 'snippet') {
-			if ($node->htmlNode) {
+			if ($node->prefix) {
 				$node->attrCode = $writer->write('<?php echo \' id="\' . $_control->getSnippetId(%var) . \'"\' ?>', (string) substr($name, 1));
 				return $writer->write($prolog . $include, $name);
 			}
@@ -310,7 +311,7 @@ if (!empty($_control->snippetMode)) {
 	public function macroBlockEnd(MacroNode $node, PhpWriter $writer)
 	{
 		if (isset($node->data->name)) { // block, snippet, define
-			if ($node->name === 'snippet' && $node->htmlNode && !$node->prefix // n:snippet -> n:inner-snippet
+			if ($node->name === 'snippet' && $node->prefix === MacroNode::PREFIX_NONE // n:snippet -> n:inner-snippet
 				&& preg_match('#^.*? n:\w+>\n?#s', $node->content, $m1) && preg_match('#[ \t]*<[^<]+\z#s', $node->content, $m2))
 			{
 				$node->openingCode = $m1[0] . $node->openingCode;
@@ -356,6 +357,9 @@ if (!empty($_control->snippetMode)) {
 	 */
 	public function macroControl(MacroNode $node, PhpWriter $writer)
 	{
+		if ($node->name === 'widget') {
+			trigger_error('Macro {widget} is deprecated; use {control} instead.', E_USER_DEPRECATED);
+		}
 		$pair = $node->tokenizer->fetchWord();
 		if ($pair === FALSE) {
 			throw new CompileException("Missing control name in {control}");

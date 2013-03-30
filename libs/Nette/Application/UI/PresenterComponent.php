@@ -120,9 +120,9 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	 * Access to reflection.
 	 * @return PresenterComponentReflection
 	 */
-	public static function getReflection()
+	public /**/static/**/ function getReflection()
 	{
-		return new PresenterComponentReflection(get_called_class());
+		return new PresenterComponentReflection(/*5.2*$this*//**/get_called_class()/**/);
 	}
 
 
@@ -141,7 +141,7 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 		$reflection = $this->getReflection();
 		foreach ($reflection->getPersistentParams() as $name => $meta) {
 			if (isset($params[$name])) { // NULLs are ignored
-				$type = gettype($meta['def'] === NULL ? $params[$name] : $meta['def']); // compatible with 2.0.x
+				$type = gettype($meta['def']);
 				if (!$reflection->convertType($params[$name], $type)) {
 					throw new Nette\Application\BadRequestException("Invalid value for persistent parameter '$name' in '{$this->getName()}', expected " . ($type === 'NULL' ? 'scalar' : $type) . ".");
 				}
@@ -179,7 +179,7 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 				continue; // ignored parameter
 			}
 
-			$type = gettype($meta['def'] === NULL ? $params[$name] : $meta['def']); // compatible with 2.0.x
+			$type = gettype($meta['def']);
 			if (!PresenterComponentReflection::convertType($params[$name], $type)) {
 				throw new InvalidLinkException("Invalid value for persistent parameter '$name' in '{$this->getName()}', expected " . ($type === 'NULL' ? 'scalar' : $type) . ".");
 			}
@@ -194,7 +194,6 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 
 	/**
 	 * Returns component param.
-	 * If no key is passed, returns the entire array.
 	 * @param  string key
 	 * @param  mixed  default value
 	 * @return mixed
@@ -202,6 +201,7 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	final public function getParameter($name = NULL, $default = NULL)
 	{
 		if (func_num_args() === 0) {
+			trigger_error('Calling ' . __METHOD__ . ' with no arguments to get all parameters is deprecated, use getParameters() instead.', E_USER_DEPRECATED);
 			return $this->params;
 
 		} elseif (isset($this->params[$name])) {
@@ -210,6 +210,17 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 		} else {
 			return $default;
 		}
+	}
+
+
+
+	/**
+	 * Returns component parameters.
+	 * @return array
+	 */
+	final public function getParameters()
+	{
+		return $this->params;
 	}
 
 
@@ -230,17 +241,8 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	/** @deprecated */
 	function getParam($name = NULL, $default = NULL)
 	{
-		//trigger_error(__METHOD__ . '() is deprecated; use getParameter() instead.', E_USER_WARNING);
+		//trigger_error(__METHOD__ . '() is deprecated; use getParameter() instead.', E_USER_DEPRECATED);
 		return func_num_args() ? $this->getParameter($name, $default) : $this->getParameter();
-	}
-
-
-
-	/** @deprecated */
-	function getParamId($name)
-	{
-		trigger_error(__METHOD__ . '() is deprecated; use getParameterId() instead.', E_USER_WARNING);
-		return $this->getParameterId($name);
 	}
 
 
@@ -252,7 +254,8 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	 */
 	public static function getPersistentParams()
 	{
-		$rc = new Nette\Reflection\ClassType(get_called_class());
+		/*5.2*$arg = func_get_arg(0);*/
+		$rc = new Nette\Reflection\ClassType(/*5.2*$arg*//**/get_called_class()/**/);
 		$params = array();
 		foreach ($rc->getProperties(\ReflectionProperty::IS_PUBLIC) as $rp) {
 			if (!$rp->isStatic() && $rp->hasAnnotation('persistent')) {

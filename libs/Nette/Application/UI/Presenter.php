@@ -111,14 +111,28 @@ abstract class Presenter extends Control implements Application\IPresenter
 	/** @var \SystemContainer|Nette\DI\Container */
 	private $context;
 
+	/** @var Nette\Application\Application */
+	private $application;
+
+	/** @var Nette\Http\Context */
+	private $httpContext;
+
+	/** @var Nette\Http\IRequest */
+	private $httpRequest;
+
+	/** @var Nette\Http\IResponse */
+	private $httpResponse;
+
+	/** @var Nette\Http\Session */
+	private $session;
+
+	/** @var Nette\Security\User */
+	private $user;
 
 
-	public function __construct(Nette\DI\Container $context = NULL)
+
+	public function __construct()
 	{
-		$this->context = $context;
-		if ($context && $this->invalidLinkMode === NULL) {
-			$this->invalidLinkMode = $context->parameters['productionMode'] ? self::INVALID_LINK_SILENT : self::INVALID_LINK_WARNING;
-		}
 	}
 
 
@@ -221,7 +235,7 @@ abstract class Presenter extends Control implements Application\IPresenter
 			} catch (Application\AbortException $e) { }
 
 			if ($this->hasFlashSession()) {
-				$this->getFlashSession()->setExpiration($this->response instanceof Responses\RedirectResponse ? '+ 30 seconds': '+ 3 seconds');
+				$this->getFlashSession()->setExpiration($this->response instanceof Responses\RedirectResponse ? '+ 30 seconds' : '+ 3 seconds');
 			}
 
 			// SHUTDOWN
@@ -307,7 +321,7 @@ abstract class Presenter extends Control implements Application\IPresenter
 		} catch (Nette\InvalidArgumentException $e) {}
 
 		if (isset($e) || $component === NULL) {
-			throw new BadSignalException("The signal receiver component '$this->signalReceiver' is not found.");
+			throw new BadSignalException("The signal receiver component '$this->signalReceiver' is not found.", NULL, isset($e) ? $e : NULL);
 
 		} elseif (!$component instanceof ISignalReceiver) {
 			throw new BadSignalException("The signal receiver component '$this->signalReceiver' is not ISignalReceiver implementor.");
@@ -609,6 +623,19 @@ abstract class Presenter extends Control implements Application\IPresenter
 
 
 
+	/**
+	 * Sends JSON data to the output.
+	 * @param  mixed $data
+	 * @return void
+	 * @throws Nette\Application\AbortException
+	 */
+	public function sendJson($data)
+	{
+		$this->sendResponse(new Responses\JsonResponse($data));
+	}
+
+
+
 	/********************* navigation & flow ****************d*g**/
 
 
@@ -684,13 +711,6 @@ abstract class Presenter extends Control implements Application\IPresenter
 				: Http\IResponse::S302_FOUND;
 		}
 		$this->sendResponse(new Responses\RedirectResponse($url, $code));
-	}
-
-	/** @deprecated */
-	function redirectUri($url, $code = NULL)
-	{
-		trigger_error(__METHOD__ . '() is deprecated; use ' . __CLASS__ . '::redirectUrl() instead.', E_USER_WARNING);
-		$this->redirectUrl($url, $code);
 	}
 
 
@@ -930,9 +950,11 @@ abstract class Presenter extends Control implements Application\IPresenter
 			$reflection = new PresenterComponentReflection($presenterClass);
 			if ($args || $destination === 'this') {
 				// counterpart of run() & tryCall()
-				$method = $presenterClass::formatActionMethod($action);
+				/**/$method = $presenterClass::formatActionMethod($action);/**/
+				/*5.2* $method = call_user_func(array($presenterClass, 'formatActionMethod'), $action);*/
 				if (!$reflection->hasCallableMethod($method)) {
-					$method = $presenterClass::formatRenderMethod($action);
+					/**/$method = $presenterClass::formatRenderMethod($action);/**/
+					/*5.2* $method = call_user_func(array($presenterClass, 'formatRenderMethod'), $action);*/
 					if (!$reflection->hasCallableMethod($method)) {
 						$method = NULL;
 					}
@@ -1147,7 +1169,8 @@ abstract class Presenter extends Control implements Application\IPresenter
 	 */
 	public static function getPersistentComponents()
 	{
-		return (array) Reflection\ClassType::from(get_called_class())
+		/*5.2*$arg = func_get_arg(0);*/
+		return (array) Reflection\ClassType::from(/*5.2*$arg*//**/get_called_class()/**/)
 			->getAnnotation('persistent');
 	}
 
@@ -1346,12 +1369,19 @@ abstract class Presenter extends Control implements Application\IPresenter
 
 
 
-	/**
-	 * @return void
-	 */
-	final public function injectPrimary(Nette\DI\Container $context)
+	final public function injectPrimary(Nette\DI\Container $context, Application\Application $application, Http\Context $httpContext, Http\IRequest $httpRequest, Http\IResponse $httpResponse, Http\Session $session, Nette\Security\User $user)
 	{
+		if ($this->application !== NULL) {
+			throw new Nette\InvalidStateException("Method " . __METHOD__ . " is intended for initialization and should not be called more than once.");
+		}
+
 		$this->context = $context;
+		$this->application = $application;
+		$this->httpContext = $httpContext;
+		$this->httpRequest = $httpRequest;
+		$this->httpResponse = $httpResponse;
+		$this->session = $session;
+		$this->user = $user;
 	}
 
 
@@ -1378,21 +1408,21 @@ abstract class Presenter extends Control implements Application\IPresenter
 
 
 	/**
-	 * @return Nette\Http\Request
+	 * @return Nette\Http\IRequest
 	 */
 	protected function getHttpRequest()
 	{
-		return $this->context->getByType('Nette\Http\IRequest');
+		return $this->httpRequest;
 	}
 
 
 
 	/**
-	 * @return Nette\Http\Response
+	 * @return Nette\Http\IResponse
 	 */
 	protected function getHttpResponse()
 	{
-		return $this->context->getByType('Nette\Http\IResponse');
+		return $this->httpResponse;
 	}
 
 
@@ -1402,7 +1432,7 @@ abstract class Presenter extends Control implements Application\IPresenter
 	 */
 	protected function getHttpContext()
 	{
-		return $this->context->getByType('Nette\Http\Context');
+		return $this->httpContext;
 	}
 
 
@@ -1412,7 +1442,7 @@ abstract class Presenter extends Control implements Application\IPresenter
 	 */
 	public function getApplication()
 	{
-		return $this->context->getByType('Nette\Application\Application');
+		return $this->application;
 	}
 
 
@@ -1422,7 +1452,7 @@ abstract class Presenter extends Control implements Application\IPresenter
 	 */
 	public function getSession($namespace = NULL)
 	{
-		$handler = $this->context->getByType('Nette\Http\Session');
+		$handler = $this->session;
 		return $namespace === NULL ? $handler : $handler->getSection($namespace);
 	}
 
@@ -1433,7 +1463,7 @@ abstract class Presenter extends Control implements Application\IPresenter
 	 */
 	public function getUser()
 	{
-		return $this->context->getByType('Nette\Security\User');
+		return $this->user;
 	}
 
 }

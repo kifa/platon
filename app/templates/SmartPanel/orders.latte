@@ -26,7 +26,7 @@
                 <tr class="{if $order->StatusID == 3}success {elseif $order->StatusID == 2} info {else} warning {/if}">
                     <td>{$id}</td>
                     <td>{$order->DateCreated|date:'%d.%m.%Y'}</td>
-                    <td><a href="{plink SmartPanel:orderDetail $id}">{$order->FirstName} {$order->SureName}</a></td>
+                    <td><a href="{plink SmartPanel:orderDetail $id}">{$order->Name}</a></td>
                     <td>{$order->TotalPrice},-</td>
                     <td>{$order->StatusName}</td>
                 </tr>

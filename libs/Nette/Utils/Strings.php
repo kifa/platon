@@ -11,8 +11,7 @@
 
 namespace Nette\Utils;
 
-use Nette,
-	Nette\Diagnostics\Debugger;
+use Nette;
 
 
 
@@ -55,15 +54,13 @@ class Strings
 	 */
 	public static function fixEncoding($s, $encoding = 'UTF-8')
 	{
-		// removes xD800-xDFFF, xFEFF, x110000 and higher
-		if (strcasecmp($encoding, 'UTF-8') === 0) {
-			$s = str_replace("\xEF\xBB\xBF", '', $s); // remove UTF-8 BOM
-		}
+		// removes xD800-xDFFF, x110000 and higher
 		if (PHP_VERSION_ID >= 50400) {
 			ini_set('mbstring.substitute_character', 'none');
 			return mb_convert_encoding($s, $encoding, $encoding);
+		} else {
+			return @iconv('UTF-16', 'UTF-8//IGNORE', iconv($encoding, 'UTF-16//IGNORE', $s)); // intentionally @
 		}
-		return @iconv('UTF-16', $encoding . '//IGNORE', iconv($encoding, 'UTF-16//IGNORE', $s)); // intentionally @
 	}
 
 
@@ -312,6 +309,33 @@ class Strings
 			$right = self::substring($right, 0, $len);
 		}
 		return self::lower($left) === self::lower($right);
+	}
+
+
+
+	/**
+	 * Finds the length of common prefix of strings.
+	 * @param  string|array
+	 * @param  string
+	 * @return string
+	 */
+	public static function findPrefix($strings, $second = NULL)
+	{
+		if (!is_array($strings)) {
+			$strings = func_get_args();
+		}
+		$first = array_shift($strings);
+		for ($i = 0; $i < strlen($first); $i++) {
+			foreach ($strings as $s) {
+				if (!isset($s[$i]) || $first[$i] !== $s[$i]) {
+					if ($i && $first[$i-1] >= "\x80" && $first[$i] >= "\x80" && $first[$i] < "\xC0") {
+						$i--;
+					}
+					return substr($first, 0, $i);
+				}
+			}
+		}
+		return $first;
 	}
 
 

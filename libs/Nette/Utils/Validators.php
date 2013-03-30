@@ -34,7 +34,7 @@ class Validators extends Nette\Object
 		'string' =>  'is_string',
 		'unicode' => array(__CLASS__, 'isUnicode'),
 		'array' => 'is_array',
-		'list' => array(__CLASS__, 'isList'),
+		'list' => array('Nette\Utils\Arrays', 'isList'),
 		'object' => 'is_object',
 		'resource' => 'is_resource',
 		'scalar' => 'is_scalar',
@@ -163,7 +163,6 @@ class Validators extends Nette\Object
 
 	/**
 	 * Finds whether a value is an integer.
-	 * @param  mixed
 	 * @return bool
 	 */
 	public static function isNumericInt($value)
@@ -175,7 +174,6 @@ class Validators extends Nette\Object
 
 	/**
 	 * Finds whether a string is a floating point number in decimal base.
-	 * @param  mixed
 	 * @return bool
 	 */
 	public static function isNumeric($value)
@@ -187,7 +185,6 @@ class Validators extends Nette\Object
 
 	/**
 	 * Finds whether a value is a syntactically correct callback.
-	 * @param  mixed
 	 * @return bool
 	 */
 	public static function isCallable($value)
@@ -211,7 +208,6 @@ class Validators extends Nette\Object
 
 	/**
 	 * Finds whether a value is "falsy".
-	 * @param  mixed
 	 * @return bool
 	 */
 	public static function isNone($value)
@@ -228,7 +224,7 @@ class Validators extends Nette\Object
 	 */
 	public static function isList($value)
 	{
-		return is_array($value) && (!$value || array_keys($value) === range(0, count($value) - 1));
+		return Arrays::isList($value);
 	}
 
 
