@@ -98,11 +98,11 @@ class OrderModel extends Repository {
     public function loadStatus($id)
     {
         if($id==''){
-            return $this->getTable('status');
+            return $this->getTable('orderstatus')->fetchPairs('OrderStatusID');
         }
         else
         {
-            return $this->getTable('status')->where('StatusID',$id);
+            return $this->getTable('orderstatus')->where('OrderStatusID',$id);
         }
     }
     
@@ -112,12 +112,12 @@ class OrderModel extends Repository {
     public function insertStatus($id,$name,$description)
     {
         $insert = array(
-            'StatusID' => $id,
+            'OrderStatusID' => $id,
             'StatusName' => $name,
             'StatusDescription' => $description
         );
         
-        return $this->getTable('Status')->insert($insert);
+        return $this->getTable('orderstatus')->insert($insert);
     }
 
     /*
@@ -179,7 +179,8 @@ class OrderModel extends Repository {
     }
     
     
-    public function countOrder()
+
+        public function countOrder()
     {
         return $this->getTable('orders')->count();
     }

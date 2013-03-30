@@ -1,0 +1,1 @@
+[2013-03-30 22-19-23] PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '5' for key 'PRIMARY' in C:\xampp\htdocs\platon\libs\Nette\Database\Statement.php:76  @  http://10.0.0.9/platon/www/product/products/2?lang=en&do=addProductForm-submit  @@  exception-2013-03-30-22-19-22-b5c108ad4a6c431afa520ce9e26c256b.html

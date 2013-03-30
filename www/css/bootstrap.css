@@ -6186,3 +6186,7 @@ a.badge:focus {
     .masterhead a:hover {
         text-decoration: none;
     }
+ 
+    li .setview {
+        min-width: 270px;
+    }
