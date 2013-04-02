@@ -31,5 +31,9 @@ class Repository extends Nette\Object {
     {
         return $this->getTable($table)->where($by);
     }
+    
+    public function getDB(){
+        return $this->database;
+    }
 
 }

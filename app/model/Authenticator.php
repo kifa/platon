@@ -33,35 +33,39 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
         list($username, $password) = $credentials;
         $row = $this->users->findByName($username);
 
-
-
+        dump($username);
+        dump($password);
+        dump($row->Password);
+        dump($this->calculateHash($password));
+        dump($this->calculateHash($password, $row->Password));
+        dump($this->calculateHash($row->Password, $password));
+        
         if (!$row) {
             throw new NS\AuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);
         }
 
-        if ($row->Password == self::calculateHash($password, $row->Password)) {
+        if ($row->Password !== self::calculateHash($password, $row->Password)) {
             throw new NS\AuthenticationException("Invalid password.", self::INVALID_CREDENTIAL);
         }
 
         unset($row->Password);
 
-        return new NS\Identity($row->UsersID, NULL, $row->toArray());
+        return new NS\Identity($row->UsersID, $row->Permission, $row->toArray());
     }
 
     /**
      * Computes salted password hash.
      * @param  string
      * @return string
-     
+     */
     public static function calculateHash($password, $salt = null) {
 
         if ($salt === null) {
-            $salt = '$2a$07$' . Nette\Utils\Strings::random(32) . '$';
-        }
-
-        return crypt($password, $salt);
-    }*/
-    
+        $salt = '$2a$07$';
+    }
+    return crypt($password, $salt);
+    }
+    /*
     public static function calculateHash($password, $salt = NULL)
 	{
 		if ($password === Strings::upper($password)) { // perhaps caps lock is on
@@ -69,5 +73,5 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
 		}
 		return crypt($password, $salt ?: '$2a$07$' . Strings::random(22));
 	}
-
+        */
 }

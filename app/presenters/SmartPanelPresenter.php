@@ -34,10 +34,18 @@ class SmartPanelPresenter extends BasePresenter {
         $this->userModel = $this->context->userModel;
     }
     
+    /*
+     * Action for setting OrderStatus
+     */
     
+    public function actionSetStatus($orderID, $statusID) {
+        $this->orderModel->setStatus($orderID, $statusID);
+        $this->redirect('orderDetail', $orderID);
+    }
+
     protected function createComponentPasswordForm() {
-        $form = new Form();
-        $form->addHidden('login', $this->getUser()->getIdentity()->Login);
+        $form = new Nette\Application\UI\Form;
+        $form->addHidden('login', $this->getUser()->getIdentity()->id);
         $form->addPassword('newPassword', 'Nové heslo:', 30)
                 ->addRule(Form::MIN_LENGTH, 'Nové heslo musí mít alespoň %d znaků.', 6);
         $form->addPassword('confirmPassword', 'Potvrzení hesla:', 30)
@@ -48,17 +56,18 @@ class SmartPanelPresenter extends BasePresenter {
         return $form;
     }
 
-    public function passwordFormSubmitted(Form $form) {
+    public function passwordFormSubmitted($form) {
         $values = $form->getValues();
-        $user = $form->getValues('login');
+        //$user = $form->getValues('login');
+        
         try {
             // $this->authenticator->authenticate(array($user->getIdentity()->username, $values->oldPassword));
-            $this->users->setPassword($values->login, $values->newPassword);
+            $this->userModel->setPassword($values->login, $values->newPassword);
             $ico = HTML::el('i')->class('icon-ok-sign left');
             $message = HTML::el('span', ' Your password was successfully changed.');
             $message->insert(0, $ico);
             $this->flashMessage($message, 'alert alert-info');
-            $this->redirect('this');
+            $this->redirect('SmartPanel:default');
         } catch (NS\AuthenticationException $e) {
             $form->addError('Zadané heslo není správné.');
         }

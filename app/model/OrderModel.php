@@ -98,7 +98,7 @@ class OrderModel extends Repository {
     public function loadStatus($id)
     {
         if($id==''){
-            return $this->getTable('orderstatus')->fetchPairs('OrderStatusID');
+            return $this->getTable('orderstatus')->order('StatusProgress')->fetchPairs('OrderStatusID');
         }
         else
         {
@@ -193,6 +193,14 @@ class OrderModel extends Repository {
     public function countDelivery()
     {
         return $this->getTable('delivery')->count();
+    }
+    
+    public function setStatus($orderid,$statusid){
+        $update = array(
+            'StatusID' => $statusid
+        );
+        
+        return $this->getTable('Orders')->where('OrderID',$orderid)->update($update);
     }
     /*
      * Change order status

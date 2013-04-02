@@ -18,13 +18,15 @@ class ProductModel extends Repository {
         //$id = '2';
         //return $this->getTable('Product')->select('Product.*,Price.*')->where('CategoryID', $id);
         if($id==''){
-            return $this->getTable('product')->select('product.ProductID, product.ProductName,
-                product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice');            
-        }
+            //return $this->getTable('product')->select('product.ProductID, product.ProductName,
+            //    product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*');            
+           return $this->getDB()->query('SELECT * FROM product JOIN price ON product.PriceID=price.PriceID JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID');
+           }
         else
-        {
-        return $this->getTable('product')->select('product.ProductID, product.ProductName, 
-            product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice')->where('CategoryID', $id);        
+        {          
+           return $this->getDB()->query('SELECT * FROM product JOIN price ON product.PriceID=price.PriceID JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID WHERE Product.CategoryID=?',$id);
+            //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
+              //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
         }
     }
 
@@ -35,10 +37,9 @@ class ProductModel extends Repository {
      * @return string
      *  */
 
-    public function loadProduct($id) {
-        
-    //return $this->getTable('Product')->where('ProductID', $id)->fetch();
-      return $this->getTable('Product')->select('Product.*,Price.*,PhotoAlbum.*')->where('Product.ProductID',$id)->fetch();
+    public function loadProduct($id) {       
+        return $this->getDB()->query('SELECT * FROM product JOIN price ON product.PriceID=price.PriceID JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID WHERE Product.ProductID=?',$id)->fetch();
+        //return $this->getTable('Product')->select('Product.*,Price.*,PhotoAlbum.*,photo.*')->where('Product.ProductID',$id)->fetch()
     }
 
     /*
@@ -107,15 +108,16 @@ class ProductModel extends Repository {
             return $this->getTable('PhotoAlbum');
         }
         else{
-        return $this->getTable('PhotoAlbum')->where('PhotoAlbumID',$id);
+            //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
+            return $this->getDB()->query('SELECT * FROM product JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID WHERE Product.ProductID=?',$id);
         }
     }
     
     /*
-     * Load Photos
+     * Load photo
      */
     public function loadPhoto($id){
-        return $this->getTable('Photo')->where('PhotoAlbumID',$id);
+        return $this->getTable('photo')->where('PhotoAlbumID',$id);
     }
     
     /*
@@ -141,13 +143,13 @@ class ProductModel extends Repository {
             'PhotoAltText' => 's4',
             'CoverPhoto' => 1
                 );
-            return $this->getTable('Photo')->insert($insert);
+            return $this->getTable('photo')->insert($insert);
         }
     /*
-     * Counting number of photos to generate ID
+     * Counting number of photo to generate ID
      * 
      */
         public function countPhoto(){
-            return $this->getTable('Photo')->count();
+            return $this->getTable('photo')->count();
         }
 }

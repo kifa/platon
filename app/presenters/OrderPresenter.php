@@ -38,7 +38,10 @@ class OrderPresenter extends BasePresenter {
         $this->userModel = $this->context->userModel;
         $this->cart = $this->getSession('cart');
     }
+    
 
+    
+    
     /*
      * Handle for removing item from Cart
      */
@@ -100,9 +103,6 @@ class OrderPresenter extends BasePresenter {
         $this->actionCart($id, "1");
     }
 
-    
-
-    
 
     public function actionCart($product, $amnt) {
      
@@ -259,6 +259,8 @@ class OrderPresenter extends BasePresenter {
             $total += $price * $amnt;  
         }
 
+        
+        if ($this->userModel->isUser($form->values->email)){
         //STEP 1 - insert address
         $this->userModel->insertAddress(
                     $addressID,
@@ -275,6 +277,7 @@ class OrderPresenter extends BasePresenter {
                     $form->values->phone,
                     $addressID
                );
+        }
         
         //STEP 3 - insert order info, assign customer
         $this->orderModel->insertOrder(
@@ -318,6 +321,7 @@ class OrderPresenter extends BasePresenter {
 
         $this->template->products = $this->orderModel->loadOrderProduct($orderNo);
         $this->template->order = $this->orderModel->loadOrder($orderNo);
+        $this->template->statuses = $this->orderModel->loadStatus('');
 
         $ico = HTML::el('i')->class('icon-ok-sign left');
         $message = HTML::el('span', ' Order has been successfully sent.');

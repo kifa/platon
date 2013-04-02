@@ -34,7 +34,7 @@
                     <td>{$order->DateCreated|date:'%d.%m.%Y'}</td>
                     <td><a href="{plink SmartPanel:orderDetail $id}">{$order->Name}</a></td>
                     <td>{$order->TotalPrice},-</td>
-                    <td>{$order->StatusName}</td>
+                    <td>{if $order->StatusProgress == 10}<i class="icon-ok"></i> {/if}{$order->StatusName}</td>
                 </tr>
                 
                 {/foreach}

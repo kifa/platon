@@ -2,6 +2,13 @@
 {if $user->isLoggedIn()}
 <div class="page-header">
         <h1 n:block="title">Order summary <small> Complete summary order.</small></h1>
+
+<div class="row">
+            <div class="span10">
+                <a href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_"Back to Orders"}</a> |
+                <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+            </div>
+        </div>
 </div>
 {/if}
 {/block}
@@ -16,7 +23,7 @@
 {$flash->message}</div>
 {/foreach}
         <div class="row">
-                            <table class="table table-hover span10">
+                            <table class="table table-hover span9">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -33,8 +40,13 @@
 
 
                                     <tr>
-                                        <td><img src="http://www.google.com/nexus/images/n4-product-hero.png" class="img-circle" style="width: 38px;">
-                                            {$product->ProductNumber}</td>
+                                        <td>{if $product->PhotoAlbumID}
+                     <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$product->PhotoURL}" class="img-circle" style="width: 38px;"/>
+
+                {else}
+                   <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="width: 38px;"/>
+                {/if}
+{$product->ProductNumber}</td>
                                         <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
                                         <td>{$product->Quantity}</td>
                                         <td>{$product->UnitPrice},-</td>
@@ -91,19 +103,19 @@
         <div class="span4 alert alert-block">
             <div class="span4">
                 <p>
-                <i class="icon-spinner icon-spin left icon-large"></i><strong> Status:</strong>&nbsp;
+                <i class="{if $order->StatusProgress == 10}icon-ok {else} icon-spinner icon-spin{/if} left icon-large"></i><strong> Status:</strong>&nbsp;
             {$order->StatusName}
                 </p>
             </div>
             <br>
             <div class="progress progress-info active span4">
-                <div class="bar" style="width: 20%"></div>
+                <div class="bar" style="width: {foreach $statuses as $id => $status}{if $id == $order->StatusID}{$status->StatusProgress}0%{/if}{/foreach}"></div>
             </div>
             <div class="span4">
                 <ul class="inline">
                     {foreach $statuses as $id => $status}
                     {if !($iterator->isFirst())}
-                    <li><a href="{plink Order:setStatus $order->OrderID, $id}">{$status->StatusName}
+                    <li><a href="{plink SmartPanel:setStatus $order->OrderID, $id}">{$status->StatusName}
                         {if !($iterator->isLast())}<i class="icon-arrow-right"></i>{/if}{if $iterator->isLast()}<i class="icon-ok"></i>{/if}</a></li>
                     {/if}
                     {/foreach}

@@ -57,7 +57,7 @@ class SignPresenter extends BasePresenter {
 			return;
 		}
 
-		$this->redirect('Homepage:'); 
+		$this->redirect('SmartPanel:default'); 
     }
 
     public function actionOut() {

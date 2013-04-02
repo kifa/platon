@@ -56,4 +56,14 @@ class UserModel extends Repository{
     public function countAddress(){
         return $this->getTable('address')->count();
     }
+    
+    public function isUser($usr){
+        $row = $this->getTable('users')->select('users.UserID')->where('UsersID', $usr);
+        if(!$row){
+            return FALSE;
+        }
+        else {
+            return TRUE;
+        }
+    }
 }
