@@ -4,9 +4,9 @@
             {if $user->isLoggedIn()}
             <div class="row">
                 <div class="span10">
-                    <a href="#" id="showNew" ><i id="addIco" class="icon-large icon-plus"></i> {_"Add Product"}</a> |
+                    <a href="#" id="showNew" ><i id="addIco" class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a> |
                     <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> |
-                    <a href="#"><i class="icon-large icon-pencil"></i> {_"Edit Category"}</a>
+                    <a href="#"><i class="icon-large icon-pencil"></i> {_"Edit Product"}</a>
                 </div>
             </div>
             {/if}
@@ -66,6 +66,31 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="tabbable span10">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#gal" data-toggle="tab"><i class="icon-camera-retro"></i> Gallery</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="gal">
+                            
+                            
+                            <ul class="thumbnails">
+                                {foreach $album as $id => $photo}
+                                <li class="span4">
+                                  <a data-toggle="lightbox" href="#myLightbox" class="thumbnail">
+                                    <img data-src="holder.js/{if $photo->CoverPhoto}300x200{else}160x120{/if}" src="{$basePath}/images/{$product->PhotoAlbumID}/{$photo->PhotoURL}" alt="{$product->ProductName}">
+                                  </a>
+                                </li>
+                              
+                            {/foreach}
+                                </ul>
+                            
+                            
+                        </div>
+                    </div>
+            </div>
+    
         </div> <!-- class="span10" -->
 {/block}
 
@@ -89,4 +114,8 @@
         <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
             <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
 </div>
+{/block}
+
+{block script}
+<script src="{$basePath}/js/bootstrap-lightbox.min.js"></script>
 {/block}

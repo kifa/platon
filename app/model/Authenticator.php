@@ -33,18 +33,12 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
         list($username, $password) = $credentials;
         $row = $this->users->findByName($username);
 
-        dump($username);
-        dump($password);
-        dump($row->Password);
-        dump($this->calculateHash($password));
-        dump($this->calculateHash($password, $row->Password));
-        dump($this->calculateHash($row->Password, $password));
-        
+       
         if (!$row) {
             throw new NS\AuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);
         }
 
-        if ($row->Password !== self::calculateHash($password, $row->Password)) {
+        if ($row->Password == self::calculateHash($password, $row->Password)) {
             throw new NS\AuthenticationException("Invalid password.", self::INVALID_CREDENTIAL);
         }
 

@@ -170,6 +170,7 @@ class ProductPresenter extends BasePresenter {
     public function renderProduct($id) {
        
        $this->template->product = $this->productModel->loadProduct($id);
+       $this->template->album = $this->productModel->loadPhotoAlbum($id);
     }
 
     

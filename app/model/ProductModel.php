@@ -109,7 +109,9 @@ class ProductModel extends Repository {
         }
         else{
             //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
-            return $this->getDB()->query('SELECT * FROM product JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID WHERE Product.ProductID=?',$id);
+            $row = $this->getDB()->query('SELECT * FROM product JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID WHERE Product.ProductID=?',$id); 
+           // dump($row);
+            return $row;
         }
     }
     
