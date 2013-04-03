@@ -8,14 +8,14 @@
 {/block}
     
 {block content}
-<div class="span10">    
+<div class="span9">    
 {*foreach $flashes as $flash}
         <div class="{$flash->type}">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
 {$flash->message}</div>
 {/foreach*}
 
-<table class="table table-hover span10">
+<table class="table table-hover span9">
             <thead>
                 <tr>
                     <th>#</th>
@@ -53,34 +53,34 @@
             </tbody>
         </table>
 
-<div class="span9 alert alert-info">   
+<div class="span8 alert alert-info">   
                         <div class="span1">                    
                             <i class="icon-shopping-cart icon-4x"></i></div>
-                        <div class="span7">
-                            <h3 class="span2"><strong class="span1">Products:</strong>
-                                <span class="span1">{$grandtotal},-</span></h3>
-                            <h3 class="span2"><strong class="span1">Shipping:</strong> 
-                                <span class="shipping span1">0,-</span></h3>
-                            <h3 class="span2"><strong class="span1">Total:</strong>
-                                <span class="ordertotal span1">{$grandtotal},-</span></h3>
+                        <div class="span6">
+                            <h4 class="span2"><strong class="span1">Products:</strong>
+                                <span class="span1">{$grandtotal},-</span></h4>
+                            <h4 class="span2"><strong class="span1">Shipping:</strong> 
+                                <span class="shipping span1">0,-</span></h4>
+                            <h4 class="span2"><strong class="span1">Total:</strong>
+                                <span class="ordertotal span1">{$grandtotal},-</span></h4>
                         </div>
                     </div>
         
         
-<div class="span10">
+<div class="span9">
             <fieldset>
                 {control cartForm}
             </fieldset>
-    <div class="span9 alert alert-info">   
+    <div class="span8 alert alert-info">   
                         <div class="span1">                    
                             <i class="icon-shopping-cart icon-4x"></i></div>
-                        <div class="span7">
-                            <h3 class="span2"><strong class="span1">Products:</strong>
-                                <span class="span1">{$grandtotal},-</span></h3>
-                            <h3 class="span2"><strong class="span1">Shipping:</strong> 
-                                <span class="shipping span1">0,-</span></h3>
-                            <h3 class="span2"><strong class="span1">Total:</strong>
-                                <span class="ordertotal span1">{$grandtotal},-</span></h3>
+                        <div class="span6">
+                            <h4 class="span2"><strong class="span1">Products:</strong>
+                                <span class="span1">{$grandtotal},-</span></h4>
+                            <h4 class="span2"><strong class="span1">Shipping:</strong> 
+                                <span class="shipping span1">0,-</span></h4>
+                            <h4 class="span2"><strong class="span1">Total:</strong>
+                                <span class="ordertotal span1">{$grandtotal},-</span></h4>
                         </div>
                     </div>
     
@@ -125,6 +125,15 @@
 
 {block sidebar}
 <div class="span2">
+    <div class="span2 alert alert-invert">
+        <h3>{_'Terms'}</h3>
+        <p>Would you like to read our Terms and condition?</p>
+        <a href="#termsButton" id="termsButton" class="btn btn-small btn-primary">READ</a>
+    </div>
+    {var $i = 'Terms'}{var $ii = '<p>Any software that is made available to download from the Services ("Software") is the copyrighted work of Microsoft and/or its suppliers. Use of the Software is governed by the terms of the end user license agreement, if any, which accompanies or is included with the Software ("License Agreement"). An end user will be unable to install any Software that is accompanied by or includes a License Agreement, unless he or she first agrees to the License Agreement terms. Third party scripts or code, linked to or referenced from this web site, are licensed to you by the third parties that own such code, not by Microsoft.
+</p><p>
+The Software is made available for download solely for use by end users according to the License Agreement. Any reproduction or redistribution of the Software not in accordance with the License Agreement is expressly prohibited by law, and may result in severe civil and criminal penalties. Violators will be prosecuted to the maximum extent possible.</p>'}
+    {control modalControl:info terms, $i, $ii}
 </div>
 {/block}
 

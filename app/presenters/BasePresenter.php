@@ -71,12 +71,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     public function beforeRender() {
         parent::beforeRender();
-        //$translator = $this->getTranslator('default');
-        //  $this->template->setTranslator($translator);
-        // $this->template->infos = $this->shopModel->nactidata();
-        // $this->template->categories = $this->categoryModel->nactidata();
+
     }
 
+    protected function createComponentBaseControl() {
+            $base = new BaseControl();
+            //$base->setTranslator($this->translator);
+            return $base;
+    }
+    
     protected function createComponentMenu() {
         $menuControl = new MenuControl();
         $menuControl->setCart($this->cart);
@@ -85,9 +88,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         return $menuControl;
     }
     
-    protected function createComponentBaseControl() {
-            $base = new BaseControl();
-           // $base->setTranslator($this->translator);
-            return $base;
+    
+    
+    protected function createComponentModalControl() {
+        $modalControl = new ModalControl();
+        $modalControl->setTranslator($this->translator);
+        return $modalControl;
     }
 }

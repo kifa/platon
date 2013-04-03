@@ -6,7 +6,7 @@ use Nette\Application\UI;
  * Menu Control component
  */
 
-class MenuControl extends UI\Control {
+class MenuControl extends BaseControl {
 
     /** @persistent */
     public $lang;

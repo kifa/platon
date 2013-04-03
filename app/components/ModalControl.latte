@@ -1,0 +1,35 @@
+<div id="{$id}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-info-sign"></i> {$title}</h3>
+            </div>
+            <div class="modal-body">
+             {$content}
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+</div>
+{block script}
+
+<script>
+        $(document).ready(function() {
+    
+          $('.nav-tabs').button();
+
+ {var $btn = '#'.$id.'Button'}
+ {var $div = '#'.$id}
+          $({$btn}).toggle(function(){
+              $({$div}).modal('show');
+             //  $('#addIco').attr('class', 'icon-large icon-minus');
+            },
+            function() {
+                $({$div}).modal('hide');
+              //  $('#addIco').attr('class', 'icon-large icon-camera-retro');
+            });
+         
+    });
+
+    </script>
+    
+{/block}

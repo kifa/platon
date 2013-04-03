@@ -17,7 +17,7 @@ class ProductControl extends BaseControl {
     private $id;
     
     /* @var Gettext\translator */
-    protected $translator;
+   protected $translator;
 
     
 

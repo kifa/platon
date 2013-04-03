@@ -37,6 +37,8 @@ class OrderPresenter extends BasePresenter {
         $this->shopModel = $this->context->shopModel;
         $this->userModel = $this->context->userModel;
         $this->cart = $this->getSession('cart');
+        
+       
     }
     
 
@@ -165,9 +167,7 @@ class OrderPresenter extends BasePresenter {
 
             $this->template->shippers = $shippers;
             $this->template->payment = $payment;
-
             $this->template->cart = $this->c2;
-            
             $this->template->cartForm = $this->createComponentCartForm();
            
         } else {

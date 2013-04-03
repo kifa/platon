@@ -256,6 +256,7 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('Homepage:');
         }
         else {
+
             $this->albumID = $row->PhotoAlbumID;
             $this->template->product = $row;
             $this->template->album = $this->productModel->loadPhotoAlbum($id);
