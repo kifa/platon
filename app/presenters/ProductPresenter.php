@@ -183,7 +183,7 @@ class ProductPresenter extends BasePresenter {
                 ->addRule(FORM::IMAGE , 'Je podporován pouze soubor JPG, PNG a GIF')
                 ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
         $addPhoto->addSubmit('add', 'Add Photo')
-                ->setAttribute('class', 'btn-primary')
+                ->setAttribute('class', 'btn-primary upl')
                 ->setAttribute('data-loading-text', 'Uploading...');
         $addPhoto->onSuccess[] = $this->addProductPhotoFormSubmitted;
         return $addPhoto;

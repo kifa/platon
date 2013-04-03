@@ -149,6 +149,10 @@
     <script>
         $(document).ready(function() {
     
+          $('.nav-tabs').button();
+          $('.upl').click(function() { 
+                $('.upl').button('toggle');
+                $('.upl').button('loading') });
           $('#addPhotoButton').toggle(function(){
               $('#addPhoto').modal('show');
              //  $('#addIco').attr('class', 'icon-large icon-minus');
