@@ -47,8 +47,9 @@ class OrderModel extends Repository {
      * Show product in order
      */
     public function loadOrderProduct($id){
-        return $this->getTable('orderdetails')->select('orderdetails.* ,product.*')
-                ->where('orderdetails.OrderID',$id);
+        //return $this->getTable('orderdetails')->select('orderdetails.* ,product.*')
+          //      ->where('orderdetails.OrderID',$id);
+          return $this->getDB()->query('SELECT * FROM orderdetails JOIN product ON orderdetails.ProductID=product.ProductID JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID where photo.CoverPhoto="1" and orderdetails.OrderID=?',$id);
     }
     /*
      * Check and save order

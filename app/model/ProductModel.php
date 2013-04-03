@@ -20,11 +20,11 @@ class ProductModel extends Repository {
         if($id==''){
             //return $this->getTable('product')->select('product.ProductID, product.ProductName,
             //    product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*');            
-           return $this->getDB()->query('SELECT * FROM product JOIN price ON product.PriceID=price.PriceID JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID');                   
+           return $this->getDB()->query('SELECT * FROM product JOIN price ON product.PriceID=price.PriceID JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID WHERE Photo.CoverPhoto="1"');                   
         }
         else
         {          
-           return $this->getDB()->query('SELECT * FROM product JOIN price ON product.PriceID=price.PriceID JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID WHERE Product.CategoryID=?',$id);
+           return $this->getDB()->query('SELECT * FROM product JOIN price ON product.PriceID=price.PriceID JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID WHERE Photo.CoverPhoto="1" and Product.CategoryID=?',$id);
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
               //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
         }
