@@ -15,6 +15,41 @@ CREATE TABLE `address` (
   PRIMARY KEY (`AddressID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
+INSERT INTO `address` (`AddressID`, `Street`, `ZIPCode`, `City`, `State`) VALUES
+(1,	'Vaclavska',	11000,	'Praha',	'CZ'),
+(2,	'Nova',	99999,	'Plzen',	'CZ'),
+(3,	'Los Santos',	99923,	'Sao Paolo',	'Br'),
+(4,	'ppp',	0,	'ppp',	NULL),
+(5,	'gyuoi',	0,	'ijoi',	NULL),
+(6,	'gyuoi',	0,	'ijoi',	NULL),
+(7,	'gyuoi',	0,	'ijoi',	NULL),
+(8,	'gyuoi',	0,	'ijoi',	NULL),
+(9,	'gyuoi',	0,	'ijoi',	NULL),
+(10,	'PPP',	18273,	'PPP',	NULL),
+(11,	'PPP',	18273,	'PPP',	NULL),
+(12,	'PPP',	18273,	'PPP',	NULL),
+(13,	'PPP',	18273,	'PPP',	NULL),
+(14,	'PPP',	18273,	'PPP',	NULL),
+(15,	'PPP',	18273,	'PPP',	NULL),
+(16,	'PPP',	18273,	'PPP',	NULL),
+(17,	'qwe',	12342,	'qrw',	NULL),
+(18,	'123142',	12311,	'2143124',	NULL),
+(19,	'pqweoq',	12831,	'pqwieruq u',	NULL),
+(20,	'pqweoq',	12831,	'pqwieruq u',	NULL),
+(21,	'pqweoq',	12831,	'pqwieruq u',	NULL),
+(22,	'asdow',	10291,	'asdkj',	NULL),
+(23,	'asdow',	10291,	'asdkj',	NULL),
+(24,	'asdow',	10291,	'asdkj',	NULL),
+(25,	'asdow',	10291,	'asdkj',	NULL),
+(26,	'asdow',	10291,	'asdkj',	NULL),
+(27,	'asdow',	10291,	'asdkj',	NULL),
+(28,	'asdow',	10291,	'asdkj',	NULL),
+(29,	'asdow',	10291,	'asdkj',	NULL),
+(30,	'asdow',	10291,	'asdkj',	NULL),
+(31,	'Na Paloučku 10',	999,	'Šumava',	NULL),
+(32,	'Na Paloučku 10',	999,	'Šumava',	NULL),
+(33,	'Na Paloučku 10',	999,	'Šumava',	NULL)
+ON DUPLICATE KEY UPDATE `AddressID` = VALUES(`AddressID`), `Street` = VALUES(`Street`), `ZIPCode` = VALUES(`ZIPCode`), `City` = VALUES(`City`), `State` = VALUES(`State`);
 
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
@@ -27,6 +62,12 @@ CREATE TABLE `category` (
   CONSTRAINT `FKHigherCategory` FOREIGN KEY (`HigherCategoryID`) REFERENCES `category` (`CategoryID`) ON DELETE SET NULL ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
+INSERT INTO `category` (`CategoryID`, `CategoryName`, `CategoryDescription`, `HigherCategoryID`) VALUES
+(1,	'Cellphone',	'Cellphone category',	NULL),
+(2,	'Notebook',	'Notebooks category',	NULL),
+(3,	'Smartphone',	'Smartphone category',	1),
+(4,	'Tablets',	'Tablets category',	NULL)
+ON DUPLICATE KEY UPDATE `CategoryID` = VALUES(`CategoryID`), `CategoryName` = VALUES(`CategoryName`), `CategoryDescription` = VALUES(`CategoryDescription`), `HigherCategoryID` = VALUES(`HigherCategoryID`);
 
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
@@ -41,6 +82,10 @@ CREATE TABLE `comment` (
   CONSTRAINT `FKPreviousComment` FOREIGN KEY (`PreviousCommentID`) REFERENCES `comment` (`CommentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+INSERT INTO `comment` (`CommentID`, `CommentTittle`, `CommentContent`, `DateOfAdded`, `AuthorID`, `PreviousCommentID`) VALUES
+(1,	'First Comment',	'This is first comment ever',	'2012-03-20',	1,	NULL),
+(2,	'Reakce na koment',	'Pi? ?esky pitomo',	'2012-03-20',	2,	1)
+ON DUPLICATE KEY UPDATE `CommentID` = VALUES(`CommentID`), `CommentTittle` = VALUES(`CommentTittle`), `CommentContent` = VALUES(`CommentContent`), `DateOfAdded` = VALUES(`DateOfAdded`), `AuthorID` = VALUES(`AuthorID`), `PreviousCommentID` = VALUES(`PreviousCommentID`);
 
 DROP TABLE IF EXISTS `currency`;
 CREATE TABLE `currency` (
@@ -51,6 +96,10 @@ CREATE TABLE `currency` (
   PRIMARY KEY (`CurrencyID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+INSERT INTO `currency` (`CurrencyID`, `CurrencyCode`, `CurrencyName`, `CurrencyRate`) VALUES
+(1,	'CZK',	'Koruna ?esk?',	NULL),
+(2,	'EUR',	'Euro',	NULL)
+ON DUPLICATE KEY UPDATE `CurrencyID` = VALUES(`CurrencyID`), `CurrencyCode` = VALUES(`CurrencyCode`), `CurrencyName` = VALUES(`CurrencyName`), `CurrencyRate` = VALUES(`CurrencyRate`);
 
 DROP TABLE IF EXISTS `delivery`;
 CREATE TABLE `delivery` (
@@ -63,6 +112,10 @@ CREATE TABLE `delivery` (
   KEY `PriceID_idx` (`DeliveryPrice`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+INSERT INTO `delivery` (`DeliveryID`, `DeliveryName`, `DeliveryDescription`, `DeliveryPrice`, `FreeFromPrice`) VALUES
+(1,	'Personal pick up',	'Personal in the shop',	0,	NULL),
+(2,	'Cash on delivery',	'Send by transport company',	150,	1000)
+ON DUPLICATE KEY UPDATE `DeliveryID` = VALUES(`DeliveryID`), `DeliveryName` = VALUES(`DeliveryName`), `DeliveryDescription` = VALUES(`DeliveryDescription`), `DeliveryPrice` = VALUES(`DeliveryPrice`), `FreeFromPrice` = VALUES(`FreeFromPrice`);
 
 DROP TABLE IF EXISTS `documentation`;
 CREATE TABLE `documentation` (
@@ -91,6 +144,16 @@ CREATE TABLE `orderdetails` (
   CONSTRAINT `FKOrderDetailsProduct` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
+INSERT INTO `orderdetails` (`OrderDetailsID`, `OrderID`, `ProductID`, `Quantity`, `UnitPrice`) VALUES
+(1,	1,	1,	1,	8999),
+(2,	1,	6,	1,	99),
+(3,	2,	6,	1,	99),
+(4,	3,	5,	1,	11999),
+(5,	4,	4,	1,	15999),
+(6,	5,	5,	1,	11999),
+(7,	6,	4,	1,	15999),
+(8,	6,	3,	1,	16999)
+ON DUPLICATE KEY UPDATE `OrderDetailsID` = VALUES(`OrderDetailsID`), `OrderID` = VALUES(`OrderID`), `ProductID` = VALUES(`ProductID`), `Quantity` = VALUES(`Quantity`), `UnitPrice` = VALUES(`UnitPrice`);
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
@@ -117,6 +180,14 @@ CREATE TABLE `orders` (
   CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`UsersID`) REFERENCES `users` (`UsersID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
+INSERT INTO `orders` (`OrderID`, `StatusID`, `UsersID`, `TotalPrice`, `TotalPriceTax`, `DateCreated`, `DateOfLastChange`, `DateFinished`, `DeliveryID`, `PaymentID`, `IP`, `SessionID`) VALUES
+(1,	1,	'aaaaaaa@aaa.aaa',	9098,	90.98,	'2013-03-30',	'2013-03-30',	NULL,	2,	1,	NULL,	NULL),
+(2,	1,	'qwe@qrw.as',	99,	0.99,	'2013-03-30',	'2013-03-30',	NULL,	2,	2,	NULL,	NULL),
+(3,	1,	'1234@1234.com',	11999,	119.99,	'2013-03-30',	'2013-03-30',	NULL,	1,	1,	NULL,	NULL),
+(4,	1,	'ppp@pppa.ppp',	15999,	0,	'2013-03-30',	'2013-03-30',	NULL,	1,	1,	NULL,	NULL),
+(5,	1,	'afaasasdsasds2134@asfew213.aff',	11999,	2519.79,	'2013-03-30',	'2013-03-30',	NULL,	1,	2,	NULL,	NULL),
+(6,	1,	'tdanek@atlas.cz',	32998,	0,	'2013-03-30',	'2013-03-30',	NULL,	1,	2,	NULL,	NULL)
+ON DUPLICATE KEY UPDATE `OrderID` = VALUES(`OrderID`), `StatusID` = VALUES(`StatusID`), `UsersID` = VALUES(`UsersID`), `TotalPrice` = VALUES(`TotalPrice`), `TotalPriceTax` = VALUES(`TotalPriceTax`), `DateCreated` = VALUES(`DateCreated`), `DateOfLastChange` = VALUES(`DateOfLastChange`), `DateFinished` = VALUES(`DateFinished`), `DeliveryID` = VALUES(`DeliveryID`), `PaymentID` = VALUES(`PaymentID`), `IP` = VALUES(`IP`), `SessionID` = VALUES(`SessionID`);
 
 DROP TABLE IF EXISTS `orderstatus`;
 CREATE TABLE `orderstatus` (
@@ -127,6 +198,11 @@ CREATE TABLE `orderstatus` (
   PRIMARY KEY (`OrderStatusID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+INSERT INTO `orderstatus` (`OrderStatusID`, `StatusName`, `StatusDescription`, `StatusProgress`) VALUES
+(1,	'Pending',	'Pending order',	1),
+(2,	'Sending',	'sending order',	5),
+(3,	'Done',	'done',	10)
+ON DUPLICATE KEY UPDATE `OrderStatusID` = VALUES(`OrderStatusID`), `StatusName` = VALUES(`StatusName`), `StatusDescription` = VALUES(`StatusDescription`), `StatusProgress` = VALUES(`StatusProgress`);
 
 DROP TABLE IF EXISTS `parametersalbum`;
 CREATE TABLE `parametersalbum` (
@@ -134,6 +210,11 @@ CREATE TABLE `parametersalbum` (
   PRIMARY KEY (`ParametersAlbumID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
+INSERT INTO `parametersalbum` (`ParametersAlbumID`) VALUES
+(1),
+(2),
+(3)
+ON DUPLICATE KEY UPDATE `ParametersAlbumID` = VALUES(`ParametersAlbumID`);
 
 DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
@@ -144,6 +225,10 @@ CREATE TABLE `payment` (
   KEY `PriceID` (`PaymentPrice`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
+INSERT INTO `payment` (`PaymentID`, `PaymentName`, `PaymentPrice`) VALUES
+(1,	'Cash',	0),
+(2,	'Banwire',	-50)
+ON DUPLICATE KEY UPDATE `PaymentID` = VALUES(`PaymentID`), `PaymentName` = VALUES(`PaymentName`), `PaymentPrice` = VALUES(`PaymentPrice`);
 
 DROP TABLE IF EXISTS `photo`;
 CREATE TABLE `photo` (
@@ -156,7 +241,7 @@ CREATE TABLE `photo` (
   PRIMARY KEY (`PhotoID`),
   KEY `PhotoAlbumID_idx` (`PhotoAlbumID`),
   CONSTRAINT `FKPhotoPhotoAlbum` FOREIGN KEY (`PhotoAlbumID`) REFERENCES `photoalbum` (`PhotoAlbumID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 INSERT INTO `photo` (`PhotoID`, `PhotoName`, `PhotoURL`, `PhotoAlbumID`, `PhotoAltText`, `CoverPhoto`) VALUES
 (1,	'Foto Galaxy Nexus 01',	'main.png',	1,	'Foto Galaxy Nexus',	1),
@@ -172,7 +257,9 @@ INSERT INTO `photo` (`PhotoID`, `PhotoName`, `PhotoURL`, `PhotoAlbumID`, `PhotoA
 (12,	'ipad-mini-scaled-1.jpg',	'ipad-mini-scaled-1.jpg',	6,	's4',	1),
 (13,	'ipad-mini-scaled-1.jpg',	'ipad-mini-scaled-1.jpg',	7,	's4',	1),
 (22,	'1416746-img-steve-jobs-apple-ipad.jpg',	'1416746-img-steve-jobs-apple-ipad.jpg',	7,	's4',	NULL),
-(23,	'Taking-pictures-with-Nokia-3310.jpg',	'Taking-pictures-with-Nokia-3310.jpg',	4,	's4',	NULL);
+(23,	'Taking-pictures-with-Nokia-3310.jpg',	'Taking-pictures-with-Nokia-3310.jpg',	4,	's4',	NULL),
+(26,	'image.jpg',	'image.jpg',	3,	's4',	NULL)
+ON DUPLICATE KEY UPDATE `PhotoID` = VALUES(`PhotoID`), `PhotoName` = VALUES(`PhotoName`), `PhotoURL` = VALUES(`PhotoURL`), `PhotoAlbumID` = VALUES(`PhotoAlbumID`), `PhotoAltText` = VALUES(`PhotoAltText`), `CoverPhoto` = VALUES(`CoverPhoto`);
 
 DROP TABLE IF EXISTS `photoalbum`;
 CREATE TABLE `photoalbum` (
@@ -182,6 +269,15 @@ CREATE TABLE `photoalbum` (
   PRIMARY KEY (`PhotoAlbumID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
+INSERT INTO `photoalbum` (`PhotoAlbumID`, `PhotoAlbumName`, `PhotoAlbumDescription`) VALUES
+(1,	'Album GN',	'Galaxy Nexus album'),
+(2,	'Chromebook',	'Chromebook gallery'),
+(3,	'Trojka',	'trojka'),
+(4,	'ctyrka',	'ctyrka'),
+(5,	'petka',	'petka'),
+(6,	'Apple iPad',	'The best tablet EVER!'),
+(7,	'Apple iPad',	'The best tablet EVER!')
+ON DUPLICATE KEY UPDATE `PhotoAlbumID` = VALUES(`PhotoAlbumID`), `PhotoAlbumName` = VALUES(`PhotoAlbumName`), `PhotoAlbumDescription` = VALUES(`PhotoAlbumDescription`);
 
 DROP TABLE IF EXISTS `price`;
 CREATE TABLE `price` (
@@ -197,6 +293,14 @@ CREATE TABLE `price` (
   CONSTRAINT `FKPriceCurrency` FOREIGN KEY (`CurrencyID`) REFERENCES `currency` (`CurrencyID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
+INSERT INTO `price` (`PriceID`, `BuyingPrice`, `SellingPrice`, `TAX`, `SALE`, `FinalPrice`, `CurrencyID`) VALUES
+(1,	0,	0,	0,	0,	100,	1),
+(2,	0,	99,	1.2,	0,	99,	1),
+(3,	5999,	7999,	1.2,	0,	8999,	1),
+(4,	9999,	15000,	1.2,	0,	16999,	1),
+(5,	8999,	13999,	1.2,	0,	15999,	1),
+(6,	6666,	10000,	1.2,	0,	11999,	1)
+ON DUPLICATE KEY UPDATE `PriceID` = VALUES(`PriceID`), `BuyingPrice` = VALUES(`BuyingPrice`), `SellingPrice` = VALUES(`SellingPrice`), `TAX` = VALUES(`TAX`), `SALE` = VALUES(`SALE`), `FinalPrice` = VALUES(`FinalPrice`), `CurrencyID` = VALUES(`CurrencyID`);
 
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
@@ -233,6 +337,15 @@ CREATE TABLE `product` (
   CONSTRAINT `product_ibfk_3` FOREIGN KEY (`ProductStatusID`) REFERENCES `productstatus` (`ProductStatusID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
+INSERT INTO `product` (`ProductID`, `ProductName`, `Producer`, `PhotoAlbumID`, `ProductNumber`, `ProductDescription`, `ProductStatusID`, `ParametersAlbumID`, `ProductEAN`, `ProductQR`, `ProductWarranty`, `PiecesAvailable`, `CategoryID`, `PriceID`, `DateOfAvailable`, `ProductDateOfAdded`, `DocumentationID`, `CommentID`) VALUES
+(1,	'Samsung Galaxy Nexus',	'Samsung',	1,	NULL,	'Smartphone ze serie Nexus',	NULL,	1,	NULL,	NULL,	NULL,	10,	2,	3,	NULL,	NULL,	NULL,	1),
+(2,	'Samsung Chromebook',	'Samsung',	2,	NULL,	'Chromebook od Samsungu',	NULL,	2,	NULL,	NULL,	NULL,	4,	2,	3,	NULL,	NULL,	NULL,	NULL),
+(3,	'Samsung Galaxy S4',	'Samsung',	4,	NULL,	'Hot news in smartphone world',	NULL,	1,	NULL,	NULL,	NULL,	99,	3,	4,	NULL,	NULL,	NULL,	NULL),
+(4,	'Sony Xperia Z',	'Sony',	3,	NULL,	'Best smartphone of present smarthone world',	NULL,	1,	NULL,	NULL,	NULL,	40,	3,	5,	NULL,	NULL,	NULL,	NULL),
+(5,	'Apple iPad',	'Apple Inc.',	5,	NULL,	'Tablet from company Apple',	NULL,	3,	NULL,	NULL,	NULL,	666,	4,	6,	NULL,	NULL,	NULL,	NULL),
+(6,	'Nokia 3310',	'neuvedeno',	4,	'11111',	'desc',	NULL,	1,	'123456',	'122',	'rok',	1,	2,	2,	'0000-00-00',	0,	1,	1),
+(9,	'Apple iPad',	'neuvedeno',	7,	'11111',	'The best tablet EVER!',	NULL,	1,	'123456',	'122',	'rok',	3,	4,	2,	'0000-00-00',	0,	1,	1)
+ON DUPLICATE KEY UPDATE `ProductID` = VALUES(`ProductID`), `ProductName` = VALUES(`ProductName`), `Producer` = VALUES(`Producer`), `PhotoAlbumID` = VALUES(`PhotoAlbumID`), `ProductNumber` = VALUES(`ProductNumber`), `ProductDescription` = VALUES(`ProductDescription`), `ProductStatusID` = VALUES(`ProductStatusID`), `ParametersAlbumID` = VALUES(`ParametersAlbumID`), `ProductEAN` = VALUES(`ProductEAN`), `ProductQR` = VALUES(`ProductQR`), `ProductWarranty` = VALUES(`ProductWarranty`), `PiecesAvailable` = VALUES(`PiecesAvailable`), `CategoryID` = VALUES(`CategoryID`), `PriceID` = VALUES(`PriceID`), `DateOfAvailable` = VALUES(`DateOfAvailable`), `ProductDateOfAdded` = VALUES(`ProductDateOfAdded`), `DocumentationID` = VALUES(`DocumentationID`), `CommentID` = VALUES(`CommentID`);
 
 DROP TABLE IF EXISTS `productstatus`;
 CREATE TABLE `productstatus` (
@@ -250,6 +363,9 @@ CREATE TABLE `settings` (
   PRIMARY KEY (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `settings` (`Name`, `Value`) VALUES
+('TAX',	'21')
+ON DUPLICATE KEY UPDATE `Name` = VALUES(`Name`), `Value` = VALUES(`Value`);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -266,5 +382,33 @@ CREATE TABLE `users` (
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`AddressID`) REFERENCES `address` (`AddressID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `AddressID`, `CompanyName`, `TIN`, `Permission`) VALUES
+('1234@1234.com',	NULL,	'1234',	0,	18,	NULL,	NULL,	'user'),
+('aaa@aaa.aaa',	NULL,	'AAA',	0,	10,	NULL,	NULL,	'user'),
+('aaaa@aaa.aaa',	NULL,	'AAA',	0,	12,	NULL,	NULL,	'user'),
+('aaaaa@aaa.aaa',	NULL,	'AAA',	0,	14,	NULL,	NULL,	'user'),
+('aaaaaa@aaa.aaa',	NULL,	'AAA',	0,	15,	NULL,	NULL,	'user'),
+('aaaaaaa@aaa.aaa',	NULL,	'AAA',	0,	16,	NULL,	NULL,	'user'),
+('admin@admin.com',	'$2a$07$$$$$$$$$$$$$$$$$$$$$$.Y',	'Admin',	0,	1,	'0',	'0',	'admin'),
+('afaasasdsasds2134@asfew213.aff',	NULL,	'asd',	0,	30,	NULL,	NULL,	'user'),
+('afaasasdsasds@asfew.aff',	NULL,	'asd',	0,	28,	NULL,	NULL,	'user'),
+('afaasasdsasds@asfew213.aff',	NULL,	'asd',	0,	29,	NULL,	NULL,	'user'),
+('afaasasdss@asfew.aff',	NULL,	'asd',	0,	27,	NULL,	NULL,	'user'),
+('afaasss@asfew.aff',	NULL,	'asd',	0,	26,	NULL,	NULL,	'user'),
+('afas@asf.aff',	NULL,	'asd',	0,	22,	NULL,	NULL,	'user'),
+('afas@asfew.aff',	NULL,	'asd',	0,	23,	NULL,	NULL,	'user'),
+('afass@asfew.aff',	NULL,	'asd',	0,	25,	NULL,	NULL,	'user'),
+('hddd@dsd.cdd',	NULL,	'Petr',	0,	8,	NULL,	NULL,	'user'),
+('jan.novak@company.com',	'novak',	'Jan',	999888777,	2,	'Company',	'819281293',	'0'),
+('kifa@mail.com',	'$2a$07$$$$$$$$$$$$$$$$$$$$$$.Y',	'Kifa',	NULL,	3,	NULL,	NULL,	'admin'),
+('petan@petr.com',	NULL,	'Petr',	0,	9,	NULL,	NULL,	'user'),
+('ppp@ppp.ppp',	NULL,	'09u7',	0,	19,	NULL,	NULL,	'user'),
+('ppp@pppa.ppp',	NULL,	'09u7',	0,	21,	NULL,	NULL,	'user'),
+('qwe@qrw.as',	NULL,	'qwe',	0,	17,	NULL,	NULL,	'user'),
+('tdanek@atlas.cz',	NULL,	'Karel',	0,	33,	NULL,	NULL,	'user'),
+('testovaci@subjekt.cz',	'$2a$07$67p8256pml1lrn1a8d986eN',	'Testovaci',	777888999,	1,	'0',	'0',	'0'),
+('tomik@tomas.com',	'$2a$07$xshgrgluo88ug5qvohjvme0',	'Tomas',	NULL,	NULL,	NULL,	NULL,	'0'),
+('yetty@himalaja.tib',	NULL,	'Yetty',	0,	4,	NULL,	NULL,	'user')
+ON DUPLICATE KEY UPDATE `UsersID` = VALUES(`UsersID`), `Password` = VALUES(`Password`), `Name` = VALUES(`Name`), `PhoneNumber` = VALUES(`PhoneNumber`), `AddressID` = VALUES(`AddressID`), `CompanyName` = VALUES(`CompanyName`), `TIN` = VALUES(`TIN`), `Permission` = VALUES(`Permission`);
 
--- 2013-04-03 18:50:41
+-- 2013-04-03 20:25:06
