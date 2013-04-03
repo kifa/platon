@@ -5,7 +5,7 @@
         
         <div class="row">
             <div class="span10">
-                {if $user->isLoggedIn()}
+                {if $user->isInRole('admin')}
                 <a href="#" id="showNew" ><i id="addIco" class="icon-large icon-plus"></i> {_"Add Product"}</a> |
                 <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> |
                 <a href="#"><i class="icon-large icon-pencil"></i> {_"Edit Category"}</a> |
@@ -22,7 +22,7 @@
         With the latest version, Google Now keeps you even more organized – get reminders
         about upcoming flights, restaurant reservations, hotel confirmations and even
         nearby photo opportunities – when and where you need them.</p>
-    {if $user->isLoggedIn()}
+    {if $user->isInRole('admin')}
     <div class="span5" style="display: none;" id="addProduct">
         {control addProductForm}
     </div>
@@ -38,7 +38,7 @@
 
 {block sidebar}
  <div class="span2">   
-    {if $user->isLoggedIn()}
+    {if $user->isInRole('admin')}
         {control menu:admin}
     {/if}
     <ul class="nav nav-list">
@@ -57,7 +57,7 @@
 {/block}
             
 {block script}
-    {if $user->isLoggedIn()}
+    {if $user->isInRole('admin')}
     <script>
         $(document).ready(function() {
             var amount = 1;

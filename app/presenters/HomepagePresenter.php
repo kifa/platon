@@ -18,7 +18,7 @@ class HomepagePresenter extends BasePresenter {
 
         /* Kontrola přihlášení
          * 
-         * if (!$this->getUser()->isLoggedIn()) {
+         * if (!$this->getUser()->isInRole('admin')) {
           $this->redirect('Sign:in');
           } */
     }

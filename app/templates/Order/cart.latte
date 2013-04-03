@@ -9,11 +9,11 @@
     
 {block content}
 <div class="span10">    
-{foreach $flashes as $flash}
+{*foreach $flashes as $flash}
         <div class="{$flash->type}">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
 {$flash->message}</div>
-{/foreach}
+{/foreach*}
 
 <table class="table table-hover span10">
             <thead>
@@ -85,12 +85,6 @@
                         </div>
                     </div>
     
-    
-            {$cartForm->render('begin')}
-               {$cartForm->render('errors')}
-               {$cartForm->render('body')} 
-            
-            {$cartForm->render('end')}
     
     
       </div> 

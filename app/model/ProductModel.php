@@ -48,12 +48,12 @@ class ProductModel extends Repository {
      * @param ? example: pozice počátečního znaku
      * @return string
      *  */
-    public function insertProduct($id,$name,$producer,$album,$prodnumber,
+    public function insertProduct($name,$producer,$album,$prodnumber,
             $description,$parameters,$ean,$qr,$warranty,$pieces,$category,$price,
             $dataaval,$dateadded,$documentation,$comment)
     {
         $insert = array(
-            'ProductID' => $id,
+            'ProductID' => NULL,
             'ProductName' => $name,
             'Producer' => $producer,
             'PhotoAlbumID' => $album,
@@ -115,43 +115,47 @@ class ProductModel extends Repository {
         }
     }
     
+    public function insertPhotoAlbum($name, $desc) {
+         $insert = array(
+            'PhotoAlbumID' => NULL,
+            'PhotoAlbumName' => $name,
+            'PhotoAlbumDescription' => $desc
+                );
+         
+           $this->getTable('photoalbum')->insert($insert);
+           return $this->countPhotoAlbum();
+    }
+    /*
+     * Count Albums
+     */
+    public function countPhotoAlbum() {
+        return $this->getTable('photoalbum')->count();
+    }
     /*
      * Load photo
      */
     public function loadPhoto($id){
-        return $this->getTable('photo')->where('PhotoAlbumID',$id);
+        return $this->getTable('photo')->where('PhotoID',$id)->fetch();
     }
     
-    /*
-     * Load title photo
-     */
-    public function loadCoverPhoto(){
-        return $this->getTable('photo')->where('CoverPhoto', 1)->fetchPairs('PhotoAlbumID');
-        //return $this->getTable('Product')->select('Product.ProductID,Product.PhotoAlbumID,Photo.PhotoAlbumID,Photo.PhotoID,Photo.PhotoURL')->fetchPairs('ProductID');
-        
+    public function deletePhoto($id) {
+        return $this->getTable('photo')->where('PhotoID', $id)->delete();
     }
 
-        /*
+    /*
      * Insert Photo
      */
     
-        public function insertPhoto($name){
-            $id = $this->countPhoto() + 1;
+        public function insertPhoto($name, $albumID, $cover = null){
             $insert = array(
-            'PhotoID' => $id,
+            'PhotoID' => NULL,
             'PhotoName' => $name,
             'PhotoURL' => $name,
-            'PhotoAlbumID' => 4,
+            'PhotoAlbumID' => $albumID,
             'PhotoAltText' => 's4',
-            'CoverPhoto' => 1
+            'CoverPhoto' => $cover
                 );
             return $this->getTable('photo')->insert($insert);
         }
-    /*
-     * Counting number of photo to generate ID
-     * 
-     */
-        public function countPhoto(){
-            return $this->getTable('photo')->count();
-        }
+
 }

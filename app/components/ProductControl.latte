@@ -1,8 +1,8 @@
 <ul class="thumbnails">
-            {while $product = $products->fetch()}
+            {foreach $products as $id => $product}
     <li class="span3 setview">
         <div class="thumbnail">
-           {if $user->isLoggedIn()}
+           {if $user->isInRole('admin')}
             <div class="row">
             {ifCurrent Homepage:}
             <div class="span3">
@@ -25,7 +25,7 @@
             <span class="badge badge-warning">{$product->PiecesAvailable}</span>
                     {/if}
             </div>
-            {var $ph = 0}
+
       <a class="span3 text-center" href="{plink Product:product $product->ProductID}"> 
             
                 {if $product->PhotoAlbumID}
@@ -61,5 +61,5 @@
         </div>
         </div> <!--primary row -->
     </li>
-            {/while}
+            {/foreach}
 </ul>

@@ -1,5 +1,5 @@
 {block pageheader}
-{if $user->isLoggedIn()}
+{if $user->isInRole('admin')}
 <div class="page-header">
 <h1 n:block="title"><i class="icon-money"></i> Payment <small>Here you see all payment methods.</small></h1>
 {/if}
@@ -7,7 +7,7 @@
 
 {block content}
 <div class="span10"> 
-{if $user->isLoggedIn()}
+{if $user->isInRole('admin')}
 
 {foreach $payments as $id => $payment}
         id: {$id}
@@ -20,7 +20,7 @@
 
 {block sidebar}
 <div class="span2"> 
-  {if $user->isLoggedIn()}
+  {if $user->isInRole('admin')}
         {control menu:admin}
         {/if}
 </div>

@@ -2,7 +2,7 @@
 
 use Nette\Forms\Form,
     Nette\Utils\Html;
-
+use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 /*
  * SettingsPreseter is used for setting up shop etc
  * 
@@ -24,6 +24,9 @@ class SmartPanelPresenter extends BasePresenter {
 
     /* @var UserModel */
     private $userModel;
+    
+    /* @var Translator */
+     protected $translator;
 
     protected function startup() {
         parent::startup();
@@ -38,6 +41,12 @@ class SmartPanelPresenter extends BasePresenter {
      * Action for setting OrderStatus
      */
     
+    
+    public function injectTranslator(NetteTranslator\Gettext $translator) {
+        $this->translator = $translator;
+    }
+    
+    
     public function actionSetStatus($orderID, $statusID) {
         $this->orderModel->setStatus($orderID, $statusID);
         $this->redirect('orderDetail', $orderID);
@@ -45,6 +54,8 @@ class SmartPanelPresenter extends BasePresenter {
 
     protected function createComponentPasswordForm() {
         $form = new Nette\Application\UI\Form;
+        $form->setRenderer(new BootstrapRenderer);
+        $form->setTranslator($this->translator);
         $form->addHidden('login', $this->getUser()->getIdentity()->id);
         $form->addPassword('newPassword', 'Nové heslo:', 30)
                 ->addRule(Form::MIN_LENGTH, 'Nové heslo musí mít alespoň %d znaků.', 6);
@@ -75,6 +86,8 @@ class SmartPanelPresenter extends BasePresenter {
 
     protected function createComponentNewUserForm() {
         $form = new Form();
+        $form->setRenderer(new BootstrapRenderer);
+        $form->setTranslator($this->translator);
         $form->addText('username', 'Uživatelské jméno:', 10);
         $form->addText('name', 'Vaše jméno', 30);
         $form->addPassword('password', 'Heslo:', 30)
@@ -114,7 +127,7 @@ class SmartPanelPresenter extends BasePresenter {
      */
 
     public function renderOrderDetail ($orderNo) {
-        if (!$this->getUser()->isLoggedIn()) {
+        if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
         } else {
         $this->template->products = $this->orderModel->loadOrderProduct($orderNo);
@@ -152,7 +165,7 @@ class SmartPanelPresenter extends BasePresenter {
      */
 
     public function renderOrders() {
-        if (!$this->getUser()->isLoggedIn()) {
+        if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
         } else {
             $this->template->orders = $this->orderModel->loadOrders();
@@ -164,7 +177,7 @@ class SmartPanelPresenter extends BasePresenter {
      */
 
     public function renderDefault() {
-        if (!$this->getUser()->isLoggedIn()) {
+        if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
         } else {
             $this->template->usr = $this->getUser()->getIdentity();

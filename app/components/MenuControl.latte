@@ -9,7 +9,7 @@
                 {/foreach}
                 
                 
-                <li class="{ifCurrent Order:cart}active{/ifCurrent}"><a href="{plink Order:cart}">{_"Cart"} {if $cart > 0}<span class="badge badge-info">{$cart}</span>{else}<span class="badge">{$cart}</span>{/if}</a></li>
+                <li class="{ifCurrent Order:cart}active{/ifCurrent}"><a href="{plink Order:cart}">{_"Cart"} {if $cart > 0}<span class="badge badge-info">{$cart}</span>{else}<span class="badge">0</span>{/if}</a></li>
        
             </ul>
         </div>

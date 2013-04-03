@@ -1,5 +1,5 @@
 {block pageheader}
-{if $user->isLoggedIn()}
+{if $user->isInRole('admin')}
 <div class="page-header">
         <h1 n:block="title">Order summary <small> Complete summary order.</small></h1>
 
@@ -15,7 +15,7 @@
 
 {block content}
 <div class="span10"> 
-{if $user->isLoggedIn()}
+{if $user->isInRole('admin')}
 
 {foreach $flashes as $flash}
         <div class="{$flash->type}">
@@ -166,7 +166,7 @@
 
 {block sidebar}
 <div class="span2"> 
-  {if $user->isLoggedIn()}
+  {if $user->isInRole('admin')}
         {control menu:admin}
         {/if}
 </div>

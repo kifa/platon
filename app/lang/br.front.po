@@ -1,0 +1,41 @@
+# Gettext keys exported by GettextTranslator and Translation Panel
+# Created: 2013-04-03 10:39:45
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2013-04-03 10:39+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));\n"
+
+
+msgid "Home"
+msgstr "Casa"
+
+msgid "Choose language:"
+msgstr ""
+
+msgid "Sign In"
+msgstr ""
+
+msgid "Cart"
+msgstr ""
+
+msgid "You"
+msgstr ""
+
+msgid "Are"
+msgstr ""
+
+msgid "Here"
+msgstr ""
+
+msgid "View as List"
+msgstr ""
+
+msgid "Buy"
+msgstr ""
+
+msgid "View"
+msgstr ""
+

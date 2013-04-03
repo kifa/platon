@@ -82,7 +82,6 @@ class ProductControl extends BaseControl {
 
         $this->template->setFile(__DIR__ . '/ProductControl.latte');
         $this->template->products = $this->service->loadCatalog($this->id);
-        $this->template->photos = $this->service->loadCoverPhoto();
         $this->template->render();
     }
 

@@ -2,6 +2,7 @@
 
 use Nette\Forms\Form,
         Nette\Utils\Html;
+use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 /*
  * class ProductPresenter
  * ProductPresenter rendering product info, and catalog info
@@ -22,6 +23,7 @@ class ProductPresenter extends BasePresenter {
     private $catId;
     protected $translator;
 
+    private $albumID;
 
 
     protected function startup() {
@@ -32,7 +34,7 @@ class ProductPresenter extends BasePresenter {
 
         /* Kontrola přihlášení
          * 
-         * if (!$this->getUser()->isLoggedIn()) {
+         * if (!$this->getUser()->isInRole('admin')) {
           $this->redirect('Sign:in');
           } */
     }
@@ -42,7 +44,32 @@ class ProductPresenter extends BasePresenter {
     }
 
 
-        protected function createComponentProduct() {
+    public function handleDeletePhoto($product, $id) {
+        if($this->getUser()->isInRole('admin')) {
+        $row = $this->productModel->loadPhoto($id);
+        if (!$row) {
+            $this->flashMessage('There is no photo to delete', 'alert');
+        }
+        else {
+            
+            $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/' . $row->PhotoURL;
+            if ($imgUrl) {
+                unlink($imgUrl);
+            }
+            
+            $e = 'Photo ' . $row->PhotoName . ' was sucessfully deleted.';
+            
+            $this->productModel->deletePhoto($id);
+            $this->flashMessage($e, 'alert');
+        }
+        
+        $this->redirect('Product:product', $product);
+    }
+    }
+
+    
+
+    protected function createComponentProduct() {
 
         $control = new ProductControl();
         $control->setService($this->context->productModel);
@@ -59,8 +86,10 @@ class ProductPresenter extends BasePresenter {
      */
     
     public function createComponentAddProductForm() {
-        if($this->getUser()->isLoggedIn()) {
+        if($this->getUser()->isInRole('admin')) {
         $addProduct = new Nette\Application\UI\Form;
+        $addProduct->setRenderer(new BootstrapRenderer);
+        $addProduct->setTranslator($this->translator);
         $addProduct->addHidden('catID', $this->catId);
         $addProduct->addGroup('AddProduct');
         $addProduct->addText('name', 'Name:')
@@ -92,14 +121,18 @@ class ProductPresenter extends BasePresenter {
      */
     
     public function addProductFormSubmitted($form) {
-  
-        $id = $this->productModel->countProducts() + 1;
+  if($this->getUser()->isInRole('admin')) {
+    //    $albumID = $this->productModel->countPhotoAlbum() + 1;
+        
+        $albumID =  $this->productModel->insertPhotoAlbum(
+                $form->values->name,
+                $form->values->desc
+                );
         
         $this->productModel->insertProduct(
-                $id, //ID
                 $form->values->name, //Name
                 $form->values->producer, //Producer
-                '4', //Album
+                $albumID, //Album
                 '11111', //Product Number
                 $form->values->desc, //Description
                 1, //Parametr Album
@@ -119,9 +152,11 @@ class ProductPresenter extends BasePresenter {
         if($form->values->image->isOK()){
         
          $this->productModel->insertPhoto(
-                        $form->values->image->name
+                        $form->values->image->name,
+                        $albumID,
+                        1
                 );
-          $imgUrl = $this->context->params['wwwDir'] . '/images/4/' . $form->values->image->name;
+          $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/' . $form->values->image->name;
           $form->values->image->move($imgUrl);
            //  dump($form->values->image->getName);
            //  dump($form->values->image->getTemporaryFile);
@@ -129,14 +164,61 @@ class ProductPresenter extends BasePresenter {
         
         $this->redirect('Product:products', $form->values->catID);
     }
+    
+        }
 
 
+    
+    /*
+     * Adding product photos
+     */
+    
+    public function createComponentAddPhotoForm()  {
+        if($this->getUser()->isInRole('admin')) {
+        $addPhoto = new Nette\Application\UI\Form;
+        $addPhoto->setRenderer(new BootstrapRenderer);
+        $addPhoto->setTranslator($this->translator);
+        $addPhoto->addHidden('albumID', $this->albumID);
+        $addPhoto->addUpload('image', 'Photo:')
+                ->addRule(FORM::IMAGE , 'Je podporován pouze soubor JPG, PNG a GIF')
+                ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
+        $addPhoto->addSubmit('add', 'Add Photo')
+                ->setAttribute('class', 'btn-primary')
+                ->setAttribute('data-loading-text', 'Uploading...');
+        $addPhoto->onSuccess[] = $this->addProductPhotoFormSubmitted;
+        return $addPhoto;
+        }
+    }
+    
+    /*
+     * Adding submit form for adding photos
+     */
+    public function addProductPhotoFormSubmitted($form) {
+        if($this->getUser()->isInRole('admin')) {
+        if($form->values->image->isOK()){
+        
+         $this->productModel->insertPhoto(
+                        $form->values->image->name,
+                        $form->values->albumID
+                );
+          $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $form->values->albumID . '/' . $form->values->image->name;
+          $form->values->image->move($imgUrl);
+          
+          $e = HTML::el('span', ' Photo ' . $form->values->image->name . ' was sucessfully uploaded');
+          $ico = HTML::el('i')->class('icon-ok-sign left');
+          $e->insert(0, $ico);
+          $this->flashMessage($e, 'alert');
+        }
+        
+        $this->redirect('this');
+    }
+    }
     /*
      * Handle for removing products 
      */
     
     public function handleDeleteProduct($id, $catID) {
-       if($this->getUser()->isLoggedIn()) {
+      if($this->getUser()->isInRole('admin')) {
         $this->productModel->deleteProduct($id);
         $this->redirect('Product:products', $catID);
        }
@@ -168,9 +250,16 @@ class ProductPresenter extends BasePresenter {
      */
     
     public function renderProduct($id) {
-       
-       $this->template->product = $this->productModel->loadProduct($id);
-       $this->template->album = $this->productModel->loadPhotoAlbum($id);
+        $row = $this->productModel->loadProduct($id);
+        if (!$row) {
+            $this->flashMessage('Product not available', 'alert');
+            $this->redirect('Homepage:');
+        }
+        else {
+            $this->albumID = $row->PhotoAlbumID;
+            $this->template->product = $row;
+            $this->template->album = $this->productModel->loadPhotoAlbum($id);
+        }
     }
 
     

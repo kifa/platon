@@ -48,7 +48,7 @@
 <a n:href="this, lang => cs"><img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" /></a>
                 </div>
                 <div class="span3">
-                    {if $user->isLoggedIn()}
+                    {if $user->isInRole('admin')}
                     <p>Hello {$user->id}! <a href="{plink Sign:out}">{_"Logout"} <i class="icon-signout"></i></a></p>
                     {else}
                     <a href="{plink Sign:in}">{_"Sign In"} <i class="icon-signin"></i></a>
@@ -72,7 +72,14 @@
             
    <div id="content"> 
        {block #pageheader}
+
        {/block}
+              {foreach $flashes as $flash}
+
+       <div class="{$flash->type}">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+{$flash->message}</div>
+{/foreach}
        
         <div class="row">
             {block #content}
