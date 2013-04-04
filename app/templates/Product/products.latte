@@ -23,8 +23,19 @@
         about upcoming flights, restaurant reservations, hotel confirmations and even
         nearby photo opportunities – when and where you need them.</p>
     {if $user->isInRole('admin')}
-    <div class="span5" style="display: none;" id="addProduct">
-        {control addProductForm}
+     
+    <div id="addProduct" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-plus"></i> Add new product</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Please fill in these information'}</p>
+              <p>{control addProductForm}</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close without adding</button>
+            </div>
     </div>
     {/if}
     
@@ -83,13 +94,15 @@
                 }
             });   
 
+          $('.upl').click(function() { 
+                $('.upl').button('toggle');
+                $('.upl').button('loading') });
+            
           $('#showNew').toggle(function(){
-              $('#addProduct').fadeIn();
-               $('#addIco').attr('class', 'icon-large icon-minus');
+              $('#addProduct').modal('show');
             },
             function() {
-                $('#addProduct').fadeOut();
-                $('#addIco').attr('class', 'icon-large icon-plus');
+                $('#addProduct').modal('hide');
             });
     });
 

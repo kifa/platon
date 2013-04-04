@@ -34,7 +34,7 @@
     <body>
         <script> document.body.className+=' js' </script>
 
-        
+         <div class="container supercontainer"> 
         <div class="container">
 
             <div class="masterhead">
@@ -74,12 +74,11 @@
        {block #pageheader}
 
        {/block}
-              {foreach $flashes as $flash}
-
-       <div class="{$flash->type}">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-{$flash->message}</div>
-{/foreach}
+             {foreach $flashes as $flash}
+                <div class="{$flash->type}">
+                     <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {$flash->message}</div>
+              {/foreach}
        
         <div class="row">
             {block #content}
@@ -90,25 +89,36 @@
             
             {block #sidebar}
             <div class="span2">
-            
-                
-            
+
             </div>
             {/block}
-   </div>       
+        </div>       
    
    <div class="footer">
                 &COPY; Birne shop 2013
    </div>
 
         </div>
-	{block scripts}
+   </div>
+</div>	{block scripts}
         
         
         <script src="{$basePath}/js/netteForms.js"></script>
         <script src="{$basePath}/js/main.js"></script>
         <script src="{$basePath}/js/bootstrap.min.js"></script>
         <script src="{$basePath}/js/live-form-validation.js"></script>
+        {if $user->isInRole('admin')}
+        <script type="text/javascript" src="{$basePath}/js/tiny_mce/tiny_mce.js" ></script >
+        <script type="text/javascript" >
+            tinyMCE.init({
+                    mode: "specific_textareas",
+                    editor_selector: "mceEditor",
+                    theme : "simple",
+                    height: '300px',
+                    width: '400px'
+            });
+         </script >    
+        {/if}
         {block #script}
         {/block}
         

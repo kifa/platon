@@ -57,4 +57,6 @@ class ModalControl extends BaseControl {
         $this->template->render();
     }
     
+    
+    
 }

@@ -185,13 +185,16 @@ class OrderPresenter extends BasePresenter {
 
         $shippers = array();
         $payment = array();
+        
+        
 
         foreach ($this->orderModel->loadDelivery('') as $key => $value) {
-            $shippers[$key] = $value->DeliveryName;
+          //  $t = HTML::el('span', $value->DeliveryPrice)->class('text-info');
+            $shippers[$key] = $value->DeliveryName . ' | ' . $value->DeliveryPrice .',-';
         };
 
         foreach ($this->orderModel->loadPayment('') as $key => $value) {
-            $payment[$key] = $value->PaymentName;
+            $payment[$key] = $value->PaymentName . ' | ' . $value->PaymentPrice.',-';
         };
         
         $cartForm = new Nette\Application\UI\Form;
@@ -214,11 +217,11 @@ class OrderPresenter extends BasePresenter {
                 ->addRule(Form::FILLED);
         $cartForm->addGroup('Shipping');
         $cartForm->addRadioList('shippers', '', $shippers)
-                ->setAttribute('class', '.span1 radio')
+              //  ->setAttribute('class', '.span1 radio')
                 ->setRequired('Please select Shipping method');
         $cartForm->addGroup('Payment');
         $cartForm->addRadioList('payment', '', $payment)
-                ->setAttribute('class', '.span1 radio')
+              //  ->setAttribute('class', '.span1 radio')
                 ->setRequired('Please select Payment method');
         $cartForm->addGroup('Terms');
         $cartForm->addCheckbox('terms', 'I accept Terms and condition.')

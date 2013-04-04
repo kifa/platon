@@ -4,7 +4,9 @@
             {if $user->isInRole('admin')}
 <div class="row">
     <div class="span10">
-        <a href="#addPhoto" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i id="addIco" class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a> |
+        <a href="#addPhoto" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a> |
+        <a href="#editDesc" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
+
         <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> |
         <a href="#"><i class="icon-large icon-pencil"></i> {_"Edit Product"}</a>
     </div>
@@ -27,7 +29,20 @@
             </div>
     </div>
     
-    
+    <div id="editDesc" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-camera-retro"></i> Edit description</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Edit your description and click Save desccription.'}</p>
+              <p>{control editDescForm}</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close without saving</button>
+            </div>
+    </div>
+
     {/if}
     
 
@@ -37,7 +52,7 @@
 {block content}
 <div class="span10">
     <div class="span5">
-        <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$product->PhotoURL}" class="img-circle" style="width: 400px;"/>
+        <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$product->PhotoURL}" style="width: 400px;"/>
     </div>
     <div class="span4">
         <div class="tabbable span4">
@@ -49,7 +64,8 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="info">
-                    <p>{$product->ProductDescription}</p>
+                   
+                    <p>{!$product->ProductDescription|striptags|truncate:180}</p>
 
                 </div>
                 <div class="tab-pane" id="spec">
@@ -88,31 +104,36 @@
                             </div>
                             </div>
 
-                            <div class="tabbable span10">
+                            <div class="tabbable span9">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#gal" data-toggle="tab"><i class="icon-camera-retro"></i> Gallery</a></li>
+                                    <li class="active"><a href="#allinfo" data-toggle="tab"><i class="icon-info-sign"></i> Info</a></li>
+                                    <li><a href="#gal" data-toggle="tab"><i class="icon-camera-retro"></i> Gallery</a></li>
                                     <li><a href="#vid" data-toggle="tab"><i class="icon-facetime-video"></i> Video</a></li>
                                     <li><a href="#rew" data-toggle="tab"><i class="icon-check"></i> Review</a></li>
                                 </ul>
                                 <div class="tab-content">
-                                    <div class="tab-pane active" id="gal">
+                                    <div class="tab-pane active" id="allinfo">
+                                        <p class="text-justified">{!$product->ProductDescription}</p>
+                                    </div>
+                                    
+                                    <div class="tab-pane" id="gal">
 
 
                                         <ul class="thumbnails">
                                 {foreach $album as $id => $photo}
-                                            <li class="{if $photo->CoverPhoto}span4 {else} span3{/if}">
+                                            <li class="{if $photo->CoverPhoto}span3 {else} span3{/if}">
                                                 <a href="#myLightbox" class="thumbnail">
-                                                    <img style="height:{if $photo->CoverPhoto}430px{else}200px{/if}; width: auto;" src="{$basePath}/images/{$product->PhotoAlbumID}/{$photo->PhotoURL}" alt="{$product->ProductName}">
+                                                    <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/{$photo->PhotoURL}" alt="{$product->ProductName}">
                                                 </a>
                                                 {if $user->isInRole('admin')}
                                                 <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> Delete image</a>
                                                   {/if}
                                             </li>
 
-                            {/foreach}
+                                 {/foreach}
                                         </ul>
                                     </div>
-                                    <div class="tab-pane active" id="vid">
+                                    <div class="tab-pane" id="vid">
                                         <iframe width="853" height="480" src="http://www.youtube.com/embed/qN3EXAFRxKQ?rel=0" frameborder="0" allowfullscreen></iframe>
                                     </div>
                                 </div>
@@ -161,6 +182,15 @@
             },
             function() {
                 $('#addPhoto').modal('hide');
+              //  $('#addIco').attr('class', 'icon-large icon-camera-retro');
+            });
+            
+          $('#editDescButton').toggle(function(){
+              $('#editDesc').modal('show');
+             //  $('#addIco').attr('class', 'icon-large icon-minus');
+            },
+            function() {
+                $('#editDesc').modal('hide');
               //  $('#addIco').attr('class', 'icon-large icon-camera-retro');
             });
          

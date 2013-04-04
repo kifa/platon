@@ -227,7 +227,7 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #333333;
-  background-color: #ffffff;
+  background: url(../img/background.jpg) no-repeat fixed top left #ffffff;
 }
 
 a {
@@ -285,6 +285,7 @@ a:focus {
   margin-left: 20px;
 }
 
+.supercontainer,
 .container,
 .navbar-static-top .container,
 .navbar-fixed-top .container,
@@ -6189,4 +6190,13 @@ a.badge:focus {
  
     li .setview {
         min-width: 270px;
+    }
+    
+    .productCaption {
+        height: 115px!important
+    }
+    
+    .supercontainer {
+        background: white;
+        padding: 18px;
     }
