@@ -146,16 +146,29 @@ class ProductModel extends Repository {
      * Insert Photo
      */
     
-        public function insertPhoto($name, $albumID, $cover = null){
-            $insert = array(
-            'PhotoID' => NULL,
-            'PhotoName' => $name,
-            'PhotoURL' => $name,
-            'PhotoAlbumID' => $albumID,
-            'PhotoAltText' => 's4',
-            'CoverPhoto' => $cover
-                );
-            return $this->getTable('photo')->insert($insert);
-        }
-
+    public function insertPhoto($name, $albumID, $cover = null){
+        $insert = array(
+        'PhotoID' => NULL,
+        'PhotoName' => $name,
+        'PhotoURL' => $name,
+        'PhotoAlbumID' => $albumID,
+        'PhotoAltText' => 's4',
+        'CoverPhoto' => $cover
+        );
+        
+        return $this->getTable('photo')->insert($insert);
+    }
+    
+    public function insertPrice($selling,$sale,$final){
+        $insert = array(
+            //'PriceID'=>
+            //'BuyingPrice'=>
+            'SellingPrice'=>$selling,
+            'SALE'=>$sale,
+            'FinalPrice'=>$final
+            //'CurrencyID'=>
+        );
+                
+        return $this->getTable('Price')->insert($insert);
+    }
 }
