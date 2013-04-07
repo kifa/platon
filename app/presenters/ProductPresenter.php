@@ -143,7 +143,7 @@ class ProductPresenter extends BasePresenter {
         $this->productModel->insertProduct(
                 $form->values->name, //Name
                 $form->values->producer, //Producer
-                $albumID, //Album
+                //$albumID, //Album
                 '11111', //Product Number
                 $form->values->desc, //Description
                 1, //Parametr Album
@@ -152,10 +152,8 @@ class ProductPresenter extends BasePresenter {
                 'rok', //Warranty
                 $form->values->amount, //Pieces
                 $form->values->cat  , //CatID
-                2, //PriceID
-                '', //Date of avail.
-                '', //Date added
-                1, //Documentation
+                //2, //PriceID
+                '', //Date of avail.                
                 1 //Comment             
                 
         );

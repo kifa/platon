@@ -57,17 +57,31 @@ class OrderModel extends Repository {
      * @param ? 
      * @return string
      */
-    public function insertOrder($id, $user, $price, $pricetax, $created, 
-            $lastchange, $delivery, $payment)
-    {                   
+    public function insertOrder($id, $user, $price, $delivery, $payment)
+    {                 
+            $today = date("Y-m-d");
+            
+            $deliveryprice = $this->loadDeliveryPrice($delivery);            
+            $paymentprice = $this->loadPaymentPrice($payment);
+            $deliverypaymentprice = $deliveryprice + $paymentprice;
+            
+            $tax1 = $this->getTable('settings')->select('Value')->where('Name',"TAX")->fetch();
+            $tax = $tax1['Value'];
+            //settype($tax, 'float');
+            $finaltax = $price * ($tax / 100);
+            
+            $totalprice = $price + $finaltax;
+
             $insert =  array(
                 'OrderID' => $id, //automaticky!
                 //'StatusID' => $status, //automaticky!
                 'UsersID' => $user,  //nepraktické, aby se pouzivalo "novak", "admin"
-                'TotalPrice' => $price, //
-                'TotalPriceTax' => $pricetax,
-                'DateCreated' => $created,  //automaticky presenter
-                'DateOfLastChange' => $lastchange, //pri vytvoreni stejne jako created
+                'ProductsPrice' => $price,
+                'DeliveryPaymentPrice' => $deliverypaymentprice,
+                'TaxPrice' => $finaltax, //
+                'TotalPrice' => $totalprice,
+                'DateCreated' => $today,  //automaticky presenter
+                'DateOfLastChange' => $today, //pri vytvoreni stejne jako created
                 //'DateFinished' => '', //? spolu s předchozí řešit až v administraci obj.
                 'DeliveryID' => $delivery,
                 'PaymentID' => $payment,
@@ -130,11 +144,16 @@ class OrderModel extends Repository {
         }
         else
         {
-            return $this->getTable('payment')->select('payment.*,price.finalprice')
-                    ->where('PaymentID',$id);
+            return $this->getTable('payment')->where('PaymentID',$id);
         }
     }
     
+    public function loadPaymentPrice($id){
+        //return $this->getTable('payment')->select('PaymentPrice')->where('PaymentID',$id)->fetch();        
+        $payment = $this->getTable('payment')->select('PaymentPrice')->where('PaymentID',$id)->fetch();
+        return $payment['PaymentPrice'];
+    }
+
     /*
      * Insert new payment method
      */
@@ -159,8 +178,14 @@ class OrderModel extends Repository {
         }
         else
         {
-            return $this->getTable('delivery')->select('delivery.*,price.FinalPrice')->where('DeliveryID',$id);
+            return $this->getTable('delivery')->where('DeliveryID',$id);
         }
+    }
+    
+    public function loadDeliveryPrice($id){
+        //return $this->getTable('delivery')->select('DeliveryPrice')->where('DeliveryID',$id)->fetch();
+        $delivery = $this->getTable('delivery')->select('DeliveryPrice')->where('DeliveryID',$id)->fetch();
+        return $delivery['DeliveryPrice'];
     }
     
     /*

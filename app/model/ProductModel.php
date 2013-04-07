@@ -20,11 +20,17 @@ class ProductModel extends Repository {
         if($id==''){
             //return $this->getTable('product')->select('product.ProductID, product.ProductName,
             //    product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*');            
-           return $this->getDB()->query('SELECT * FROM product JOIN price ON product.PriceID=price.PriceID JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID WHERE Photo.CoverPhoto="1"');                   
-        }
+            return $this->getDB()->query('SELECT * FROM product JOIN price 
+                ON price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
+                JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+                WHERE Photo.CoverPhoto="1"');                              
+            
+            }
         else
-        {          
-           return $this->getDB()->query('SELECT * FROM product JOIN price ON product.PriceID=price.PriceID JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID WHERE Photo.CoverPhoto="1" and Product.CategoryID=?',$id);
+        {  return $this->getDB()->query('SELECT * FROM product JOIN price ON 
+            price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
+            JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+            WHERE Photo.CoverPhoto="1" and product.CategoryID=?',$id);
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
               //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
         }
@@ -38,7 +44,10 @@ class ProductModel extends Repository {
      *  */
 
     public function loadProduct($id) {       
-        return $this->getDB()->query('SELECT * FROM product JOIN price ON product.PriceID=price.PriceID JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID WHERE Product.ProductID=?',$id)->fetch();
+        return $this->getDB()->query('SELECT * 
+FROM product JOIN price ON product.ProductID=price.ProductID JOIN photoalbum ON
+product.ProductID=photoalbum.ProductID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+WHERE Product.ProductID=?',$id)->fetch();
         //return $this->getTable('Product')->select('Product.*,Price.*,PhotoAlbum.*,photo.*')->where('Product.ProductID',$id)->fetch()
     }
 
@@ -48,15 +57,16 @@ class ProductModel extends Repository {
      * @param ? example: pozice počátečního znaku
      * @return string
      *  */
-    public function insertProduct($name,$producer,$album,$prodnumber,
-            $description,$parameters,$ean,$qr,$warranty,$pieces,$category,$price,
-            $dataaval,$dateadded,$documentation,$comment)
+    public function insertProduct($name,$producer,$prodnumber,
+            $description,$parameters,$ean,$qr,$warranty,$pieces,$category,
+            $dataaval,$comment)
     {
+        $today = date("Y-m-d");
+        
         $insert = array(
             'ProductID' => NULL,
             'ProductName' => $name,
-            'Producer' => $producer,
-            'PhotoAlbumID' => $album,
+            'Producer' => $producer,            
             'ProductNumber' => $prodnumber,
             'ProductDescription' => $description,
             //'ProductStatusID' => '',
@@ -65,45 +75,99 @@ class ProductModel extends Repository {
             'ProductQR' => $qr,
             'ProductWarranty' => $warranty,
             'PiecesAvailable' => $pieces,
-            'CategoryID' => $category,
-            'PriceID' => $price,
+            'CategoryID' => $category,            
             'DateOfAvailable' => $dataaval,
-            'ProductDateOfAdded' => $dateadded,
-            'DocumentationID' => $documentation,
+            'ProductDateOfAdded' => $today,            
             'CommentID' => $comment
         );
         return $this->getTable('Product')->insert($insert);              
     }
     /*
      * Update Product
-     * @param ?
-     * @param ? example: pozice počátečního znaku
-     * @return string
+     * @param id
+     *      Parameter id mean id of product you want to update
+     * @param value
+     *      Parameter value is new value you want to update
+     * @param update
+     *      Parameter update determines which attribut you want to update.
+     *      Possible values are
+     *              name => update product name
+     *              producer => update producer name
+     *              pn => update product number
+     *              description => update product description
+     *              status => update product status
+     *              ean => update product ean code
+     *              qr => update product qr code
+     *              warranty => update product warranty informations
+     *              category => update product category
+     *              available => update date when product will be available
+     *              pieces => update number od pieces which are available
+     *              comment => update first first
+     * 
+     * @return 
+     *      Insert new informations to the database
      *  */
-    public function updateProduct($id,$name,$producer,$prodnumber,
-            $description,$ean,$qr,$warranty,$pieces,$category,
-            $dataaval,$documentation,$comment){
-        $insert = array(
-
-            'ProductName' => $name,
-            'Producer' => $producer,
-            //'PhotoAlbumID' => $album,
-            'ProductNumber' => $prodnumber,
-            'ProductDescription' => $description,
-            //'ProductStatusID' => '',
-            //'ParametersAlbumID' => $parameters,
-            'ProductEAN' => $ean,
-            'ProductQR' => $qr,
-            'ProductWarranty' => $warranty,
-            'PiecesAvailable' => $pieces,
-            'CategoryID' => $category,
-            //'PriceID' => $price,
-            'DateOfAvailable' => $dataaval,
-            //'ProductDateOfAdded' => $dateadded,
-            'DocumentationID' => $documentation,
-            'CommentID' => $comment
-        );
-        
+    public function updateProduct($id,$value,$update){
+        if($update=="name"){
+            $insert = array(
+                'ProductName' => $value
+                );
+        };
+        if ($update=="producer"){
+            $insert = array (
+                'Producer' => $value
+            );
+        };
+        if($update=="pn"){
+            $insert = array (
+                'ProductNumber' => $value
+            );
+        };
+        if($update=="description"){
+            $insert = array (
+                'ProductDescription' => $value
+            );
+        };
+        if($update=="status"){
+            $insert = array (
+                'ProductStatusID' => $value
+            );
+        };
+        if($update=="ean"){
+            $insert = array (
+                'ProductEAN' => $value
+            );
+        };
+        if($update=="qr"){
+            $insert = array (
+                'ProductQR' => $value
+            );
+        };
+        if($update=="warranty"){
+            $insert = array (
+                'ProductWarranty' => $value
+            );
+        };
+        if($update=="pieces"){
+            $insert = array (
+                'PiecesAvailable' => $value
+            );
+        };        
+        if($update=="category"){
+            $insert = array (
+                'CategoryID' => $value
+            );
+        };
+        if($update=="available"){
+            $insert = array (
+                'DateOfAvailable' => $value
+            );
+        };    
+        if($update=="comment"){
+            $insert = array (
+                'CommentID' => $value
+            );
+        };                           
         return $this->getTable('Product')->where('ProductID',$id)->update($insert);
     }
 
@@ -134,7 +198,9 @@ class ProductModel extends Repository {
         }
         else{
             //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
-            $row = $this->getDB()->query('SELECT * FROM product JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID WHERE Product.ProductID=?',$id); 
+            $row = $this->getDB()->query('SELECT * FROM product JOIN photoalbum 
+                ON product.ProductID=photoalbum.ProductID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+                WHERE Product.ProductID=?',$id); 
            // dump($row);
             return $row;
         }
@@ -184,14 +250,15 @@ class ProductModel extends Repository {
         return $this->getTable('photo')->insert($insert);
     }
     
-    public function insertPrice($selling,$sale,$final){
+    public function insertPrice($selling,$sale,$final,$product){
         $insert = array(
             //'PriceID'=>
             //'BuyingPrice'=>
             'SellingPrice'=>$selling,
             'SALE'=>$sale,
-            'FinalPrice'=>$final
+            'FinalPrice'=>$final,
             //'CurrencyID'=>
+            'ProductID'=>$product
         );
                 
         return $this->getTable('Price')->insert($insert);

@@ -246,11 +246,10 @@ class OrderPresenter extends BasePresenter {
     public function cartFormSubmitted($form) {
 
         $total = 0;
-        $today = date("Y-m-d");
         
-        $tax = $this->shopModel->getTax()->Value;
-        settype($tax, 'float');
-        $finalTax = $total * ($tax / 100);
+        //$tax = $this->shopModel->getTax()->Value;
+        //settype($tax, 'float');
+        //$finalTax = $total * ($tax / 100);
         
         $this->orderNo = $this->orderModel->countOrder() + 1;
                 $orderDetCount = $this->orderModel->countOrderDetail() + 1;
@@ -286,7 +285,7 @@ class OrderPresenter extends BasePresenter {
         $this->orderModel->insertOrder(
                 $this->orderNo,
                 $form->values->email,
-                $total, $finalTax, $today, $today, $form->values->shippers, $form->values->payment
+                $total, $form->values->shippers, $form->values->payment
         );
 
         //STEP 4 - insert Order Details and assign them to Order
