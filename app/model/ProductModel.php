@@ -80,7 +80,32 @@ class ProductModel extends Repository {
      * @param ? example: pozice počátečního znaku
      * @return string
      *  */
+    public function updateProduct($id,$name,$producer,$prodnumber,
+            $description,$ean,$qr,$warranty,$pieces,$category,
+            $dataaval,$documentation,$comment){
+        $insert = array(
 
+            'ProductName' => $name,
+            'Producer' => $producer,
+            //'PhotoAlbumID' => $album,
+            'ProductNumber' => $prodnumber,
+            'ProductDescription' => $description,
+            //'ProductStatusID' => '',
+            //'ParametersAlbumID' => $parameters,
+            'ProductEAN' => $ean,
+            'ProductQR' => $qr,
+            'ProductWarranty' => $warranty,
+            'PiecesAvailable' => $pieces,
+            'CategoryID' => $category,
+            //'PriceID' => $price,
+            'DateOfAvailable' => $dataaval,
+            //'ProductDateOfAdded' => $dateadded,
+            'DocumentationID' => $documentation,
+            'CommentID' => $comment
+        );
+        
+        return $this->getTable('Product')->where('ProductID',$id)->update($insert);
+    }
 
     /*
      * Delete Product
