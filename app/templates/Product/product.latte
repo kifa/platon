@@ -121,8 +121,8 @@
 
                                         <ul class="thumbnails">
                                 {foreach $album as $id => $photo}
-                                            <li class="{if $photo->CoverPhoto}span3 {else} span3{/if}">
-                                                <a href="#myLightbox" class="thumbnail">
+                                            <li class="{if $photo->CoverPhoto}span3 {else} span3 {/if}">
+                                                <a href="#myLightbox" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
                                                     <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/{$photo->PhotoURL}" alt="{$product->ProductName}">
                                                 </a>
                                                 {if $user->isInRole('admin')}
@@ -166,8 +166,18 @@
 
 {block script}
      <script src="{$basePath}/js/bootstrap-lightbox.min.js"></script>
-     <script src="{$basePath}/js/holder.js"></script>
-     
+
+     <script>
+        $(document).ready(function() {
+                $(".imgLiquid").imgLiquid({
+                    fill: true,
+                    fadeInTime: 0,
+                    delay: 0,
+                    horizontalAlign: "left",
+                    verticalAlign: "top"});
+            });
+        </script>
+        
          {if $user->isInRole('admin')}
     <script>
         $(document).ready(function() {

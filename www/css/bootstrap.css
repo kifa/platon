@@ -6200,3 +6200,7 @@ a.badge:focus {
         background: white;
         padding: 18px;
     }
+    
+    .imgLiquid img{
+    visibility:hidden;
+}
