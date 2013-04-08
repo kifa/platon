@@ -7,9 +7,9 @@
         <a href="#addPhoto" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a> |
         <a href="#editDesc" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
         <a href="#editPrice" data-toggel="modal" data-target="#editPrice" id="editPriceButton" ><i class="icon-large icon-money"></i> {_"Edit Price"}</a> |
+        <a href="#editPieces" data-toggel="modal" data-target="#editPieces" id="editPiecesButton"><i class="icon-large icon-truck"></i> {_"Edit Pieces"}</a> |
+        <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> 
         
-        <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> |
-        <a href="#"><i class="icon-large icon-pencil"></i> {_"Edit Product"}</a>
     </div>
 </div>
             {/if}
@@ -52,6 +52,20 @@
             <div class="modal-body">
                 <p>{_'Edit your description and click Save desccription.'}</p>
               <p>{control editPriceForm}</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close without saving</button>
+            </div>
+    </div>
+    
+    <div id="editPieces" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-camera-retro"></i> Edit pieces in stock</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Edit your description and click Save desccription.'}</p>
+              <p>{control editPiecesForm}</p>
             </div>
             <div class="modal-footer">
               <button class="btn" data-dismiss="modal" aria-hidden="true">Close without saving</button>
@@ -237,7 +251,14 @@
               //  $('#addIco').attr('class', 'icon-large icon-camera-retro');
             });
         
-         
+         $('#editPiecesButton').toggle(function(){
+              $('#editPieces').modal('show');
+             //  $('#addIco').attr('class', 'icon-large icon-minus');
+            },
+            function() {
+                $('#editPieces').modal('hide');
+              //  $('#addIco').attr('class', 'icon-large icon-camera-retro');
+            });
     });
 
     </script>
