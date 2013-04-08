@@ -248,6 +248,39 @@ class ProductPresenter extends BasePresenter {
         }
     }
     
+    
+    public function createComponentEditPriceForm() {
+         if($this->getUser()->isInRole('admin')) {
+           
+           // = $this->productModel->loadProduct($id)->ProductDescription;  
+           $editForm = new Nette\Application\UI\Form;
+           $editForm->setTranslator($this->translator);
+          // $editForm->setRenderer(new BootstrapRenderer);
+           $editForm->addText('price', 'Price:')
+                   ->setDefaultValue($this->row['SellingPrice'])
+                   ->setRequired()
+                   ->addRule(FORM::FLOAT, 'This has to be a number.');
+           $editForm->addText('discount', 'Discount:')
+                   ->setDefaultValue($this->row['SALE'])
+                   ->addRule(FORM::FLOAT, 'This has to be a number.');
+           $editForm->addHidden('id', $this->row['ProductID']);
+           $editForm->addSubmit('edit', 'Save price')
+                   ->setAttribute('class', 'upl btn btn-primary')
+                   ->setAttribute('data-loading-text', 'Saving...');
+            $editForm->onSuccess[] = $this->editPriceFormSubmitted;
+            return $editForm;
+         }
+    }
+    
+    public function editPriceFormSubmitted($form) {
+        if($this->getUser()->isInRole('admin')) {
+            
+           $this->productModel->updatePrice($form->values->id, $form->values->price, $form->values->discount);
+           
+           $this->redirect('this');
+        }
+    }
+    
     /*
      * Handle for removing products 
      */
@@ -293,8 +326,7 @@ class ProductPresenter extends BasePresenter {
         }
         else {
             
-            $this->row = array('ProductID' => $row->ProductID,'PhotoAlbumID' => $row->PhotoAlbumID, 'ProductDescription' => $row->ProductDescription);
-            dump($this->row);
+            $this->row = array('ProductID' => $row->ProductID,'PhotoAlbumID' => $row->PhotoAlbumID, 'ProductDescription' => $row->ProductDescription, 'SellingPrice' => $row->SellingPrice, 'SALE' => $row->SALE);
             $this->template->product = $row;
             $this->template->album = $this->productModel->loadPhotoAlbum($id);
         }

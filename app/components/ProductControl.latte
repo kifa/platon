@@ -40,7 +40,7 @@
          <div class="caption .span3 productCaption">
             <h4><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></h4>
             
-            <p class="productCaptionText">{$product->ProductDescription|truncate:60}</p>
+            <p class="productCaptionText">{!$product->ProductDescription|striptags|truncate:60}</p>
             </div>
             <hr>
             <div class="row .span3">
@@ -55,7 +55,7 @@
             <div class="row .span3">
                 <hr>
                     <div class="span2">
-                        <p class="text-success text-center lead"> {$product->FinalPrice},- </p>
+                        <p class="text-success text-center lead">{$product->FinalPrice},- {if $product->SALE > 1}<span class="muted" style="text-decoration: line-through; font-size: 50%;">{$product->SellingPrice},-</span>{/if} </p>
                     </div>
                
             </div> 
@@ -77,4 +77,6 @@
                     verticalAlign: "top"});
             });
         </script>
+        
+        
 {/block}

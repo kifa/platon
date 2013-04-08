@@ -121,6 +121,18 @@ WHERE Product.ProductID=?',$id)->fetch();
                 );        
         return $this->getTable('Product')->where('ProductID',$id)->update($insert);
     }
+    
+    public function updatePrice($id, $price, $discount){
+        
+            $final = $price - $discount;
+        
+            $insert = array(
+                'SellingPrice' => $price,
+                'FinalPrice' => $final,
+                'SALE' => $discount
+                );        
+        return $this->getTable('Price')->where('ProductID',$id)->update($insert);
+    }
 
     /*
      * Delete Product

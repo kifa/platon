@@ -6,7 +6,8 @@
     <div class="span10">
         <a href="#addPhoto" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a> |
         <a href="#editDesc" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
-
+        <a href="#editPrice" data-toggel="modal" data-target="#editPrice" id="editPriceButton" ><i class="icon-large icon-money"></i> {_"Edit Price"}</a> |
+        
         <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> |
         <a href="#"><i class="icon-large icon-pencil"></i> {_"Edit Product"}</a>
     </div>
@@ -43,6 +44,20 @@
             </div>
     </div>
 
+    <div id="editPrice" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-camera-retro"></i> Edit price</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Edit your description and click Save desccription.'}</p>
+              <p>{control editPriceForm}</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close without saving</button>
+            </div>
+    </div>
+    
     {/if}
     
 
@@ -85,7 +100,13 @@
         </div>
 
         <div class=".span4 alert alert-info">
-            <h2 class="text-info span2">{$product->FinalPrice},-</h2>
+            {if $product->SALE > 1}
+            <p class=".span2 alert alert-warning">
+                        <i class="icon-money icon-large"></i>  <span class="badge badge-important">- {$product->SALE},- / {var $procent = 100 * ($product->SALE / $product->SellingPrice)} {$procent|number}%</span>
+            </p>
+            {/if}
+            
+            <h2 class="text-info span2">{$product->FinalPrice},- {if $product->SALE > 1}<span class="muted" style="text-decoration: line-through; font-size: 50%;">{$product->SellingPrice},-</span>{/if}</h2>
             <a href="{plink Order:cart $product->ProductID, "1"}" class="span2 btn btn-primary">
                 <i class="icon-shopping-cart"></i> Buy</a>
 
@@ -99,7 +120,9 @@
                     {elseif $product->PiecesAvailable = 0 }
                             <span class="badge">
                         {/if}
-                    {$product->PiecesAvailable}</span></p>
+                    {$product->PiecesAvailable}</span>
+                      </p>
+                      
                             </div>
                             </div>
                             </div>
@@ -179,9 +202,10 @@
         </script>
         
          {if $user->isInRole('admin')}
+                    <script src="{$basePath}/js/droparea.js"></script>
     <script>
         $(document).ready(function() {
-    
+                 
           $('.nav-tabs').button();
           $('.upl').click(function() { 
                 $('.upl').button('toggle');
@@ -203,9 +227,20 @@
                 $('#editDesc').modal('hide');
               //  $('#addIco').attr('class', 'icon-large icon-camera-retro');
             });
+            
+          $('#editPriceButton').toggle(function(){
+              $('#editPrice').modal('show');
+             //  $('#addIco').attr('class', 'icon-large icon-minus');
+            },
+            function() {
+                $('#editPrice').modal('hide');
+              //  $('#addIco').attr('class', 'icon-large icon-camera-retro');
+            });
+        
          
     });
 
     </script>
+  
     {/if}
 {/block}

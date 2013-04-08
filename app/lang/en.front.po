@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-03-27 12:46:25
+# Created: 2013-04-07 21:17:19
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-03-27 12:46+0100\n"
+"PO-Revision-Date: 2013-04-07 21:17+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -12,8 +12,14 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));\n"
 
 
+msgid "Add Product"
+msgstr "Add Product"
+
 msgid "Admin"
 msgstr "Admin"
+
+msgid "Amount"
+msgstr "Amount"
 
 msgid "Are"
 msgstr "Are"
@@ -27,8 +33,20 @@ msgstr "Cart"
 msgid "Category"
 msgstr "Category"
 
+msgid "Category: "
+msgstr "Category:"
+
+msgid "Cellphone"
+msgstr "Cellphone"
+
 msgid "Choose language:"
 msgstr "Choose language:"
+
+msgid "Description: "
+msgstr "Description:"
+
+msgid "Edit Category"
+msgstr "Edit Category"
 
 msgid "Here"
 msgstr "Here"
@@ -36,14 +54,74 @@ msgstr "Here"
 msgid "Home"
 msgstr "Home"
 
+msgid "In stock"
+msgstr "In stock"
+
+msgid "Keep me signed in"
+msgstr "Keep me signed in"
+
 msgid "Logout"
 msgstr "Logout"
+
+msgid "Name:"
+msgstr "Name:"
+
+msgid "Notebook"
+msgstr "Notebook"
+
+msgid "Nové heslo:"
+msgstr "New Password:"
 
 msgid "Orders"
 msgstr "Orders"
 
+msgid "Other"
+msgstr "Other"
+
+msgid "Password:"
+msgstr "Password:"
+
+msgid "Payment"
+msgstr "Payment"
+
+msgid "Please enter your password."
+msgstr "Please enter your password."
+
+msgid "Please enter your username."
+msgstr "Please, enter your username."
+
+msgid "Price:"
+msgstr "Price:"
+
+msgid "Producer: "
+msgstr "Producer:"
+
+msgid "Shipping"
+msgstr "Shipping"
+
+msgid "Sign In"
+msgstr "Sign In"
+
+msgid "Sign in"
+msgstr "Sign in"
+
+msgid "Smartphone"
+msgstr "Smartphone"
+
+msgid "Stats"
+msgstr "Stats"
+
+msgid "Tablets"
+msgstr "Tablets"
+
+msgid "Uživatelské jméno:"
+msgstr "User name:"
+
 msgid "View"
 msgstr "View"
+
+msgid "View as List"
+msgstr "View as List"
 
 msgid "You"
 msgstr "You"
@@ -51,6 +129,6 @@ msgstr "You"
 msgid "You cannot edit product here!"
 msgstr "You cannot edit product here!"
 
-msgid "Sign In"
-msgstr "Sign In"
+msgid "Image:"
+msgstr "Image:"
 
