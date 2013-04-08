@@ -57,8 +57,8 @@ WHERE Product.ProductID=?',$id)->fetch();
      * @param ? example: pozice počátečního znaku
      * @return string
      *  */
-    public function insertProduct($name,$producer,$prodnumber,
-            $description,$parameters,$ean,$qr,$warranty,$pieces,$category,
+    public function insertProduct($name,$price,$producer,$prodnumber,
+            $description,$ean,$qr,$warranty,$pieces,$category,
             $dataaval,$comment)
     {
         $today = date("Y-m-d");
@@ -69,8 +69,7 @@ WHERE Product.ProductID=?',$id)->fetch();
             'Producer' => $producer,            
             'ProductNumber' => $prodnumber,
             'ProductDescription' => $description,
-            //'ProductStatusID' => '',
-            'ParametersAlbumID' => $parameters,
+            //'ProductStatusID' => '',            
             'ProductEAN' => $ean,
             'ProductQR' => $qr,
             'ProductWarranty' => $warranty,
@@ -80,7 +79,15 @@ WHERE Product.ProductID=?',$id)->fetch();
             'ProductDateOfAdded' => $today,            
             'CommentID' => $comment
         );
-        return $this->getTable('Product')->insert($insert);              
+        $row = $this->getTable('Product')->insert($insert);   
+        $lastprodid = $row["ProductID"];
+        
+        $albumid = $this->insertPhotoAlbum($name, $description,$lastprodid);
+        
+        $this->insertPrice($lastprodid, $price);
+        
+        return array($lastprodid, $albumid);
+        
     }
     /*
      * Update Product
@@ -107,67 +114,11 @@ WHERE Product.ProductID=?',$id)->fetch();
      * @return 
      *      Insert new informations to the database
      *  */
-    public function updateProduct($id,$value,$update){
-        if($update=="name"){
+    public function updateProduct($id, $update, $value){
+        
             $insert = array(
-                'ProductName' => $value
-                );
-        };
-        if ($update=="producer"){
-            $insert = array (
-                'Producer' => $value
-            );
-        };
-        if($update=="pn"){
-            $insert = array (
-                'ProductNumber' => $value
-            );
-        };
-        if($update=="description"){
-            $insert = array (
-                'ProductDescription' => $value
-            );
-        };
-        if($update=="status"){
-            $insert = array (
-                'ProductStatusID' => $value
-            );
-        };
-        if($update=="ean"){
-            $insert = array (
-                'ProductEAN' => $value
-            );
-        };
-        if($update=="qr"){
-            $insert = array (
-                'ProductQR' => $value
-            );
-        };
-        if($update=="warranty"){
-            $insert = array (
-                'ProductWarranty' => $value
-            );
-        };
-        if($update=="pieces"){
-            $insert = array (
-                'PiecesAvailable' => $value
-            );
-        };        
-        if($update=="category"){
-            $insert = array (
-                'CategoryID' => $value
-            );
-        };
-        if($update=="available"){
-            $insert = array (
-                'DateOfAvailable' => $value
-            );
-        };    
-        if($update=="comment"){
-            $insert = array (
-                'CommentID' => $value
-            );
-        };                           
+                $update => $value
+                );        
         return $this->getTable('Product')->where('ProductID',$id)->update($insert);
     }
 
@@ -206,15 +157,16 @@ WHERE Product.ProductID=?',$id)->fetch();
         }
     }
     
-    public function insertPhotoAlbum($name, $desc) {
+    public function insertPhotoAlbum($name, $desc, $product) {
          $insert = array(
-            'PhotoAlbumID' => NULL,
+            'PhotoAlbumID' => NULL,             
             'PhotoAlbumName' => $name,
-            'PhotoAlbumDescription' => $desc
-                );
+            'PhotoAlbumDescription' => $desc,
+            'ProductID' => $product
+            );
          
-           $this->getTable('photoalbum')->insert($insert);
-           return $this->countPhotoAlbum();
+           $row = $this->getTable('photoalbum')->insert($insert);
+           return $row["PhotoAlbumID"];
     }
     /*
      * Count Albums
@@ -237,28 +189,28 @@ WHERE Product.ProductID=?',$id)->fetch();
      * Insert Photo
      */
     
-    public function insertPhoto($name, $albumID, $cover = null){
+    public function insertPhoto($name, $url, $albumID, $cover = null){
         $insert = array(
         'PhotoID' => NULL,
         'PhotoName' => $name,
-        'PhotoURL' => $name,
+        'PhotoURL' => $url,
         'PhotoAlbumID' => $albumID,
-        'PhotoAltText' => 's4',
+        'PhotoAltText' => $name,
         'CoverPhoto' => $cover
         );
         
         return $this->getTable('photo')->insert($insert);
     }
     
-    public function insertPrice($selling,$sale,$final,$product){
+    public function insertPrice($product,$final,$sale = 0){
         $insert = array(
             //'PriceID'=>
+            'ProductID'=>$product,
             //'BuyingPrice'=>
-            'SellingPrice'=>$selling,
+            //'SellingPrice'=>$selling,
             'SALE'=>$sale,
-            'FinalPrice'=>$final,
+            'FinalPrice'=>$final
             //'CurrencyID'=>
-            'ProductID'=>$product
         );
                 
         return $this->getTable('Price')->insert($insert);

@@ -114,15 +114,15 @@
                 <ul class="inline">
                     {foreach $statuses as $id => $status}
                     {if !($iterator->isFirst())}
-                    <li><a href="{plink SmartPanel:setStatus $order->OrderID, $id}">{$status->StatusName}
-                        {if !($iterator->isLast())}<i class="icon-arrow-right"></i>{/if}{if $iterator->isLast()}<i class="icon-ok"></i>{/if}</a></li>
+                    <li>{if $id !== $order->StatusID}<a href="{plink SmartPanel:setStatus $order->OrderID, $id}" >{/if}{$status->StatusName}
+                        {if !($iterator->isLast())}<i class="icon-arrow-right"></i>{/if}{if $iterator->isLast()}<i class="icon-ok"></i>{/if}{if $id !== $order->StatusID}</a>{/if}</li>
                     {/if}
                     {/foreach}
                   </ul>
             </div>
         </div>
                 
-                
+              {dump $order}  
     </div>
         <div class="span4 alert alert-block">
             <div class="span4">

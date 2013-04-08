@@ -30,7 +30,7 @@ class OrderModel extends Repository {
      * @return string 
      */  
     public function loadOrders(){     
-        return $this->getTable('orders')->select('orders.*,delivery.*,payment.*,users.*,status.*')->fetchPairs('OrderID');
+        return $this->getTable('orders')->select('orders.*,delivery.*,payment.*,users.*,status.*')->order('orders.OrderID DESC')->fetchPairs('OrderID');
     }
     
     /*

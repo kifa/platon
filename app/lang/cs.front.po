@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-03-27 10:50:30
+# Created: 2013-04-07 20:51:51
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-03-27 10:50+0100\n"
+"PO-Revision-Date: 2013-04-07 20:51+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -17,6 +17,9 @@ msgstr "Správa"
 
 msgid "Are"
 msgstr "Jste"
+
+msgid "Buy"
+msgstr "Koupit"
 
 msgid "Cart"
 msgstr "Košík"
@@ -33,8 +36,23 @@ msgstr "Zde"
 msgid "Home"
 msgstr "Domů"
 
+msgid "Logout"
+msgstr "Odhlásit se"
+
 msgid "Orders"
 msgstr "Objednávky"
+
+msgid "Other"
+msgstr "Ostatní"
+
+msgid "Payment"
+msgstr "Metoda Platby"
+
+msgid "Shipping"
+msgstr "Poštovné"
+
+msgid "Stats"
+msgstr "Statistiky"
 
 msgid "View"
 msgstr "Prohlédnout"
@@ -45,6 +63,66 @@ msgstr "Právě"
 msgid "You cannot edit product here!"
 msgstr "Pro úpravu přejděte do kategorie!"
 
-msgid "Buy"
-msgstr "Koupit"
+msgid "Add Product"
+msgstr "Přidat produkt"
+
+msgid "Edit Category"
+msgstr "Upravit kategorii"
+
+msgid "Name:"
+msgstr "Jméno:"
+
+msgid "Price:"
+msgstr "Cena:"
+
+msgid "Please complete mandatory field."
+msgstr "Prosím vyplňte povinná pole."
+
+msgid "It has to be a number!"
+msgstr "Zde musí být číslo."
+
+msgid "Description: "
+msgstr "Popis:"
+
+msgid "Category: "
+msgstr "Kategorie:"
+
+msgid "Notebook"
+msgstr "Notebook"
+
+msgid "Tablets"
+msgstr "Tablet"
+
+msgid "Smartphone"
+msgstr "Smartphone"
+
+msgid "Cellphone"
+msgstr "Mobilní telefon"
+
+msgid "Producer: "
+msgstr "Výrobce:"
+
+msgid "Image:"
+msgstr "Obrázek:"
+
+msgid "Amount"
+msgstr "Množství"
+
+msgid "Please fill in these information"
+msgstr "Prosím vyplňte"
+
+msgid "Back to SmartPanel"
+msgstr ""
+
+msgid "View as List"
+msgstr ""
+
+msgid "Je podporován pouze soubor JPG, PNG a GIF"
+msgstr ""
+
+msgid "Maximálně 2MB"
+msgstr ""
+
+msgid "Terms"
+msgstr ""
 

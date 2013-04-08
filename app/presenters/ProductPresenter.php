@@ -23,8 +23,8 @@ class ProductPresenter extends BasePresenter {
     private $id;
     private $catId;
     protected $translator;
-
-    private $albumID;
+    
+    private $row;
 
 
     protected function startup() {
@@ -133,45 +133,37 @@ class ProductPresenter extends BasePresenter {
     
     public function addProductFormSubmitted($form) {
   if($this->getUser()->isInRole('admin')) {
-    //    $albumID = $this->productModel->countPhotoAlbum() + 1;
-        
-        $albumID =  $this->productModel->insertPhotoAlbum(
-                $form->values->name,
-                $form->values->desc
-                );
-        
-        $this->productModel->insertProduct(
+
+        $return = $this->productModel->insertProduct(
                 $form->values->name, //Name
-                $form->values->producer, //Producer
-                //$albumID, //Album
+                $form->values->price,
+                $form->values->producer, //Producer                
                 '11111', //Product Number
                 $form->values->desc, //Description
-                1, //Parametr Album
                 '123456', //Ean
                 '122', //QR
                 'rok', //Warranty
                 $form->values->amount, //Pieces
                 $form->values->cat  , //CatID
-                //2, //PriceID
                 '', //Date of avail.                
-                1 //Comment             
+                1 //Comment   
+                
                 
         );
         
         if($form->values->image->isOK()){
         
          $this->productModel->insertPhoto(
+                        $form->values->name,
                         $form->values->image->name,
-                        $albumID,
+                        $return[1],
                         1
                 );
-          $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/' . $form->values->image->name;
+          $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $return[1] . '/' . $form->values->image->name;
           $form->values->image->move($imgUrl);
-           //  dump($form->values->image->getName);
-           //  dump($form->values->image->getTemporaryFile);
         }
         
-        $this->redirect('Product:products', $form->values->cat);
+        $this->redirect('Product:product', $return[0]);
     }
     
         }
@@ -187,8 +179,8 @@ class ProductPresenter extends BasePresenter {
         $addPhoto = new Nette\Application\UI\Form;
         $addPhoto->setRenderer(new BootstrapRenderer);
         $addPhoto->setTranslator($this->translator);
-        $addPhoto->addHidden('name', $this->productModel->loadProduct($this->id)->ProductName);
-        $addPhoto->addHidden('albumID', $this->albumID);
+        $addPhoto->addHidden('name', 'name');
+        $addPhoto->addHidden('albumID', $this->row['PhotoAlbumID']);
         $addPhoto->addUpload('image', 'Photo:')
                 ->addRule(FORM::IMAGE , 'Je podporován pouze soubor JPG, PNG a GIF')
                 ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
@@ -208,8 +200,8 @@ class ProductPresenter extends BasePresenter {
         if($form->values->image->isOK()){
         
          $this->productModel->insertPhoto(
-                        $form->values->image->name,
                         $form->values->name,
+                        $form->values->image->name,
                         $form->values->albumID
                 );
           $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $form->values->albumID . '/' . $form->values->image->name;
@@ -222,22 +214,22 @@ class ProductPresenter extends BasePresenter {
         }
         
         $this->redirect('this');
-    }
+      }
     }
     
     
     public function createComponentEditDescForm() {
          if($this->getUser()->isInRole('admin')) {
-             
-           $desc = $this->productModel->loadProduct($this->id)->ProductDescription;  
+           
+           // = $this->productModel->loadProduct($id)->ProductDescription;  
            $editForm = new Nette\Application\UI\Form;
            $editForm->setTranslator($this->translator);
           // $editForm->setRenderer(new BootstrapRenderer);
            $editForm->addTextArea('text', 'Description:', 150, 150)
-                   ->setDefaultValue($desc)
+                   ->setDefaultValue($this->row['ProductDescription'])
                    ->setRequired()
-                ->setAttribute('class', 'mceEditor');
-                 
+                   ->setAttribute('class', 'mceEditor');
+           $editForm->addHidden('id', $this->row['ProductID']);
            $editForm->addSubmit('edit', 'Save description')
                    ->setAttribute('class', 'upl btn btn-primary')
                    ->setAttribute('data-loading-text', 'Saving...');
@@ -248,7 +240,12 @@ class ProductPresenter extends BasePresenter {
     }
     
     public function editDescFormSubmitted($form) {
-        
+        if($this->getUser()->isInRole('admin')) {
+            
+           $this->productModel->updateProduct($form->values->id, 'ProductDescription', $form->values->text);
+           
+           $this->redirect('this');
+        }
     }
     
     /*
@@ -288,15 +285,16 @@ class ProductPresenter extends BasePresenter {
      */
     
     public function renderProduct($id) {
-        $this->id = $id;
+        
         $row = $this->productModel->loadProduct($id);
         if (!$row) {
             $this->flashMessage('Product not available', 'alert');
             $this->redirect('Homepage:');
         }
         else {
-
-            $this->albumID = $row->PhotoAlbumID;
+            
+            $this->row = array('ProductID' => $row->ProductID,'PhotoAlbumID' => $row->PhotoAlbumID, 'ProductDescription' => $row->ProductDescription);
+            dump($this->row);
             $this->template->product = $row;
             $this->template->album = $this->productModel->loadPhotoAlbum($id);
         }
