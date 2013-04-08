@@ -163,7 +163,8 @@
                                                     <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/{$photo->PhotoURL}" alt="{$product->ProductName}">
                                                 </a>
                                                 {if $user->isInRole('admin')}
-                                                <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> Delete image</a>
+                                                    <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> Set as COVER image</a>
+                                                    <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> Delete image</a>
                                                   {/if}
                                             </li>
 

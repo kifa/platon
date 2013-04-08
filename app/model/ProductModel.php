@@ -197,6 +197,13 @@ WHERE Product.ProductID=?',$id)->fetch();
         return $this->getTable('photo')->where('PhotoID', $id)->delete();
     }
 
+     public function coverPhoto($id) {
+         $insert = array(
+             'CoverPhoto' => 1
+         );
+         
+        return $this->getTable('photo')->where('PhotoID', $id)->update($insert);
+    }
     /*
      * Insert Photo
      */
