@@ -391,7 +391,7 @@ protected function createComponentEditParamForm() {
          
           foreach ($this->parameters as $id => $param) {
                
-               $editForm->addText($param->ParameterID, $param->Parameter)
+               $editForm->addText($param->ParameterID, $param->AttribName)
                    ->setDefaultValue($param->Val)
                    ->setRequired();
                    
@@ -422,7 +422,7 @@ protected function createComponentAddParamForm() {
            $addForm->setTranslator($this->translator);
          
           foreach ($this->parameters as $id => $param) {
-               $options[$id] = $param->Parameter;
+               $options[$id] = $param->AttribName;
            } 
            $addForm->addGroup('Select one of already created:');
            $addForm->addMultiSelect('options', 'Predefined:', $options);
