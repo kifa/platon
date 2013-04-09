@@ -339,8 +339,6 @@ public function actionProduct($id) {
 
 protected function createComponentEditParamForm() {
          
-           
-           
            $editForm = new Nette\Application\UI\Form;
            $editForm->setTranslator($this->translator);
            $number = 0;

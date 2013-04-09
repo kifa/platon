@@ -74,17 +74,15 @@ class EditControl extends BaseControl {
 }
     
 
-public function beforeRender($id) {
+public function actionParameters($id) {
+    dump('AAA');
+    $this->parameters = $this->service->loadParameters('1');
     $editForm = $this['editParamForm'];
-    $editForm->setValues($this->parameters);
-    dump($editForm);
-    //$this->parameters = $this->service->loadParameters('1');
+    
 }
 
 protected function createComponentEditParamForm() {
-         
-           
-           
+          
            $editForm = new Nette\Application\UI\Form;
            $editForm->setTranslator($this->translator);
            $number = 0;
@@ -92,30 +90,21 @@ protected function createComponentEditParamForm() {
           foreach ($this->parameters as $id => $param) {
                
                $editForm->addText($param->ParameterID, $param->Parameter)
-                   ->setDefaultValue($param->Value)
+                   ->setDefaultValue($param->Val)
                    ->setRequired();
-                   
-            
            } 
-            /*
-           $editFormaddDynamic('parameters', function (Container $container) {
-                    $container->addText('parameter');
-            }); */
-           $editForm->addText('tets', 'TEST')
-                   ->setDefaultValue('test')
-                   ->setRequired();
+
            $editForm->addSubmit('edit', 'Save attributes')
                    ->setAttribute('class', 'upl btn btn-primary')
                    ->setAttribute('data-loading-text', 'Saving...');
             $editForm->onSuccess[] = $this->editParamFormSubmitted;
             return $editForm;
-         
     }
     
     public function editParamFormSubmitted($form) {
-            dump($form->values);
+           
            foreach($form->values as $id => $value) {
-           $this->service->updateParameter($id, $value);
+           $this->productModel->updateParameter($id, $value);
 
            }
          // $this->redirect('this');
@@ -126,7 +115,7 @@ protected function createComponentEditParamForm() {
      * Rendering component Product from ProductControl.latte
      */
 
-    public function render($id) {
+    public function renderParameters($id) {
 
         $this->productID = $id;
         $this->parameters = $this->service->loadParameters($this->productID);

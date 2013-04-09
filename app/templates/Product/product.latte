@@ -7,7 +7,8 @@
         <a href="#addPhoto" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a> |
         <a href="#editDesc" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
         <a href="#editPrice" data-toggel="modal" data-target="#editPrice" id="editPriceButton" ><i class="icon-large icon-money"></i> {_"Edit Price"}</a> |
-        
+        <a href="#editParam" data-toggel="modal" data-target="#editParam" id="editParamButton" ><i class="icon-large icon-list"></i> {_"Edit Param"}</a> |
+
         <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> |
         <a href="#"><i class="icon-large icon-pencil"></i> {_"Edit Product"}</a>
     </div>
@@ -58,9 +59,19 @@
             </div>
     </div>
     
-    
-    {control editParamForm}
-    
+    <div id="editParam" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-camera-retro"></i> Edit price</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Edit your description and click Save desccription.'}</p>
+                 {control editParamForm}
+     </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close without saving</button>
+            </div>
+    </div>
     
     {/if}
     
@@ -247,7 +258,15 @@
               //  $('#addIco').attr('class', 'icon-large icon-camera-retro');
             });
         
-         
+         $('#editParamButton').toggle(function(){
+              $('#editParam').modal('show');
+             //  $('#addIco').attr('class', 'icon-large icon-minus');
+            },
+            function() {
+                $('#editParam').modal('hide');
+              //  $('#addIco').attr('class', 'icon-large icon-camera-retro');
+            });
+            
     });
 
     </script>
