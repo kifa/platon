@@ -70,6 +70,24 @@ class ProductPresenter extends BasePresenter {
     }
 
     
+    public function handleCoverPhoto($product, $id) {
+        if($this->getUser()->isInRole('admin')) {
+        $row = $this->productModel->loadPhoto($id);
+        if (!$row) {
+            $this->flashMessage('There is no photo to delete', 'alert');
+        }
+        else {
+            
+            $e = 'Photo ' . $row->PhotoName . ' was sucessfully set as COVER.';
+            
+            $this->productModel->coverPhoto($id);
+            $this->flashMessage($e, 'alert');
+        }
+        
+        $this->redirect('Product:product', $product);
+    }
+    }
+    
 
     protected function createComponentProduct() {
 
@@ -295,6 +313,34 @@ class ProductPresenter extends BasePresenter {
    
     
     
+    public function createComponentEditPiecesForm() {
+         if($this->getUser()->isInRole('admin')) {
+            
+           $editForm = new Nette\Application\UI\Form;
+           $editForm->setTranslator($this->translator);
+           $editForm->setRenderer(new BootstrapRenderer);
+           $editForm->addText('pieces', 'Pieces:')
+                   ->setDefaultValue($this->row['PiecesAvailable'])
+                   ->setRequired()
+                   ->addRule(FORM::INTEGER, 'This has to be a number.');
+           $editForm->addHidden('id', $this->row['ProductID']);
+           $editForm->addSubmit('edit', 'Save it')
+                   ->setAttribute('class', 'upl btn btn-primary')
+                   ->setAttribute('data-loading-text', 'Saving...');
+            $editForm->onSuccess[] = $this->editPiecesFormSubmitted;
+            return $editForm;
+         }
+    }
+    
+    public function editPiecesFormSubmitted($form) {
+        if($this->getUser()->isInRole('admin')) {
+            
+           $this->productModel->updateProduct($form->values->id, 'PiecesAvailable', $form->values->pieces);
+           
+           $this->redirect('this');
+        }
+    }
+    
     /*
      * Handle for removing products 
      */
@@ -380,7 +426,12 @@ protected function createComponentEditParamForm() {
         }
         else {
             
-            $this->row = array('ProductID' => $row->ProductID,'PhotoAlbumID' => $row->PhotoAlbumID, 'ProductDescription' => $row->ProductDescription, 'SellingPrice' => $row->SellingPrice, 'SALE' => $row->SALE);
+            $this->row = array('ProductID' => $row->ProductID,
+                               'PhotoAlbumID' => $row->PhotoAlbumID,
+                               'ProductDescription' => $row->ProductDescription,
+                               'SellingPrice' => $row->SellingPrice,
+                               'SALE' => $row->SALE,
+                               'PiecesAvailable' => $row->PiecesAvailable);
             $this->template->product = $row;
             $this->template->album = $this->productModel->loadPhotoAlbum($id);
             $this->template->parameter = $this->productModel->loadParameters($id);
