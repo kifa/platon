@@ -244,13 +244,13 @@ WHERE Product.ProductID=?',$id)->fetch();
         return $this->getTable('parameters')->insert($insert);
     }
     
-    public function updateParameter($param,$value,$unit){
+    public function updateParameter($paramID,$value,$unit=NULL){
         $update = array(
-            'Parameter' => $param,
-            'Value' => $value,
-            'Unit' => $unit
+          //  'Parameter' => $param,
+            'Val' => $value,
+          //  'Unit' => $unit
         );
                 
-        return $this->getTable('parameters')->where('ParameterID',$param)->update($update);
+        return $this->getTable('parameters')->where('ParameterID',$paramID)->update($update);
     }
 }

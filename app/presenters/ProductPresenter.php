@@ -25,6 +25,7 @@ class ProductPresenter extends BasePresenter {
     protected $translator;
     
     private $row;
+    private $parameters;
 
 
     protected function startup() {
@@ -80,7 +81,16 @@ class ProductPresenter extends BasePresenter {
     }
  
     
-    
+    protected function createComponentEditControl() {
+        if($this->getUser()->isInRole('admin')) {
+                $editControl = new EditControl();
+                $editControl->setService($this->productModel);
+                $editControl->setTranslator($this->translator);
+                $editControl->setParameters($this->productModel->loadParameters($this->row['ProductID']));
+                $editControl->setProductID($this->row['ProductID']);
+                return $editControl;
+            }
+    }
     
     /*
      * Creating form for adding product
@@ -274,12 +284,16 @@ class ProductPresenter extends BasePresenter {
     
     public function editPriceFormSubmitted($form) {
         if($this->getUser()->isInRole('admin')) {
-            
+          
            $this->productModel->updatePrice($form->values->id, $form->values->price, $form->values->discount);
            
            $this->redirect('this');
         }
     }
+    
+    
+   
+    
     
     /*
      * Handle for removing products 
@@ -317,6 +331,48 @@ class ProductPresenter extends BasePresenter {
 * @return string
      */
     
+public function actionProduct($id) {
+     $this->parameters = $this->productModel->loadParameters($id);
+    $editForm = $this['editParamForm'];
+  
+}
+
+protected function createComponentEditParamForm() {
+         
+           
+           
+           $editForm = new Nette\Application\UI\Form;
+           $editForm->setTranslator($this->translator);
+           $number = 0;
+         
+          foreach ($this->parameters as $id => $param) {
+               
+               $editForm->addText($param->ParameterID, $param->Parameter)
+                   ->setDefaultValue($param->Val)
+                   ->setRequired();
+                   
+            
+           } 
+
+           $editForm->addSubmit('edit', 'Save attributes')
+                   ->setAttribute('class', 'upl btn btn-primary')
+                   ->setAttribute('data-loading-text', 'Saving...');
+            $editForm->onSuccess[] = $this->editParamFormSubmitted;
+            return $editForm;
+         
+    }
+    
+    public function editParamFormSubmitted($form) {
+           
+           foreach($form->values as $id => $value) {
+           $this->productModel->updateParameter($id, $value);
+
+           }
+          $this->redirect('this');
+        
+    }
+    
+
     public function renderProduct($id) {
         
         $row = $this->productModel->loadProduct($id);
@@ -330,6 +386,7 @@ class ProductPresenter extends BasePresenter {
             $this->template->product = $row;
             $this->template->album = $this->productModel->loadPhotoAlbum($id);
             $this->template->parameter = $this->productModel->loadParameters($id);
+            //$this->prarameters = $this->productModel->loadParameters($id);
         }
     }
 

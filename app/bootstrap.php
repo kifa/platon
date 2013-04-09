@@ -22,6 +22,9 @@ $configurator->createRobotLoader()
 //Bootstrap forms
 Kdyby\BootstrapFormRenderer\DI\RendererExtension::register($configurator);
 
+//Replicator
+Kdyby\Replicator\Container::register();
+
 // Translation setup
 $configurator->onCompile[] = function ($configurator, $compiler) {
     $compiler->addExtension('netteTranslator', new NetteTranslator\NetteTranslatorExtension);
