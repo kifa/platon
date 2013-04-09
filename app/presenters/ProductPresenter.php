@@ -329,6 +329,7 @@ class ProductPresenter extends BasePresenter {
             $this->row = array('ProductID' => $row->ProductID,'PhotoAlbumID' => $row->PhotoAlbumID, 'ProductDescription' => $row->ProductDescription, 'SellingPrice' => $row->SellingPrice, 'SALE' => $row->SALE);
             $this->template->product = $row;
             $this->template->album = $this->productModel->loadPhotoAlbum($id);
+            $this->template->parameter = $this->productModel->loadParameters($id);
         }
     }
 

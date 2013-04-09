@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-04-07 20:51:51
+# Created: 2013-04-08 23:10:00
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-04-07 20:51+0200\n"
+"PO-Revision-Date: 2013-04-08 23:10+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -12,8 +12,14 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));\n"
 
 
+msgid "Add Product"
+msgstr "Přidat produkt"
+
 msgid "Admin"
 msgstr "Správa"
+
+msgid "Amount"
+msgstr "Množství"
 
 msgid "Are"
 msgstr "Jste"
@@ -27,8 +33,20 @@ msgstr "Košík"
 msgid "Category"
 msgstr "Kategorie"
 
+msgid "Category: "
+msgstr "Kategorie:"
+
+msgid "Cellphone"
+msgstr "Mobilní telefon"
+
 msgid "Choose language:"
 msgstr "Vyberte jazyk:"
+
+msgid "Description: "
+msgstr "Popis:"
+
+msgid "Edit Category"
+msgstr "Upravit kategorii"
 
 msgid "Here"
 msgstr "Zde"
@@ -36,8 +54,20 @@ msgstr "Zde"
 msgid "Home"
 msgstr "Domů"
 
+msgid "Image:"
+msgstr "Obrázek:"
+
+msgid "It has to be a number!"
+msgstr "Zde musí být číslo."
+
 msgid "Logout"
 msgstr "Odhlásit se"
+
+msgid "Name:"
+msgstr "Jméno:"
+
+msgid "Notebook"
+msgstr "Notebook"
 
 msgid "Orders"
 msgstr "Objednávky"
@@ -48,11 +78,29 @@ msgstr "Ostatní"
 msgid "Payment"
 msgstr "Metoda Platby"
 
+msgid "Please complete mandatory field."
+msgstr "Prosím vyplňte povinná pole."
+
+msgid "Please fill in these information"
+msgstr "Prosím vyplňte"
+
+msgid "Price:"
+msgstr "Cena:"
+
+msgid "Producer: "
+msgstr "Výrobce:"
+
 msgid "Shipping"
 msgstr "Poštovné"
 
+msgid "Smartphone"
+msgstr "Smartphone"
+
 msgid "Stats"
 msgstr "Statistiky"
+
+msgid "Tablets"
+msgstr "Tablet"
 
 msgid "View"
 msgstr "Prohlédnout"
@@ -63,58 +111,37 @@ msgstr "Právě"
 msgid "You cannot edit product here!"
 msgstr "Pro úpravu přejděte do kategorie!"
 
-msgid "Add Product"
-msgstr "Přidat produkt"
+msgid "Photo:"
+msgstr "Foto:"
 
-msgid "Edit Category"
-msgstr "Upravit kategorii"
-
-msgid "Name:"
-msgstr "Jméno:"
-
-msgid "Price:"
-msgstr "Cena:"
-
-msgid "Please complete mandatory field."
-msgstr "Prosím vyplňte povinná pole."
-
-msgid "It has to be a number!"
-msgstr "Zde musí být číslo."
-
-msgid "Description: "
+msgid "Description:"
 msgstr "Popis:"
 
-msgid "Category: "
-msgstr "Kategorie:"
+msgid "Edit Description"
+msgstr "Upravit Popis"
 
-msgid "Notebook"
-msgstr "Notebook"
+msgid "Edit Price"
+msgstr "Upravit Cenu"
 
-msgid "Tablets"
-msgstr "Tablet"
+msgid "Edit Product"
+msgstr "Upravit Produkt"
 
-msgid "Smartphone"
-msgstr "Smartphone"
+msgid "Add Photo"
+msgstr "Přidat Foto"
 
-msgid "Cellphone"
-msgstr "Mobilní telefon"
+msgid "Select photo and click Add photo"
+msgstr "Vyberte foto a klikněte na Přidat Foto"
 
-msgid "Producer: "
-msgstr "Výrobce:"
+msgid "Save description"
+msgstr "Uložit popis"
 
-msgid "Image:"
-msgstr "Obrázek:"
+msgid "Discount:"
+msgstr "Sleva:"
 
-msgid "Amount"
-msgstr "Množství"
+msgid "Save price"
+msgstr "Uložit cenu"
 
-msgid "Please fill in these information"
-msgstr "Prosím vyplňte"
-
-msgid "Back to SmartPanel"
-msgstr ""
-
-msgid "View as List"
+msgid "Terms"
 msgstr ""
 
 msgid "Je podporován pouze soubor JPG, PNG a GIF"
@@ -123,6 +150,12 @@ msgstr ""
 msgid "Maximálně 2MB"
 msgstr ""
 
-msgid "Terms"
+msgid "Edit your description and click Save desccription."
+msgstr ""
+
+msgid "This has to be a number."
+msgstr ""
+
+msgid "In stock"
 msgstr ""
 

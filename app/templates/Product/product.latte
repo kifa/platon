@@ -85,9 +85,15 @@
                 </div>
                 <div class="tab-pane" id="spec">
                     <ul class="icons">
-                        <li><i class="icon-ok"></i>Width:</li>
-                        <li><i class="icon-ok"></i>Height:</li>
-                        <li><i class="icon-ok"></i>Weight:</li>
+                        {foreach $parameter as $parameter}
+                            <li>                                                                                                    
+                                
+                                    {$parameter->Parameter}:
+                                    {$parameter->Value}
+                                    {$parameter->Unit}
+                                
+                            </li>
+                        {/foreach}                        
                     </ul>
                 </div>
                 <div class="tab-pane" id="other">

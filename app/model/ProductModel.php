@@ -227,4 +227,30 @@ WHERE Product.ProductID=?',$id)->fetch();
                 
         return $this->getTable('Price')->insert($insert);
     }
+    
+    public function loadParameters($id){
+        return $this->getTable('parameters')->where('ProductID',$id)->fetchPairs('ParameterID');
+    }
+
+    public function insertParameter($product,$param,$value,$unit){
+        $insert = array(
+            'ParameterID' => NULL,
+            'ProductID' => $product,
+            'Parameter' => $param,
+            'Value' => $value,
+            'Unit' => $unit
+        );
+        
+        return $this->getTable('parameters')->insert($insert);
+    }
+    
+    public function updateParameter($param,$value,$unit){
+        $update = array(
+            'Parameter' => $param,
+            'Value' => $value,
+            'Unit' => $unit
+        );
+                
+        return $this->getTable('parameters')->where('ParameterID',$param)->update($update);
+    }
 }
