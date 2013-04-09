@@ -416,7 +416,39 @@ protected function createComponentEditParamForm() {
         
     }
     
+protected function createComponentAddParamForm() {
+         
+           $addForm = new Nette\Application\UI\Form;
+           $addForm->setTranslator($this->translator);
+           $number = 0;
+         
+          foreach ($this->parameters as $id => $param) {
+               
+               $options[$id] = $param->Parameter;
+                   
+            
+           } 
+           $addForm->addMultiSelect('options', 'Predefined:', $options);
+           $addForm->addHidden('productID', $this->row['ProductID']);
+           $addForm->addSubmit('edit', 'Save attributes')
+                   ->setAttribute('class', 'upl btn btn-primary')
+                   ->setAttribute('data-loading-text', 'Saving...');
+            $addForm->onSuccess[] = $this->editParamFormSubmitted;
+            return $addForm;
+         
+    }
+    
+    public function addParamFormSubmitted($form) {
+           
+           foreach($form->values->options as $id => $value) {
+           $this->productModel->insertParameter($id, $value);
 
+           }
+          $this->redirect('this');
+        
+    }
+    
+    
     public function renderProduct($id) {
         
         $row = $this->productModel->loadProduct($id);

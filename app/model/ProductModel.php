@@ -201,7 +201,7 @@ WHERE Product.ProductID=?',$id)->fetch();
          $insert = array(
              'CoverPhoto' => 1
          );
-         
+            
         return $this->getTable('photo')->where('PhotoID', $id)->update($insert);
     }
     /*
