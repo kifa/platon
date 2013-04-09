@@ -232,19 +232,23 @@ INSERT INTO `orderstatus` (`OrderStatusID`, `StatusName`, `StatusDescription`, `
 (2,	'Sending',	'sending order',	5),
 (3,	'Done',	'done',	10);
 
-DROP TABLE IF EXISTS `parametersalbum`;
-CREATE TABLE `parametersalbum` (
-  `ParametersAlbumID` int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `parameters`;
+CREATE TABLE `parameters` (
+  `ParameterID` int(11) NOT NULL AUTO_INCREMENT,
   `ProductID` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ParametersAlbumID`),
+  `Parameter` varchar(255) DEFAULT NULL,
+  `Val` varchar(255) DEFAULT NULL,
+  `Unit` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ParameterID`),
   KEY `ProductID` (`ProductID`),
-  CONSTRAINT `parametersalbum_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  CONSTRAINT `parameters_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-INSERT INTO `parametersalbum` (`ParametersAlbumID`, `ProductID`) VALUES
-(1,	NULL),
-(2,	NULL),
-(3,	NULL);
+INSERT INTO `parameters` (`ParameterID`, `ProductID`, `Parameter`, `Val`, `Unit`) VALUES
+(1,	1,	'Weight',	'169',	'g'),
+(2,	1,	'Display size',	'4,8',	'inch'),
+(3,	1,	'Display resolution',	'1878x900',	'px'),
+(4,	1,	'Battery',	'1850',	'mAh');
 
 DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
@@ -336,8 +340,8 @@ CREATE TABLE `price` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 INSERT INTO `price` (`PriceID`, `ProductID`, `SellingPrice`, `SALE`, `FinalPrice`, `CurrencyID`) VALUES
-(1,	1,	10999,	0,	100,	1),
-(2,	2,	99,	0,	99,	1),
+(1,	1,	10998,	0,	10998,	1),
+(2,	2,	5999,	10,	5989,	1),
 (3,	3,	7999,	0,	8999,	1),
 (4,	4,	15000,	0,	16999,	1),
 (5,	5,	13999,	0,	15999,	1),
@@ -374,7 +378,7 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`ProductID`, `ProductName`, `Producer`, `ProductNumber`, `ProductDescription`, `ProductStatusID`, `ProductEAN`, `ProductQR`, `ProductWarranty`, `PiecesAvailable`, `CategoryID`, `DateOfAvailable`, `ProductDateOfAdded`, `CommentID`) VALUES
 (1,	'Samsung Galaxy Nexus',	'Samsung',	NULL,	'Smartphone ze serie Nexus',	NULL,	NULL,	NULL,	NULL,	10,	2,	NULL,	NULL,	1),
-(2,	'Samsung Chromebook',	'Samsung',	NULL,	'Chromebook od Samsungu',	NULL,	NULL,	NULL,	NULL,	4,	2,	NULL,	NULL,	NULL),
+(2,	'Samsung Chromebook',	'Samsung',	NULL,	'<p>Chromebook od Samsungu. Ten nej notebook ... pokud m&aacute;te mobiln&iacute; internet v&scaron;ude.</p>',	NULL,	NULL,	NULL,	NULL,	4,	2,	NULL,	NULL,	NULL),
 (3,	'Samsung Galaxy S4',	'Samsung',	NULL,	'Hot news in smartphone world',	NULL,	NULL,	NULL,	NULL,	99,	3,	NULL,	NULL,	NULL),
 (4,	'Sony Xperia Z',	'Sony',	NULL,	'<p>Best smartphone of present smarthone world. SUPERB!</p>',	NULL,	NULL,	NULL,	NULL,	40,	3,	NULL,	NULL,	NULL),
 (5,	'Apple iPad',	'Apple Inc.',	NULL,	'Tablet from company Apple',	NULL,	NULL,	NULL,	NULL,	666,	4,	NULL,	NULL,	NULL),
@@ -463,4 +467,4 @@ INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `AddressID`, 
 ('tomik@tomas.com',	'$2a$07$xshgrgluo88ug5qvohjvme0',	'Tomas',	NULL,	1,	NULL,	NULL,	'0'),
 ('yetty@himalaja.tib',	NULL,	'Yetty',	0,	1,	NULL,	NULL,	'user');
 
--- 2013-04-08 20:03:15
+-- 2013-04-09 22:45:34
