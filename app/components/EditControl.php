@@ -74,25 +74,22 @@ class EditControl extends BaseControl {
 }
     
 
-public function actionParameters($id) {
-    dump('AAA');
-    $this->parameters = $this->service->loadParameters('1');
-    $editForm = $this['editParamForm'];
-    
-}
 
 protected function createComponentEditParamForm() {
           
            $editForm = new Nette\Application\UI\Form;
            $editForm->setTranslator($this->translator);
-           $number = 0;
+           
+           $editForm->addDynamic('parameters', function (Container $container) {
+               $container->addText('parameter');
+           });
          
-          foreach ($this->parameters as $id => $param) {
+         /* foreach ($this->parameters as $id => $param) {
                
                $editForm->addText($param->ParameterID, $param->Parameter)
                    ->setDefaultValue($param->Val)
                    ->setRequired();
-           } 
+           } */ 
 
            $editForm->addSubmit('edit', 'Save attributes')
                    ->setAttribute('class', 'upl btn btn-primary')
@@ -103,7 +100,7 @@ protected function createComponentEditParamForm() {
     
     public function editParamFormSubmitted($form) {
            
-           foreach($form->values as $id => $value) {
+           foreach($form['parameters']->values as $value) {
            $this->productModel->updateParameter($id, $value);
 
            }

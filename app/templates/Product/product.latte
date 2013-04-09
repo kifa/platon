@@ -59,6 +59,7 @@
             </div>
     </div>
     
+    {*control editControl:parameters $product->ProductID*}
     <div id="editParam" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -66,13 +67,12 @@
             </div>
             <div class="modal-body">
                 <p>{_'Edit your description and click Save desccription.'}</p>
-                 {control editParamForm}
-     </div>
+                    {control editParamForm}
+    </div>
             <div class="modal-footer">
               <button class="btn" data-dismiss="modal" aria-hidden="true">Close without saving</button>
             </div>
     </div>
-    
     {/if}
     
 
