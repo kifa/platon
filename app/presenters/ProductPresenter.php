@@ -420,19 +420,18 @@ protected function createComponentAddParamForm() {
          
            $addForm = new Nette\Application\UI\Form;
            $addForm->setTranslator($this->translator);
-           $number = 0;
          
           foreach ($this->parameters as $id => $param) {
-               
                $options[$id] = $param->Parameter;
-                   
-            
            } 
+           $addForm->addGroup('Select one of already created:');
            $addForm->addMultiSelect('options', 'Predefined:', $options);
+           $addForm->addGroup('Create new atributes:');
+           $addForm->addText('newParam', 'Name of atribute:');
            $addForm->addHidden('productID', $this->row['ProductID']);
-           $addForm->addSubmit('edit', 'Save attributes')
+           $addForm->addSubmit('edit', 'Add attributes')
                    ->setAttribute('class', 'upl btn btn-primary')
-                   ->setAttribute('data-loading-text', 'Saving...');
+                   ->setAttribute('data-loading-text', 'Adding...');
             $addForm->onSuccess[] = $this->editParamFormSubmitted;
             return $addForm;
          
@@ -441,7 +440,7 @@ protected function createComponentAddParamForm() {
     public function addParamFormSubmitted($form) {
            
            foreach($form->values->options as $id => $value) {
-           $this->productModel->insertParameter($id, $value);
+           $this->productModel->insertParameter($form->values->ProductID, $id, $value);
 
            }
           $this->redirect('this');
