@@ -236,14 +236,15 @@ WHERE Product.ProductID=?',$id)->fetch();
     }
     
     public function loadParameters($id){
-        return $this->getTable('parameters')->where('ProductID',$id)->fetchPairs('ParameterID');
+        return $this->getTable('parameters')->select('parameters.*,attrib.*')
+                ->where('ProductID',$id)->fetchPairs('ParameterID');
     }
 
-    public function insertParameter($product,$param,$value,$unit){
+    public function insertParameter($product,$attribute,$value,$unit){
         $insert = array(
             'ParameterID' => NULL,
             'ProductID' => $product,
-            'Parameter' => $param,
+            'AttributeID' => $attribute,
             'Value' => $value,
             'Unit' => $unit
         );
@@ -259,5 +260,57 @@ WHERE Product.ProductID=?',$id)->fetch();
         );
                 
         return $this->getTable('parameters')->where('ParameterID',$paramID)->update($update);
+    }
+    
+    public function loadAttribute($id){
+        if($id == NULL){
+            return $this->getTable('attrib');
+        }
+        else {
+            return $this->getTable('attrib')->where('AttribID',$id);
+        }
+    }
+
+    public function insertAttribute($name){
+        $insert = array(
+            'AttribName' => $name
+        );
+        
+        return $this->getTable('attrib')->insert($insert);
+    }
+    
+    public function updateAttribute($id,$name){
+        $insert = array(
+            'AttribName' => $name
+        );
+        
+        return $this->getTable('attrib')->where('AttribID',$id)->update($insert);
+    }
+    
+    public function loadUnit($id){
+        if($id == NULL){
+            return $this->getTable('units');
+        }
+        else {
+            return $this->getTable('units')->where('UnitID',$id);
+        }
+    }
+
+    public function insertUnit($name,$short){
+        $insert = array(
+            'UnitName' => $name,
+            'UnitShort' => $short
+        );
+        
+        return $this->getTable('units')->insert($insert);
+    }
+    
+    public function updateUnit($id,$name,$short){
+        $insert = array(
+            'UnitName' => $name,
+            'UnitShort' => $short
+        );
+        
+        return $this->getTable('units')->where('UnitID',$id)->update($insert);
     }
 }
