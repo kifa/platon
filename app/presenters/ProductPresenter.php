@@ -26,7 +26,7 @@ class ProductPresenter extends BasePresenter {
     
     private $row;
     private $parameters;
-
+    
 
     protected function startup() {
         parent::startup();
@@ -379,12 +379,17 @@ class ProductPresenter extends BasePresenter {
     
 public function actionProduct($id) {
      $this->parameters = $this->productModel->loadParameters($id);
-    $editForm = $this['editParamForm'];
+      
+    if($this->getUser()->isInRole('admin')) {
+     $editForm = $this['editParamForm'];
+     $addForm = $this['addParamForm'];
+     
+    }
   
 }
 
 protected function createComponentEditParamForm() {
-         
+         if($this->getUser()->isInRole('admin')) { 
            $editForm = new Nette\Application\UI\Form;
            $editForm->setTranslator($this->translator);
            $number = 0;
@@ -403,21 +408,23 @@ protected function createComponentEditParamForm() {
                    ->setAttribute('data-loading-text', 'Saving...');
             $editForm->onSuccess[] = $this->editParamFormSubmitted;
             return $editForm;
+         }
          
     }
     
     public function editParamFormSubmitted($form) {
-           
+          if($this->getUser()->isInRole('admin')) {  
            foreach($form->values as $id => $value) {
            $this->productModel->updateParameter($id, $value);
 
            }
           $this->redirect('this');
+          }
         
     }
     
 protected function createComponentAddParamForm() {
-         
+          if($this->getUser()->isInRole('admin')) {
            $addForm = new Nette\Application\UI\Form;
            $addForm->setTranslator($this->translator);
          
@@ -432,18 +439,21 @@ protected function createComponentAddParamForm() {
            $addForm->addSubmit('edit', 'Add attributes')
                    ->setAttribute('class', 'upl btn btn-primary')
                    ->setAttribute('data-loading-text', 'Adding...');
-            $addForm->onSuccess[] = $this->editParamFormSubmitted;
+            $addForm->onSuccess[] = $this->addParamFormSubmitted;
             return $addForm;
-         
+          }
     }
     
     public function addParamFormSubmitted($form) {
-           
-           foreach($form->values->options as $id => $value) {
+           if($this->getUser()->isInRole('admin')) { 
+        /*   foreach($form->values->options as $id => $value) {
            $this->productModel->insertParameter($form->values->ProductID, $id, $value);
-
-           }
+           
+           } */
+         
           $this->redirect('this');
+ 
+           }
         
     }
     
@@ -456,16 +466,21 @@ protected function createComponentAddParamForm() {
             $this->redirect('Homepage:');
         }
         else {
-            
+             if($this->getUser()->isInRole('admin')) {
             $this->row = array('ProductID' => $row->ProductID,
                                'PhotoAlbumID' => $row->PhotoAlbumID,
                                'ProductDescription' => $row->ProductDescription,
                                'SellingPrice' => $row->SellingPrice,
                                'SALE' => $row->SALE,
                                'PiecesAvailable' => $row->PiecesAvailable);
+            
+                $this->template->var = $this->var;
+          
+             }
             $this->template->product = $row;
             $this->template->album = $this->productModel->loadPhotoAlbum($id);
             $this->template->parameter = $this->productModel->loadParameters($id);
+            
             //$this->prarameters = $this->productModel->loadParameters($id);
         }
     }
