@@ -414,11 +414,13 @@ class ProductPresenter extends BasePresenter {
             foreach ($this->productModel->loadAttribute('') as $id => $param) {
                 $options[$id] = $param->AttribName;
             }
+            
 
             $addForm->addGroup('Select one of already created:');
             $prompt = Html::el('option')->setText("Select predefined")->class('prompt');
             $addForm->addSelect('options', 'Predefined:', $options)
                     ->setPrompt($prompt);
+            $addForm->addText('paramValue', 'Parameter Value');
             $addForm->addGroup('Create new atributes:');
             $addForm->addText('newParam', 'Name of atribute:');
             $addForm->addHidden('productID', $this->row['ProductID']);
@@ -437,7 +439,7 @@ class ProductPresenter extends BasePresenter {
               $this->productModel->insertParameter($form->values->productID, $value);
               } */
             if($form->values->options != '') {
-            $this->productModel->insertParameter($form->values->productID, $form->values->options);
+            $this->productModel->insertParameter($form->values->productID, $form->values->options, $form->values->paramValue);
             }
             if ($form->values->newParam) {
                 $attrib = $this->productModel->insertAttribute($form->values->newParam);
