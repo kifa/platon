@@ -236,17 +236,23 @@ WHERE Product.ProductID=?',$id)->fetch();
     }
     
     public function loadParameters($id){
-        return $this->getTable('parameters')->select('parameters.*,attrib.*')
+        if ($id == null){
+            return $this->getTable('parameters')->select('parameters.*,attrib.*')
+                ->fetchPairs('ParameterID');
+        }
+        else {
+            return $this->getTable('parameters')->select('parameters.*,attrib.*')
                 ->where('ProductID',$id)->fetchPairs('ParameterID');
+        }
     }
 
-    public function insertParameter($product,$attribute,$value,$unit){
+    public function insertParameter($product,$attribute,$value=null,$unit=''){
         $insert = array(
             'ParameterID' => NULL,
             'ProductID' => $product,
-            'AttributeID' => $attribute,
-            'Value' => $value,
-            'Unit' => $unit
+            'AttribID' => $attribute,
+            'Val' => $value,
+            'UnitID' => $unit
         );
         
         return $this->getTable('parameters')->insert($insert);

@@ -86,11 +86,11 @@
                 <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> Add Param</a>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane active" id="editParams">
+                <div class="tab-pane {if $parameter}active{/if}" id="editParams">
                   {if $parameter}  {control editParamForm} {/if}
 
                 </div>
-                <div class="tab-pane" id="addParam">
+                <div class="tab-pane {if !$parameter}active{/if}" id="addParam">
                         {control addParamForm}
                 </div>
             </div>
