@@ -246,7 +246,7 @@ WHERE Product.ProductID=?',$id)->fetch();
         }
     }
 
-    public function insertParameter($product,$attribute,$value=null,$unit=''){
+    public function insertParameter($product,$attribute,$value=null,$unit=null){
         $insert = array(
             'ParameterID' => NULL,
             'ProductID' => $product,
