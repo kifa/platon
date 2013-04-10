@@ -237,11 +237,11 @@ WHERE Product.ProductID=?',$id)->fetch();
     
     public function loadParameters($id){
         if ($id == null){
-            return $this->getTable('parameters')->select('parameters.*,attrib.*')
+            return $this->getTable('parameters')->select('parameters.*,attrib.*,unit.*')
                 ->fetchPairs('ParameterID');
         }
         else {
-            return $this->getTable('parameters')->select('parameters.*,attrib.*')
+            return $this->getTable('parameters')->select('parameters.*,attrib.*,unit.*')
                 ->where('ProductID',$id)->fetchPairs('ParameterID');
         }
     }
@@ -295,10 +295,10 @@ WHERE Product.ProductID=?',$id)->fetch();
     
     public function loadUnit($id){
         if($id == NULL){
-            return $this->getTable('units');
+            return $this->getTable('unit');
         }
         else {
-            return $this->getTable('units')->where('UnitID',$id);
+            return $this->getTable('unit')->where('UnitID',$id);
         }
     }
 
@@ -308,7 +308,7 @@ WHERE Product.ProductID=?',$id)->fetch();
             'UnitShort' => $short
         );
         
-        return $this->getTable('units')->insert($insert);
+        return $this->getTable('unit')->insert($insert);
     }
     
     public function updateUnit($id,$name,$short){
@@ -317,6 +317,6 @@ WHERE Product.ProductID=?',$id)->fetch();
             'UnitShort' => $short
         );
         
-        return $this->getTable('units')->where('UnitID',$id)->update($insert);
+        return $this->getTable('unit')->where('UnitID',$id)->update($insert);
     }
 }
