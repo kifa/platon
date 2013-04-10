@@ -22,13 +22,17 @@ class ProductPresenter extends BasePresenter {
     protected $translator;
     private $row;
     private $parameters;
+    
+    private $edit;
 
     protected function startup() {
         parent::startup();
         $this->productModel = $this->context->productModel;
         $this->categoryModel = $this->context->categoryModel;
-
-
+       
+        if ($this->getUser()->isInRole('admin')) {
+             $this->edit = $this->getSession('edit');
+        }
         /* Kontrola přihlášení
          * 
          * if (!$this->getUser()->isInRole('admin')) {
@@ -362,6 +366,7 @@ class ProductPresenter extends BasePresenter {
                     'SellingPrice' => $row->SellingPrice,
                     'SALE' => $row->SALE,
                     'PiecesAvailable' => $row->PiecesAvailable);
+                
                 $editForm = $this['editParamForm'];
                 $addForm = $this['addParamForm'];
             }
@@ -378,13 +383,12 @@ class ProductPresenter extends BasePresenter {
             foreach ($this->parameters as $id => $param) {
 
                 $editForm->addText($param->ParameterID, $param->AttribName)
-                        ->setDefaultValue($param->Val)
-                        ->setRequired();
+                        ->setDefaultValue($param->Val);
                 
             }
 
             $editForm->addSubmit('edit', 'Save attributes')
-                    ->setAttribute('class', 'upl btn btn-primary')
+                    ->setAttribute('class', 'upl-edit btn btn-primary')
                     ->setAttribute('data-loading-text', 'Saving...');
             $editForm->onSuccess[] = $this->editParamFormSubmitted;
             return $editForm;
@@ -396,6 +400,7 @@ class ProductPresenter extends BasePresenter {
             foreach ($form->values as $id => $value) {
                 $this->productModel->updateParameter($id, $value);
             }
+            
             $this->redirect('this');
         }
     }
@@ -418,7 +423,7 @@ class ProductPresenter extends BasePresenter {
             $addForm->addText('newParam', 'Name of atribute:');
             $addForm->addHidden('productID', $this->row['ProductID']);
             $addForm->addSubmit('edit', 'Add attributes')
-                    ->setAttribute('class', 'upl btn btn-primary')
+                    ->setAttribute('class', 'upl-add btn btn-primary')
                     ->setAttribute('data-loading-text', 'Adding...');
             $addForm->onSuccess[] = $this->addParamFormSubmitted;
             return $addForm;
@@ -439,7 +444,7 @@ class ProductPresenter extends BasePresenter {
                 $this->productModel->insertParameter($form->values->productID, $attrib);
             }
 
-    
+                $this->edit->param = 1;
                 $this->redirect('this');
             
         }
@@ -459,7 +464,7 @@ class ProductPresenter extends BasePresenter {
             }
 
             $editForm->addSubmit('delete', 'Delete attributes')
-                    ->setAttribute('class', 'upl btn btn-primary')
+                    ->setAttribute('class', 'upl-del btn btn-primary')
                     ->setAttribute('data-loading-text', 'Deleting...');
             $editForm->onSuccess[] = $this->deleteParamFormSubmitted;
             return $editForm;
@@ -474,6 +479,7 @@ class ProductPresenter extends BasePresenter {
                 $this->productModel->deleteParameter($id);
                     }
             }
+           
             $this->redirect('this');
         }
     }
@@ -483,7 +489,14 @@ class ProductPresenter extends BasePresenter {
     
     
     public function renderProduct($id) {
-
+        if($this->edit->param != NULL) {
+            $this->template->attr = 1;
+            $this->edit->param = NULL;
+            
+        }
+        else {
+            $this->template->attr = 0;
+        }
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->album = $this->productModel->loadPhotoAlbum($id);
         $this->template->parameter = $this->productModel->loadParameters($id);

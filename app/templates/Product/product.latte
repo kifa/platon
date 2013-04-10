@@ -145,7 +145,7 @@
                                 
                                     {$parameter->AttribName}:
                                     {$parameter->Val}
-                                    {$parameter->UnitShort}
+                                    {*$parameter->UnitShort*}
                                 
                             </li>
                         {/foreach}                        
@@ -272,6 +272,15 @@
           $('.upl').click(function() { 
                 $('.upl').button('toggle');
                 $('.upl').button('loading') });
+          $('.upl-edit').click(function() { 
+                $('.upl-edit').button('toggle');
+                $('.upl-edit').button('loading') });
+            $('.upl-add').click(function() { 
+                $('.upl-add').button('toggle');
+                $('.upl-add').button('loading') });
+            $('.upl-del').click(function() { 
+                $('.upl-del').button('toggle');
+                $('.upl-del').button('loading') });
           $('#addPhotoButton').toggle(function(){
               $('#addPhoto').modal('show');
              //  $('#addIco').attr('class', 'icon-large icon-minus');
@@ -317,6 +326,9 @@
               //  $('#addIco').attr('class', 'icon-large icon-camera-retro');
             });
             
+            {if $attr == 1}
+                $('#editParam').modal('show');
+                {/if}
     });
 
     </script>
