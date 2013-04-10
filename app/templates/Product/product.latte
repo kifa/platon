@@ -75,6 +75,7 @@
     
     {*control editControl:parameters $product->ProductID*}
     <div id="editParam" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h3 id="myModalLabel"><i class="icon-list"></i> Edit Atributes</h3>
@@ -84,22 +85,34 @@
             <ul class="nav nav-tabs">
                {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> Edit Params</a></li> {/if}
                 <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> Add Param</a>
+               {if $parameter} <li><a href="#deleteParams" data-toggle="tab"><i class="icon-trash"></i> Delete Params</a></li> {/if}
             </ul>
             <div class="tab-content">
                 <div class="tab-pane {if $parameter}active{/if}" id="editParams">
                   {if $parameter}  {control editParamForm} {/if}
 
                 </div>
+                
                 <div class="tab-pane {if !$parameter}active{/if}" id="addParam">
-                        {control addParamForm}
+                          {control addParamForm}
                 </div>
+                {if $parameter}
+                <div class="tab-pane" id="deleteParams">
+                    <p>{_'Check all parameters you want to delete'}</p>
+                              {control deleteParamForm}
+                </div>
+                {/if}
             </div>
                   
              </div>
             <div class="modal-footer">
               <button class="btn" data-dismiss="modal" aria-hidden="true">Close without saving</button>
             </div>
+   
     </div>
+    
+
+    
     {/if}
     
 
@@ -303,6 +316,7 @@
                 $('#editParam').modal('hide');
               //  $('#addIco').attr('class', 'icon-large icon-camera-retro');
             });
+            
     });
 
     </script>

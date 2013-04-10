@@ -354,7 +354,7 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('Homepage:');
         } else {
             $this->parameters = $this->productModel->loadParameters($id);
-            
+
             if ($this->getUser()->isInRole('admin')) {
                 $this->row = array('ProductID' => $row->ProductID,
                     'PhotoAlbumID' => $row->PhotoAlbumID,
@@ -365,7 +365,6 @@ class ProductPresenter extends BasePresenter {
                 $editForm = $this['editParamForm'];
                 $addForm = $this['addParamForm'];
             }
-            
         }
     }
 
@@ -373,6 +372,7 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             $editForm = new Nette\Application\UI\Form;
             $editForm->setTranslator($this->translator);
+            $editForm->setRenderer(new BootstrapRenderer());
             $number = 0;
 
             foreach ($this->parameters as $id => $param) {
@@ -380,6 +380,7 @@ class ProductPresenter extends BasePresenter {
                 $editForm->addText($param->ParameterID, $param->AttribName)
                         ->setDefaultValue($param->Val)
                         ->setRequired();
+                
             }
 
             $editForm->addSubmit('edit', 'Save attributes')
@@ -404,17 +405,15 @@ class ProductPresenter extends BasePresenter {
             $addForm = new Nette\Application\UI\Form;
             $addForm->setTranslator($this->translator);
             $addForm->setRenderer(new BootstrapRenderer);
-            foreach ($this->productModel->loadAttribute('') as $id => $param) {
 
-                foreach ($this->parameters as $idAdded => $paramAdded){
-                    if($idAdded !== $param){
-                    $options[$id] = $param->AttribName;
-                    }
-                }
+            foreach ($this->productModel->loadAttribute('') as $id => $param) {
+                $options[$id] = $param->AttribName;
             }
-            
+
             $addForm->addGroup('Select one of already created:');
-            $addForm->addSelect('options', 'Predefined:', $options);
+            $prompt = Html::el('option')->setText("Select predefined")->class('prompt');
+            $addForm->addSelect('options', 'Predefined:', $options)
+                    ->setPrompt($prompt);
             $addForm->addGroup('Create new atributes:');
             $addForm->addText('newParam', 'Name of atribute:');
             $addForm->addHidden('productID', $this->row['ProductID']);
@@ -429,20 +428,60 @@ class ProductPresenter extends BasePresenter {
     public function addParamFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
 
-            foreach ($form->values->options as $id => $value) {
-                
-                $this->productModel->insertParameter($form->values->productID, $value);
-
+            /*  foreach ($form->values->options as $id => $value) { 
+              $this->productModel->insertParameter($form->values->productID, $value);
+              } */
+            if($form->values->options != '') {
+            $this->productModel->insertParameter($form->values->productID, $form->values->options);
             }
-            if($form->values->newParam){
+            if ($form->values->newParam) {
                 $attrib = $this->productModel->insertAttribute($form->values->newParam);
-                $this->productModel->insertParameter($form->values->productID, $attrib->AttribID);
+                $this->productModel->insertParameter($form->values->productID, $attrib);
             }
+
+    
+                $this->redirect('this');
             
-            $this->redirect('this');
         }
     }
 
+    
+    
+    
+    protected function createComponentDeleteParamForm() {
+        if ($this->getUser()->isInRole('admin')) {
+            $editForm = new Nette\Application\UI\Form;
+            $editForm->setTranslator($this->translator);
+            $editForm->setRenderer(new BootstrapRenderer());
+            foreach ($this->parameters as $id => $param) {
+                $editForm->addCheckbox($param->ParameterID, $param->AttribName)
+                        ->setDefaultValue(FALSE);
+            }
+
+            $editForm->addSubmit('delete', 'Delete attributes')
+                    ->setAttribute('class', 'upl btn btn-primary')
+                    ->setAttribute('data-loading-text', 'Deleting...');
+            $editForm->onSuccess[] = $this->deleteParamFormSubmitted;
+            return $editForm;
+        }
+    }
+
+    public function deleteParamFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+ 
+            foreach ($form->values as $id => $value) {
+            if ($value == TRUE) {
+                $this->productModel->deleteParameter($id);
+                    }
+            }
+            $this->redirect('this');
+        }
+    }
+    
+    
+    
+    
+    
     public function renderProduct($id) {
 
         $this->template->product = $this->productModel->loadProduct($id);
@@ -466,4 +505,4 @@ class ProductPresenter extends BasePresenter {
     }
 
 }
-?>
+

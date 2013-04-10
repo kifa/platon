@@ -268,6 +268,10 @@ WHERE Product.ProductID=?',$id)->fetch();
         return $this->getTable('parameters')->where('ParameterID',$paramID)->update($update);
     }
     
+    public function deleteParameter($paramID){
+        return $this->getTable('parameters')->where('ParameterID', $paramID)->delete();
+    }
+    
     public function loadAttribute($id){
         if($id == NULL){
             return $this->getTable('attrib');
@@ -278,11 +282,20 @@ WHERE Product.ProductID=?',$id)->fetch();
     }
 
     public function insertAttribute($name){
+        
+        $row = $this->getTable('attrib')->where('AttribName',$name)->fetch();
+        
+        if (!$row) {
         $insert = array(
             'AttribName' => $name
         );
         
         return $this->getTable('attrib')->insert($insert);
+        }
+        else {
+            
+            return $row->AttribID;
+        }
     }
     
     public function updateAttribute($id,$name){
