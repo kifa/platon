@@ -1,27 +1,22 @@
 
 {block pageheader}
 <div class="page-header">
-        <h1 n:block="title">{$category->CategoryName}<small> {$category->CategoryDescription}</small></h1>
+        <h1 n:block="title">{$category->CategoryName}<small> {$category->CategoryDescription|striptags|truncate:50}</small></h1>
         
         <div class="row">
             <div class="span10">
                 {if $user->isInRole('admin')}
-                <a href="#" id="showNew" ><i id="addIco" class="icon-large icon-plus"></i> {_"Add Product"}</a> |
+                <a href="#addProduct" data-toggel="modal" data-target="#addProductButton" id="addProductButton"><i class="icon-large icon-plus"></i> {_"Add Product"}</a> |
                 <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> |
-                <a href="#"><i class="icon-large icon-pencil"></i> {_"Edit Category"}</a> |
+                <a href="#editCategory" data-toggel="modal" data-target="#editCategory" id="editCategoryButton"><i class="icon-large icon-pencil"></i> {_"Edit Category"}</a> |
+
                 {/if}
                 <a href="#" id="setView"><i class="icon-th-list icon-large"></i> {_"View as List"}</a>
             </div>
         </div>
         
     </div>
-    <p class="text-left">Nexus 4 comes with the latest version of Google Now to bring you just the
-        right information at just the right time. It shows you how much traffic
-        to expect before you leave for work, or when the next train will arrive
-        as you’re standing on the platform.
-        With the latest version, Google Now keeps you even more organized – get reminders
-        about upcoming flights, restaurant reservations, hotel confirmations and even
-        nearby photo opportunities – when and where you need them.</p>
+    <p class="text-left">{!$category->CategoryDescription}</p>
     {if $user->isInRole('admin')}
      
     <div id="addProduct" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -31,7 +26,21 @@
             </div>
             <div class="modal-body">
                 <p>{_'Please fill in these information'}</p>
-              <p>{control addProductForm}</p>
+              {control addProductForm}
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close without adding</button>
+            </div>
+    </div>
+    
+    <div id="editCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-pencil"></i> Edit Category</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Please fill in these information'}</p>
+              {control editCategoryForm}
             </div>
             <div class="modal-footer">
               <button class="btn" data-dismiss="modal" aria-hidden="true">Close without adding</button>
@@ -98,7 +107,14 @@
                 $('.upl').button('toggle');
                 $('.upl').button('loading') });
             
-          $('#showNew').toggle(function(){
+           $('#editCategoryButton').toggle(function(){
+              $('#editCategory').modal('show');
+            },
+            function() {
+                $('#editCategory').modal('hide');
+            });
+           
+            $('#addProductButton').toggle(function(){
               $('#addProduct').modal('show');
             },
             function() {

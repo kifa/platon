@@ -49,7 +49,15 @@ class CategoryModel extends Repository {
      * @return string
      */
 
-
+    public function updateCategory($id, $name, $desc, $higher=NULL){
+        
+            $insert = array(
+                'CategoryName' => $name,
+                'CategoryDescription' => $desc,
+                'HigherCategoryID' => $higher
+                );        
+        return $this->getTable('category')->where('CategoryID',$id)->update($insert);
+    }
 
     /*
      * Delete Category

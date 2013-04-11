@@ -22,16 +22,16 @@ class ProductPresenter extends BasePresenter {
     protected $translator;
     private $row;
     private $parameters;
-    
     private $edit;
+    private $categoryParam;
 
     protected function startup() {
         parent::startup();
         $this->productModel = $this->context->productModel;
         $this->categoryModel = $this->context->categoryModel;
-       
+
         if ($this->getUser()->isInRole('admin')) {
-             $this->edit = $this->getSession('edit');
+            $this->edit = $this->getSession('edit');
         }
         /* Kontrola přihlášení
          * 
@@ -103,10 +103,31 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    /*
-     * Creating form for adding product
-     */
+    /************************************************************************
+     *                            Render Products aka CATEGORY
+     * @param 
+     ************************************************************************/
 
+    public function actionProducts($id) {
+        $row = $this->productModel->loadCatalog($id);
+        if (!$row) {
+            $this->flashMessage('Categry not available', 'alert');
+            $this->redirect('Homepage:');
+        } else {
+            
+
+            if ($this->getUser()->isInRole('admin')) {
+                $row = $this->categoryModel->loadCategory($id);
+                $this->categoryParam = array('CategoryID' => $row->CategoryID,
+                    'CategoryName' => $row->CategoryName,
+                    'CategoryDescription' => $row->CategoryDescription,
+                    'HigherCategoryID' => $row->HigherCategoryID);
+
+                $editCategoryForm = $this['editCategoryForm'];
+                //$addForm = $this['addCategoryForm'];
+            }
+        }
+    }
     public function createComponentAddProductForm() {
 
         if ($this->getUser()->isInRole('admin')) {
@@ -118,7 +139,7 @@ class ProductPresenter extends BasePresenter {
             }
 
             $addProduct = new Nette\Application\UI\Form;
-            $addProduct->setRenderer(new BootstrapRenderer);
+            //      $addProduct->setRenderer(new BootstrapRenderer);
             $addProduct->setTranslator($this->translator);
             $addProduct->addText('name', 'Name:')
                     ->setRequired();
@@ -140,7 +161,7 @@ class ProductPresenter extends BasePresenter {
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
             $addProduct->addSubmit('add', 'Add Product')
-                    ->setAttribute('class', 'upl')
+                    ->setAttribute('class', 'upl btn btn-primary')
                     ->setAttribute('data-loading-text', 'Adding...');
             $addProduct->onSubmit('tinyMCE.triggerSave()');
             $addProduct->onSuccess[] = $this->addProductFormSubmitted;
@@ -179,6 +200,84 @@ class ProductPresenter extends BasePresenter {
             }
 
             $this->redirect('Product:product', $return[0]);
+        }
+    }
+
+    /*
+     * Handle for removing products 
+     */
+
+    public function handleDeleteProduct($id, $catID) {
+        if ($this->getUser()->isInRole('admin')) {
+            $this->productModel->deleteProduct($id);
+            $this->redirect('Product:products', $catID);
+        }
+    }
+
+    
+    protected function createComponentEditCategoryForm() {
+        if ($this->getUser()->isInRole('admin')) {
+
+            $editForm = new Nette\Application\UI\Form;
+            $editForm->setTranslator($this->translator);
+            //$editForm->setRenderer(new BootstrapRenderer);
+            $editForm->addText('name', 'Name:')
+                    ->setRequired()
+                    ->setDefaultValue($this->categoryParam['CategoryName']);
+            $editForm->addTextArea('text', 'Description:', 150, 150)
+                    ->setDefaultValue($this->categoryParam['CategoryDescription'])
+                    ->setRequired()
+                    ->setAttribute('class', 'mceEditor');
+            $editForm->addHidden('id', $this->categoryParam['CategoryID']);
+            $editForm->addSubmit('edit', 'Save description')
+                    ->setAttribute('class', 'upl btn btn-primary')
+                    ->setAttribute('data-loading-text', 'Saving...');
+            $editForm->onSubmit('tinyMCE.triggerSave()');
+            $editForm->onSuccess[] = $this->editCategoryFormSubmitted;
+            return $editForm;
+        }
+    }
+
+    public function editCategoryFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+
+            $this->categoryModel->updateCategory($form->values->id, $form->values->name, $form->values->text);
+            $this->redirect('this');
+        }
+    }
+    
+
+    public function renderProducts($id) {
+
+        $this->catId = $id;
+        $this->template->products = $this->productModel->loadCatalog($id);
+        $this->template->category = $this->categoryModel->loadCategory($id);
+    }
+
+    /*     * *******************************************************************
+     *                      RENDER PRODUCT
+     * rendering Product with full info
+     * ********************************************************************* */
+
+    public function actionProduct($id) {
+        $row = $this->productModel->loadProduct($id);
+        if (!$row) {
+            $this->flashMessage('Product not available', 'alert');
+            $this->redirect('Homepage:');
+        } else {
+            $this->parameters = $this->productModel->loadParameters($id);
+
+            if ($this->getUser()->isInRole('admin')) {
+                $this->row = array('ProductID' => $row->ProductID,
+                    'PhotoAlbumID' => $row->PhotoAlbumID,
+                    'ProductDescription' => $row->ProductDescription,
+                    'SellingPrice' => $row->SellingPrice,
+                    'SALE' => $row->SALE,
+                    'PiecesAvailable' => $row->PiecesAvailable);
+
+                $editForm = $this['editParamForm'];
+                $addForm = $this['addParamForm'];
+            }
         }
     }
 
@@ -228,10 +327,9 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    public function createComponentEditDescForm() {
+    protected function createComponentEditDescForm() {
         if ($this->getUser()->isInRole('admin')) {
 
-            // = $this->productModel->loadProduct($id)->ProductDescription;  
             $editForm = new Nette\Application\UI\Form;
             $editForm->setTranslator($this->translator);
             // $editForm->setRenderer(new BootstrapRenderer);
@@ -253,15 +351,13 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
 
             $this->productModel->updateProduct($form->values->id, 'ProductDescription', $form->values->text);
-
             $this->redirect('this');
         }
     }
-
-    protected function createComponentEditPriceForm() {
+    
+   protected function createComponentEditPriceForm() {
         if ($this->getUser()->isInRole('admin')) {
 
-            // = $this->productModel->loadProduct($id)->ProductDescription;  
             $editForm = new Nette\Application\UI\Form;
             $editForm->setTranslator($this->translator);
             // $editForm->setRenderer(new BootstrapRenderer);
@@ -318,76 +414,24 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    /*
-     * Handle for removing products 
-     */
-
-    public function handleDeleteProduct($id, $catID) {
-        if ($this->getUser()->isInRole('admin')) {
-            $this->productModel->deleteProduct($id);
-            $this->redirect('Product:products', $catID);
-        }
-    }
-
-    /*
-     * renderProducts
-     * @param ?
-     * @param ? example: pozice počátečního znaku
-     * @return string
-     */
-
-    public function renderProducts($id) {
-
-        $this->catId = $id;
-        $this->template->products = $this->productModel->loadCatalog($id);
-        $this->template->category = $this->categoryModel->loadCategory($id);
-    }
-
-    /***********************************************************************
-     *                      RENDER PRODUCT
-     * rendering Product with full info
-     ***********************************************************************/
-
-    public function actionProduct($id) {
-        $row = $this->productModel->loadProduct($id);
-        if (!$row) {
-            $this->flashMessage('Product not available', 'alert');
-            $this->redirect('Homepage:');
-        } else {
-            $this->parameters = $this->productModel->loadParameters($id);
-
-            if ($this->getUser()->isInRole('admin')) {
-                $this->row = array('ProductID' => $row->ProductID,
-                    'PhotoAlbumID' => $row->PhotoAlbumID,
-                    'ProductDescription' => $row->ProductDescription,
-                    'SellingPrice' => $row->SellingPrice,
-                    'SALE' => $row->SALE,
-                    'PiecesAvailable' => $row->PiecesAvailable);
-                
-                $editForm = $this['editParamForm'];
-                $addForm = $this['addParamForm'];
-            }
-        }
-    }
-
     protected function createComponentEditParamForm() {
         if ($this->getUser()->isInRole('admin')) {
             $editForm = new Nette\Application\UI\Form;
             $editForm->setTranslator($this->translator);
             $editForm->setRenderer(new BootstrapRenderer());
 
-            foreach($this->productModel->loadUnit('') as $id => $unit) {
+            foreach ($this->productModel->loadUnit('') as $id => $unit) {
                 $units[$id] = $unit->UnitShort;
             }
             $prompt = Html::el('option')->setText("-- Select --")->class('prompt');
-           
+
             foreach ($this->parameters as $id => $param) {
                 $editForm->addGroup($param->AttribName);
                 $editForm->addText($param->ParameterID, 'Value:')
                         ->setDefaultValue($param->Val);
-                $editForm->addSelect('unit'.$param->ParameterID, 'Select unit:', $units, 1, 4)
-                         ->setPrompt($prompt)
-                         ->setDefaultValue($param->UnitID);
+                $editForm->addSelect('unit' . $param->ParameterID, 'Select unit:', $units, 1, 4)
+                        ->setPrompt($prompt)
+                        ->setDefaultValue($param->UnitID);
             }
 
             $editForm->addSubmit('edit', 'Save Specs')
@@ -402,14 +446,14 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             $prevID = null;
             foreach ($form->values as $id => $value) {
-                
-                if($id == 'unit' . $prevID ) {
-                     $this->productModel->updateParameter($prevID, $prevVal, $value);
+
+                if ($id == 'unit' . $prevID) {
+                    $this->productModel->updateParameter($prevID, $prevVal, $value);
                 }
                 $prevID = $id;
                 $prevVal = $value;
             }
-            
+
             $this->redirect('this');
         }
     }
@@ -419,12 +463,12 @@ class ProductPresenter extends BasePresenter {
             $addForm = new Nette\Application\UI\Form;
             $addForm->setTranslator($this->translator);
             $addForm->setRenderer(new BootstrapRenderer);
-            
+
             foreach ($this->productModel->loadAttribute('') as $id => $param) {
                 $options[$id] = $param->AttribName;
             }
-            
-            foreach($this->productModel->loadUnit('') as $id => $unit) {
+
+            foreach ($this->productModel->loadUnit('') as $id => $unit) {
                 $units[$id] = $unit->UnitShort;
             }
 
@@ -444,9 +488,7 @@ class ProductPresenter extends BasePresenter {
                     ->setAttribute('class', 'upl-add btn btn-primary')
                     ->setAttribute('data-loading-text', 'Adding...');
             $addForm->onSuccess[] = $this->addParamFormSubmitted;
-            
-           // $renderer = $addForm->getRenderer();
-           // $renderer->wrappers['control']['submit'] = 'div class="modal-footer"';
+
             return $addForm;
         }
     }
@@ -454,27 +496,18 @@ class ProductPresenter extends BasePresenter {
     public function addParamFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
 
-            /*  foreach ($form->values->options as $id => $value) { 
-              $this->productModel->insertParameter($form->values->productID, $value);
-              } */
-            if($form->values->options != '') {
-            $this->productModel->insertParameter($form->values->productID,
-                                                 $form->values->options,
-                                                 $form->values->paramValue,
-                                                 $form->values->unit);
+            if ($form->values->options != '') {
+                $this->productModel->insertParameter($form->values->productID, $form->values->options, $form->values->paramValue, $form->values->unit);
             }
             if ($form->values->newParam) {
                 $attrib = $this->productModel->insertAttribute($form->values->newParam);
-                $this->productModel->insertParameter($form->values->productID, $attrib, NULL, $form->values->unit );
+                $this->productModel->insertParameter($form->values->productID, $attrib, NULL, $form->values->unit);
             }
-                $this->edit->param = 1;
-                $this->redirect('this');
+            $this->edit->param = 1;
+            $this->redirect('this');
         }
     }
 
-    
-    
-    
     protected function createComponentDeleteParamForm() {
         if ($this->getUser()->isInRole('admin')) {
             $editForm = new Nette\Application\UI\Form;
@@ -495,46 +528,34 @@ class ProductPresenter extends BasePresenter {
 
     public function deleteParamFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
- 
+
             foreach ($form->values as $id => $value) {
-            if ($value == TRUE) {
-                $this->productModel->deleteParameter($id);
-                    }
+                if ($value == TRUE) {
+                    $this->productModel->deleteParameter($id);
+                }
             }
-           
             $this->redirect('this');
         }
     }
-    
-    
-    
-    
-    
+
     public function renderProduct($id) {
-      if ($this->getUser()->isInRole('admin')) {
-        if($this->edit->param != NULL) {
-            $this->template->attr = 1;
-            $this->edit->param = NULL;
-            
-        }
-        else {
-            $this->template->attr = 0;
-        }
+        if ($this->getUser()->isInRole('admin')) {
+            if ($this->edit->param != NULL) {
+                $this->template->attr = 1;
+                $this->edit->param = NULL;
+            } else {
+                $this->template->attr = 0;
+            }
         }
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->album = $this->productModel->loadPhotoAlbum($id);
         $this->template->parameter = $this->productModel->loadParameters($id);
-
-        //$this->prarameters = $this->productModel->loadParameters($id);
     }
 
-    /*
-     * renderDefault()
-     * rendering default product catalog
-     *  @param ?
-     * @param ? example: pozice počátečního znaku
-     * @return string
-     */
+    /*     * ***********************************************************************
+     *                      Render Default
+     * 
+     * ********************************************************************** */
 
     public function renderDefault() {
         $this->redirect('Products');
