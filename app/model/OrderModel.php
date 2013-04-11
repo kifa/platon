@@ -178,7 +178,7 @@ class OrderModel extends Repository {
         }
         else
         {
-            return $this->getTable('delivery')->where('DeliveryID',$id);
+            return $this->getTable('delivery')->where('DeliveryID',$id)->fetch();
         }
     }
     
@@ -191,11 +191,11 @@ class OrderModel extends Repository {
     /*
      * Insert new delivery 
      */
-    public function insertDelivery($id,$type,$description,$price,$free)
+    public function insertDelivery($name,$price,$description=NULL,$free=NULL)
     {
         $insert = array(
-            'DeliveryID' => $id,
-            'DeliveryName' => $type,
+            'DeliveryID' => NULL,
+            'DeliveryName' => $name,
             'DeliveryDescription' => $description,
             'DeliveryPrice' => $price,
             'FreeFromPrice' => $free
@@ -204,10 +204,14 @@ class OrderModel extends Repository {
         return $this->getTable('delivery')->insert($insert);
     }
     
+    public function deleteDelivery($id) {
+        
+        return $this->getTable('delivery')->where('DeliveryID',$id)->delete();
+    }
+    
     
 
-        public function countOrder()
-    {
+    public function countOrder()  {
         return $this->getTable('orders')->count();
     }
     

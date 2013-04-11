@@ -237,11 +237,11 @@ WHERE Product.ProductID=?',$id)->fetch();
     
     public function loadParameters($id){
         if ($id == null){
-            return $this->getTable('parameters')->select('parameters.*,attrib.*')
+            return $this->getTable('parameters')->select('parameters.*,attrib.*,unit.*')
                 ->fetchPairs('ParameterID');
         }
         else {
-            return $this->getTable('parameters')->select('parameters.*,attrib.*')
+            return $this->getTable('parameters')->select('parameters.*,attrib.*,unit.*')
                 ->where('ProductID',$id)->fetchPairs('ParameterID');
         }
     }

@@ -8,7 +8,7 @@
         <a href="#editDesc" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
         <a href="#editPrice" data-toggel="modal" data-target="#editPrice" id="editPriceButton" ><i class="icon-large icon-money"></i> {_"Edit Price"}</a> |
         <a href="#editPieces" data-toggel="modal" data-target="#editPieces" id="editPiecesButton"><i class="icon-large icon-truck"></i> {_"Edit Pieces"}</a> |
-        <a href="#editParam" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Atributes"}</a> |
+        <a href="#editParam" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Specs"}</a> |
         <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> 
         
     </div>
@@ -78,27 +78,30 @@
           
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-list"></i> Edit Atributes</h3>
+              <h3 id="myModalLabel"><i class="icon-list"></i> Edit Specification</h3>
             </div>
             <div class="modal-body tabbable">
                 
             <ul class="nav nav-tabs">
-               {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> Edit Params</a></li> {/if}
-                <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> Add Param</a>
-               {if $parameter} <li><a href="#deleteParams" data-toggle="tab"><i class="icon-trash"></i> Delete Params</a></li> {/if}
+               {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> Edit Specs</a></li> {/if}
+                <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> Add Spec</a>
+               {if $parameter} <li><a href="#deleteParams" data-toggle="tab"><i class="icon-trash"></i> Delete Spec</a></li> {/if}
             </ul>
             <div class="tab-content">
                 <div class="tab-pane {if $parameter}active{/if}" id="editParams">
-                  {if $parameter}  {control editParamForm} {/if}
+                  {if $parameter} 
+                        <p>{_'Here you can edit all Spec assigned to this product. Edit values and then click Save Spec bellow.'}</p>
+                        {control editParamForm} {/if}
 
                 </div>
                 
                 <div class="tab-pane {if !$parameter}active{/if}" id="addParam">
+                    <p>{_'Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow.'}</p>
                           {control addParamForm}
                 </div>
                 {if $parameter}
                 <div class="tab-pane" id="deleteParams">
-                    <p>{_'Check all parameters you want to delete'}</p>
+                    <p>{_'Check all specification you want to delete and then click Delete specs bellow.'}</p>
                               {control deleteParamForm}
                 </div>
                 {/if}

@@ -258,7 +258,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    public function createComponentEditPriceForm() {
+    protected function createComponentEditPriceForm() {
         if ($this->getUser()->isInRole('admin')) {
 
             // = $this->productModel->loadProduct($id)->ProductDescription;  
@@ -290,7 +290,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    public function createComponentEditPiecesForm() {
+    protected function createComponentEditPiecesForm() {
         if ($this->getUser()->isInRole('admin')) {
 
             $editForm = new Nette\Application\UI\Form;
@@ -387,7 +387,7 @@ class ProductPresenter extends BasePresenter {
                 
             }
 
-            $editForm->addSubmit('edit', 'Save attributes')
+            $editForm->addSubmit('edit', 'Save Specs')
                     ->setAttribute('class', 'upl-edit btn btn-primary')
                     ->setAttribute('data-loading-text', 'Saving...');
             $editForm->onSuccess[] = $this->editParamFormSubmitted;
@@ -410,7 +410,7 @@ class ProductPresenter extends BasePresenter {
             $addForm = new Nette\Application\UI\Form;
             $addForm->setTranslator($this->translator);
             $addForm->setRenderer(new BootstrapRenderer);
-
+            
             foreach ($this->productModel->loadAttribute('') as $id => $param) {
                 $options[$id] = $param->AttribName;
             }
@@ -418,16 +418,19 @@ class ProductPresenter extends BasePresenter {
 
             $addForm->addGroup('Select one of already created:');
             $prompt = Html::el('option')->setText("Select predefined")->class('prompt');
-            $addForm->addSelect('options', 'Predefined:', $options)
+            $addForm->addSelect('options', 'Select:', $options)
                     ->setPrompt($prompt);
-            $addForm->addText('paramValue', 'Parameter Value');
-            $addForm->addGroup('Create new atributes:');
-            $addForm->addText('newParam', 'Name of atribute:');
+            $addForm->addText('paramValue', 'Enter Value');
+            $addForm->addGroup('Create a new one:');
+            $addForm->addText('newParam', 'Name of new Spec:');
             $addForm->addHidden('productID', $this->row['ProductID']);
-            $addForm->addSubmit('edit', 'Add attributes')
+            $addForm->addSubmit('edit', 'Add Spec')
                     ->setAttribute('class', 'upl-add btn btn-primary')
                     ->setAttribute('data-loading-text', 'Adding...');
             $addForm->onSuccess[] = $this->addParamFormSubmitted;
+            
+           // $renderer = $addForm->getRenderer();
+           // $renderer->wrappers['control']['submit'] = 'div class="modal-footer"';
             return $addForm;
         }
     }
@@ -465,7 +468,7 @@ class ProductPresenter extends BasePresenter {
                         ->setDefaultValue(FALSE);
             }
 
-            $editForm->addSubmit('delete', 'Delete attributes')
+            $editForm->addSubmit('delete', 'Delete Specs')
                     ->setAttribute('class', 'upl-del btn btn-primary')
                     ->setAttribute('data-loading-text', 'Deleting...');
             $editForm->onSuccess[] = $this->deleteParamFormSubmitted;

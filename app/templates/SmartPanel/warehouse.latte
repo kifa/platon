@@ -1,7 +1,7 @@
 {block pageheader}
 {if $user->isInRole('admin')}
 <div class="page-header">
-    <h1 n:block="title"><i class="icon-truck"></i> {_'Shipping'} <small>{_'Here you see all shipping methods.'}</small></h1>
+    <h1 n:block="title"><i class="icon-truck"></i> {_'Warehouse'} <small>{_'Change stock in one place.'}</small></h1>
 
 <div class="row">
             <div class="span10">
@@ -37,7 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        {foreach $delivery as $deliver}
+                        {* foreach $delivery as $deliver}
 
                             <tr class="info">
                                 <td>{$iterator->counter}</td>
@@ -48,13 +48,13 @@
                                 <td><a n:href="removeShip! $deliver->DeliveryID"><i class="icon-trash"></i> {_'remove'}</a></td>
                             </tr>
 
-                        {/foreach}
+                        {/foreach *}
                         </tbody>
                     </table>
                 </div>
             </div> <div class="tab-pane" id="addShip">
                 
-                    {control addShippingForm}
+                    {*control addShippingForm*}
 
             </div>
         </div>
