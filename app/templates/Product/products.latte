@@ -16,7 +16,7 @@
         </div>
         
     </div>
-    <p class="text-left">{!$category->CategoryDescription}</p>
+    <div class="alert alert-info">{!$category->CategoryDescription}</div>
     {if $user->isInRole('admin')}
      
     <div id="addProduct" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
