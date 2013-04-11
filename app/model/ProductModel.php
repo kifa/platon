@@ -262,7 +262,7 @@ WHERE Product.ProductID=?',$id)->fetch();
         $update = array(
           //  'Parameter' => $param,
             'Val' => $value,
-          //  'Unit' => $unit
+            'UnitID' => $unit
         );
                 
         return $this->getTable('parameters')->where('ParameterID',$paramID)->update($update);
@@ -308,7 +308,7 @@ WHERE Product.ProductID=?',$id)->fetch();
     
     public function loadUnit($id){
         if($id == NULL){
-            return $this->getTable('unit');
+            return $this->getTable('unit')->fetchPairs('UnitID');
         }
         else {
             return $this->getTable('unit')->where('UnitID',$id);

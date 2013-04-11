@@ -142,17 +142,12 @@
 
                 </div>
                 <div class="tab-pane" id="spec">
-                    <ul class="icons">
+                    <dl class="dl-horizontal">
                         {foreach $parameter as $parameter}
-                            <li>                                                                                                    
-                                
-                                    {$parameter->AttribName}:
-                                    {$parameter->Val}
-                                    {*$parameter->UnitShort*}
-                                
-                            </li>
+                            <dt>{$parameter->AttribName}:</dt>
+                            <dd>{$parameter->Val}{$parameter->UnitShort}</dd>
                         {/foreach}                        
-                    </ul>
+                    </dl>
                 </div>
                 <div class="tab-pane" id="other">
                     <p>Other infos</p>

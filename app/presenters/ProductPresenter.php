@@ -343,13 +343,10 @@ class ProductPresenter extends BasePresenter {
         $this->template->category = $this->categoryModel->loadCategory($id);
     }
 
-    /*
-     * renderProduct();
+    /***********************************************************************
+     *                      RENDER PRODUCT
      * rendering Product with full info
-     * * @param ?
-     * @param ? example: pozice počátečního znaku
-     * @return string
-     */
+     ***********************************************************************/
 
     public function actionProduct($id) {
         $row = $this->productModel->loadProduct($id);
@@ -378,13 +375,19 @@ class ProductPresenter extends BasePresenter {
             $editForm = new Nette\Application\UI\Form;
             $editForm->setTranslator($this->translator);
             $editForm->setRenderer(new BootstrapRenderer());
-            $number = 0;
 
+            foreach($this->productModel->loadUnit('') as $id => $unit) {
+                $units[$id] = $unit->UnitShort;
+            }
+            $prompt = Html::el('option')->setText("-- Select --")->class('prompt');
+           
             foreach ($this->parameters as $id => $param) {
-
-                $editForm->addText($param->ParameterID, $param->AttribName)
+                $editForm->addGroup($param->AttribName);
+                $editForm->addText($param->ParameterID, 'Value:')
                         ->setDefaultValue($param->Val);
-                
+                $editForm->addSelect('unit'.$param->ParameterID, 'Select unit:', $units, 1, 4)
+                         ->setPrompt($prompt)
+                         ->setDefaultValue($param->UnitID);
             }
 
             $editForm->addSubmit('edit', 'Save Specs')
@@ -397,8 +400,14 @@ class ProductPresenter extends BasePresenter {
 
     public function editParamFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
+            $prevID = null;
             foreach ($form->values as $id => $value) {
-                $this->productModel->updateParameter($id, $value);
+                
+                if($id == 'unit' . $prevID ) {
+                     $this->productModel->updateParameter($prevID, $prevVal, $value);
+                }
+                $prevID = $id;
+                $prevVal = $value;
             }
             
             $this->redirect('this');
@@ -415,14 +424,21 @@ class ProductPresenter extends BasePresenter {
                 $options[$id] = $param->AttribName;
             }
             
+            foreach($this->productModel->loadUnit('') as $id => $unit) {
+                $units[$id] = $unit->UnitShort;
+            }
 
             $addForm->addGroup('Select one of already created:');
-            $prompt = Html::el('option')->setText("Select predefined")->class('prompt');
-            $addForm->addSelect('options', 'Select:', $options)
+            $prompt = Html::el('option')->setText("-- Select --")->class('prompt');
+            $addForm->addSelect('options', 'Select spec:', $options)
                     ->setPrompt($prompt);
-            $addForm->addText('paramValue', 'Enter Value');
+            $addForm->addText('paramValue', 'Enter Value:');
+            $addForm->addSelect('unit', 'Select unit:', $units)
+                    ->setPrompt($prompt);
             $addForm->addGroup('Create a new one:');
             $addForm->addText('newParam', 'Name of new Spec:');
+            $addForm->addSelect('unit2', 'Select unit:', $units)
+                    ->setPrompt($prompt);
             $addForm->addHidden('productID', $this->row['ProductID']);
             $addForm->addSubmit('edit', 'Add Spec')
                     ->setAttribute('class', 'upl-add btn btn-primary')
@@ -442,16 +458,17 @@ class ProductPresenter extends BasePresenter {
               $this->productModel->insertParameter($form->values->productID, $value);
               } */
             if($form->values->options != '') {
-            $this->productModel->insertParameter($form->values->productID, $form->values->options, $form->values->paramValue);
+            $this->productModel->insertParameter($form->values->productID,
+                                                 $form->values->options,
+                                                 $form->values->paramValue,
+                                                 $form->values->unit);
             }
             if ($form->values->newParam) {
                 $attrib = $this->productModel->insertAttribute($form->values->newParam);
-                $this->productModel->insertParameter($form->values->productID, $attrib);
+                $this->productModel->insertParameter($form->values->productID, $attrib, NULL, $form->values->unit );
             }
-
                 $this->edit->param = 1;
                 $this->redirect('this');
-            
         }
     }
 
@@ -494,6 +511,7 @@ class ProductPresenter extends BasePresenter {
     
     
     public function renderProduct($id) {
+      if ($this->getUser()->isInRole('admin')) {
         if($this->edit->param != NULL) {
             $this->template->attr = 1;
             $this->edit->param = NULL;
@@ -501,6 +519,7 @@ class ProductPresenter extends BasePresenter {
         }
         else {
             $this->template->attr = 0;
+        }
         }
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->album = $this->productModel->loadPhotoAlbum($id);
