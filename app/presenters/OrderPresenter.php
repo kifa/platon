@@ -216,22 +216,26 @@ class OrderPresenter extends BasePresenter {
         $cartForm->addText('psc', 'PSC:', 40, 100)
                 ->addRule(Form::FILLED);
         $cartForm->addGroup('Shipping');
-        $cartForm->addRadioList('shippers', '', $shippers)
+        $cartForm->addSelect('shippers', '', $shippers)
               //  ->setAttribute('class', '.span1 radio')
                 ->setRequired('Please select Shipping method');
         $cartForm->addGroup('Payment');
-        $cartForm->addRadioList('payment', '', $payment)
+        $cartForm->addSelect('payment', '', $payment)
               //  ->setAttribute('class', '.span1 radio')
                 ->setRequired('Please select Payment method');
         $cartForm->addGroup('Terms');
+        
         $cartForm->addCheckbox('terms', 'I accept Terms and condition.')
-                ->setAttribute('class', 'checkbox inline')
                 ->setRequired()
                 ->setDefaultValue('TRUE')
                 ->addRule(Form::FILLED, 'In order to continue checkout, you have to agree with Term.');
+        $cartForm->addButton('termButton', 'Read Terms')
+                ->setHtmlId('termsButton')
+                ->setAttribute('class', 'btn btn-small btn-primary');
         $cartForm->addGroup('Checkout');
         $cartForm->addSubmit('send', 'Checkout here!')
                 ->setAttribute('class', 'btn btn-warning btn-large');
+        
         $cartForm->onSuccess[] = $this->cartFormSubmitted;
         return $cartForm;
     }

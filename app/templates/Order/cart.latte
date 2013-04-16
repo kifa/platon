@@ -8,7 +8,7 @@
 {/block}
     
 {block content}
-<div class="span9">    
+<div class="span10">    
 {*foreach $flashes as $flash}
         <div class="{$flash->type}">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -125,11 +125,7 @@
 
 {block sidebar}
 <div class="span2">
-    <div class="span2 alert alert-invert">
-        <h3>{_'Terms'}</h3>
-        <p>Would you like to read our Terms and condition?</p>
-        <a href="#termsButton" id="termsButton" class="btn btn-small btn-primary">READ</a>
-    </div>
+    <a href="#termsButton" id="termsButton" class="btn btn-small btn-primary">READ</a>
     {var $i = 'Terms'}{var $ii = 'Violators will be prosecuted to the maximum extent possible.'}
     {control modalControl:info terms, $i, $ii}
 </div>

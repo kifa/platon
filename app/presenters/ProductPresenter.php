@@ -1,7 +1,8 @@
 <?php
 
 use Nette\Forms\Form,
-    Nette\Utils\Html;
+    Nette\Utils\Html,
+        Nette\Image;
 use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 
 /*
@@ -199,6 +200,18 @@ class ProductPresenter extends BasePresenter {
                 );
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $return[1] . '/' . $form->values->image->name;
                 $form->values->image->move($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 300, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $return[1] . '/300-' . $form->values->image->name;
+                $image->save($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 50, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $return[1] . '/50-' . $form->values->image->name;
+                $image->save($imgUrl);
             }
 
             $this->redirect('Product:product', $return[0]);
@@ -341,6 +354,18 @@ class ProductPresenter extends BasePresenter {
                 );
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $form->values->albumID . '/' . $form->values->image->name;
                 $form->values->image->move($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 300, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $form->values->albumID . '/300-' . $form->values->image->name;
+                $image->save($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 50, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $form->values->albumID . '/50-' . $form->values->image->name;
+                $image->save($imgUrl);
 
                 $e = HTML::el('span', ' Photo ' . $form->values->image->name . ' was sucessfully uploaded');
                 $ico = HTML::el('i')->class('icon-ok-sign left');
