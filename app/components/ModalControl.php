@@ -57,6 +57,14 @@ class ModalControl extends BaseControl {
         $this->template->render();
     }
     
+    public function renderGallery($id, $title, $content) {
+
+        $this->template->setFile(__DIR__ . '/ModalGalleryControl.latte');
+        $this->template->id = $id;
+        $this->template->title = $title;
+        $this->template->content = $content;
+        $this->template->render();
+    }
     
     
 }
