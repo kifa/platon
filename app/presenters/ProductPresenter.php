@@ -236,6 +236,12 @@ class ProductPresenter extends BasePresenter {
             $editForm = new Nette\Application\UI\Form;
             $editForm->setTranslator($this->translator);
             //$editForm->setRenderer(new BootstrapRenderer);
+            
+            foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
+                $categories[$id] = $category->CategoryName;
+            }
+            $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
+            
             $editForm->addText('name', 'Name:')
                     ->setRequired()
                     ->setDefaultValue($this->categoryParam['CategoryName']);
@@ -243,6 +249,9 @@ class ProductPresenter extends BasePresenter {
                     ->setDefaultValue($this->categoryParam['CategoryDescription'])
                     ->setRequired()
                     ->setAttribute('class', 'mceEditor');
+            $editForm->addSelect('parent', 'Parent Category:', $categories)
+                    ->setPrompt($prompt)
+                    ->setDefaultValue($this->categoryParam['HigherCategoryID']);
             $editForm->addHidden('id', $this->categoryParam['CategoryID']);
             $editForm->addSubmit('edit', 'Save description')
                     ->setAttribute('class', 'upl btn btn-primary')
@@ -256,7 +265,7 @@ class ProductPresenter extends BasePresenter {
     public function editCategoryFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
 
-            $this->categoryModel->updateCategory($form->values->id, $form->values->name, $form->values->text);
+            $this->categoryModel->updateCategory($form->values->id, $form->values->name, $form->values->text, $form->values->parent);
             $this->redirect('this');
         }
     }

@@ -35,7 +35,7 @@ class CategoryModel extends Repository {
      * @param ? example: pozice počátečního znaku
      * @return string
      */
-    public function createCategory($id, $name, $description, $higher){
+    public function createCategory($id, $name, $description, $higher=NULL){
         $insert = array(
             'CategoryID' => $id,
             'CategoryName' => $name,
