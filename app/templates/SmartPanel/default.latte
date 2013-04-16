@@ -26,6 +26,7 @@
         <ul class="nav nav-tabs">
           <li class="active"><a href="#overal"  data-toggle="tab">Overal</a></li>
           <li><a href="#account"  data-toggle="tab">Account</a></li>
+          <li><a href="#other"  data-toggle="tab">Other</a></li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane active" id="overal">
@@ -112,6 +113,11 @@
                  {control passwordForm}   
             
           </div>
+            
+            <div class="tab-pane" id="other">
+                <h3>Regenerate Thumbnails</h3>
+                <a href="{plink regenerateThumb!}" id="regen" class="btn btn-primary"><i id="gen" class="icon-spinner"></i> <span class="gen">Click to regenerate!</span></a>
+            </div>
         </div>
    </div>
 
@@ -126,4 +132,20 @@
         {control menu:admin}
     {/if}
  </div>
+{/block}
+
+{block script}
+<script>
+   $(document).ready(function() {
+       
+    $('#regen').click(function() { 
+                
+                $('#gen').attr('class', 'icon-spin icon-spinner');
+                $('.gen').text('Regenerating...');
+                $('#regen').attr('class', 'btn btn-primary disabled');
+            });
+     
+      });
+    </script>
+
 {/block}

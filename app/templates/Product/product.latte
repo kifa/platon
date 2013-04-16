@@ -248,7 +248,7 @@
                                 {foreach $album as $id => $photo}
                                             <li class="{if $photo->CoverPhoto}span3 {else} span3 {/if}">
                                                 <a href="#myLightbox" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
-                                                    <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/{$photo->PhotoURL}" alt="{$product->ProductName}">
+                                                    <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}">
                                                 </a>
                                                 {if $user->isInRole('admin')}
                                                     <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> Set as COVER image</a>

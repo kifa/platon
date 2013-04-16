@@ -1,7 +1,8 @@
 <?php
 
 use Nette\Forms\Form,
-    Nette\Utils\Html;
+    Nette\Utils\Html,
+    Nette\Image;
 use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 
 /*
@@ -250,6 +251,32 @@ class SmartPanelPresenter extends BasePresenter {
     /*
      * Render default view of SmartPanel
      */
+    
+    public function handleRegenerateThumb() {
+        foreach ($this->productModel->loadCatalog('') as $id => $product) {
+            if ($product->PhotoAlbumID) {
+                foreach ($this->productModel->loadPhotoAlbum($product->ProductID) as $id => $photo) {      
+                    $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $product->PhotoAlbumID . '/';
+
+                    $image = Image::fromFile($imgUrl . $photo->PhotoURL);
+                    $image->resize(null, 300, Image::SHRINK_ONLY);
+
+                    $imgUrl300 = $imgUrl . '300-' . $photo->PhotoURL;
+                    $image->save($imgUrl300);
+
+                    $image = Image::fromFile($imgUrl . $photo->PhotoURL);
+                    $image->resize(null, 50, Image::SHRINK_ONLY);
+
+                    $imgUrl50 = $imgUrl . '50-' . $photo->PhotoURL;
+                    $image->save($imgUrl50);
+             
+                }
+            }
+        }
+        
+        $this->flashMessage('Thumbs sucessfully regenerated.', 'alert');
+        $this->presenter->redirect("this");
+    }
 
     public function renderDefault() {
         if (!$this->getUser()->isInRole('admin')) {

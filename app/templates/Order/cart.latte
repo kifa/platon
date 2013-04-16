@@ -33,7 +33,7 @@
         {var $subtotal = $amnt * $product->FinalPrice}
                 <tr>
                     <td>{if $product->PhotoAlbumID}
-                             <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$product->PhotoURL}" class="img-circle" style="width: 38px;"/>
+                             <img src="{$basePath}/images/{$product->PhotoAlbumID}/50-{$product->PhotoURL}" class="img-circle" style="width: 38px;"/>
                         {else}
                              <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="width: 38px;"/>
                         {/if} 
