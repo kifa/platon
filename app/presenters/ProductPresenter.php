@@ -310,6 +310,7 @@ class ProductPresenter extends BasePresenter {
                     'ProductDescription' => $row->ProductDescription,
                     'SellingPrice' => $row->SellingPrice,
                     'SALE' => $row->SALE,
+                    'CategoryID' => $row->CategoryID,
                     'PiecesAvailable' => $row->PiecesAvailable);
 
                 $editForm = $this['editParamForm'];
@@ -384,11 +385,21 @@ class ProductPresenter extends BasePresenter {
             $editForm = new Nette\Application\UI\Form;
             $editForm->setTranslator($this->translator);
             // $editForm->setRenderer(new BootstrapRenderer);
+            foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
+                $categories[$id] = $category->CategoryName;
+            }
+            $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
+                    
             $editForm->addTextArea('text', 'Description:', 150, 150)
                     ->setDefaultValue($this->row['ProductDescription'])
                     ->setRequired()
                     ->setAttribute('class', 'mceEditor');
+            
+            $editForm->addSelect('category', 'Select Category:', $categories)
+                    ->setPrompt($prompt)
+                    ->setDefaultValue($this->row['CategoryID']);
             $editForm->addHidden('id', $this->row['ProductID']);
+            
             $editForm->addSubmit('edit', 'Save description')
                     ->setAttribute('class', 'upl btn btn-primary')
                     ->setAttribute('data-loading-text', 'Saving...');
@@ -402,6 +413,7 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
 
             $this->productModel->updateProduct($form->values->id, 'ProductDescription', $form->values->text);
+            $this->productModel->updateProduct($form->values->id, 'CategoryID', $form->values->category);
             $this->redirect('this');
         }
     }

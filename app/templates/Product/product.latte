@@ -247,7 +247,7 @@
                                         <ul class="thumbnails">
                                 {foreach $album as $id => $photo}
                                             <li class="{if $photo->CoverPhoto}span3 {else} span3 {/if}">
-                                                <a href="#myLightbox" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
+                                                <a data-toggle="lightbox" href="#photo{$id}" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
                                                     <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}">
                                                 </a>
                                                 {if $user->isInRole('admin')}
@@ -256,8 +256,28 @@
                                                   {/if}
                                             </li>
 
-                                 {/foreach}
+                                            
+                                            <div id="photo{$id}" class="lightbox hide fade"  tabindex="-1" role="dialog" aria-hidden="true">
+                                                        <div class='lightbox-header'>
+                                                            <button type="button" class="close" data-dismiss="lightbox" aria-hidden="true">&times;</button>
+                                                        </div>
+                                                        <div class='lightbox-content'>
+                                                            <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/{$photo->PhotoURL}" alt="{$product->ProductName}">
+                                                        </div>
+                                                        <div class='lightbox-footer'>
+                                                            {if $id !== 0}<a data-toggle="lightbox" href="#photo{$id-1}" data-dismiss="lightbox" class="btn btn-small btn-primary"><i class="icon-arrow-left"></i> Prev</a>{/if}
+                                                            <a data-toggle="lightbox" href="#photo{$id+1}" data-dismiss="lightbox" class="btn btn-small btn-primary"><i class="icon-arrow-right"></i> Next</a>
+                                                            <a href="#" data-dismiss="lightbox" class="btn btn-small btn-primary"><i class="icon-remove"></i> Close</a>
+
+                                                        </div>
+                                                    </div>
+                                     {/foreach}
                                         </ul>
+                                        
+                                        
+                                       
+
+                                        
                                     </div>
                                     <div class="tab-pane" id="vid">
                                         <iframe width="853" height="480" src="http://www.youtube.com/embed/qN3EXAFRxKQ?rel=0" frameborder="0" allowfullscreen></iframe>
