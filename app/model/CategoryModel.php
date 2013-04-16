@@ -25,6 +25,10 @@ class CategoryModel extends Repository {
         return $this->getTable('Category')->where('CategoryID', $id)->fetch();
     }
     
+    public function loadCategory2($id){
+        return $this->getTable('Category')->where('CategoryID', $id);
+    }
+    
     /*
      * Create Category
      * @param ?

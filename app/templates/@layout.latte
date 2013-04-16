@@ -27,6 +27,7 @@
         <link rel="stylesheet" href="{$basePath}/css/flag.css">
         <link rel="shortcut icon" href="{$basePath}/favicon.ico">
         <script src="{$basePath}/js/jquery.js"></script>
+      
         
 	{block head}{/block}
     </head>
@@ -89,7 +90,14 @@
             
             {block #sidebar}
             <div class="span2">
-
+                    <ul class="nav nav-list">
+                        <li class="nav-header">Menu</li>
+                        <li class="active"><a href="#"><i class="icon-home"></i>{_'Domů'}</a></li>
+                        <li><a href="#"><i class="icon-book"></i>{_'Jak nakupovat'}</a></li>
+                        <li><a href="#"><i class="icon-heart"></i>{_'Jak prodávat'}</a></li>
+                        <li><a href="#"><i class="icon-comment"></i>{_'Jak cokoliv'}</a></li>
+                        <li class="divider"></li>
+                    </ul>
             </div>
             {/block}
         </div>       
@@ -121,7 +129,7 @@
             });
         </script>
         {if $user->isInRole('admin')}
-        <script type="text/javascript" src="{$basePath}/js/tiny_mce/tiny_mce.js" ></script >
+       <script type="text/javascript" src="{$basePath}/js/tiny_mce/tiny_mce.js" ></script>
         <script type="text/javascript" >
             tinyMCE.init({
                     mode: "specific_textareas",
@@ -130,7 +138,9 @@
                     height: '300px',
                     width: '300px'
             });
-         </script >    
+         </script> 
+         
+         
         {/if}
         {block #script}
         {/block}

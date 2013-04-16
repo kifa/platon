@@ -14,10 +14,10 @@ class ProductModel extends Repository {
      * @param ? example: pozice počátečního znaku
      * @return string
      */
-    public function loadCatalog($id) {
+    public function loadCatalog($catID) {
         //$id = '2';
         //return $this->getTable('Product')->select('Product.*,Price.*')->where('CategoryID', $id);
-        if($id==''){
+        if($catID==''){
             //return $this->getTable('product')->select('product.ProductID, product.ProductName,
             //    product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*');            
             return $this->getDB()->query('SELECT * FROM product JOIN price 
@@ -30,7 +30,7 @@ class ProductModel extends Repository {
         {  return $this->getDB()->query('SELECT * FROM product JOIN price ON 
             price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-            WHERE Photo.CoverPhoto="1" and product.CategoryID=?',$id);
+            WHERE Photo.CoverPhoto="1" and product.CategoryID=?',$catID);
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
               //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
         }
@@ -142,6 +142,21 @@ WHERE Product.ProductID=?',$id)->fetch();
      */
     public function deleteProduct($id){
         return $this->getTable('Product')->where('ProductID',$id)->delete();
+    }
+    
+    public function hideProduct($id){
+        $insert = array(
+            'ProductStatusID' => 1
+        );
+        
+        return $this->getTable('Product')->where('ProductID',$id)->update($insert);
+    }
+    
+     public function showProduct($id){
+        $insert = array(
+            'ProductStatusID' => 2
+        );
+        return $this->getTable('Product')->where('ProductID',$id)->update($insert);
     }
     
     /*
@@ -331,5 +346,30 @@ WHERE Product.ProductID=?',$id)->fetch();
         );
         
         return $this->getTable('unit')->where('UnitID',$id)->update($insert);
+    }
+    
+    
+    /*
+     * Insert Doc
+     */
+    
+    public function insertDocumentation($name, $url, $productID, $desc = null){
+        $insert = array(
+        'DocumentID' => NULL,
+        'DocumentName' => $name,
+        'DocumentURL' => $url,
+        'DocumentDescription' => $desc,
+        'ProductID' => $productID
+        );
+        
+        return $this->getTable('documentation')->insert($insert);
+    }
+    
+    public function loadDocumentation($id){
+        return $this->getTable('documentation')->where('ProductID',$id);
+    }
+    
+    public function deleteDocumentation($id){
+        return $this->getTable('documentation')->where('DocumentID',$id)->delete();
     }
 }

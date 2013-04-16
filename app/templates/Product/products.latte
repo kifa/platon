@@ -26,6 +26,7 @@
             </div>
             <div class="modal-body">
                 <p>{_'Please fill in these information'}</p>
+                
               {control addProductForm}
             </div>
             <div class="modal-footer">
@@ -62,13 +63,13 @@
         {control menu:admin}
     {/if}
     <ul class="nav nav-list">
-                <li class="nav-header">Menu</li>
-                <li class="active"><a href="#"><i class="icon-home"></i>Domů</a></li>
-                <li><a href="#"><i class="icon-book"></i>Jak nakupovat</a></li>
-                <li><a href="#"><i class="icon-heart"></i>Jak prodávat</a></li>
-                <li><a href="#"><i class="icon-comment"></i>Jak cokoliv</a></li>
-                <li class="divider"></li>
-            </ul>
+                        <li class="nav-header">Menu</li>
+                        <li class="active"><a href="#"><i class="icon-home"></i>{_'Domů'}</a></li>
+                        <li><a href="#"><i class="icon-book"></i>{_'Jak nakupovat'}</a></li>
+                        <li><a href="#"><i class="icon-heart"></i>{_'Jak prodávat'}</a></li>
+                        <li><a href="#"><i class="icon-comment"></i>{_'Jak cokoliv'}</a></li>
+                        <li class="divider"></li>
+                    </ul>
 
             <i class="icon-camera-retro icon-2x"></i><strong>Google Nexus</strong>
             <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
@@ -139,6 +140,9 @@
               $('#setview').children('i').attr('class', 'icon-large icon-th-list');
 
             });
+            
+  
+          
             
         });
     </script>

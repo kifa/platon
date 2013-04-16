@@ -1,7 +1,7 @@
 <ul class="thumbnails">
             {foreach $products as $id => $product}
     <li class="span3 setview">
-        <div class="thumbnail">
+        <div class="thumbnail {$product->ProductStatusID == 1 ? alert}">
            {if $user->isInRole('admin')}
             <div class="row">
             {ifCurrent Homepage:}
@@ -10,8 +10,21 @@
             </div>
             {else}
             <div class="span3">
-                {_"Admin"}: <a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" ><i id="deleteProduct" class="icon-large icon-trash"></i></a>
-            
+                {_"Admin"}: 
+                {if $product->ProductStatusID == 1}
+                <a href="{plink showProduct! $product->CategoryID, $product->ProductID}" title="Publish product">
+                        <i id="showProduct" class="icon-large icon-eye-open"></i></a>
+                        
+                <a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" title="Delete product">
+                        <i id="deleteProduct" class="icon-large icon-trash"></i></a>
+
+                {elseif $product->ProductStatusID == 2}
+                    <a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" title="Hide product">
+                        <i id="hideProduct" class="icon-large icon-eye-close"></i></a>
+
+                {else}
+                    <a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" ><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
+                {/if}
             </div>
             {/ifCurrent}
             </div>
@@ -55,7 +68,7 @@
             <div class="row .span3">
                 <hr>
                     <div class="span2">
-                        <p class="text-success text-center lead">{$product->FinalPrice},- {if $product->SALE > 1}<span class="muted" style="text-decoration: line-through; font-size: 50%;">{$product->SellingPrice},-</span>{/if} </p>
+                        <p class="text-success text-center lead">{$product->FinalPrice},- {if $product->SALE > 1}<span class="muted .span1" style="text-decoration: line-through; font-size: 50%;">{$product->SellingPrice},-</span>{/if} </p>
                     </div>
                
             </div> 

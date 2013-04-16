@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-04-07 21:17:19
+# Created: 2013-04-16 09:29:53
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-04-07 21:17+0200\n"
+"PO-Revision-Date: 2013-04-16 09:29+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -45,6 +45,9 @@ msgstr "Choose language:"
 msgid "Description: "
 msgstr "Description:"
 
+msgid "Domů"
+msgstr "Home"
+
 msgid "Edit Category"
 msgstr "Edit Category"
 
@@ -54,8 +57,17 @@ msgstr "Here"
 msgid "Home"
 msgstr "Home"
 
+msgid "Image:"
+msgstr "Image:"
+
 msgid "In stock"
 msgstr "In stock"
+
+msgid "Jak nakupovat"
+msgstr "How to shop"
+
+msgid "Jak prodávat"
+msgstr "Where´s my order"
 
 msgid "Keep me signed in"
 msgstr "Keep me signed in"
@@ -129,6 +141,6 @@ msgstr "You"
 msgid "You cannot edit product here!"
 msgstr "You cannot edit product here!"
 
-msgid "Image:"
-msgstr "Image:"
+msgid "Jak cokoliv"
+msgstr "Other"
 

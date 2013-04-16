@@ -108,8 +108,8 @@ class ProductPresenter extends BasePresenter {
      * @param 
      ************************************************************************/
 
-    public function actionProducts($id) {
-        $row = $this->productModel->loadCatalog($id);
+    public function actionProducts($catID) {
+        $row = $this->productModel->loadCatalog($catID);
         if (!$row) {
             $this->flashMessage('Categry not available', 'alert');
             $this->redirect('Homepage:');
@@ -117,11 +117,13 @@ class ProductPresenter extends BasePresenter {
             
 
             if ($this->getUser()->isInRole('admin')) {
-                $row = $this->categoryModel->loadCategory($id);
-                $this->categoryParam = array('CategoryID' => $row->CategoryID,
-                    'CategoryName' => $row->CategoryName,
-                    'CategoryDescription' => $row->CategoryDescription,
-                    'HigherCategoryID' => $row->HigherCategoryID);
+          
+             
+                $row2 = $this->categoryModel->loadCategory($catID);
+                $this->categoryParam = array('CategoryID' => $catID,
+                    'CategoryName' => $row2->CategoryName,
+                    'CategoryDescription' => $row2->CategoryDescription,
+                    'HigherCategoryID' => $row2->HigherCategoryID);
 
                 $editCategoryForm = $this['editCategoryForm'];
                 //$addForm = $this['addCategoryForm'];
@@ -207,13 +209,26 @@ class ProductPresenter extends BasePresenter {
      * Handle for removing products 
      */
 
-    public function handleDeleteProduct($id, $catID) {
+    public function handleDeleteProduct($catID, $id) {
         if ($this->getUser()->isInRole('admin')) {
             $this->productModel->deleteProduct($id);
-            $this->redirect('Product:products', $catID);
+            $this->redirect('this', $catID);
         }
     }
 
+    public function handleHideProduct($catID, $id) {
+        if ($this->getUser()->isInRole('admin')) {
+            $this->productModel->hideProduct($id);
+            $this->redirect('this', $catID);
+        }
+    }
+    
+    public function handleShowProduct($catID, $id) {
+        if ($this->getUser()->isInRole('admin')) {
+            $this->productModel->showProduct($id);
+            $this->redirect('Product:products', $catID);
+        }
+    }
     
     protected function createComponentEditCategoryForm() {
         if ($this->getUser()->isInRole('admin')) {
@@ -247,11 +262,11 @@ class ProductPresenter extends BasePresenter {
     }
     
 
-    public function renderProducts($id) {
+    public function renderProducts($catID) {
 
-        $this->catId = $id;
-        $this->template->products = $this->productModel->loadCatalog($id);
-        $this->template->category = $this->categoryModel->loadCategory($id);
+        $this->catId = $catID;
+        $this->template->products = $this->productModel->loadCatalog($catID);
+        $this->template->category = $this->categoryModel->loadCategory($catID);
     }
 
     /*     * *******************************************************************
@@ -277,6 +292,7 @@ class ProductPresenter extends BasePresenter {
 
                 $editForm = $this['editParamForm'];
                 $addForm = $this['addParamForm'];
+                $docsForm = $this['addDocumentationForm'];
             }
         }
     }
@@ -327,6 +343,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
+    
     protected function createComponentEditDescForm() {
         if ($this->getUser()->isInRole('admin')) {
 
@@ -537,6 +554,79 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('this');
         }
     }
+    
+    
+    public function handleDeleteDocument($product, $id) {
+        if ($this->getUser()->isInRole('admin')) {
+            $row = $this->productModel->loadDocumentation($product)->fetch();
+            if (!$row) {
+                $this->flashMessage('There is no Docs to delete', 'alert');
+            } else {
+
+
+                $docUrl = $this->context->parameters['wwwDir'] . '/docs/' . $row->ProductID . '/' . $row->DocumentURL;
+                if ($docUrl) {
+                    unlink($docUrl);
+                }
+
+                $e = 'Doc ' . $row->DocumentName . ' was sucessfully deleted.';
+
+                $this->productModel->deleteDocumentation($id);
+                $this->flashMessage($e, 'alert');
+            }
+
+            $this->redirect('Product:product', $product);
+        }
+    }
+    
+    /*
+     * Adding product photos
+     */
+
+    public function createComponentAddDocumentationForm() {
+        if ($this->getUser()->isInRole('admin')) {
+            $addPhoto = new Nette\Application\UI\Form;
+            $addPhoto->setRenderer(new BootstrapRenderer);
+            $addPhoto->setTranslator($this->translator);
+            $addPhoto->addText('name', 'Name:');
+            $addPhoto->addHidden('productid', $this->row['ProductID']);
+            $addPhoto->addUpload('doc', 'Document:')
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
+            $addPhoto->addText('desc', 'Description', 20, 10);
+            $addPhoto->addSubmit('add', 'Add Document')
+                    ->setAttribute('class', 'btn-primary upl')
+                    ->setAttribute('data-loading-text', 'Uploading...');
+            $addPhoto->onSuccess[] = $this->addDocumentationFormSubmitted;
+            return $addPhoto;
+        }
+    }
+
+    /*
+     * Adding submit form for adding photos
+     */
+
+    public function addDocumentationFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            if ($form->values->doc->isOK()) {
+
+                $this->productModel->insertDocumentation(
+                        $form->values->name, $form->values->doc->name, $form->values->productid, $form->values->desc
+                );
+                $imgUrl = $this->context->parameters['wwwDir'] . '/docs/' . $form->values->productid . '/' . $form->values->doc->name;
+                $form->values->doc->move($imgUrl);
+
+                $e = HTML::el('span', ' Docs ' . $form->values->doc->name . ' was sucessfully uploaded');
+                $ico = HTML::el('i')->class('icon-ok-sign left');
+                $e->insert(0, $ico);
+                $this->flashMessage($e, 'alert');
+            }
+
+            $this->redirect('this');
+        }
+    }
+    
+    
+    
 
     public function renderProduct($id) {
         if ($this->getUser()->isInRole('admin')) {
@@ -547,9 +637,14 @@ class ProductPresenter extends BasePresenter {
                 $this->template->attr = 0;
             }
         }
+        
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->album = $this->productModel->loadPhotoAlbum($id);
         $this->template->parameter = $this->productModel->loadParameters($id);
+        
+        $this->template->docs = $this->productModel->loadDocumentation($id)->fetchPairs('DocumentID');
+       
+            
     }
 
     /*     * ***********************************************************************

@@ -4,8 +4,8 @@
         <div class="container">
             <ul class="nav">
                 <li class="{ifCurrent Homepage:default}active{/ifCurrent}"><a href="{plink Homepage:default}">{_"Home"}</a></li>
-                {foreach $category as $id => $cat}
-                <li class="{ifCurrent product:products $id}active{/ifCurrent}"><a href="{plink product:products $id}"><i class="icon-spinner"></i>{$cat->CategoryName}</a></li> 
+                {foreach $category as $catID => $cat}
+                <li class="{ifCurrent Product:products $catID}active{/ifCurrent}"><a href="{plink product:products $catID}"><i class="icon-spinner"></i>{$cat->CategoryName}</a></li> 
                 {/foreach}
                 
                 
