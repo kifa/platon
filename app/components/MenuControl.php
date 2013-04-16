@@ -40,7 +40,23 @@ class MenuControl extends BaseControl {
     return $template;
 }
     
-   
+    
+    private function getBread($catID) {
+        $list = $this->category->loadCategory($catID);
+        $menu[$catID][$catID] = $list->CategoryName;
+        
+        while ($list->HigherCategoryID){
+            $list = $this->category->loadCategory($list->HigherCategoryID);
+            $menu[$catID][$list->CategoryID] = $list->CategoryName;
+        }
+        
+        /* @var $menu array */
+        $menu = array_reverse($menu[$catID], TRUE);
+        return $menu;
+        
+
+    }
+
     public function renderAdmin() {
         if($this->parent->getUser()->isLoggedIn()){
         $this->template->setFile(__DIR__.'/MenuAdminControl.latte');
@@ -54,6 +70,12 @@ class MenuControl extends BaseControl {
         $this->template->cart = $this->cart->numberItems;
         $this->template->category = $this->category->loadCategoryList(); 
       //  $this->template->menuItems = $this->ShopModel->getMenu();
+        $this->template->render();
+    }
+    
+    public function renderBread($catID) {
+        $this->template->setFile(__DIR__ . '/MenuBreadControl.latte');
+        $this->template->category = $this->getBread($catID); 
         $this->template->render();
     }
 

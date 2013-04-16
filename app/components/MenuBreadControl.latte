@@ -1,0 +1,14 @@
+
+<ul class="breadcrumb">
+  <li><a href="{$basePath}">{_"Home"}</a> <span class="divider">/</span></li>
+  {foreach $category as $catID => $cat}
+    
+  {ifCurrent Product:products $catID} 
+  <li class="active">{$cat}</a></li>
+  {else}
+  <li><a href="{plink product:products $catID}">{$cat}</a> <span class="divider">/</span></li>
+  {/ifCurrent}
+
+  {/foreach}
+  
+</ul>

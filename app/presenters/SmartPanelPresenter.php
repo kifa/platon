@@ -232,11 +232,16 @@ class SmartPanelPresenter extends BasePresenter {
         }
     }
 
-    
+    /**********************************************************************
+     *                      WAREHOUSE
+     *********************************************************************/
+  
     public function renderWarehouse() {
         if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
         } else {
+           
+            $this->template->products = $this->productModel->loadCatalog('');
             
         }
     }

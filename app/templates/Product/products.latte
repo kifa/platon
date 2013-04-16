@@ -1,4 +1,6 @@
-
+{block bread}
+{control menu:bread $category->CategoryID}
+{/block}
 {block pageheader}
 <div class="page-header">
         <h1 n:block="title">{$category->CategoryName}<small> {$category->CategoryDescription|striptags|truncate:50}</small></h1>

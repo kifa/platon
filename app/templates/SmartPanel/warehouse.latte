@@ -1,7 +1,7 @@
 {block pageheader}
 {if $user->isInRole('admin')}
 <div class="page-header">
-    <h1 n:block="title"><i class="icon-truck"></i> {_'Warehouse'} <small>{_'Change stock in one place.'}</small></h1>
+    <h1 n:block="title"><i class="icon-plus-sign-alt"></i> {_'Warehouse'} <small>{_'Change stock in one place.'}</small></h1>
 
 <div class="row">
             <div class="span10">
@@ -20,7 +20,7 @@
     <div class="tabbable"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">
             <li class="active"><a href="#overal"  data-toggle="tab">{_'Overal'}</a></li>
-            <li><a href="#addShip"  data-toggle="tab">{_'Add Shipping'}</a></li>
+            <li><a href="#addShip"  data-toggle="tab">{_'Category'}</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="overal">
@@ -29,32 +29,39 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th></th>
                                 <th>{_'Name'}</th>
-                                <th>{_'Description'}</th>
                                 <th>{_'Price'}</th>
-                                <th>{_'Free from'}</th>
+                                <th>{_'Stock'}</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                        {* foreach $delivery as $deliver}
+                        {foreach $products as $id => $product}
 
                             <tr class="info">
                                 <td>{$iterator->counter}</td>
-                                <td>{$deliver->DeliveryName}</td>
-                                <td><a href="{plink SmartPanel:}">{$deliver->DeliveryDescription}</a></td>
-                                <td>{$deliver->DeliveryPrice},-</td>
-                                <td>{$deliver->FreeFromPrice ? '-' : $deliver->FreeFromPrice}</td>
-                                <td><a n:href="removeShip! $deliver->DeliveryID"><i class="icon-trash"></i> {_'remove'}</a></td>
+                                <td>
+                                {if $product->PhotoAlbumID}
+                     <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$product->PhotoURL}" class="img-circle" style="height: 30px; width: auto;"/>
+
+                {else}
+                   <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="height: 30px; width: auto;"/>
+                {/if} 
+                                </td>
+                                <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
+                                <td>{$product->FinalPrice},-</td>
+                                <td>{$product->PiecesAvailable}</td>
+                                
                             </tr>
 
-                        {/foreach *}
+                        {/foreach}
                         </tbody>
                     </table>
                 </div>
-            </div> <div class="tab-pane" id="addShip">
+            </div> <div class="tab-pane" id="cat">
                 
-                    {*control addShippingForm*}
+
 
             </div>
         </div>
