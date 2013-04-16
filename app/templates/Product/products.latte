@@ -52,13 +52,13 @@
 {/block}
     
 {block content}
-<div class="span10">    
+<div class="span9">    
     {control product}
 </div>    
 {/block}
 
 {block sidebar}
- <div class="span2">   
+ <div class="span3">   
     {if $user->isInRole('admin')}
         {control menu:admin}
     {/if}

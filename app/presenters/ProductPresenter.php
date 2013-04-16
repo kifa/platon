@@ -592,7 +592,7 @@ class ProductPresenter extends BasePresenter {
             $addPhoto->addHidden('productid', $this->row['ProductID']);
             $addPhoto->addUpload('doc', 'Document:')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
-            $addPhoto->addText('desc', 'Description', 20, 10);
+            $addPhoto->addText('desc', 'Description', 20, 100);
             $addPhoto->addSubmit('add', 'Add Document')
                     ->setAttribute('class', 'btn-primary upl')
                     ->setAttribute('data-loading-text', 'Uploading...');

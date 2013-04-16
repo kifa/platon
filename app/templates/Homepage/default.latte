@@ -13,9 +13,9 @@
             <img src="{$basePath}/images/birne.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>Představujeme BIRNE SHOP!</h1>
+                    <h1>{_'Představujeme BIRNE SHOP!'}</h1>
                     <p class="lead">Jedinečný a dokonalý eshop právě pro Vás!</p>
-                    <a class="btn btn-large btn-primary" href="#">Začněte již dnes</a>
+                    <a class="btn btn-large btn-primary" href="#">{_'Začněte již dnes'}</a>
                 </div>
             </div>
         </div>
@@ -23,9 +23,9 @@
             <img src="{$basePath}/images/birne.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>Nejdou obchody? BIRNE SHOP!</h1>
+                    <h1>{_'Nejdou obchody? BIRNE SHOP!'}</h1>
                     <p class="lead">Řešení, které prostě funguje.</p>
-                    <a class="btn btn-large btn-primary" href="#">Zjistit více</a>
+                    <a class="btn btn-large btn-primary" href="#">{_'Zjistit více'}</a>
                 </div>
             </div>
         </div>
@@ -33,9 +33,9 @@
             <img src="{$basePath}/images/birne.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>Radost prodávat? BIRNE SHOP!</h1>
+                    <h1>{_'Radost prodávat? BIRNE SHOP!'}</h1>
                     <p class="lead">Provozovat eshop na naší platformě je radost!</p>
-                    <a class="btn btn-large btn-primary" href="#">Přesvědčete se</a>
+                    <a class="btn btn-large btn-primary" href="#">{_'Přesvědčete se'}</a>
                 </div>
             </div>
         </div>
@@ -45,17 +45,28 @@
 </div>
 
 <hr>
-    <h2>Zde přijdou produkty a doprava novinky a infomace.</h2>
+<div class="alert alert-info span11">
+    <div class="span2">
+        <h2><i class="icon-arrow-down"></i> Sale</h2>
+    </div>
+    <div class="span3">
+        <h2><i class="icon-truck"></i> Free shipping</h2>
+    </div>
+    <div class="span4">
+        <h2><i class="icon-user"></i> Customer Service</h2>
+    </div>
+    
+</div>
 {/block}
 
 {block content}
-<div class="span10">
+<div class="span9">
       {control product}  
 </div>       
 {/block}
 
 {block sidebar}
-<div class="span2">
+<div class="span3">
         {if $user->isLoggedIn()}
         {control menu:admin}
         {/if}

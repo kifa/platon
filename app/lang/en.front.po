@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-04-16 09:29:53
+# Created: 2013-04-16 16:48:53
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-04-16 09:29+0200\n"
+"PO-Revision-Date: 2013-04-16 16:48+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -63,6 +63,9 @@ msgstr "Image:"
 msgid "In stock"
 msgstr "In stock"
 
+msgid "Jak cokoliv"
+msgstr "Other"
+
 msgid "Jak nakupovat"
 msgstr "How to shop"
 
@@ -77,6 +80,9 @@ msgstr "Logout"
 
 msgid "Name:"
 msgstr "Name:"
+
+msgid "Nejdou obchody? BIRNE SHOP!"
+msgstr "Sales has stopped? BIRNE SHOP!"
 
 msgid "Notebook"
 msgstr "Notebook"
@@ -107,6 +113,15 @@ msgstr "Price:"
 
 msgid "Producer: "
 msgstr "Producer:"
+
+msgid "Představujeme BIRNE SHOP!"
+msgstr "Introducing BIRNE SHOP!"
+
+msgid "Přesvědčete se"
+msgstr "Explore it!"
+
+msgid "Radost prodávat? BIRNE SHOP!"
+msgstr "Enjoy selling! BIRNE SHOP!"
 
 msgid "Shipping"
 msgstr "Shipping"
@@ -141,6 +156,9 @@ msgstr "You"
 msgid "You cannot edit product here!"
 msgstr "You cannot edit product here!"
 
-msgid "Jak cokoliv"
-msgstr "Other"
+msgid "Začněte již dnes"
+msgstr "Start TODAY"
+
+msgid "Zjistit více"
+msgstr "Find out more"
 
