@@ -265,24 +265,36 @@ class OrderPresenter extends BasePresenter {
             $total += $price * $amnt;  
         }
 
-        
+        //USER == TRUE
         if ($this->userModel->isUser($form->values->email)){
-        //STEP 1 - insert address
-        $this->userModel->insertAddress(
-                    $addressID,
+
+        $this->userModel->updateUser(
+                    $form->values->email,
+                    $form->values->name,
+                    $form->values->phone
+               );
+
+        $this->userModel->updateAddress(
+                    $form->values->email,
                     $form->values->address,
                     $form->values->city,
                     $form->values->psc
                 );
-        
-        
-        //STEP 2 - insert customer and assign address
-        $this->userModel->insertUser(
+        }
+        //USER == FALSE
+        else {
+            $this->userModel->insertUser(
                     $form->values->email,
                     $form->values->name,
-                    $form->values->phone,
-                    $addressID
+                    $form->values->phone
                );
+
+            $this->userModel->insertAddress(
+                    $form->values->email,
+                    $form->values->address,
+                    $form->values->city,
+                    $form->values->psc
+                );
         }
         
         //STEP 3 - insert order info, assign customer
