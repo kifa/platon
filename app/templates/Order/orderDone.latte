@@ -1,7 +1,7 @@
 
 {block pageheader}
 <div class="page-header">
-        <h1 n:block="title">Order summary <small> Complete summary order.</small></h1>
+        <h1 n:block="title">{_'Order summary'} <small> {_'Complete summary order'}.</small></h1>
 </div>
 
 {foreach $flashes as $flash}
@@ -13,16 +13,16 @@
 
 
 {block content}
-<div class="span10">
+<div class="span9">
        <div class="row">
-            <table class="table table-hover span9">
+            <table class="table table-hover span8">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Product Name</th>
-                        <th>Amount</th>
-                        <th>Item price</th>
-                        <th>Total price</th>
+                        <th>{_'Product Name'}</th>
+                        <th>{_'Amount'}</th>
+                        <th>{_'Item price'}</th>
+                        <th>{_'Total price'}</th>
 
                     </tr>
                 </thead>
@@ -49,15 +49,15 @@
 
     {/foreach}
 
-                <div class="span9 alert alert-info">   
-                    <div class="span1">                    
+                <div class="span8 alert alert-info">   
+                    <div class=".span1">                    
                         <i class="icon-shopping-cart icon-4x"></i></div>
-                    <div class="span7">
-                        <h3 class="span2"><strong class="span1">Products:</strong>
+                    <div class=".span7">
+                        <h3 class="span2"><strong class="span1">{_'Products'}:</strong>
                                 <span class="span1">{$grandtotal},-</span></h3>
-                        <h3 class="span2"><strong class="span1">Shipping:</strong> 
+                        <h3 class="span2"><strong class="span1">{_'Shipping'}:</strong> 
                                 <span class="shipping span1">{$shipping = $order->DeliveryPrice},-</span></h3>
-                        <h3 class="span2"><strong class="span1">Total:</strong>
+                        <h3 class="span2"><strong class="span1">{_'Total'}:</strong>
                                 <span class="ordertotal span1">{$grandtotal += $shipping},-</span></h3>
                     </div>
                 </div>
@@ -65,35 +65,37 @@
                 </tbody>
             </table>
         </div>
-            <div class="row">
-            <div class="span4 alert alert-block">
+         
+    <div class="row">
+            <div class="span3 alert alert-block">
 
                 <div class="span4">
                     <p>
-                    <i class="icon-calendar icon-large left"></i><strong> Date created:</strong>&nbsp;
+                    <i class="icon-calendar icon-large left"></i><strong> {_'Date created'}:</strong>&nbsp;
                 {$order->DateCreated|date:'%d.%m.%Y'}
                     </p>
                 </div>
 
                 <div class="span4">
                     <p>
-                    <i class="icon-truck icon-large left"></i><strong> Shipping:</strong>&nbsp;
+                    <i class="icon-truck icon-large left"></i><strong> {_'Shipping'}:</strong>&nbsp;
                 {$order->DeliveryName}
                     </p>
                 </div>
                 <br>
                 <div class="span4">
                     <p>
-                    <i class="icon-money icon-large left"></i><strong> Payment:</strong>&nbsp;
+                    <i class="icon-money icon-large left"></i><strong> {_'Payment'}:</strong>&nbsp;
                 {$order->PaymentName}
                     </p>
                 </div>
             </div>
-                <div class="row">
+        
+               
             <div class="span4 alert alert-block">
                 <div class="span4">
                     <p>
-                    <i class="icon-spinner icon-spin left icon-large"></i><strong> Status:</strong>&nbsp;
+                    <i class="icon-spinner icon-spin left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
                 {$order->StatusName}
                     </p>
                 </div>
@@ -103,7 +105,7 @@
                 </div>
                 <div class="span4">
                 <ul class="inline">
-                    <li>Next progress:</li>
+                    <li>{_'Next progress'}:</li>
                     {foreach $statuses as $id => $status}
                     {if !($iterator->isFirst())}
                     <li>{$status->StatusName}
@@ -113,20 +115,21 @@
                   </ul>
             </div>
             </div>
-        </div>
-            <div class="span4 alert alert-block">
+   
+        
+            <div class="span3 alert alert-block">
             <div class="span4">
-            <i class="icon-user left icon-large"></i><strong> Your contact:</strong>
+            <i class="icon-user left icon-large"></i><strong> {_'Your contact'}:</strong>
             <p>
                 <dl>
-                    <dd><strong>Name:</strong> {$order->Name}</dd>
-                    <dd><strong>Email:</strong> {$order->UsersID}</dd>
-                    <dd><strong>Phone:</strong> {if $order->PhoneNumber != !''}{$order->PhoneNumber}{else}not available{/if}</dd>
+                    <dd><strong>{_'Name'}:</strong> {$order->Name}</dd>
+                    <dd><strong>{_'Email'}:</strong> {$order->UsersID}</dd>
+                    <dd><strong>{_'Phone'}:</strong> {if $order->PhoneNumber != !''}{$order->PhoneNumber}{else}not available{/if}</dd>
                 </dl>
             </p>
         {if $order->CompanyName != ""}
             <dl>
-                <dt>Company:</dt>
+                <dt>{_'Company'}:</dt>
                 <dd>{$order->CompanyName}</dd>
             </dl>
         {/if}
@@ -135,15 +138,14 @@
 
         <div class="span4 alert alert-block">
             <div class="span4">
-                 <i class="icon-home left icon-large"></i><strong> Your address:</strong>
+                 <i class="icon-home left icon-large"></i><strong> {_'Your address'}:</strong>
             <dl>
-                <dt>Shipping:</dt>
-                <dd>{$order->StatusID}</dd>
-            </dl>
-            <dl>
-                <dt>Invoice:</dt>
-                <dd>{$order->PaymentName}</dd>
-            </dl>
+              
+                <dd><strong>{_'Street'}:</strong> {$address->Street}</dd>
+                <dd><strong>{_'City'}:</strong> {$address->City}</dd>
+                <dd><strong>{_'ZIP'}:</strong> {$address->ZIPCode}</dd>
+            </dl>     
+                 
             </div>
         </div>
             </div>
@@ -152,7 +154,7 @@
 {/block}
 
 {block sidebar}
-<div class="span2">
+<div class="span3">
 <div class="alert alert-block">
     <p><i class="icon-info-sign"></i><strong> Thank you for your order!</strong><br>
     We are currenty working on your order. On this page you can see all info about
