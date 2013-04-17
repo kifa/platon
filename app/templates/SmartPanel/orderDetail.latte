@@ -1,7 +1,7 @@
 {block pageheader}
 {if $user->isInRole('admin')}
 <div class="page-header">
-        <h1 n:block="title">Order summary <small> Complete summary order.</small></h1>
+        <h1 n:block="title">{_'Order summary'} <small> {_'Complete summary order'}.</small></h1>
 
 <div class="row">
             <div class="span10">
@@ -27,10 +27,10 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Product Name</th>
-                                        <th>Amount</th>
-                                        <th>Item price</th>
-                                        <th>Total price</th>
+                                        <th>{_'Product Name'}</th>
+                                        <th>{_'Amount'}</th>
+                                        <th>{_'Item price'}</th>
+                                        <th>{_'Total price'}</th>
 
                                     </tr>
                                 </thead>
@@ -60,11 +60,11 @@
                                     <div class="span1">                    
                                         <i class="icon-shopping-cart icon-4x"></i></div>
                                     <div class="span7">
-                                        <h3 class="span2"><strong class="span1">Products:</strong>
+                                        <h3 class="span2"><strong class="span1">{_'Products'}:</strong>
                                                 <span class="span1">{$grandtotal},-</span></h3>
-                                        <h3 class="span2"><strong class="span1">Shipping:</strong> 
+                                        <h3 class="span2"><strong class="span1">{_'Shipping'}:</strong> 
                                                 <span class="shipping span1">{$shipping = $order->DeliveryPrice},-</span></h3>
-                                        <h3 class="span2"><strong class="span1">Total:</strong>
+                                        <h3 class="span2"><strong class="span1">{_'Total'}:</strong>
                                                 <span class="ordertotal span1">{$grandtotal += $shipping},-</span></h3>
                                     </div>
                                 </div>
@@ -77,21 +77,21 @@
 
             <div class="span4">
                 <p>
-                <i class="icon-calendar icon-large left"></i><strong> Date created:</strong>&nbsp;
+                <i class="icon-calendar icon-large left"></i><strong> {_'Date created'}:</strong>&nbsp;
             {$order->DateCreated|date:'%d.%m.%Y'}
                 </p>
             </div>
           
             <div class="span4">
                 <p>
-                <i class="icon-truck icon-large left"></i><strong> Shipping:</strong>&nbsp;
+                <i class="icon-truck icon-large left"></i><strong> {_'Shipping'}:</strong>&nbsp;
             {$order->DeliveryName}
                 </p>
             </div>
             <br>
             <div class="span4">
                 <p>
-                <i class="icon-money icon-large left"></i><strong> Payment:</strong>&nbsp;
+                <i class="icon-money icon-large left"></i><strong> {_'Payment'}:</strong>&nbsp;
             {$order->PaymentName}
                 </p>
             </div>
@@ -102,7 +102,7 @@
         <div class="span4 alert alert-block">
             <div class="span4">
                 <p>
-                <i class="{if $order->StatusProgress == 10}icon-ok {else} icon-spinner icon-spin{/if} left icon-large"></i><strong> Status:</strong>&nbsp;
+                <i class="{if $order->StatusProgress == 10}icon-ok {else} icon-spinner icon-spin{/if} left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
             {$order->StatusName}
                 </p>
             </div>
@@ -129,14 +129,14 @@
             <i class="icon-user left icon-large"></i><strong> Contact:</strong>
             <p>
                 <dl>
-                    <dd><strong>Name:</strong> {$order->Name}</dd>
-                    <dd><strong>Email:</strong> {$order->UsersID}</dd>
-                    <dd><strong>Phone:</strong> {if $order->PhoneNumber != !''}{$order->PhoneNumber}{else}not available{/if}</dd>
+                    <dd><strong>{_'Name'}:</strong> {$order->Name}</dd>
+                    <dd><strong>{_'Email'}:</strong> {$order->UsersID}</dd>
+                    <dd><strong>{_'Phone'}:</strong> {if $order->PhoneNumber != !''}{$order->PhoneNumber}{else}not available{/if}</dd>
                 </dl>
             </p>
         {if $order->CompanyName != ""}
             <dl>
-                <dt>Company:</dt>
+                <dt>{_'Company'}:</dt>
                 <dd>{$order->CompanyName}</dd>
             </dl>
         {/if}
@@ -145,15 +145,15 @@
 
         <div class="span4 alert alert-block">
             <div class="span4">
-                 <i class="icon-home left icon-large"></i><strong> Address:</strong>
-            <dl>
-                <dt>Shipping:</dt>
-                <dd>{$order->StatusID}</dd>
-            </dl>
-            <dl>
-                <dt>Invoice:</dt>
-                <dd>{$order->PaymentName}</dd>
-            </dl>
+                 <i class="icon-home left icon-large"></i><strong> {_'Address'}:</strong>
+            
+             <dl>
+              
+                <dd><strong>{_'Street'}:</strong> {$address->Street}</dd>
+                <dd><strong>{_'City'}:</strong> {$address->City}</dd>
+                <dd><strong>{_'ZIP'}:</strong> {$address->ZIPCode}</dd>
+            </dl> 
+                 
             </div>
         </div>
         
