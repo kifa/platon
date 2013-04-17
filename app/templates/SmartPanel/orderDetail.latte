@@ -103,7 +103,7 @@
 
     </div>
     <div class="row">
-        <div class="span4 alert alert-block">
+        <div class="span4 alert alert-info">
 
             <div class="span4">
                 <p>
@@ -129,7 +129,7 @@
         <div class="row">
 
 
-            <div class="span4 alert alert-block">
+            <div class="span4 alert {$order->Note ? 'alert-block' : 'alert-info'}">
             <div class="span4">
                 <i class="icon-paper-clip left icon-large"></i><strong> {_'Note'}:</strong>
 
@@ -140,7 +140,7 @@
 
               
         </div>
-        <div class="span4 alert alert-block">
+        <div class="span4 alert alert-info">
             <div class="span4">
                 <i class="icon-user left icon-large"></i><strong> Contact:</strong>
                 <p>
@@ -159,7 +159,7 @@
             </div>
         </div>
 
-        <div class="span4 alert alert-block">
+        <div class="span4 alert alert-info">
             <div class="span4">
                 <i class="icon-home left icon-large"></i><strong> {_'Address'}:</strong>
 

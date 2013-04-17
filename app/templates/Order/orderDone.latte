@@ -1,7 +1,7 @@
 
 {block pageheader}
 <div class="page-header">
-        <h1 n:block="title">{_'Order summary'} <small> {_'Complete summary order'}.</small></h1>
+        <h1 n:block="title">{$order->OrderID} | {_'Order summary'} <small> {_'Complete summary order'}.</small></h1>
 </div>
 
 {/block}
@@ -10,6 +10,30 @@
 {block content}
 <div class="span9">
        <div class="row">
+           <div class="span4 alert alert-block">
+                <div class="span4">
+                    <p>
+                    <i class="icon-spinner icon-spin left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
+                {$order->StatusName}
+                    </p>
+                </div>
+                <br>
+                <div class="progress progress-info active span4">
+                    <div class="bar" style="width: 20%"></div>
+                </div>
+                <div class="span4">
+                <ul class="inline">
+                    <li>{_'Next progress'}:</li>
+                    {foreach $statuses as $id => $status}
+                    {if !($iterator->isFirst())}
+                    <li>{$status->StatusName}
+                        {if !($iterator->isLast())}<i class="icon-arrow-right"></i>{/if}{if $iterator->isLast()}<i class="icon-ok"></i>{/if}</li>
+                    {/if}
+                    {/foreach}
+                  </ul>
+            </div>
+            </div>
+           
             <table class="table table-hover span8">
                 <thead>
                     <tr>
@@ -44,25 +68,47 @@
 
     {/foreach}
 
-                <div class="span8 alert alert-info">   
-                    <div class=".span1">                    
-                        <i class="icon-shopping-cart icon-4x"></i></div>
-                    <div class=".span7">
-                        <h3 class="span2"><strong class="span1">{_'Products'}:</strong>
-                                <span class="span1">{$grandtotal},-</span></h3>
-                        <h3 class="span2"><strong class="span1">{_'Shipping'}:</strong> 
-                                <span class="shipping span1">{$shipping = $order->DeliveryPrice},-</span></h3>
-                        <h3 class="span2"><strong class="span1">{_'Total'}:</strong>
-                                <span class="ordertotal span1">{$grandtotal += $shipping},-</span></h3>
-                    </div>
-                </div>
+                <div class="span3 alert alert-info">   
+            <div class="span5">                    
+                <i class="icon-shopping-cart icon-large left"></i> <strong>{_'Order n.'} {$order->OrderID}</strong></div>
+            <div class="span4">
+                <dl>
+                    <dd><strong >{_'Products'}:</strong> {$grandtotal},-</dd>
+                    <dd><strong >{_'Shipping'}:</strong> {$shipping = $order->DeliveryPrice},-</dd>
+                    <dd><strong >{_'Total'}:</strong> {$grandtotal += $shipping},-</dd>
+                
+                
+                </dl>
+                
+            </div>
+        </div>
 
                 </tbody>
             </table>
         </div>
          
     <div class="row">
-            <div class="span3 alert alert-block">
+        
+          <div class="span4 alert alert-info">
+            <div class="span4">
+            <i class="icon-user left icon-large"></i><strong> {_'Your contact'}:</strong>
+            <p>
+                <dl>
+                    <dd>{_'Name'}: <strong>{$order->Name}</strong></dd>
+                    <dd>{_'Email'}: <strong>{$order->UsersID}</strong></dd>
+                    <dd>{_'Phone'}: <strong>{if $order->PhoneNumber != !''}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
+                </dl>
+            </p>
+        {if $order->CompanyName != ""}
+            <dl>
+                <dt>{_'Company'}:</dt>
+                <dd>{$order->CompanyName}</dd>
+            </dl>
+        {/if}
+            </div>
+        </div>
+        
+            <div class="span3 alert alert-info">
 
                 <div class="span4">
                     <p>
@@ -87,51 +133,12 @@
             </div>
         
                
-            <div class="span4 alert alert-block">
-                <div class="span4">
-                    <p>
-                    <i class="icon-spinner icon-spin left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
-                {$order->StatusName}
-                    </p>
-                </div>
-                <br>
-                <div class="progress progress-info active span4">
-                    <div class="bar" style="width: 20%"></div>
-                </div>
-                <div class="span4">
-                <ul class="inline">
-                    <li>{_'Next progress'}:</li>
-                    {foreach $statuses as $id => $status}
-                    {if !($iterator->isFirst())}
-                    <li>{$status->StatusName}
-                        {if !($iterator->isLast())}<i class="icon-arrow-right"></i>{/if}{if $iterator->isLast()}<i class="icon-ok"></i>{/if}</li>
-                    {/if}
-                    {/foreach}
-                  </ul>
-            </div>
-            </div>
+            
    
         
-            <div class="span3 alert alert-block">
-            <div class="span4">
-            <i class="icon-user left icon-large"></i><strong> {_'Your contact'}:</strong>
-            <p>
-                <dl>
-                    <dd>{_'Name'}: <strong>{$order->Name}</strong></dd>
-                    <dd>{_'Email'}: <strong>{$order->UsersID}</strong></dd>
-                    <dd>{_'Phone'}: <strong>{if $order->PhoneNumber != !''}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
-                </dl>
-            </p>
-        {if $order->CompanyName != ""}
-            <dl>
-                <dt>{_'Company'}:</dt>
-                <dd>{$order->CompanyName}</dd>
-            </dl>
-        {/if}
-            </div>
-        </div>
+          
 
-        <div class="span4 alert alert-block">
+        <div class="span4 alert alert-info">
             <div class="span4">
                  <i class="icon-home left icon-large"></i><strong> {_'Your address'}:</strong>
             <dl>
