@@ -78,7 +78,7 @@ class UserModel extends Repository{
     }
     
     public function isUser($usr){
-        $row = $this->getTable('users')->select('users.UserID')->where('UsersID', $usr);
+        $row = $this->getTable('users')->where('UsersID', $usr)->fetch();
         if(!$row){
             return FALSE;
         }

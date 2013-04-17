@@ -266,8 +266,9 @@ class OrderPresenter extends BasePresenter {
             $amnt = $this->cart->prd[$id];
             $total += $price * $amnt;  
         }
-
-        //USER == TRUE
+        
+                
+        //USER == TRUE        
         if ($this->userModel->isUser($form->values->email)){
 
         $this->userModel->updateUser(

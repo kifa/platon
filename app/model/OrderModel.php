@@ -49,7 +49,11 @@ class OrderModel extends Repository {
     public function loadOrderProduct($id){
         //return $this->getTable('orderdetails')->select('orderdetails.* ,product.*')
           //      ->where('orderdetails.OrderID',$id);
-          return $this->getDB()->query('SELECT * FROM orderdetails JOIN product ON orderdetails.ProductID=product.ProductID JOIN photoalbum ON product.PhotoAlbumID=photoalbum.PhotoAlbumID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID where photo.CoverPhoto="1" and orderdetails.OrderID=?',$id);
+          return $this->getDB()->query('SELECT * FROM orderdetails 
+              JOIN product ON orderdetails.ProductID=product.ProductID 
+              JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
+              JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+              WHERE photo.CoverPhoto="1" and orderdetails.OrderID=?',$id);
     }
     /*
      * Check and save order
@@ -57,7 +61,7 @@ class OrderModel extends Repository {
      * @param ? 
      * @return string
      */
-    public function insertOrder( $user, $price, $delivery, $payment)
+    public function insertOrder($user, $price, $delivery, $payment, $note)
     {                 
             $today = date("Y-m-d");
             
@@ -85,11 +89,12 @@ class OrderModel extends Repository {
                 //'DateFinished' => '', //? spolu s předchozí řešit až v administraci obj.
                 'DeliveryID' => $delivery,
                 'PaymentID' => $payment,
+                'Note' => $note,
                 'IP' => NULL,
                 'SessionID' => NULL
             );
-            $order = $this->getTable('orders')->insert($insert);
-            return $order['OrderID'];
+            $lastID = $this->getTable('orders')->insert($insert);
+            return $lastID['OrderID'];
     }
     
     /*
