@@ -51,10 +51,10 @@ class UserModel extends Repository{
     }
     
     
-    public function insertAddress($email,$street,$city,$zip){
+    public function insertAddress($usersID,$street,$city,$zip){
         $insert = array(
             'AddressID' => NULL,
-            'UsersID' => $email,
+            'UsersID' => $usersID,
             'Street' => $street,
             'ZIPCode' => $zip,
             'City' => $city
@@ -71,7 +71,7 @@ class UserModel extends Repository{
             'City' => $city
         );
         
-        return $this->getTable('address')->where('UsersID',$usersID)->insert($update);
+        return $this->getTable('address')->where('UsersID',$usersID)->update($update);
     }
 
     public function countAddress(){
