@@ -57,7 +57,7 @@ class OrderModel extends Repository {
      * @param ? 
      * @return string
      */
-    public function insertOrder($id, $user, $price, $delivery, $payment)
+    public function insertOrder( $user, $price, $delivery, $payment)
     {                 
             $today = date("Y-m-d");
             
@@ -73,7 +73,7 @@ class OrderModel extends Repository {
             $totalprice = $price + $finaltax;
 
             $insert =  array(
-                'OrderID' => $id, //automaticky!
+                 //'OrderID' => $id, //automaticky!
                 //'StatusID' => $status, //automaticky!
                 'UsersID' => $user,  //nepraktické, aby se pouzivalo "novak", "admin"
                 'ProductsPrice' => $price,
@@ -88,17 +88,17 @@ class OrderModel extends Repository {
                 'IP' => NULL,
                 'SessionID' => NULL
             );
-            return $this->getTable('orders')->insert($insert);
-            
+            $order = $this->getTable('orders')->insert($insert);
+            return $order['OrderID'];
     }
     
     /*
      * Insert order details
      */
-    public function insertOrderDetails($id, $orderid, $product, $quantity, $unitprice) 
+    public function insertOrderDetails($orderid, $product, $quantity, $unitprice) 
     {
         $insert = array(
-            'OrderDetailsID' => $id,
+          //  'OrderDetailsID' => $id,
             'OrderID' => $orderid,
             'ProductID' => $product,
             'Quantity' => $quantity,

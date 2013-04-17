@@ -299,7 +299,6 @@ class OrderPresenter extends BasePresenter {
         
         //STEP 3 - insert order info, assign customer
         $orderNo = $this->orderModel->insertOrder(
-               // $this->orderNo,
                 $form->values->email,
                 $total,
                 $form->values->shippers,
