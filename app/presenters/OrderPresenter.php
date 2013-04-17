@@ -255,9 +255,9 @@ class OrderPresenter extends BasePresenter {
         //settype($tax, 'float');
         //$finalTax = $total * ($tax / 100);
         
-        $this->orderNo = $this->orderModel->countOrder() + 1;
-                $orderDetCount = $this->orderModel->countOrderDetail() + 1;
-        $addressID = $this->userModel->countAddress() + 1;
+        // $this->orderNo = $this->orderModel->countOrder() + 1;
+             //   $orderDetCount = $this->orderModel->countOrderDetail() + 1;
+
 
         foreach ($this->cart->prd as $id => $amnt) {
             $price = $this->productModel->loadProduct($id)->FinalPrice;
@@ -298,10 +298,12 @@ class OrderPresenter extends BasePresenter {
         }
         
         //STEP 3 - insert order info, assign customer
-        $this->orderModel->insertOrder(
-                $this->orderNo,
+        $orderNo = $this->orderModel->insertOrder(
+               // $this->orderNo,
                 $form->values->email,
-                $total, $form->values->shippers, $form->values->payment
+                $total,
+                $form->values->shippers,
+                $form->values->payment
         );
 
         //STEP 4 - insert Order Details and assign them to Order
@@ -309,12 +311,17 @@ class OrderPresenter extends BasePresenter {
 
             $price = $this->productModel->loadProduct($id)->FinalPrice;
             $amnt = $this->cart->prd[$id];
-            $this->orderModel->insertOrderDetails($orderDetCount, $this->orderNo, $id, $amnt, $price);
-            $orderDetCount++;
+            $this->orderModel->insertOrderDetails(
+                  //  $orderDetCount,
+                    $orderNo,
+                    $id,
+                    $amnt,
+                    $price);
+          //  $orderDetCount++;
            }
            
         //STEP 5 - redirect to Order Summary
-        $this->redirect('Order:orderDone', $this->orderNo);
+        $this->redirect('Order:orderDone', $orderNo);
     }
 
     /*
