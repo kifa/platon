@@ -289,6 +289,18 @@ class SmartPanelPresenter extends BasePresenter {
             $this->template->anyVariable = 'any value';
         }
     }
+    
+    /*********************************************************************
+     *                  STATS
+     ********************************************************************/
+    
+    public function renderStats() {
+        if (!$this->getUser()->isInRole('admin')) {
+            $this->redirect('Sign:in');
+        } else {
+            
+        }
+    }
 
 }
 

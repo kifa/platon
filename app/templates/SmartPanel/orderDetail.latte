@@ -1,14 +1,14 @@
 {block pageheader}
 {if $user->isInRole('admin')}
 <div class="page-header">
-        <h1 n:block="title">{_'Order summary'} <small> {_'Complete summary order'}.</small></h1>
+    <h1 n:block="title">{_'Order summary'} <small> {_'Complete summary order'}.</small></h1>
 
 <div class="row">
-            <div class="span10">
-                <a href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_"Back to Orders"}</a> |
-                <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
-            </div>
-        </div>
+    <div class="span10">
+        <a href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_"Back to Orders"}</a> |
+        <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+    </div>
+</div>
 </div>
 {/if}
 {/block}
@@ -18,91 +18,15 @@
 {if $user->isInRole('admin')}
 
 {foreach $flashes as $flash}
-        <div class="{$flash->type}">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <div class="{$flash->type}">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
 {$flash->message}</div>
 {/foreach}
-        <div class="row">
-                            <table class="table table-hover span9">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>{_'Product Name'}</th>
-                                        <th>{_'Amount'}</th>
-                                        <th>{_'Item price'}</th>
-                                        <th>{_'Total price'}</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                    {var $grandtotal = 0}
-                    {foreach $products as $id => $product}
-
-
-                                    <tr>
-                                        <td>{if $product->PhotoAlbumID}
-                                                <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$product->PhotoURL}" class="img-circle" style="width: 38px;"/>
-                                           {else}
-                                                <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="width: 38px;"/>
-                                           {/if}
-                                             {$product->ProductNumber}</td>
-                                        <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
-                                        <td>{$product->Quantity}</td>
-                                        <td>{$product->UnitPrice},-</td>
-                                        <td>{$subtotal = $product->Quantity * $product->UnitPrice},-</td>
-
-                                    </tr>
-                       {var $grandtotal += $subtotal}
-
-                    {/foreach}
-
-                                <div class="span9 alert alert-info">   
-                                    <div class="span1">                    
-                                        <i class="icon-shopping-cart icon-4x"></i></div>
-                                    <div class="span7">
-                                        <h3 class="span2"><strong class="span1">{_'Products'}:</strong>
-                                                <span class="span1">{$grandtotal},-</span></h3>
-                                        <h3 class="span2"><strong class="span1">{_'Shipping'}:</strong> 
-                                                <span class="shipping span1">{$shipping = $order->DeliveryPrice},-</span></h3>
-                                        <h3 class="span2"><strong class="span1">{_'Total'}:</strong>
-                                                <span class="ordertotal span1">{$grandtotal += $shipping},-</span></h3>
-                                    </div>
-                                </div>
-
-                                </tbody>
-                            </table>
-    </div>
-        <div class="row">
+    <div class="row">
         <div class="span4 alert alert-block">
-
-            <div class="span4">
+            <div class="span5">
                 <p>
-                <i class="icon-calendar icon-large left"></i><strong> {_'Date created'}:</strong>&nbsp;
-            {$order->DateCreated|date:'%d.%m.%Y'}
-                </p>
-            </div>
-          
-            <div class="span4">
-                <p>
-                <i class="icon-truck icon-large left"></i><strong> {_'Shipping'}:</strong>&nbsp;
-            {$order->DeliveryName}
-                </p>
-            </div>
-            <br>
-            <div class="span4">
-                <p>
-                <i class="icon-money icon-large left"></i><strong> {_'Payment'}:</strong>&nbsp;
-            {$order->PaymentName}
-                </p>
-            </div>
-        </div>
-            <div class="row">
-        
-                
-        <div class="span4 alert alert-block">
-            <div class="span4">
-                <p>
-                <i class="{if $order->StatusProgress == 10}icon-ok {else} icon-spinner icon-spin{/if} left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
+                    <i class="{if $order->StatusProgress == 10}icon-ok {else} icon-spinner icon-spin{/if} left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
             {$order->StatusName}
                 </p>
             </div>
@@ -118,55 +42,138 @@
                         {if !($iterator->isLast())}<i class="icon-arrow-right"></i>{/if}{if $iterator->isLast()}<i class="icon-ok"></i>{/if}{if $id !== $order->StatusID}</a>{/if}</li>
                     {/if}
                     {/foreach}
-                  </ul>
+                </ul>
             </div>
         </div>
+
+        
+
+
+        <table class="table table-hover span9">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>{_'Product Name'}</th>
+                    <th>{_'Amount'}</th>
+                    <th>{_'Item price'}</th>
+                    <th>{_'Total price'}</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                    {var $grandtotal = 0}
+                    {foreach $products as $id => $product}
+
+
+                <tr>
+                    <td>{if $product->PhotoAlbumID}
+                        <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$product->PhotoURL}" class="img-circle" style="width: 38px;"/>
+                                           {else}
+                        <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="width: 38px;"/>
+                                           {/if}
+                                             {$product->ProductNumber}</td>
+                    <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
+                    <td>{$product->Quantity}</td>
+                    <td>{$product->UnitPrice},-</td>
+                    <td>{$subtotal = $product->Quantity * $product->UnitPrice},-</td>
+
+                </tr>
+                       {var $grandtotal += $subtotal}
+
+                    {/foreach}
+
+            </tbody>
+            <div class="span4 alert alert-info">   
+            <div class="span5">                    
+                <i class="icon-shopping-cart icon-large left"></i> <strong>{_'Order Summary'}:</strong></div>
+            <div class="span4">
+                <dl>
+                    <dd><strong >{_'Products'}:</strong> {$grandtotal},-</dd>
+                    <dd><strong >{_'Shipping'}:</strong> {$shipping = $order->DeliveryPrice},-</dd>
+                    <dd><strong >{_'Total'}:</strong> {$grandtotal += $shipping},-</dd>
                 
-              {dump $order}  
+                
+                </dl>
+                
+            </div>
+        </div>
+        </table>
+
     </div>
+    <div class="row">
+        <div class="span4 alert alert-block">
+
+            <div class="span4">
+                <p>
+                    <i class="icon-calendar icon-large left"></i> {_'Date created'}:&nbsp;
+                    <strong>{$order->DateCreated|date:'%d.%m.%Y'}</strong>
+                </p>
+            </div>
+
+            <div class="span4">
+                <p>
+                    <i class="icon-truck icon-large left"></i> {_'Shipping'}:&nbsp;
+                    <strong>{$order->DeliveryName}</strong>
+                </p>
+            </div>
+
+            <div class="span4">
+                <p>
+                    <i class="icon-money icon-large left"></i> {_'Payment'}:&nbsp;
+                    <strong>{$order->PaymentName}</strong>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="span4 alert alert-block">
+            <div class="span4">
+                <i class="icon-paper-clip left icon-large"></i><strong> {_'Note'}:</strong>
+
+                <p>{$order->Note}</p>
+
+            </div>
+        </div>
+
+              
+        </div>
         <div class="span4 alert alert-block">
             <div class="span4">
-            <i class="icon-user left icon-large"></i><strong> Contact:</strong>
-            <p>
+                <i class="icon-user left icon-large"></i><strong> Contact:</strong>
+                <p>
                 <dl>
-                    <dd><strong>{_'Name'}:</strong> {$order->Name}</dd>
-                    <dd><strong>{_'Email'}:</strong> {$order->UsersID}</dd>
-                    <dd><strong>{_'Phone'}:</strong> {if $order->PhoneNumber != !''}{$order->PhoneNumber}{else}not available{/if}</dd>
+                    <dd>{_'Name'}: <strong>{$order->Name}</strong></dd>
+                    <dd>{_'Email'}: <strong>{$order->UsersID}</strong></dd>
+                    <dd>{_'Phone'}: <strong>{if $order->PhoneNumber != !''}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
                 </dl>
-            </p>
+                </p>
         {if $order->CompanyName != ""}
-            <dl>
-                <dt>{_'Company'}:</dt>
-                <dd>{$order->CompanyName}</dd>
-            </dl>
+                <dl>
+                    <dt>{_'Company'}:</dt>
+                    <dd>{$order->CompanyName}</dd>
+                </dl>
         {/if}
             </div>
         </div>
 
         <div class="span4 alert alert-block">
             <div class="span4">
-                 <i class="icon-home left icon-large"></i><strong> {_'Address'}:</strong>
-            
-             <dl>
-              
-                <dd><strong>{_'Street'}:</strong> {$address->Street}</dd>
-                <dd><strong>{_'City'}:</strong> {$address->City}</dd>
-                <dd><strong>{_'ZIP'}:</strong> {$address->ZIPCode}</dd>
-            </dl> 
-                 
+                <i class="icon-home left icon-large"></i><strong> {_'Address'}:</strong>
+
+                <dl>
+
+                    <dd>{_'Street'}: <strong>{$address->Street}</strong></dd>
+                    <dd>{_'City'}: <strong>{$address->City}</strong></dd>
+                    <dd>{_'ZIP'}: <strong>{$address->ZIPCode}</strong></dd>
+                </dl> 
+
             </div>
         </div>
-            
-        <div class="span4 alert alert-block">
-            <div class="span4">
-                 <i class="icon-paper-clip left icon-large"></i><strong> {_'Note'}:</strong>
-            
-                 <p>{$order->Note}</p>
-                 
-            </div>
-        </div>
+
         
-        </div>
+
+    </div>
 
 {/if}
 </div>

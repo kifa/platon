@@ -50,7 +50,7 @@
                 </div>
                 <div class="span3">
                     {if $user->isInRole('admin')}
-                    <p>Hello {$user->id}! <a href="{plink Sign:out}">{_"Logout"} <i class="icon-signout"></i></a></p>
+                    <p>Hello {$user->id}! <br><a href="{plink SmartPanel:}"><i class="icon-lightbulb"></i> SmartPanel</a> | <a href="{plink Sign:out}">{_"Logout"} <i class="icon-signout"></i></a></p>
                     {else}
                     <a href="{plink Sign:in}">{_"Sign In"} <i class="icon-signin"></i></a>
                     {/if}
@@ -83,7 +83,11 @@
             </div>
             {/block}
             
-            {block #sidebar}
+            {block sidebar}
+            
+            {if $user->isInRole('admin')}
+               {control menu:admin}
+            {/if}
             <div class="span2">
                     <ul class="nav nav-list">
                         <li class="nav-header">Menu</li>
