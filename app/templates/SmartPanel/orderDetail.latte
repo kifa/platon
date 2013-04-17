@@ -57,6 +57,7 @@
                     <th>{_'Amount'}</th>
                     <th>{_'Item price'}</th>
                     <th>{_'Total price'}</th>
+                    <th></th>
 
                 </tr>
             </thead>
@@ -65,7 +66,7 @@
                     {foreach $products as $id => $product}
 
 
-                <tr>
+                <tr class="{if $product->PiecesAvailable <= 0 } error {elseif $product->PiecesAvailable < 5} warning {else} success {/if}">
                     <td>{if $product->PhotoAlbumID}
                         <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$product->PhotoURL}" class="img-circle" style="width: 38px;"/>
                                            {else}
@@ -76,6 +77,7 @@
                     <td>{$product->Quantity}</td>
                     <td>{$product->UnitPrice},-</td>
                     <td>{$subtotal = $product->Quantity * $product->UnitPrice},-</td>
+                    <td><i class="{if $product->PiecesAvailable <= 0 } icon-ban-circle {elseif $product->PiecesAvailable < 5} icon-warning-sign {else} icon-ok-sign {/if}" title="{_'In stock'}: {$product->PiecesAvailable}"></i></td>
 
                 </tr>
                        {var $grandtotal += $subtotal}

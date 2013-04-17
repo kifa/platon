@@ -23,7 +23,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     private $categoryModel;
     private $cart;
 
-    
+    private $orderModel;
+
+
     public $backlink;
     
     /** @persistent */
@@ -37,6 +39,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         parent::startup();
         $this->shopModel = $this->context->shopModel;
         $this->categoryModel = $this->context->categoryModel;
+        $this->orderModel = $this->context->orderModel;
         $this->cart = $this->getSession('cart');
     }
 
@@ -93,6 +96,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     protected function createComponentModalControl() {
         $modalControl = new ModalControl();
         $modalControl->setTranslator($this->translator);
+        $modalControl->setService($this->orderModel);
         return $modalControl;
     }
     

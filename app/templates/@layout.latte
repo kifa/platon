@@ -103,8 +103,10 @@
    
    <div class="footer">
                 &COPY; Birne shop 2013
+                
+                {control modalControl:tracking}
    </div>
-
+            
         </div>
    </div>
 </div>	{block scripts}
@@ -125,6 +127,14 @@
                     delay: 0,
                     horizontalAlign: "left",
                     verticalAlign: "top"});
+                
+                $('#trackingButton').toggle(function(){
+                    $('#tracking').modal('show');
+                  },
+                  function() {
+                      $('#tracking').modal('hide');
+                  });
+                     
             });
         </script>
         {if $user->isInRole('admin')}

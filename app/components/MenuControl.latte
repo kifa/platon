@@ -9,8 +9,8 @@
                 {/foreach}
                 
                 
-                <li class="{ifCurrent Order:cart}active{/ifCurrent}"><a href="{plink Order:cart}">{_"Cart"} {if $cart > 0}<span class="badge badge-info">{$cart}</span>{else}<span class="badge">0</span>{/if}</a></li>
-       
+                <li {ifCurrent Order:cart}class="active"{/ifCurrent}><a href="{plink Order:cart}">{_"Cart"} {if $cart > 0}<span class="badge badge-info">{$cart}</span>{else}<span class="badge">0</span>{/if}</a></li>
+                <li {ifCurrent Order:cart}class="active"{/ifCurrent}><a href="#tracking" data-toggel="modal" data-target="#tracking" id="trackingButton"><i class="icon-large icon-search"></i> {_"Track order"}</a>
             </ul>
         </div>
     </div>
