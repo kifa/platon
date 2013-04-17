@@ -63,14 +63,15 @@ class UserModel extends Repository{
         return $this->getTable('address')->insert($insert);
     }
     
-    public function updateAddress($email,$street,$city,$zip){
+    public function updateAddress($usersID,$street,$city,$zip){
         $update = array(
+            'UsersID' => $usersID,
             'Street' => $street,
             'ZIPCode' => $zip,
             'City' => $city
         );
         
-        return $this->getTable('address')->where('UsersID',$email)->insert($update);
+        return $this->getTable('address')->where('UsersID',$usersID)->insert($update);
     }
 
     public function countAddress(){
