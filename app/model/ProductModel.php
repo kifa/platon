@@ -46,7 +46,7 @@ class ProductModel extends Repository {
     public function loadProduct($id) {       
         return $this->getDB()->query('SELECT * 
 FROM product JOIN price ON product.ProductID=price.ProductID JOIN photoalbum ON
-product.ProductID=photoalbum.ProductID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+product.ProductID=photoalbum.ProductID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
 WHERE Product.ProductID=?',$id)->fetch();
         //return $this->getTable('Product')->select('Product.*,Price.*,PhotoAlbum.*,photo.*')->where('Product.ProductID',$id)->fetch()
     }
@@ -373,6 +373,11 @@ WHERE Product.ProductID=?',$id)->fetch();
         return $this->getTable('documentation')->where('DocumentID',$id)->delete();
     }
     
+    public function loadCoverPhoto($id){
+        return $this->getTable('photo')->select('photo.PhotoURL, photoalbum.ProductID')->where('photoalbum.ProductID',$id)
+                ->where('photo.CoverPhoto','1')->fetch();
+    }
+
     public function updateCoverPhoto($product,$photo){
         $album = $this->getTable('photoalbum')->select('PhotoAlbumID')->where('ProductID',$product)->fetch();       
         $albumID = $album['PhotoAlbumID'];
