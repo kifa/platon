@@ -44,9 +44,11 @@ class ProductModel extends Repository {
      *  */
 
     public function loadProduct($id) {       
-        return $this->getDB()->query('SELECT * 
-FROM product JOIN price ON product.ProductID=price.ProductID JOIN photoalbum ON
-product.ProductID=photoalbum.ProductID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
+        return $this->getDB()->query('SELECT * FROM product 
+JOIN price ON product.ProductID=price.ProductID
+JOIN producer ON product.ProducerID=producer.ProducerID
+JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
+JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
 WHERE Product.ProductID=?',$id)->fetch();
         //return $this->getTable('Product')->select('Product.*,Price.*,PhotoAlbum.*,photo.*')->where('Product.ProductID',$id)->fetch()
     }
@@ -393,5 +395,29 @@ WHERE Product.ProductID=?',$id)->fetch();
         $this->getTable('photo')->where('PhotoAlbumID',$albumID)->where('CoverPhoto','1')->update($unsetCover);
        
         $this->getTable('photo')->where('PhotoID',$photo)->update($setCover);
+    }
+    
+    public function loadProducer($id){
+        return $this->getTable('producer')->where('ProducerID',$id);
+    }
+    
+    public function loadProducers(){
+        return $this->getTable('producer')->fetchPairs('ProducerID');
+    }
+    
+    public function insertProducer($name){
+        $insert = array(
+            'ProducerName' => $name
+        );
+                
+        return $this->getTable('producer')->insert($insert);
+    }
+    
+    public function updateProducer($id,$name){
+        $update = array(
+            'ProducerName' => $name
+        );
+        
+        return $this->getTable('producer')->where('ProducerID',$id)->update($update);
     }
 }
