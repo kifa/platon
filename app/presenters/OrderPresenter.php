@@ -345,6 +345,7 @@ class OrderPresenter extends BasePresenter {
         $this->template->products = $this->orderModel->loadOrderProduct($orderNo);
         $this->template->order = $this->orderModel->loadOrder($orderNo);
         $this->template->statuses = $this->orderModel->loadStatus('');
+        $this->template->address = $this->userModel->loadAddress($orderNo);
 
         $ico = HTML::el('i')->class('icon-ok-sign left');
         $message = HTML::el('span', ' Order has been successfully sent.');
