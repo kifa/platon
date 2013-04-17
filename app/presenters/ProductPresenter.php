@@ -140,6 +140,10 @@ class ProductPresenter extends BasePresenter {
             foreach ($this->categoryModel->loadCategoryList() as $id => $name) {
                 $category[$id] = $name->CategoryName;
             }
+            
+            foreach ($this->productModel->loadProducers() as $id => $name) {
+                $producers[$id] = $name->ProducerName;
+            }
 
             $addProduct = new Nette\Application\UI\Form;
             //      $addProduct->setRenderer(new BootstrapRenderer);
@@ -158,8 +162,7 @@ class ProductPresenter extends BasePresenter {
                     ->setAttribute('class', 'mceEditor');
             $addProduct->addSelect('cat', 'Category: ', $category)
                     ->setDefaultValue($this->catId);
-            $addProduct->addText('producer', 'Producer: ')
-                    ->setDefaultValue('neuvedeno');
+            $addProduct->addSelect('producer', 'Producer: ', $producers);
             $addProduct->addUpload('image', 'Image:')
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
@@ -181,7 +184,8 @@ class ProductPresenter extends BasePresenter {
 
             $return = $this->productModel->insertProduct(
                     $form->values->name, //Name
-                    $form->values->price, $form->values->producer, //Producer                
+                    $form->values->price, 
+                    $form->values->producer, //Producer                
                     '11111', //Product Number
                     $form->values->desc, //Description
                     '123456', //Ean
@@ -306,6 +310,8 @@ class ProductPresenter extends BasePresenter {
 
             if ($this->getUser()->isInRole('admin')) {
                 $this->row = array('ProductID' => $row->ProductID,
+                    'ProductName' => $row->ProductName,
+                    'ProducerID' => $row->ProducerID,
                     'PhotoAlbumID' => $row->PhotoAlbumID,
                     'ProductDescription' => $row->ProductDescription,
                     'SellingPrice' => $row->SellingPrice,
@@ -388,16 +394,31 @@ class ProductPresenter extends BasePresenter {
             foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
                 $categories[$id] = $category->CategoryName;
             }
+            
+             foreach ($this->productModel->loadProducers() as $id => $name) {
+                $producers[$id] = $name->ProducerName;
+            }
+            
             $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
-                    
+            
+            $editForm->addText('name', 'Name:')
+                    ->setDefaultValue($this->row['ProductName'])
+                    ->setRequired();
+            
+            $editForm->addSelect('category', 'Select Category:', $categories)
+                    ->setPrompt($prompt)
+                    ->setDefaultValue($this->row['CategoryID']);
+            
             $editForm->addTextArea('text', 'Description:', 150, 150)
                     ->setDefaultValue($this->row['ProductDescription'])
                     ->setRequired()
                     ->setAttribute('class', 'mceEditor');
             
-            $editForm->addSelect('category', 'Select Category:', $categories)
+            
+            $editForm->addSelect('producer', 'Producer', $producers)
                     ->setPrompt($prompt)
-                    ->setDefaultValue($this->row['CategoryID']);
+                    ->setDefaultValue($this->row['ProducerID']);
+            
             $editForm->addHidden('id', $this->row['ProductID']);
             
             $editForm->addSubmit('edit', 'Save description')
@@ -412,7 +433,9 @@ class ProductPresenter extends BasePresenter {
     public function editDescFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
 
+            $this->productModel->updateProduct($form->values->id, 'ProductName', $form->values->name);
             $this->productModel->updateProduct($form->values->id, 'ProductDescription', $form->values->text);
+            $this->productModel->updateProduct($form->values->id, 'ProducerID', $form->values->producer);
             $this->productModel->updateProduct($form->values->id, 'CategoryID', $form->values->category);
             $this->redirect('this');
         }
