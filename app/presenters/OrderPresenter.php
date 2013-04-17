@@ -257,9 +257,6 @@ class OrderPresenter extends BasePresenter {
         //settype($tax, 'float');
         //$finalTax = $total * ($tax / 100);
         
-        // $this->orderNo = $this->orderModel->countOrder() + 1;
-             //   $orderDetCount = $this->orderModel->countOrderDetail() + 1;
-
 
         foreach ($this->cart->prd as $id => $amnt) {
             $price = $this->productModel->loadProduct($id)->FinalPrice;
@@ -315,12 +312,10 @@ class OrderPresenter extends BasePresenter {
             $price = $this->productModel->loadProduct($id)->FinalPrice;
             $amnt = $this->cart->prd[$id];
             $this->orderModel->insertOrderDetails(
-                  //  $orderDetCount,
                     $orderNo,
                     $id,
                     $amnt,
                     $price);
-          //  $orderDetCount++;
            }
            
         //STEP 5 - redirect to Order Summary
