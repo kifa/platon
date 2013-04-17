@@ -30,27 +30,47 @@ class UserModel extends Repository{
             ('Password' => Authenticator::calculateHash($password)));
     }
     
-    public function insertUser($UsersID,$name,$phone,$address){
+    public function insertUser($UsersID,$name,$phone){
         $insert = array(
         //  'UserID' => $id,
                 'UsersID' => $UsersID,
                 'Name' => $name,
                 'PhoneNumber' => $phone,
-                'AddressID' => $address
                 );
         
         return $this->getTable('users')->insert($insert);
     }
     
-    public function insertAddress($id,$street,$city,$zip){
+    public function updateUser($UsersID,$name,$phone){
+        $update = array(
+                'Name' => $name,
+                'PhoneNumber' => $phone,
+                );
+        
+    return $this->getTable('users')->where('UsersID',$UsersID)->update($update);
+    }
+    
+    
+    public function insertAddress($email,$street,$city,$zip){
         $insert = array(
-            'AddressID' => $id,
+            'AddressID' => NULL,
+            'UsersID' => $email,
             'Street' => $street,
             'ZIPCode' => $zip,
             'City' => $city
         );
         
         return $this->getTable('address')->insert($insert);
+    }
+    
+    public function updateAddress($email,$street,$city,$zip){
+        $update = array(
+            'Street' => $street,
+            'ZIPCode' => $zip,
+            'City' => $city
+        );
+        
+        return $this->getTable('address')->where('UsersID',$email)->insert($update);
     }
 
     public function countAddress(){

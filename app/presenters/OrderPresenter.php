@@ -213,7 +213,7 @@ class OrderPresenter extends BasePresenter {
                 ->addRule(Form::FILLED);
         $cartForm->addText('city', 'City:', 40, 100)
                 ->addRule(Form::FILLED);
-        $cartForm->addText('psc', 'PSC:', 40, 100)
+        $cartForm->addText('zip', 'ZIP:', 40, 100)
                 ->addRule(Form::FILLED);
         $cartForm->addGroup('Shipping');
         $cartForm->addSelect('shippers', '', $shippers)
@@ -278,7 +278,7 @@ class OrderPresenter extends BasePresenter {
                     $form->values->email,
                     $form->values->address,
                     $form->values->city,
-                    $form->values->psc
+                    $form->values->zip
                 );
         }
         //USER == FALSE
@@ -293,7 +293,7 @@ class OrderPresenter extends BasePresenter {
                     $form->values->email,
                     $form->values->address,
                     $form->values->city,
-                    $form->values->psc
+                    $form->values->zip
                 );
         }
         
