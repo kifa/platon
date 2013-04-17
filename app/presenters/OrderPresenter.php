@@ -232,6 +232,8 @@ class OrderPresenter extends BasePresenter {
         $cartForm->addButton('termButton', 'Read Terms')
                 ->setHtmlId('termsButton')
                 ->setAttribute('class', 'btn btn-small btn-primary');
+         $cartForm->addGroup('Notes');
+        $cartForm->addTextArea('note', 'Note:', 50, 4);
         $cartForm->addGroup('Checkout');
         $cartForm->addSubmit('send', 'Checkout here!')
                 ->setAttribute('class', 'btn btn-warning btn-large');
@@ -302,7 +304,8 @@ class OrderPresenter extends BasePresenter {
                 $form->values->email,
                 $total,
                 $form->values->shippers,
-                $form->values->payment
+                $form->values->payment,
+                $form->values->note
         );
 
         //STEP 4 - insert Order Details and assign them to Order
