@@ -4,11 +4,6 @@
         <h1 n:block="title">{_'Order summary'} <small> {_'Complete summary order'}.</small></h1>
 </div>
 
-{foreach $flashes as $flash}
-            <div class="{$flash->type}">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-    {$flash->message}</div>
-    {/foreach}
 {/block}
 
 
