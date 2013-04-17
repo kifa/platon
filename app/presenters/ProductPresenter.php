@@ -67,20 +67,20 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    public function handleCoverPhoto($product, $id) {
+    public function handleCoverPhoto($id, $photo) {
         if ($this->getUser()->isInRole('admin')) {
-            $row = $this->productModel->loadPhoto($id);
+            $row = $this->productModel->loadPhoto($photo);
             if (!$row) {
-                $this->flashMessage('There is no photo to delete', 'alert');
+                $this->flashMessage('There is no photo to set as cover', 'alert');
             } else {
-
+                $this->productModel->updateCoverPhoto($id,$photo);
                 $e = 'Photo ' . $row->PhotoName . ' was sucessfully set as COVER.';
 
-                $this->productModel->coverPhoto($id);
+                //$this->productModel->coverPhoto($id);
                 $this->flashMessage($e, 'alert');
             }
 
-            $this->redirect('Product:product', $product);
+            $this->redirect('Product:product', $id);
         }
     }
 

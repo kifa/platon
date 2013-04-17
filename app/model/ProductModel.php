@@ -372,4 +372,21 @@ WHERE Product.ProductID=?',$id)->fetch();
     public function deleteDocumentation($id){
         return $this->getTable('documentation')->where('DocumentID',$id)->delete();
     }
+    
+    public function updateCoverPhoto($product,$photo){
+        $album = $this->getTable('photoalbum')->select('PhotoAlbumID')->where('ProductID',$product)->fetch();       
+        $albumID = $album['PhotoAlbumID'];
+        
+        $unsetCover = array(
+            'CoverPhoto' => 0
+        );
+        
+        $setCover = array(
+            'CoverPhoto' => 1
+        );
+        
+        $this->getTable('photo')->where('PhotoAlbumID',$albumID)->where('CoverPhoto','1')->update($unsetCover);
+       
+        $this->getTable('photo')->where('PhotoID',$photo)->update($setCover);
+    }
 }
