@@ -94,16 +94,19 @@
         {foreach $shippers as $id => $value}
                 sp[{$id}] = {$value};
         {/foreach}
-        //sp[1] = 150; sp[2] = 190;
-        {dump $shippers}
-        var pm = new Array(); 
-        pm[1] = 0; pm[2] = -50;
         
+        
+        var pm = new Array();
+        {foreach $payment as $id => $value}
+                pm[{$id}] = {$value};
+        {/foreach}
+        
+       
         var shipping = 0;
         var payment = 0;
         
         $('select[name="shippers"]').change(function() {
-            i = $('option:selected').val();
+            i = $('select[name="shippers"] option:selected').val();
             shipping = sp[i];
              var grandtotal = shipping + {$grandtotal} + payment;
         $('.shipping').html(shipping + ',-');
@@ -111,10 +114,11 @@
         $('.ordertotal').html(grandtotal + ',-'); 
         });
         
-        $('select[name=payment]').cchange(function() {
-            i = $('option:selected').val();
-            payment = pm[i];
-             var grandtotal = payment + {$grandtotal} + shipping;
+        $('select[name=payment]').change(function() {
+            p = $('select[name=payment] option:selected').val();         
+            payment = pm[p];
+
+            var grandtotal = payment + {$grandtotal} + shipping;
         $('.ordertotal').html(grandtotal + ',-'); 
         });
 
