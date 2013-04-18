@@ -215,6 +215,19 @@ class OrderModel extends Repository {
         return $this->getTable('delivery')->insert($insert);
     }
     
+    public function updateDelivery($id, $name, $description=NULL, $price, $free=NULL)
+    {
+        $update = array(
+            
+            'DeliveryName' => $name,
+            'DeliveryDescription' => $description,
+            'DeliveryPrice' => $price,
+            'FreeFromPrice' => $free
+        );
+        
+        return $this->getTable('delivery')->where('DeliveryID', $id)->update($update);
+    }
+    
     public function deleteDelivery($id) {
         
         return $this->getTable('delivery')->where('DeliveryID',$id)->delete();

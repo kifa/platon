@@ -149,7 +149,23 @@ class SmartPanelPresenter extends BasePresenter {
     /*        Render Shipping method and settings           */
     /**********************************************************************/
 
-     public function handleRemoveShip($id) {
+    public function actionShipping(){
+          if ($this->getUser()->isInRole('admin')) {
+        foreach ($this->orderModel->loadDelivery('') as $id => $deliver){
+            $deliveryInfo = array(
+                'DeliveryID' => $deliver->DeliveryID,
+                'DeliveryName' => $deliver->DeliveryName,
+                'DeliveryPrice' => $deliver->DeliveryPrice,
+                'DeliveryDescription' => $deliver->DeliveryDescription,
+                'FreeFromPrice' => $deliver->FreeFromPrice
+            );
+            $this['editShipping'.$deliver->DeliveryID] = $this->createComponentEditShippingForm($deliveryInfo);
+        }
+          }
+        
+    }
+
+    public function handleRemoveShip($id) {
        if ($this->getUser()->isInRole('admin')) {
          $row = $this->orderModel->loadDelivery($id);
          if($row) {       
@@ -212,7 +228,43 @@ class SmartPanelPresenter extends BasePresenter {
         }
     }
 
+    protected function createComponentEditShippingForm($deliveryID){
+         if ($this->getUser()->isInRole('admin')) { 
+        $editShip = new Nette\Application\UI\Form;
+        
+        $editShip->setTranslator($this->translator);
+        $editShip->setRenderer(new BootstrapRenderer);
+        $editShip->addText('name', 'Name:')
+                ->setDefaultValue($deliveryID['DeliveryName'])
+                ->setRequired();
+        $editShip->addText('desc', 'Description:')
+                ->setDefaultValue($deliveryID['DeliveryDescription']);
+        $editShip->addText('price', 'Price:')
+                ->setDefaultValue($deliveryID['DeliveryPrice']);
+        $editShip->addText('free', 'Free from:')
+                ->setDefaultValue($deliveryID['FreeFromPrice']);
+        $editShip->addHidden('deliveryID', $deliveryID['DeliveryID'] );
+        $editShip->addSubmit('edit', 'Edit shipping')
+                ->setAttribute('class', 'btn btn-primary upl')
+                        ->setAttribute('data-loading-text', 'Saving...');
+        $editShip->onSuccess[] = $this->editShippingSubmitted;
+        return $editShip;
+         }     
+    }
     
+    public function editShippingSubmitted($form) {
+          if ($this->getUser()->isInRole('admin')) {
+        $this->orderModel->updateDelivery($form->values->deliveryID, $form->values->name, $form->values->desc, $form->values->price, $form->values->free);
+          
+        $ico = HTML::el('i')->class('icon-ok-sign left');
+            $message = HTML::el('span', ' was added sucessfully updates.');
+            $message->insert(0, ' ' . $form->values->name);
+            $message->insert(0, $ico);
+            $this->flashMessage($message, 'alert success');
+            $this->redirect('this');
+          }
+    }
+
     public function renderShipping() {
         
         $this->template->delivery = $this->orderModel->loadDelivery('');

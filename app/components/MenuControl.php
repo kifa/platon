@@ -14,7 +14,8 @@ class MenuControl extends BaseControl {
     /** @var NetteTranslator\Gettext */
     protected $translator;
     private $cart;
-    private $category;
+    private $categoryModel;
+    private $productModel;
 
 
 
@@ -27,8 +28,12 @@ class MenuControl extends BaseControl {
     }
 
     public function setCategory($cat) {
-        $this->category = $cat;
+        $this->categoryModel = $cat;
 
+    }
+    
+    public function setProduct($pro) {
+        $this->productModel = $pro;
     }
 
     public function createTemplate($class = NULL)
@@ -42,11 +47,11 @@ class MenuControl extends BaseControl {
     
     
     private function getBread($catID) {
-        $list = $this->category->loadCategory($catID);
+        $list = $this->categoryModel->loadCategory($catID);
         $menu[$catID][$catID] = $list->CategoryName;
         
         while ($list->HigherCategoryID){
-            $list = $this->category->loadCategory($list->HigherCategoryID);
+            $list = $this->categoryModel->loadCategory($list->HigherCategoryID);
             $menu[$catID][$list->CategoryID] = $list->CategoryName;
         }
         
@@ -60,7 +65,7 @@ class MenuControl extends BaseControl {
     public function renderAdmin() {
         if($this->parent->getUser()->isLoggedIn()){
         $this->template->setFile(__DIR__.'/MenuAdminControl.latte');
-        $this->template->category = $this->category->loadCategoryList(); 
+        $this->template->category = $this->categoryModel->loadCategoryList(); 
         $this->template->render();
         }
     }
@@ -68,7 +73,8 @@ class MenuControl extends BaseControl {
     public function render() {
         $this->template->setFile(__DIR__ . '/MenuControl.latte');
         $this->template->cart = $this->cart->numberItems;
-        $this->template->category = $this->category->loadCategoryList(); 
+        $this->template->category = $this->categoryModel->loadCategoryList(); 
+        $this->template->producers = $this->productModel->loadProducers();
       //  $this->template->menuItems = $this->ShopModel->getMenu();
         $this->template->render();
     }

@@ -1,7 +1,7 @@
 {block pageheader}
 {if $user->isInRole('admin')}
 <div class="page-header">
-    <h1 n:block="title">{_'Order summary'} <small> {_'Complete summary order'}.</small></h1>
+    <h1 n:block="title">{$order->OrderID} <i class="icon-angle-right"></i> {_'Order summary'} <small> {_'Complete summary order'}.</small></h1>
 
 <div class="row">
     <div class="span10">
@@ -66,7 +66,7 @@
                     {foreach $products as $id => $product}
 
 
-                <tr class="{if $product->PiecesAvailable <= 0 } error {elseif $product->PiecesAvailable < 5} warning {else} success {/if}">
+                <tr class="{if $product->PiecesAvailable <= 0 } error {elseif $product->PiecesAvailable < 5} warning {else}  {/if}">
                     <td>{if $product->PhotoAlbumID}
                         <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$product->PhotoURL}" class="img-circle" style="width: 38px;"/>
                                            {else}
@@ -87,7 +87,7 @@
             </tbody>
             <div class="span4 alert alert-info">   
             <div class="span5">                    
-                <i class="icon-shopping-cart icon-large left"></i> <strong>{_'Order Summary'}:</strong></div>
+                <i class="icon-shopping-cart icon-large left"></i> <strong>{_'Order n.'} {$order->OrderID}</strong></div>
             <div class="span4">
                 <dl>
                     <dd><strong >{_'Products'}:</strong> {$grandtotal},-</dd>

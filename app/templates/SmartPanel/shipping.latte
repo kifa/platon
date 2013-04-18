@@ -24,7 +24,7 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="overal">
-                <div class="span6">
+                <div class="span7">
                     <table class="table">
                         <thead>
                             <tr>
@@ -33,7 +33,7 @@
                                 <th>{_'Description'}</th>
                                 <th>{_'Price'}</th>
                                 <th>{_'Free from'}</th>
-                                <th></th>
+                                <th class="span2"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,24 +42,50 @@
                             <tr class="info">
                                 <td>{$iterator->counter}</td>
                                 <td>{$deliver->DeliveryName}</td>
-                                <td><a href="{plink SmartPanel:}">{$deliver->DeliveryDescription}</a></td>
+                                <td>{$deliver->DeliveryDescription}</td>
                                 <td>{$deliver->DeliveryPrice},-</td>
-                                <td>{$deliver->FreeFromPrice ? '-' : $deliver->FreeFromPrice}</td>
-                                <td><a n:href="removeShip! $deliver->DeliveryID"><i class="icon-trash"></i> {_'remove'}</a></td>
-                            </tr>
-
+                                <td>{$deliver->FreeFromPrice ? $deliver->FreeFromPrice : '-'},-</td>
+                                <td>
+                                
+                                <a href="#edit{$deliver->DeliveryID}" data-toggel="modal" data-target="#edit{$deliver->DeliveryID}" id="edit{$deliver->DeliveryID}Button">
+                                    <i class="icon-large icon-pencil"></i> {_"Edit"}</a> |
+                                    
+                                    <a n:href="removeShip! $deliver->DeliveryID"><i class="icon-trash icon-large"></i></a>
+                                
+                                </td>
+                                
+                                
+                            </tr>                     
                         {/foreach}
                         </tbody>
                     </table>
                 </div>
-            </div> <div class="tab-pane" id="addShip">
+            </div> 
+            <div class="tab-pane" id="addShip">
                 
                     {control addShippingForm}
 
             </div>
         </div>
     </div>
-
+    
+    {foreach $delivery as $deliver} 
+    <div id="edit{$deliver->DeliveryID}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                      <h3 id="myModalLabel"><i class="icon-truck"></i> {_'Edit'} {$deliver->DeliveryName}</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>{_'Edit your description and click Save desccription.'}</p>
+                                     {var $edit = 'editShipping'.$deliver->DeliveryID}
+                                        <p>{control $edit}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+                                    </div>
+                            </div>
+    
+{/foreach}
 
 
 {/if}
@@ -72,4 +98,27 @@
         {control menu:admin}
         {/if}
 </div>
+{/block}
+
+ {block script}
+
+<script> 
+   
+    $(document).ready(function() {
+        {foreach $delivery as $deliver} 
+                               $('#edit{$deliver->DeliveryID}Button').toggle(function(){
+                                     $('#edit{$deliver->DeliveryID}').modal('show');
+                                   },
+                                   function() {
+                                       $('#edit{$deliver->DeliveryID}').modal('hide');
+                                   });
+                                   {/foreach}
+      $('.upl').click(function() { 
+                $('.upl').button('toggle');
+                $('.upl').button('loading') });
+        });
+      
+</script>
+                             
+                             
 {/block}
