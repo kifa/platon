@@ -1,14 +1,12 @@
 <div class="offset3 span3">
 <div class="span3  alert alert-info">
+        {if $user->isInRole('admin')}
+        Hello <strong>{$user->id}!</strong> <br><a href="{plink SmartPanel:}"><i class="icon-lightbulb"></i> SmartPanel</a> | 
+        <a href="{plink SmartPanel:default}">{_"News"} <span class="badge badge-info"><i class="icon-envelope"></i> 2</span></a> |
+        <a href="{plink Sign:out}">{_"Logout"} <i class="icon-signout"></i></a>
+        {else}
         <a href="{plink Order:cart}"><i class="icon-large icon-shopping-cart"></i> {_"Cart"} {if $cart > 0}<span class="badge badge-info">{$cart}</span>{else}<span class="badge">0</span>{/if}</a> |
         <a href="#tracking" data-toggel="modal" data-target="#tracking" id="trackingButton"><i class="icon-large icon-search"></i> {_"Track order"}</a> |
-
-        {if $user->isInRole('admin')}
-        <a href="{plink Sign:out}">{_"Logout"} <i class="icon-signout"></i></a>
-        <hr>
-        Hello {$user->id}! <br><a href="{plink SmartPanel:}"><i class="icon-lightbulb"></i> SmartPanel</a> | 
-        <a href="{plink SmartPanel:default}">{_"News"} <span class="badge badge-info"><i class="icon-envelope"></i> 2</span></a>
-        {else}
         <a href="{plink Sign:in}">{_"Sign In"} <i class="icon-signin"></i></a>
         {/if}
     </div>
