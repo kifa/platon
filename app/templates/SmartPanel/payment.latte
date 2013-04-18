@@ -1,7 +1,15 @@
 {block pageheader}
 {if $user->isInRole('admin')}
 <div class="page-header">
-<h1 n:block="title"><i class="icon-money"></i> Payment <small>Here you see all payment methods.</small></h1>
+<h1 n:block="title"><i class="icon-money"></i>{_'Payment'} <small>{_'Here you see all payment methods.'}</small></h1>
+
+<div class="row">
+            <div class="span10">
+                <a href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a> |
+                <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+            </div>
+        </div>
+</div>
 {/if}
 {/block}
 
@@ -9,11 +17,70 @@
 <div class="span10"> 
 {if $user->isInRole('admin')}
 
-{foreach $payments as $id => $payment}
-        id: {$id}
-        name: {$payment->PaymentName}
-    {/foreach}
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#overal"  data-toggle="tab">{_'Overal'}</a></li>
+            <li><a href="#addPay"  data-toggle="tab">{_'Add Payment'}</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="overal">
+                <div class="span7">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{_'Name'}</th>
+                                <th>{_'Price'}</th>
+                                <th class="span2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $payments as $payment}
 
+                            <tr class="info">
+                                <td>{$iterator->counter}</td>
+                                <td>{$payment->PaymentName}</td>
+                                <td>{$payment->PaymentPrice},-</td>
+                                <td>
+                                
+                                <a href="#edit{$payment->PaymentID}" data-toggel="modal" data-target="#edit{$payment->PaymentID}" id="edit{$payment->PaymentID}Button">
+                                    <i class="icon-large icon-pencil"></i> {_"Edit"}</a> |
+                                    
+                                    <a n:href="removePay! $payment->PaymentID"><i class="icon-trash icon-large"></i></a>
+                                
+                                </td>
+                                
+                                
+                            </tr>                     
+                        {/foreach}
+                        </tbody>
+                    </table>
+                </div>
+            <div class="tab-pane" id="addPay">
+                
+                    {control addPaymentForm}
+
+            </div>    
+        </div>
+    </div>
+            
+    {foreach $payments as $payment} 
+    <div id="edit{$payment->PaymentID}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                      <h3 id="myModalLabel"><i class="icon-truck"></i> {_'Edit'} {$payment->PaymentName}</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>{_'Edit your description and click Save desccription.'}</p>
+                                     {var $edit = 'editPayment'.$payment->PaymentID}
+                                        <p>{control $edit}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+                                    </div>
+                            </div>
+    
+    {/foreach}
 {/if}
 </div>
 {/block}
@@ -24,4 +91,27 @@
         {control menu:admin}
         {/if}
 </div>
+{/block}
+    
+    {block script}
+
+<script> 
+   
+    $(document).ready(function() {
+        {foreach $payments as $payment} 
+                               $('#edit{$payment->PaymentID}Button').toggle(function(){
+                                     $('#edit{$payment->PaymentID}').modal('show');
+                                   },
+                                   function() {
+                                       $('#edit{$payment->PaymentID}').modal('hide');
+                                   });
+                                   {/foreach}
+      $('.upl').click(function() { 
+                $('.upl').button('toggle');
+                $('.upl').button('loading') });
+        });
+      
+</script>
+                             
+                             
 {/block}

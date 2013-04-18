@@ -136,15 +136,6 @@ class SmartPanelPresenter extends BasePresenter {
         }
     }
 
-    /*
-     * Render Payment
-     */
-
-    public function renderPayment() {
-
-        $this->template->payments = $this->orderModel->loadPayment('');
-    }
-
     /**************************************************************************/
     /*        Render Shipping method and settings           */
     /**********************************************************************/
@@ -269,6 +260,125 @@ class SmartPanelPresenter extends BasePresenter {
         
         $this->template->delivery = $this->orderModel->loadDelivery('');
         
+    }
+    
+    /**************************************************************************/
+    /*        Render payment method and settings           */
+    /**********************************************************************/
+    public function actionPayment(){
+          if ($this->getUser()->isInRole('admin')) {
+        foreach ($this->orderModel->loadPayment('') as $id => $payment){
+            $paymentInfo = array(
+                'PaymentID' => $payment->PaymentID,
+                'PaymentName' => $payment->PaymentName,
+                'PaymentPrice' => $payment->PaymentPrice
+            );
+            $this['editPayment'.$payment->PaymentID] = $this->createComponentEditPaymentForm($paymentInfo);
+        }
+          }
+        
+    }
+    
+    public function handleRemovePay($id) {
+       if ($this->getUser()->isInRole('admin')) {
+         $row = $this->orderModel->loadPayment($id);
+         if($row) {       
+            $this->orderModel->deletePayment($id);
+            $message = Html::el('span', ' was removed.');
+            $e = Html::el('i')->class('icon-ok-sign left');
+            $message->insert(0, ' '. $row->PaymentName);
+            $message->insert(0, $e);
+            $this->flashMessage($message, 'alert');
+            $this->presenter->redirect("this");
+         }
+         else {
+             
+             $this->flashMessage('This payment cannot be removed.', 'alert');
+                $this->presenter->redirect("this");
+             
+         }
+        }
+    }
+    
+    protected function createComponentAddPaymentForm() {
+        if ($this->getUser()->isInRole('admin')) {
+            $addForm = new Nette\Application\UI\Form;
+            $addForm->setTranslator($this->translator);
+            $addForm->setRenderer(new BootstrapRenderer);
+
+            $addForm->addGroup('Create new payment:');
+            $addForm->addText('newPay', 'Payment name:')
+                    ->setRequired();
+            $addForm->addText('pricePay', 'Payment price:')
+                    ->setRequired()
+                    ->addRule(FORM::FLOAT, 'This has to be a number');
+                         //->setDefaultValue(0)
+                    //->addRule(FORM::FLOAT, 'This has to be a number.');
+            $addForm->addSubmit('add', 'Add Payment')
+                    ->setAttribute('class', 'upl-add btn btn-primary')
+                    ->setAttribute('data-loading-text', 'Adding...');
+            $addForm->onSuccess[] = $this->addPaymentFormSubmitted;
+
+            return $addForm;
+        }
+    }
+
+    public function addPaymentFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+
+            $this->orderModel->insertPayment($form->values->newPay,
+                                              $form->values->pricePay
+                                              );
+            
+            $ico = HTML::el('i')->class('icon-ok-sign left');
+            $message = HTML::el('span', ' was added sucessfully to your payment method.');
+            $message->insert(0, ' ' . $form->values->newPay);
+            $message->insert(0, $ico);
+            $this->flashMessage($message, 'alert success');
+            $this->redirect('this');
+        }
+    }
+
+    protected function createComponentEditPaymentForm($paymentID){
+         if ($this->getUser()->isInRole('admin')) { 
+        $editPay = new Nette\Application\UI\Form;
+        
+        $editPay->setTranslator($this->translator);
+        $editPay->setRenderer(new BootstrapRenderer);
+        $editPay->addText('name', 'Name:')
+                ->setDefaultValue($paymentID['PaymentName'])
+                ->setRequired();
+        $editPay->addText('price', 'Price:')
+                ->setDefaultValue($paymentID['PaymentPrice']);
+        $editPay->addHidden('paymentID', $paymentID['PaymentID'] );
+        $editPay->addSubmit('edit', 'Edit payment')
+                ->setAttribute('class', 'btn btn-primary upl')
+                        ->setAttribute('data-loading-text', 'Saving...');
+        $editPay->onSuccess[] = $this->editPaymentSubmitted;
+        return $editPay;
+         }     
+    }
+    
+    public function editPaymentSubmitted($form) {
+          if ($this->getUser()->isInRole('admin')) {
+        $this->orderModel->updatePayment($form->values->paymentID, $form->values->name, $form->values->price);
+          
+        $ico = HTML::el('i')->class('icon-ok-sign left');
+            $message = HTML::el('span', ' was added sucessfully updates.');
+            $message->insert(0, ' ' . $form->values->name);
+            $message->insert(0, $ico);
+            $this->flashMessage($message, 'alert success');
+            $this->redirect('this');
+          }
+    }
+    
+    /*
+     * Render Payment
+     */
+
+    public function renderPayment() {
+
+        $this->template->payments = $this->orderModel->loadPayment('');
     }
 
     /*

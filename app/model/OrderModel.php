@@ -168,10 +168,9 @@ class OrderModel extends Repository {
     /*
      * Insert new payment method
      */
-    public function insertPayment($id,$name,$price)
+    public function insertPayment($name,$price)
     {
         $insert = array(
-            'PaymentID' => $id,
             'PaymentName' => $name,
             'PaymentPrice' => $price
         );
@@ -179,6 +178,21 @@ class OrderModel extends Repository {
         return $this->getTable('payment')->insert($insert);
     }
     
+    public function updatePayment($id,$name,$price)
+    {
+        $update = array(
+            'PaymentName' => $name,
+            'PaymentPrice' => $price
+        );
+                
+        return $this->getTable('payment')->where('PaymentID',$id)->update($update);
+    }
+    
+    public function deletePayment($id){
+        return $this->getTable('payment')->where('PaymentID',$id)->delete();
+    }
+
+
     /*
      * Load delivery 
      */
