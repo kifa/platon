@@ -84,5 +84,11 @@ class MenuControl extends BaseControl {
         $this->template->category = $this->getBread($catID); 
         $this->template->render();
     }
+    
+    public function renderTop() {
+        $this->template->setFile(__DIR__ . '/MenuTopControl.latte');
+        $this->template->cart = $this->cart->numberItems;
+        $this->template->render();
+    }
 
 }
