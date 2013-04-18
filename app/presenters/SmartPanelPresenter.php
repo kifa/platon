@@ -281,7 +281,7 @@ class SmartPanelPresenter extends BasePresenter {
     
     public function handleRemovePay($id) {
        if ($this->getUser()->isInRole('admin')) {
-         $row = $this->orderModel->loadPayment($id);
+         $row = $this->orderModel->loadPayment($id)->fetch();
          if($row) {       
             $this->orderModel->deletePayment($id);
             $message = Html::el('span', ' was removed.');
