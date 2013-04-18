@@ -31,7 +31,7 @@
                 </p>
             </div>
             <br>
-            <div class="progress progress-info active span4">
+            <div class="progress progress-info progress-striped active span4">
                 <div class="bar" style="width: {foreach $statuses as $id => $status}{if $id == $order->StatusID}{$status->StatusProgress}0%{/if}{/foreach}"></div>
             </div>
             <div class="span4">
