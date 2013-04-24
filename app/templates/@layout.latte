@@ -12,11 +12,9 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="description" content="">
+        <title>{block #title|striptags|upper|trim|strip}BirneShop{/block} | Birne Solutions</title>
+        <meta name="description" content="{block #metadesc|striptags|strip|trim}Ecommerce 2.0 that works almost automatically.{/block}">
         <meta name="robots" content="{$robots}" n:ifset="$robots">
-
-        <title>{block #title|striptags|upper}BirneShop{/block} | Birne Solutions</title>
-
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
         <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
         <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap.css">

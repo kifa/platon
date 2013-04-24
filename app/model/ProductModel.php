@@ -136,6 +136,14 @@ WHERE Product.ProductID=?',$id)->fetch();
         return $this->getTable('Price')->where('ProductID',$id)->update($insert);
     }
 
+    public function decreaseProduct($id, $amnt) {
+        $cur = $this->getTable('Product')->where('ProductID',$id)->fetch()->PiecesAvailable;
+        $cur = $cur - $amnt;
+        $insert = array(
+                'PiecesAvailable' => $cur
+                );        
+        return $this->getTable('Product')->where('ProductID',$id)->update($insert);
+    }
     /*
      * Delete Product
      * @param ?

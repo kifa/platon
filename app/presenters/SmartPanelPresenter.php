@@ -124,6 +124,18 @@ class SmartPanelPresenter extends BasePresenter {
      * @param int
      * @return void
      */
+    
+    public function actionOrderDetail($orderNo) {
+        $row = $this->orderModel->loadOrder($orderNo);
+        if (!$row) {
+            $message = Html::el('span', ' This order wasnt placed, yet. Sorry.');
+            $e = Html::el('i')->class('icon-warning-sign left');
+            $message->insert(0, $e);
+            $this->flashMessage($message, 'alert');
+            $this->presenter->redirect('SmartPanel:Orders');
+        }
+        
+    }
 
     public function renderOrderDetail($orderNo) {
         if (!$this->getUser()->isInRole('admin')) {
@@ -133,6 +145,8 @@ class SmartPanelPresenter extends BasePresenter {
             $this->template->order = $this->orderModel->loadOrder($orderNo);
             $this->template->statuses = $this->orderModel->loadStatus('');
             $this->template->address = $this->orderModel->loadOrderAddress($orderNo);
+            
+            $this->template->nextOrder = $this->orderModel->loadOrder($orderNo+1);
         }
     }
 

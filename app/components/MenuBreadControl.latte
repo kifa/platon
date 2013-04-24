@@ -8,7 +8,9 @@
   {else}
   <li><a href="{plink product:products $catID}">{$cat}</a> <span class="divider">/</span></li>
   {/ifCurrent}
-
-  {/foreach}
   
+  {/foreach}
+  {if $product}
+  <li class="active">{$product->ProductName}</a></li>
+  {/if}
 </ul>

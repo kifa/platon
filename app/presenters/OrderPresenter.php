@@ -351,6 +351,12 @@ class OrderPresenter extends BasePresenter {
         $message = HTML::el('span', ' Order has been successfully sent.');
         $message->insert(0, $ico);
         $this->flashMessage($message, 'alert alert-info');
+        
+        foreach ($this->cart->prd as $id => $amnt) {
+
+            $this->productModel->decreaseProduct($id, $this->cart->prd[$id]);
+           }
+           
         unset($this->cart->prd);
         $this->cart->numberItems = 0;
     }

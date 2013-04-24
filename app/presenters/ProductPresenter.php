@@ -322,6 +322,8 @@ class ProductPresenter extends BasePresenter {
                 $editForm = $this['editParamForm'];
                 $addForm = $this['addParamForm'];
                 $docsForm = $this['addDocumentationForm'];
+                $priceForm = $this['editPriceForm'];
+               // $this['editPriceForm']['price'] = $this->row['SellingPrice'];
             }
         }
     }
@@ -444,22 +446,23 @@ class ProductPresenter extends BasePresenter {
    protected function createComponentEditPriceForm() {
         if ($this->getUser()->isInRole('admin')) {
 
-            $editForm = new Nette\Application\UI\Form;
-            $editForm->setTranslator($this->translator);
-            // $editForm->setRenderer(new BootstrapRenderer);
-            $editForm->addText('price', 'Price:')
+            $priceForm = new Nette\Application\UI\Form;
+            $priceForm->setTranslator($this->translator);
+            $priceForm->setRenderer(new BootstrapRenderer);
+            $priceForm->addText('price', 'Price:')
                     ->setDefaultValue($this->row['SellingPrice'])
                     ->setRequired()
                     ->addRule(FORM::FLOAT, 'This has to be a number.');
-            $editForm->addText('discount', 'Discount:')
+            $priceForm->addText('discount', 'Discount:')
                     ->setDefaultValue($this->row['SALE'])
-                    ->addRule(FORM::FLOAT, 'This has to be a number.');
-            $editForm->addHidden('id', $this->row['ProductID']);
-            $editForm->addSubmit('edit', 'Save price')
-                    ->setAttribute('class', 'upl btn btn-primary')
+                    ->addRule(FORM::FLOAT, 'This has to be a number.')
+                    ->addRule(FORM::RANGE, 'It should be less then price', array(0, $this->row['SellingPrice']));
+            $priceForm->addHidden('id', $this->row['ProductID']);
+            $priceForm->addSubmit('edit', 'Save price')
+                    ->setAttribute('class', 'btn btn-primary')
                     ->setAttribute('data-loading-text', 'Saving...');
-            $editForm->onSuccess[] = $this->editPriceFormSubmitted;
-            return $editForm;
+            $priceForm->onSuccess[] = $this->editPriceFormSubmitted;
+            return $priceForm;
         }
     }
 

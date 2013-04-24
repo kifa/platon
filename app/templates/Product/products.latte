@@ -18,7 +18,7 @@
         </div>
         
     </div>
-    <div class="alert alert-info">{!$category->CategoryDescription}</div>
+    <div class="alert alert-info" n:block="metadesc">{!$category->CategoryDescription}</div>
     {if $user->isInRole('admin')}
      
     <div id="addProduct" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

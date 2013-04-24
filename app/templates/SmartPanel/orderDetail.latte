@@ -6,6 +6,12 @@
 <div class="row">
     <div class="span10">
         <a href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_"Back to Orders"}</a> |
+        {if $order->OrderID != 1}
+        <a href="{plink SmartPanel:orderDetail $order->OrderID - 1 }"><i class="icon-arrow-left"></i> {_"Prev Order"}</a> |
+        {/if}
+        {if $nextOrder}
+        <a href="{plink SmartPanel:orderDetail $order->OrderID + 1}"><i class="icon-arrow-right"></i> {_"Next Order"}</a> |
+        {/if}
         <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
     </div>
 </div>

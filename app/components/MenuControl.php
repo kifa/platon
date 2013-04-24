@@ -79,9 +79,15 @@ class MenuControl extends BaseControl {
         $this->template->render();
     }
     
-    public function renderBread($catID) {
+    public function renderBread($catID, $id=null) {
         $this->template->setFile(__DIR__ . '/MenuBreadControl.latte');
-        $this->template->category = $this->getBread($catID); 
+        $this->template->category = $this->getBread($catID);
+        if ($id) {
+        $this->template->product = $this->productModel->loadProduct($id);
+        }
+        else {
+           $this->template->product = null;  
+        }
         $this->template->render();
     }
     
