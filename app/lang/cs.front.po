@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-04-08 23:10:00
+# Created: 2013-04-25 16:02:06
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-04-08 23:10+0200\n"
+"PO-Revision-Date: 2013-04-25 16:02+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -12,8 +12,23 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));\n"
 
 
+msgid "ADD Category"
+msgstr "Přidat kategorii"
+
+msgid "Add Document"
+msgstr "Přidat dokument"
+
+msgid "Add Payment"
+msgstr "Přidat platební metodu"
+
+msgid "Add Photo"
+msgstr "Přidat Foto"
+
 msgid "Add Product"
 msgstr "Přidat produkt"
+
+msgid "Add Spec"
+msgstr "Přidat specifikaci"
 
 msgid "Admin"
 msgstr "Správa"
@@ -42,11 +57,29 @@ msgstr "Mobilní telefon"
 msgid "Choose language:"
 msgstr "Vyberte jazyk:"
 
+msgid "Description"
+msgstr "Popis"
+
+msgid "Description:"
+msgstr "Popis:"
+
 msgid "Description: "
 msgstr "Popis:"
 
+msgid "Discount:"
+msgstr "Sleva:"
+
 msgid "Edit Category"
 msgstr "Upravit kategorii"
+
+msgid "Edit Description"
+msgstr "Upravit Popis"
+
+msgid "Edit Price"
+msgstr "Upravit Cenu"
+
+msgid "Edit Product"
+msgstr "Upravit Produkt"
 
 msgid "Here"
 msgstr "Zde"
@@ -66,6 +99,9 @@ msgstr "Odhlásit se"
 msgid "Name:"
 msgstr "Jméno:"
 
+msgid "News"
+msgstr "Zprávy"
+
 msgid "Notebook"
 msgstr "Notebook"
 
@@ -75,8 +111,14 @@ msgstr "Objednávky"
 msgid "Other"
 msgstr "Ostatní"
 
+msgid "Overal"
+msgstr "Přehled"
+
 msgid "Payment"
-msgstr "Metoda Platby"
+msgstr "Platby a slevy"
+
+msgid "Photo:"
+msgstr "Foto:"
 
 msgid "Please complete mandatory field."
 msgstr "Prosím vyplňte povinná pole."
@@ -90,6 +132,15 @@ msgstr "Cena:"
 msgid "Producer: "
 msgstr "Výrobce:"
 
+msgid "Save description"
+msgstr "Uložit popis"
+
+msgid "Save price"
+msgstr "Uložit cenu"
+
+msgid "Select photo and click Add photo"
+msgstr "Vyberte foto a klikněte na Přidat Foto"
+
 msgid "Shipping"
 msgstr "Poštovné"
 
@@ -102,6 +153,12 @@ msgstr "Statistiky"
 msgid "Tablets"
 msgstr "Tablet"
 
+msgid "Track order"
+msgstr "Sledovat objednávku"
+
+msgid "Track your order"
+msgstr "Sledovat objednávku"
+
 msgid "View"
 msgstr "Prohlédnout"
 
@@ -111,51 +168,9 @@ msgstr "Právě"
 msgid "You cannot edit product here!"
 msgstr "Pro úpravu přejděte do kategorie!"
 
-msgid "Photo:"
-msgstr "Foto:"
-
-msgid "Description:"
-msgstr "Popis:"
-
-msgid "Edit Description"
-msgstr "Upravit Popis"
-
-msgid "Edit Price"
-msgstr "Upravit Cenu"
-
-msgid "Edit Product"
-msgstr "Upravit Produkt"
-
-msgid "Add Photo"
-msgstr "Přidat Foto"
-
-msgid "Select photo and click Add photo"
-msgstr "Vyberte foto a klikněte na Přidat Foto"
-
-msgid "Save description"
-msgstr "Uložit popis"
-
-msgid "Discount:"
-msgstr "Sleva:"
-
-msgid "Save price"
-msgstr "Uložit cenu"
-
-msgid "Terms"
-msgstr ""
-
-msgid "Je podporován pouze soubor JPG, PNG a GIF"
-msgstr ""
-
-msgid "Maximálně 2MB"
-msgstr ""
+msgid "Your order number:"
+msgstr "Číslo Vaší objednávky"
 
 msgid "Edit your description and click Save desccription."
-msgstr ""
-
-msgid "This has to be a number."
-msgstr ""
-
-msgid "In stock"
-msgstr ""
+msgstr "Upravte popis a kliknete na Uložit popis"
 

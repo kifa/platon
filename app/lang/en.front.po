@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-04-16 16:48:53
+# Created: 2013-04-25 17:05:08
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-04-16 16:48+0200\n"
+"PO-Revision-Date: 2013-04-25 17:05+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -12,17 +12,44 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));\n"
 
 
+msgid "ADD Category"
+msgstr "Přidat kategorii"
+
+msgid "Account"
+msgstr "Účet"
+
+msgid "Add Document"
+msgstr "Přidat dokument"
+
+msgid "Add Photo"
+msgstr "Přidat fotku"
+
 msgid "Add Product"
 msgstr "Add Product"
 
+msgid "Add Spec"
+msgstr "Přidat specifikaci"
+
+msgid "Address"
+msgstr "Adresa"
+
 msgid "Admin"
 msgstr "Admin"
+
+msgid "All orders"
+msgstr "Všechny objednávky"
 
 msgid "Amount"
 msgstr "Amount"
 
 msgid "Are"
 msgstr "Are"
+
+msgid "Back to Orders"
+msgstr "Zpět na objednávky"
+
+msgid "Back to SmartPanel"
+msgstr "Zpět na Smart Panel"
 
 msgid "Buy"
 msgstr "Buy"
@@ -42,17 +69,89 @@ msgstr "Cellphone"
 msgid "Choose language:"
 msgstr "Choose language:"
 
+msgid "City"
+msgstr "Město"
+
+msgid "Click to regenerate!"
+msgstr "Klikněte pro obnovení!"
+
+msgid "Company"
+msgstr "Firma"
+
+msgid "Complete summary order"
+msgstr "Kompletní shrnutí objednávky"
+
+msgid "Create Category"
+msgstr "Vytvořit kategorii"
+
+msgid "Create a new one:"
+msgstr "Vytvořit novou:"
+
+msgid "Customer"
+msgstr "Zákazník"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Date created"
+msgstr "Datum vytvoření"
+
+msgid "Delete Category"
+msgstr "Smazat kategorii"
+
+msgid "Delete Specs"
+msgstr "Smazat specifikaci"
+
+msgid "Description"
+msgstr "Popis"
+
+msgid "Description:"
+msgstr "Popis:"
+
 msgid "Description: "
 msgstr "Description:"
+
+msgid "Discount:"
+msgstr "Sleva:"
+
+msgid "Document:"
+msgstr "Dokument:"
 
 msgid "Domů"
 msgstr "Home"
 
+msgid "Download"
+msgstr "Stáhnout"
+
+msgid "Download link"
+msgstr "Odkaz ke stažení"
+
 msgid "Edit Category"
 msgstr "Edit Category"
 
+msgid "Edit Description"
+msgstr "Upravit popis a kategorii"
+
+msgid "Edit Documents"
+msgstr "Upravit dokumenty"
+
+msgid "Edit Pieces"
+msgstr "Upravit množství"
+
+msgid "Edit Price"
+msgstr "Upravit cenu"
+
+msgid "Edit Specs"
+msgstr "Upravit specifikaci"
+
+msgid "Email"
+msgstr "Email"
+
 msgid "Here"
 msgstr "Here"
+
+msgid "Here is all you need!"
+msgstr "Zde je vše, co potřebujete!"
 
 msgid "Home"
 msgstr "Home"
@@ -63,6 +162,12 @@ msgstr "Image:"
 msgid "In stock"
 msgstr "In stock"
 
+msgid "It has to be a number!"
+msgstr "Zde musí být číslo!"
+
+msgid "Item price"
+msgstr "Cena za ks"
+
 msgid "Jak cokoliv"
 msgstr "Other"
 
@@ -72,11 +177,35 @@ msgstr "How to shop"
 msgid "Jak prodávat"
 msgstr "Where´s my order"
 
+msgid "Je podporován pouze soubor JPG, PNG a GIF"
+msgstr "Je podporován pouze soubor JPG, PNG, GIF"
+
 msgid "Keep me signed in"
 msgstr "Keep me signed in"
 
+msgid "Latest Comments"
+msgstr "Poslední komentáře"
+
+msgid "Latest Orders"
+msgstr "Poslední objednávky"
+
 msgid "Logout"
 msgstr "Logout"
+
+msgid "Maximálně 2MB"
+msgstr "Maximálně 2MB"
+
+msgid "More comments"
+msgstr "Více komentářů"
+
+msgid "More stats"
+msgstr "Více statistik"
+
+msgid "Name"
+msgstr "Jméno"
+
+msgid "Name of new Spec:"
+msgstr "Název nové specifikace:"
 
 msgid "Name:"
 msgstr "Name:"
@@ -84,11 +213,29 @@ msgstr "Name:"
 msgid "Nejdou obchody? BIRNE SHOP!"
 msgstr "Sales has stopped? BIRNE SHOP!"
 
+msgid "News"
+msgstr "Zprávy"
+
+msgid "Next Order"
+msgstr "Další obj."
+
+msgid "Next Orders"
+msgstr "Další objednávka"
+
+msgid "Next progress"
+msgstr "Další postup"
+
 msgid "Notebook"
 msgstr "Notebook"
 
 msgid "Nové heslo:"
 msgstr "New Password:"
+
+msgid "Order n."
+msgstr "Číslo obj."
+
+msgid "Order summary"
+msgstr "Shrnutí objednávky"
 
 msgid "Orders"
 msgstr "Orders"
@@ -96,11 +243,26 @@ msgstr "Orders"
 msgid "Other"
 msgstr "Other"
 
+msgid "Overal"
+msgstr "Celkově"
+
+msgid "Parent Category:"
+msgstr "Nadřazená kategorie:"
+
 msgid "Password:"
 msgstr "Password:"
 
 msgid "Payment"
 msgstr "Payment"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Photo:"
+msgstr "Fotka:"
+
+msgid "Pieces:"
+msgstr "Množství:"
 
 msgid "Please enter your password."
 msgstr "Please enter your password."
@@ -108,11 +270,29 @@ msgstr "Please enter your password."
 msgid "Please enter your username."
 msgstr "Please, enter your username."
 
+msgid "Potvrzení hesla:"
+msgstr "Potvrzení hesla:"
+
+msgid "Prev Order"
+msgstr "Předchozí obj."
+
+msgid "Prev Orders"
+msgstr "Předchozí objednávka"
+
 msgid "Price:"
 msgstr "Price:"
 
+msgid "Producer"
+msgstr "Výrobce"
+
 msgid "Producer: "
 msgstr "Producer:"
+
+msgid "Product Name"
+msgstr "Název produktu"
+
+msgid "Products"
+msgstr "Produkty"
 
 msgid "Představujeme BIRNE SHOP!"
 msgstr "Introducing BIRNE SHOP!"
@@ -123,6 +303,27 @@ msgstr "Explore it!"
 msgid "Radost prodávat? BIRNE SHOP!"
 msgstr "Enjoy selling! BIRNE SHOP!"
 
+msgid "Regenerate Thumbnails"
+msgstr "Obnovit miniatury"
+
+msgid "Save Specs"
+msgstr "Uložit specifikaci"
+
+msgid "Save description"
+msgstr "Uložit popis"
+
+msgid "Save it"
+msgstr "Uložit"
+
+msgid "Save price"
+msgstr "Aktualizovat cenu"
+
+msgid "Select Category:"
+msgstr "Vyberte kategorii:"
+
+msgid "Select spec:"
+msgstr "Vyberte specifikaci:"
+
 msgid "Shipping"
 msgstr "Shipping"
 
@@ -132,17 +333,47 @@ msgstr "Sign In"
 msgid "Sign in"
 msgstr "Sign in"
 
+msgid "Smart Panel"
+msgstr "Smart Panel"
+
 msgid "Smartphone"
 msgstr "Smartphone"
 
 msgid "Stats"
 msgstr "Stats"
 
+msgid "Status"
+msgstr "Stav"
+
+msgid "Street"
+msgstr "Ulice"
+
+msgid "Subject"
+msgstr "Předmět"
+
 msgid "Tablets"
 msgstr "Tablets"
 
+msgid "This month"
+msgstr "Tento měsíc"
+
+msgid "Total"
+msgstr "Celkem"
+
+msgid "Total price"
+msgstr "Cena celkem"
+
+msgid "Track order"
+msgstr "Track order"
+
+msgid "Track your order"
+msgstr "Sledujte svou objednávku"
+
 msgid "Uživatelské jméno:"
 msgstr "User name:"
+
+msgid "Value:"
+msgstr "Hodnota:"
 
 msgid "View"
 msgstr "View"
@@ -150,15 +381,123 @@ msgstr "View"
 msgid "View as List"
 msgstr "View as List"
 
+msgid "Warehouse"
+msgstr "Sklad"
+
 msgid "You"
 msgstr "You"
 
 msgid "You cannot edit product here!"
 msgstr "You cannot edit product here!"
 
+msgid "Your address"
+msgstr "Vaše adresa"
+
+msgid "Your contact"
+msgstr "Váš kontakt"
+
+msgid "Your email:"
+msgstr "Váš email:"
+
+msgid "Your order number:"
+msgstr "Číslo Vaší objednávky:"
+
+msgid "ZIP"
+msgstr "PSČ"
+
 msgid "Začněte již dnes"
 msgstr "Start TODAY"
 
 msgid "Zjistit více"
 msgstr "Find out more"
+
+msgid "Změnit heslo"
+msgstr "Změnit heslo"
+
+msgid "Please fill in these information"
+msgstr ""
+
+msgid "Please complete mandatory field."
+msgstr ""
+
+msgid "Smartphones"
+msgstr ""
+
+msgid "Samsung"
+msgstr ""
+
+msgid "Sony"
+msgstr ""
+
+msgid "Apple"
+msgstr ""
+
+msgid "Lenovo"
+msgstr ""
+
+msgid "Nokia"
+msgstr ""
+
+msgid "Are you sure to delete this category?"
+msgstr ""
+
+msgid "If so, choose where to move products!"
+msgstr ""
+
+msgid "Move products to category:"
+msgstr ""
+
+msgid "Please enter a valid email address."
+msgstr ""
+
+msgid "Spodní prádlo"
+msgstr ""
+
+msgid "Select photo and click Add photo"
+msgstr ""
+
+msgid "Edit your description and click Save desccription."
+msgstr ""
+
+msgid "This has to be a number."
+msgstr ""
+
+msgid "It should be less then price"
+msgstr ""
+
+msgid "Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow."
+msgstr ""
+
+msgid "Select one of already created:"
+msgstr ""
+
+msgid "Weight"
+msgstr ""
+
+msgid "Display size"
+msgstr ""
+
+msgid "Display resolution"
+msgstr ""
+
+msgid "Battery"
+msgstr ""
+
+msgid "Enter Value:"
+msgstr ""
+
+msgid "Select unit:"
+msgstr ""
+
+msgid "g"
+msgstr ""
+
+msgid "mAh"
+msgstr ""
+
+msgid "px"
+msgstr ""
+
+msgid "\""
+msgstr ""
 

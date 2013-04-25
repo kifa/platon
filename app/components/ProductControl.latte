@@ -15,8 +15,8 @@
                 <a href="{plink showProduct! $product->CategoryID, $product->ProductID}" title="Publish product">
                         <i id="showProduct" class="icon-large icon-eye-open"></i></a>
                         
-                <a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" title="Delete product">
-                        <i id="deleteProduct" class="icon-large icon-trash"></i></a>
+                <a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" title="Archive product">
+                        <i id="deleteProduct" class="icon-large icon-inbox"></i></a>
 
                 {elseif $product->ProductStatusID == 2}
                     <a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" title="Hide product">
