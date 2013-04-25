@@ -49,6 +49,20 @@
               <button class="btn" data-dismiss="modal" aria-hidden="true">Close without adding</button>
             </div>
     </div>
+    
+    <div id="addCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-pencil"></i> Add Category</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Please fill in these information'}</p>
+              {control addCategoryForm}
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close without adding</button>
+            </div>
+    </div>
     {/if}
     
 {/block}
@@ -122,6 +136,13 @@
             },
             function() {
                 $('#addProduct').modal('hide');
+            });
+            
+            $('#addCategoryButton').toggle(function(){
+              $('#addCategory').modal('show');
+            },
+            function() {
+                $('#addCategory').modal('hide');
             });
     });
 

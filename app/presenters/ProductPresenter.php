@@ -127,6 +127,7 @@ class ProductPresenter extends BasePresenter {
                     'HigherCategoryID' => $row2->HigherCategoryID);
 
                 $editCategoryForm = $this['editCategoryForm'];
+                $addCategoryForm = $this['addCategoryForm'];
                 //$addForm = $this['addCategoryForm'];
             }
         }
@@ -284,6 +285,42 @@ class ProductPresenter extends BasePresenter {
 
             $this->categoryModel->updateCategory($form->values->id, $form->values->name, $form->values->text, $form->values->parent);
             $this->redirect('this');
+        }
+    }
+    
+    protected function createComponentAddCategoryForm() {
+        if ($this->getUser()->isInRole('admin')) {
+
+            $addForm = new Nette\Application\UI\Form;
+            $addForm->setTranslator($this->translator);
+            //$editForm->setRenderer(new BootstrapRenderer);
+            
+            foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
+                $categories[$id] = $category->CategoryName;
+            }
+            $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
+            
+            $addForm->addText('name', 'Name:')
+                    ->setRequired();
+            $addForm->addTextArea('text', 'Description:', 150, 150)
+                    ->setAttribute('class', 'mceEditor');
+            $addForm->addSelect('parent', 'Parent Category:', $categories)
+                    ->setPrompt($prompt);
+            $addForm->addSubmit('edit', 'Save description')
+                    ->setAttribute('class', 'upl btn btn-primary')
+                    ->setAttribute('data-loading-text', 'Saving...');
+            $addForm->onSubmit('tinyMCE.triggerSave()');
+            $addForm->onSuccess[] = $this->addCategoryFormSubmitted;
+            return $addForm;
+        }
+    }
+
+    public function addCategoryFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+
+            $row = $this->categoryModel->createCategory($form->values->name, $form->values->text, $form->values->parent);
+            dump($row);
+            $this->redirect('Product:products', $row);
         }
     }
     
