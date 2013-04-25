@@ -11,6 +11,7 @@
                 <a href="#addProduct" data-toggel="modal" data-target="#addProductButton" id="addProductButton"><i class="icon-large icon-plus"></i> {_"Add Product"}</a> |
                 <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> |
                 <a href="#editCategory" data-toggel="modal" data-target="#editCategory" id="editCategoryButton"><i class="icon-large icon-pencil"></i> {_"Edit Category"}</a> |
+                <a href="#deleteCategory" data-toggel="modal" data-target="#deleteCategory" id="deleteCategoryButton"><i class="icon-large icon-trash"></i> {_"Delete Category"}</a> |
 
                 {/if}
                 <a href="#" id="setView"><i class="icon-th-list icon-large"></i> {_"View as List"}</a>
@@ -58,6 +59,21 @@
             <div class="modal-body">
                 <p>{_'Please fill in these information'}</p>
               {control addCategoryForm}
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close without adding</button>
+            </div>
+    </div>
+    
+    <div id="deleteCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-pencil"></i> Delete {$category->CategoryName} Category?</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Are you sure to delete this category?'}</p>
+                <p>{_'If so, choose where to move products!'}</p>
+              {control deleteCategoryForm}
             </div>
             <div class="modal-footer">
               <button class="btn" data-dismiss="modal" aria-hidden="true">Close without adding</button>
@@ -144,7 +160,15 @@
             function() {
                 $('#addCategory').modal('hide');
             });
+            
+            $('#deleteCategoryButton').toggle(function(){
+              $('#deleteCategory').modal('show');
+            },
+            function() {
+                $('#deleteCategory').modal('hide');
+            });
     });
+    
 
     </script>
     {/if}

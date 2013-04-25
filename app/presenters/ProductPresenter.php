@@ -306,9 +306,9 @@ class ProductPresenter extends BasePresenter {
                     ->setAttribute('class', 'mceEditor');
             $addForm->addSelect('parent', 'Parent Category:', $categories)
                     ->setPrompt($prompt);
-            $addForm->addSubmit('edit', 'Save description')
+            $addForm->addSubmit('edit', 'Create Category')
                     ->setAttribute('class', 'upl btn btn-primary')
-                    ->setAttribute('data-loading-text', 'Saving...');
+                    ->setAttribute('data-loading-text', 'Creating...');
             $addForm->onSubmit('tinyMCE.triggerSave()');
             $addForm->onSuccess[] = $this->addCategoryFormSubmitted;
             return $addForm;
@@ -324,6 +324,43 @@ class ProductPresenter extends BasePresenter {
         }
     }
     
+    protected function createComponentDeleteCategoryForm() {
+        if ($this->getUser()->isInRole('admin')) {
+
+            $deleteForm = new Nette\Application\UI\Form;
+            $deleteForm->setTranslator($this->translator);
+            $deleteForm->setRenderer(new BootstrapRenderer);
+            
+            foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
+                $categories[$id] = $category->CategoryName;
+            }
+            $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
+            
+            $deleteForm->addHidden('id', $this->categoryParam['CategoryID']);
+            $deleteForm->addSelect('parent', 'Move products to category:', $categories)
+                    ->setPrompt($prompt)
+                    ->setDefaultValue($this->categoryParam['HigherCategoryID'])
+                    ->setRequired();
+            $deleteForm->addSubmit('edit', 'Delete Category')
+                    ->setAttribute('class', 'upl btn btn-danger')
+                    ->setAttribute('data-loading-text', 'Deleting...');
+            $deleteForm->onSubmit('tinyMCE.triggerSave()');
+            $deleteForm->onSuccess[] = $this->deleteCategoryFormSubmitted;
+            return $deleteForm;
+        }
+    }
+
+    public function deleteCategoryFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            
+            foreach($this->productModel->loadCatalog($form->values->id) as $product) {
+              $this->productModel->updateProduct($product->ProductID, 'CategoryID', $form->values->parent);
+            }
+
+            $this->categoryModel->deleteCategory($form->values->id);
+            $this->redirect('Product:products', $form->values->parent);
+        }
+    }
 
     public function renderProducts($catID) {
 

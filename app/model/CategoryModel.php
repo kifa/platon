@@ -36,6 +36,7 @@ class CategoryModel extends Repository {
      * @return string
      */
     public function createCategory($name, $description=NULL, $higher=NULL){
+       
         $insert = array(
             'CategoryName' => $name,
             'CategoryDescription' => $description,
@@ -43,6 +44,7 @@ class CategoryModel extends Repository {
         );
         $row = $this->getTable('Category')->insert($insert);
         return $row->CategoryID;
+        
     }
 
 
@@ -61,6 +63,7 @@ class CategoryModel extends Repository {
                 'HigherCategoryID' => $higher
                 );        
         return $this->getTable('category')->where('CategoryID',$id)->update($insert);
+       
     }
 
     /*
@@ -68,6 +71,15 @@ class CategoryModel extends Repository {
      * @param ?
      * @param ? example: pozice počátečního znaku
      * @return string */
+    
+    
+    public function deleteCategory($id){
+        
+        return $this->getTable('category')->where('CategoryID',$id)->delete();
+        
+    }
+    
+    
 }
 
-?>
+
