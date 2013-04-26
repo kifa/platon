@@ -99,20 +99,7 @@ WHERE Product.ProductID=?',$id)->fetch();
      *      Parameter value is new value you want to update
      * @param update
      *      Parameter update determines which attribut you want to update.
-     *      Possible values are
-     *              name => update product name
-     *              producer => update producer name
-     *              pn => update product number
-     *              description => update product description
-     *              status => update product status
-     *              ean => update product ean code
-     *              qr => update product qr code
-     *              warranty => update product warranty informations
-     *              category => update product category
-     *              available => update date when product will be available
-     *              pieces => update number od pieces which are available
-     *              comment => update first first
-     * 
+    * 
      * @return 
      *      Insert new informations to the database
      *  */

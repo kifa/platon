@@ -103,6 +103,50 @@ class OrderModel extends Repository {
             return $lastID['OrderID'];
     }
     
+    public function updateOrder($orderid, $shipping, $payment) {
+        $paymentPrice = $this->loadPaymentPrice($payment);
+        $deliveryPrice = $this->loadDeliveryPrice($shipping);
+        
+        $productPrice = $this->loadOrder($orderid)->ProductsPrice;
+        $total = $productPrice + $deliveryPrice + $paymentPrice;
+        
+        $insert = array(
+                'DeliveryID' => $shipping,
+                'PaymentID' => $payment,
+                'DeliveryPaymentPrice' => $deliveryPrice,
+                'TotalPrice' => $total
+                );   
+        
+        return $this->getTable('orders')->where('OrderID',$orderid)->update($insert);
+        
+    }
+    
+    
+    public function updateOrderProducts($orderid, $product, $newProduct, $shipping, $payment, $products) {
+       
+        //recalculating order
+        $deliveryPrice = $this->loadDeliveryPrice($shipping);
+        $paymentPrice = $this->loadPaymentPrice($payment);
+        
+        $total = $products + $deliveryPrice + $paymentPrice + $newProduct;
+        
+        //inserting order details - products
+        $this->insertOrderDetails($orderid, $product, 1, $newProduct);
+        
+        
+        //updating order total info
+        $insert = array(
+                'DeliveryID' => $shipping,
+                'PaymentID' => $payment,
+                'DeliveryPaymentPrice' => $deliveryPrice,
+                'TotalPrice' => $total,
+                'ProductsPrice' => $products + $newProduct
+                );   
+        
+        return $this->getTable('orders')->where('OrderID',$orderid)->update($insert);
+        
+    }
+    
     /*
      * Insert order details
      */

@@ -29,6 +29,8 @@ class SmartPanelPresenter extends BasePresenter {
 
     /* @var Translator */
     protected $translator;
+    
+    private $orderRow;
 
     protected function startup() {
         parent::startup();
@@ -117,15 +119,16 @@ class SmartPanelPresenter extends BasePresenter {
         }
     }
 
-    /*
-     * renderOrderDone()
-     * rendering Thank you for your order page
-     * 
-     * @param int
-     * @return void
-     */
+    /*******************************************************************
+     *              ORDER DETAIL
+     *
+     ********************************************************************/
     
     public function actionOrderDetail($orderNo) {
+        if (!$this->getUser()->isInRole('admin')) {
+             $this->redirect('Sign:in');
+        } else {
+        
         $row = $this->orderModel->loadOrder($orderNo);
         if (!$row) {
             $message = Html::el('span', ' This order wasnt placed, yet. Sorry.');
@@ -133,8 +136,103 @@ class SmartPanelPresenter extends BasePresenter {
             $message->insert(0, $e);
             $this->flashMessage($message, 'alert');
             $this->presenter->redirect('SmartPanel:Orders');
+         }
+            $this->orderRow = array('Shipping' => $row->DeliveryID,
+                                    'Payment' => $row->PaymentID,
+                                   'OrderID' => $row->OrderID,
+                                   // 'Total' => $row->TotalPrice,
+                                    'TotalProducts' => $row->ProductsPrice);
+            $editForm = $this['editOrderInfoForm'];
         }
         
+    }
+    
+    protected function createComponentEditOrderInfoForm() {
+        
+        $shippers = array();
+        $payment = array();
+
+        foreach ($this->orderModel->loadDelivery('') as $key => $value) {
+          //  $t = HTML::el('span', $value->DeliveryPrice)->class('text-info');
+            $shippers[$key] = $value->DeliveryName . ' | ' . $value->DeliveryPrice .',-';
+        };
+
+        foreach ($this->orderModel->loadPayment('') as $key => $value) {
+            $payment[$key] = $value->PaymentName . ' | ' . $value->PaymentPrice.',-';
+        };
+        
+        $editForm = new Nette\Application\UI\Form;
+        $editForm->setRenderer(new BootstrapRenderer);
+        $editForm->setTranslator($this->translator);
+        $editForm->addHidden('orderID', $this->orderRow['OrderID']);
+        $editForm->addSelect('shipper', 'Shipping:', $shippers)
+                ->setDefaultValue($this->orderRow['Shipping']);
+        $editForm->addSelect('payment', 'Payment:', $payment)
+            ->setDefaultValue($this->orderRow['Payment']);
+        $editForm->addSubmit('edit', 'Edit info')
+                    ->setAttribute('class', 'btn-primary upl')
+                    ->setAttribute('data-loading-text', 'Editing...');
+        $editForm->onSuccess[] = $this->editOrderInfoFormSubmitted;
+        return $editForm;
+    }
+
+    public function editOrderInfoFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            
+            $this->orderModel->updateOrder($form->values->orderID, $form->values->shipper, $form->values->payment);
+            
+            $message = Html::el('span', ' Order was sucessfully updated!');
+            $e = Html::el('i')->class('icon-ok-sign left');
+            $message->insert(0, $e);
+            $this->flashMessage($message, 'alert');
+            $this->redirect('this');
+            
+        }
+        
+    }
+    
+    protected function createComponentEditProductsForm() {
+        
+               
+        $editProducts = new Nette\Application\UI\Form;
+        $editProducts->setTranslator($this->translator);
+       // $editProducts->setRenderer(new BootstrapRenderer);
+        $editProducts->addHidden('orderID', $this->orderRow['OrderID']);
+        $editProducts->addHidden('totalProducts', $this->orderRow['TotalProducts'] );
+        
+        foreach ($this->productModel->loadCatalog('') as $id => $product) {
+            $products[$product->ProductID] = $product->ProductName;
+           
+            $editProducts->addHidden($product->ProductID, $product->FinalPrice);
+         }
+        $editProducts->addSelect('product', 'Select Product to add', $products)
+                ->setRequired();
+        
+        $editProducts->addSubmit('add' , 'Add products')
+                ->setAttribute('class', 'btn-primary upl')
+                    ->setAttribute('data-loading-text', 'Adding...');
+        $editProducts->onSuccess[] = $this->editProductsFormSubmitted;
+        return $editProducts;
+                
+        
+    }
+    
+    public function editProductsFormSubmitted($form) {
+         if ($this->getUser()->isInRole('admin')) {
+             $pID = $form->values->product;
+          
+             $this->orderModel->updateOrderProducts($form->values->orderID, $form->values->product,
+                     $form->values->$pID,
+                     $this->orderRow['Shipping'], 
+                     $this->orderRow['Payment'],
+                     $this->orderRow['TotalProducts']);
+             
+             $message = Html::el('span', ' Product was sucessfully added!');
+            $e = Html::el('i')->class('icon-ok-sign left');
+            $message->insert(0, $e);
+            $this->flashMessage($message, 'alert');
+            $this->redirect('this');
+         }
     }
 
     public function renderOrderDetail($orderNo) {

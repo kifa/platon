@@ -12,10 +12,57 @@
         {if $nextOrder}
         <a href="{plink SmartPanel:orderDetail $order->OrderID + 1}"><i class="icon-arrow-right"></i> {_"Next Order"}</a> |
         {/if}
+        {if $order->StatusProgress !== 10}
+        <a href="#editCustomer" data-toggel="modal" data-target="#editCustomer" id="editCustomerButton"><i class="icon-large icon-user"></i> {_"Edit Customer"}</a> |
+        <a href="#editOrderInfo" data-toggel="modal" data-target="#editOrderInfo" id="editOrderInfoButton"><i class="icon-large icon-list"></i> {_"Edit Order Info"}</a> |
+        <a href="#editProducts" data-toggel="modal" data-target="#editProducts" id="editProductsButton"><i class="icon-large icon-download"></i> {_"Edit Products"}</a> |
+        {/if}
         <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
     </div>
 </div>
 </div>
+    
+    <div id="editCustomer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-user"></i> {_'Edit Customer'}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Edit customer info and click save'}</p>
+              <p>{*control editCustomerForm*}</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+    </div>
+
+    <div id="editOrderInfo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-list"></i> {_'Edit Order Info'}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Edit order info and click save'}</p>
+              <p>{control editOrderInfoForm}</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+    </div>
+
+    <div id="editProducts" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-list"></i> {_'Edit Products'}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Edit order info and click save'}</p>
+              <p>{control editProductsForm}</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+    </div>
 {/if}
 {/block}
 
@@ -23,11 +70,6 @@
 <div class="span10"> 
 {if $user->isInRole('admin')}
 
-{foreach $flashes as $flash}
-    <div class="{$flash->type}">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-{$flash->message}</div>
-{/foreach}
     <div class="row">
         <div class="span4 alert alert-block">
             <div class="span5">
@@ -193,4 +235,29 @@
         {control menu:admin}
         {/if}
 </div>
+{/block}
+
+{block script}
+<script>
+ $('#editCustomerButton').toggle(function(){
+              $('#editCustomer').modal('show');
+            },
+            function() {
+                $('#editCustomer').modal('hide');
+            });
+            
+  $('#editOrderInfoButton').toggle(function(){
+              $('#editOrderInfo').modal('show');
+            },
+            function() {
+                $('#editOrderInfo').modal('hide');
+            });          
+    $('#editProductsButton').toggle(function(){
+              $('#editProducts').modal('show');
+            },
+            function() {
+                $('#editProducts').modal('hide');
+            });            
+            
+</script>
 {/block}

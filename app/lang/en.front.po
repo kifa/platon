@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-04-25 17:05:08
+# Created: 2013-04-26 00:18:25
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-04-25 17:05+0200\n"
+"PO-Revision-Date: 2013-04-26 00:18+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -13,31 +13,31 @@ msgstr ""
 
 
 msgid "ADD Category"
-msgstr "Přidat kategorii"
+msgstr "ADD Category"
 
 msgid "Account"
-msgstr "Účet"
+msgstr "Account"
 
 msgid "Add Document"
-msgstr "Přidat dokument"
+msgstr "Add Document"
 
 msgid "Add Photo"
-msgstr "Přidat fotku"
+msgstr "Add Photo"
 
 msgid "Add Product"
 msgstr "Add Product"
 
 msgid "Add Spec"
-msgstr "Přidat specifikaci"
+msgstr "Add Spec"
 
 msgid "Address"
-msgstr "Adresa"
+msgstr "Address"
 
 msgid "Admin"
 msgstr "Admin"
 
 msgid "All orders"
-msgstr "Všechny objednávky"
+msgstr "All orders"
 
 msgid "Amount"
 msgstr "Amount"
@@ -46,10 +46,10 @@ msgid "Are"
 msgstr "Are"
 
 msgid "Back to Orders"
-msgstr "Zpět na objednávky"
+msgstr "Back to Orders"
 
 msgid "Back to SmartPanel"
-msgstr "Zpět na Smart Panel"
+msgstr "Back to SmartPanel"
 
 msgid "Buy"
 msgstr "Buy"
@@ -70,79 +70,79 @@ msgid "Choose language:"
 msgstr "Choose language:"
 
 msgid "City"
-msgstr "Město"
+msgstr "City"
 
 msgid "Click to regenerate!"
-msgstr "Klikněte pro obnovení!"
+msgstr "Click to regenerate!"
 
 msgid "Company"
-msgstr "Firma"
+msgstr "Company"
 
 msgid "Complete summary order"
-msgstr "Kompletní shrnutí objednávky"
+msgstr "Complete summary order"
 
 msgid "Create Category"
-msgstr "Vytvořit kategorii"
+msgstr "Create Category"
 
 msgid "Create a new one:"
-msgstr "Vytvořit novou:"
+msgstr "Create a new one:"
 
 msgid "Customer"
-msgstr "Zákazník"
+msgstr "Customer"
 
 msgid "Date"
-msgstr "Datum"
+msgstr "Date"
 
 msgid "Date created"
-msgstr "Datum vytvoření"
+msgstr "Date created"
 
 msgid "Delete Category"
-msgstr "Smazat kategorii"
+msgstr "Delete Category"
 
 msgid "Delete Specs"
-msgstr "Smazat specifikaci"
+msgstr "Delete Specs"
 
 msgid "Description"
-msgstr "Popis"
+msgstr "Description"
 
 msgid "Description:"
-msgstr "Popis:"
+msgstr "Description:"
 
 msgid "Description: "
 msgstr "Description:"
 
 msgid "Discount:"
-msgstr "Sleva:"
+msgstr "Discount:"
 
 msgid "Document:"
-msgstr "Dokument:"
+msgstr "Document:"
 
 msgid "Domů"
 msgstr "Home"
 
 msgid "Download"
-msgstr "Stáhnout"
+msgstr "Download"
 
 msgid "Download link"
-msgstr "Odkaz ke stažení"
+msgstr "Download link"
 
 msgid "Edit Category"
 msgstr "Edit Category"
 
 msgid "Edit Description"
-msgstr "Upravit popis a kategorii"
+msgstr "Edit Description"
 
 msgid "Edit Documents"
-msgstr "Upravit dokumenty"
+msgstr "Edit Documents"
 
 msgid "Edit Pieces"
-msgstr "Upravit množství"
+msgstr "Edit Pieces"
 
 msgid "Edit Price"
-msgstr "Upravit cenu"
+msgstr "Edit Price"
 
 msgid "Edit Specs"
-msgstr "Upravit specifikaci"
+msgstr "Edit Specs"
 
 msgid "Email"
 msgstr "Email"
@@ -151,7 +151,7 @@ msgid "Here"
 msgstr "Here"
 
 msgid "Here is all you need!"
-msgstr "Zde je vše, co potřebujete!"
+msgstr "Here is all you need!"
 
 msgid "Home"
 msgstr "Home"
@@ -263,6 +263,12 @@ msgstr "Fotka:"
 
 msgid "Pieces:"
 msgstr "Množství:"
+
+msgid "Please complete mandatory field."
+msgstr "Please complete mandatory field."
+
+msgid "Please enter a valid email address."
+msgstr "Please enter a valid email address."
 
 msgid "Please enter your password."
 msgstr "Please enter your password."
@@ -413,91 +419,4 @@ msgstr "Find out more"
 
 msgid "Změnit heslo"
 msgstr "Změnit heslo"
-
-msgid "Please fill in these information"
-msgstr ""
-
-msgid "Please complete mandatory field."
-msgstr ""
-
-msgid "Smartphones"
-msgstr ""
-
-msgid "Samsung"
-msgstr ""
-
-msgid "Sony"
-msgstr ""
-
-msgid "Apple"
-msgstr ""
-
-msgid "Lenovo"
-msgstr ""
-
-msgid "Nokia"
-msgstr ""
-
-msgid "Are you sure to delete this category?"
-msgstr ""
-
-msgid "If so, choose where to move products!"
-msgstr ""
-
-msgid "Move products to category:"
-msgstr ""
-
-msgid "Please enter a valid email address."
-msgstr ""
-
-msgid "Spodní prádlo"
-msgstr ""
-
-msgid "Select photo and click Add photo"
-msgstr ""
-
-msgid "Edit your description and click Save desccription."
-msgstr ""
-
-msgid "This has to be a number."
-msgstr ""
-
-msgid "It should be less then price"
-msgstr ""
-
-msgid "Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow."
-msgstr ""
-
-msgid "Select one of already created:"
-msgstr ""
-
-msgid "Weight"
-msgstr ""
-
-msgid "Display size"
-msgstr ""
-
-msgid "Display resolution"
-msgstr ""
-
-msgid "Battery"
-msgstr ""
-
-msgid "Enter Value:"
-msgstr ""
-
-msgid "Select unit:"
-msgstr ""
-
-msgid "g"
-msgstr ""
-
-msgid "mAh"
-msgstr ""
-
-msgid "px"
-msgstr ""
-
-msgid "\""
-msgstr ""
 

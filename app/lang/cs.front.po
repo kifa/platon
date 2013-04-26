@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-04-25 16:02:06
+# Created: 2013-04-26 00:08:29
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-04-25 16:02+0200\n"
+"PO-Revision-Date: 2013-04-26 00:08+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -39,6 +39,9 @@ msgstr "Množství"
 msgid "Are"
 msgstr "Jste"
 
+msgid "Back to SmartPanel"
+msgstr "Zpět na Smart Panel"
+
 msgid "Buy"
 msgstr "Koupit"
 
@@ -57,6 +60,12 @@ msgstr "Mobilní telefon"
 msgid "Choose language:"
 msgstr "Vyberte jazyk:"
 
+msgid "Close without saving"
+msgstr "Zavřít bez uložení"
+
+msgid "Create new payment:"
+msgstr "Vytvořit novou platbu:"
+
 msgid "Description"
 msgstr "Popis"
 
@@ -68,6 +77,9 @@ msgstr "Popis:"
 
 msgid "Discount:"
 msgstr "Sleva:"
+
+msgid "Edit"
+msgstr "Upravit"
 
 msgid "Edit Category"
 msgstr "Upravit kategorii"
@@ -81,8 +93,17 @@ msgstr "Upravit Cenu"
 msgid "Edit Product"
 msgstr "Upravit Produkt"
 
+msgid "Edit payment"
+msgstr "Upravit platbu"
+
+msgid "Edit your description and click Save desccription."
+msgstr "Upravte popis a kliknete na Uložit popis"
+
 msgid "Here"
 msgstr "Zde"
+
+msgid "Here you see all payment methods."
+msgstr "Zde jsou všechny Vaše platební metody."
 
 msgid "Home"
 msgstr "Domů"
@@ -95,6 +116,9 @@ msgstr "Zde musí být číslo."
 
 msgid "Logout"
 msgstr "Odhlásit se"
+
+msgid "Name"
+msgstr "Jméno"
 
 msgid "Name:"
 msgstr "Jméno:"
@@ -117,6 +141,12 @@ msgstr "Přehled"
 msgid "Payment"
 msgstr "Platby a slevy"
 
+msgid "Payment name:"
+msgstr "Název platby"
+
+msgid "Payment price:"
+msgstr "Poplatek za platbu:"
+
 msgid "Photo:"
 msgstr "Foto:"
 
@@ -125,6 +155,9 @@ msgstr "Prosím vyplňte povinná pole."
 
 msgid "Please fill in these information"
 msgstr "Prosím vyplňte"
+
+msgid "Price"
+msgstr "Cena"
 
 msgid "Price:"
 msgstr "Cena:"
@@ -144,6 +177,9 @@ msgstr "Vyberte foto a klikněte na Přidat Foto"
 msgid "Shipping"
 msgstr "Poštovné"
 
+msgid "Sign In"
+msgstr "Přihlásit"
+
 msgid "Smartphone"
 msgstr "Smartphone"
 
@@ -152,6 +188,9 @@ msgstr "Statistiky"
 
 msgid "Tablets"
 msgstr "Tablet"
+
+msgid "This has to be a number"
+msgstr "Zde by mělo být číslo"
 
 msgid "Track order"
 msgstr "Sledovat objednávku"
@@ -162,15 +201,21 @@ msgstr "Sledovat objednávku"
 msgid "View"
 msgstr "Prohlédnout"
 
+msgid "Warehouse"
+msgstr "Sklad"
+
 msgid "You"
 msgstr "Právě"
 
 msgid "You cannot edit product here!"
 msgstr "Pro úpravu přejděte do kategorie!"
 
+msgid "Your email:"
+msgstr "Váš email:"
+
 msgid "Your order number:"
 msgstr "Číslo Vaší objednávky"
 
-msgid "Edit your description and click Save desccription."
-msgstr "Upravte popis a kliknete na Uložit popis"
+msgid "Please enter a valid email address."
+msgstr "Prosím zadejte email."
 
