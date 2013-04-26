@@ -482,7 +482,7 @@ class ProductPresenter extends BasePresenter {
                     ->setRequired();
             
             $editForm->addSelect('category', 'Select Category:', $categories)
-                    ->setPrompt($prompt)
+
                     ->setDefaultValue($this->row['CategoryID']);
             
             $editForm->addTextArea('text', 'Description:', 150, 150)
@@ -511,7 +511,9 @@ class ProductPresenter extends BasePresenter {
 
             $this->productModel->updateProduct($form->values->id, 'ProductName', $form->values->name);
             $this->productModel->updateProduct($form->values->id, 'ProductDescription', $form->values->text);
+            if ($form->values->producer != NULL) {
             $this->productModel->updateProduct($form->values->id, 'ProducerID', $form->values->producer);
+            }
             $this->productModel->updateProduct($form->values->id, 'CategoryID', $form->values->category);
             $this->redirect('this');
         }
