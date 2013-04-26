@@ -466,7 +466,7 @@ class ProductPresenter extends BasePresenter {
 
             $editForm = new Nette\Application\UI\Form;
             $editForm->setTranslator($this->translator);
-            // $editForm->setRenderer(new BootstrapRenderer);
+            $editForm->setRenderer(new BootstrapRenderer);
             foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
                 $categories[$id] = $category->CategoryName;
             }
