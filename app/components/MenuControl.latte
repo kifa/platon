@@ -11,7 +11,11 @@
                 <li class="{*ifCurrent Product:products $catID}active{/ifCurrent*}"><a href="{*plink product:products $catID*}"><i class="icon-spinner"></i>{$producer->ProducerName}</a></li> 
                 {/foreach}
                 {if $user->isInRole('admin')}
+                {ifCurrent Product:products}
                 <li><a href="#addCategory" data-toggel="modal" data-target="#addCategory" id="addCategoryButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Category"}</a></li>
+                {else}
+                
+                {/ifCurrent}
                 {/if}
             </ul>
         </div>

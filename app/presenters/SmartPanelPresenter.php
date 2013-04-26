@@ -227,7 +227,9 @@ class SmartPanelPresenter extends BasePresenter {
                      $this->orderRow['Payment'],
                      $this->orderRow['TotalProducts']);
              
-             $message = Html::el('span', ' Product was sucessfully added!');
+            $this->productModel->decreaseProduct($form->values->product, 1); 
+             
+            $message = Html::el('span', ' Product was sucessfully added!');
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
             $this->flashMessage($message, 'alert');

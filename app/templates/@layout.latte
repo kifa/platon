@@ -79,6 +79,7 @@
             
             {if $user->isInRole('admin')}
                {control menu:admin}
+            
             {/if}
             <div class="span2">
                     <ul class="nav nav-list">
@@ -98,7 +99,10 @@
                 
                 {control modalControl:tracking}
    </div>
-            
+      {block modal}
+       
+       
+        {/block}      
         </div>
    </div>
 </div>	{block scripts}
@@ -126,7 +130,15 @@
                   function() {
                       $('#tracking').modal('hide');
                   });
-                     
+             {if $user->isInRole('admin')}   
+               $('#addCategoryButton').toggle(function(){
+              $('#addCategory').modal('show');
+            },
+            function() {
+                $('#addCategory').modal('hide');
+            });
+            {/if}
+    
             });
         </script>
         {if $user->isInRole('admin')}
