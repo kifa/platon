@@ -106,6 +106,7 @@ class OrderModel extends Repository {
     public function updateOrder($orderid, $shipping, $payment) {
         $paymentPrice = $this->loadPaymentPrice($payment);
         $deliveryPrice = $this->loadDeliveryPrice($shipping);
+        $deliveryPaymentPrice = $paymentPrice + $deliveryPrice;
         
         $productPrice = $this->loadOrder($orderid)->ProductsPrice;
         $total = $productPrice + $deliveryPrice + $paymentPrice;
@@ -113,7 +114,7 @@ class OrderModel extends Repository {
         $insert = array(
                 'DeliveryID' => $shipping,
                 'PaymentID' => $payment,
-                'DeliveryPaymentPrice' => $deliveryPrice,
+                'DeliveryPaymentPrice' => $deliveryPaymentPrice,
                 'TotalPrice' => $total
                 );   
         
@@ -127,6 +128,7 @@ class OrderModel extends Repository {
         //recalculating order
         $deliveryPrice = $this->loadDeliveryPrice($shipping);
         $paymentPrice = $this->loadPaymentPrice($payment);
+        $deliveryPaymentPrice = $paymentPrice + $deliveryPrice;
         
         $total = $products + $deliveryPrice + $paymentPrice + $newProduct;
         
@@ -138,7 +140,7 @@ class OrderModel extends Repository {
         $insert = array(
                 'DeliveryID' => $shipping,
                 'PaymentID' => $payment,
-                'DeliveryPaymentPrice' => $deliveryPrice,
+                'DeliveryPaymentPrice' => $deliveryPaymentPrice,
                 'TotalPrice' => $total,
                 'ProductsPrice' => $products + $newProduct
                 );   
