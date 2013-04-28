@@ -1,6 +1,6 @@
 <ul class="thumbnails">
             {foreach $products as $id => $product}
-    <li class="span3 setview">
+    <li class="span3 setview miniproduct">
         <div class="thumbnail {$product->ProductStatusID == 1 ? alert}">
            {if $user->isInRole('admin')}
             <div class="row">

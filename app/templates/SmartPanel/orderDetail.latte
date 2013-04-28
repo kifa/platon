@@ -16,6 +16,8 @@
         <a href="#editCustomer" data-toggel="modal" data-target="#editCustomer" id="editCustomerButton"><i class="icon-large icon-user"></i> {_"Edit Customer"}</a> |
         <a href="#editOrderInfo" data-toggel="modal" data-target="#editOrderInfo" id="editOrderInfoButton"><i class="icon-large icon-list"></i> {_"Edit Order Info"}</a> |
         <a href="#editProducts" data-toggel="modal" data-target="#editProducts" id="editProductsButton"><i class="icon-large icon-download"></i> {_"Edit Products"}</a> |
+      
+        <a href="{plink setStatus! $order->OrderID, 0, 'Cancelled'}"><i class="icon-large icon-ban-circle"></i> {_"Cancel order"}</a> |
         {/if}
         <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
     </div>
@@ -57,9 +59,10 @@
             </div>
             <div class="modal-body">
                 <p>{_'Edit order info and click save'}</p>
-              <p>{control editProductsForm}</p>
             </div>
             <div class="modal-footer">
+                {control addProductsForm}
+                
               <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
     </div>
@@ -71,10 +74,10 @@
 {if $user->isInRole('admin')}
 
     <div class="row">
-        <div class="span4 alert alert-block">
+        <div class="span4 {if $order->StatusProgress == 0} grey {/if} alert alert-block">
             <div class="span5">
                 <p>
-                    <i class="{if $order->StatusProgress == 10}icon-ok {else} icon-spinner icon-spin{/if} left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
+                    <i class="{if $order->StatusProgress == 10}icon-ok {elseif $order->StatusProgress == 0} icon-ban-circle {else} icon-spinner icon-spin{/if} left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
             {$order->StatusName}
                 </p>
             </div>
@@ -86,7 +89,7 @@
                 <ul class="inline">
                     {foreach $statuses as $id => $status}
                     {if !($iterator->isFirst())}
-                    <li>{if $id !== $order->StatusID}<a href="{plink SmartPanel:setStatus $order->OrderID, $id}" >{/if}{$status->StatusName}
+                    <li>{if $id !== $order->StatusID}<a href="{plink setStatus! $order->OrderID, $id, $status->StatusName}" >{/if}{$status->StatusName}
                         {if !($iterator->isLast())}<i class="icon-arrow-right"></i>{/if}{if $iterator->isLast()}<i class="icon-ok"></i>{/if}{if $id !== $order->StatusID}</a>{/if}</li>
                     {/if}
                     {/foreach}
@@ -122,7 +125,8 @@
                                            {/if}
                                              {$product->ProductNumber}</td>
                     <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
-                    <td>{$product->Quantity}</td>
+                    
+                    <td>{$product->Quantity} {if $order->StatusProgress !== 10 && $productsInOrder !== 1 }<a href="{plink removeProduct! $order->OrderID, $product->ProductID, $product->Quantity + $product->PiecesAvailable}"><i class="icon-trash"></i></a> {/if}</td>
                     <td>{$product->UnitPrice},-</td>
                     <td>{$subtotal = $product->Quantity * $product->UnitPrice},-</td>
                     <td><i class="{if $product->PiecesAvailable <= 0 } icon-ban-circle {elseif $product->PiecesAvailable < 5} icon-warning-sign {else} icon-ok-sign {/if}" title="{_'In stock'}: {$product->PiecesAvailable}"></i></td>

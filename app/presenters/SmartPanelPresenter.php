@@ -31,6 +31,8 @@ class SmartPanelPresenter extends BasePresenter {
     protected $translator;
     
     private $orderRow;
+    
+    private $productInOrder;
 
     protected function startup() {
         parent::startup();
@@ -49,9 +51,15 @@ class SmartPanelPresenter extends BasePresenter {
         $this->translator = $translator;
     }
 
-    public function actionSetStatus($orderID, $statusID) {
-        $this->orderModel->setStatus($orderID, $statusID);
-        $this->redirect('orderDetail', $orderID);
+    public function handleSetStatus($orderid, $statusID, $name) {
+            $this->orderModel->setStatus($orderid, $statusID);
+        
+            $message = Html::el('span', ' Order status in now: ' . $name);
+            $e = Html::el('i')->class('icon-ok-sign left');
+            $message->insert(0, $e);
+            $this->flashMessage($message, 'alert alert-info');
+                    
+        $this->redirect('this');
     }
 
     protected function createComponentPasswordForm() {
@@ -124,12 +132,12 @@ class SmartPanelPresenter extends BasePresenter {
      *
      ********************************************************************/
     
-    public function actionOrderDetail($orderNo) {
+    public function actionOrderDetail($orderid) {
         if (!$this->getUser()->isInRole('admin')) {
              $this->redirect('Sign:in');
         } else {
         
-        $row = $this->orderModel->loadOrder($orderNo);
+        $row = $this->orderModel->loadOrder($orderid);
         if (!$row) {
             $message = Html::el('span', ' This order wasnt placed, yet. Sorry.');
             $e = Html::el('i')->class('icon-warning-sign left');
@@ -143,10 +151,35 @@ class SmartPanelPresenter extends BasePresenter {
                                    // 'Total' => $row->TotalPrice,
                                     'TotalProducts' => $row->ProductsPrice);
             $editForm = $this['editOrderInfoForm'];
+            $this->productInOrder = $this->orderModel->checkRemoveProduct($orderid);
         }
         
     }
     
+    public function handleRemoveProduct($orderid, $product, $amount) {
+        
+        if ($this->productInOrder > 1) {
+        $this->orderModel->removeOrderProducts($orderid, $product);
+        $this->productModel->updateProduct($product, 'PiecesAvailable', $amount);
+        
+        $message = Html::el('span', ' Product was sucessfully removed.');
+            $e = Html::el('i')->class('icon-ok-sign left');
+            $message->insert(0, $e);
+            $this->flashMessage($message, 'alert');
+        }
+        else {
+            $message = Html::el('span', ' Cannot delete last product. Would you like to ');
+            $cancel = Html::el('a', 'CANCEL ORDER')->href($this->link('setStatus!', $orderid, 0));
+            $e = Html::el('i')->class('icon-ok-sign left');
+            $message->insert(0, $e);
+            $message->insert(2, $cancel);
+            $this->flashMessage($message, 'alert');
+        }
+        $this->redirect('this'); 
+        
+    
+    }
+
     protected function createComponentEditOrderInfoForm() {
         
         $shippers = array();
@@ -191,7 +224,7 @@ class SmartPanelPresenter extends BasePresenter {
         
     }
     
-    protected function createComponentEditProductsForm() {
+    protected function createComponentAddProductsForm() {
         
                
         $editProducts = new Nette\Application\UI\Form;
@@ -211,13 +244,13 @@ class SmartPanelPresenter extends BasePresenter {
         $editProducts->addSubmit('add' , 'Add products')
                 ->setAttribute('class', 'btn-primary upl')
                     ->setAttribute('data-loading-text', 'Adding...');
-        $editProducts->onSuccess[] = $this->editProductsFormSubmitted;
+        $editProducts->onSuccess[] = $this->addProductsFormSubmitted;
         return $editProducts;
                 
         
     }
     
-    public function editProductsFormSubmitted($form) {
+    public function addProductsFormSubmitted($form) {
          if ($this->getUser()->isInRole('admin')) {
              $pID = $form->values->product;
           
@@ -237,16 +270,17 @@ class SmartPanelPresenter extends BasePresenter {
          }
     }
 
-    public function renderOrderDetail($orderNo) {
+    public function renderOrderDetail($orderid) {
         if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
         } else {
-            $this->template->products = $this->orderModel->loadOrderProduct($orderNo);
-            $this->template->order = $this->orderModel->loadOrder($orderNo);
+            $this->template->products = $this->orderModel->loadOrderProduct($orderid);
+            $this->template->order = $this->orderModel->loadOrder($orderid);
             $this->template->statuses = $this->orderModel->loadStatus('');
-            $this->template->address = $this->orderModel->loadOrderAddress($orderNo);
-            
-            $this->template->nextOrder = $this->orderModel->loadOrder($orderNo+1);
+            $this->template->address = $this->orderModel->loadOrderAddress($orderid);
+            $this->template->productsInOrder = $this->productInOrder;
+                    
+            $this->template->nextOrder = $this->orderModel->loadOrder($orderid+1);
         }
     }
 

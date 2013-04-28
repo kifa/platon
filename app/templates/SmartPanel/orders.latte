@@ -30,12 +30,12 @@
             <tbody>
                 {foreach $orders as $id => $order}
                 
-                <tr class="{if $order->StatusID == 3}success {elseif $order->StatusID == 2} info {else} warning {/if}">
+                <tr class="{if $order->StatusID == 10} success {elseif $order->StatusID == 2} info {elseif $order->StatusID == 0} grey {else} warning {/if}">
                     <td>{$id}</td>
                     <td>{$order->DateCreated|date:'%d.%m.%Y'}</td>
                     <td><a href="{plink SmartPanel:orderDetail $id}">{$order->Name}</a></td>
                     <td>{$order->TotalPrice},-</td>
-                    <td>{if $order->StatusProgress == 10}<i class="icon-ok"></i> {/if}{$order->StatusName}</td>
+                    <td><i class="{if $order->StatusProgress == 10}icon-ok {elseif $order->StatusProgress == 0} icon-ban-circle {else} icon-spinner icon-spin{/if} left"></i> {$order->StatusName}</td>
                 </tr>
                 
                 {/foreach}

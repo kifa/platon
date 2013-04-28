@@ -147,6 +147,26 @@ class OrderModel extends Repository {
         
     }
     
+    public function removeOrderProducts($orderid, $product) {
+        $price = $this->removeOrderDetail($orderid, $product);
+        
+        $order = $this->loadOrder($orderid);
+        $total = $order->TotalPrice;
+        $products = $order->ProductsPrice;
+        
+         //updating order total info
+        $insert = array(
+                'TotalPrice' => $total - $price,
+                'ProductsPrice' => $products + $price
+                );   
+        
+        return $this->getTable('orders')->where('OrderID',$orderid)->update($insert);
+    }
+
+    public function checkRemoveProduct($orderid) {
+        return $this->getTable('orderdetails')->where('OrderID', $orderid)->count();
+    }
+
     /*
      * Insert order details
      */
@@ -162,6 +182,16 @@ class OrderModel extends Repository {
         return $this->getTable('orderdetails')->insert($insert);
     }
     
+    /* return price of deleted product */
+    public function removeOrderDetail($orderid, $product) {
+        
+        $detail = $this->getTable('orderdetails')->where('OrderID', $orderid)->where('ProductID', $product)->fetch();
+        $price = $detail->UnitPrice;
+        $detail->delete();
+        
+        return $price;
+        
+    }
     /*
      * Load order statuses
      */
