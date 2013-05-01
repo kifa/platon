@@ -35,12 +35,13 @@ class CategoryModel extends Repository {
      * @param ? example: pozice počátečního znaku
      * @return string
      */
-    public function createCategory($name, $description=NULL, $higher=NULL){
+    public function createCategory($name, $description=NULL, $higher=NULL, $photo=NULL){
        
         $insert = array(
             'CategoryName' => $name,
             'CategoryDescription' => $description,
-            'HigherCategoryID' => $higher
+            'HigherCategoryID' => $higher,
+            'CategoryPhoto' => $photo
         );
         $row = $this->getTable('Category')->insert($insert);
         return $row->CategoryID;
@@ -55,14 +56,16 @@ class CategoryModel extends Repository {
      * @return string
      */
 
-    public function updateCategory($id, $name, $desc, $higher=NULL){
+    public function updateCategory($id, $name, $desc, $higher=NULL, $status, $photo=NULL){
         
-            $insert = array(
+            $update = array(
                 'CategoryName' => $name,
                 'CategoryDescription' => $desc,
-                'HigherCategoryID' => $higher
+                'HigherCategoryID' => $higher,
+                'CategoryStatus' => $status,
+                'CategoryPhoto' => $photo
                 );        
-        return $this->getTable('category')->where('CategoryID',$id)->update($insert);
+        return $this->getTable('category')->where('CategoryID',$id)->update($update);
        
     }
 
