@@ -5,23 +5,26 @@
 
 <div class="row">
     <div class="span10">
-        <a href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_"Back to Orders"}</a> |
+        <a class="btn" href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_"Back to Orders"}</a> 
+        <div class="btn-group">
         {if $order->OrderID != 1}
-        <a href="{plink SmartPanel:orderDetail $order->OrderID - 1 }"><i class="icon-arrow-left"></i> {_"Prev Order"}</a> |
+        <a class="btn" href="{plink SmartPanel:orderDetail $order->OrderID - 1 }"><i class="icon-arrow-left"></i> {_"Prev Order"}</a> 
         {/if}
         {if $nextOrder}
-        <a href="{plink SmartPanel:orderDetail $order->OrderID + 1}"><i class="icon-arrow-right"></i> {_"Next Order"}</a> |
+        <a class="btn" href="{plink SmartPanel:orderDetail $order->OrderID + 1}"><i class="icon-arrow-right"></i> {_"Next Order"}</a> 
         {/if}
+        </div>
+        <div class="btn-group">
         {if $order->StatusProgress !== 10}
-        <a href="#editCustomer" data-toggel="modal" data-target="#editCustomer" id="editCustomerButton"><i class="icon-large icon-user"></i> {_"Edit Customer"}</a> |
-        <a href="#editOrderInfo" data-toggel="modal" data-target="#editOrderInfo" id="editOrderInfoButton"><i class="icon-large icon-list"></i> {_"Edit Order Info"}</a> |
-        <a href="#editProducts" data-toggel="modal" data-target="#editProducts" id="editProductsButton"><i class="icon-large icon-download"></i> {_"Edit Products"}</a> |
-      
+        <a class="btn" href="#editCustomer" data-toggel="modal" data-target="#editCustomer" id="editCustomerButton"><i class="icon-large icon-user"></i> {_"Edit Customer"}</a> 
+        <a class="btn" href="#editOrderInfo" data-toggel="modal" data-target="#editOrderInfo" id="editOrderInfoButton"><i class="icon-large icon-list"></i> {_"Edit Order Info"}</a> 
+        <a class="btn" href="#editProducts" data-toggel="modal" data-target="#editProducts" id="editProductsButton"><i class="icon-large icon-download"></i> {_"Edit Products"}</a> 
+        </div>
          {if $order->StatusProgress !== 0}
-        <a href="#cancelOrder" data-toggel="modal" data-target="#cancelOrder" id="cancelOrderButton"><i class="icon-large icon-ban-circle"></i> {_"Cancel order"}</a> |
+        <a class="btn" href="#cancelOrder" data-toggel="modal" data-target="#cancelOrder" id="cancelOrderButton"><i class="icon-large icon-ban-circle"></i> {_"Cancel order"}</a> 
         {/if}
         {/if}
-        <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+        <a class="btn" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
     </div>
 </div>
 </div>
@@ -80,6 +83,21 @@
             <div class="modal-footer">
                 
               <a class="btn btn-warning" href="{plink setStatus! $order->OrderID, 0, 'Cancelled'}"><i class="icon-large icon-ban-circle"></i> {_"Cancel order"}</a>
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+    </div>
+
+    <div id="addNote" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-ban-circle"></i> {_'Add Note'}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Add any note to this order'}</p>
+            </div>
+            <div class="modal-footer">
+                
+              {control addNoteForm}
               <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
     </div>
@@ -215,7 +233,7 @@
                     {foreach $notes as $note}
                 <p>{$note->NotesName} - {$note->NotesDescription} - {$note->NotesDate}</p>
                 {/foreach}
-
+                 <a class="btn" href="#addNote" data-toggel="modal" data-target="#addNote" id="addNoteButton"><i class="icon-large icon-plus-sign"></i> {_"Add note"}</a> 
             </div>
         </div>
 
@@ -297,6 +315,13 @@
             function() {
                 $('#cancelOrder').modal('hide');
             });      
+            
+     $('#addNoteButton').toggle(function(){
+              $('#addNote').modal('show');
+            },
+            function() {
+                $('#addNote').modal('hide');
+            });  
             
      $('.delProduct .del').click(function(){
               $(this).parent().children('.ask').show();
