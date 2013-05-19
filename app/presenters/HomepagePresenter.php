@@ -27,17 +27,18 @@ class HomepagePresenter extends BasePresenter {
         $this->translator = $translator;
     }
 
-    protected function createComponentProduct() {
-        $control = new ProductControl();
-        $control->setService($this->context->productModel);
-        $control->setTranslator($this->translator);
-        return $control;
-    }
-    
+  
     
     public function renderDefault() {
 
-        $this->template->products = $this->productModel->loadCatalog('');
+         if ($this->getUser()->isInRole('admin')) {
+            // load all products
+        $this->template->products = $this->productModel->loadCatalogAdmin("");
+        } else {
+            // load published products
+        $this->template->products = $this->productModel->loadCatalog("");
+        }
+       
         $this->template->category = $this->categoryModel->loadCategory("");
         $this->template->anyVariable = 'any value';
     }

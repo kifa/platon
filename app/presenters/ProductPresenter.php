@@ -84,14 +84,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    protected function createComponentProduct() {
-
-        $control = new ProductControl();
-        $control->setService($this->context->productModel);
-        $control->setCategoryID($this->catId);
-        $control->setTranslator($this->translator);
-        return $control;
-    }
+    
 
     protected function createComponentEditControl() {
         if ($this->getUser()->isInRole('admin')) {
@@ -110,7 +103,13 @@ class ProductPresenter extends BasePresenter {
      ************************************************************************/
 
     public function actionProducts($catID) {
+         if ($this->getUser()->isInRole('admin')) {
+            // load all products
+       $row = $this->productModel->loadCatalogAdmin($catID);
+        } else {
+            // load published products
         $row = $this->productModel->loadCatalog($catID);
+        }
         if (!$row) {
             $this->flashMessage('Categry not available', 'alert');
             $this->redirect('Homepage:');
@@ -132,6 +131,18 @@ class ProductPresenter extends BasePresenter {
             }
         }
     }
+    
+
+     public function handleSetCategoryStatus($catID, $categoryStatus) {
+         if ($this->getUser()->isInRole('admin')) {
+            $this->categoryModel->setCategoryStatus($catID, $categoryStatus);
+             $e = 'Category status is now:';
+                $this->flashMessage($e, 'alert');
+            $this->redirect('this', $catID);
+        }
+    }
+    
+    
     public function createComponentAddProductForm() {
 
         if ($this->getUser()->isInRole('admin')) {
@@ -157,6 +168,8 @@ class ProductPresenter extends BasePresenter {
             $addProduct->addText('amount', 'Amount')
                     ->setDefaultValue('1')
                     ->addRule(FORM::INTEGER, 'It has to be a number!')
+                    ->setRequired();
+            $addProduct->addTextArea('short', 'Impress: ', 5)
                     ->setRequired();
             $addProduct->addTextArea('desc', 'Description: ', 10)
                     ->setRequired()
@@ -188,6 +201,7 @@ class ProductPresenter extends BasePresenter {
                     $form->values->price, 
                     $form->values->producer, //Producer                
                     '11111', //Product Number
+                    $form->values->short,
                     $form->values->desc, //Description
                     '123456', //Ean
                     '122', //QR
@@ -230,6 +244,14 @@ class ProductPresenter extends BasePresenter {
     public function handleDeleteProduct($catID, $id) {
         if ($this->getUser()->isInRole('admin')) {
             $this->productModel->deleteProduct($id);
+            $this->redirect('this', $catID);
+        }
+    }
+    
+    
+    public function handleArchiveProduct($catID, $id) {
+        if ($this->getUser()->isInRole('admin')) {
+            $this->productModel->archiveProduct($id);
             $this->redirect('this', $catID);
         }
     }
@@ -365,8 +387,16 @@ class ProductPresenter extends BasePresenter {
     public function renderProducts($catID) {
 
         $this->catId = $catID;
+        
+        if ($this->getUser()->isInRole('admin')) {
+            // load all products
+        $this->template->products = $this->productModel->loadCatalogAdmin($catID);
+        } else {
+            // load published products
         $this->template->products = $this->productModel->loadCatalog($catID);
-        $this->template->category = $this->categoryModel->loadCategory($catID);
+        }
+        $this->template->category = $this->categoryModel->loadCategory($catID);     
+
     }
 
     /*     * *******************************************************************
@@ -485,6 +515,10 @@ class ProductPresenter extends BasePresenter {
 
                     ->setDefaultValue($this->row['CategoryID']);
             
+            $editForm->addTextArea('short', 'Impress:', 10)
+                    ->setDefaultValue($this->row['ProductDescription'])
+                    ->setRequired();
+                    
             $editForm->addTextArea('text', 'Description:', 150, 150)
                     ->setDefaultValue($this->row['ProductDescription'])
                     ->setRequired()
@@ -510,7 +544,8 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
 
             $this->productModel->updateProduct($form->values->id, 'ProductName', $form->values->name);
-            $this->productModel->updateProduct($form->values->id, 'ProductDescription', $form->values->text);
+           $this->productModel->updateProduct($form->values->id, 'ProductDescription', $form->values->text);
+           $this->productModel->updateProduct($form->values->id, 'ProductShort', $form->values->short);
             if ($form->values->producer != NULL) {
             $this->productModel->updateProduct($form->values->id, 'ProducerID', $form->values->producer);
             }

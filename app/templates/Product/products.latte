@@ -13,8 +13,18 @@
                 <a href="#editCategory" data-toggel="modal" data-target="#editCategory" id="editCategoryButton"><i class="icon-large icon-pencil"></i> {_"Edit Category"}</a> |
                 <a href="#deleteCategory" data-toggel="modal" data-target="#deleteCategory" id="deleteCategoryButton"><i class="icon-large icon-trash"></i> {_"Delete Category"}</a> |
 
+                
+                
+                {if $category->CategoryStatus == 0}
+                <a href="{plink setCategoryStatus! $category->CategoryID, 1}">{_'Publish category!'}</a>
+                {elseif $category->CategoryStatus == 1}
+                <a href="{plink setCategoryStatus! $category->CategoryID, 2}">{_'Feature category!'}</a> |
+                    <a href="{plink setCategoryStatus! $category->CategoryID, 0}">{_'Unpublish category!'}</a>
+
                 {/if}
-                <a href="#" id="setView"><i class="icon-th-list icon-large"></i> {_"View as List"}</a>
+
+                {/if}
+                
             </div>
         </div>
         
@@ -26,7 +36,7 @@
     
 {block content}
 <div class="span9">    
-    {control product}
+    {include ../Product/productCatalog.latte}
 </div>    
 {/block}
 
@@ -108,28 +118,6 @@
 
     </script>
     {/if}
-    
-    <script>
-        $(document).ready(function() {
-            $('#setView').toggle(function(){
-             
-              $('.setview').attr('class', 'span10 setview');
-              $('#setview').children('i').attr('class', 'icon-large icon-th');
-     
-            },
-            function() {
-
-              $('.setview').attr('class', 'span3 setview');
-              $('#setview').children('i').attr('class', 'icon-large icon-th-list');
-
-            });
-           
-           // $('#frm-editCategoryForm-edit').insertBefore('.modal-footer button');
-  
-          
-            
-        });
-    </script>
 
 {/block}
     
@@ -191,11 +179,11 @@
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h3 id="myModalLabel"><i class="icon-pencil"></i> Add Category</h3>
             </div>
-            <div class="modal-body">
+            <div class="modal-body"></div>
+            <div class="modal-footer">
                 <p>{_'Please fill in these information'}</p>
               {control addCategoryForm}
-            </div>
-            <div class="modal-footer">
+            
               <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
             </div>
             </div>

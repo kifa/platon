@@ -15,8 +15,33 @@ class ProductModel extends Repository {
      * @return string
      */
     public function loadCatalog($catID) {
+        
+        //load only published products
+        
         //$id = '2';
         //return $this->getTable('Product')->select('Product.*,Price.*')->where('CategoryID', $id);
+        if($catID==''){
+            //return $this->getTable('product')->select('product.ProductID, product.ProductName,
+            //    product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*');            
+            return $this->getDB()->query('SELECT * FROM product JOIN price 
+                ON price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
+                JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+                WHERE Photo.CoverPhoto="1" and product.ProductStatusID="2"');                              
+            
+            }
+        else
+        {  return $this->getDB()->query('SELECT * FROM product JOIN price ON 
+            price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
+            JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+            WHERE Photo.CoverPhoto="1" and product.ProductStatusID="2" and product.CategoryID=?',$catID);
+            //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
+              //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
+        }
+    }
+    
+    public function loadCatalogAdmin($catID) {
+        
+        // load ALL products, even unpublished        
         if($catID==''){
             //return $this->getTable('product')->select('product.ProductID, product.ProductName,
             //    product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*');            
@@ -70,6 +95,7 @@ WHERE Product.ProductID=?',$id)->fetch();
             'ProductName' => $name,
             'Producer' => $producer,            
             'ProductNumber' => $prodnumber,
+            'ProductShort' => $short,
             'ProductDescription' => $description,
             //'ProductStatusID' => '',            
             'ProductEAN' => $ean,

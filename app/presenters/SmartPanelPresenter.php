@@ -52,12 +52,19 @@ class SmartPanelPresenter extends BasePresenter {
     }
 
     public function handleSetStatus($orderid, $statusID, $name) {
+        
+           
             $this->orderModel->setStatus($orderid, $statusID);
         
             $message = Html::el('span', ' Order status in now: ' . $name);
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
+             if ($statusID !== 0) {
             $this->flashMessage($message, 'alert alert-info');
+               }
+            else {
+                 $this->flashMessage($message, 'alert alert-error');
+            }
                     
         $this->redirect('this');
     }
@@ -149,7 +156,8 @@ class SmartPanelPresenter extends BasePresenter {
                                     'Payment' => $row->PaymentID,
                                    'OrderID' => $row->OrderID,
                                    // 'Total' => $row->TotalPrice,
-                                    'TotalProducts' => $row->ProductsPrice);
+                                    'TotalProducts' => $row->ProductsPrice,
+                                     'Note' => $row->Note);
             $editForm = $this['editOrderInfoForm'];
             $this->productInOrder = $this->orderModel->checkRemoveProduct($orderid);
         }
@@ -268,6 +276,10 @@ class SmartPanelPresenter extends BasePresenter {
             $this->flashMessage($message, 'alert');
             $this->redirect('this');
          }
+    }
+    
+    public function createComponentEditNote() {
+        
     }
 
     public function renderOrderDetail($orderid) {

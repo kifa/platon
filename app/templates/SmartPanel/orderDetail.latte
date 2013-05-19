@@ -17,7 +17,9 @@
         <a href="#editOrderInfo" data-toggel="modal" data-target="#editOrderInfo" id="editOrderInfoButton"><i class="icon-large icon-list"></i> {_"Edit Order Info"}</a> |
         <a href="#editProducts" data-toggel="modal" data-target="#editProducts" id="editProductsButton"><i class="icon-large icon-download"></i> {_"Edit Products"}</a> |
       
-        <a href="{plink setStatus! $order->OrderID, 0, 'Cancelled'}"><i class="icon-large icon-ban-circle"></i> {_"Cancel order"}</a> |
+         {if $order->StatusProgress !== 0}
+        <a href="#cancelOrder" data-toggel="modal" data-target="#cancelOrder" id="cancelOrderButton"><i class="icon-large icon-ban-circle"></i> {_"Cancel order"}</a> |
+        {/if}
         {/if}
         <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
     </div>
@@ -66,6 +68,23 @@
               <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
     </div>
+
+    <div id="cancelOrder" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-ban-circle"></i> {_'Cancel order'} {$order->OrderID}?</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Do you really want to CANCEL this order?'}</p>
+            </div>
+            <div class="modal-footer">
+                
+              <a class="btn btn-warning" href="{plink setStatus! $order->OrderID, 0, 'Cancelled'}"><i class="icon-large icon-ban-circle"></i> {_"Cancel order"}</a>
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+    </div>
+
+    
 {/if}
 {/block}
 
@@ -126,7 +145,16 @@
                                              {$product->ProductNumber}</td>
                     <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
                     
-                    <td>{$product->Quantity} {if $order->StatusProgress !== 10 && $productsInOrder !== 1 }<a href="{plink removeProduct! $order->OrderID, $product->ProductID, $product->Quantity + $product->PiecesAvailable}"><i class="icon-trash"></i></a> {/if}</td>
+                    <td>{$product->Quantity}
+                        {if $order->StatusProgress !== 10 && $productsInOrder !== 1 }
+                        <span class="delProduct">
+                        <a href="#delproduct" class="del btn"><i class="icon-trash"></i></a>
+                        <span class="ask" style="display: none;">
+                        <a class="btn" href="{plink removeProduct! $order->OrderID, $product->ProductID, $product->Quantity + $product->PiecesAvailable}">Are you sure? <i class="icon-trash"></i></a> 
+                        <a href="#cancel" class="btn cancel">Cancel</a>
+                        </span> 
+                        </span>{/if}</td>
+                    
                     <td>{$product->UnitPrice},-</td>
                     <td>{$subtotal = $product->Quantity * $product->UnitPrice},-</td>
                     <td><i class="{if $product->PiecesAvailable <= 0 } icon-ban-circle {elseif $product->PiecesAvailable < 5} icon-warning-sign {else} icon-ok-sign {/if}" title="{_'In stock'}: {$product->PiecesAvailable}"></i></td>
@@ -262,6 +290,25 @@
             function() {
                 $('#editProducts').modal('hide');
             });            
+    $('#cancelOrderButton').toggle(function(){
+              $('#cancelOrder').modal('show');
+            },
+            function() {
+                $('#cancelOrder').modal('hide');
+            });      
+            
+     $('.delProduct .del').click(function(){
+              $(this).parent().children('.ask').show();
+              $(this).hide();
+            });
+            
+    $('.delProduct .cancel').click(function(){
+                $(this).parent().hide();
+                $(this).parent().parent().children('.del').show();
+            }); 
+        
+     
+               
             
 </script>
 {/block}

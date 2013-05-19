@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-04-26 00:18:25
+# Created: 2013-05-15 15:42:55
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-04-26 00:18+0200\n"
+"PO-Revision-Date: 2013-05-15 15:42+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -184,10 +184,10 @@ msgid "Keep me signed in"
 msgstr "Keep me signed in"
 
 msgid "Latest Comments"
-msgstr "Poslední komentáře"
+msgstr "Latest Comments"
 
 msgid "Latest Orders"
-msgstr "Poslední objednávky"
+msgstr "Latest Orders"
 
 msgid "Logout"
 msgstr "Logout"
@@ -196,16 +196,16 @@ msgid "Maximálně 2MB"
 msgstr "Maximálně 2MB"
 
 msgid "More comments"
-msgstr "Více komentářů"
+msgstr "More comments"
 
 msgid "More stats"
-msgstr "Více statistik"
+msgstr "More stats"
 
 msgid "Name"
-msgstr "Jméno"
+msgstr "Name"
 
 msgid "Name of new Spec:"
-msgstr "Název nové specifikace:"
+msgstr "Name of new Spec:"
 
 msgid "Name:"
 msgstr "Name:"
@@ -214,16 +214,16 @@ msgid "Nejdou obchody? BIRNE SHOP!"
 msgstr "Sales has stopped? BIRNE SHOP!"
 
 msgid "News"
-msgstr "Zprávy"
+msgstr "News"
 
 msgid "Next Order"
-msgstr "Další obj."
+msgstr "Next Order"
 
 msgid "Next Orders"
-msgstr "Další objednávka"
+msgstr "Next Orders"
 
 msgid "Next progress"
-msgstr "Další postup"
+msgstr "Next progress"
 
 msgid "Notebook"
 msgstr "Notebook"
@@ -232,10 +232,10 @@ msgid "Nové heslo:"
 msgstr "New Password:"
 
 msgid "Order n."
-msgstr "Číslo obj."
+msgstr "Order n."
 
 msgid "Order summary"
-msgstr "Shrnutí objednávky"
+msgstr "Order summary"
 
 msgid "Orders"
 msgstr "Orders"
@@ -244,10 +244,10 @@ msgid "Other"
 msgstr "Other"
 
 msgid "Overal"
-msgstr "Celkově"
+msgstr "Overal"
 
 msgid "Parent Category:"
-msgstr "Nadřazená kategorie:"
+msgstr "Parent Category:"
 
 msgid "Password:"
 msgstr "Password:"
@@ -256,13 +256,13 @@ msgid "Payment"
 msgstr "Payment"
 
 msgid "Phone"
-msgstr "Telefon"
+msgstr "Phone"
 
 msgid "Photo:"
-msgstr "Fotka:"
+msgstr "Photo:"
 
 msgid "Pieces:"
-msgstr "Množství:"
+msgstr "Pieces:"
 
 msgid "Please complete mandatory field."
 msgstr "Please complete mandatory field."
@@ -283,22 +283,22 @@ msgid "Prev Order"
 msgstr "Předchozí obj."
 
 msgid "Prev Orders"
-msgstr "Předchozí objednávka"
+msgstr "Prev Orders"
 
 msgid "Price:"
 msgstr "Price:"
 
 msgid "Producer"
-msgstr "Výrobce"
+msgstr "Producer"
 
 msgid "Producer: "
 msgstr "Producer:"
 
 msgid "Product Name"
-msgstr "Název produktu"
+msgstr "Product Name"
 
 msgid "Products"
-msgstr "Produkty"
+msgstr "Products"
 
 msgid "Představujeme BIRNE SHOP!"
 msgstr "Introducing BIRNE SHOP!"
@@ -310,25 +310,25 @@ msgid "Radost prodávat? BIRNE SHOP!"
 msgstr "Enjoy selling! BIRNE SHOP!"
 
 msgid "Regenerate Thumbnails"
-msgstr "Obnovit miniatury"
+msgstr "Regenerate Thumbnails"
 
 msgid "Save Specs"
-msgstr "Uložit specifikaci"
+msgstr "Save Specs"
 
 msgid "Save description"
-msgstr "Uložit popis"
+msgstr "Save description"
 
 msgid "Save it"
-msgstr "Uložit"
+msgstr "Save it"
 
 msgid "Save price"
-msgstr "Aktualizovat cenu"
+msgstr "Save price"
 
 msgid "Select Category:"
-msgstr "Vyberte kategorii:"
+msgstr "Select Category:"
 
 msgid "Select spec:"
-msgstr "Vyberte specifikaci:"
+msgstr "Select spec:"
 
 msgid "Shipping"
 msgstr "Shipping"
@@ -349,37 +349,37 @@ msgid "Stats"
 msgstr "Stats"
 
 msgid "Status"
-msgstr "Stav"
+msgstr "Status"
 
 msgid "Street"
-msgstr "Ulice"
+msgstr "Street"
 
 msgid "Subject"
-msgstr "Předmět"
+msgstr "Subject"
 
 msgid "Tablets"
 msgstr "Tablets"
 
 msgid "This month"
-msgstr "Tento měsíc"
+msgstr "This month"
 
 msgid "Total"
-msgstr "Celkem"
+msgstr "Total"
 
 msgid "Total price"
-msgstr "Cena celkem"
+msgstr "Total price"
 
 msgid "Track order"
 msgstr "Track order"
 
 msgid "Track your order"
-msgstr "Sledujte svou objednávku"
+msgstr "Track your order"
 
 msgid "Uživatelské jméno:"
 msgstr "User name:"
 
 msgid "Value:"
-msgstr "Hodnota:"
+msgstr "Value:"
 
 msgid "View"
 msgstr "View"
@@ -388,7 +388,7 @@ msgid "View as List"
 msgstr "View as List"
 
 msgid "Warehouse"
-msgstr "Sklad"
+msgstr "Warehouse"
 
 msgid "You"
 msgstr "You"
@@ -397,19 +397,19 @@ msgid "You cannot edit product here!"
 msgstr "You cannot edit product here!"
 
 msgid "Your address"
-msgstr "Vaše adresa"
+msgstr "Your address"
 
 msgid "Your contact"
-msgstr "Váš kontakt"
+msgstr "Your contact"
 
 msgid "Your email:"
-msgstr "Váš email:"
+msgstr "Your email:"
 
 msgid "Your order number:"
-msgstr "Číslo Vaší objednávky:"
+msgstr "Your order number:"
 
 msgid "ZIP"
-msgstr "PSČ"
+msgstr "ZIP"
 
 msgid "Začněte již dnes"
 msgstr "Start TODAY"

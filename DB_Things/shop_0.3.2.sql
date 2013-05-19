@@ -5,10 +5,6 @@ SET foreign_key_checks = 0;
 SET time_zone = 'SYSTEM';
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP DATABASE IF EXISTS `shop`;
-CREATE DATABASE `shop` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `shop`;
-
 DROP TABLE IF EXISTS `address`;
 CREATE TABLE `address` (
   `AddressID` int(11) NOT NULL AUTO_INCREMENT,
@@ -20,15 +16,27 @@ CREATE TABLE `address` (
   PRIMARY KEY (`AddressID`),
   KEY `UsersID` (`UsersID`),
   CONSTRAINT `address_ibfk_2` FOREIGN KEY (`UsersID`) REFERENCES `users` (`UsersID`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `address` (`AddressID`, `UsersID`, `Street`, `ZIPCode`, `City`, `State`) VALUES
+(56,	NULL,	'U hřbitova 105',	26751,	'Zdice',	NULL),
+(57,	NULL,	'U hřbitova 105',	26751,	'Zdice',	NULL),
+(58,	NULL,	'U hřbitova 105',	26751,	'Zdice',	NULL),
+(59,	NULL,	'U hřbitova 105',	26751,	'Zdice',	NULL),
+(60,	NULL,	'qwer',	0,	'qwr',	NULL),
+(61,	NULL,	'qwer',	0,	'qwr',	NULL),
+(62,	NULL,	'qwer',	0,	'qwr',	NULL),
+(63,	NULL,	'qwer',	0,	'qwr',	NULL),
+(64,	'12389@1234.xxx',	'qwer',	0,	'qwr',	NULL),
+(65,	'admin@admin.com',	'asdasd',	0,	'vdsfs',	NULL),
+(66,	'michal@prosek.cz',	'This',	0,	'is',	NULL);
 
 DROP TABLE IF EXISTS `attrib`;
 CREATE TABLE `attrib` (
   `AttribID` int(11) NOT NULL AUTO_INCREMENT,
   `AttribName` varchar(255) NOT NULL,
   PRIMARY KEY (`AttribID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `attrib` (`AttribID`, `AttribName`) VALUES
 (1,	'Weight'),
@@ -36,22 +44,48 @@ INSERT INTO `attrib` (`AttribID`, `AttribName`) VALUES
 (3,	'Display resolution'),
 (4,	'Battery');
 
+DROP TABLE IF EXISTS `blog`;
+CREATE TABLE `blog` (
+  `BlogID` int(11) NOT NULL,
+  `ProductID` int(11) NOT NULL,
+  `CategoryID` int(11) NOT NULL,
+  `BlogName` varchar(150) NOT NULL,
+  `BlogDescription` text NOT NULL,
+  KEY `ProductID` (`ProductID`),
+  KEY `CategoryID` (`CategoryID`),
+  CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`),
+  CONSTRAINT `blog_ibfk_2` FOREIGN KEY (`CategoryID`) REFERENCES `category` (`CategoryID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `CategoryID` int(11) NOT NULL AUTO_INCREMENT,
   `CategoryName` varchar(45) DEFAULT NULL,
   `CategoryDescription` longtext,
+  `CategoryStatus` int(11) DEFAULT '0',
   `HigherCategoryID` int(11) DEFAULT NULL,
   PRIMARY KEY (`CategoryID`),
   KEY `HigherCategoryID_idx` (`HigherCategoryID`),
   CONSTRAINT `FKHigherCategory` FOREIGN KEY (`HigherCategoryID`) REFERENCES `category` (`CategoryID`) ON DELETE SET NULL ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `category` (`CategoryID`, `CategoryName`, `CategoryDescription`, `HigherCategoryID`) VALUES
-(1,	'Cellphone',	'<p>A mobile phone (also known as a cellular phone, cell phone, and a hand phone) is a device that can make and receive telephone calls over a radio link while moving around a wide geographic area. It does so by connecting to a cellular network provided by a mobile phone operator, allowing access to the public telephone network. By contrast, a cordless telephone is used only within the short range of a single, private base station. In addition to telephony, modern mobile phones also support a wide variety of other services such as text messaging, MMS, email, Internet access, short-range wireless communications (infrared, Bluetooth), business applications, gaming and photography. Mobile phones that offer these and more general computing capabilities are referred to as smartphones.</p>',	NULL),
-(2,	'Notebook',	'<p>A laptop computer is a personal computer for mobile use.[1] A laptop has most of the same components as a desktop computer, inclu<strong>ding a display, a keyboard, a pointing device such as a touchpad (also k</strong>nown as a trackpad) and/or a pointing stick, and speakers into a single unit. A laptop is powered by mains electricity via an AC adapter, and can be used away from an outlet using a rechargeable battery. Laptops are also sometimes called notebook computers, notebooks, ultrabooks[2] or netbooks.&nbsp;</p>',	4),
-(3,	'Smartphones',	'<p>A smartphone is a mobile phone built on a mobile operating system, with more advanced computing capability connectivity than a feature phone. The first smartphones combined the functions of a personal digital assistant (PDA) with a mobile phone. Later models added the functionality of portable media players, low-end compact digital cameras, pocket video cameras, and GPS navigation units to form one multi-use device. Many modern smartphones also include high-resolution touchscreens and web browsers that display standard web pages as well as mobile-optimized sites.</p>',	2),
-(4,	'Tablets',	'<p>A tablet computer, or simply tablet, is a one-piece mobile computer. Devices typically offer a touchscreen, with finger (or stylus) gestures acting as the primary means of control, though often supplemented by the use of one or more physical context sensitive buttons or the input from one or more accelerometers; an on-screen, hideable virtual keyboard is generally offered as the principal means of data input. Available in a variety of sizes, tablets customarily offer a screen diagonal greater than 7 inches (18 cm), differentiating themselves through size from functionally similar smart phones or personal digital assistants.</p>',	1);
+INSERT INTO `category` (`CategoryID`, `CategoryName`, `CategoryDescription`, `CategoryStatus`, `HigherCategoryID`) VALUES
+(1,	'Cellphone',	'<p>A mobile phone (also known as a cellular phone, cell phone, and a hand phone) is a device that can make and receive telephone calls over a radio link while moving around a wide geographic area. It does so by connecting to a cellular network provided by a mobile phone operator, allowing access to the public telephone network. By contrast, a cordless telephone is used only within the short range of a single, private base station. In addition to telephony, modern mobile phones also support a wide variety of other services such as text messaging, MMS, email, Internet access, short-range wireless communications (infrared, Bluetooth), business applications, gaming and photography. Mobile phones that offer these and more general computing capabilities are referred to as smartphones.</p>',	1,	NULL),
+(2,	'Notebook',	'<p>A laptop computer is a personal computer for mobile use.[1] A laptop has most of the same components as a desktop computer, inclu<strong>ding a display, a keyboard, a pointing device such as a touchpad (also k</strong>nown as a trackpad) and/or a pointing stick, and speakers into a single unit. A laptop is powered by mains electricity via an AC adapter, and can be used away from an outlet using a rechargeable battery. Laptops are also sometimes called notebook computers, notebooks, ultrabooks[2] or netbooks.&nbsp;</p>',	1,	4),
+(3,	'Smartphones-',	'<p>A smartphone is a mobile phone built on a mobile operating system, with more advanced computing capability connectivity than a feature phone. The first smartphones combined the functions of a personal digital assistant (PDA) with a mobile phone. Later models added the functionality of portable media players, low-end compact digital cameras, pocket video cameras, and GPS navigation units to form one multi-use device. Many modern smartphones also include high-resolution touchscreens and web browsers that display standard web pages as well as mobile-optimized sites.</p>',	0,	2),
+(4,	'Tablets',	'<p>A tablet computer, or simply tablet, is a one-piece mobile computer. Devices typically offer a touchscreen, with finger (or stylus) gestures acting as the primary means of control, though often supplemented by the use of one or more physical context sensitive buttons or the input from one or more accelerometers; an on-screen, hideable virtual keyboard is generally offered as the principal means of data input. Available in a variety of sizes, tablets customarily offer a screen diagonal greater than 7 inches (18 cm), differentiating themselves through size from functionally similar smart phones or personal digital assistants.</p>',	1,	1);
+
+DROP TABLE IF EXISTS `categorystatus`;
+CREATE TABLE `categorystatus` (
+  `CategoryStatusID` int(11) NOT NULL,
+  `CategoryStatusName` varchar(190) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `categorystatus` (`CategoryStatusID`, `CategoryStatusName`) VALUES
+(1,	'Published'),
+(2,	'Featured'),
+(0,	'Draft');
 
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
@@ -64,7 +98,7 @@ CREATE TABLE `comment` (
   PRIMARY KEY (`CommentID`),
   KEY `CommentID_idx` (`PreviousCommentID`),
   CONSTRAINT `FKPreviousComment` FOREIGN KEY (`PreviousCommentID`) REFERENCES `comment` (`CommentID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `comment` (`CommentID`, `CommentTittle`, `CommentContent`, `DateOfAdded`, `UserID`, `PreviousCommentID`) VALUES
 (1,	'First Comment',	'This is first comment ever',	'2012-03-20',	1,	NULL),
@@ -77,7 +111,7 @@ CREATE TABLE `currency` (
   `CurrencyName` varchar(45) DEFAULT NULL,
   `CurrencyRate` float DEFAULT NULL,
   PRIMARY KEY (`CurrencyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `currency` (`CurrencyID`, `CurrencyCode`, `CurrencyName`, `CurrencyRate`) VALUES
 (1,	'CZK',	'Koruna ?esk?',	NULL),
@@ -92,12 +126,12 @@ CREATE TABLE `delivery` (
   `FreeFromPrice` float DEFAULT NULL,
   PRIMARY KEY (`DeliveryID`),
   KEY `PriceID_idx` (`DeliveryPrice`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `delivery` (`DeliveryID`, `DeliveryName`, `DeliveryDescription`, `DeliveryPrice`, `FreeFromPrice`) VALUES
 (1,	'Personal pick up',	'Personal in the shop',	0,	NULL),
-(2,	'Cash on delivery',	'Send by transport company',	150,	1000),
-(3,	'DPD',	'Curier express shipping',	160,	10000);
+(2,	'Czech postal service',	'Send by transport company',	99,	1000),
+(3,	'DPD',	'Curier express shipping!',	160,	10000);
 
 DROP TABLE IF EXISTS `documentation`;
 CREATE TABLE `documentation` (
@@ -109,10 +143,24 @@ CREATE TABLE `documentation` (
   PRIMARY KEY (`DocumentID`),
   KEY `ProductID_idx` (`ProductID`),
   CONSTRAINT `FKDocumentProduct` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `documentation` (`DocumentID`, `DocumentName`, `DocumentDescription`, `DocumentURL`, `ProductID`) VALUES
 (3,	'User Guide',	'Super User',	'vizitka_joo (1).pdf',	4);
+
+DROP TABLE IF EXISTS `notes`;
+CREATE TABLE `notes` (
+  `NotesID` int(11) NOT NULL,
+  `OrderID` int(11) NOT NULL,
+  `NotesDate` int(11) NOT NULL,
+  `NotesName` varchar(90) NOT NULL,
+  `NotesDescription` text NOT NULL,
+  KEY `OrderID` (`OrderID`),
+  KEY `NotesDate` (`NotesDate`),
+  CONSTRAINT `notes_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`),
+  CONSTRAINT `notes_ibfk_2` FOREIGN KEY (`NotesDate`) REFERENCES `orders` (`OrderID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 DROP TABLE IF EXISTS `orderdetails`;
 CREATE TABLE `orderdetails` (
@@ -126,7 +174,7 @@ CREATE TABLE `orderdetails` (
   KEY `ProductID_idx` (`ProductID`),
   CONSTRAINT `FKOrderDetailsOrder` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKOrderDetailsProduct` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `orderdetails` (`OrderDetailsID`, `OrderID`, `ProductID`, `Quantity`, `UnitPrice`) VALUES
 (1,	1,	1,	1,	8999),
@@ -141,7 +189,12 @@ INSERT INTO `orderdetails` (`OrderDetailsID`, `OrderID`, `ProductID`, `Quantity`
 (10,	7,	3,	1,	8999),
 (11,	8,	6,	1,	11999),
 (12,	9,	6,	1,	11999),
-(13,	9,	4,	1,	16999);
+(13,	9,	4,	1,	16999),
+(15,	18,	1,	1,	10998),
+(16,	19,	2,	1,	5999),
+(29,	17,	6,	1,	11999),
+(31,	20,	13,	1,	3999),
+(33,	20,	11,	1,	23999);
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
@@ -157,6 +210,7 @@ CREATE TABLE `orders` (
   `DateFinished` date DEFAULT NULL,
   `DeliveryID` int(11) DEFAULT NULL,
   `PaymentID` int(11) DEFAULT NULL,
+  `Note` longtext,
   `IP` varchar(15) DEFAULT NULL,
   `SessionID` int(11) DEFAULT NULL,
   PRIMARY KEY (`OrderID`),
@@ -168,18 +222,22 @@ CREATE TABLE `orders` (
   CONSTRAINT `FKOrderStatus` FOREIGN KEY (`StatusID`) REFERENCES `orderstatus` (`OrderStatusID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`PaymentID`) REFERENCES `payment` (`PaymentID`) ON DELETE SET NULL,
   CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`UsersID`) REFERENCES `users` (`UsersID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `orders` (`OrderID`, `StatusID`, `UsersID`, `ProductsPrice`, `DeliveryPaymentPrice`, `TaxPrice`, `TotalPrice`, `DateCreated`, `DateOfLastChange`, `DateFinished`, `DeliveryID`, `PaymentID`, `IP`, `SessionID`) VALUES
-(1,	1,	'aaaaaaa@aaa.aaa',	9098,	NULL,	90.98,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	2,	1,	NULL,	NULL),
-(2,	1,	'qwe@qrw.as',	99,	NULL,	0.99,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	2,	2,	NULL,	NULL),
-(3,	1,	'1234@1234.com',	11999,	NULL,	119.99,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	1,	1,	NULL,	NULL),
-(4,	1,	'ppp@pppa.ppp',	15999,	NULL,	0,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	1,	1,	NULL,	NULL),
-(5,	1,	'afaasasdsasds2134@asfew213.aff',	11999,	NULL,	2519.79,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	1,	2,	NULL,	NULL),
-(6,	1,	'tdanek@atlas.cz',	32998,	NULL,	0,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	1,	2,	NULL,	NULL),
-(7,	1,	'asda@asd.ads',	9098,	NULL,	0,	NULL,	'2013-04-07',	'2013-04-07',	NULL,	1,	1,	NULL,	NULL),
-(8,	1,	'rte@gdsaasasasasdaassf.fgd',	11999,	100,	2519.79,	14518.8,	'2013-04-07',	'2013-04-07',	NULL,	2,	2,	NULL,	NULL),
-(9,	2,	'asd@asfdg.dfg',	28998,	150,	6089.58,	35087.6,	'2013-04-07',	'2013-04-07',	NULL,	2,	1,	NULL,	NULL);
+INSERT INTO `orders` (`OrderID`, `StatusID`, `UsersID`, `ProductsPrice`, `DeliveryPaymentPrice`, `TaxPrice`, `TotalPrice`, `DateCreated`, `DateOfLastChange`, `DateFinished`, `DeliveryID`, `PaymentID`, `Note`, `IP`, `SessionID`) VALUES
+(1,	1,	'aaaaaaa@aaa.aaa',	9098,	NULL,	90.98,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	2,	1,	NULL,	NULL,	NULL),
+(2,	1,	'qwe@qrw.as',	99,	NULL,	0.99,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	2,	NULL,	NULL,	NULL,	NULL),
+(3,	1,	'1234@1234.com',	11999,	NULL,	119.99,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	1,	1,	NULL,	NULL,	NULL),
+(4,	1,	'ppp@pppa.ppp',	15999,	NULL,	0,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	1,	1,	NULL,	NULL,	NULL),
+(5,	1,	'afaasasdsasds2134@asfew213.aff',	11999,	NULL,	2519.79,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	1,	NULL,	NULL,	NULL,	NULL),
+(6,	1,	'tdanek@atlas.cz',	32998,	NULL,	0,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	1,	NULL,	NULL,	NULL,	NULL),
+(7,	1,	'asda@asd.ads',	9098,	NULL,	0,	NULL,	'2013-04-07',	'2013-04-07',	NULL,	1,	1,	NULL,	NULL,	NULL),
+(8,	1,	'rte@gdsaasasasasdaassf.fgd',	11999,	100,	2519.79,	14518.8,	'2013-04-07',	'2013-04-07',	NULL,	2,	NULL,	NULL,	NULL,	NULL),
+(9,	2,	'asd@asfdg.dfg',	28998,	150,	6089.58,	35087.6,	'2013-04-07',	'2013-04-07',	NULL,	2,	1,	NULL,	NULL,	NULL),
+(17,	1,	'12389@1234.xxx',	33997,	0,	2309.79,	11999,	'2013-04-17',	'2013-04-17',	NULL,	1,	1,	'Note',	NULL,	NULL),
+(18,	2,	'admin@admin.com',	10998,	0,	2309,	13307,	'2013-04-17',	'2013-04-17',	NULL,	1,	1,	'wfevergverbr',	NULL,	NULL),
+(19,	1,	'michal@prosek.cz',	5999,	149,	1259.79,	7258.79,	'2013-04-24',	'2013-04-24',	NULL,	1,	3,	'Chci to hned!',	NULL,	NULL),
+(20,	2,	'michal@prosek.cz',	181987,	160,	2519.58,	182147,	'2013-04-24',	'2013-04-24',	NULL,	3,	1,	'',	NULL,	NULL);
 
 DROP TABLE IF EXISTS `orderstatus`;
 CREATE TABLE `orderstatus` (
@@ -188,9 +246,10 @@ CREATE TABLE `orderstatus` (
   `StatusDescription` varchar(255) DEFAULT NULL,
   `StatusProgress` int(11) DEFAULT '0',
   PRIMARY KEY (`OrderStatusID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `orderstatus` (`OrderStatusID`, `StatusName`, `StatusDescription`, `StatusProgress`) VALUES
+(0,	'CANCELED',	'order has been canceled',	0),
 (1,	'Pending',	'Pending order',	1),
 (2,	'Sending',	'sending order',	5),
 (3,	'Done',	'done',	10);
@@ -209,7 +268,7 @@ CREATE TABLE `parameters` (
   CONSTRAINT `parameters_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`),
   CONSTRAINT `parameters_ibfk_2` FOREIGN KEY (`AttribID`) REFERENCES `attrib` (`AttribID`),
   CONSTRAINT `parameters_ibfk_3` FOREIGN KEY (`UnitID`) REFERENCES `unit` (`UnitID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `parameters` (`ParameterID`, `ProductID`, `AttribID`, `Val`, `UnitID`) VALUES
 (1,	1,	1,	'169',	2),
@@ -224,11 +283,11 @@ CREATE TABLE `payment` (
   `PaymentPrice` float DEFAULT '1',
   PRIMARY KEY (`PaymentID`),
   KEY `PriceID` (`PaymentPrice`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `payment` (`PaymentID`, `PaymentName`, `PaymentPrice`) VALUES
 (1,	'Cash',	0),
-(2,	'Banwire',	-50);
+(3,	'Bankwire',	50);
 
 DROP TABLE IF EXISTS `photo`;
 CREATE TABLE `photo` (
@@ -241,7 +300,7 @@ CREATE TABLE `photo` (
   PRIMARY KEY (`PhotoID`),
   KEY `PhotoAlbumID_idx` (`PhotoAlbumID`),
   CONSTRAINT `FKPhotoPhotoAlbum` FOREIGN KEY (`PhotoAlbumID`) REFERENCES `photoalbum` (`PhotoAlbumID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `photo` (`PhotoID`, `PhotoName`, `PhotoURL`, `PhotoAlbumID`, `PhotoAltText`, `CoverPhoto`) VALUES
 (1,	'Foto Galaxy Nexus 01',	'main.png',	1,	'Foto Galaxy Nexus',	1),
@@ -252,17 +311,16 @@ INSERT INTO `photo` (`PhotoID`, `PhotoName`, `PhotoURL`, `PhotoAlbumID`, `PhotoA
 (7,	'Nexus',	'nexus3.jpg',	1,	'nexus',	0),
 (8,	'nexus7.jpg',	'nexus7.jpg',	1,	's4',	0),
 (9,	'nex.jpg',	'nex.jpg',	1,	's4',	0),
-(10,	'samsung-galaxy-nexus_2.jpg',	'samsung-galaxy-nexus_2.jpg',	1,	's4',	0),
 (11,	'Samsung-Galaxy-Nexus-Landscape.jpg',	'Samsung-Galaxy-Nexus-Landscape.jpg',	1,	's4',	0),
 (12,	'ipad-mini-scaled-1.jpg',	'ipad-mini-scaled-1.jpg',	6,	's4',	1),
 (13,	'ipad-mini-scaled-1.jpg',	'ipad-mini-scaled-1.jpg',	7,	's4',	1),
 (22,	'1416746-img-steve-jobs-apple-ipad.jpg',	'1416746-img-steve-jobs-apple-ipad.jpg',	7,	's4',	NULL),
 (23,	'Taking-pictures-with-Nokia-3310.jpg',	'Taking-pictures-with-Nokia-3310.jpg',	4,	's4',	NULL),
-(27,	'ImgW.jpe',	'ImgW.jpe',	8,	's4',	1),
-(28,	'ImgW (1).jpe',	'ImgW (1).jpe',	8,	's4',	NULL),
-(29,	'ImgW (2).jpe',	'ImgW (2).jpe',	8,	's4',	NULL),
-(30,	'ImgW (3).jpe',	'ImgW (3).jpe',	8,	's4',	NULL),
-(31,	'ImgW.jpe',	'ImgW.jpe',	9,	's4',	1),
+(27,	'ImgW.jpg',	'ImgW.jpg',	8,	's4',	0),
+(28,	'ImgW (1).jpg',	'ImgW (1).jpg',	8,	's4',	1),
+(29,	'ImgW (2).jpg',	'ImgW (2).jpg',	8,	's4',	0),
+(30,	'ImgW (3).jpg',	'ImgW (3).jpg',	8,	's4',	NULL),
+(31,	'ImgW.jpg',	'ImgW.jpg',	9,	's4',	1),
 (33,	'Sony Ericsson Xperia Mini',	'mini.jpg',	11,	'Sony Ericsson Xperia Mini',	1),
 (34,	'Sony Ericsson Xperia Mini',	'mini2.jpg',	11,	'Sony Ericsson Xperia Mini',	NULL),
 (35,	'name',	'1a6ccb602dfbb930b87c709644585f1d.jpg',	11,	'name',	NULL),
@@ -278,7 +336,7 @@ CREATE TABLE `photoalbum` (
   PRIMARY KEY (`PhotoAlbumID`),
   KEY `ProductID` (`ProductID`),
   CONSTRAINT `photoalbum_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `photoalbum` (`PhotoAlbumID`, `PhotoAlbumName`, `PhotoAlbumDescription`, `ProductID`) VALUES
 (1,	'Album GN',	'Galaxy Nexus album',	1),
@@ -305,26 +363,41 @@ CREATE TABLE `price` (
   KEY `ProductID` (`ProductID`),
   CONSTRAINT `FKPriceCurrency` FOREIGN KEY (`CurrencyID`) REFERENCES `currency` (`CurrencyID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `price_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `price` (`PriceID`, `ProductID`, `SellingPrice`, `SALE`, `FinalPrice`, `CurrencyID`) VALUES
 (1,	1,	10998,	0,	10998,	1),
 (2,	2,	5999,	0,	5999,	1),
 (3,	3,	7999,	0,	8999,	1),
-(4,	4,	15000,	0,	15000,	1),
+(4,	4,	15000,	1500,	13500,	1),
 (5,	5,	13999,	0,	15999,	1),
 (6,	6,	10000,	0,	11999,	1),
 (7,	9,	11999,	1,	13999,	1),
-(8,	10,	9999,	1,	10999,	1),
+(8,	10,	20,	18,	2,	1),
 (9,	11,	20999,	1,	23999,	1),
 (10,	13,	NULL,	0,	3999,	1);
+
+DROP TABLE IF EXISTS `producer`;
+CREATE TABLE `producer` (
+  `ProducerID` int(11) NOT NULL AUTO_INCREMENT,
+  `ProducerName` varchar(255) NOT NULL,
+  PRIMARY KEY (`ProducerID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `producer` (`ProducerID`, `ProducerName`) VALUES
+(1,	'Samsung'),
+(2,	'Sony'),
+(3,	'Apple'),
+(4,	'Lenovo'),
+(5,	'Nokia');
 
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `ProductID` int(11) NOT NULL AUTO_INCREMENT,
   `ProductName` varchar(255) DEFAULT NULL,
-  `Producer` varchar(255) DEFAULT NULL,
+  `ProducerID` int(11) DEFAULT NULL,
   `ProductNumber` varchar(255) DEFAULT NULL,
+  `ProductShort` varchar(255) DEFAULT NULL,
   `ProductDescription` longtext,
   `ProductStatusID` int(11) DEFAULT NULL,
   `ProductEAN` varchar(45) DEFAULT NULL,
@@ -339,22 +412,24 @@ CREATE TABLE `product` (
   KEY `CategoryID_idx` (`CategoryID`),
   KEY `CommentID_idx` (`CommentID`),
   KEY `ProductStatusID` (`ProductStatusID`),
+  KEY `ProducerID` (`ProducerID`),
   CONSTRAINT `FKProductCategory` FOREIGN KEY (`CategoryID`) REFERENCES `category` (`CategoryID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKProductComment` FOREIGN KEY (`CommentID`) REFERENCES `comment` (`CommentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `product_ibfk_3` FOREIGN KEY (`ProductStatusID`) REFERENCES `productstatus` (`ProductStatusID`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+  CONSTRAINT `product_ibfk_3` FOREIGN KEY (`ProductStatusID`) REFERENCES `productstatus` (`ProductStatusID`),
+  CONSTRAINT `product_ibfk_4` FOREIGN KEY (`ProducerID`) REFERENCES `producer` (`ProducerID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `product` (`ProductID`, `ProductName`, `Producer`, `ProductNumber`, `ProductDescription`, `ProductStatusID`, `ProductEAN`, `ProductQR`, `ProductWarranty`, `PiecesAvailable`, `CategoryID`, `DateOfAvailable`, `ProductDateOfAdded`, `CommentID`) VALUES
-(1,	'Samsung Galaxy Nexus',	'Samsung',	NULL,	'Smartphone ze serie Nexus',	NULL,	NULL,	NULL,	NULL,	10,	2,	NULL,	NULL,	1),
-(2,	'Samsung Chromebook',	'Samsung',	NULL,	'<p>An ultraportable, sleek laptop for everyday adventures. It weighs 2.4 pounds and has over 6.5 hours of battery life, so you can bring it anywhere and use it everywhere</p>',	NULL,	NULL,	NULL,	NULL,	4,	2,	NULL,	NULL,	NULL),
-(3,	'Samsung Galaxy S4',	'Samsung',	NULL,	'Hot news in smartphone world',	2,	NULL,	NULL,	NULL,	99,	3,	NULL,	NULL,	NULL),
-(4,	'Sony Xperia Z',	'Sony',	NULL,	'<p>Best smartphone of present smarthone world. SUPERB!</p>',	2,	NULL,	NULL,	NULL,	40,	3,	NULL,	NULL,	NULL),
-(5,	'Apple iPad',	'Apple Inc.',	NULL,	'Tablet from company Apple',	NULL,	NULL,	NULL,	NULL,	666,	4,	NULL,	NULL,	NULL),
-(6,	'Nokia 3310',	'neuvedeno',	'11111',	'desc',	NULL,	'123456',	'122',	'rok',	1,	2,	'0000-00-00',	0,	1),
-(9,	'Apple iPad',	'neuvedeno',	'11111',	'The best tablet EVER!',	NULL,	'123456',	'122',	'rok',	3,	4,	'0000-00-00',	0,	1),
-(10,	'Lenovo ThinkPad Tablet 2 64GB WiFi 3G 3679-4HG',	'neuvedeno',	'11111',	'Tablet Lenovo ThinkPad skrývá v uhlazeném černém šasi velmi atraktivní hardwarovou výbavu pohánějící systém Microsoft Windows 8. Tablet je vhodný pro náročné uživatele na každodenních cestách, kteří potřebují především spolehlivě rychlý kancelářský software, přístup k internetu s nejrůznějšími aplikacemi včetně vysoce kvalitní videokomunikace a přehrávání zvuku i videa. S výdrží až 10 hodin na jedno nabití s vámi bude celý den připravený do služby.\r\n\r\nKe všem činnostem skvěle poslouží multidotykový displej v rozlišení HD Ready. Displej je typu IPS jako záruka prvotřídního barevného podání s jemnými odstíny. Pro rozšíření plochy potěší konektor Mini HDMI. Pressure Sensitivy se postará o zabránění náhodných dotyků při nečinnosti. Pro jemnější ovládání a ruční psaní i kreslení si lze dokoupit pero. Pomocí USB či BlueTooth však připojíte i fyzickou klávesnici.\r\n\r\nPro data je úložiště o kapacitě 64 GB. Oproti standardním diskům přinese daleko menší energetickou spotřebu, rychlejší přístup a',	NULL,	'123456',	'122',	'rok',	1,	4,	'0000-00-00',	0,	1),
-(11,	'Lenovo ThinkPad Edge E130 Arctic Blue 3358-8CG',	'neuvedeno',	'11111',	'Velmi malý a tenký cestovní notebook LENOVO ThinkPad Edge E130 s nejnovějším procesorem a s <strong>3G připojením</strong> jako ideální každodenní parťák aktivních&nbsp;uživatelů. Notebook odpovídá displeji o kompromisní úhlopříčce <strong>11,6\"</strong>. Ten je v <strong>matné povrchové úpravě </strong>pro lepší viditelnost. Spolu s pokročilými funkcemi pro VoIP, ergonomickou klávesnicí a kombinací touchpadu s trackpointem nabízí komfort pro každodenní službu. Je vhodný pro pracovité jedince vyžadující flexibilní mobilní použití a dlouhou výdrž na baterií, která u tohoto modelu dosahuje neuvěřitelných <strong>8 hodin</strong>!<br><br>Pro vaše data je vložen <strong>nadstandardně rychlý disk o kapacitě 500 GB</strong>, takže s sebou budete mít vše důležité. Na disku je předinstalovaný operační systém <strong>Microsoft Windows 8</strong>, který přichází s přehledným dlaždicovým prostředím. Svižný chod tohoto lehce přenosného počítače je na procesoru se sníženou spotřebou z nejnovější série <strong>Ivy Bridge, Intel Core i3 3217U</strong>. Pokud si&nbsp;budete přát&nbsp;pustit například HD video, přijde vhod <strong>HDMI</strong> port, kterým můžete notebook připojit k televizím nebo projektorům ve velkém rozlišení. Další rozšíření lze uskutečnit přes vysokorychlostní <strong>UBS 3.0 </strong>či bezdrátový <strong>BlueTooth</strong>.<br><br>',	NULL,	'123456',	'122',	'rok',	1,	2,	'0000-00-00',	0,	1),
-(13,	'Sony Ericsson Xperia Mini',	'neuvedeno',	'11111',	'<p>Uživatel se d&iacute;ky operačn&iacute;mu syst&eacute;mu Android může tě&scaron;it na &scaron;pičkovou funkčn&iacute; z&aacute;kladu. Ta je tvořena např. internetov&yacute;m prohl&iacute;žečem,<strong> e-mailov&yacute;m klientem</strong>, multimedi&aacute;ln&iacute;m přehr&aacute;vačem, bohat&yacute;mi možnostmi synchronizace, kvalitn&iacute;mu funkcemi pro organizaci času, prohl&iacute;žečem dokumentů, skvěl&yacute;m kalend&aacute;řem či aplikacemi pro př&iacute;stup na Facebook a Twitter. Př&iacute;stup ke katalogu Android Market pak umožn&iacute; instalaci dal&scaron;&iacute;ch tis&iacute;ců aplikac&iacute; a her. Samozřejmost&iacute; je tak&eacute; poveden&yacute; digit&aacute;ln&iacute; fotoapar&aacute;t s rozli&scaron;en&iacute;m pět megapixelů nebo vestavěn&aacute; satelitn&iacute; aGPS navigace. Telefonu nechyb&iacute; ani podpora technologi&iacute; Wi-Fi (včetně DLNA) a Bluetooth. Pro připojen&iacute; sluch&aacute;tek je k dispozici standardn&iacute; 3,5 mm jack. O nap&aacute;jen&iacute; se star&aacute; Li-Ion akumul&aacute;tor o kapacitě 1200 mAh, jenž by měl telefonu na jedno nabit&iacute; umožnit setrvat až 340 hodin v pohotovostn&iacute;m režimu nebo vykonat čtyři a půl hodiny hovoru.</p>',	2,	'123456',	'122',	'rok',	12,	3,	'0000-00-00',	2013,	1);
+INSERT INTO `product` (`ProductID`, `ProductName`, `ProducerID`, `ProductNumber`, `ProductShort`, `ProductDescription`, `ProductStatusID`, `ProductEAN`, `ProductQR`, `ProductWarranty`, `PiecesAvailable`, `CategoryID`, `DateOfAvailable`, `ProductDateOfAdded`, `CommentID`) VALUES
+(1,	'Samsung Galaxy Nexus 2',	3,	'',	NULL,	'<p>Smartphone ze serie Nexus</p>',	1,	'',	'',	'',	10,	2,	NULL,	NULL,	1),
+(2,	'Samsung Chromebook',	1,	'',	NULL,	'<p>An ultraportable, sleek laptop for everyday adventures. It weighs 2.4 pounds and has over 6.5 hours of battery life, so you can bring it anywhere and use it everywhere</p>',	2,	'',	'',	'',	1,	2,	NULL,	NULL,	NULL),
+(3,	'Samsung Galaxy S4',	1,	'',	NULL,	'Hot news in smartphone world',	2,	'',	'',	'',	99,	3,	NULL,	NULL,	NULL),
+(4,	'Nokia 3355',	1,	'',	NULL,	'<p>Best smartphone of present smarthone world. SUPERB!</p>',	2,	'',	'',	'',	40,	1,	NULL,	NULL,	NULL),
+(5,	'Apple iPad',	3,	'',	NULL,	'Tablet from company Apple',	2,	'',	'',	'',	666,	4,	NULL,	NULL,	NULL),
+(6,	'Nokia 3310',	5,	'11111',	NULL,	'desc',	1,	'123456',	'122',	'rok',	1,	2,	'0000-00-00',	0,	1),
+(9,	'Apple iPad',	3,	'11111',	NULL,	'The best tablet EVER!',	2,	'123456',	'122',	'rok',	9,	4,	'0000-00-00',	0,	1),
+(10,	'Lenovo ThinkPad Tablet 2 64GB WiFi 3G 3679-4HG',	4,	'11111',	NULL,	'<p>Tablet Lenovo ThinkPad skr&yacute;v&aacute; v uhlazen&eacute;m čern&eacute;m &scaron;asi velmi atraktivn&iacute; hardwarovou v&yacute;bavu poh&aacute;něj&iacute;c&iacute; syst&eacute;m Microsoft Windows 8. Tablet je vhodn&yacute; pro n&aacute;ročn&eacute; uživatele na každodenn&iacute;ch cest&aacute;ch, kteř&iacute; potřebuj&iacute; předev&scaron;&iacute;m spolehlivě rychl&yacute; kancel&aacute;řsk&yacute; software, př&iacute;stup k internetu s nejrůzněj&scaron;&iacute;mi aplikacemi včetně vysoce kvalitn&iacute; videokomunikace a přehr&aacute;v&aacute;n&iacute; zvuku i videa. S v&yacute;drž&iacute; až 10 hodin na jedno nabit&iacute; s v&aacute;mi bude cel&yacute; den připraven&yacute; do služby. Ke v&scaron;em činnostem skvěle poslouž&iacute; multidotykov&yacute; displej v rozli&scaron;en&iacute; HD Ready. Displej je typu IPS jako z&aacute;ruka prvotř&iacute;dn&iacute;ho barevn&eacute;ho pod&aacute;n&iacute; s jemn&yacute;mi odst&iacute;ny. Pro roz&scaron;&iacute;řen&iacute; plochy potě&scaron;&iacute; konektor Mini HDMI. Pressure Sensitivy se postar&aacute; o zabr&aacute;něn&iacute; n&aacute;hodn&yacute;ch dotyků při nečinnosti. Pro jemněj&scaron;&iacute; ovl&aacute;d&aacute;n&iacute; a ručn&iacute; psan&iacute; i kreslen&iacute; si lze dokoupit pero. Pomoc&iacute; USB či BlueTooth v&scaron;ak připoj&iacute;te i fyzickou kl&aacute;vesnici. Pro data je &uacute;loži&scaron;tě o kapacitě 64 GB. Oproti standardn&iacute;m diskům přinese daleko men&scaron;&iacute; energetickou spotřebu, rychlej&scaron;&iacute; př&iacute;stup a</p>',	2,	'123456',	'122',	'rok',	1,	4,	'0000-00-00',	0,	1),
+(11,	'Lenovo ThinkPad Edge E130 Arctic Blue 3358-8CG',	4,	'11111',	NULL,	'Velmi malý a tenký cestovní notebook LENOVO ThinkPad Edge E130 s nejnovějším procesorem a s <strong>3G připojením</strong> jako ideální každodenní parťák aktivních&nbsp;uživatelů. Notebook odpovídá displeji o kompromisní úhlopříčce <strong>11,6\"</strong>. Ten je v <strong>matné povrchové úpravě </strong>pro lepší viditelnost. Spolu s pokročilými funkcemi pro VoIP, ergonomickou klávesnicí a kombinací touchpadu s trackpointem nabízí komfort pro každodenní službu. Je vhodný pro pracovité jedince vyžadující flexibilní mobilní použití a dlouhou výdrž na baterií, která u tohoto modelu dosahuje neuvěřitelných <strong>8 hodin</strong>!<br><br>Pro vaše data je vložen <strong>nadstandardně rychlý disk o kapacitě 500 GB</strong>, takže s sebou budete mít vše důležité. Na disku je předinstalovaný operační systém <strong>Microsoft Windows 8</strong>, který přichází s přehledným dlaždicovým prostředím. Svižný chod tohoto lehce přenosného počítače je na procesoru se sníženou spotřebou z nejnovější série <strong>Ivy Bridge, Intel Core i3 3217U</strong>. Pokud si&nbsp;budete přát&nbsp;pustit například HD video, přijde vhod <strong>HDMI</strong> port, kterým můžete notebook připojit k televizím nebo projektorům ve velkém rozlišení. Další rozšíření lze uskutečnit přes vysokorychlostní <strong>UBS 3.0 </strong>či bezdrátový <strong>BlueTooth</strong>.<br><br>',	2,	'123456',	'122',	'rok',	0,	2,	'0000-00-00',	0,	1),
+(13,	'Sony Ericsson Xperia Mini',	2,	'11111',	'Skvělý malý telefon vhodný do každé malé kapsy. QWERTY klávesnice!\r\n',	'<p>Uživatel se d&iacute;ky operačn&iacute;mu syst&eacute;mu Android může tě&scaron;it na &scaron;pičkovou funkčn&iacute; z&aacute;kladu. Ta je tvořena např. internetov&yacute;m prohl&iacute;žečem,<strong> e-mailov&yacute;m klientem</strong>, multimedi&aacute;ln&iacute;m přehr&aacute;vačem, bohat&yacute;mi možnostmi synchronizace, kvalitn&iacute;mu funkcemi pro organizaci času, prohl&iacute;žečem dokumentů, skvěl&yacute;m kalend&aacute;řem či aplikacemi pro př&iacute;stup na Facebook a Twitter. Př&iacute;stup ke katalogu Android Market pak umožn&iacute; instalaci dal&scaron;&iacute;ch tis&iacute;ců aplikac&iacute; a her. Samozřejmost&iacute; je tak&eacute; poveden&yacute; digit&aacute;ln&iacute; fotoapar&aacute;t s rozli&scaron;en&iacute;m pět megapixelů nebo vestavěn&aacute; satelitn&iacute; aGPS navigace. Telefonu nechyb&iacute; ani podpora technologi&iacute; Wi-Fi (včetně DLNA) a Bluetooth. Pro připojen&iacute; sluch&aacute;tek je k dispozici standardn&iacute; 3,5 mm jack. O nap&aacute;jen&iacute; se star&aacute; Li-Ion akumul&aacute;tor o kapacitě 1200 mAh, jenž by měl telefonu na jedno nabit&iacute; umožnit setrvat až 340 hodin v pohotovostn&iacute;m režimu nebo vykonat čtyři a půl hodiny hovoru.</p>',	2,	'123456',	'122',	'rok',	11,	3,	'0000-00-00',	2013,	1);
 
 DROP TABLE IF EXISTS `productstatus`;
 CREATE TABLE `productstatus` (
@@ -362,7 +437,7 @@ CREATE TABLE `productstatus` (
   `ProductStatusName` varchar(100) NOT NULL,
   `ProductStatusDescription` varchar(255) NOT NULL,
   PRIMARY KEY (`ProductStatusID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `productstatus` (`ProductStatusID`, `ProductStatusName`, `ProductStatusDescription`) VALUES
 (1,	'Concept',	'This product is in stae: Concept'),
@@ -384,7 +459,7 @@ CREATE TABLE `unit` (
   `UnitShort` varchar(50) NOT NULL,
   `UnitName` varchar(255) NOT NULL,
   PRIMARY KEY (`UnitID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `unit` (`UnitID`, `UnitShort`, `UnitName`) VALUES
 (1,	' ',	' '),
@@ -407,12 +482,13 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`, `TIN`, `Permission`) VALUES
 ('1234@1234.com',	'',	'1234',	0,	'',	'',	'user'),
+('12389@1234.xxx',	NULL,	'XXX',	0,	NULL,	NULL,	'user'),
 ('aaa@aaa.aaa',	'',	'AAA',	0,	'',	'',	'user'),
 ('aaaa@aaa.aaa',	'',	'AAA',	0,	'',	'',	'user'),
 ('aaaaa@aaa.aaa',	'',	'AAA',	0,	'',	'',	'user'),
 ('aaaaaa@aaa.aaa',	'',	'AAA',	0,	'',	'',	'user'),
 ('aaaaaaa@aaa.aaa',	'',	'AAA',	0,	'',	'',	'user'),
-('admin@admin.com',	'$2a$07$$$$$$$$$$$$$$$$$$$$$$.Yqgs4IC6X2x/em6hm8RFU1wBrsCvoAi',	'Admin',	0,	'0',	'0',	'admin'),
+('admin@admin.com',	'$2a$07$$$$$$$$$$$$$$$$$$$$$$.Yqgs4IC6X2x/em6hm8RFU1wBrsCvoAi',	'Lukkk',	0,	'0',	'0',	'admin'),
 ('ads@fgsw.sdg',	'',	'asdzx',	0,	'',	'',	'user'),
 ('ads@fgw.sdg',	'',	'asdzx',	0,	'',	'',	'user'),
 ('afaasasdsasds2134@asfew213.aff',	'',	'asd',	0,	'',	'',	'user'),
@@ -429,6 +505,7 @@ INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`
 ('hddd@dsd.cdd',	'',	'Petr',	0,	'',	'',	'user'),
 ('jan.novak@company.com',	'novak',	'Jan',	999888777,	'Company',	'819281293',	'0'),
 ('kifa@mail.com',	'$2a$07$$$$$$$$$$$$$$$$$$$$$$.Y',	'Kifa',	NULL,	'',	'',	'admin'),
+('michal@prosek.cz',	NULL,	'Michal Prošáků',	0,	NULL,	NULL,	'user'),
 ('petan@petr.com',	'',	'Petr',	0,	'',	'',	'user'),
 ('ppp@ppp.ppp',	'',	'09u7',	0,	'',	'',	'user'),
 ('ppp@pppa.ppp',	'',	'09u7',	0,	'',	'',	'user'),
@@ -450,4 +527,4 @@ INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`
 ('tomik@tomas.com',	'$2a$07$xshgrgluo88ug5qvohjvme0',	'Tomas',	NULL,	NULL,	NULL,	'0'),
 ('yetty@himalaja.tib',	NULL,	'Yetty',	0,	NULL,	NULL,	'user');
 
--- 2013-04-17 11:30:06
+-- 2013-05-19 20:18:04

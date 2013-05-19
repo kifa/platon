@@ -82,7 +82,15 @@ class CategoryModel extends Repository {
         
     }
     
-    
+      public function setCategoryStatus($id, $status){
+        
+            $update = array(
+
+                'CategoryStatus' => $status
+                );        
+        return $this->getTable('category')->where('CategoryID',$id)->update($update);
+       
+    }
 }
 
 
