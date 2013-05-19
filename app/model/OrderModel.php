@@ -64,7 +64,7 @@ class OrderModel extends Repository {
     
     
       public function loadOrderNotes($id){
-        return $this->getTable('notes')->where('OrdersID',$id)->fetchPairs('NotesID');
+        return $this->getTable('notes')->where('OrderID',$id)->fetchPairs('NotesID');
     }
     /*
      * Check and save order
