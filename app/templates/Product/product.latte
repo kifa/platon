@@ -7,13 +7,15 @@
             {if $user->isInRole('admin')}
 <div class="row">
     <div class="span10">
-        <a href="#addPhoto" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a> |
-        <a href="#editDesc" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
-        <a href="#editPrice" data-toggel="modal" data-target="#editPrice" id="editPriceButton" ><i class="icon-large icon-money"></i> {_"Edit Price"}</a> |
-        <a href="#editPieces" data-toggel="modal" data-target="#editPieces" id="editPiecesButton"><i class="icon-large icon-truck"></i> {_"Edit Pieces"}</a> |
-        <a href="#editParam" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Specs"}</a> |
-        <a href="#editDocs" data-toggel="modal" data-target="#editDocs" id="editDocsButton"><i class="icon-large icon-download"></i> {_"Edit Documents"}</a> |
-        <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> 
+        <a href="#addPhoto" class="btn" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
+         <div class="btn-group">
+        <a href="#editDesc" class="btn" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
+        <a href="#editPrice" class="btn" data-toggel="modal" data-target="#editPrice" id="editPriceButton" ><i class="icon-large icon-money"></i> {_"Edit Price"}</a> |
+        <a href="#editPieces" class="btn" data-toggel="modal" data-target="#editPieces" id="editPiecesButton"><i class="icon-large icon-truck"></i> {_"Edit Pieces"}</a> |
+        <a href="#editParam" class="btn" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Specs"}</a> |
+        <a href="#editDocs" class="btn" data-toggel="modal" data-target="#editDocs" id="editDocsButton"><i class="icon-large icon-download"></i> {_"Edit Documents"}</a> |
+         </div>
+        <a href="#" class="btn" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> 
         
     </div>
 </div>

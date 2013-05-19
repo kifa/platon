@@ -8,20 +8,34 @@
         <div class="row">
             <div class="span10">
                 {if $user->isInRole('admin')}
-                <a href="#addProduct" data-toggel="modal" data-target="#addProductButton" id="addProductButton"><i class="icon-large icon-plus"></i> {_"Add Product"}</a> |
-                <a href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> |
-                <a href="#editCategory" data-toggel="modal" data-target="#editCategory" id="editCategoryButton"><i class="icon-large icon-pencil"></i> {_"Edit Category"}</a> |
-                <a href="#deleteCategory" data-toggel="modal" data-target="#deleteCategory" id="deleteCategoryButton"><i class="icon-large icon-trash"></i> {_"Delete Category"}</a> |
-
+                <a href="#addProduct" class="btn" data-toggel="modal" data-target="#addProductButton" id="addProductButton"><i class="icon-large icon-plus"></i> {_"Add Product"}</a>
+                <div class="btn-group">
+                <a href="#" class="btn"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+                <a href="#editCategory" class="btn" data-toggel="modal" data-target="#editCategory" id="editCategoryButton"><i class="icon-large icon-pencil"></i> {_"Edit Category"}</a>
+                </div>
                 
+                <div class="btn-group">
+                    {if $category->CategoryStatus == 0}
+  <a class="btn" href="{plink setCategoryStatus! $category->CategoryID, 1}"><i class="icon-large icon-eye-open"></i> {_'Publish category'}</a>
+  {elseif $category->CategoryStatus == 1}
+    <a class="btn" href="{plink setCategoryStatus! $category->CategoryID, 0}"><i class="icon-large icon-eye-close"></i> {_'Unpublish category'}</a></button>
+     {/if}
+  <button class="btn dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+      <li><a href="{plink setCategoryStatus! $category->CategoryID, 2}">{_'Feature category!'}</a></li>
+      <li><a href="#deleteCategory" data-toggel="modal" data-target="#deleteCategory" id="deleteCategoryButton"><i class="icon-large icon-trash"></i> {_"Delete Category"}</a>
+</li>
+  </ul>
+</div>
                 
-                {if $category->CategoryStatus == 0}
-                <a href="{plink setCategoryStatus! $category->CategoryID, 1}">{_'Publish category!'}</a>
-                {elseif $category->CategoryStatus == 1}
-                <a href="{plink setCategoryStatus! $category->CategoryID, 2}">{_'Feature category!'}</a> |
-                    <a href="{plink setCategoryStatus! $category->CategoryID, 0}">{_'Unpublish category!'}</a>
+               
+                
+               
+                    
 
-                {/if}
+               
 
                 {/if}
                 

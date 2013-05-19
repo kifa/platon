@@ -61,6 +61,11 @@ class OrderModel extends Repository {
               JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
               WHERE photo.CoverPhoto="1" and orderdetails.OrderID=?',$id);
     }
+    
+    
+      public function loadOrderNotes($id){
+        return $this->getTable('notes')->where('OrdersID',$id)->fetchPairs('NotesID');
+    }
     /*
      * Check and save order
      * @param ?

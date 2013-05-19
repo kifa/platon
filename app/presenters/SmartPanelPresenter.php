@@ -290,6 +290,7 @@ class SmartPanelPresenter extends BasePresenter {
             $this->template->order = $this->orderModel->loadOrder($orderid);
             $this->template->statuses = $this->orderModel->loadStatus('');
             $this->template->address = $this->orderModel->loadOrderAddress($orderid);
+            $this->template->notes = $this->orderModel->loadOrderNotes($orderid);
             $this->template->productsInOrder = $this->productInOrder;
                     
             $this->template->nextOrder = $this->orderModel->loadOrder($orderid+1);

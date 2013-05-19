@@ -73,7 +73,7 @@ CREATE TABLE `category` (
 INSERT INTO `category` (`CategoryID`, `CategoryName`, `CategoryDescription`, `CategoryStatus`, `HigherCategoryID`) VALUES
 (1,	'Cellphone',	'<p>A mobile phone (also known as a cellular phone, cell phone, and a hand phone) is a device that can make and receive telephone calls over a radio link while moving around a wide geographic area. It does so by connecting to a cellular network provided by a mobile phone operator, allowing access to the public telephone network. By contrast, a cordless telephone is used only within the short range of a single, private base station. In addition to telephony, modern mobile phones also support a wide variety of other services such as text messaging, MMS, email, Internet access, short-range wireless communications (infrared, Bluetooth), business applications, gaming and photography. Mobile phones that offer these and more general computing capabilities are referred to as smartphones.</p>',	1,	NULL),
 (2,	'Notebook',	'<p>A laptop computer is a personal computer for mobile use.[1] A laptop has most of the same components as a desktop computer, inclu<strong>ding a display, a keyboard, a pointing device such as a touchpad (also k</strong>nown as a trackpad) and/or a pointing stick, and speakers into a single unit. A laptop is powered by mains electricity via an AC adapter, and can be used away from an outlet using a rechargeable battery. Laptops are also sometimes called notebook computers, notebooks, ultrabooks[2] or netbooks.&nbsp;</p>',	1,	4),
-(3,	'Smartphones-',	'<p>A smartphone is a mobile phone built on a mobile operating system, with more advanced computing capability connectivity than a feature phone. The first smartphones combined the functions of a personal digital assistant (PDA) with a mobile phone. Later models added the functionality of portable media players, low-end compact digital cameras, pocket video cameras, and GPS navigation units to form one multi-use device. Many modern smartphones also include high-resolution touchscreens and web browsers that display standard web pages as well as mobile-optimized sites.</p>',	0,	2),
+(3,	'Smartphones-',	'<p>A smartphone is a mobile phone built on a mobile operating system, with more advanced computing capability connectivity than a feature phone. The first smartphones combined the functions of a personal digital assistant (PDA) with a mobile phone. Later models added the functionality of portable media players, low-end compact digital cameras, pocket video cameras, and GPS navigation units to form one multi-use device. Many modern smartphones also include high-resolution touchscreens and web browsers that display standard web pages as well as mobile-optimized sites.</p>',	1,	2),
 (4,	'Tablets',	'<p>A tablet computer, or simply tablet, is a one-piece mobile computer. Devices typically offer a touchscreen, with finger (or stylus) gestures acting as the primary means of control, though often supplemented by the use of one or more physical context sensitive buttons or the input from one or more accelerometers; an on-screen, hideable virtual keyboard is generally offered as the principal means of data input. Available in a variety of sizes, tablets customarily offer a screen diagonal greater than 7 inches (18 cm), differentiating themselves through size from functionally similar smart phones or personal digital assistants.</p>',	1,	1);
 
 DROP TABLE IF EXISTS `categorystatus`;
@@ -150,17 +150,16 @@ INSERT INTO `documentation` (`DocumentID`, `DocumentName`, `DocumentDescription`
 
 DROP TABLE IF EXISTS `notes`;
 CREATE TABLE `notes` (
-  `NotesID` int(11) NOT NULL,
-  `OrderID` int(11) NOT NULL,
-  `NotesDate` int(11) NOT NULL,
-  `NotesName` varchar(90) NOT NULL,
+  `NotesID` int(11) NOT NULL AUTO_INCREMENT,
+  `OrdersID` int(11) NOT NULL,
+  `NotesDate` datetime NOT NULL,
+  `NotesName` varchar(150) NOT NULL,
   `NotesDescription` text NOT NULL,
-  KEY `OrderID` (`OrderID`),
-  KEY `NotesDate` (`NotesDate`),
-  CONSTRAINT `notes_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`),
-  CONSTRAINT `notes_ibfk_2` FOREIGN KEY (`NotesDate`) REFERENCES `orders` (`OrderID`)
+  PRIMARY KEY (`NotesID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `notes` (`NotesID`, `OrdersID`, `NotesDate`, `NotesName`, `NotesDescription`) VALUES
+(1,	19,	'2013-05-19 21:11:51',	'Zákazník',	'Bez Ponožek!');
 
 DROP TABLE IF EXISTS `orderdetails`;
 CREATE TABLE `orderdetails` (
@@ -527,4 +526,4 @@ INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`
 ('tomik@tomas.com',	'$2a$07$xshgrgluo88ug5qvohjvme0',	'Tomas',	NULL,	NULL,	NULL,	'0'),
 ('yetty@himalaja.tib',	NULL,	'Yetty',	0,	NULL,	NULL,	'user');
 
--- 2013-05-19 20:18:04
+-- 2013-05-19 21:13:39

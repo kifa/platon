@@ -212,8 +212,9 @@
             <div class="span4 alert {$order->Note ? 'alert-block' : 'alert-info'}">
             <div class="span4">
                 <i class="icon-paper-clip left icon-large"></i><strong> {_'Note'}:</strong>
-
-                <p>{$order->Note}</p>
+                    {foreach $notes as $note}
+                <p>{$note->NotesName} - {$note->NotesDescription} - {$note->NotesDate}</p>
+                {/foreach}
 
             </div>
         </div>
