@@ -110,7 +110,7 @@ WHERE Product.ProductID=?',$id)->fetch();
         $row = $this->getTable('Product')->insert($insert);   
         $lastprodid = $row["ProductID"];
         
-        $albumid = $this->insertPhotoAlbum($name, $description,$lastprodid);
+        $albumid = $this->insertPhotoAlbum($name, $description,$lastprodid, null);
         
         $this->insertPrice($lastprodid, $price);
         
@@ -207,12 +207,13 @@ WHERE Product.ProductID=?',$id)->fetch();
         }
     }
     
-    public function insertPhotoAlbum($name, $desc, $product) {
+    public function insertPhotoAlbum($name, $desc, $product = NULL, $blog = NULL) {
          $insert = array(
             'PhotoAlbumID' => NULL,             
             'PhotoAlbumName' => $name,
             'PhotoAlbumDescription' => $desc,
-            'ProductID' => $product
+            'ProductID' => $product,
+            'BlogID' => $blog
             );
          
            $row = $this->getTable('photoalbum')->insert($insert);

@@ -1,5 +1,8 @@
 <?php
 
+use Nette\Forms\Form,
+    Nette\Utils\Html,
+        Nette\Image;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -51,7 +54,9 @@ class BlogPresenter extends BasePresenter {
                     ->setRequired()
                     ->setAttribute('class', 'mceEditor');
             $addProduct->addSelect('cat', 'Category: ', $category);
-            
+            $addProduct->addUpload('image', 'Image:')
+                    ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
             $addProduct->addSubmit('add', 'Add Post')
                     ->setAttribute('class', 'upl btn btn-primary')
                     ->setAttribute('data-loading-text', 'Adding...');
@@ -76,6 +81,29 @@ class BlogPresenter extends BasePresenter {
                      //Description
                     
             );
+            
+            if ($form->values->image->isOK()) {
+
+                $albumid = $this->productModel->insertPhotoAlbum($form->values->name, $form->values->desc, null, $return);
+                
+                $this->productModel->insertPhoto(
+                        $form->values->name, $form->values->image->name, $albumid, 1
+                );
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/blog/' . $return . '/' . $form->values->image->name;
+                $form->values->image->move($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 300, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/blog/' . $return . '/300-' . $form->values->image->name;
+                $image->save($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 50, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/blog/' . $return . '/50-' . $form->values->image->name;
+                $image->save($imgUrl);
+            }
 
             
           $this->redirect('Blog:post', $return);
@@ -96,6 +124,8 @@ class BlogPresenter extends BasePresenter {
     }
       
     public function renderPost($postid) {
+        $this->template->photo = $this->blogModel->loadCoverPhoto($postid);
+        $this->template->album = $this->blogModel->loadPhotoAlbum($postid);
         $this->template->post = $this->blog->loadPost($postid);
         
     }

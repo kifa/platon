@@ -44,7 +44,7 @@ class BlogModel extends Repository {
 
         $insert = array(
           'BlogName' => $name,
-            'BlogDescription' => $desc,
+          'BlogDescription' => $desc,
           'BlogContent' => $content,
           'CategoryID' => $categoryID
         );
@@ -53,6 +53,7 @@ class BlogModel extends Repository {
         return $return->BlogID;
     }
     
+
     public function updatePost($id, $name, $content, $categoryID) {
         $update = array(
           'BlogName' => $name,
@@ -67,5 +68,22 @@ class BlogModel extends Repository {
         return $this->getTable('blog')->where('BlogID', $id)->delete();
     }
     
+    public function loadCoverPhoto($id){
+        return $this->getTable('photo')->select('photo.PhotoURL, photoalbum.ProductID')->where('photoalbum.BlogtID',$id)
+                ->where('photo.CoverPhoto','1')->fetch();
+    }
     
+     public function loadPhotoAlbum($id){
+        if($id==''){
+            return $this->getTable('PhotoAlbum');
+        }
+        else{
+            //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
+            $row = $this->getDB()->query('SELECT * FROM product JOIN photoalbum 
+                ON product.ProductID=photoalbum.ProductID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+                WHERE Product.BlogID=?',$id); 
+           // dump($row);
+            return $row;
+        }
+    }
 }
