@@ -16,6 +16,7 @@ class MenuControl extends BaseControl {
     private $cart;
     private $categoryModel;
     private $productModel;
+    private $blogModel;
 
 
 
@@ -29,6 +30,11 @@ class MenuControl extends BaseControl {
 
     public function setCategory($cat) {
         $this->categoryModel = $cat;
+
+    }
+    
+    public function setBlog($blog) {
+        $this->blogModel = $blog;
 
     }
     
@@ -90,6 +96,19 @@ class MenuControl extends BaseControl {
         }
         $this->template->render();
     }
+    
+    public function renderBreadBlog($catID, $id=null) {
+        $this->template->setFile(__DIR__ . '/MenuBreadBlogControl.latte');
+        $this->template->category = $this->getBread($catID);
+        if ($id) {
+        $this->template->blog = $this->blogModel->loadPost($id);
+        }
+        else {
+           $this->template->blog = null;  
+        }
+        $this->template->render();
+    }
+    
     
     public function renderTop() {
         $this->template->setFile(__DIR__ . '/MenuTopControl.latte');

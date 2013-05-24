@@ -1,0 +1,14 @@
+<div class="row">
+            {foreach $posts as $id => $post}
+    <div class="span10">
+        <h2>{$post->BlogName}</h2>
+        <div><p>{$post->BlogContent|strip:150}</p><small><a href="{plink Blog:post $post->BlogID}">{_'Read more'} <i class="icon-arrow-right"></i></a></small></div>
+    </div>
+    <hr class="span9">
+    
+            {/foreach}
+</div>
+
+{block script}
+        
+{/block}

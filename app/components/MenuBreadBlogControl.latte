@@ -1,0 +1,16 @@
+
+<ul class="breadcrumb">
+  <li><a href="{$basePath}">{_"Home"}</a> <span class="divider">/</span></li>
+  {foreach $category as $catID => $cat}
+    
+  {ifCurrent Blog:category $catID} 
+  <li class="active">{$cat}</a></li>
+  {else}
+  <li><a href="{plink Blog:category $catID}">{$cat}</a> <span class="divider">/</span></li>
+  {/ifCurrent}
+  
+  {/foreach}
+  {if $blog}
+  <li class="active">{$blog->BlogName}</a></li>
+  {/if}
+</ul>
