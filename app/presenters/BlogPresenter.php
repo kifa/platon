@@ -124,8 +124,8 @@ class BlogPresenter extends BasePresenter {
     }
       
     public function renderPost($postid) {
-        $this->template->photo = $this->blogModel->loadCoverPhoto($postid);
-        $this->template->album = $this->blogModel->loadPhotoAlbum($postid);
+        $this->template->photo = $this->blog->loadCoverPhoto($postid);
+        $this->template->album = $this->blog->loadPhotoAlbum($postid);
         $this->template->post = $this->blog->loadPost($postid);
         
     }

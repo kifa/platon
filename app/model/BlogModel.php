@@ -69,7 +69,7 @@ class BlogModel extends Repository {
     }
     
     public function loadCoverPhoto($id){
-        return $this->getTable('photo')->select('photo.PhotoURL, photoalbum.ProductID')->where('photoalbum.BlogtID',$id)
+        return $this->getTable('photo')->select('photo.PhotoURL, photoalbum.BlogID')->where('photoalbum.BlogID',$id)
                 ->where('photo.CoverPhoto','1')->fetch();
     }
     
@@ -79,9 +79,9 @@ class BlogModel extends Repository {
         }
         else{
             //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
-            $row = $this->getDB()->query('SELECT * FROM product JOIN photoalbum 
-                ON product.ProductID=photoalbum.ProductID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE Product.BlogID=?',$id); 
+            $row = $this->getDB()->query('SELECT * FROM blog JOIN photoalbum 
+                ON blog.BlogID=photoalbum.BlogID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+                WHERE Blog.BlogID=?',$id); 
            // dump($row);
             return $row;
         }
