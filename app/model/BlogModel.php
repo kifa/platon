@@ -28,10 +28,17 @@ class BlogModel extends Repository {
     public function loadPosts($id = NULL) {
         
         if($id == NULL) {
-        return $this->getTable('blog')->fetchPairs('BlogID');
+        // return $this->getTable('blog')->order('BlogID DESC')->fetchPairs('BlogID');
+        
+        return $this->getDB()->query('SELECT * FROM blog JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
+                JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+                WHERE Photo.CoverPhoto="1"');
         }
         else {
-        return $this->getTable('blog')->where('CategoryID', $id)->fetchPairs('BlogID');    
+        //return $this->getTable('blog')->where('CategoryID', $id)->order('BlogID DESC')->fetchPairs('BlogID');    
+            return $this->getDB()->query('SELECT * FROM blog JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
+            JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+            WHERE Photo.CoverPhoto="1" blog.CategoryID=?',$id);
         }
     }
     
