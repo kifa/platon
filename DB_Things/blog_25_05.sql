@@ -87,8 +87,8 @@ INSERT INTO `category` (`CategoryID`, `CategoryName`, `CategoryDescription`, `Ca
 (2,	'Notebook',	'<p>A laptop computer is a personal computer for mobile use.[1] A laptop has most of the same components as a desktop computer, inclu<strong>ding a display, a keyboard, a pointing device such as a touchpad (also k</strong>nown as a trackpad) and/or a pointing stick, and speakers into a single unit. A laptop is powered by mains electricity via an AC adapter, and can be used away from an outlet using a rechargeable battery. Laptops are also sometimes called notebook computers, notebooks, ultrabooks[2] or netbooks.&nbsp;</p>',	1,	4),
 (3,	'Smartphones-',	'<p>A smartphone is a mobile phone built on a mobile operating system, with more advanced computing capability connectivity than a feature phone. The first smartphones combined the functions of a personal digital assistant (PDA) with a mobile phone. Later models added the functionality of portable media players, low-end compact digital cameras, pocket video cameras, and GPS navigation units to form one multi-use device. Many modern smartphones also include high-resolution touchscreens and web browsers that display standard web pages as well as mobile-optimized sites.</p>',	1,	2),
 (4,	'Tablets',	'<p>A tablet computer, or simply tablet, is a one-piece mobile computer. Devices typically offer a touchscreen, with finger (or stylus) gestures acting as the primary means of control, though often supplemented by the use of one or more physical context sensitive buttons or the input from one or more accelerometers; an on-screen, hideable virtual keyboard is generally offered as the principal means of data input. Available in a variety of sizes, tablets customarily offer a screen diagonal greater than 7 inches (18 cm), differentiating themselves through size from functionally similar smart phones or personal digital assistants.</p>',	1,	1),
-(99,	'Blog',	'Blog full of wonderfull stories!',	1,	NULL),
-(100,	'Static Text',	NULL,	1,	NULL);
+(99,	'Blog',	'Blog full of wonderfull stories!',	3,	NULL),
+(100,	'Static Text',	NULL,	3,	NULL);
 
 DROP TABLE IF EXISTS `categorystatus`;
 CREATE TABLE `categorystatus` (
@@ -99,7 +99,8 @@ CREATE TABLE `categorystatus` (
 INSERT INTO `categorystatus` (`CategoryStatusID`, `CategoryStatusName`) VALUES
 (1,	'Published'),
 (2,	'Featured'),
-(0,	'Draft');
+(0,	'Draft'),
+(3,	'Blog');
 
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
@@ -551,4 +552,4 @@ INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`
 ('tomik@tomas.com',	'$2a$07$xshgrgluo88ug5qvohjvme0',	'Tomas',	NULL,	NULL,	NULL,	'0'),
 ('yetty@himalaja.tib',	NULL,	'Yetty',	0,	NULL,	NULL,	'user');
 
--- 2013-05-25 13:03:42
+-- 2013-05-25 13:18:33

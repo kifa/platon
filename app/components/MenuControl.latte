@@ -5,7 +5,9 @@
             <ul class="nav">
                 <li class="{ifCurrent Homepage:default}active{/ifCurrent}"><a href="{plink Homepage:default}">{_"Home"}</a></li>
                 {foreach $category as $catID => $cat}
+                {if $cat->CategoryStatus != 3}
                 <li class="{ifCurrent Product:products $catID}active{/ifCurrent}"><a href="{plink product:products $catID}"><i class="icon-spinner"></i>{$cat->CategoryName}</a></li> 
+                {/if}
                 {/foreach}
                 <li>
                 <div class="btn-group">
