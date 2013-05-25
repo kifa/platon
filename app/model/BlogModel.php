@@ -31,9 +31,9 @@ class BlogModel extends Repository {
         }
         else {
         return $this->getTable('blog')->where('CategoryID', $id)->order('BlogID DESC')->fetchPairs('BlogID');    
-         /*   return $this->getDB()->query('SELECT * FROM blog JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
+        /*    return $this->getDB()->query('SELECT * FROM blog JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-             WHERE Photo.CoverPhoto="1" blog.CategoryID=?',$id); */
+             WHERE Photo.CoverPhoto="1" blog.CategoryID=?',$id);  */
         }
     }
     
@@ -46,11 +46,11 @@ WHERE blog.BlogID=?',$postid)->fetch();
         
     }
 
-    public function insertPost($name,  $categoryID, $content, $desc) {
+    public function insertPost($name,  $categoryID, $content) {
 
         $insert = array(
           'BlogName' => $name,
-          'BlogDescription' => $desc,
+         // 'BlogDescription' => $desc,
           'BlogContent' => $content,
           'CategoryID' => $categoryID
         );

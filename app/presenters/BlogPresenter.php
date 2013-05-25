@@ -50,10 +50,6 @@ class BlogPresenter extends BasePresenter {
             $addPost->setTranslator($this->translator);
             $addPost->addText('name', 'Name:')
                     ->setRequired();
-           /* CURRENTLY UNUSED $addProduct->addTextArea('short', 'Impress: ')
-                    ->setRequired();
-            
-            */
             $addPost->addTextArea('desc', 'Description: ', 10)
                     ->setRequired()
                     ->setAttribute('class', 'mceEditor');
@@ -80,8 +76,8 @@ class BlogPresenter extends BasePresenter {
             $return = $this->blog->insertPost(
                     $form->values->name, //Name
                     $form->values->cat,
-                    $form->values->desc,
-                    "" //Description
+                    $form->values->desc
+                     //Description
                     
             );
             
@@ -120,7 +116,7 @@ class BlogPresenter extends BasePresenter {
          if ($this->getUser()->isInRole('admin')) {
                 $this->row = array('BlogID' => $row->BlogID,
                     'BlogName' => $row->BlogName,
-                    'BlogDescription' => $row->BlogDescription,
+
                     'BlogContent' => $row->BlogContent,
                     'PhotoAlbumID' => $row->PhotoAlbumID,
                     'CategoryID' => $row->CategoryID);
@@ -186,7 +182,7 @@ class BlogPresenter extends BasePresenter {
                     ->setRequired(); */
                     
             $editForm->addTextArea('text', 'Description:', 150, 150)
-                    ->setDefaultValue($this->row['BlogDescription'])
+                    ->setDefaultValue($this->row['BlogContent'])
                     ->setRequired()
                     ->setAttribute('class', 'mceEditor');
             

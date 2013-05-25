@@ -68,6 +68,10 @@ class MenuControl extends BaseControl {
 
     }
 
+    private function loadStaticMenu() {
+        return $this->blogModel->loadPosts(100);
+    }
+    
     public function renderAdmin() {
         if($this->parent->getUser()->isLoggedIn()){
         $this->template->setFile(__DIR__.'/MenuAdminControl.latte');
@@ -76,7 +80,9 @@ class MenuControl extends BaseControl {
         }
     }
     
-    public function render() {
+    
+
+        public function render() {
         $this->template->setFile(__DIR__ . '/MenuControl.latte');
         $this->template->cart = $this->cart->numberItems;
         $this->template->category = $this->categoryModel->loadCategoryList(); 
@@ -113,6 +119,12 @@ class MenuControl extends BaseControl {
     public function renderTop() {
         $this->template->setFile(__DIR__ . '/MenuTopControl.latte');
         $this->template->cart = $this->cart->numberItems;
+        $this->template->render();
+    }
+    
+    public function renderFooter() {
+        $this->template->setFile(__DIR__ . '/MenuFooterControl.latte');
+        $this->template->menu = $this->loadStaticMenu();
         $this->template->render();
     }
 
