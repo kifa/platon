@@ -27,8 +27,10 @@
 {/block}
 
 {block content}
+
 <div class="span10">
 
+    {if $post->CategoryID != 100}
             <div class="tabbable span9">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#allinfo" data-toggle="tab"><i class="icon-info-sign"></i> {_'Post'}</a></li>
@@ -40,8 +42,8 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="allinfo">
                         <img src="{$basePath}/images/blog/{$post->BlogID}/300-{$photo->PhotoURL}" alt="{$post->BlogName}"/>
-                        <p class="text-justified">{!$post->BlogContent}</p>
                         <p class="text-justified" n:block="metadesc">{!$post->BlogContent}</p>
+
                     </div>
 
                     <div class="tab-pane" id="gal">
@@ -70,7 +72,13 @@
                     </div>
                  </div>
             </div>
+    
 
+    {else}
+    
+    <p class="text-justified">{!$post->BlogContent}</p>
+    {/if}
+    
 </div> <!-- class="span10" -->
 {/block}
 
