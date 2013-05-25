@@ -43,7 +43,7 @@
         </div>
         
     </div>
-    <div class="alert alert-info" n:block="metadesc">{!$category->CategoryDescription}</div>
+<div class="alert alert-info" n:block="metadesc">{!$category->CategoryDescription} <small><a href="{plink Blog:category $category->CategoryID}">{_'Check news on blog'} <i class="icon-arrow-right"></i></a></small></div>
     
     
 {/block}

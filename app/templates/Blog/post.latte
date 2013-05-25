@@ -31,21 +31,37 @@
 
             <div class="tabbable span9">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#allinfo" data-toggle="tab"><i class="icon-info-sign"></i> Info</a></li>
-                    <li><a href="#gal" data-toggle="tab"><i class="icon-camera-retro"></i> Gallery</a></li>
-                    <li><a href="#vid" data-toggle="tab"><i class="icon-facetime-video"></i> Video</a></li>
-                    <li><a href="#rew" data-toggle="tab"><i class="icon-check"></i> Review</a></li>
+                    <li class="active"><a href="#allinfo" data-toggle="tab"><i class="icon-info-sign"></i> {_'Post'}</a></li>
+                    <li><a href="#gal" data-toggle="tab"><i class="icon-camera-retro"></i> {_'Gallery'}</a></li>
+                    <li><a href="#vid" data-toggle="tab"><i class="icon-facetime-video"></i> {_'Video'}</a></li>
+                    <li><a href="#rew" data-toggle="tab"><i class="icon-check"></i> {_'Review'}</a></li>
                    
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="allinfo">
-                        <img src="{$basePath}/images/blog/{$post->BlogID}/300-{$photo->PhotoURL}"/>
+                        <img src="{$basePath}/images/blog/{$post->BlogID}/300-{$photo->PhotoURL}" alt="{$post->BlogName}"/>
                         <p class="text-justified">{!$post->BlogDescription}</p>
                         <p class="text-justified" n:block="metadesc">{!$post->BlogContent}</p>
                     </div>
 
                     <div class="tab-pane" id="gal">
-
+                        <ul class="thumbnails">
+                                {foreach $album as $id => $photo}
+                                            <li class="{if $photo->CoverPhoto}span3 {else} span3 {/if}">
+                                                <a data-toggle="lightbox" href="#photo{$id}" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
+                                                    <img style="" src="{$basePath}/images/blog/{$post->BlogID}/300-{$photo->PhotoURL}" alt="{$post->BlogName}">
+                                                </a>
+                                                {if $user->isInRole('admin')}
+                                                   {if !$photo->CoverPhoto} <a href="{link coverPhoto! $post->BlogID, $photo->PhotoID}"><i class="icon-star" ></i> Set as COVER image</a> {/if}
+                                                    <a href="{link deletePhoto! $post->BlogID, $photo->PhotoID}"><i class="icon-trash" ></i> Delete image</a>
+                                                  {/if}
+                                            </li>
+                                           
+                                            {var $src = $basePath . '/images/blog/' . $post->BlogID .'/'.$photo->PhotoURL}
+                                            {control modalControl:gallery $id, $post->BlogName, $src }
+                                          
+                                     {/foreach}
+                                        </ul>
 
                        
                     </div>
@@ -162,7 +178,7 @@ $('#editDocs').modal('hide');
 {/if}
 {/block}
 
-{*block modal}
+{block modal}
 {if $user->isInRole('admin')}
 
 
@@ -184,7 +200,7 @@ $('#editDocs').modal('hide');
 <div id="editDesc" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-<h3 id="myModalLabel"><i class="icon-pencil"></i> Edit description</h3>
+<h3 id="myModalLabel"><i class="icon-pencil"></i> Edit post</h3>
 </div>
 <div class="modal-body">
 <p>{_'Edit your description and click Save desccription.'}</p>
@@ -195,7 +211,7 @@ $('#editDocs').modal('hide');
 <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
 </div>
 </div>
-
+{*
 <div id="editPrice" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -226,7 +242,7 @@ $('#editDocs').modal('hide');
 </div>
 </div>
 
-{*control editControl:parameters $post->ProductID}
+{control editControl:parameters $post->ProductID}
 <div id="editParam" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
 <div class="modal-header">
@@ -315,8 +331,8 @@ $('#editDocs').modal('hide');
 </div>
 
 </div>
-
+*}
 {/if}
 
 
-{/block*}
+{/block}
