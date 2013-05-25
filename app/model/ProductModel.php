@@ -39,6 +39,17 @@ class ProductModel extends Repository {
         }
     }
     
+     public function loadCatalogBrand($prodID) {
+        
+          return $this->getDB()->query('SELECT * FROM product JOIN price ON 
+            price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
+            JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+            WHERE Photo.CoverPhoto="1" and product.ProductStatusID="2" and product.ProducerID=?', $prodID);
+            //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
+              //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
+        
+    }
+    
     public function loadCatalogAdmin($catID) {
         
         // load ALL products, even unpublished        
@@ -419,8 +430,8 @@ WHERE Product.ProductID=?',$id)->fetch();
         $this->getTable('photo')->where('PhotoID',$photo)->update($setCover);
     }
     
-    public function loadProducer($id){
-        return $this->getTable('producer')->where('ProducerID',$id);
+    public function loadProducer($prodid){
+        return $this->getTable('producer')->where('ProducerID',$prodid)->fetch();
     }
     
     public function loadProducers(){

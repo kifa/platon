@@ -387,17 +387,34 @@ class ProductPresenter extends BasePresenter {
     public function renderProducts($catID) {
 
         $this->catId = $catID;
-        
-        if ($this->getUser()->isInRole('admin')) {
-            // load all products
-        $this->template->products = $this->productModel->loadCatalogAdmin($catID);
-        } else {
-            // load published products
-        $this->template->products = $this->productModel->loadCatalog($catID);
-        }
-        $this->template->category = $this->categoryModel->loadCategory($catID);     
+ 
+            if ($this->getUser()->isInRole('admin')) {
+                // load all products
+            $this->template->products = $this->productModel->loadCatalogAdmin($catID);
+            } else {
+                // load published products
+            $this->template->products = $this->productModel->loadCatalog($catID);
+            }
+             $this->template->category = $this->categoryModel->loadCategory($catID);  
+
 
     }
+    
+    public function renderProductsBrand($prodID) {
+        
+
+            
+            $this->template->products = $this->productModel->loadCatalogBrand($prodID);
+ 
+             $this->template->producer = $this->productModel->loadProducer($prodID);  
+
+    }
+
+
+
+
+
+
 
     /*     * *******************************************************************
      *                      RENDER PRODUCT

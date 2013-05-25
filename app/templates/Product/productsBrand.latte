@@ -1,16 +1,14 @@
 {block bread}
-{control menu:bread $category->CategoryID}
+{*control menu:bread $category->CategoryID*}
 {/block}
 {block pageheader}
 
-
-
 <div class="page-header">
-        <h1 n:block="title">{$category->CategoryName}<small> {$category->CategoryDescription|striptags|truncate:50}</small></h1>
+        <h1 n:block="title">{$producer->ProducerName}<small> {*$category->CategoryDescription|striptags|truncate:50*}</small></h1>
         
         <div class="row">
             <div class="span10">
-                {if $user->isInRole('admin')}
+                {*if $user->isInRole('admin')}
                 <a href="#addProduct" class="btn" data-toggel="modal" data-target="#addProductButton" id="addProductButton"><i class="icon-large icon-plus"></i> {_"Add Product"}</a>
                 <div class="btn-group">
                 <a href="#" class="btn"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
@@ -32,13 +30,13 @@
 </li>
   </ul>
 </div>
-               {/if}
+               {/if*}
                 
             </div>
         </div>
         
     </div>
-<div class="alert alert-info" n:block="metadesc">{!$category->CategoryDescription} <small><a href="{plink Blog:category $category->CategoryID}">{_'Check news on blog'} <i class="icon-arrow-right"></i></a></small></div>
+<div class="alert alert-info" n:block="metadesc">{!$producer->ProducerName} <small><a href="{plink Blog:category}">{_'Check news on blog'} <i class="icon-arrow-right"></i></a></small></div>
     
 
     
@@ -133,7 +131,7 @@
     
     {block modal}
     
-    {if $user->isInRole('admin')}
+    {*if $user->isInRole('admin')}
      
     <div id="addProduct" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
@@ -197,5 +195,5 @@
               <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
             </div>
             </div>
-{/if}
+{/if*}
 {/block}
