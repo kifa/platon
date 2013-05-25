@@ -3,9 +3,9 @@
   <li><a href="{$basePath}">{_"Home"}</a> <span class="divider">/</span></li>
   {foreach $category as $catID => $cat}
   
-{ifCurrent !Blog:category NULL}
+
   <li><a href="{plink Blog:category NULL}">{_'Blog'}</a> <span class="divider">/</span></li>
-{/ifCurrent}
+
   {ifCurrent Blog:category $catID} 
   <li class="active">{$cat}</a></li>
   {else}
