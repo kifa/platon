@@ -70,9 +70,12 @@
         {if $user->isLoggedIn()}
         {control menu:admin}
         {/if}
-        <i class="icon-camera-retro icon-2x"></i><strong>Google Nexus</strong>
-        <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-            <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
+         <ul class="nav nav-list">
+                        <li class="nav-header">Menu</li>
+                        
+                        {control menu:side}
+                        <li class="divider"></li>
+                    </ul>
 </div>
 {/block}
 

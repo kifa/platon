@@ -34,6 +34,27 @@ class BlogPresenter extends BasePresenter {
           } */
     }
     
+    
+    
+     
+    public function actionPost($postid) {
+         $row = $this->blog->loadPost($postid);
+         if ($this->getUser()->isInRole('admin')) {
+                $this->row = array('BlogID' => $row->BlogID,
+                    'BlogName' => $row->BlogName,
+
+                    'BlogContent' => $row->BlogContent,
+                    'PhotoAlbumID' => $row->PhotoAlbumID,
+                    'CategoryID' => $row->CategoryID);
+
+                $editDescForm = $this['editDescForm'];
+               $addPhotoForm = $this['addPhotoForm'];
+            }
+    }
+    
+    
+    
+    
      public function createComponentAddPostForm() {
 
         if ($this->getUser()->isInRole('admin')) {
@@ -54,7 +75,8 @@ class BlogPresenter extends BasePresenter {
                     ->setRequired()
                     ->setAttribute('class', 'mceEditor');
             $addPost->addSelect('cat', 'Category: ', $category);
-            $addPost->addUpload('image', 'Image:')
+            $addPost->addUpload('image', 'Image:')    
+                    ->addCondition(Form::FILLED)
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
             $addPost->addSubmit('add', 'Add Post')
@@ -109,22 +131,7 @@ class BlogPresenter extends BasePresenter {
         }
     }
     
-    
-    public function actionPost($postid) {
-         $row = $this->blog->loadPost($postid);
-
-         if ($this->getUser()->isInRole('admin')) {
-                $this->row = array('BlogID' => $row->BlogID,
-                    'BlogName' => $row->BlogName,
-
-                    'BlogContent' => $row->BlogContent,
-                    'PhotoAlbumID' => $row->PhotoAlbumID,
-                    'CategoryID' => $row->CategoryID);
-
-                $editDescForm = $this['editDescForm'];
-               $addPhotoForm = $this['addPhotoForm'];
-            }
-    }
+   
 
 
     public function handleDeletePhoto($post, $id) {

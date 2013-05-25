@@ -128,4 +128,9 @@ class MenuControl extends BaseControl {
         $this->template->render();
     }
 
+    public function renderSide() {
+        $this->template->setFile(__DIR__ . '/MenuSideControl.latte');
+        $this->template->menu = $this->loadStaticMenu();
+        $this->template->render();
+    }
 }

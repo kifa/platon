@@ -26,7 +26,7 @@
 
 {block content}
 
-<div class="span10">
+<div class="span9">
 
     {if $post->CategoryID != 100}
             <div class="tabbable span9">
@@ -81,7 +81,7 @@
 {/block}
 
 {block sidebar}
-            <div class="span2">
+            <div class="span3">
 {if $user->isInRole('admin')}
 {control menu:admin}
 {/if}
@@ -89,10 +89,7 @@
 
                 <ul class="nav nav-list">
                     <li class="nav-header">Menu</li>
-                    <li class="active"><a href="#"><i class="icon-home"></i>Domů</a></li>
-                    <li><a href="#"><i class="icon-book"></i>Jak nakupovat</a></li>
-                    <li><a href="#"><i class="icon-heart"></i>Jak prodávat</a></li>
-                    <li><a href="#"><i class="icon-comment"></i>Jak cokoliv</a></li>
+                    {control menu:side}
                     <li class="divider"></li>
                 </ul>
 
