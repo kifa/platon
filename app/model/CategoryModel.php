@@ -91,6 +91,16 @@ class CategoryModel extends Repository {
         return $this->getTable('category')->where('CategoryID',$id)->update($update);
        
     }
+    
+    public function addPhoto($id, $name) {
+        $update = array('CategoryPhoto' => $name);
+        return $this->getTable('category')->where('CategoryID', $id)->update($update);
+    }
+    
+    public function deletePhoto($id) {
+        $update = array('CategoryPhoto' => NULL);
+        return $this->getTable('category')->where('CategoryID', $id)->update($update);
+    }
 }
 
 

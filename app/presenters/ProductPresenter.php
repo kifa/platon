@@ -56,6 +56,16 @@ class ProductPresenter extends BasePresenter {
                 if ($imgUrl) {
                     unlink($imgUrl);
                 }
+                
+                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/150-' . $row->PhotoURL;
+                if ($imgUrl) {
+                    unlink($imgUrl);
+                }
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/300-' . $row->PhotoURL;
+                if ($imgUrl) {
+                    unlink($imgUrl);
+                }
 
                 $e = 'Photo ' . $row->PhotoName . ' was sucessfully deleted.';
 
@@ -64,6 +74,34 @@ class ProductPresenter extends BasePresenter {
             }
 
             $this->redirect('Product:product', $product);
+        }
+    }
+    
+    public function handleDeletePhotoCategory($id, $name) {
+        if ($this->getUser()->isInRole('admin')) {
+            
+
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/' . $name;
+                if ($imgUrl) {
+                    unlink($imgUrl);
+                }
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/150-' . $name;
+                if ($imgUrl) {
+                    unlink($imgUrl);
+                }
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/20-' . $name;
+                if ($imgUrl) {
+                    unlink($imgUrl);
+                }
+
+                $e = 'Photo ' . $name . ' was sucessfully deleted.';
+
+                $this->categoryModel->deletePhoto($id);
+                $this->flashMessage($e, 'alert');
+
+            $this->redirect('Product:products', $id);
         }
     }
 
@@ -328,6 +366,10 @@ class ProductPresenter extends BasePresenter {
                     ->setAttribute('class', 'mceEditor');
             $addForm->addSelect('parent', 'Parent Category:', $categories)
                     ->setPrompt($prompt);
+            $addForm->addUpload('image', 'Image:')
+                    ->addCondition(FORM::FILLED)
+                    ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
             $addForm->addSubmit('edit', 'Create Category')
                     ->setAttribute('class', 'upl btn btn-primary')
                     ->setAttribute('data-loading-text', 'Creating...');
@@ -340,8 +382,28 @@ class ProductPresenter extends BasePresenter {
     public function addCategoryFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
 
-            $row = $this->categoryModel->createCategory($form->values->name, $form->values->text, $form->values->parent);
-            dump($row);
+            if ($form->values->image->isOK()) {
+
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/' . $form->values->image->name;
+                $form->values->image->move($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 150, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/150-' . $form->values->image->name;
+                $image->save($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 20, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/20-' . $form->values->image->name;
+                $image->save($imgUrl);
+                
+                $row = $this->categoryModel->createCategory($form->values->name, $form->values->text, $form->values->parent, $form->values->image->name);
+            }
+            else {
+                $row = $this->categoryModel->createCategory($form->values->name, $form->values->text, $form->values->parent);
+            }
             $this->redirect('Product:products', $row);
         }
     }
@@ -395,15 +457,14 @@ class ProductPresenter extends BasePresenter {
                 // load published products
             $this->template->products = $this->productModel->loadCatalog($catID);
             }
+         
              $this->template->category = $this->categoryModel->loadCategory($catID);  
 
 
     }
     
     public function renderProductsBrand($prodID) {
-        
 
-            
             $this->template->products = $this->productModel->loadCatalogBrand($prodID);
  
              $this->template->producer = $this->productModel->loadProducer($prodID);  
@@ -507,6 +568,61 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
+    
+    public function createComponentAddCategoryPhotoForm() {
+        if ($this->getUser()->isInRole('admin')) {
+            $addPhoto = new Nette\Application\UI\Form;
+            $addPhoto->setRenderer(new BootstrapRenderer);
+            $addPhoto->setTranslator($this->translator);
+            $addPhoto->addHidden('categoryID', $this->categoryParam['CategoryID']);
+            $addPhoto->addUpload('image', 'Photo:')
+                    ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
+            $addPhoto->addSubmit('add', 'Add Photo')
+                    ->setAttribute('class', 'btn-primary upl')
+                    ->setAttribute('data-loading-text', 'Uploading...');
+            $addPhoto->onSuccess[] = $this->addCategoryPhotoFormSubmitted;
+            return $addPhoto;
+        }
+    }
+
+    /*
+     * Adding submit form for adding photos
+     */
+
+    public function addCategoryPhotoFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            if ($form->values->image->isOK()) {
+
+  
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/' . $form->values->image->name;
+                $form->values->image->move($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 150, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/150-' . $form->values->image->name;
+                $image->save($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 20, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/20-' . $form->values->image->name;
+                $image->save($imgUrl);
+                
+                $this->categoryModel->addPhoto($form->values->categoryID, $form->values->image->name);
+
+                $e = HTML::el('span', ' Photo ' . $form->values->image->name . ' was sucessfully uploaded');
+                $ico = HTML::el('i')->class('icon-ok-sign left');
+                $e->insert(0, $ico);
+                $this->flashMessage($e, 'alert');
+            }
+
+            $this->redirect('this');
+        }
+    }
+    
+    
     
     protected function createComponentEditDescForm() {
         if ($this->getUser()->isInRole('admin')) {

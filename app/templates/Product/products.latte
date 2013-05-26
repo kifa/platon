@@ -15,6 +15,10 @@
                 <div class="btn-group">
                 <a href="#" class="btn"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
                 <a href="#editCategory" class="btn" data-toggel="modal" data-target="#editCategory" id="editCategoryButton"><i class="icon-large icon-pencil"></i> {_"Edit Category"}</a>
+                {if $category->CategoryPhoto == NULL}
+                <a href="#addCategoryPhoto" class="btn" data-toggel="modal" data-target="#addCategoryPhoto" id="addCategoryPhotoButton"><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
+                {/if}
+
                 </div>
                 
                 <div class="btn-group">
@@ -38,7 +42,13 @@
         </div>
         
     </div>
-<div class="alert alert-info" n:block="metadesc">{!$category->CategoryDescription} <small><a href="{plink Blog:category $category->CategoryID}">{_'Check news on blog'} <i class="icon-arrow-right"></i></a></small></div>
+<div class="alert alert-info" n:block="metadesc">
+    {if $category->CategoryPhoto != NULL }
+    <img src="{$basePath}/images/category/150-{$category->CategoryPhoto}" class="img-circle" />
+     {if $user->isInRole('admin')}<a href="{plink deletePhotoCategory! $category->CategoryID, $category->CategoryPhoto }">{_'Delete photo'}</a> {/if}
+    {/if}
+{!$category->CategoryDescription} <small><a href="{plink Blog:category $category->CategoryID}">{_'Check news on blog'} <i class="icon-arrow-right"></i></a></small>
+</div>
     
 
     
@@ -113,6 +123,12 @@
                 $('#addProduct').modal('hide');
             });
             
+             $('#addCategoryPhotoButton').toggle(function(){
+              $('#addCategoryPhoto').modal('show');
+            },
+            function() {
+                $('#addCategoryPhoto').modal('hide');
+            });
             
             
             $('#deleteCategoryButton').toggle(function(){
@@ -145,6 +161,22 @@
             </div>
             <div class="modal-footer">
                 {control addProductForm}
+              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+            </div>
+    </div>
+    
+    <div id="addCategoryPhoto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-plus"></i> Add category photo</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Please fill in these information'}</p>
+                
+              
+            </div>
+            <div class="modal-footer">
+                {control addCategoryPhotoForm}
               <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
             </div>
     </div>
