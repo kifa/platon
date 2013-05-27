@@ -45,9 +45,9 @@ class ProductPresenter extends BasePresenter {
         $this->translator = $translator;
     }
 
-    public function handleDeletePhoto($product, $id) {
+    public function handleDeletePhoto($id, $photo) {
         if ($this->getUser()->isInRole('admin')) {
-            $row = $this->productModel->loadPhoto($id);
+            $row = $this->productModel->loadPhoto($photo);
             if (!$row) {
                 $this->flashMessage('There is no photo to delete', 'alert');
             } else {
@@ -57,11 +57,13 @@ class ProductPresenter extends BasePresenter {
                     unlink($imgUrl);
                 }
                 
-                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/150-' . $row->PhotoURL;
+
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/50-' . $row->PhotoURL;
                 if ($imgUrl) {
                     unlink($imgUrl);
                 }
                 
+
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/300-' . $row->PhotoURL;
                 if ($imgUrl) {
                     unlink($imgUrl);
@@ -69,11 +71,11 @@ class ProductPresenter extends BasePresenter {
 
                 $e = 'Photo ' . $row->PhotoName . ' was sucessfully deleted.';
 
-                $this->productModel->deletePhoto($id);
+                $this->productModel->deletePhoto($photo);
                 $this->flashMessage($e, 'alert');
             }
 
-            $this->redirect('Product:product', $product);
+                $this->redirect('Product:product', $id);
         }
     }
     

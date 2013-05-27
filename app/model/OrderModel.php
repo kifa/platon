@@ -49,6 +49,18 @@ class OrderModel extends Repository {
         
         return $this->getTable('address')->where('UsersID',$user)->fetch();
     }
+    
+     public function updateOrderAddress($id, $street, $zip, $city){
+        $user = $this->getTable('orders')->select('orders.UsersID')->where('OrderID',$id);
+        
+        $update = array('Street' => $street,
+                        'ZIPCode' => $zip,
+                        'City' => $city);
+        
+        return $this->getTable('address')->where('UsersID',$user)->update($update);
+    }
+    
+    
     /*
      * Show product in order
      */

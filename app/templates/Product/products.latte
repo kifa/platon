@@ -41,19 +41,20 @@
             </div>
         </div>
         
-    </div>
+ </div>   
+
 <div class="alert alert-info span10 row">
     {if $category->CategoryPhoto != NULL }
-    <div class="span3">
+    <span class="span3">
     
     <img src="{$basePath}/images/category/150-{$category->CategoryPhoto}" class="img-circle" />
      {if $user->isInRole('admin')}<a href="{plink deletePhotoCategory! $category->CategoryID, $category->CategoryPhoto }">{_'Delete photo'}</a> {/if}
     
-    </div>
+    </span>
     {/if}
-    <div class="{$category->CategoryPhoto ? span6 : span9}" n:block="metadesc">
+    <span class="{$category->CategoryPhoto ? span6 : span9}" n:block="metadesc">
 {!$category->CategoryDescription} <small><a href="{plink Blog:category $category->CategoryID}">{_'Check news on blog'} <i class="icon-arrow-right"></i></a></small>
-    </div>
+    </span>
 </div>
     
 

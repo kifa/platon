@@ -33,6 +33,8 @@ class SmartPanelPresenter extends BasePresenter {
     private $orderRow;
     
     private $productInOrder;
+    
+     private $orderAddress;
 
     protected function startup() {
         parent::startup();
@@ -158,6 +160,12 @@ class SmartPanelPresenter extends BasePresenter {
                                    // 'Total' => $row->TotalPrice,
                                     'TotalProducts' => $row->ProductsPrice,
                                      'Note' => $row->Note);
+            $adress = $this->orderModel->loadOrderAddress($orderid);
+            $this->orderAddress = array('Street' => $adress->Street,
+                                       'ZIPCode' => $adress->ZIPCode,
+                                       'City' => $adress->City);
+            
+            $editAddress = $this['editOrderAddressForm'];
             $editForm = $this['editOrderInfoForm'];
             $this->productInOrder = $this->orderModel->checkRemoveProduct($orderid);
         }
@@ -231,6 +239,43 @@ class SmartPanelPresenter extends BasePresenter {
         }
         
     }
+    
+     protected function createComponentEditOrderAddressForm() {
+        
+                
+        $editForm = new Nette\Application\UI\Form;
+        $editForm->setRenderer(new BootstrapRenderer);
+        $editForm->setTranslator($this->translator);
+        $editForm->addHidden('orderID', $this->orderRow['OrderID']);
+        $editForm->addText('street', 'Street:')
+                ->setDefaultValue($this->orderAddress['Street']);
+        $editForm->addText('zipcode', 'ZIP:')
+                ->setDefaultValue($this->orderAddress['ZIPCode']);
+        $editForm->addText('city', 'City:')
+                ->setDefaultValue($this->orderAddress['City']);
+        $editForm->addSubmit('edit', 'Edit address')
+                    ->setAttribute('class', 'btn-primary upl')
+                    ->setAttribute('data-loading-text', 'Editing...');
+        $editForm->onSuccess[] = $this->editOrderAddressFormSubmitted;
+        return $editForm;
+    }
+
+    public function editOrderAddressFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            
+            $this->orderModel->updateOrderAddress($form->values->orderID, $form->values->street, $form->values->zipcode, $form->values->city);
+            
+            $message = Html::el('span', ' Order address was sucessfully updated!');
+            $e = Html::el('i')->class('icon-ok-sign left');
+            $message->insert(0, $e);
+            $this->flashMessage($message, 'alert');
+            $this->redirect('this');
+            
+        }
+        
+    }
+    
+    
     
     protected function createComponentAddProductsForm() {
         
