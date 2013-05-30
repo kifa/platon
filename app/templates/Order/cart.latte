@@ -19,10 +19,10 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Product Name</th>
-                    <th>Amount</th>
-                    <th>Item price</th>
-                    <th>Total price</th>
+                    <th>{_'Product Name'}</th>
+                    <th>{_'Amount'}</th>
+                    <th>{_'Item price'}</th>
+                    <th>{_'Total price'}</th>
                     <th>X</th>
                 </tr>
             </thead>
@@ -87,9 +87,8 @@
     
     
       </div> 
-
 <script>
-    $(document).ready(function() {
+
         var sp = new Array(); 
         {foreach $shippers as $id => $value}
                 sp[{$id}] = {$value};
@@ -121,10 +120,8 @@
             var grandtotal = payment + {$grandtotal} + shipping;
         $('.ordertotal').html(grandtotal + ',-'); 
         });
-
-});
-
 </script>
+
 </div>
 {/block}
 
@@ -136,5 +133,6 @@
 </div>
 {/block}
 
-
+    {block script}
+{/block}
 

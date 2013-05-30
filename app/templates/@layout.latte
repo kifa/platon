@@ -24,7 +24,10 @@
         <link rel="stylesheet" href="{$basePath}/css/bootstrap-lightbox.min.css">
         <link rel="stylesheet" href="{$basePath}/css/flag.css">
         <link rel="shortcut icon" href="{$basePath}/favicon.ico">
-        <script src="{$basePath}/js/jquery.js"></script>
+        {ifCurrent Order:cart}
+                <script src="{$basePath}/js/jquery.js"></script>
+                {/ifCurrent}
+
       
         
 	{block head}{/block}
@@ -121,7 +124,11 @@
         </div>
    </div>
 </div>	{block scripts}
+        {ifCurrent Order:cart}
         
+        {else}
+        <script src="{$basePath}/js/jquery.js"></script>
+                {/ifCurrent}
         
         <script src="{$basePath}/js/netteForms.js"></script>
         <script src="{$basePath}/js/main.js"></script>
