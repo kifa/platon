@@ -82,12 +82,13 @@ class MenuControl extends BaseControl {
     
     
 
-        public function render() {
+        public function render($img) {
         $this->template->setFile(__DIR__ . '/MenuControl.latte');
         $this->template->cart = $this->cart->numberItems;
         $this->template->category = $this->categoryModel->loadCategoryList(); 
         $this->template->producers = $this->productModel->loadProducers();
       //  $this->template->menuItems = $this->ShopModel->getMenu();
+        $this->template->img = $img;
         $this->template->render();
     }
     
