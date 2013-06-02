@@ -13,7 +13,7 @@
             <!--<img src="{$basePath}/images/birne.jpg" alt=""> -->
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>{_'Představujeme BIRNE SHOP!'}</h1>
+                    <h2>{_'Představujeme BIRNE SHOP!'}</h2>
                    <!--  <p class="lead">Jedinečný a dokonalý eshop právě pro Vás!</p>-->
                     <a class="btn btn-large btn-primary" href="#">{_'Začněte již dnes'}</a>
                 </div>
@@ -23,7 +23,7 @@
             <!--<img src="{$basePath}/images/birne.jpg" alt=""> -->
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>{_'Nejdou obchody? BIRNE SHOP!'}</h1>
+                   <h2>{_'Nejdou obchody? BIRNE SHOP!'}</h2>
                     <!-- <p class="lead">Řešení, které prostě funguje.</p>-->
                     <a class="btn btn-large btn-primary" href="#">{_'Zjistit více'}</a>
                 </div>
@@ -33,36 +33,27 @@
             <!--<img src="{$basePath}/images/birne.jpg" alt=""> -->
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>{_'Radost prodávat? BIRNE SHOP!'}</h1>
+                    <h2>{_'Radost prodávat? BIRNE SHOP!'}</h2>
                     <!--<p class="lead">Provozovat eshop na naší platformě je radost!</p>-->
                     <a class="btn btn-large btn-primary" href="#">{_'Přesvědčete se'}</a>
                 </div>
             </div>
         </div>
     </div>
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+ <!--   <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>-->
 </div>
 
 <hr>
-<div class="alert alert-info span11">
-    <div class="span2">
-        <h2><i class="icon-arrow-down"></i> Sale</h2>
-    </div>
-    <div class="span3">
-        <h2><i class="icon-truck"></i> Free shipping</h2>
-    </div>
-    <div class="span4">
-        <h2><i class="icon-user"></i> Customer Service</h2>
-    </div>
-    
-</div>
+
 {/block}
 
 {block content}
 <div class="span9">
       {include ../Product/productCatalog.latte}  
-</div>       
+</div> 
+
+
 {/block}
 
 {block sidebar}
@@ -70,7 +61,17 @@
         {if $user->isLoggedIn()}
         {control menu:admin}
         {/if}
-         <ul class="nav nav-list">
+       
+    <ul class="nav nav-list">
+                        <li class="nav-header">{_'Categories'}</li>
+                        
+                        {control menu}
+                        
+                        <li class="divider"></li>
+                    </ul>
+    
+    
+      <ul class="nav nav-list">
                         <li class="nav-header">Menu</li>
                         
                         {control menu:side}

@@ -1,8 +1,5 @@
 
-<div class="navbar">
-    <div class="navbar-inner">
-        <div class="container">
-            <ul class="nav">
+
                 <li class="{ifCurrent Homepage:default}active{/ifCurrent}"><a href="{plink Homepage:default}">{_"Home"}</a></li>
                 {foreach $category as $catID => $cat}
                 {if $cat->CategoryStatus != 3}
@@ -38,9 +35,3 @@
                 
        
                 <li class="{ifCurrent Blog:category}active{/ifCurrent}"><a href="{plink Blog:category}"><i class="icon-large icon-star-empty"></i> {_"Blog"}</a></li>
-        
-                 
-            </ul>
-        </div>
-    </div>
-</div>
