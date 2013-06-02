@@ -6,8 +6,8 @@
 
 
 <div class="page-header">
-        <h1 n:block="title">{$category->CategoryName}<small> {$category->CategoryDescription|striptags|truncate:50}</small></h1>
-        
+    <h1 n:block="title">{$category->CategoryName}<small> {$category->CategoryDescription|striptags|truncate:50} </small></h1>
+       <a href="#showcategoryinfo" id="morecategory">more about category...</a>
         <div class="row">
             <div class="span10">
                 {if $user->isInRole('admin')}
@@ -43,7 +43,7 @@
         
  </div>   
 
-<div class="alert alert-info span10 row">
+<div class="alert alert-info span10 row hide" id="categoryinfo">
     {if $category->CategoryPhoto != NULL }
     <span class="span3">
     
@@ -147,8 +147,20 @@
     });
     
 
+    
     </script>
     {/if}
+    
+    <script>
+        $('#morecategory').toggle(function(){
+        $('#categoryinfo').fadeIn();
+       
+        },
+        function(){
+            
+         $('#categoryinfo').fadeOut();
+        });
+        </script>
 
 {/block}
     

@@ -17,11 +17,12 @@
         <meta name="robots" content="{$robots}" n:ifset="$robots">
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
         <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
-        <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap.css">
+        <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap.min.css">
         <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap-responsive.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{$basePath}/css/font-awesome.min.css">
         <link rel="stylesheet" href="{$basePath}/css/bootstrap-lightbox.min.css">
+        <link rel="stylesheet" href="{$basePath}/css/user/theme.css">
         <link rel="stylesheet" href="{$basePath}/css/flag.css">
         <link rel="shortcut icon" href="{$basePath}/favicon.ico">
         {ifCurrent Order:cart}
@@ -44,10 +45,10 @@
                         <span class="caret"></span>
                     </a>
                         <ul class="dropdown-menu">
-                            <li><a n:href="this, lang => br" ><img src="{$basePath}/img/blank.gif" class="flag flag-br" alt="Brazil" />Portugese</a></li>
-                            <li><a n:href="this, lang => en" ><img src="{$basePath}/img/blank.gif" class="flag flag-gb" alt="English" />English</a></li>
-                            <li><a n:href="this, lang => cs" ><img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" />Česky</a></li>
-                            <li><a n:href="this, lang => de" ><img src="{$basePath}/img/blank.gif" class="flag flag-de" alt="Deutsch" />Deutsch</a></li>
+                            <li><a n:href="this, lang => br" ><img src="{$basePath}/img/blank.gif" class="flag flag-br" alt="Brazil" /> Português</a></li>
+                            <li><a n:href="this, lang => en" ><img src="{$basePath}/img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
+                            <li><a n:href="this, lang => cs" ><img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" /> Česky</a></li>
+                            <li><a n:href="this, lang => de" ><img src="{$basePath}/img/blank.gif" class="flag flag-de" alt="Deutsch" /> Deutsch</a></li>
                         </ul>
                 </div>
 

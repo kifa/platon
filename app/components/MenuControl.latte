@@ -14,9 +14,9 @@
                     {$cat->CategoryName}</a></li> 
                 {/if}
                 {/foreach}
-                <li>
+                <li class="margin5 {ifCurrent product:productsBrand}active{/ifCurrent}}">
                 <div class="btn-group">
-  <a class="btn dropdown-toggle btn-small" data-toggle="dropdown" href="#">
+  <a class="dropdown-toggle btn-small" data-toggle="dropdown" href="#">
     {_'Choose Brand'}
     <span class="caret"></span>
   </a>
