@@ -169,3 +169,9 @@ body {
 .carousel-indicators .active {
     background: #fff!important;
 }
+
+.post {
+    background: white;
+    padding: 0px 8px 0px 8px;
+text-align: justify;
+}
