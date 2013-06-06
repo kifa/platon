@@ -81,6 +81,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     public function beforeRender() {
         parent::beforeRender();
+       
+        $this->template->shopName = $this->shopModel->getShopInfo('Name');
+        $this->template->shopDescription = $this->shopModel->getShopInfo('Description');
+        $this->template->shopLogo = $this->shopModel->getShopInfo('Logo');
+        // set theme layout
+        $this->setLayout($this->shopModel->getShopInfo('CatalogLayout'));
+        
 
     }
 

@@ -8,28 +8,3 @@
 
  *}
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{block #title|striptags|upper|trim|strip}BirneShop{/block} | Birne Solutions</title>
-        <meta name="description" content="{block #metadesc|striptags|strip|trim}Ecommerce 2.0 that works almost automatically.{/block}">
-        <meta name="robots" content="{$robots}" n:ifset="$robots">
-        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
-        <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
-        <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap.min.css">
-        <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap-responsive.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{$basePath}/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{$basePath}/css/bootstrap-lightbox.min.css">
-        <link rel="stylesheet" href="{$basePath}/css/user/theme.css">
-        <link rel="stylesheet" href="{$basePath}/css/flag.css">
-        <link rel="shortcut icon" href="{$basePath}/favicon.ico">
-        {ifCurrent Order:cart}
-                <script src="{$basePath}/js/jquery.js"></script>
-                {/ifCurrent}
-
-      
-        
-	{block head}{/block}
-    </head>

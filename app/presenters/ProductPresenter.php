@@ -471,7 +471,6 @@ class ProductPresenter extends BasePresenter {
          
              $this->template->category = $this->categoryModel->loadCategory($catID);  
              
-             $this->setLayout($this->shopModel->getShopInfo('CatalogLayout'));
 
 
     }
@@ -481,6 +480,8 @@ class ProductPresenter extends BasePresenter {
             $this->template->products = $this->productModel->loadCatalogBrand($prodID);
  
              $this->template->producer = $this->productModel->loadProducer($prodID);  
+             
+
 
     }
 

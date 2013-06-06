@@ -7,6 +7,7 @@ class HomepagePresenter extends BasePresenter {
 
     private $productModel;
     private $categoryModel;
+    private $shopModel;
     
     protected $translator;
 
@@ -15,7 +16,7 @@ class HomepagePresenter extends BasePresenter {
 
         $this->productModel = $this->context->productModel;
         $this->categoryModel = $this->context->categoryModel;
-
+        $this->shopModel = $this->context->shopModel;
         /* Kontrola přihlášení
          * 
          * if (!$this->getUser()->isInRole('admin')) {
@@ -41,6 +42,7 @@ class HomepagePresenter extends BasePresenter {
        
         $this->template->category = $this->categoryModel->loadCategory("");
         $this->template->anyVariable = 'any value';
+        
     }
 
 }

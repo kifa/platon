@@ -481,8 +481,10 @@ CREATE TABLE `settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `settings` (`Name`, `Value`) VALUES
-('CatalogLayout',	'layout2'),
+('CatalogLayout',	'layout'),
+('Description',	'Ecommerce 2.0 that works almost automatically.'),
 ('HomepageLayout',	'default'),
+('Logo',	'birne_logo_web.png'),
 ('Name',	'Birneshop DEMO'),
 ('ProductLayout',	'default'),
 ('TAX',	'21');
@@ -561,4 +563,4 @@ INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`
 ('tomik@tomas.com',	'$2a$07$xshgrgluo88ug5qvohjvme0',	'Tomas',	NULL,	NULL,	NULL,	'0'),
 ('yetty@himalaja.tib',	NULL,	'Yetty',	0,	NULL,	NULL,	'user');
 
--- 2013-06-06 15:26:21
+-- 2013-06-06 16:35:58
