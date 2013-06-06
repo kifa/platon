@@ -1,40 +1,5 @@
-{**
- * My Application layout template.
- *
- * @param string   $basePath web base path
- * @param string   $robots   tell robots how to index the content of a page (optional)
- * @param array    $flashes  flash messages
-    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
-
- *}
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{block #title|striptags|upper|trim|strip}BirneShop{/block} | Birne Solutions</title>
-        <meta name="description" content="{block #metadesc|striptags|strip|trim}Ecommerce 2.0 that works almost automatically.{/block}">
-        <meta name="robots" content="{$robots}" n:ifset="$robots">
-        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
-        <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
-        <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap.min.css">
-        <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap-responsive.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{$basePath}/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{$basePath}/css/bootstrap-lightbox.min.css">
-        <link rel="stylesheet" href="{$basePath}/css/user/theme.css">
-        <link rel="stylesheet" href="{$basePath}/css/flag.css">
-        <link rel="shortcut icon" href="{$basePath}/favicon.ico">
-        {ifCurrent Order:cart}
-                <script src="{$basePath}/js/jquery.js"></script>
-                {/ifCurrent}
-
-      
-        
-	{block head}{/block}
-    </head>
-
-    <body>
+{include ./components/head.latte}
+<body>
         <script> document.body.className+=' js' </script>
 
          <div class="container supercontainer"> 
@@ -152,64 +117,11 @@
         {/block}      
         </div>
    </div>
-</div>	{block scripts}
-        {ifCurrent Order:cart}
-        
-        {else}
-        <script src="{$basePath}/js/jquery.js"></script>
-                {/ifCurrent}
-        
-        <script src="{$basePath}/js/netteForms.js"></script>
-        <script src="{$basePath}/js/main.js"></script>
-        <script src="{$basePath}/js/bootstrap.min.js"></script>
-        <script src="{$basePath}/js/live-form-validation.js"></script>
-        <script src="{$basePath}/js/jquery.nette.js"></script>
-        <script src="{$basePath}/js/imgLiquid-min.js"></script>
-        <script>
+</div>	
 
-        $(document).ready(function() {
-                $(".imgLiquid").imgLiquid({
-                    fill: true,
-                    fadeInTime: 0,
-                    delay: 0,
-                    horizontalAlign: "left",
-                    verticalAlign: "top"});
-                
-                $('#trackingButton').toggle(function(){
-                    $('#tracking').modal('show');
-                  },
-                  function() {
-                      $('#tracking').modal('hide');
-                  });
-             {if $user->isInRole('admin')}   
-               $('#addCategoryButton').toggle(function(){
-              $('#addCategory').modal('show');
-            },
-            function() {
-                $('#addCategory').modal('hide');
-            });
-            {/if}
+
+{include ./components/footer.latte}
     
-            });
-        </script>
-        {if $user->isInRole('admin')}
-       <script type="text/javascript" src="{$basePath}/js/tiny_mce/tiny_mce.js" ></script>
-        <script type="text/javascript" >
-            tinyMCE.init({
-                    mode: "specific_textareas",
-                    editor_selector: "mceEditor",
-                    theme : "advanced",
-                    height: '300px',
-                    width: '300px'
-            });
-         </script> 
-         
-         
-        {/if}
-         
-            {block #script}
-            {/block}
-        
-	{/block}
+    
     </body>
 </html>

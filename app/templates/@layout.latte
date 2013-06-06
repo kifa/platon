@@ -1,211 +1,119 @@
-{**
- * My Application layout template.
- *
- * @param string   $basePath web base path
- * @param string   $robots   tell robots how to index the content of a page (optional)
- * @param array    $flashes  flash messages
-    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+{include ./components/head.latte}
+<body>
+    <script> document.body.className+=' js' </script>
 
- *}
+    <div class="container supercontainer"> 
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{block #title|striptags|upper|trim|strip}BirneShop{/block} | Birne Solutions</title>
-        <meta name="description" content="{block #metadesc|striptags|strip|trim}Ecommerce 2.0 that works almost automatically.{/block}">
-        <meta name="robots" content="{$robots}" n:ifset="$robots">
-        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
-        <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
-        <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap.min.css">
-        <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap-responsive.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{$basePath}/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{$basePath}/css/bootstrap-lightbox.min.css">
-        <link rel="stylesheet" href="{$basePath}/css/user/theme.css">
-        <link rel="stylesheet" href="{$basePath}/css/flag.css">
-        <link rel="shortcut icon" href="{$basePath}/favicon.ico">
-        {ifCurrent Order:cart}
-                <script src="{$basePath}/js/jquery.js"></script>
-                {/ifCurrent}
-
-      
-        
-	{block head}{/block}
-    </head>
-
-    <body>
-        <script> document.body.className+=' js' </script>
-
-         <div class="container supercontainer"> 
-
-             <div class="margin5 span3 pull-right btn-group">
-                         <a class="btn pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-                             <i class="icon-globe"></i> {_'Choose language:'}
-                        <span class="caret"></span>
-                    </a>
-                        <ul class="dropdown-menu">
-                            <li><a n:href="this, lang => br" ><img src="{$basePath}/img/blank.gif" class="flag flag-br" alt="Brazil" /> Português</a></li>
-                            <li><a n:href="this, lang => en" ><img src="{$basePath}/img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
-                            <li><a n:href="this, lang => cs" ><img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" /> Česky</a></li>
-                            <li><a n:href="this, lang => de" ><img src="{$basePath}/img/blank.gif" class="flag flag-de" alt="Deutsch" /> Deutsch</a></li>
-                        </ul>
-                </div>
+        <div class="margin5 span3 pull-right btn-group">
+            <a class="btn pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="icon-globe"></i> {_'Choose language:'}
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a n:href="this, lang => br" ><img src="{$basePath}/img/blank.gif" class="flag flag-br" alt="Brazil" /> Português</a></li>
+                <li><a n:href="this, lang => en" ><img src="{$basePath}/img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
+                <li><a n:href="this, lang => cs" ><img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" /> Česky</a></li>
+                <li><a n:href="this, lang => de" ><img src="{$basePath}/img/blank.gif" class="flag flag-de" alt="Deutsch" /> Deutsch</a></li>
+            </ul>
+        </div>
 
         <div class="container">
-
-            
-            
             <div class="masterhead">
                 <div class="row">
                     <a href="{plink Homepage:default}" class="span5"><h1><img src="{$basePath}/images/birne_logo_web.png" alt="BirneShop!" title="Birne shop"></h1></a>
-                   
+
                     {control menu:top}
-                    
-            </div>
+
+                </div>
                 <div class="row">
                     <div class="span12">
                         <div class="navbar">
-    <div class="navbar-inner">
-        <div class="container">
-            <ul class="nav">
+                            <div class="navbar-inner">
+                                <div class="container">
+                                    <ul class="nav">
                     {control menu 1}
-                            </ul>
-        </div>
-    </div>
-</div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
+
             </div>
             {block #bread}{/block}
-            
-            
-   <div id="content"> 
+
+
+            <div id="content"> 
        {block #pageheader}
 
        {/block}
              {foreach $flashes as $flash}
                 <div class="{$flash->type}">
-                     <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
               {$flash->message}</div>
               {/foreach}
-       
-        <div class="row">
+
+                <div class="row">
 
             {block #content}
-            <div class="span10">
-            
-            </div>
+                    <div class="span10">
+
+                    </div>
             {/block}
-            
+
             {block sidebar}
                 {if $user->isInRole('admin')}
                    {control menu:admin}
                 {/if}
-                <div class="span2">
+                    <div class="span2">
                         <ul class="nav nav-list">
                             <li class="nav-header">Menu</li>
                            {control menu:side}
                             <li class="divider"></li>
                         </ul>
-                </div>
+                    </div>
             {/block}
-            
-            
-        </div>       
-   
-   <div class="footer">
-       <div class="alert alert-info span11">
-    <div class="span2">
-        <h3><i class="icon-arrow-down"></i> Sale</h3>
-    </div>
-    <div class="span3">
-        <h3><i class="icon-truck"></i> Free shipping</h3>
-    </div>
-    <div class="span3">
-        <h3><i class="icon-user"></i> Customer Service</h3>
-    </div>
-    <div class="span2">
-        <h3><i class="icon-star"></i> Blog</h3>
-    </div>
-    
-</div>
-       
-       <div class="span10">
-           <hr>
-           {control menu:footer}
-       </div>
-       <div class="span12">     
-                &COPY; Birne shop 2013
-                
-                {control modalControl:tracking}
-       </div>
-   </div>
-      {block modal}
-       
-       
-        {/block}      
-        </div>
-   </div>
-</div>	{block scripts}
-        {ifCurrent Order:cart}
-        
-        {else}
-        <script src="{$basePath}/js/jquery.js"></script>
-                {/ifCurrent}
-        
-        <script src="{$basePath}/js/netteForms.js"></script>
-        <script src="{$basePath}/js/main.js"></script>
-        <script src="{$basePath}/js/bootstrap.min.js"></script>
-        <script src="{$basePath}/js/live-form-validation.js"></script>
-        <script src="{$basePath}/js/jquery.nette.js"></script>
-        <script src="{$basePath}/js/imgLiquid-min.js"></script>
-        <script>
 
-        $(document).ready(function() {
-                $(".imgLiquid").imgLiquid({
-                    fill: true,
-                    fadeInTime: 0,
-                    delay: 0,
-                    horizontalAlign: "left",
-                    verticalAlign: "top"});
-                
-                $('#trackingButton').toggle(function(){
-                    $('#tracking').modal('show');
-                  },
-                  function() {
-                      $('#tracking').modal('hide');
-                  });
-             {if $user->isInRole('admin')}   
-               $('#addCategoryButton').toggle(function(){
-              $('#addCategory').modal('show');
-            },
-            function() {
-                $('#addCategory').modal('hide');
-            });
-            {/if}
+
+                </div>       
+
+                <div class="footer">
+                    <div class="alert alert-info span11">
+                        <div class="span2">
+                            <h3><i class="icon-arrow-down"></i> Sale</h3>
+                        </div>
+                        <div class="span3">
+                            <h3><i class="icon-truck"></i> Free shipping</h3>
+                        </div>
+                        <div class="span3">
+                            <h3><i class="icon-user"></i> Customer Service</h3>
+                        </div>
+                        <div class="span2">
+                            <h3><i class="icon-star"></i> Blog</h3>
+                        </div>
+
+                    </div>
+
+                    <div class="span10">
+                        <hr>
+           {control menu:footer}
+                    </div>
+                    <div class="span12">     
+                        &COPY; Birne shop 2013
+
+                {control modalControl:tracking}
+                    </div>
+                </div>
+      {block modal}
+
+
+        {/block}      
+            </div>
+        </div>
+    </div>	
+
+
+{include ./components/footer.latte}
     
-            });
-        </script>
-        {if $user->isInRole('admin')}
-       <script type="text/javascript" src="{$basePath}/js/tiny_mce/tiny_mce.js" ></script>
-        <script type="text/javascript" >
-            tinyMCE.init({
-                    mode: "specific_textareas",
-                    editor_selector: "mceEditor",
-                    theme : "advanced",
-                    height: '300px',
-                    width: '300px'
-            });
-         </script> 
-         
-         
-        {/if}
-         
-            {block #script}
-            {/block}
-        
-	{/block}
     </body>
 </html>
