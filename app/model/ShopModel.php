@@ -29,6 +29,28 @@ class ShopModel extends Repository {
         $tax = $this->getTable('settings')->where('Name',"TAX")->fetch();
         return $tax['Value'];
     }
+    
+    public function getShopInfo($name)
+    {
+        $value = $this->getTable('settings')->where('Name', $name)->fetch();
+        return $value['Value'];
+    }
+    
+    public function setShopInfo($name, $value)
+    {
+        if ($name == 'CatalogLayout') {
+            $update = array(
+                'Value' => "layout" . $value
+              );
+            
+        }
+        else {
+        $update = array(
+          $name => $value  
+        );
+        }       
+        return $this->getTable('settings')->where('Name', $name)->update($update);
+    }
 
 
     /*

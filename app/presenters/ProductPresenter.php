@@ -18,6 +18,7 @@ class ProductPresenter extends BasePresenter {
 
     private $productModel;
     private $categoryModel;
+    private $shopModel;
     private $id;
     private $catId;
     protected $translator;
@@ -30,6 +31,7 @@ class ProductPresenter extends BasePresenter {
         parent::startup();
         $this->productModel = $this->context->productModel;
         $this->categoryModel = $this->context->categoryModel;
+        $this->shopModel = $this->context->shopModel;
 
         if ($this->getUser()->isInRole('admin')) {
             $this->edit = $this->getSession('edit');
@@ -310,6 +312,13 @@ class ProductPresenter extends BasePresenter {
         }
     }
     
+    public function handleSetCatalogLayout($catID, $layoutID) {
+         if ($this->getUser()->isInRole('admin')) {
+            $this->shopModel->setShopInfo('CatalogLayout', $layoutID);
+            $this->redirect('this', $catID);
+        }
+    }
+
     protected function createComponentEditCategoryForm() {
         if ($this->getUser()->isInRole('admin')) {
 
@@ -461,6 +470,8 @@ class ProductPresenter extends BasePresenter {
             }
          
              $this->template->category = $this->categoryModel->loadCategory($catID);  
+             
+             $this->setLayout($this->shopModel->getShopInfo('CatalogLayout'));
 
 
     }

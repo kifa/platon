@@ -92,12 +92,8 @@
               {/foreach}
        
         <div class="row">
-
-            {block #content}
-            <div class="span10">
             
-            </div>
-            {/block}
+          
             
             {block sidebar}
                 {if $user->isInRole('admin')}
@@ -112,7 +108,15 @@
                 </div>
             {/block}
             
+            {block #content}
+            <div class="span10">
             
+            </div>
+            
+            {/block}
+            
+            
+  
         </div>       
    
    <div class="footer">
