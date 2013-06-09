@@ -3,12 +3,7 @@
     <div class="span9 thumbnail post">
         <h2>{$post->BlogName}</h2>
         <div><p>
-        {if $post->PhotoAlbumID}
-                     <img src="{$basePath}/images/blog/{$post->BlogID}/50-{$post->PhotoURL}" class="img-polaroid pull-left margin5" />
-
-                {else}
-                   <img src="{$basePath}/images/no_image.jpg" class="img-circle pull-left" class="span2" style="height: 150px; width: auto;"/>
-                {/if} 
+        
         {$post->BlogContent|striptags|truncate:400}</p><small><a href="{plink Blog:post $post->BlogID}">{_'Read more'} <i class="icon-arrow-right"></i></a></small></div>
     </div>
     <hr class="span9">

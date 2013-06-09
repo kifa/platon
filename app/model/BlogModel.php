@@ -23,17 +23,17 @@ class BlogModel extends Repository {
     public function loadPosts($id = NULL) {
         
         if($id == NULL) {
-        // return $this->getTable('blog')->order('BlogID DESC')->fetchPairs('BlogID');
-    
-            
-        return $this->getDB()->query('
+            // return $this->getTable('blog')->order('BlogID DESC')->fetchPairs('BlogID');   
+            return $this->getTable('blog')->order('BlogID DESC')->fetchPairs('BlogID');            
+            /*return $this->getDB()->query('
                 SELECT * FROM blog 
                 JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
-                ORDER BY blog.BlogID DESC');
+                ORDER BY blog.BlogID DESC');            */
+            
         }
         else {
-        return $this->getTable('blog')->where('CategoryID', $id)->order('BlogID DESC')->fetchPairs('BlogID');    
+            return $this->getTable('blog')->where('CategoryID', $id)->order('BlogID DESC')->fetchPairs('BlogID');    
         /*    return $this->getDB()->query('SELECT * FROM blog JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
              WHERE Photo.CoverPhoto="1" blog.CategoryID=?',$id);  */
@@ -41,11 +41,14 @@ class BlogModel extends Repository {
     }
     
     public function loadPost($postid){
-      //  return $this->getTable('blog')->where('BlogID',$postid)->fetch();
-         return $this->getDB()->query('SELECT * FROM blog
+        return $this->getTable('blog')->where('BlogID',$postid)->fetch();
+       
+        /*return $this->getDB()->query('
+                SELECT * FROM blog
                 JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
-                WHERE blog.BlogID=?',$postid)->fetch();
+                WHERE blog.BlogID=?
+                ',$postid)->fetch();*/
         
     }
 
@@ -75,9 +78,13 @@ class BlogModel extends Repository {
         return $this->getTable('blog')->where('BlogID', $id)->delete();
     }
     
-    public function loadCoverPhoto($id){
-        return $this->getTable('photo')->select('photo.PhotoURL, photoalbum.BlogID')->where('photoalbum.BlogID',$id)
+    public function loadCoverPhoto($id){        
+        $photo = $this->getTable('photo')->select('photo.PhotoURL, photoalbum.BlogID')->where('photoalbum.BlogID',$id)
                 ->where('photo.CoverPhoto','1')->fetch();
+        if($photo["PhotoURL"]==""){
+            $photo["PhotoURL"]=1;
+        }
+        return $photo["PhotoURL"];
     }
     
      public function loadPhotoAlbum($id){
@@ -86,13 +93,12 @@ class BlogModel extends Repository {
         }
         else{
             //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
-            $row = $this->getDB()->query('
+            return $this->getTable('photo')->select('photo.*,photoalbum.*')->where('photoalbum.blogID',$id);
+            /*$row = $this->getDB()->query('
                 SELECT * FROM blog 
                 JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE Blog.BlogID=?',$id);
-            // dump($row);
-            return $row;
+                WHERE Blog.BlogID=?',$id);*/           
         }
     }
 }

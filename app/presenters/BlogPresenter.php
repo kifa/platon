@@ -10,9 +10,9 @@ use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
  */
 class BlogPresenter extends BasePresenter {
     
-     protected $translator;
-     private $blog;
-     private $productModel;
+    protected $translator;
+    private $blog;
+    private $productModel;
     private $categoryModel;
     private $row;
 
@@ -277,10 +277,10 @@ class BlogPresenter extends BasePresenter {
     public function renderCategory($id) {
         $this->template->category = $this->blog->loadCategory($id);
         if($id == NULL) {
-        $this->template->posts = $this->blog->loadPosts();
+        $this->template->posts = $this->blog->loadPosts();        
         }
         else {
-            $this->template->posts = $this->blog->loadPosts($id);
+            $this->template->posts = $this->blog->loadPosts($id);                     
         }
         
     }
