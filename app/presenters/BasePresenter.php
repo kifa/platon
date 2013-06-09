@@ -1,5 +1,6 @@
 <?php
 
+use Nette\Utils\Html;
 /**
  * Base presenter for eshop.
  * Presenting skeleton of shop - header - content link - footer
@@ -48,6 +49,41 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     
     public function injectProductModel(ProductModel $productModel) {
         $this->productModel = $productModel;
+    }
+    
+    public function handleAddToCart($product, $amnt) {
+     
+       $row = $this->productModel->loadProduct($product);
+        if (!$row || !$product) {
+             if ($this->cart->numberItems > 0) {
+                $this->setView('Cart');
+            } else {
+                $this->setView('CartEmpty');
+            }
+        }
+        else {
+            if (isset($this->cart->prd[$product])) {
+                $mnt = $this->cart->prd[$product];
+                $mnt += $amnt;
+                $this->cart->prd[$product] = $mnt;
+            } else {
+                $this->cart->prd[$product] = $amnt;
+            }
+            $this->cart->lastItem = $product;
+            $this->cart->numberItems = Count($this->cart->prd);
+
+            $ico = HTML::el('i')->class('icon-ok-sign left');
+            $message = HTML::el('span', ' ' . $row->ProductName . ' was successfully added to your cart. ');
+            $link = HTML::el('a', 'Proceed to checkout ')->href($this->link('Order:cart'))->class('btn btn-primary btn-small');
+            $ico2 = HTML::el('i')->class('icon-arrow-right right');
+            $message->insert(0, $ico);
+            $message->insert(2, $link);
+            $link->insert(2, $ico2);
+            
+            $this->flashMessage($message, 'alert alert-success');
+           $this->redirect('this');
+       
+        }
     }
 
     /**

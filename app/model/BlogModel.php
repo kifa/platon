@@ -24,10 +24,13 @@ class BlogModel extends Repository {
         
         if($id == NULL) {
         // return $this->getTable('blog')->order('BlogID DESC')->fetchPairs('BlogID');
-        
-        return $this->getDB()->query('SELECT * FROM blog JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
-                JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE Photo.CoverPhoto="1" ORDER BY blog.BlogID DESC');
+    
+            
+        return $this->getDB()->query('
+                SELECT * FROM blog 
+                JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
+                JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
+                ORDER BY blog.BlogID DESC');
         }
         else {
         return $this->getTable('blog')->where('CategoryID', $id)->order('BlogID DESC')->fetchPairs('BlogID');    
@@ -40,9 +43,9 @@ class BlogModel extends Repository {
     public function loadPost($postid){
       //  return $this->getTable('blog')->where('BlogID',$postid)->fetch();
          return $this->getDB()->query('SELECT * FROM blog
-JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
-JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
-WHERE blog.BlogID=?',$postid)->fetch();
+                JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
+                JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
+                WHERE blog.BlogID=?',$postid)->fetch();
         
     }
 
@@ -83,10 +86,12 @@ WHERE blog.BlogID=?',$postid)->fetch();
         }
         else{
             //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
-            $row = $this->getDB()->query('SELECT * FROM blog JOIN photoalbum 
-                ON blog.BlogID=photoalbum.BlogID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE Blog.BlogID=?',$id); 
-           // dump($row);
+            $row = $this->getDB()->query('
+                SELECT * FROM blog 
+                JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
+                JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+                WHERE Blog.BlogID=?',$id);
+            // dump($row);
             return $row;
         }
     }
