@@ -3,7 +3,6 @@
     <div class="span9 thumbnail post">
         <h2>{$post->BlogName}</h2>
         <div><p>
-        
         {$post->BlogContent|striptags|truncate:400}</p><small><a href="{plink Blog:post $post->BlogID}">{_'Read more'} <i class="icon-arrow-right"></i></a></small></div>
     </div>
     <hr class="span9">

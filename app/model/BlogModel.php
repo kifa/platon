@@ -24,7 +24,8 @@ class BlogModel extends Repository {
         
         if($id == NULL) {
             // return $this->getTable('blog')->order('BlogID DESC')->fetchPairs('BlogID');   
-            return $this->getTable('blog')->order('BlogID DESC')->fetchPairs('BlogID');            
+            return $this->getTable('blog')->order('BlogID DESC')->fetchPairs('BlogID');           
+            
             /*return $this->getDB()->query('
                 SELECT * FROM blog 
                 JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
