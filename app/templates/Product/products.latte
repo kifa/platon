@@ -7,7 +7,7 @@
 
 <div class="page-header">
     <h1 n:block="title" class="edit" n:snippet="editTitle">{$category->CategoryName}</h1>
-    <small> {$category->CategoryDescription|striptags|truncate:50} </small>
+    <small class="shortDesc"> {$category->CategoryDescription|striptags|truncate:50} </small>
 <a href="#showcategoryinfo" id="morecategory">more about category...</a>
 <div class="row">
     <div class="span10">
@@ -68,7 +68,7 @@
     </span>
     {/if}
     <span class="{$category->CategoryPhoto ? span6 : span9}" n:block="metadesc">
-        <span class="editD" n:snippet="editDescription">{!$category->CategoryDescription}</span> <small><br/>
+        <span class="editDescription" n:snippet="editDescription">{!$category->CategoryDescription}</span> <small><br/>
         <a href="{plink Blog:category $category->CategoryID}">{_'Check news on blog'} <i class="icon-arrow-right"></i></a></small>
     </span>
 </div>
@@ -169,7 +169,7 @@
         }
         });
         
-        $('.editD').editable( {link editDescription! $category->CategoryID }, {
+        $('.editDescription').editable( {link editDescription! $category->CategoryID }, {
          type      : 'textarea',
          rows      : '5',
          cols      : '25',
@@ -179,7 +179,8 @@
          tooltip   : 'Click to edit ...',
          callback : function(value, settings) {
             var json = $.parseJSON(value);
-            $('.editD').text(json.edit);
+            $('.editDescription').text(json.edit);
+            $('.shortDesc').text(json.edit);
         }
         });
 });
