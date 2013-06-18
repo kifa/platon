@@ -2,7 +2,7 @@
 
 use Nette\Forms\Form,
     Nette\Utils\Html,
-        Nette\Image;
+    Nette\Image;
 use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 
 /*
@@ -58,13 +58,13 @@ class ProductPresenter extends BasePresenter {
                 if ($imgUrl) {
                     unlink($imgUrl);
                 }
-                
+
 
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/50-' . $row->PhotoURL;
                 if ($imgUrl) {
                     unlink($imgUrl);
                 }
-                
+
 
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/300-' . $row->PhotoURL;
                 if ($imgUrl) {
@@ -77,33 +77,33 @@ class ProductPresenter extends BasePresenter {
                 $this->flashMessage($e, 'alert');
             }
 
-                $this->redirect('Product:product', $id);
+            $this->redirect('Product:product', $id);
         }
     }
-    
+
     public function handleDeletePhotoCategory($id, $name) {
         if ($this->getUser()->isInRole('admin')) {
-            
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/' . $name;
-                if ($imgUrl) {
-                    unlink($imgUrl);
-                }
-                
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/150-' . $name;
-                if ($imgUrl) {
-                    unlink($imgUrl);
-                }
-                
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/20-' . $name;
-                if ($imgUrl) {
-                    unlink($imgUrl);
-                }
 
-                $e = 'Photo ' . $name . ' was sucessfully deleted.';
+            $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/' . $name;
+            if ($imgUrl) {
+                unlink($imgUrl);
+            }
 
-                $this->categoryModel->deletePhoto($id);
-                $this->flashMessage($e, 'alert');
+            $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/150-' . $name;
+            if ($imgUrl) {
+                unlink($imgUrl);
+            }
+
+            $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/20-' . $name;
+            if ($imgUrl) {
+                unlink($imgUrl);
+            }
+
+            $e = 'Photo ' . $name . ' was sucessfully deleted.';
+
+            $this->categoryModel->deletePhoto($id);
+            $this->flashMessage($e, 'alert');
 
             $this->redirect('Product:products', $id);
         }
@@ -115,7 +115,7 @@ class ProductPresenter extends BasePresenter {
             if (!$row) {
                 $this->flashMessage('There is no photo to set as cover', 'alert');
             } else {
-                $this->productModel->updateCoverPhoto($id,$photo);
+                $this->productModel->updateCoverPhoto($id, $photo);
                 $e = 'Photo ' . $row->PhotoName . ' was sucessfully set as COVER.';
 
                 $this->productModel->coverPhoto($id);
@@ -125,8 +125,6 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('Product:product', $id);
         }
     }
-
-    
 
     protected function createComponentEditControl() {
         if ($this->getUser()->isInRole('admin')) {
@@ -139,28 +137,28 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    /************************************************************************
+    /*     * **********************************************************************
      *                            Render Products aka CATEGORY
      * @param 
-     ************************************************************************/
+     * ********************************************************************** */
 
     public function actionProducts($catID) {
-         if ($this->getUser()->isInRole('admin')) {
+        if ($this->getUser()->isInRole('admin')) {
             // load all products
-       $row = $this->productModel->loadCatalogAdmin($catID);
+            $row = $this->productModel->loadCatalogAdmin($catID);
         } else {
             // load published products
-        $row = $this->productModel->loadCatalog($catID);
+            $row = $this->productModel->loadCatalog($catID);
         }
         if (!$row) {
             $this->flashMessage('Categry not available', 'alert');
             $this->redirect('Homepage:');
         } else {
-            
+
 
             if ($this->getUser()->isInRole('admin')) {
-          
-             
+
+
                 $row2 = $this->categoryModel->loadCategory($catID);
                 $this->categoryParam = array('CategoryID' => $catID,
                     'CategoryName' => $row2->CategoryName,
@@ -173,18 +171,16 @@ class ProductPresenter extends BasePresenter {
             }
         }
     }
-    
 
-     public function handleSetCategoryStatus($catID, $categoryStatus) {
-         if ($this->getUser()->isInRole('admin')) {
+    public function handleSetCategoryStatus($catID, $categoryStatus) {
+        if ($this->getUser()->isInRole('admin')) {
             $this->categoryModel->setCategoryStatus($catID, $categoryStatus);
-             $e = 'Category status is now:';
-                $this->flashMessage($e, 'alert');
+            $e = 'Category status is now:';
+            $this->flashMessage($e, 'alert');
             $this->redirect('this', $catID);
         }
     }
-    
-    
+
     public function createComponentAddProductForm() {
 
         if ($this->getUser()->isInRole('admin')) {
@@ -194,7 +190,7 @@ class ProductPresenter extends BasePresenter {
             foreach ($this->categoryModel->loadCategoryList() as $id => $name) {
                 $category[$id] = $name->CategoryName;
             }
-            
+
             foreach ($this->productModel->loadProducers() as $id => $name) {
                 $producers[$id] = $name->ProducerName;
             }
@@ -240,11 +236,9 @@ class ProductPresenter extends BasePresenter {
 
             $return = $this->productModel->insertProduct(
                     $form->values->name, //Name
-                    $form->values->price, 
-                    $form->values->producer, //Producer                
+                    $form->values->price, $form->values->producer, //Producer                
                     '11111', //Product Number
-                    $form->values->short,
-                    $form->values->desc, //Description
+                    $form->values->short, $form->values->desc, //Description
                     '123456', //Ean
                     '122', //QR
                     'rok', //Warranty
@@ -261,16 +255,16 @@ class ProductPresenter extends BasePresenter {
                 );
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $return[1] . '/' . $form->values->image->name;
                 $form->values->image->move($imgUrl);
-                
+
                 $image = Image::fromFile($imgUrl);
                 $image->resize(null, 300, Image::SHRINK_ONLY);
-                
+
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $return[1] . '/300-' . $form->values->image->name;
                 $image->save($imgUrl);
-                
+
                 $image = Image::fromFile($imgUrl);
                 $image->resize(null, 50, Image::SHRINK_ONLY);
-                
+
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $return[1] . '/50-' . $form->values->image->name;
                 $image->save($imgUrl);
             }
@@ -289,8 +283,7 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('this', $catID);
         }
     }
-    
-    
+
     public function handleArchiveProduct($catID, $id) {
         if ($this->getUser()->isInRole('admin')) {
             $this->productModel->archiveProduct($id);
@@ -304,16 +297,16 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('this', $catID);
         }
     }
-    
+
     public function handleShowProduct($catID, $id) {
         if ($this->getUser()->isInRole('admin')) {
             $this->productModel->showProduct($id);
             $this->redirect('Product:products', $catID);
         }
     }
-    
+
     public function handleSetCatalogLayout($catID, $layoutID) {
-         if ($this->getUser()->isInRole('admin')) {
+        if ($this->getUser()->isInRole('admin')) {
             $this->shopModel->setShopInfo('CatalogLayout', $layoutID);
             $this->redirect('this', $catID);
         }
@@ -324,13 +317,14 @@ class ProductPresenter extends BasePresenter {
 
             $editForm = new Nette\Application\UI\Form;
             $editForm->setTranslator($this->translator);
-            //$editForm->setRenderer(new BootstrapRenderer);
-            
+
+            $editForm->setRenderer(new BootstrapRenderer);
+
             foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
                 $categories[$id] = $category->CategoryName;
             }
             $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
-            
+
             $editForm->addText('name', 'Name:')
                     ->setRequired()
                     ->setDefaultValue($this->categoryParam['CategoryName']);
@@ -354,23 +348,30 @@ class ProductPresenter extends BasePresenter {
     public function editCategoryFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
 
-            $this->categoryModel->updateCategory($form->values->id, $form->values->name, $form->values->text, $form->values->parent);
-            $this->redirect('this');
+            $this->categoryModel->updateCategory($form->values->id, $form->values->name, $form->values->text, $form->values->parent, 1);
+
+            if (!$this->isAjax()) {
+                $this->redirect('this');
+            } else {
+               // $form->setValues(array(), TRUE);
+                $this->invalidateControl('categoryInfoForm');
+                $this->invalidateControl('categoryInfo');
+            }
         }
     }
-    
+
     protected function createComponentAddCategoryForm() {
         if ($this->getUser()->isInRole('admin')) {
 
             $addForm = new Nette\Application\UI\Form;
             $addForm->setTranslator($this->translator);
             //$editForm->setRenderer(new BootstrapRenderer);
-            
+
             foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
                 $categories[$id] = $category->CategoryName;
             }
             $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
-            
+
             $addForm->addText('name', 'Name:')
                     ->setRequired();
             $addForm->addTextArea('text', 'Description:', 150, 150)
@@ -397,40 +398,39 @@ class ProductPresenter extends BasePresenter {
 
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/' . $form->values->image->name;
                 $form->values->image->move($imgUrl);
-                
+
                 $image = Image::fromFile($imgUrl);
                 $image->resize(null, 150, Image::SHRINK_ONLY);
-                
+
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/150-' . $form->values->image->name;
                 $image->save($imgUrl);
-                
+
                 $image = Image::fromFile($imgUrl);
                 $image->resize(null, 20, Image::SHRINK_ONLY);
-                
+
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/20-' . $form->values->image->name;
                 $image->save($imgUrl);
-                
+
                 $row = $this->categoryModel->createCategory($form->values->name, $form->values->text, $form->values->parent, $form->values->image->name);
-            }
-            else {
+            } else {
                 $row = $this->categoryModel->createCategory($form->values->name, $form->values->text, $form->values->parent);
             }
             $this->redirect('Product:products', $row);
         }
     }
-    
+
     protected function createComponentDeleteCategoryForm() {
         if ($this->getUser()->isInRole('admin')) {
 
             $deleteForm = new Nette\Application\UI\Form;
             $deleteForm->setTranslator($this->translator);
             $deleteForm->setRenderer(new BootstrapRenderer);
-            
+
             foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
                 $categories[$id] = $category->CategoryName;
             }
             $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
-            
+
             $deleteForm->addHidden('id', $this->categoryParam['CategoryID']);
             $deleteForm->addSelect('parent', 'Move products to category:', $categories)
                     ->setPrompt($prompt)
@@ -447,9 +447,9 @@ class ProductPresenter extends BasePresenter {
 
     public function deleteCategoryFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
-            
-            foreach($this->productModel->loadCatalog($form->values->id) as $product) {
-              $this->productModel->updateProduct($product->ProductID, 'CategoryID', $form->values->parent);
+
+            foreach ($this->productModel->loadCatalog($form->values->id) as $product) {
+                $this->productModel->updateProduct($product->ProductID, 'CategoryID', $form->values->parent);
             }
 
             $this->categoryModel->deleteCategory($form->values->id);
@@ -460,36 +460,24 @@ class ProductPresenter extends BasePresenter {
     public function renderProducts($catID) {
 
         $this->catId = $catID;
- 
-            if ($this->getUser()->isInRole('admin')) {
-                // load all products
+
+        if ($this->getUser()->isInRole('admin')) {
+            // load all products
             $this->template->products = $this->productModel->loadCatalogAdmin($catID);
-            } else {
-                // load published products
+        } else {
+            // load published products
             $this->template->products = $this->productModel->loadCatalog($catID);
-            }
-         
-             $this->template->category = $this->categoryModel->loadCategory($catID);  
-             
+        }
 
-
+        $this->template->category = $this->categoryModel->loadCategory($catID);
     }
-    
+
     public function renderProductsBrand($prodID) {
 
-            $this->template->products = $this->productModel->loadCatalogBrand($prodID);
- 
-             $this->template->producer = $this->productModel->loadProducer($prodID);  
-             
+        $this->template->products = $this->productModel->loadCatalogBrand($prodID);
 
-
+        $this->template->producer = $this->productModel->loadProducer($prodID);
     }
-
-
-
-
-
-
 
     /*     * *******************************************************************
      *                      RENDER PRODUCT
@@ -519,7 +507,7 @@ class ProductPresenter extends BasePresenter {
                 $addForm = $this['addParamForm'];
                 $docsForm = $this['addDocumentationForm'];
                 $priceForm = $this['editPriceForm'];
-               // $this['editPriceForm']['price'] = $this->row['SellingPrice'];
+                // $this['editPriceForm']['price'] = $this->row['SellingPrice'];
             }
         }
     }
@@ -559,16 +547,16 @@ class ProductPresenter extends BasePresenter {
                 );
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $form->values->albumID . '/' . $form->values->image->name;
                 $form->values->image->move($imgUrl);
-                
+
                 $image = Image::fromFile($imgUrl);
                 $image->resize(null, 300, Image::SHRINK_ONLY);
-                
+
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $form->values->albumID . '/300-' . $form->values->image->name;
                 $image->save($imgUrl);
-                
+
                 $image = Image::fromFile($imgUrl);
                 $image->resize(null, 50, Image::SHRINK_ONLY);
-                
+
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $form->values->albumID . '/50-' . $form->values->image->name;
                 $image->save($imgUrl);
 
@@ -582,7 +570,6 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    
     public function createComponentAddCategoryPhotoForm() {
         if ($this->getUser()->isInRole('admin')) {
             $addPhoto = new Nette\Application\UI\Form;
@@ -608,22 +595,22 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             if ($form->values->image->isOK()) {
 
-  
+
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/' . $form->values->image->name;
                 $form->values->image->move($imgUrl);
-                
+
                 $image = Image::fromFile($imgUrl);
                 $image->resize(null, 150, Image::SHRINK_ONLY);
-                
+
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/150-' . $form->values->image->name;
                 $image->save($imgUrl);
-                
+
                 $image = Image::fromFile($imgUrl);
                 $image->resize(null, 20, Image::SHRINK_ONLY);
-                
+
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/20-' . $form->values->image->name;
                 $image->save($imgUrl);
-                
+
                 $this->categoryModel->addPhoto($form->values->categoryID, $form->values->image->name);
 
                 $e = HTML::el('span', ' Photo ' . $form->values->image->name . ' was sucessfully uploaded');
@@ -635,9 +622,7 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('this');
         }
     }
-    
-    
-    
+
     protected function createComponentEditDescForm() {
         if ($this->getUser()->isInRole('admin')) {
 
@@ -647,37 +632,36 @@ class ProductPresenter extends BasePresenter {
             foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
                 $categories[$id] = $category->CategoryName;
             }
-            
-             foreach ($this->productModel->loadProducers() as $id => $name) {
+
+            foreach ($this->productModel->loadProducers() as $id => $name) {
                 $producers[$id] = $name->ProducerName;
             }
-            
+
             $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
-            
+
             $editForm->addText('name', 'Name:')
                     ->setDefaultValue($this->row['ProductName'])
                     ->setRequired();
-            
-            $editForm->addSelect('category', 'Select Category:', $categories)
 
+            $editForm->addSelect('category', 'Select Category:', $categories)
                     ->setDefaultValue($this->row['CategoryID']);
-            
+
             $editForm->addTextArea('short', 'Impress:', 10)
                     ->setDefaultValue($this->row['ProductDescription'])
                     ->setRequired();
-                    
+
             $editForm->addTextArea('text', 'Description:', 150, 150)
                     ->setDefaultValue($this->row['ProductDescription'])
                     ->setRequired()
                     ->setAttribute('class', 'mceEditor');
-            
-            
+
+
             $editForm->addSelect('producer', 'Producer', $producers)
                     ->setPrompt($prompt)
                     ->setDefaultValue($this->row['ProducerID']);
-            
+
             $editForm->addHidden('id', $this->row['ProductID']);
-            
+
             $editForm->addSubmit('edit', 'Save description')
                     ->setAttribute('class', 'upl btn btn-primary')
                     ->setAttribute('data-loading-text', 'Saving...');
@@ -691,17 +675,17 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
 
             $this->productModel->updateProduct($form->values->id, 'ProductName', $form->values->name);
-           $this->productModel->updateProduct($form->values->id, 'ProductDescription', $form->values->text);
-           $this->productModel->updateProduct($form->values->id, 'ProductShort', $form->values->short);
+            $this->productModel->updateProduct($form->values->id, 'ProductDescription', $form->values->text);
+            $this->productModel->updateProduct($form->values->id, 'ProductShort', $form->values->short);
             if ($form->values->producer != NULL) {
-            $this->productModel->updateProduct($form->values->id, 'ProducerID', $form->values->producer);
+                $this->productModel->updateProduct($form->values->id, 'ProducerID', $form->values->producer);
             }
             $this->productModel->updateProduct($form->values->id, 'CategoryID', $form->values->category);
             $this->redirect('this');
         }
     }
-    
-   protected function createComponentEditPriceForm() {
+
+    protected function createComponentEditPriceForm() {
         if ($this->getUser()->isInRole('admin')) {
 
             $priceForm = new Nette\Application\UI\Form;
@@ -884,8 +868,7 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('this');
         }
     }
-    
-    
+
     public function handleDeleteDocument($product, $id) {
         if ($this->getUser()->isInRole('admin')) {
             $row = $this->productModel->loadDocumentation($product)->fetch();
@@ -908,7 +891,7 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('Product:product', $product);
         }
     }
-    
+
     /*
      * Adding product photos
      */
@@ -954,9 +937,6 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('this');
         }
     }
-    
-    
-    
 
     public function renderProduct($id) {
         if ($this->getUser()->isInRole('admin')) {
@@ -967,15 +947,13 @@ class ProductPresenter extends BasePresenter {
                 $this->template->attr = 0;
             }
         }
-        
+
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->photo = $this->productModel->loadCoverPhoto($id);
         $this->template->album = $this->productModel->loadPhotoAlbum($id);
         $this->template->parameter = $this->productModel->loadParameters($id);
-        
+
         $this->template->docs = $this->productModel->loadDocumentation($id)->fetchPairs('DocumentID');
-       
-            
     }
 
     /*     * ***********************************************************************

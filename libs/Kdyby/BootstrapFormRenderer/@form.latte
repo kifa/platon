@@ -7,7 +7,7 @@
  *}
 
 {define #form}
-{form $form}
+{form $form class => ajax}
 {block #errors}
 
 <div n:foreach="$renderer->findErrors() as $error" class="alert alert-error">

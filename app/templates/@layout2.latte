@@ -143,8 +143,70 @@
    </div>
 </div>	
 
+{block scripts}
+        {ifCurrent Order:cart}
 
-{include ./components/footer.latte}
+        {else}
+    <script src="{$basePath}/js/jquery.js"></script>
+                {/ifCurrent}
+
+    <script src="{$basePath}/js/netteForms.js"></script>
+   
+    <script src="{$basePath}/js/bootstrap.min.js"></script>
+    <script src="{$basePath}/js/live-form-validation.js"></script>
+    
+    <script src="{$basePath}/js/imgLiquid-min.js"></script>
+    
+    <script src="{$basePath}/js/nette.ajax.js"></script> 
+    <script src="{$basePath}/js/main.js"></script>
+    <script>
+
+    $(document).ready(function() {
+            $(".imgLiquid").imgLiquid({
+                fill: true,
+                fadeInTime: 0,
+                delay: 0,
+                horizontalAlign: "left",
+                verticalAlign: "top"});
+                
+            $('#trackingButton').toggle(function(){
+                $('#tracking').modal('show');
+              },
+              function() {
+                  $('#tracking').modal('hide');
+              });
+         {if $user->isInRole('admin')}   
+           $('#addCategoryButton').toggle(function(){
+          $('#addCategory').modal('show');
+        },
+        function() {
+            $('#addCategory').modal('hide');
+        });
+        {/if}
+    
+        });
+    </script>
+        {if $user->isInRole('admin')}
+    <script type="text/javascript" src="{$basePath}/js/tiny_mce/tiny_mce.js" ></script>
+    <script type="text/javascript" >
+        tinyMCE.init({
+                mode: "specific_textareas",
+                editor_selector: "mceEditor",
+                theme : "advanced",
+                height: '300px',
+                width: '300px'
+        });
+    </script> 
+
+
+        {/if}
+
+            {block #script}
+            {/block}
+
+	{/block}
+
+{*include ./components/footer.latte*}
     
     
     </body>
