@@ -169,22 +169,15 @@
         }
         });
         
-        $('.editD').editable( {link editDescription! $category->CategoryID }, {
-         type      : 'wysiwyg',
-         onblur    : 'ignore',
+        $('.editDescription').editable( {link editDescription! $category->CategoryID }, {
+         type      : 'textarea',
+         rows      : '5',
+         cols      : '25',
          cancel    : {_'Cancel'},
          submit    : 'OK',
-         cssclass  : 'span6',
-         colls     : '15',
-         rows      : '15',
          indicator : '<i class="icon-spinner icon-spin"></i>',
          tooltip   : 'Click to edit ...',
-         wysiwyg   : { controls : { separator04         : { visible : true },
-                               insertOrderedList   : { visible : true },
-                               insertUnorderedList : { visible : true }
-                }
-         }, 
-        callback : function(value, settings) {
+         callback : function(value, settings) {
             var json = $.parseJSON(value);
             $('.editDescription').text(json.edit);
             $('.shortDesc').text(json.edit);
