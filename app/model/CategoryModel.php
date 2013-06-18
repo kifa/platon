@@ -56,7 +56,7 @@ class CategoryModel extends Repository {
      * @return string
      */
 
-    public function updateCategory($id, $name, $desc, $higher=NULL, $status, $photo=NULL){
+    public function updateCategory($id, $name, $desc=NULL, $higher=NULL, $status=NULL, $photo=NULL){
         
             $update = array(
                 'CategoryName' => $name,

@@ -368,7 +368,7 @@ class ProductPresenter extends BasePresenter {
             $content = $_POST['value'];
 
             //$this->categoryModel->updateCategory($content);
-            $this->categoryModel->updateCategory($catid, $content, "ahoooj", NULL, 1);
+            $this->categoryModel->updateCategory($catid, $content);
             
         }
         if(!$this->isControlInvalid('editTitle'))
@@ -377,9 +377,9 @@ class ProductPresenter extends BasePresenter {
             
             $this->payload->edit = $content;
             $this->sendPayload();
-                    
+            $this->invalidateControl('menu');        
             $this->invalidateControl('editTitle');
-            $this->invalidateControl('menu');
+            
         }
         else {
          $this->redirect('this');
