@@ -390,7 +390,7 @@ class ProductPresenter extends BasePresenter {
          if($this->isAjax())
         {            
             $content = $_POST['value']; //odesílaná nová hodnota
-            $this->categoryModel->updateCategory($catid, $content);
+            $this->categoryModel->updateCategoryDesc($catid, $content);
            
         }
         if(!$this->isControlInvalid('editDescription'))
