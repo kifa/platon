@@ -6,7 +6,7 @@
 
 
 <div class="page-header">
-    <h1 n:block="title" n:snippet="categoryInfo">{$category->CategoryName}<small> {$category->CategoryDescription|striptags|truncate:50} </small></h1>
+    <h1 n:block="title" class="edit" n:snippet="editTitle">{$category->CategoryName}</h1><small> {$category->CategoryDescription|striptags|truncate:50} </small>
 <a href="#showcategoryinfo" id="morecategory">more about category...</a>
 <div class="row">
     <div class="span10">
@@ -158,9 +158,19 @@
         function() {
             $('#deleteCategory').modal('hide');
         });
+        
+        $('.edit').editable( {link editTitle! $category->CategoryID }, { 
+         type      : 'text',
+         cancel    : {_'Cancel'},
+         submit    : 'OK',
+         indicator : '<i class="icon-spinner icon-spin"></i>',
+         tooltip   : 'Click to edit...',
+         callback : function(value, settings) {
+            var json = $.parseJSON(value);
+            $('.edit').text(json.edit);
+        }
+     });
 });
-    
-
     
 </script>
     {/if}
@@ -175,6 +185,7 @@
      $('#categoryinfo').fadeOut();
     });
 </script>
+
 
 {/block}
 

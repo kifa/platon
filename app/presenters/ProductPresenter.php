@@ -359,6 +359,33 @@ class ProductPresenter extends BasePresenter {
             }
         }
     }
+    
+    public function handleEditTitle($catid) {
+        
+         if($this->isAjax())
+        {
+            $name = $_POST['id'];
+            $content = $_POST['value'];
+
+            //$this->categoryModel->updateCategory($content);
+            $this->categoryModel->updateCategory($catid, $content, "ahoooj", NULL, 1);
+            
+        }
+        if(!$this->isControlInvalid('editTitle'))
+        {
+            
+            
+            $this->payload->edit = $content;
+            $this->sendPayload();
+                    
+            $this->invalidateControl('editTitle');
+            $this->invalidateControl('menu');
+        }
+        else {
+         $this->redirect('this');
+        }
+        
+    }
 
     protected function createComponentAddCategoryForm() {
         if ($this->getUser()->isInRole('admin')) {

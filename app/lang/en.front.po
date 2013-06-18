@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-05-15 15:42:55
+# Created: 2013-06-18 14:35:18
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-05-15 15:42+0200\n"
+"PO-Revision-Date: 2013-06-18 14:35+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -419,4 +419,196 @@ msgstr "Find out more"
 
 msgid "Změnit heslo"
 msgstr "Změnit heslo"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Choose Brand"
+msgstr ""
+
+msgid "Blog"
+msgstr ""
+
+msgid "Categories"
+msgstr ""
+
+msgid "Check news on blog"
+msgstr ""
+
+msgid "Read more"
+msgstr ""
+
+msgid "Nové heslo musí mít alespoň %d znaků."
+msgstr ""
+
+msgid "Nové heslo je nutné zadat ještě jednou pro potvrzení."
+msgstr ""
+
+msgid "Zadná hesla se musejí shodovat."
+msgstr ""
+
+msgid "Unpublish category"
+msgstr ""
+
+msgid "Feature category!"
+msgstr ""
+
+msgid "Set Catalog Layout"
+msgstr ""
+
+msgid "Left!"
+msgstr ""
+
+msgid "Right"
+msgstr ""
+
+msgid "Delete photo"
+msgstr ""
+
+msgid "Please fill in these information"
+msgstr ""
+
+msgid "Impress: "
+msgstr ""
+
+msgid "Smartphones-"
+msgstr ""
+
+msgid "Static Text"
+msgstr ""
+
+msgid "Washmashine"
+msgstr ""
+
+msgid "Samsung"
+msgstr ""
+
+msgid "Sony"
+msgstr ""
+
+msgid "Apple"
+msgstr ""
+
+msgid "Lenovo"
+msgstr ""
+
+msgid "Nokia"
+msgstr ""
+
+msgid "Close without adding"
+msgstr ""
+
+msgid "Are you sure to delete this category?"
+msgstr ""
+
+msgid "If so, choose where to move products!"
+msgstr ""
+
+msgid "Move products to category:"
+msgstr ""
+
+msgid "Select photo and click Add photo"
+msgstr ""
+
+msgid "Edit your description and click Save desccription."
+msgstr ""
+
+msgid "Impress:"
+msgstr ""
+
+msgid "Close without saving"
+msgstr ""
+
+msgid "This has to be a number."
+msgstr ""
+
+msgid "It should be less then price"
+msgstr ""
+
+msgid "Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow."
+msgstr ""
+
+msgid "Select one of already created:"
+msgstr ""
+
+msgid "Weight"
+msgstr ""
+
+msgid "Display size"
+msgstr ""
+
+msgid "Display resolution"
+msgstr ""
+
+msgid "Battery"
+msgstr ""
+
+msgid "Enter Value:"
+msgstr ""
+
+msgid "Select unit:"
+msgstr ""
+
+msgid "g"
+msgstr ""
+
+msgid "mAh"
+msgstr ""
+
+msgid "px"
+msgstr ""
+
+msgid "\""
+msgstr ""
+
+msgid "Publish category"
+msgstr ""
+
+msgid "Here you can edit all Spec assigned to this product. Edit values and then click Save Spec bellow."
+msgstr ""
+
+msgid "Check all specification you want to delete and then click Delete specs bellow."
+msgstr ""
+
+msgid "Cellphones"
+msgstr ""
+
+msgid "Tablet"
+msgstr ""
+
+msgid "Cellphonesss<small> A mobile phone (also know"
+msgstr ""
+
+msgid "Cellphonesss&lt;small&gt; A mobile phone (als"
+msgstr ""
+
+msgid "Cellphes<small> ahoooj </small>"
+msgstr ""
+
+msgid "Cellphes"
+msgstr ""
+
+msgid "Cellph"
+msgstr ""
+
+msgid "Cellphone<small> ahoooj </small>"
+msgstr ""
+
+msgid "Cellphon"
+msgstr ""
+
+msgid "Cellphoggn<small> ahoooj </small>"
+msgstr ""
+
+msgid "Cel"
+msgstr ""
+
+msgid "Cellll<small> ahoooj </small>"
+msgstr ""
+
+msgid "Cellphone;small&gt; ahoooj &lt;/small&gt;<sma"
+msgstr ""
+
+msgid "Cellphonesss<small> ahoooj </small>"
+msgstr ""
 

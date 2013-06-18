@@ -1,39 +1,37 @@
-
-
-                <li class="{ifCurrent Homepage:default}active{/ifCurrent}"><a href="{plink Homepage:default}">{_"Home"}</a></li>
+<li class="{ifCurrent Homepage:default}active{/ifCurrent}"><a href="{plink Homepage:default}">{_"Home"}</a></li>
                 {foreach $category as $catID => $cat}
                 {if $cat->CategoryStatus != 3}
-                <li class="{ifCurrent Product:products $catID}active{/ifCurrent}"><a href="{plink product:products $catID}">
+<li class="{ifCurrent Product:products $catID}active{/ifCurrent}"><a href="{plink product:products $catID}">
                         {if $img !== NULL}
                             {if $cat->CategoryPhoto != NULL}
-                            <img src="{$basePath}/images/category/20-{$cat->CategoryPhoto}" class="img-circle" alt="{$cat->CategoryName}"/>
+        <img src="{$basePath}/images/category/20-{$cat->CategoryPhoto}" class="img-circle" alt="{$cat->CategoryName}"/>
                             {/if}
                         {/if}
-                        
+
                     {$cat->CategoryName}</a></li> 
                 {/if}
                 {/foreach}
-                <li class="margin5 {ifCurrent product:productsBrand}active{/ifCurrent}}">
-                <div class="btn-group">
-  <a class="dropdown-toggle btn-small" data-toggle="dropdown" href="#">
+<li class="margin5 {ifCurrent product:productsBrand}active{/ifCurrent}}">
+    <div class="btn-group">
+        <a class="dropdown-toggle btn-small" data-toggle="dropdown" href="#">
     {_'Choose Brand'}
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu">
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
       {foreach $producers as $prodID => $producer}
-    <li class="{*ifCurrent Product:products $catID}active{/ifCurrent*}"><a href="{plink product:productsBrand $prodID}"><i class="icon-spinner"></i>{$producer->ProducerName}</a></li> 
+            <li class="{*ifCurrent Product:products $catID}active{/ifCurrent*}"><a href="{plink product:productsBrand $prodID}"><i class="icon-spinner"></i>{$producer->ProducerName}</a></li> 
         {/foreach}
-  </ul>
-</div>
-                </li>
-                
+        </ul>
+    </div>
+</li>
+
                 {if $user->isInRole('admin')}
                 {ifCurrent Product:products}
-                <li><a href="#addCategory" data-toggel="modal" data-target="#addCategory" id="addCategoryButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Category"}</a></li>
+<li><a href="#addCategory" data-toggel="modal" data-target="#addCategory" id="addCategoryButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Category"}</a></li>
                 {else}
-                
+
                 {/ifCurrent}
                 {/if}
-                
-       
-                <li class="{ifCurrent Blog:category}active{/ifCurrent}"><a href="{plink Blog:category}"><i class="icon-large icon-star-empty"></i> {_"Blog"}</a></li>
+
+
+<li class="{ifCurrent Blog:category}active{/ifCurrent}"><a href="{plink Blog:category}"><i class="icon-large icon-star-empty"></i> {_"Blog"}</a></li>

@@ -55,7 +55,7 @@
                         <div class="navbar">
                             <div class="navbar-inner">
                                 <div class="container">
-                                    <ul class="nav">
+                                    <ul class="nav" n:snippet="menu">
                     {control menu 1}
                                     </ul>
                                 </div>
@@ -151,6 +151,9 @@
     
     <script src="{$basePath}/js/nette.ajax.js"></script> 
     <script src="{$basePath}/js/main.js"></script>
+    
+    <script src="{$basePath}/js/jquery.jeditable.mini.js"></script>
+    
     <script>
 
     $(document).ready(function() {
@@ -174,6 +177,8 @@
         function() {
             $('#addCategory').modal('hide');
         });
+        
+  
         {/if}
     
         });
