@@ -81,11 +81,11 @@ class ProductModel extends Repository {
 
     public function loadProduct($id) {       
         return $this->getDB()->query('SELECT * FROM product 
-JOIN price ON product.ProductID=price.ProductID
-JOIN producer ON product.ProducerID=producer.ProducerID
-JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
-JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
-WHERE Product.ProductID=?',$id)->fetch();
+            JOIN price ON product.ProductID=price.ProductID
+            JOIN producer ON product.ProducerID=producer.ProducerID
+            JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
+            JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
+            WHERE Product.ProductID=?',$id)->fetch();
         //return $this->getTable('Product')->select('Product.*,Price.*,PhotoAlbum.*,photo.*')->where('Product.ProductID',$id)->fetch()
     }
 
@@ -142,12 +142,20 @@ WHERE Product.ProductID=?',$id)->fetch();
      *  */
     public function updateProduct($id, $update, $value){
         
-            $insert = array(
+            $update = array(
                 $update => $value
                 );        
-        return $this->getTable('Product')->where('ProductID',$id)->update($insert);
+        return $this->getTable('Product')->where('ProductID',$id)->update($update);
     }
     
+    public function updateProductName($id,$value){
+        $update = array(
+            'ProductName' => $value
+        );
+        return $this->getTable('Product')->where('ProductID',$id)->update($update);
+    }
+
+
     public function updatePrice($id, $price, $discount){
         
             $final = $price - $discount;
@@ -163,10 +171,10 @@ WHERE Product.ProductID=?',$id)->fetch();
     public function decreaseProduct($id, $amnt) {
         $cur = $this->getTable('Product')->where('ProductID',$id)->fetch()->PiecesAvailable;
         $cur = $cur - $amnt;
-        $insert = array(
+        $update = array(
                 'PiecesAvailable' => $cur
                 );        
-        return $this->getTable('Product')->where('ProductID',$id)->update($insert);
+        return $this->getTable('Product')->where('ProductID',$id)->update($update);
     }
     /*
      * Delete Product

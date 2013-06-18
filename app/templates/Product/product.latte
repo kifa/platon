@@ -3,7 +3,8 @@
 {/block}
 {block pageheader}
 <div class="page-header">
-    <h1 n:block="title">{$product->ProductName} <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>
+    <h1 n:block="title"><span class="editProdTitle" n:snippet="editProdTitle">{$product->ProductName}</span>
+            <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>
             {if $user->isInRole('admin')}
 <div class="row">
     <div class="span10">
@@ -270,7 +271,19 @@
                 $('#editParam').modal('show');
                 {/if}
     });
-
+        
+            $('.editProdTitle').editable( {link editProdTitle! $product->ProductID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.edit').text(json.edit);
+               }
+           });
+           
     </script>
   
     {/if}

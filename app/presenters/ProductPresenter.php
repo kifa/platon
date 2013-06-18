@@ -385,6 +385,30 @@ class ProductPresenter extends BasePresenter {
         
     }
     
+    public function handleEditProdTitle($prodid) {
+        
+         if($this->isAjax())
+        {            
+            $content = $_POST['value'];
+            $this->productModel->updateProduct($prodid, 'ProductName',$content);
+            
+        }
+        if(!$this->isControlInvalid('editProdTitle'))
+        {
+            
+            
+            $this->payload->edit = $content;
+            $this->sendPayload();
+            $this->invalidateControl('menu');        
+            $this->invalidateControl('editProdTitle');
+            
+        }
+        else {
+         $this->redirect('this');
+        }
+        
+    }
+    
     public function handleEditDescription($catid) {
        
          if($this->isAjax())
