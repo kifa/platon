@@ -364,10 +364,8 @@ class ProductPresenter extends BasePresenter {
         
          if($this->isAjax())
         {
-            $name = $_POST['id'];
+            //$name = $_POST['id'];
             $content = $_POST['value'];
-
-            //$this->categoryModel->updateCategory($content);
             $this->categoryModel->updateCategory($catid, $content);
             
         }
