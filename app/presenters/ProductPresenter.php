@@ -384,6 +384,29 @@ class ProductPresenter extends BasePresenter {
         }
         
     }
+    
+    public function handleEditDescription($catid) {
+       
+         if($this->isAjax())
+        {            
+            $content = $_POST['value']; //odesílaná nová hodnota
+            $this->categoryModel->updateCategory($catid, $content);
+           
+        }
+        if(!$this->isControlInvalid('editDescription'))
+        {           
+            $this->payload->edit = $content; //zaslání nové hodnoty do šablony
+            $this->sendPayload();
+            $this->invalidateControl('menu');       
+            $this->invalidateControl('editDescription'); //invalidace snipetu
+           
+        }
+        else {
+         $this->redirect('this');
+        }
+       
+    }
+
 
     protected function createComponentAddCategoryForm() {
         if ($this->getUser()->isInRole('admin')) {

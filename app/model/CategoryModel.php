@@ -68,6 +68,18 @@ class CategoryModel extends Repository {
         return $this->getTable('category')->where('CategoryID',$id)->update($update);
        
     }
+    
+    /*
+     * Update Category Description
+     */
+    public function updateCategoryDesc($id, $desc){
+            
+            $update = array(                
+                'CategoryDescription' => $desc         
+                );        
+        return $this->getTable('category')->where('CategoryID',$id)->update($update);
+       
+    }
 
     /*
      * Delete Category
