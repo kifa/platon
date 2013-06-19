@@ -1,6 +1,6 @@
-<ul class="thumbnails">
+<ul class="thumbnails" n:snippet="products">
             {foreach $products as $id => $product}
-    <li class="span3 setview miniproduct">
+    <li class="span3 setview miniproduct" n:snippet="{$product->ProductID}">
         <div class="thumbnail {$product->ProductStatusID == 1 ? alert}">
            {if $user->isInRole('admin')}
             <div class="row">
@@ -23,7 +23,7 @@
                         <i id="hideProduct" class="icon-large icon-eye-close"></i></a>
 
                 {else}
-                    <a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" ><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
+                    <a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" class="ajax"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
                 {/if}
             </div>
             {/ifCurrent}

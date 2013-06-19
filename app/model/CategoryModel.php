@@ -69,6 +69,15 @@ class CategoryModel extends Repository {
        
     }
     
+    public function updateCategoryParent($id, $higher){
+        
+            $update = array(
+                'HigherCategoryID' => $higher
+                );        
+        return $this->getTable('category')->where('CategoryID',$id)->update($update);
+       
+    }
+    
     /*
      * Update Category Description
      */

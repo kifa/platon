@@ -38,6 +38,21 @@
                     </ul>
                 </div>
                 
+                <div class="btn-group">
+                    <a class="btn">{_'Parent Category'}</a>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" n:snippet="parentCategory">
+                        {foreach $categories as $catID => $cat}
+                
+                        <li class="parentcat"><a href="{plink setParentCategory!  $category->CategoryID, $catID }" class="ajax">
+                        {if $category->HigherCategoryID == $catID}<i class="icon-ok-sign"></i>{/if}
+                        {$cat->CategoryName}</a></li> 
+                        {/foreach}
+                   
+                    </ul>
+                </div>
                 
                 <div class="btn-group">
                         
@@ -190,8 +205,10 @@
             $('.shortDesc').html(json.edit);
         }
         });
-});
-    
+             
+         $('.parentcat').click(function() { 
+            $(this).hide(); });
+   });  
 </script>
     {/if}
 

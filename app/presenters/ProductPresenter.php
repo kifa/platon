@@ -293,8 +293,16 @@ class ProductPresenter extends BasePresenter {
 
     public function handleHideProduct($catID, $id) {
         if ($this->getUser()->isInRole('admin')) {
+            
             $this->productModel->hideProduct($id);
-            $this->redirect('this', $catID);
+            
+            if($this->isAjax())
+            {            
+                $this->invalidateControl('prod-'.$id);
+            }
+            else {
+              $this->redirect('this', $catID);
+            }
         }
     }
 
@@ -490,8 +498,6 @@ class ProductPresenter extends BasePresenter {
 
             $this->productModel->updateProduct($prodid, 'PiecesAvailable', $content);
  
- 
-            
         }
         if(!$this->isControlInvalid('editProdAmount'))
         {
@@ -506,6 +512,8 @@ class ProductPresenter extends BasePresenter {
         }
         
     }
+    
+    
     
     public function handleEditDescription($catid) {
        
@@ -529,6 +537,23 @@ class ProductPresenter extends BasePresenter {
        
     }
 
+    
+    public function handlesetParentCategory($catid, $parentid) {
+       
+        
+        $this->categoryModel->updateCategoryParent($catid, $parentid);
+        
+        
+         if($this->isAjax())
+        {            
+             $this->invalidateControl('parentCategory');
+           
+        }
+        else {
+         $this->redirect('this');
+        }
+       
+    }
 
     protected function createComponentAddCategoryForm() {
         if ($this->getUser()->isInRole('admin')) {
@@ -634,11 +659,13 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             // load all products
             $this->template->products = $this->productModel->loadCatalogAdmin($catID);
+            $this->template->categories = $this->categoryModel->loadCategoryList();
         } else {
             // load published products
             $this->template->products = $this->productModel->loadCatalog($catID);
         }
 
+        
         $this->template->category = $this->categoryModel->loadCategory($catID);
     }
 
