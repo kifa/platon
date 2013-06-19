@@ -390,7 +390,7 @@ class ProductPresenter extends BasePresenter {
          if($this->isAjax())
         {            
             $content = $_POST['value'];
-            $this->productModel->updateProduct($prodid, 'ProductName',$content);
+            $this->productModel->updateProduct($prodid, 'ProductName', $content);
             
         }
         if(!$this->isControlInvalid('editProdTitle'))
@@ -399,8 +399,106 @@ class ProductPresenter extends BasePresenter {
             
             $this->payload->edit = $content;
             $this->sendPayload();
-            $this->invalidateControl('menu');        
             $this->invalidateControl('editProdTitle');
+            
+        }
+        else {
+         $this->redirect('this');
+        }
+        
+    }
+    
+    public function handleEditProdDescription($prodid) {
+        
+         if($this->isAjax())
+        {            
+            $content = $_POST['value'];
+            $this->productModel->updateProduct($prodid, 'ProductDescription', $content);
+            
+        }
+        if(!$this->isControlInvalid('editProdDescription'))
+        {
+
+            $this->payload->edit = $content;
+            $this->sendPayload();
+            $this->invalidateControl('editProdDescription');
+            
+        }
+        else {
+         $this->redirect('this');
+        }
+        
+    }
+    
+    public function handleEditProdShort($prodid) {
+        
+         if($this->isAjax())
+        {            
+            $content = $_POST['value'];
+            $this->productModel->updateProduct($prodid, 'ProductShort', $content);
+            
+        }
+        if(!$this->isControlInvalid('editProdShort'))
+        {
+
+            $this->payload->edit = $content;
+            $this->sendPayload();
+            $this->invalidateControl('editProdShort');
+            
+        }
+        else {
+         $this->redirect('this');
+        }
+        
+    }
+    
+    public function handleEditProdPrice($prodid, $sellingprice, $sale) {
+        
+         if($this->isAjax())
+        {            
+            $content = $_POST['value'];
+
+            if ($sale == 0) {
+            $this->productModel->updatePrice($prodid, $content, $sale);    
+            }
+            else {
+              $sale = $sellingprice - $content;
+            $this->productModel->updatePrice($prodid, $sellingprice, $sale); 
+            }
+            
+        }
+        if(!$this->isControlInvalid('editProdPrice'))
+        {
+           
+            $this->payload->edit = $content;
+            $this->sendPayload();
+            $this->invalidateControl('editProdPrice');
+            
+        }
+        else {
+         $this->redirect('this');
+        }
+        
+    }
+    
+    
+    public function handleEditProdAmount($prodid) {
+        
+         if($this->isAjax())
+        {            
+            $content = $_POST['value'];
+
+            $this->productModel->updateProduct($prodid, 'PiecesAvailable', $content);
+ 
+ 
+            
+        }
+        if(!$this->isControlInvalid('editProdAmount'))
+        {
+           
+            $this->payload->edit = $content;
+            $this->sendPayload();
+            $this->invalidateControl('editProdAmount');
             
         }
         else {

@@ -385,8 +385,8 @@
 
                 var editor = this.editor = $('<iframe src="javascript:false;"></iframe>').css({
                     minHeight : ( newY - 6 ).toString() + 'px',
-                    width     : ( newX - 8 ).toString() + 'px',
-                    minWidth : '100%'
+                   // width     : ( newX - 8 ).toString() + 'px',
+                    width : '100%'
                 }).attr('id', $(element).attr('id') + 'IFrame')
                 .attr('frameborder', '0');
 

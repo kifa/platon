@@ -186,8 +186,8 @@
          }, 
         callback : function(value, settings) {
             var json = $.parseJSON(value);
-            $('.editDescription').text(json.edit);
-            $('.shortDesc').text(json.edit);
+            $('.editDescription').html(json.edit);
+            $('.shortDesc').html(json.edit);
         }
         });
 });

@@ -9,20 +9,20 @@
 <div class="row">
     <div class="span10">
         <a href="#addPhoto" class="btn" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
-         <div class="btn-group">
-        <a href="#editDesc" class="btn" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
-        <a href="#editPrice" class="btn" data-toggel="modal" data-target="#editPrice" id="editPriceButton" ><i class="icon-large icon-money"></i> {_"Edit Price"}</a> |
-        <a href="#editPieces" class="btn" data-toggel="modal" data-target="#editPieces" id="editPiecesButton"><i class="icon-large icon-truck"></i> {_"Edit Pieces"}</a> |
-        <a href="#editParam" class="btn" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Specs"}</a> |
-        <a href="#editDocs" class="btn" data-toggel="modal" data-target="#editDocs" id="editDocsButton"><i class="icon-large icon-download"></i> {_"Edit Documents"}</a> |
-         </div>
+        <div class="btn-group">
+            <a href="#editDesc" class="btn" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
+            <a href="#editPrice" class="btn" data-toggel="modal" data-target="#editPrice" id="editPriceButton" ><i class="icon-large icon-money"></i> {_"Edit Price"}</a> |
+            <a href="#editPieces" class="btn" data-toggel="modal" data-target="#editPieces" id="editPiecesButton"><i class="icon-large icon-truck"></i> {_"Edit Pieces"}</a> |
+            <a href="#editParam" class="btn" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Specs"}</a> |
+            <a href="#editDocs" class="btn" data-toggel="modal" data-target="#editDocs" id="editDocsButton"><i class="icon-large icon-download"></i> {_"Edit Documents"}</a> |
+        </div>
         <a href="#" class="btn" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> 
-        
+
     </div>
 </div>
             {/if}
-    
-    
+
+
 
 </div>
 {/block}
@@ -35,22 +35,22 @@
     <div class="span4">
         <div class="tabbable span4">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#info" data-toggle="tab"><i class="icon-info-sign"></i> Info</a></li>
-                <li><a href="#spec" data-toggle="tab"><i class="icon-list"></i> Spec</a></li>
-                <li><a href="#other" data-toggle="tab">Other</a></li>
+                <li class="active"><a href="#info" data-toggle="tab"><i class="icon-info-sign"></i> {_'Info'}</a></li>
+                <li><a href="#spec" data-toggle="tab"><i class="icon-list"></i> {_'Spec'}</a></li>
+                <li><a href="#other" data-toggle="tab">{_'Other'}</a></li>
                 <li><a href="#ask" data-toggle="tab"><i class="icon-comment"></i> Ask &AMP; share</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="info">
-                   
-                    <p n:block="metadesc">{!$product->ProductShort|striptags|truncate:180}</p>
+
+                    <p n:block="metadesc" class="editProdShort" n:snippet="editProdShort">{!$product->ProductShort|striptags|truncate:180}</p>
 
                 </div>
                 <div class="tab-pane" id="spec">
                     <dl class="dl-horizontal">
                         {foreach $parameter as $parameter}
-                            <dt>{$parameter->AttribName}:</dt>
-                            <dd>{$parameter->Val}{$parameter->UnitShort}</dd>
+                        <dt>{$parameter->AttribName}:</dt>
+                        <dd>{$parameter->Val}{$parameter->UnitShort}</dd>
                         {/foreach}                        
                     </dl>
                 </div>
@@ -66,17 +66,17 @@
 
         <div class=".span4 alert alert-info">
             {if $product->SALE > 1}
-            <p class=".span2 alert alert-warning">
-                        <i class="icon-money icon-large"></i>
-                        
-                        <span class="badge badge-important">- {$product->SALE},- / {var $procent = 100 * ($product->SALE / $product->SellingPrice)} {$procent|number}%</span>
-                        <span class="muted" style="text-decoration: line-through;">{$product->SellingPrice},-</span>
+            <p class=".span2 alert alert-warning" n:snippet="editProdSale">
+                <i class="icon-money icon-large"></i>
+
+                <span class="badge badge-important">- {$product->SALE},- / {var $procent = 100 * ($product->SALE / $product->SellingPrice)} {$procent|number}%</span>
+                <span class="muted" style="text-decoration: line-through;">{$product->SellingPrice},-</span>
             </p>
             {/if}
-            
-            <h2 class="text-info span3">{$product->FinalPrice},- </h2>
+
+            <h2 class="text-info span3"><span class="editProdPrice" n:snippet="editProdPrice">{$product->FinalPrice}</span>,- </h2>
             <a href="{plink Order:cart $product->ProductID, "1"}" class="span2 btn btn-primary">
-                <i class="icon-shopping-cart"></i> Buy</a>
+                <i class="icon-shopping-cart"></i> {_'Buy'}</a>
 
 
             <div class="span2 clearfix">
@@ -88,9 +88,9 @@
                     {elseif $product->PiecesAvailable = 0 }
                             <span class="badge">
                         {/if}
-                    {$product->PiecesAvailable}</span>
-                      </p>
-                      
+                               <span class="editProdAmount span1" n:snippet="editProdAmount">{$product->PiecesAvailable}</span></span>
+                            </p>
+
                             </div>
                             </div>
                             </div>
@@ -104,10 +104,10 @@
                                    {if $docs} <li><a href="#docs" data-toggle="tab"><i class="icon-download"></i> Docs</a></li>{/if}
                                 </ul>
                                 <div class="tab-content">
-                                    <div class="tab-pane active text-justified" id="allinfo">
-                                        <p class="text-justified">{!$product->ProductDescription}</p>
+                                     <div class="tab-pane active" id="allinfo" >
+                                        <div class="editProdDescription" n:snippet="editProdDescription">{!$product->ProductDescription}</div>
                                     </div>
-                                    
+
                                     <div class="tab-pane" id="gal">
 
 
@@ -119,20 +119,20 @@
                                                 </a>
                                                 {if $user->isInRole('admin')}
                                                    {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> Set as COVER image</a> {/if}
-                                                    <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> Delete image</a>
+                                                <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> Delete image</a>
                                                   {/if}
                                             </li>
-                                           
+
                                             {var $src = $basePath . '/images/' . $product->PhotoAlbumID .'/'.$photo->PhotoURL}
                                             {control modalControl:gallery $id, $product->ProductName, $src }
-                                          
+
                                      {/foreach}
                                         </ul>
-                                        
-                                        
-                                       
 
-                                        
+
+
+
+
                                     </div>
                                     <div class="tab-pane" id="vid">
                                         <iframe width="853" height="480" src="http://www.youtube.com/embed/qN3EXAFRxKQ?rel=0" frameborder="0" allowfullscreen></iframe>
@@ -142,27 +142,27 @@
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                <th>#</th>
-                                                <th>{_'Name'}</th>
-                                                <th>{_'Description'}</th>
-                                                <th>{_'Download link'}</th>
+                                                    <th>#</th>
+                                                    <th>{_'Name'}</th>
+                                                    <th>{_'Description'}</th>
+                                                    <th>{_'Download link'}</th>
                                                  {if $user->isInRole('admin')}
-                                                <th></th>    
+                                                    <th></th>    
                                                 {/if}
                                                 </tr>
                                             </thead>
                                         {foreach $docs as $id => $doc}
                                             <tbody>
-                                            <tr>
-                                                <td>{$id}</td>
-                                                <td>{$doc->DocumentName}</td>
-                                                <td>{$doc->DocumentDescription}</td>
-                                                <td><a href="{$basePath}/docs/{$product->ProductID}/{$doc->DocumentURL}" title="{_'Download'} {$doc->DocumentName}"><i class="icon-download" ></i> {$doc->DocumentURL}</a></td>
+                                                <tr>
+                                                    <td>{$id}</td>
+                                                    <td>{$doc->DocumentName}</td>
+                                                    <td>{$doc->DocumentDescription}</td>
+                                                    <td><a href="{$basePath}/docs/{$product->ProductID}/{$doc->DocumentURL}" title="{_'Download'} {$doc->DocumentName}"><i class="icon-download" ></i> {$doc->DocumentURL}</a></td>
                                                {if $user->isInRole('admin')}
-                                                <td><a href="{link deleteDocument! $product->ProductID, $doc->DocumentID}"><i class="icon-trash" ></i> Delete document</a></td>
+                                                    <td><a href="{link deleteDocument! $product->ProductID, $doc->DocumentID}"><i class="icon-trash" ></i> Delete document</a></td>
                                                   {/if}
                                           {/foreach}
-                                            </tr>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -182,7 +182,7 @@
 
                                 <ul class="nav nav-list">
                                     <li class="nav-header">Menu</li>
-                                    
+
                                       {control menu:side}
                                     <li class="divider"></li>
                                 </ul>
@@ -194,255 +194,319 @@
 {/block}
 
 {block script}
-     <script src="{$basePath}/js/bootstrap-lightbox.min.js"></script>
+                            <script src="{$basePath}/js/bootstrap-lightbox.min.js"></script>
 
-     <script>
-        $(document).ready(function() {
-                $(".imgLiquid").imgLiquid({
-                    fill: true,
-                    fadeInTime: 0,
-                    delay: 0,
-                    horizontalAlign: "left",
-                    verticalAlign: "top"});
-            });
-        </script>
-        
+                            <script>
+                               $(document).ready(function() {
+                                       $(".imgLiquid").imgLiquid({
+                                           fill: true,
+                                           fadeInTime: 0,
+                                           delay: 0,
+                                           horizontalAlign: "left",
+                                           verticalAlign: "top"});
+                                   });
+                            </script>
+
          {if $user->isInRole('admin')}
-                    <script src="{$basePath}/js/droparea.js"></script>
-    <script>
-        $(document).ready(function() {
+                            <script src="{$basePath}/js/droparea.js"></script>
+                            <script>
+                                $(document).ready(function() {
                  
-          $('.nav-tabs').button();
-          $('.upl').click(function() { 
-                $('.upl').button('toggle');
-                $('.upl').button('loading') });
-          $('.upl-edit').click(function() { 
-                $('.upl-edit').button('toggle');
-                $('.upl-edit').button('loading') });
-            $('.upl-add').click(function() { 
-                $('.upl-add').button('toggle');
-                $('.upl-add').button('loading') });
-            $('.upl-del').click(function() { 
-                $('.upl-del').button('toggle');
-                $('.upl-del').button('loading') });
-          $('#addPhotoButton').toggle(function(){
-              $('#addPhoto').modal('show');
-            },
-            function() {
-                $('#addPhoto').modal('hide');
-            });
+                                  $('.nav-tabs').button();
+                                  $('.upl').click(function() { 
+                                        $('.upl').button('toggle');
+                                        $('.upl').button('loading') });
+                                  $('.upl-edit').click(function() { 
+                                        $('.upl-edit').button('toggle');
+                                        $('.upl-edit').button('loading') });
+                                    $('.upl-add').click(function() { 
+                                        $('.upl-add').button('toggle');
+                                        $('.upl-add').button('loading') });
+                                    $('.upl-del').click(function() { 
+                                        $('.upl-del').button('toggle');
+                                        $('.upl-del').button('loading') });
+                                  $('#addPhotoButton').toggle(function(){
+                                      $('#addPhoto').modal('show');
+                                    },
+                                    function() {
+                                        $('#addPhoto').modal('hide');
+                                    });
             
-          $('#editDescButton').toggle(function(){
-              $('#editDesc').modal('show');
-            },
-            function() {
-                $('#editDesc').modal('hide');
-            });
+                                  $('#editDescButton').toggle(function(){
+                                      $('#editDesc').modal('show');
+                                    },
+                                    function() {
+                                        $('#editDesc').modal('hide');
+                                    });
             
-          $('#editPriceButton').toggle(function(){
-              $('#editPrice').modal('show');
-            },
-            function() {
-                $('#editPrice').modal('hide');
-            });
+                                  $('#editPriceButton').toggle(function(){
+                                      $('#editPrice').modal('show');
+                                    },
+                                    function() {
+                                        $('#editPrice').modal('hide');
+                                    });
         
-         $('#editPiecesButton').toggle(function(){
-              $('#editPieces').modal('show');
-            },
-            function() {
-                $('#editPieces').modal('hide');
-            });
+                                 $('#editPiecesButton').toggle(function(){
+                                      $('#editPieces').modal('show');
+                                    },
+                                    function() {
+                                        $('#editPieces').modal('hide');
+                                    });
             
-          $('#editParamButton').toggle(function(){
-              $('#editParam').modal('show');
-            },
-            function() {
-                $('#editParam').modal('hide');
-            });
+                                  $('#editParamButton').toggle(function(){
+                                      $('#editParam').modal('show');
+                                    },
+                                    function() {
+                                        $('#editParam').modal('hide');
+                                    });
             
-           $('#editDocsButton').toggle(function(){
-              $('#editDocs').modal('show');
-            },
-            function() {
-                $('#editDocs').modal('hide');
-            });
+                                   $('#editDocsButton').toggle(function(){
+                                      $('#editDocs').modal('show');
+                                    },
+                                    function() {
+                                        $('#editDocs').modal('hide');
+                                    });
             
-            {if $attr == 1}
-                $('#editParam').modal('show');
-                {/if}
-    });
+                                    {if $attr == 1}
+                                        $('#editParam').modal('show');
+                                        {/if}
+                            });
         
-            $('.editProdTitle').editable( {link editProdTitle! $product->ProductID }, { 
-                type      : 'text',
-                cancel    : {_'Cancel'},
-                submit    : 'OK',
-                indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
-                callback : function(value, settings) {
-                   var json = $.parseJSON(value);
-                   $('.edit').text(json.edit);
-               }
-           });
+                                    $('.editProdTitle').editable( {link editProdTitle! $product->ProductID }, { 
+                                        type      : 'text',
+                                        cancel    : {_'Cancel'},
+                                        submit    : 'OK',
+                                        indicator : '<i class="icon-spinner icon-spin"></i>',
+                                        tooltip   : 'Click to edit ...',
+                                        callback : function(value, settings) {
+                                           var json = $.parseJSON(value);
+                                           $('.editProdTitle').text(json.edit);
+                                       }
+                                   });
            
-    </script>
-  
+                                   $('.editProdDescription').editable( {link editProdDescription! $product->ProductID }, {
+                                        type      : 'wysiwyg',
+                                        onblur    : 'ignore',
+                                        cancel    : {_'Cancel'},
+                                        submit    : 'OK',
+                                        cssclass  : 'span10',
+                                        colls     : '15',
+                                        rows      : '15',
+                                        indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+                                        tooltip   : {_'Click to edit ...'},
+                                        wysiwyg   : { controls : { separator04         : { visible : true },
+                                                              insertOrderedList   : { visible : true },
+                                                              insertUnorderedList : { visible : true }
+                                               }
+                                        }, 
+                                       callback : function(value, settings) {
+                                           var json = $.parseJSON(value);
+                                           $('.editProdDescription').html(json.edit);
+                                       }
+                                });
+                                
+                                $('.editProdShort').editable( {link editProdShort! $product->ProductID }, {
+                                        type      : 'textarea',
+                                        onblur    : 'ignore',
+                                        cancel    : {_'Cancel'},
+                                        submit    : 'OK',
+                                        colls     : '6',
+                                        rows      : '7', 
+                                        indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+                                        tooltip   : {_'Click to edit ...'},
+                                        callback : function(value, settings) {
+                                           var json = $.parseJSON(value);
+                                           $('.editProdShort').text(json.edit);
+                                       }
+                                });
+                                
+                                $('.editProdPrice').editable( {link editProdPrice! $product->ProductID, $product->SellingPrice, $product->SALE }, {
+                                        type      : 'text',
+                                        onblur    : 'ignore',
+                                        cancel    : {_'Cancel'},
+                                        submit    : 'OK', 
+                                        indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+                                        tooltip   : {_'Click to edit ...'},
+                                        callback : function(value, settings) {
+                                           var json = $.parseJSON(value);
+                                           $('.editProdPrice').text(json.edit);
+                                       }
+                                });
+                                
+                                $('.editProdAmount').editable( {link editProdAmount! $product->ProductID }, {
+                                        type      : 'text',
+                                        onblur    : 'ignore',
+                                        cancel    : {_'Cancel'},
+                                        submit    : 'OK', 
+                                        colls     : '4',
+                                        rows      : '3',
+                                        indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+                                        tooltip   : {_'Click to edit ...'},
+                                        callback : function(value, settings) {
+                                           var json = $.parseJSON(value);
+                                           $('.editProdAmount').text(json.edit);
+                                       }
+                                });
+           
+                            </script>
+
     {/if}
 {/block}
 
     {block modal}
 {if $user->isInRole('admin')}
 
-    
-    <div id="addPhoto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-camera-retro"></i> Add new photo</h3>
-            </div>
-            <div class="modal-body">
-                <p>{_'Select photo and click Add photo'}</p>
-              <p></p>
-            </div>
-            <div class="modal-footer">
+
+                            <div id="addPhoto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3 id="myModalLabel"><i class="icon-camera-retro"></i> Add new photo</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{_'Select photo and click Add photo'}</p>
+                                    <p></p>
+                                </div>
+                                <div class="modal-footer">
                 {control addPhotoForm}
-              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            </div>
-    </div>
-    
-    <div id="editDesc" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-pencil"></i> Edit description</h3>
-            </div>
-            <div class="modal-body">
-                <p>{_'Edit your description and click Save desccription.'}</p>
-              <p></p>
-            </div>
-            <div class="modal-footer">
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                </div>
+                            </div>
+
+                            <div id="editDesc" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3 id="myModalLabel"><i class="icon-pencil"></i> Edit description</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{_'Edit your description and click Save desccription.'}</p>
+                                    <p></p>
+                                </div>
+                                <div class="modal-footer">
                 {control editDescForm}
-              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
-            </div>
-    </div>
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+                                </div>
+                            </div>
 
-    <div id="editPrice" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-money"></i> Edit price</h3>
-            </div>
-            <div class="modal-body">
-                <p>{_'Edit your description and click Save desccription.'}</p>
-              <p></p>
-            </div>
-            <div class="modal-footer">
+                            <div id="editPrice" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3 id="myModalLabel"><i class="icon-money"></i> Edit price</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{_'Edit your description and click Save desccription.'}</p>
+                                    <p></p>
+                                </div>
+                                <div class="modal-footer">
                 {control editPriceForm}
-              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
-            </div>
-    </div>
-    
-    <div id="editPieces" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-truck"></i> Edit pieces in stock</h3>
-            </div>
-            <div class="modal-body">
-                <p>{_'Edit your description and click Save desccription.'}</p>
-              <p></p>
-            </div>
-            <div class="modal-footer">
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+                                </div>
+                            </div>
+
+                            <div id="editPieces" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3 id="myModalLabel"><i class="icon-truck"></i> Edit pieces in stock</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{_'Edit your description and click Save desccription.'}</p>
+                                    <p></p>
+                                </div>
+                                <div class="modal-footer">
                 {control editPiecesForm}
-              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
-            </div>
-    </div>
-    
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+                                </div>
+                            </div>
+
     {*control editControl:parameters $product->ProductID*}
-    <div id="editParam" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-list"></i> Edit Specification</h3>
-            </div>
-        <div class="modal-body"> </div>
-            <div class="modal-footer">
-                
-                  <div class="tabbable">
-                
-            <ul class="nav nav-tabs">
+                            <div id="editParam" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3 id="myModalLabel"><i class="icon-list"></i> Edit Specification</h3>
+                                </div>
+                                <div class="modal-body"> </div>
+                                <div class="modal-footer">
+
+                                    <div class="tabbable">
+
+                                        <ul class="nav nav-tabs">
                {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> Edit Specs</a></li> {/if}
-                <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> Add Spec</a>
+                                            <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> Add Spec</a>
                {if $parameter} <li><a href="#deleteParams" data-toggle="tab"><i class="icon-trash"></i> Delete Spec</a></li> {/if}
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane {if $parameter}active{/if}" id="editParams">
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane {if $parameter}active{/if}" id="editParams">
                   {if $parameter} 
-                        <p>{_'Here you can edit all Spec assigned to this product. Edit values and then click Save Spec bellow.'}</p>
+                                                <p>{_'Here you can edit all Spec assigned to this product. Edit values and then click Save Spec bellow.'}</p>
                         {control editParamForm} {/if}
 
-                </div>
-                
-                <div class="tab-pane {if !$parameter}active{/if}" id="addParam">
-                    <p>{_'Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow.'}</p>
+                                            </div>
+
+                                            <div class="tab-pane {if !$parameter}active{/if}" id="addParam">
+                                                <p>{_'Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow.'}</p>
                           {control addParamForm}
-                </div>
+                                            </div>
                 {if $parameter}
-                <div class="tab-pane" id="deleteParams">
-                    <p>{_'Check all specification you want to delete and then click Delete specs bellow.'}</p>
+                                            <div class="tab-pane" id="deleteParams">
+                                                <p>{_'Check all specification you want to delete and then click Delete specs bellow.'}</p>
                               {control deleteParamForm}
-                </div>
+                                            </div>
                 {/if}
-            </div>
-                  
-             </div>
-                
-                
-              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
-            </div>
-   
-    </div>
-    
-    <div id="editDocs" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-list"></i> Edit Docs and Files</h3>
-            </div>
-            <div class="modal-body">
-                
-                
-             </div>
-            <div class="modal-footer">
-                <div class="modal-body tabbable">
-                
-            <ul class="nav nav-tabs">
+                                        </div>
+
+                                    </div>
+
+
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+                                </div>
+
+                            </div>
+
+                            <div id="editDocs" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3 id="myModalLabel"><i class="icon-list"></i> Edit Docs and Files</h3>
+                                </div>
+                                <div class="modal-body">
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="modal-body tabbable">
+
+                                        <ul class="nav nav-tabs">
                {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> Edit Specs</a></li> {/if}
-                <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> Add Spec</a>
+                                            <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> Add Spec</a>
                {if $parameter} <li><a href="#deleteParams" data-toggle="tab"><i class="icon-trash"></i> Delete Spec</a></li> {/if}
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane {if $parameter}active{/if}" id="editParams">
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane {if $parameter}active{/if}" id="editParams">
                   {if $parameter} 
-                        <p>{_'Here you can edit all Spec assigned to this product. Edit values and then click Save Spec bellow.'}</p>
+                                                <p>{_'Here you can edit all Spec assigned to this product. Edit values and then click Save Spec bellow.'}</p>
                         {control editParamForm} {/if}
 
-                </div>
-                
-                <div class="tab-pane {if !$parameter}active{/if}" id="addParam">
-                    <p>{_'Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow.'}</p>
+                                            </div>
+
+                                            <div class="tab-pane {if !$parameter}active{/if}" id="addParam">
+                                                <p>{_'Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow.'}</p>
                           {control addDocumentationForm}
-                </div>
+                                            </div>
                 {if $parameter}
-                <div class="tab-pane" id="deleteParams">
-                    <p>{_'Check all specification you want to delete and then click Delete specs bellow.'}</p>
+                                            <div class="tab-pane" id="deleteParams">
+                                                <p>{_'Check all specification you want to delete and then click Delete specs bellow.'}</p>
                               {control deleteParamForm}
-                </div>
+                                            </div>
                 {/if}
-            </div>
-                  
-             </div>
-                
-              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
-            </div>
-   
-    </div>
-    
+                                        </div>
+
+                                    </div>
+
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+                                </div>
+
+                            </div>
+
     {/if}
 
 
