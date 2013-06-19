@@ -368,7 +368,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
     
-    public function handleEditTitle($catid) {
+    public function handleCatTitle($catid) {
         
          if($this->isAjax())
         {
@@ -377,14 +377,14 @@ class ProductPresenter extends BasePresenter {
             $this->categoryModel->updateCategory($catid, $content);
             
         }
-        if(!$this->isControlInvalid('editTitle'))
+        if(!$this->isControlInvalid('CatTitle'))
         {
             
             
             $this->payload->edit = $content;
             $this->sendPayload();
             $this->invalidateControl('menu');        
-            $this->invalidateControl('editTitle');
+            $this->invalidateControl('CatTitle');
             
         }
         else {
@@ -393,7 +393,7 @@ class ProductPresenter extends BasePresenter {
         
     }
     
-    public function handleEditProdTitle($prodid) {
+    public function handleProdTitle($prodid) {
         
          if($this->isAjax())
         {            
@@ -401,13 +401,13 @@ class ProductPresenter extends BasePresenter {
             $this->productModel->updateProduct($prodid, 'ProductName', $content);
             
         }
-        if(!$this->isControlInvalid('editProdTitle'))
+        if(!$this->isControlInvalid('ProdTitle'))
         {
             
             
             $this->payload->edit = $content;
             $this->sendPayload();
-            $this->invalidateControl('editProdTitle');
+            $this->invalidateControl('ProdTitle');
             
         }
         else {
@@ -416,7 +416,7 @@ class ProductPresenter extends BasePresenter {
         
     }
     
-    public function handleEditProdDescription($prodid) {
+    public function handleProdDescription($prodid) {
         
          if($this->isAjax())
         {            
@@ -424,12 +424,12 @@ class ProductPresenter extends BasePresenter {
             $this->productModel->updateProduct($prodid, 'ProductDescription', $content);
             
         }
-        if(!$this->isControlInvalid('editProdDescription'))
+        if(!$this->isControlInvalid('ProdDescription'))
         {
 
             $this->payload->edit = $content;
             $this->sendPayload();
-            $this->invalidateControl('editProdDescription');
+            $this->invalidateControl('ProdDescription');
             
         }
         else {
@@ -438,7 +438,7 @@ class ProductPresenter extends BasePresenter {
         
     }
     
-    public function handleEditProdShort($prodid) {
+    public function handleProdShort($prodid) {
         
          if($this->isAjax())
         {            
@@ -446,12 +446,12 @@ class ProductPresenter extends BasePresenter {
             $this->productModel->updateProduct($prodid, 'ProductShort', $content);
             
         }
-        if(!$this->isControlInvalid('editProdShort'))
+        if(!$this->isControlInvalid('ProdShort'))
         {
 
             $this->payload->edit = $content;
             $this->sendPayload();
-            $this->invalidateControl('editProdShort');
+            $this->invalidateControl('ProdShort');
             
         }
         else {
@@ -460,7 +460,7 @@ class ProductPresenter extends BasePresenter {
         
     }
     
-    public function handleEditProdPrice($prodid, $sellingprice, $sale) {
+    public function handleProdPrice($prodid, $sellingprice, $sale) {
         
          if($this->isAjax())
         {            
@@ -475,12 +475,12 @@ class ProductPresenter extends BasePresenter {
             }
             
         }
-        if(!$this->isControlInvalid('editProdPrice'))
+        if(!$this->isControlInvalid('ProdPrice'))
         {
            
             $this->payload->edit = $content;
             $this->sendPayload();
-            $this->invalidateControl('editProdPrice');
+            $this->invalidateControl('ProdPrice');
             
         }
         else {
@@ -490,7 +490,7 @@ class ProductPresenter extends BasePresenter {
     }
     
     
-    public function handleEditProdAmount($prodid) {
+    public function handleProdAmount($prodid) {
         
          if($this->isAjax())
         {            
@@ -499,12 +499,12 @@ class ProductPresenter extends BasePresenter {
             $this->productModel->updateProduct($prodid, 'PiecesAvailable', $content);
  
         }
-        if(!$this->isControlInvalid('editProdAmount'))
+        if(!$this->isControlInvalid('ProdAmount'))
         {
            
             $this->payload->edit = $content;
             $this->sendPayload();
-            $this->invalidateControl('editProdAmount');
+            $this->invalidateControl('ProdAmount');
             
         }
         else {
@@ -515,7 +515,7 @@ class ProductPresenter extends BasePresenter {
     
     
     
-    public function handleEditDescription($catid) {
+    public function handleCatDescription($catid) {
        
          if($this->isAjax())
         {            
@@ -523,12 +523,12 @@ class ProductPresenter extends BasePresenter {
             $this->categoryModel->updateCategoryDesc($catid, $content);
            
         }
-        if(!$this->isControlInvalid('editDescription'))
+        if(!$this->isControlInvalid('CatDescription'))
         {           
             $this->payload->edit = $content; //zaslání nové hodnoty do šablony
             $this->sendPayload();
             $this->invalidateControl('menu');       
-            $this->invalidateControl('editDescription'); //invalidace snipetu
+            $this->invalidateControl('CatDescription'); //invalidace snipetu
            
         }
         else {

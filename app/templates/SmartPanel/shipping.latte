@@ -41,10 +41,10 @@
 
                             <tr class="info">
                                 <td>{$iterator->counter}</td>
-                                <td>{$deliver->DeliveryName}</td>
-                                <td>{$deliver->DeliveryDescription}</td>
-                                <td>{$deliver->DeliveryPrice},-</td>
-                                <td>{$deliver->FreeFromPrice ? $deliver->FreeFromPrice : '-'},-</td>
+                                <td class="DelName" n:snippet="DelName">{$deliver->DeliveryName}</td>
+                                <td class="DelDescription" n:snippet="DelDescription">{$deliver->DeliveryDescription}</td>
+                                <td class="DelPrice" n:snippet="DelPrice">{$deliver->DeliveryPrice},-</td>
+                                <td class="DelFF" n:snippet="DelFF">{$deliver->FreeFromPrice ? $deliver->FreeFromPrice : '-'},-</td>
                                 <td>
                                 
                                 <a href="#edit{$deliver->DeliveryID}" data-toggel="modal" data-target="#edit{$deliver->DeliveryID}" id="edit{$deliver->DeliveryID}Button">
@@ -117,7 +117,58 @@
                 $('.upl').button('toggle');
                 $('.upl').button('loading') });
         });
-      
+   
+   {if $user->isInRole('admin')}
+        {foreach $delivery as $deliver}       
+            $('.DelName').editable( {link DelName! $deliver->DeliveryID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelName').text(json.edit);
+               }
+           });
+
+           $('.DelDescription').editable( {link DelDescription! $deliver->DeliveryID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelDescription').text(json.edit);
+               }
+           });
+
+           $('.DelPrice').editable( {link DelPrice! $deliver->DeliveryID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelPrice').text(json.edit);
+               }
+           });
+
+           $('.DelFF').editable( {link DelFF! $deliver->DeliveryID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelFF').text(json.edit);
+               }
+           });      
+        {/foreach}
+    {/if}
 </script>
                              
                              
