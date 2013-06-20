@@ -40,7 +40,7 @@
                         {if $photo != 1}
                             <img src="{$basePath}/images/blog/{$post->BlogID}/300-{$photo}" alt="{$post->BlogName}"/>
                         {/if}
-                            <p class="text-justified" n:block="metadesc">{!$post->BlogContent}</p>
+                            <p class="text-justified BlogContent" n:snippet="BlogContent" n:block="metadesc">{!$post->BlogContent}</p>
 
                     </div>
 
@@ -71,10 +71,8 @@
                  </div>
             </div>
     
-
-    {else}
-    
-    <p class="text-justified">{!$post->BlogContent}</p>
+    {else}        
+        <p class="text-justified">{!$post->BlogContent}</p>            
     {/if}
     
 </div> <!-- class="span10" -->
