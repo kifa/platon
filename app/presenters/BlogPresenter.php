@@ -161,6 +161,48 @@ class BlogPresenter extends BasePresenter {
         }
     }
     
+    public function handleBlogName($blogid) {
+        
+         if($this->isAjax())
+        {            
+            $content = $_POST['value'];
+            $this->blog->updatePost($blogid, 'BlogName', $content);            
+        }
+        if(!$this->isControlInvalid('BlogName'))
+        {                        
+            $this->payload->edit = $content;
+            $this->sendPayload();
+            $this->invalidateControl('BlogName');
+            
+        }
+        else {
+         $this->redirect('this');
+        }
+        
+    }
+
+    public function handleBlogContent($blogid) {
+        
+         if($this->isAjax())
+        {            
+            $content = $_POST['value'];
+            $this->blog->updatePost($blogid, 'BlogContent', $content);
+            
+        }
+        if(!$this->isControlInvalid('BlogContent'))
+        {
+
+            $this->payload->edit = $content;
+            $this->sendPayload();
+            $this->invalidateControl('BlogContent');
+            
+        }
+        else {
+         $this->redirect('this');
+        }
+        
+    }
+    
     protected function createComponentEditDescForm() {
         if ($this->getUser()->isInRole('admin')) {
 

@@ -3,7 +3,7 @@
 {/block}
 {block pageheader}
 <div class="page-header">
-    <h1 n:block="title">{$post->BlogName} <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>
+    <h1 n:block="title"><span class="BlogName" n:snippet="BlogName">{$post->BlogName}</span> <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>
             {if $user->isInRole('admin')}
 <div class="row">
     <div class="span10">
@@ -34,12 +34,13 @@
                     <li><a href="#rew" data-toggle="tab"><i class="icon-check"></i> {_'Review'}</a></li>
                    
                 </ul>
+                
                 <div class="tab-content">
                     <div class="tab-pane active" id="allinfo">
                         {if $photo != 1}
                             <img src="{$basePath}/images/blog/{$post->BlogID}/300-{$photo}" alt="{$post->BlogName}"/>
                         {/if}
-                        <p class="text-justified" n:block="metadesc">{!$post->BlogContent}</p>
+                            <p class="text-justified" n:block="metadesc">{!$post->BlogContent}</p>
 
                     </div>
 
@@ -172,7 +173,38 @@ function() {
 $('#editDocs').modal('hide');
 });
 
+    $('.BlogName').editable( {link BlogName! $post->BlogID }, {
+            type      : 'text',
+            cancel    : {_'Cancel'},
+            submit    : 'OK',
+            indicator : '<i class="icon-spinner icon-spin"></i>',
+            tooltip   : 'Click to edit...',
+            callback : function(value, settings) {
+               var json = $.parseJSON(value);
+               $('.BlogName').text(json.edit);
+           }
+    });
 
+    $('.BlogContent').editable( {link BlogContent! $post->BlogID }, {
+            type      : 'wysiwyg',
+            onblur    : 'ignore',
+            cancel    : {_'Cancel'},
+            submit    : 'OK',
+            cssclass  : 'span10',
+            colls     : '15',
+            rows      : '15',
+            indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+            tooltip   : {_'Click to edit ...'},
+            wysiwyg   : { controls : { separator04         : { visible : true },
+                           insertOrderedList   : { visible : true },
+                           insertUnorderedList : { visible : true }
+                        }
+                        }, 
+            callback : function(value, settings) {
+                var json = $.parseJSON(value);
+                $('.BlogContent').html(json.edit);
+            }
+    });
 });
 
 </script>
