@@ -8,7 +8,7 @@
             {if $user->isInRole('admin')}
 <div class="row">
     <div class="span10">
-        <a href="#addPhoto" class="btn" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
+
         <div class="btn-group">
                     <a class="btn">{_'Choose Category'}</a>
                     <button class="btn dropdown-toggle" data-toggle="dropdown">
@@ -42,8 +42,6 @@
         </div>
         
         <div class="btn-group">
-           
-            <a href="#editPrice" class="btn" data-toggel="modal" data-target="#editPrice" id="editPriceButton" ><i class="icon-large icon-money"></i> {_"Edit Price"}</a> |
             <a href="#editParam" class="btn" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Specs"}</a> |
             <a href="#editDocs" class="btn" data-toggel="modal" data-target="#editDocs" id="editDocsButton"><i class="icon-large icon-download"></i> {_"Edit Documents"}</a> |
         </div>
@@ -183,7 +181,8 @@
                                                 </a>
                                                 {if $user->isInRole('admin')}
                                                    {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> Set as COVER image</a> {/if}
-                                                <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> Delete image</a>
+                                                {if !$photo->CoverPhoto}<a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> Delete image</a>{/if}
+                                                {if $photo->CoverPhoto}To delete, set another cover photo.{/if}
                                                   {/if}
                                             </li>
 
@@ -289,34 +288,7 @@
                                     $('.upl-del').click(function() { 
                                         $('.upl-del').button('toggle');
                                         $('.upl-del').button('loading') });
-                                  $('#addPhotoButton').toggle(function(){
-                                      $('#addPhoto').modal('show');
-                                    },
-                                    function() {
-                                        $('#addPhoto').modal('hide');
-                                    });
-            
-                                  $('#editDescButton').toggle(function(){
-                                      $('#editDesc').modal('show');
-                                    },
-                                    function() {
-                                        $('#editDesc').modal('hide');
-                                    });
-            
-                                  $('#editPriceButton').toggle(function(){
-                                      $('#editPrice').modal('show');
-                                    },
-                                    function() {
-                                        $('#editPrice').modal('hide');
-                                    });
-        
-                                 $('#editPiecesButton').toggle(function(){
-                                      $('#editPieces').modal('show');
-                                    },
-                                    function() {
-                                        $('#editPieces').modal('hide');
-                                    });
-            
+                                 
                                   $('#editParamButton').toggle(function(){
                                       $('#editParam').modal('show');
                                     },
