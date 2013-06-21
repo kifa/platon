@@ -104,13 +104,20 @@
             
               {if $user->isInRole('admin')}
               <button class="btn" id="editPriceOff" class="hide" style="display: none;">{_'Finish Editing Price'}</button>
-              <button class="btn" id="editPrice">{_'Edit Price'}</button>    
+              <button class="btn" id="editPrice">{_'Edit Price'}</button> 
               {/if}
             <div n:snippet="prodPrice">
               {if $user->isInRole('admin')}
                 
                 <div id="editProdPrice" class="hide span3">
-                
+               <p>{_'Discount'}:</p>
+                    <div class="btn-group">
+                    
+                    <a href="{plink setSale! $product->ProductID, 5}" class="ajax btn discountbtn">5%</a>
+                    <a href="{plink setSale! $product->ProductID, 10}" class="ajax btn discountbtn">10%</a>
+                    <a href="{plink setSale! $product->ProductID, 15}" class="ajax btn discountbtn">15%</a>
+                    <hr>   
+                    </div>
                 {control editPriceForm}
                 </div>
                 {/if}
@@ -427,6 +434,10 @@
                                     $(this).attr('class', 'btn btn-primary disabled');
                                     $('#editPriceOff').hide();
                                     $('#editPrice').show();
+                                });
+                                
+                                $('.discountbtn').click(function(){
+                                    $(this).attr('class', 'btn btn-primary disabled');
                                 });
                             </script>
 
