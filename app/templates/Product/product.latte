@@ -102,11 +102,12 @@
 
         <div class=".span4 alert alert-info">
             
-             
-            <div n:snippet="prodPrice">
-               {if $user->isInRole('admin')}
+              {if $user->isInRole('admin')}
               <button class="btn" id="editPriceOff" class="hide" style="display: none;">{_'Finish Editing Price'}</button>
               <button class="btn" id="editPrice">{_'Edit Price'}</button>    
+              {/if}
+            <div n:snippet="prodPrice">
+              {if $user->isInRole('admin')}
                 
                 <div id="editProdPrice" class="hide span3">
                 
@@ -424,6 +425,8 @@
                                 
                                 $('#priceSave').click(function(){
                                     $(this).attr('class', 'btn btn-primary disabled');
+                                    $('#editPriceOff').hide();
+                                    $('#editPrice').show();
                                 });
                             </script>
 
