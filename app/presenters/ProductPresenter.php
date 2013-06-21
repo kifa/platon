@@ -474,18 +474,20 @@ class ProductPresenter extends BasePresenter {
             $this->productModel->updatePrice($prodid, $sellingprice, $sale); 
             }
             
+            
         }
-        if(!$this->isControlInvalid('editProdPrice'))
+        if(!$this->isControlInvalid('prodPrice'))
         {
-           
+            
             $this->payload->edit = $content;
             $this->sendPayload();
-            $this->invalidateControl('editProdPrice');
+            
             
         }
         else {
          $this->redirect('this');
         }
+        
         
     }
     
@@ -525,7 +527,17 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    
+    public function handleSetProductProducer($id, $producerid) {
+         if($this->isAjax())
+        {            
+            $this->productModel->updateProduct($id, 'ProducerID', $producerid);
+            $this->invalidateControl('productProducer');
+            
+        }
+        else {
+         $this->redirect('this');
+        }
+    }
 
     public function handleEditDescription($catid) {
        
@@ -728,7 +740,7 @@ class ProductPresenter extends BasePresenter {
     public function createComponentAddPhotoForm() {
         if ($this->getUser()->isInRole('admin')) {
             $addPhoto = new Nette\Application\UI\Form;
-            $addPhoto->setRenderer(new BootstrapRenderer);
+           // $addPhoto->setRenderer(new BootstrapRenderer);
             $addPhoto->setTranslator($this->translator);
             $addPhoto->addHidden('name', 'name');
             $addPhoto->addHidden('albumID', $this->row['PhotoAlbumID']);
@@ -832,68 +844,6 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    protected function createComponentEditDescForm() {
-        if ($this->getUser()->isInRole('admin')) {
-
-            $editForm = new Nette\Application\UI\Form;
-            $editForm->setTranslator($this->translator);
-            $editForm->setRenderer(new BootstrapRenderer);
-            foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
-                $categories[$id] = $category->CategoryName;
-            }
-
-            foreach ($this->productModel->loadProducers() as $id => $name) {
-                $producers[$id] = $name->ProducerName;
-            }
-
-            $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
-
-            $editForm->addText('name', 'Name:')
-                    ->setDefaultValue($this->row['ProductName'])
-                    ->setRequired();
-
-            $editForm->addSelect('category', 'Select Category:', $categories)
-                    ->setDefaultValue($this->row['CategoryID']);
-
-            $editForm->addTextArea('short', 'Impress:', 10)
-                    ->setDefaultValue($this->row['ProductDescription'])
-                    ->setRequired();
-
-            $editForm->addTextArea('text', 'Description:', 150, 150)
-                    ->setDefaultValue($this->row['ProductDescription'])
-                    ->setRequired()
-                    ->setAttribute('class', 'mceEditor');
-
-
-            $editForm->addSelect('producer', 'Producer', $producers)
-                    ->setPrompt($prompt)
-                    ->setDefaultValue($this->row['ProducerID']);
-
-            $editForm->addHidden('id', $this->row['ProductID']);
-
-            $editForm->addSubmit('edit', 'Save description')
-                    ->setAttribute('class', 'upl btn btn-primary')
-                    ->setAttribute('data-loading-text', 'Saving...');
-            $editForm->onSubmit('tinyMCE.triggerSave()');
-            $editForm->onSuccess[] = $this->editDescFormSubmitted;
-            return $editForm;
-        }
-    }
-
-    public function editDescFormSubmitted($form) {
-        if ($this->getUser()->isInRole('admin')) {
-
-            $this->productModel->updateProduct($form->values->id, 'ProductName', $form->values->name);
-            $this->productModel->updateProduct($form->values->id, 'ProductDescription', $form->values->text);
-            $this->productModel->updateProduct($form->values->id, 'ProductShort', $form->values->short);
-            if ($form->values->producer != NULL) {
-                $this->productModel->updateProduct($form->values->id, 'ProducerID', $form->values->producer);
-            }
-            $this->productModel->updateProduct($form->values->id, 'CategoryID', $form->values->category);
-            $this->redirect('this');
-        }
-    }
-
     protected function createComponentEditPriceForm() {
         if ($this->getUser()->isInRole('admin')) {
 
@@ -921,34 +871,6 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
 
             $this->productModel->updatePrice($form->values->id, $form->values->price, $form->values->discount);
-
-            $this->redirect('this');
-        }
-    }
-
-    protected function createComponentEditPiecesForm() {
-        if ($this->getUser()->isInRole('admin')) {
-
-            $editForm = new Nette\Application\UI\Form;
-            $editForm->setTranslator($this->translator);
-            $editForm->setRenderer(new BootstrapRenderer);
-            $editForm->addText('pieces', 'Pieces:')
-                    ->setDefaultValue($this->row['PiecesAvailable'])
-                    ->setRequired()
-                    ->addRule(FORM::INTEGER, 'This has to be a number.');
-            $editForm->addHidden('id', $this->row['ProductID']);
-            $editForm->addSubmit('edit', 'Save it')
-                    ->setAttribute('class', 'upl btn btn-primary')
-                    ->setAttribute('data-loading-text', 'Saving...');
-            $editForm->onSuccess[] = $this->editPiecesFormSubmitted;
-            return $editForm;
-        }
-    }
-
-    public function editPiecesFormSubmitted($form) {
-        if ($this->getUser()->isInRole('admin')) {
-
-            $this->productModel->updateProduct($form->values->id, 'PiecesAvailable', $form->values->pieces);
 
             $this->redirect('this');
         }
@@ -1152,12 +1074,17 @@ class ProductPresenter extends BasePresenter {
             if ($this->edit->param != NULL) {
                 $this->template->attr = 1;
                 $this->edit->param = NULL;
+                
+                
+                
             } else {
                 $this->template->attr = 0;
             }
+            
+            $this->template->categories = $this->categoryModel->loadCategoryList();
+                $this->template->producers = $this->productModel->loadProducers();
         }
-
-        $this->template->categories = $this->categoryModel->loadCategoryList();
+        
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->photo = $this->productModel->loadCoverPhoto($id);
         $this->template->album = $this->productModel->loadPhotoAlbum($id);

@@ -3,7 +3,7 @@
 {/block}
 {block pageheader}
 <div class="page-header">
-    <h1 n:block="title"><span class="ProdTitle" n:snippet="ProdTitle">{$product->ProductName}</span>
+    <h1 n:block="title"><span class="prodTitle" n:snippet="prodTitle">{$product->ProductName}</span>
             <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>
             {if $user->isInRole('admin')}
 <div class="row">
@@ -26,9 +26,24 @@
         </div>
         
         <div class="btn-group">
-            <a href="#editDesc" class="btn" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
+                    <a class="btn">{_'Choose Producer'}</a>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" n:snippet="productProducer">
+                        {foreach $producers as $producerID => $prod}
+                
+                        <li class="productproducer"><a href="{plink setProductProducer!  $product->ProductID, $producerID }" class="ajax">
+                        {if $product->ProducerID == $producerID}<i class="icon-ok-sign"></i>{/if}
+                        {$prod->ProducerName}</a></li> 
+                        {/foreach}
+                   
+                    </ul>
+        </div>
+        
+        <div class="btn-group">
+           
             <a href="#editPrice" class="btn" data-toggel="modal" data-target="#editPrice" id="editPriceButton" ><i class="icon-large icon-money"></i> {_"Edit Price"}</a> |
-            <a href="#editPieces" class="btn" data-toggel="modal" data-target="#editPieces" id="editPiecesButton"><i class="icon-large icon-truck"></i> {_"Edit Pieces"}</a> |
             <a href="#editParam" class="btn" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Specs"}</a> |
             <a href="#editDocs" class="btn" data-toggel="modal" data-target="#editDocs" id="editDocsButton"><i class="icon-large icon-download"></i> {_"Edit Documents"}</a> |
         </div>
@@ -80,7 +95,7 @@
             </div>
         </div>
 
-        <div class=".span4 alert alert-info">
+        <div class=".span4 alert alert-info" n:snippet="prodPrice">
             {if $product->SALE > 1}
             <p class=".span2 alert alert-warning" n:snippet="prodSale">
                 <i class="icon-money icon-large"></i>
@@ -90,7 +105,7 @@
             </p>
             {/if}
 
-            <h2 class="text-info span3"><span class="prodPrice" n:snippet="prodPrice">{$product->FinalPrice}</span>,- </h2>
+            <h2 class="text-info span3"><span class="prodPrice" >{$product->FinalPrice}</span>,- </h2>
             <a href="{plink Order:cart $product->ProductID, "1"}" class="span2 btn btn-primary">
                 <i class="icon-shopping-cart"></i> {_'Buy'}</a>
 
@@ -128,6 +143,9 @@
 
 
                                         <ul class="thumbnails">
+                                            {if $user->isInRole('admin')}
+                                            <div class="span9">{control addPhotoForm}</div>
+                                            {/if}
                                 {foreach $album as $id => $photo}
                                             <li class="{if $photo->CoverPhoto}span3 {else} span3 {/if}">
                                                 <a data-toggle="lightbox" href="#photo{$id}" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
@@ -373,37 +391,6 @@
     {block modal}
 {if $user->isInRole('admin')}
 
-
-                            <div id="addPhoto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3 id="myModalLabel"><i class="icon-camera-retro"></i> Add new photo</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <p>{_'Select photo and click Add photo'}</p>
-                                    <p></p>
-                                </div>
-                                <div class="modal-footer">
-                {control addPhotoForm}
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                </div>
-                            </div>
-
-                            <div id="editDesc" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3 id="myModalLabel"><i class="icon-pencil"></i> Edit description</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <p>{_'Edit your description and click Save desccription.'}</p>
-                                    <p></p>
-                                </div>
-                                <div class="modal-footer">
-                {control editDescForm}
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
-                                </div>
-                            </div>
-
                             <div id="editPrice" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -419,20 +406,7 @@
                                 </div>
                             </div>
 
-                            <div id="editPieces" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3 id="myModalLabel"><i class="icon-truck"></i> Edit pieces in stock</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <p>{_'Edit your description and click Save desccription.'}</p>
-                                    <p></p>
-                                </div>
-                                <div class="modal-footer">
-                {control editPiecesForm}
-                                    <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
-                                </div>
-                            </div>
+                           
 
     {*control editControl:parameters $product->ProductID*}
                             <div id="editParam" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
