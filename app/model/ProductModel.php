@@ -156,19 +156,27 @@ class ProductModel extends Repository {
     }
 
 
-    public function updatePrice($id, $price, $discount){
+    public function updatePrice($id, $price, $sale){
         
-            $final = $price - $discount;
+            $final = $price - $sale;
         
-            $insert = array(
+            $update = array(
                 'SellingPrice' => $price,
                 'FinalPrice' => $final,
-                'SALE' => $discount
+                'SALE' => $sale
                 );        
-        return $this->getTable('Price')->where('ProductID',$id)->update($insert);
+        return $this->getTable('Price')->where('ProductID',$id)->update($update);
     }
 
-    public function decreaseProduct($id, $amnt) {
+    public function updateSale($prodid,$sale){
+        $update = array(
+            'SALE' => $sale
+        );
+                
+        return $this->getTable('Price')->where('ProductID',$prodid)->update($update);
+    }
+
+        public function decreaseProduct($id, $amnt) {
         $cur = $this->getTable('Product')->where('ProductID',$id)->fetch()->PiecesAvailable;
         $cur = $cur - $amnt;
         $update = array(
