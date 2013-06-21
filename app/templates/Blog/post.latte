@@ -72,7 +72,7 @@
             </div>
     
     {else}        
-        <p class="text-justified">{!$post->BlogContent}</p>            
+        <p class="text-justified BlogContentSt" n:snippet="BlogContentSt">{!$post->BlogContent}</p>            
     {/if}
     
 </div> <!-- class="span10" -->
@@ -201,6 +201,27 @@ $('#editDocs').modal('hide');
             callback : function(value, settings) {
                 var json = $.parseJSON(value);
                 $('.BlogContent').html(json.edit);
+            }
+    });
+    
+    $('.BlogContentSt').editable( {link BlogContent! $post->BlogID }, {
+            type      : 'wysiwyg',
+            onblur    : 'ignore',
+            cancel    : {_'Cancel'},
+            submit    : 'OK',
+            cssclass  : 'span10',
+            colls     : '15',
+            rows      : '15',
+            indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+            tooltip   : {_'Click to edit ...'},
+            wysiwyg   : { controls : { separator04         : { visible : true },
+                           insertOrderedList   : { visible : true },
+                           insertUnorderedList : { visible : true }
+                        }
+                        }, 
+            callback : function(value, settings) {
+                var json = $.parseJSON(value);
+                $('.BlogContentSt').html(json.edit);
             }
     });
 });
