@@ -168,10 +168,30 @@ class ProductModel extends Repository {
         return $this->getTable('Price')->where('ProductID',$id)->update($update);
     }
 
-    public function updateSale($prodid,$sale){
-        $update = array(
-            'SALE' => $sale
-        );
+    public function updateSale($prodid,$sale,$type=NULL){
+        if($type==NULL){
+            $productprice = $this->getTable('Price')->select('SellingPrice')->where('ProductID',$prodid)->fetch();            
+            
+            $finalprice = $productprice['SellingPrice'] - $sale;
+                        
+            $update = array(
+                'SALE' => $sale,
+                'FinalPrice' => $finalprice
+            );
+        }
+        elseif ($type=='percent') {
+            $productprice = $this->getTable('Price')->select('SellingPrice')->where('ProductID',$prodid)->fetch();            
+            
+            $sale = $sale/100;
+            
+            $abssale = $productprice['SellingPrice'] * $sale;
+            $finalprice = $productprice['SellingPrice'] - $abssale;
+            
+            $update = array(
+                'SALE' => $abssale,
+                'FinalPrice' => $finalprice                    
+            );            
+    }
                 
         return $this->getTable('Price')->where('ProductID',$prodid)->update($update);
     }
