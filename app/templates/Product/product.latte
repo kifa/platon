@@ -10,6 +10,22 @@
     <div class="span10">
         <a href="#addPhoto" class="btn" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
         <div class="btn-group">
+                    <a class="btn">{_'Choose Category'}</a>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" n:snippet="productCategory">
+                        {foreach $categories as $catID => $cat}
+                
+                        <li class="productcat"><a href="{plink setProductCategory!  $product->ProductID, $catID }" class="ajax">
+                        {if $category->HigherCategoryID == $catID}<i class="icon-ok-sign"></i>{/if}
+                        {$cat->CategoryName}</a></li> 
+                        {/foreach}
+                   
+                    </ul>
+        </div>
+        
+        <div class="btn-group">
             <a href="#editDesc" class="btn" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
             <a href="#editPrice" class="btn" data-toggel="modal" data-target="#editPrice" id="editPriceButton" ><i class="icon-large icon-money"></i> {_"Edit Price"}</a> |
             <a href="#editPieces" class="btn" data-toggel="modal" data-target="#editPieces" id="editPiecesButton"><i class="icon-large icon-truck"></i> {_"Edit Pieces"}</a> |
@@ -43,7 +59,7 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="info">
 
-                    <p n:block="metadesc" class="editProdShort" n:snippet="editProdShort">{!$product->ProductShort|striptags|truncate:180}</p>
+                    <p n:block="metadesc" class="prodShort" n:snippet="prodShort">{!$product->ProductShort|striptags|truncate:180}</p>
 
                 </div>
                 <div class="tab-pane" id="spec">
@@ -66,7 +82,7 @@
 
         <div class=".span4 alert alert-info">
             {if $product->SALE > 1}
-            <p class=".span2 alert alert-warning" n:snippet="editProdSale">
+            <p class=".span2 alert alert-warning" n:snippet="prodSale">
                 <i class="icon-money icon-large"></i>
 
                 <span class="badge badge-important">- {$product->SALE},- / {var $procent = 100 * ($product->SALE / $product->SellingPrice)} {$procent|number}%</span>
@@ -74,7 +90,7 @@
             </p>
             {/if}
 
-            <h2 class="text-info span3"><span class="editProdPrice" n:snippet="editProdPrice">{$product->FinalPrice}</span>,- </h2>
+            <h2 class="text-info span3"><span class="prodPrice" n:snippet="prodPrice">{$product->FinalPrice}</span>,- </h2>
             <a href="{plink Order:cart $product->ProductID, "1"}" class="span2 btn btn-primary">
                 <i class="icon-shopping-cart"></i> {_'Buy'}</a>
 
@@ -88,7 +104,7 @@
                     {elseif $product->PiecesAvailable = 0 }
                             <span class="badge">
                         {/if}
-                               <span class="editProdAmount span1" n:snippet="editProdAmount">{$product->PiecesAvailable}</span></span>
+                               <span class="prodAmount span1" n:snippet="prodAmount">{$product->PiecesAvailable}</span></span>
                             </p>
 
                             </div>
@@ -105,7 +121,7 @@
                                 </ul>
                                 <div class="tab-content">
                                      <div class="tab-pane active" id="allinfo" >
-                                        <div class="editProdDescription" n:snippet="editProdDescription">{!$product->ProductDescription}</div>
+                                        <div class="prodDescription" n:snippet="prodDescription">{!$product->ProductDescription}</div>
                                     </div>
 
                                     <div class="tab-pane" id="gal">
@@ -272,7 +288,7 @@
                                         {/if}
                             });
         
-                                    $('.editProdTitle').editable( {link editProdTitle! $product->ProductID }, { 
+                                    $('.prodTitle').editable( {link editProdTitle! $product->ProductID }, { 
                                         type      : 'text',
                                         cancel    : {_'Cancel'},
                                         submit    : 'OK',
@@ -280,11 +296,11 @@
                                         tooltip   : 'Click to edit ...',
                                         callback : function(value, settings) {
                                            var json = $.parseJSON(value);
-                                           $('.editProdTitle').text(json.edit);
+                                           $('.prodTitle').text(json.edit);
                                        }
                                    });
            
-                                   $('.editProdDescription').editable( {link editProdDescription! $product->ProductID }, {
+                                   $('.prodDescription').editable( {link editProdDescription! $product->ProductID }, {
                                         type      : 'wysiwyg',
                                         onblur    : 'ignore',
                                         cancel    : {_'Cancel'},
@@ -301,11 +317,11 @@
                                         }, 
                                        callback : function(value, settings) {
                                            var json = $.parseJSON(value);
-                                           $('.editProdDescription').html(json.edit);
+                                           $('.prodDescription').html(json.edit);
                                        }
                                 });
                                 
-                                $('.editProdShort').editable( {link editProdShort! $product->ProductID }, {
+                                $('.prodShort').editable( {link editProdShort! $product->ProductID }, {
                                         type      : 'textarea',
                                         onblur    : 'ignore',
                                         cancel    : {_'Cancel'},
@@ -316,11 +332,11 @@
                                         tooltip   : {_'Click to edit ...'},
                                         callback : function(value, settings) {
                                            var json = $.parseJSON(value);
-                                           $('.editProdShort').text(json.edit);
+                                           $('.prodShort').text(json.edit);
                                        }
                                 });
                                 
-                                $('.editProdPrice').editable( {link editProdPrice! $product->ProductID, $product->SellingPrice, $product->SALE }, {
+                                $('.prodPrice').editable( {link editProdPrice! $product->ProductID, $product->SellingPrice, $product->SALE }, {
                                         type      : 'text',
                                         onblur    : 'ignore',
                                         cancel    : {_'Cancel'},
@@ -329,11 +345,11 @@
                                         tooltip   : {_'Click to edit ...'},
                                         callback : function(value, settings) {
                                            var json = $.parseJSON(value);
-                                           $('.editProdPrice').text(json.edit);
+                                           $('.prodPrice').text(json.edit);
                                        }
                                 });
                                 
-                                $('.editProdAmount').editable( {link editProdAmount! $product->ProductID }, {
+                                $('.prodAmount').editable( {link editProdAmount! $product->ProductID }, {
                                         type      : 'text',
                                         onblur    : 'ignore',
                                         cancel    : {_'Cancel'},
@@ -344,10 +360,11 @@
                                         tooltip   : {_'Click to edit ...'},
                                         callback : function(value, settings) {
                                            var json = $.parseJSON(value);
-                                           $('.editProdAmount').text(json.edit);
+                                           $('.prodAmount').text(json.edit);
                                        }
                                 });
            
+                                
                             </script>
 
     {/if}

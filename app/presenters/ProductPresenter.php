@@ -513,8 +513,20 @@ class ProductPresenter extends BasePresenter {
         
     }
     
+    public function handleSetProductCategory($id, $catid) {
+         if($this->isAjax())
+        {            
+            $this->productModel->updateProduct($id, 'CategoryID', $catid);
+            $this->invalidateControl('productCategory');
+            
+        }
+        else {
+         $this->redirect('this');
+        }
+    }
+
     
-    
+
     public function handleEditDescription($catid) {
        
          if($this->isAjax())
