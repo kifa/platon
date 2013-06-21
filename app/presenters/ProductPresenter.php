@@ -493,7 +493,7 @@ class ProductPresenter extends BasePresenter {
     
     public function handleSetSale($prodid, $amount) {
         if ($this->getUser()->isInRole('admin')) {
-            $this->productModel->updateSale($proid, $amount);
+            $this->productModel->updateSale($prodid, $amount);
             
             if($this->isAjax()) {
                 $this->invalidateControl('prodPrice');
