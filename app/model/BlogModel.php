@@ -24,9 +24,9 @@ class BlogModel extends Repository {
         
         if($id == NULL) {
             // return $this->getTable('blog')->order('BlogID DESC')->fetchPairs('BlogID');   
-            return $this->getTable('blog')->order('BlogID DESC')->fetchPairs('BlogID');           
+           return $this->getTable('blog')->order('BlogID DESC')->fetchPairs('BlogID');           
             
-            /*return $this->getDB()->query('
+           /* return $this->getDB()->query('
                 SELECT * FROM blog 
                 JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
@@ -35,21 +35,20 @@ class BlogModel extends Repository {
         }
         else {
             return $this->getTable('blog')->where('CategoryID', $id)->order('BlogID DESC')->fetchPairs('BlogID');    
-        /*    return $this->getDB()->query('SELECT * FROM blog JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
+            /*return $this->getDB()->query('SELECT * FROM blog JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
              WHERE Photo.CoverPhoto="1" blog.CategoryID=?',$id);  */
         }
     }
     
     public function loadPost($postid){
-        return $this->getTable('blog')->where('BlogID',$postid)->fetch();
+        //return $this->getTable('blog')->where('BlogID',$postid)->fetch();
        
-        /*return $this->getDB()->query('
+        return $this->getDB()->query('
                 SELECT * FROM blog
                 JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
-                WHERE blog.BlogID=?
-                ',$postid)->fetch();*/
+                WHERE blog.BlogID=?',$postid)->fetch();
         
     }
 
@@ -70,8 +69,7 @@ class BlogModel extends Repository {
     public function updatePost($id, $where, $content) {
         $update = array(
           $where => $content,
-        );
-
+        );        
         return $this->getTable('blog')->where('BlogID', $id)->update($update);
     }
 

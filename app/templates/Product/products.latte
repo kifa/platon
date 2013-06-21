@@ -6,7 +6,7 @@
 
 
 <div class="page-header">
-    <h1 n:block="title" class="edit" n:snippet="editTitle">{$category->CategoryName}</h1>
+    <h1 n:block="title" class="CatTitle" n:snippet="CatTitle">{$category->CategoryName}</h1>
     <small class="shortDesc"> {$category->CategoryDescription|striptags|truncate:50} </small>
 <a href="#showcategoryinfo" id="morecategory">more about category...</a>
 <div class="row">
@@ -83,7 +83,7 @@
     </span>
     {/if}
     <span class="{$category->CategoryPhoto ? span6 : span9}" n:block="metadesc">
-        <span class="editDescription" n:snippet="editDescription">{!$category->CategoryDescription}</span> <small><br/>
+        <span class="CatDescription" n:snippet="CatDescription">{!$category->CategoryDescription}</span> <small><br/>
         <a href="{plink Blog:category $category->CategoryID}">{_'Check news on blog'} <i class="icon-arrow-right"></i></a></small>
     </span>
 </div>
@@ -172,7 +172,7 @@
             $('#deleteCategory').modal('hide');
         });
         
-        $('.edit').editable( {link editTitle! $category->CategoryID }, { 
+        $('.CatTitle').editable( {link CatTitle! $category->CategoryID }, { 
          type      : 'text',
          cancel    : {_'Cancel'},
          submit    : 'OK',
@@ -180,11 +180,11 @@
          tooltip   : 'Click to edit ...',
          callback : function(value, settings) {
             var json = $.parseJSON(value);
-            $('.edit').text(json.edit);
+            $('.CatTitle').text(json.edit);
         }
         });
         
-        $('.editDescription').editable( {link editDescription! $category->CategoryID }, {
+        $('.CatDescription').editable( {link CatDescription! $category->CategoryID }, {
          type      : 'wysiwyg',
          onblur    : 'ignore',
          cancel    : {_'Cancel'},
@@ -201,7 +201,7 @@
          }, 
         callback : function(value, settings) {
             var json = $.parseJSON(value);
-            $('.editDescription').html(json.edit);
+            $('.CatDescription').html(json.edit);
             $('.shortDesc').html(json.edit);
         }
         });

@@ -395,6 +395,94 @@ class SmartPanelPresenter extends BasePresenter {
           }
         
     }
+    
+    public function handleDelTitle($delid) {
+       
+         if($this->isAjax())
+        {            
+            $content = $_POST['value']; //odesílaná nová hodnota
+
+            $this->orderModel->updateDelivery($delid, $content);
+           
+        }
+        if(!$this->isControlInvalid('DelTitle'))
+        {           
+            $this->payload->edit = $content; //zaslání nové hodnoty do šablony
+            $this->sendPayload();
+            $this->invalidateControl('menu');       
+            $this->invalidateControl('DelTitle'); //invalidace snipetu
+           
+        }
+        else {
+         $this->redirect('this');
+        }
+    }
+
+    public function handleDelDescription($delid) {
+       
+         if($this->isAjax())
+        {            
+            $content = $_POST['value']; //odesílaná nová hodnota
+
+            $this->orderModel->updateDeliveryDescription($delid, $content);
+           
+        }
+        if(!$this->isControlInvalid('DelDescription'))
+        {           
+            $this->payload->edit = $content; //zaslání nové hodnoty do šablony
+            $this->sendPayload();
+            $this->invalidateControl('menu');       
+            $this->invalidateControl('DelDescription'); //invalidace snipetu
+           
+        }
+        else {
+         $this->redirect('this');
+        }
+    }
+    
+    public function handleDelPrice($delid) {
+       
+         if($this->isAjax())
+        {            
+            $content = $_POST['value']; //odesílaná nová hodnota
+
+            $this->orderModel->updateDeliveryPrice($delid, $content);
+           
+        }
+        if(!$this->isControlInvalid('DelPrice'))
+        {           
+            $this->payload->edit = $content; //zaslání nové hodnoty do šablony
+            $this->sendPayload();
+            $this->invalidateControl('menu');       
+            $this->invalidateControl('DelPrice'); //invalidace snipetu
+           
+        }
+        else {
+         $this->redirect('this');
+        }
+    }
+    
+    public function handleDelFF($delid) {
+       
+         if($this->isAjax())
+        {            
+            $content = $_POST['value']; //odesílaná nová hodnota
+
+            $this->orderModel->updateDeliveryFreefrom($delid, $content);
+           
+        }
+        if(!$this->isControlInvalid('DelFF'))
+        {           
+            $this->payload->edit = $content; //zaslání nové hodnoty do šablony
+            $this->sendPayload();
+            $this->invalidateControl('menu');       
+            $this->invalidateControl('DelFF'); //invalidace snipetu
+           
+        }
+        else {
+         $this->redirect('this');
+        }
+    }
 
     public function handleRemoveShip($id) {
        if ($this->getUser()->isInRole('admin')) {

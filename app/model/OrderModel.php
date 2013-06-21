@@ -346,6 +346,33 @@ class OrderModel extends Repository {
         return $this->getTable('delivery')->where('DeliveryID', $id)->update($update);
     }
     
+    public function updateDeliveryDescription($id, $description)
+    {
+        $update = array(
+            'DeliveryDescription' => $description,
+        );
+        
+        return $this->getTable('delivery')->where('DeliveryID', $id)->update($update);
+    }
+    
+    public function updateDeliveryPrice($id, $price)
+    {
+        $update = array(
+            'DeliveryPrice' => $price
+        );
+        
+        return $this->getTable('delivery')->where('DeliveryID', $id)->update($update);
+    }
+    
+    public function updateDeliveryFreefrom($id, $ffprice)
+    {
+        $update = array(
+            'FreeFromPrice' => $ffprice
+        );
+        
+        return $this->getTable('delivery')->where('DeliveryID', $id)->update($update);
+    }
+    
     public function deleteDelivery($id) {
         
         return $this->getTable('delivery')->where('DeliveryID',$id)->delete();

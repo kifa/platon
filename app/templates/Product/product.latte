@@ -3,7 +3,7 @@
 {/block}
 {block pageheader}
 <div class="page-header">
-    <h1 n:block="title"><span class="editProdTitle" n:snippet="editProdTitle">{$product->ProductName}</span>
+    <h1 n:block="title"><span class="ProdTitle" n:snippet="ProdTitle">{$product->ProductName}</span>
             <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>
             {if $user->isInRole('admin')}
 <div class="row">
