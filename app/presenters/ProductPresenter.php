@@ -1157,6 +1157,7 @@ class ProductPresenter extends BasePresenter {
             }
         }
 
+        $this->template->categories = $this->categoryModel->loadCategoryList();
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->photo = $this->productModel->loadCoverPhoto($id);
         $this->template->album = $this->productModel->loadPhotoAlbum($id);
