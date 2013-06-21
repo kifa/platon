@@ -861,6 +861,7 @@ class ProductPresenter extends BasePresenter {
             $priceForm->addHidden('id', $this->row['ProductID']);
             $priceForm->addSubmit('edit', 'Save price')
                     ->setAttribute('class', 'btn btn-primary')
+                    ->setHtmlId('priceSave')
                     ->setAttribute('data-loading-text', 'Saving...');
             $priceForm->onSuccess[] = $this->editPriceFormSubmitted;
             return $priceForm;
@@ -870,9 +871,16 @@ class ProductPresenter extends BasePresenter {
     public function editPriceFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
 
+            
             $this->productModel->updatePrice($form->values->id, $form->values->price, $form->values->discount);
-
+            if($this->isAjax()){
+                
+                $this->invalidateControl('prodPrice');
+            }
+            else {
+            
             $this->redirect('this');
+            }
         }
     }
 
