@@ -76,7 +76,12 @@ class OrderPresenter extends BasePresenter {
         $mnt += 1;
         $this->cart->prd[$id] = $mnt;
 
+        if($this->isAjax()){
+            $this->invalidateControl('cart');   
+        }
+        else {
         $this->presenter->redirect('this');
+        }
     }
 
     /*
