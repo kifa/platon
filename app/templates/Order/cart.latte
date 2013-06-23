@@ -15,7 +15,7 @@
 {$flash->message}</div>
 {/foreach*}
 
-<table class="table table-hover span9" n:snippet="cartTable">
+<table class="table table-hover span9">
             <thead>
                 <tr>
                     <th>#</th>
@@ -26,7 +26,7 @@
                     <th>X</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody n:snippet="cartTable">
 {var $grandtotal = 0}
 {foreach $cart as $id => $products}
     {foreach $products as $amnt => $product}
