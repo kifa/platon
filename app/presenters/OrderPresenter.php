@@ -61,7 +61,13 @@ class OrderPresenter extends BasePresenter {
             $el2 = Html::el('a', 'Take it Back!')->href($this->link('graveItem!'));
             $el1->add($el2);
             $this->flashMessage($el1, 'alert');
-            $this->presenter->redirect("this");
+            if($this->isAjax()){
+                $this->invalidateControl('cartTable');   
+            }
+            else {
+                $this->presenter->redirect('this');
+            }
+           
         } else {
             $this->redirect('Order:cartEmpty');
         }
@@ -77,7 +83,7 @@ class OrderPresenter extends BasePresenter {
         $this->cart->prd[$id] = $mnt;
 
         if($this->isAjax()){
-            $this->invalidateControl('cart');   
+            $this->invalidateControl('cartTable');   
         }
         else {
         $this->presenter->redirect('this');
@@ -95,7 +101,12 @@ class OrderPresenter extends BasePresenter {
 
         if ($mnt > 0) {
             $this->cart->prd[$id] = $mnt;
-            $this->presenter->redirect('this');
+            if($this->isAjax()){
+               $this->invalidateControl('cartTable');   
+             }
+            else {
+                $this->presenter->redirect('this');
+            }
         } else {
             $this->handleRemoveItem($id);
         }

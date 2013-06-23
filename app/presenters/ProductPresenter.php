@@ -576,7 +576,7 @@ class ProductPresenter extends BasePresenter {
     }
 
     
-    public function handlesetParentCategory($catid, $parentid) {
+    public function handleSetParentCategory($catid, $parentid) {
        
         
         $this->categoryModel->updateCategoryParent($catid, $parentid);
