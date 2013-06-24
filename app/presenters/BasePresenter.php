@@ -152,7 +152,22 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         return $modalControl;
     }
     
+    protected function createComponentProductEdit() {
+        $productEditControl = new productEditControl();
+        $productEditControl->setTranslator($this->translator);
+        $productEditControl->setProduct($this->productModel);
+        $productEditControl->setCategory($this->categoryModel);
+        $productEditControl->setBlog($this->blogModel);
+        return $productEditControl;
+    }
     
-    
+    protected function createComponentProduct() {
+        $productControl = new productControl();
+        $productControl->setTranslator($this->translator);
+        $productControl->setProduct($this->productModel);
+        $productControl->setCategory($this->categoryModel);
+        $productControl->setBlog($this->blogModel);
+        return $productControl;
+    }
     
 }

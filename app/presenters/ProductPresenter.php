@@ -136,6 +136,8 @@ class ProductPresenter extends BasePresenter {
             return $editControl;
         }
     }
+    
+    
 
     /*     * **********************************************************************
      *                            Render Products aka CATEGORY
@@ -277,7 +279,8 @@ class ProductPresenter extends BasePresenter {
      * Handle for removing products 
      */
 
-    public function handleDeleteProduct($catID, $id) {
+        
+       public function handleDeleteProduct($catID, $id) {
         if ($this->getUser()->isInRole('admin')) {
             $this->productModel->deleteProduct($id);
             $this->redirect('this', $catID);
@@ -291,15 +294,17 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    public function handleHideProduct($catID, $id) {
+     public function handleHideProduct($catID, $id) {
         if ($this->getUser()->isInRole('admin')) {
             
             $this->productModel->hideProduct($id);
             
             if($this->isAjax())
             {            
-                $this->invalidateControl('prod-'.$id);
+              $this->invalidateControl('products');
+              $this->invalidateControl('script');
             }
+            
             else {
               $this->redirect('this', $catID);
             }
@@ -309,10 +314,18 @@ class ProductPresenter extends BasePresenter {
     public function handleShowProduct($catID, $id) {
         if ($this->getUser()->isInRole('admin')) {
             $this->productModel->showProduct($id);
-            $this->redirect('Product:products', $catID);
+            
+            if($this->isAjax()) {
+                $this->invalidateControl('products');
+                $this->invalidateControl('script');
+            }
+            else {
+            $this->redirect('this', $catID);
+            }
         }
     }
 
+    
     public function handleSetCatalogLayout($catID, $layoutID) {
         if ($this->getUser()->isInRole('admin')) {
             $this->shopModel->setShopInfo('CatalogLayout', $layoutID);

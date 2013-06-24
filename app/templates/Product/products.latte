@@ -111,8 +111,82 @@
 {/block}
 
 {block content}
-<div class="span10">    
-    {include ../Product/productCatalog.latte}
+<div class="span10" n:snippet="products">    
+    {*include ../Product/productCatalog.latte*}
+
+
+<ul class="thumbnails">
+            {foreach $products as $id => $product}
+    <li class="span3 setview miniproduct" n:snippet="product-{$product->ProductID}">
+        <div class="thumbnail {$product->ProductStatusID == 1 ? alert} ">
+           {if $user->isInRole('admin')}
+            <div class="row">
+            {ifCurrent Homepage:}
+            <div class="span3">
+                {_"You cannot edit product here!"}
+            </div>
+            {else}
+            <div class="span3">
+                {control productEdit $product->ProductID}
+                
+            </div>
+            {/ifCurrent}
+            </div>
+            <hr>
+            {/if}
+<div class="row">            
+            <div class="span3">
+                    {if $product->PiecesAvailable > 5}
+            <span class="badge badge-info">{$product->PiecesAvailable}</span>
+                    {else}
+            <span class="badge badge-warning">{$product->PiecesAvailable}</span>
+                    {/if}
+            </div>
+
+      <a class="span3 imgLiquid" style="height: 150px; width: auto;" href="{plink Product:product $product->ProductID}"> 
+            
+                {if $product->PhotoAlbumID}
+                     <img src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$product->PhotoURL}" class="img-circle" />
+
+                {else}
+                   <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="height: 150px; width: auto;"/>
+                {/if} 
+     
+         </a>          
+                   
+         <div class="caption .span3 productCaption">
+            <h4><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></h4>
+            
+            <p class="productCaptionText">{!$product->ProductShort|striptags|truncate:60}</p>
+            </div>
+            <hr>
+            <div class="row .span3">
+                <hr>
+                    <div class="pr-btn">
+                        <a href="{plink addToCart! $product->ProductID, "1"}" class="btn btn-success span1"><i class="icon-shopping-cart icon-large"></i> {_"Buy"}</a>
+                         <a href="{plink Product:product $product->ProductID}" class="btn btn-primary span1"><i class="icon-info-sign icon-large"></i> {_"View"}</a>         
+                    </div>
+                
+              </div> 
+            
+            <div class="row .span3">
+                <hr>
+                    <div class="span2">
+                        <p class="text-success text-center lead">{$product->FinalPrice},- {if $product->SALE > 1}<span class="muted .span1" style="text-decoration: line-through; font-size: 50%;">{$product->SellingPrice},-</span>{/if} </p>
+                    </div>
+               
+            </div> 
+
+        </div>
+        </div> <!--primary row -->
+    </li>
+                {*control product $product->ProductID*}
+            {/foreach}
+</ul>
+
+
+
+
 </div>    
 {/block}
 
@@ -210,7 +284,18 @@
 </script>
     {/if}
 
+
 <div n:snippet="script">
+<script>
+        $(document).ready(function() {
+                $(".imgLiquid").imgLiquid({
+                    fill: true,
+                    fadeInTime: 0,
+                    delay: 0,
+                    horizontalAlign: "center",
+                    verticalAlign: "top"});
+            });
+        </script>
 <script>
     $('#morecategory').toggle(function(){
     $('#categoryinfo').fadeIn();

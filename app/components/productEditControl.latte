@@ -1,0 +1,15 @@
+{_"Admin"}: 
+                {if $product->ProductStatusID == 1}
+<a href="{plink showProduct! $product->CategoryID, $product->ProductID}" title="Publish product" class="ajax">
+    <i id="showProduct" class="icon-large icon-eye-open"></i></a>
+
+<a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" title="Archive product" class="ajax">
+    <i id="deleteProduct" class="icon-large icon-inbox"></i></a>
+
+                {elseif $product->ProductStatusID == 2}
+<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" title="Hide product" class="ajax">
+    <i id="hideProduct" class="icon-large icon-eye-close"></i></a>
+
+                {else}
+<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" class="ajax"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
+                {/if}
