@@ -188,7 +188,7 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
 
             $addProduct = new Nette\Application\UI\Form;
-            //$addProduct->setRenderer(new BootstrapRenderer);
+            $addProduct->setRenderer(new BootstrapRenderer);
             $addProduct->setTranslator($this->translator);
             $addProduct->addText('name', 'Name:')
                     ->setRequired();
