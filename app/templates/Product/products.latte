@@ -43,11 +43,16 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" n:snippet="parentCategory">
+                        <li class="parentcat"><a href="{plink setParentCategory!  $category->CategoryID, NULL }" class="ajax">
+                        {if $category->HigherCategoryID == NULL}<i class="icon-ok-sign"></i>{/if}
+                        {_'--No parent--'}</a></li> 
+                        
                         {foreach $categories as $catID => $cat}
-                
+                        {if $category->CategoryID != $catID & $cat->CategoryStatus != 3}
                         <li class="parentcat"><a href="{plink setParentCategory!  $category->CategoryID, $catID }" class="ajax">
                         {if $category->HigherCategoryID == $catID}<i class="icon-ok-sign"></i>{/if}
                         {$cat->CategoryName}</a></li> 
+                        {/if}
                         {/foreach}
                    
                     </ul>
