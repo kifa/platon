@@ -563,6 +563,7 @@ class ProductPresenter extends BasePresenter {
             if($this->isAjax())
            {            
                 $this->invalidateControl('parentCategory');
+                $this->invalidateControl('bread');
                 $this->invalidateControl('script');
 
            }
