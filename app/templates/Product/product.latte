@@ -15,10 +15,11 @@
                     </button>
                     <ul class="dropdown-menu" n:snippet="productCategory">
                         {foreach $categories as $catID => $cat}
-                
+                         {if $cat->CategoryStatus != 3}
                         <li class="productcat"><a href="{plink setProductCategory!  $product->ProductID, $catID }" class="ajax">
                         {if $product->CategoryID == $catID}<i class="icon-ok-sign"></i>{/if}
-                        {$cat->CategoryName}</a></li> 
+                        {$cat->CategoryName}</a></li>
+                        {/if}
                         {/foreach}
                    
                     </ul>
@@ -274,7 +275,19 @@
                             </script>
 
          {if $user->isInRole('admin')}
+                            
                             <script src="{$basePath}/js/droparea.js"></script>
+<div n:snippet="script">
+<script>
+    
+    $('a.ajax').click(function(){
+        $(this).html('<i class="icon-spinner icon-spin"></i>');
+    });
+    
+    
+</script>
+</div>
+                            
                             <script>
                                 $(document).ready(function() {
                  

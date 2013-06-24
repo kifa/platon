@@ -96,7 +96,7 @@ class ProductModel extends Repository {
      * @return string
      *  */
     public function insertProduct($name,$price,$producer,$prodnumber,
-            $description,$ean,$qr,$warranty,$pieces,$category,
+            $short,$description,$ean,$qr,$warranty,$pieces,$category,
             $dataaval,$comment)
     {
         $today = date("Y-m-d");
@@ -104,7 +104,7 @@ class ProductModel extends Repository {
         $insert = array(
             'ProductID' => NULL,
             'ProductName' => $name,
-            'Producer' => $producer,            
+            'ProducerID' => $producer,            
             'ProductNumber' => $prodnumber,
             'ProductShort' => $short,
             'ProductDescription' => $description,

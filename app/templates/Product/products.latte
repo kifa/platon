@@ -14,7 +14,7 @@
 <div class="row">
     <div class="span10">
         {if $user->isInRole('admin')}
-                <a href="#addProduct" class="btn" data-toggel="modal" data-target="#addProductButton" id="addProductButton"><i class="icon-large icon-plus"></i> {_"Add Product"}</a>
+                <a href="#addProduct" class="btn" id="addProductButton"><i class="icon-large icon-plus"></i> {_"Add Product"}</a>
                 <div class="btn-group">
                     <a href="#" class="btn"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
                         {if $category->CategoryPhoto == NULL}
@@ -114,10 +114,34 @@
 
 {block content}
 <div class="span10" n:snippet="products">    
-    {*include ../Product/productCatalog.latte*}
-
 
 <ul class="thumbnails">
+    
+    {if $user->isInRole('admin')}
+             
+    <li class="span3 setview miniproduct hide" n:snippet="newproduct" >
+        <div class="thumbnail info">
+            <div style="height: 527px">
+                <div class="row">
+
+                <div class="span3">
+                    <h3>{_"Add new product!"}</h3>
+                </div>
+
+                </div>
+                <hr>
+
+            <div class="span3">            
+              {control addProductForm}
+
+            </div>
+                <a href="#addProduct" class="btn" id="addProductButtonHide"><i class="icon-large icon-minus-sign"></i> {_'Hide'}</a>
+            </div>
+        </div> <!--primary row -->
+    </li>
+    
+    
+    {/if}
             {foreach $products as $id => $product}
     <li class="span3 setview miniproduct" n:snippet="product-{$product->ProductID}">
         <div class="thumbnail {$product->ProductStatusID == 1 ? alert} ">
@@ -219,16 +243,20 @@
             }
         });   
 
-      $('.upl').click(function() { 
-            $('.upl').button('toggle');
-            $('.upl').button('loading') });
+      
             
                   
         $('#addProductButton').toggle(function(){
-          $('#addProduct').modal('show');
+          $('#snippet--newproduct').fadeIn();
+          $('#addProductButton').text('Hide Product');
         },
         function() {
-            $('#addProduct').modal('hide');
+             $('#snippet--newproduct').fadeOut();
+             $('#addProductButton').text('Add Product');
+        });
+        
+        $('#addProductButtonHide').click(function(){
+          $('#snippet--newproduct').fadeOut();
         });
             
          $('#addCategoryPhotoButton').toggle(function(){
@@ -246,7 +274,7 @@
             $('#deleteCategory').modal('hide');
         });
         
-        $('.CatTitle').editable( {link CatTitle! $category->CategoryID }, { 
+        $('.CatTitle').editable( {link editCatTitle! $category->CategoryID }, { 
          type      : 'text',
          cancel    : {_'Cancel'},
          submit    : 'OK',
@@ -258,7 +286,7 @@
         }
         });
         
-        $('.CatDescription').editable( {link CatDescription! $category->CategoryID }, {
+        $('.CatDescription').editable( {link editCatDescription! $category->CategoryID }, {
          type      : 'wysiwyg',
          onblur    : 'ignore',
          cancel    : {_'Cancel'},
@@ -308,9 +336,11 @@
      $('#categoryinfo').fadeOut();
     });
     
-    $('.ajax').click(function(){
-    $(this).html('<i class="icon-spinner icon-spin"></i>');
-});
+    $('a.ajax').click(function(){
+        $(this).html('<i class="icon-spinner icon-spin"></i>');
+    });
+    
+    
 </script>
 </div>
 
@@ -320,22 +350,6 @@
     {block modal}
 
     {if $user->isInRole('admin')}
-
-<div id="addProduct" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel"><i class="icon-plus"></i> Add new product</h3>
-    </div>
-    <div class="modal-body">
-        <p>{_'Please fill in these information'}</p>
-
-
-    </div>
-    <div class="modal-footer">
-                {control addProductForm}
-        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-    </div>
-</div>
 
 <div id="addCategoryPhoto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">

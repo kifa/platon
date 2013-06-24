@@ -187,18 +187,8 @@ class ProductPresenter extends BasePresenter {
 
         if ($this->getUser()->isInRole('admin')) {
 
-            $category = array();
-
-            foreach ($this->categoryModel->loadCategoryList() as $id => $name) {
-                $category[$id] = $name->CategoryName;
-            }
-
-            foreach ($this->productModel->loadProducers() as $id => $name) {
-                $producers[$id] = $name->ProducerName;
-            }
-
             $addProduct = new Nette\Application\UI\Form;
-            //      $addProduct->setRenderer(new BootstrapRenderer);
+            //$addProduct->setRenderer(new BootstrapRenderer);
             $addProduct->setTranslator($this->translator);
             $addProduct->addText('name', 'Name:')
                     ->setRequired();
@@ -209,21 +199,20 @@ class ProductPresenter extends BasePresenter {
                     ->setDefaultValue('1')
                     ->addRule(FORM::INTEGER, 'It has to be a number!')
                     ->setRequired();
-            $addProduct->addTextArea('short', 'Impress: ', 5)
+           /* $addProduct->addTextArea('short', 'Impress: ', 3)
                     ->setRequired();
-            $addProduct->addTextArea('desc', 'Description: ', 10)
+            /*$addProduct->addTextArea('desc', 'Description: ', 10)
                     ->setRequired()
-                    ->setAttribute('class', 'mceEditor');
-            $addProduct->addSelect('cat', 'Category: ', $category)
-                    ->setDefaultValue($this->catId);
-            $addProduct->addSelect('producer', 'Producer: ', $producers);
+                    ->setAttribute('class', 'mceEditor'); */
+            $addProduct->addHidden('cat', $this->catId);
+           // $addProduct->addSelect('producer', 'Producer: ', $producers); */
             $addProduct->addUpload('image', 'Image:')
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
             $addProduct->addSubmit('add', 'Add Product')
                     ->setAttribute('class', 'upl btn btn-primary')
                     ->setAttribute('data-loading-text', 'Adding...');
-            $addProduct->onSubmit('tinyMCE.triggerSave()');
+           // $addProduct->onSubmit('tinyMCE.triggerSave()');
             $addProduct->onSuccess[] = $this->addProductFormSubmitted;
             return $addProduct;
         }
@@ -238,9 +227,9 @@ class ProductPresenter extends BasePresenter {
 
             $return = $this->productModel->insertProduct(
                     $form->values->name, //Name
-                    $form->values->price, $form->values->producer, //Producer                
+                    $form->values->price, 1, //Producer                
                     '11111', //Product Number
-                    $form->values->short, $form->values->desc, //Description
+                    '', '', //Description
                     '123456', //Ean
                     '122', //QR
                     'rok', //Warranty
@@ -271,7 +260,12 @@ class ProductPresenter extends BasePresenter {
                 $image->save($imgUrl);
             }
 
+            if($this->isAjax()) {
+                $this->invalidateControl('content');
+            }
+            else {
             $this->redirect('Product:product', $return[0]);
+            }
         }
     }
 
@@ -381,19 +375,23 @@ class ProductPresenter extends BasePresenter {
         }
     }
     
-    public function handleEditTitle($catid) {
+    public function handleEditCatTitle($catid) {
         if($this->getUser()->isInRole('admin')){
+            
+          $this->invalidateControl('bread');
+          
             if($this->isAjax()){
                //$name = $_POST['id'];
                $content = $_POST['value'];
                $this->categoryModel->updateCategory($catid, $content);
+               
            }
-           if(!$this->isControlInvalid('editTitle')){
+           if(!$this->isControlInvalid('CatTitle')){
                $this->payload->edit = $content;
                $this->sendPayload();
                $this->invalidateControl('menu');  
                $this->invalidateControl('bread');
-               $this->invalidateControl('editTitle');
+               $this->invalidateControl('CatTitle');
            }
            else {
             $this->redirect('this');
@@ -514,6 +512,7 @@ class ProductPresenter extends BasePresenter {
             {            
                 $this->productModel->updateProduct($id, 'CategoryID', $catid);
                 $this->invalidateControl('productCategory');
+                $this->invalidateControl('script');
 
             }
             else {
@@ -528,6 +527,7 @@ class ProductPresenter extends BasePresenter {
             {            
                 $this->productModel->updateProduct($id, 'ProducerID', $producerid);
                 $this->invalidateControl('productProducer');
+                $this->invalidateControl('script');
 
             }
             else {
@@ -536,7 +536,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    public function handleEditDescription($catid) {
+    public function handleEditCatDescription($catid) {
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            
                $content = $_POST['value']; //odesílaná nová hodnota
