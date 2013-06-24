@@ -2,7 +2,7 @@
 {block pageheader}
 
         <div class="page-header">
-        <h1 n:block="title">Your cart <small>Here you can complete your order. Just fill fields bellow.</small></h1>
+        <h1 n:block="title">{_'Your cart'} <small>Here you can complete your order. Just fill fields bellow.</small></h1>
         </div>
 
 {/block}
@@ -39,9 +39,9 @@
                         {/if} 
                         {$product->ProductNumber}</td>
                     <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
-                    <td><a href="{plink addAmount! $id}" class="ajax"><i class="icon-plus-sign"></i></a> {$amnt} {_'pcs'}
+                    <td><a href="{plink addAmount! $id}" class="ajax"><i class="icon-plus-sign"></i>higher</a> {$amnt} {_'pcs'}
                         
-                        <a href="{plink removeAmount! $id}" class="ajax"><i class="icon-minus-sign"></i></a></td>
+                        <a href="{plink removeAmount! $id}" class="ajax"><i class="icon-minus-sign"></i>lower</a></td>
                     <td>{$product->FinalPrice},-</td>
                     <td>{$subtotal},-</td>
                     <td><a n:href="removeItem! $id" class="ajax"><i class="icon-trash"></i> {_'remove'}</a></td>
