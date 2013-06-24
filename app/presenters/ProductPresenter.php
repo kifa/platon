@@ -382,229 +382,195 @@ class ProductPresenter extends BasePresenter {
     }
     
     public function handleEditTitle($catid) {
-        
-         if($this->isAjax())
-        {
-            //$name = $_POST['id'];
-            $content = $_POST['value'];
-            $this->categoryModel->updateCategory($catid, $content);
-            
-        }
-        if(!$this->isControlInvalid('editTitle'))
-        {
-            
-            
-            $this->payload->edit = $content;
-            $this->sendPayload();
-            $this->invalidateControl('menu');        
-            $this->invalidateControl('editTitle');
-            
-        }
-        else {
-         $this->redirect('this');
-        }
-        
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){
+               //$name = $_POST['id'];
+               $content = $_POST['value'];
+               $this->categoryModel->updateCategory($catid, $content);
+           }
+           if(!$this->isControlInvalid('editTitle')){
+               $this->payload->edit = $content;
+               $this->sendPayload();
+               $this->invalidateControl('menu');        
+               $this->invalidateControl('editTitle');
+           }
+           else {
+            $this->redirect('this');
+           }
+       }
     }
     
-    public function handleEditProdTitle($prodid) {
-        
-         if($this->isAjax())
-        {            
-            $content = $_POST['value'];
-            $this->productModel->updateProduct($prodid, 'ProductName', $content);
-            
+    public function handleEditProdTitle($prodid){
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){            
+                $content = $_POST['value'];
+                $this->productModel->updateProduct($prodid, 'ProductName', $content);
+            }
+            if(!$this->isControlInvalid('editProdTitle')){
+                $this->payload->edit = $content;
+                $this->sendPayload();
+                $this->invalidateControl('editProdTitle');
+            }
+            else {
+             $this->redirect('this');
+            }
+
         }
-        if(!$this->isControlInvalid('editProdTitle'))
-        {
-            
-            
-            $this->payload->edit = $content;
-            $this->sendPayload();
-            $this->invalidateControl('editProdTitle');
-            
-        }
-        else {
-         $this->redirect('this');
-        }
-        
     }
     
     public function handleEditProdDescription($prodid) {
-        
-         if($this->isAjax())
-        {            
-            $content = $_POST['value'];
-            $this->productModel->updateProduct($prodid, 'ProductDescription', $content);
-            
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){            
+                $content = $_POST['value'];
+                $this->productModel->updateProduct($prodid, 'ProductDescription', $content);
+            }
+            if(!$this->isControlInvalid('editProdDescription')){
+                $this->payload->edit = $content;
+                $this->sendPayload();
+                $this->invalidateControl('editProdDescription');
+            }
+            else {
+             $this->redirect('this');
+            }
         }
-        if(!$this->isControlInvalid('editProdDescription'))
-        {
-
-            $this->payload->edit = $content;
-            $this->sendPayload();
-            $this->invalidateControl('editProdDescription');
-            
-        }
-        else {
-         $this->redirect('this');
-        }
-        
     }
     
     public function handleEditProdShort($prodid) {
-        
-         if($this->isAjax())
-        {            
-            $content = $_POST['value'];
-            $this->productModel->updateProduct($prodid, 'ProductShort', $content);
-            
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){            
+                $content = $_POST['value'];
+                $this->productModel->updateProduct($prodid, 'ProductShort', $content);
+            }
+            if(!$this->isControlInvalid('editProdShort')){
+                $this->payload->edit = $content;
+                $this->sendPayload();
+                $this->invalidateControl('editProdShort');
+            }
+            else {
+             $this->redirect('this');
+            }
         }
-        if(!$this->isControlInvalid('editProdShort'))
-        {
-
-            $this->payload->edit = $content;
-            $this->sendPayload();
-            $this->invalidateControl('editProdShort');
-            
-        }
-        else {
-         $this->redirect('this');
-        }
-        
     }
     
     public function handleEditProdPrice($prodid, $sellingprice, $sale) {
-        
-         if($this->isAjax())
-        {            
-            $content = $_POST['value'];
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){            
+                $content = $_POST['value'];
 
-            if ($sale == 0) {
-            $this->productModel->updatePrice($prodid, $content, $sale);    
+                if ($sale == 0) {
+                $this->productModel->updatePrice($prodid, $content, $sale);    
+                }
+                else {
+                  $sale = $sellingprice - $content;
+                $this->productModel->updatePrice($prodid, $sellingprice, $sale); 
+                }
+            }
+            if(!$this->isControlInvalid('prodPrice')){
+                $this->payload->edit = $content;
+                $this->sendPayload();
             }
             else {
-              $sale = $sellingprice - $content;
-            $this->productModel->updatePrice($prodid, $sellingprice, $sale); 
+             $this->redirect('this');
             }
-            
-            
         }
-        if(!$this->isControlInvalid('prodPrice'))
-        {
-            
-            $this->payload->edit = $content;
-            $this->sendPayload();
-            
-            
-        }
-        else {
-         $this->redirect('this');
-        }
-        
-        
     }
     
-    public function handleSetSale($prodid, $amount, $type) {
-        if ($this->getUser()->isInRole('admin')) {
-            
+    public function handleSetSale($prodid, $amount, $type){
+        if ($this->getUser()->isInRole('admin')) {            
             $this->productModel->updateSale($prodid, $amount, $type);
-            
             if($this->isAjax()) {
                 $this->invalidateControl('prodPrice');
             }
             else{
               $this->redirect('this');  
             }
-            
         }
     }
 
-    public function handleEditProdAmount($prodid) {
-        
-         if($this->isAjax())
-        {            
-            $content = $_POST['value'];
+    public function handleEditProdAmount($prodid) {        
+        if($this->getUser()->isInRole('admin')){ 
+            if($this->isAjax())
+            {            
+                $content = $_POST['value'];
 
-            $this->productModel->updateProduct($prodid, 'PiecesAvailable', $content);
- 
+                $this->productModel->updateProduct($prodid, 'PiecesAvailable', $content);
+            }
+            if(!$this->isControlInvalid('editProdAmount'))
+            {
+                $this->payload->edit = $content;
+                $this->sendPayload();
+                $this->invalidateControl('editProdAmount');
+            }
+            else {
+             $this->redirect('this');
+            }
         }
-        if(!$this->isControlInvalid('editProdAmount'))
-        {
-           
-            $this->payload->edit = $content;
-            $this->sendPayload();
-            $this->invalidateControl('editProdAmount');
-            
-        }
-        else {
-         $this->redirect('this');
-        }
-        
     }
     
     public function handleSetProductCategory($id, $catid) {
-         if($this->isAjax())
-        {            
-            $this->productModel->updateProduct($id, 'CategoryID', $catid);
-            $this->invalidateControl('productCategory');
-            
-        }
-        else {
-         $this->redirect('this');
+        if($this->getUser()->isInRole('admin')){ 
+            if($this->isAjax())
+            {            
+                $this->productModel->updateProduct($id, 'CategoryID', $catid);
+                $this->invalidateControl('productCategory');
+
+            }
+            else {
+             $this->redirect('this');
+            }
         }
     }
 
     public function handleSetProductProducer($id, $producerid) {
-         if($this->isAjax())
-        {            
-            $this->productModel->updateProduct($id, 'ProducerID', $producerid);
-            $this->invalidateControl('productProducer');
-            
-        }
-        else {
-         $this->redirect('this');
+        if($this->getUser()->isInRole('admin')){ 
+            if($this->isAjax())
+            {            
+                $this->productModel->updateProduct($id, 'ProducerID', $producerid);
+                $this->invalidateControl('productProducer');
+
+            }
+            else {
+             $this->redirect('this');
+            }
         }
     }
 
     public function handleEditDescription($catid) {
-       
-         if($this->isAjax())
-        {            
-            $content = $_POST['value']; //odesílaná nová hodnota
-            $this->categoryModel->updateCategoryDesc($catid, $content);
-           
-        }
-        if(!$this->isControlInvalid('editDescription'))
-        {           
-            $this->payload->edit = $content; //zaslání nové hodnoty do šablony
-            $this->sendPayload();
-            $this->invalidateControl('menu');       
-            $this->invalidateControl('editDescription'); //invalidace snipetu
-           
-        }
-        else {
-         $this->redirect('this');
-        }
-       
-    }
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){            
+               $content = $_POST['value']; //odesílaná nová hodnota
+               $this->categoryModel->updateCategoryDesc($catid, $content);
 
+           }
+           if(!$this->isControlInvalid('editDescription')){           
+               $this->payload->edit = $content; //zaslání nové hodnoty do šablony
+               $this->sendPayload();
+               $this->invalidateControl('menu');       
+               $this->invalidateControl('editDescription'); //invalidace snipetu
+           }
+           else {
+            $this->redirect('this');
+           }
+
+       }
+    }
     
     public function handleSetParentCategory($catid, $parentid) {
-       
+        if($this->getUser()->isInRole('admin')){
         
-        $this->categoryModel->updateCategoryParent($catid, $parentid);
-        
-        
-         if($this->isAjax())
-        {            
-             $this->invalidateControl('parentCategory');
-             $this->invalidateControl('script');
-           
-        }
-        else {
-         $this->redirect('this');
-        }
-       
+            $this->categoryModel->updateCategoryParent($catid, $parentid);
+                
+            if($this->isAjax())
+           {            
+                $this->invalidateControl('parentCategory');
+                $this->invalidateControl('script');
+
+           }
+           else {
+            $this->redirect('this');
+           }
+
+       }
     }
 
     protected function createComponentAddCategoryForm() {

@@ -40,10 +40,7 @@ class OrderPresenter extends BasePresenter {
         
        
     }
-    
-
-    
-    
+        
     /*
      * Handle for removing item from Cart
      */
@@ -53,20 +50,19 @@ class OrderPresenter extends BasePresenter {
         $this->cart->graveItem = $id;
         $this->cart->numberItems = Count($this->cart->prd);
 
-
-
         if ($this->cart->numberItems > 0) {
 
             $el1 = Html::el('span', 'Product was removed. Isn´t it pitty?! ');
             $el2 = Html::el('a', 'Take it Back!')->href($this->link('graveItem!'));
             $el1->add($el2);
             $this->flashMessage($el1, 'alert');
-            if($this->isAjax()){
-                $this->invalidateControl('cartTable');   
-            }
-            else {
-                $this->presenter->redirect('this');
-            }
+            
+                if($this->isAjax()){
+                    $this->invalidateControl('cartTable');   
+                }
+                else {
+                    $this->presenter->redirect('this');
+                }
            
         } else {
             $this->redirect('Order:cartEmpty');
@@ -77,17 +73,17 @@ class OrderPresenter extends BasePresenter {
      * Handle for adding amount of goods
      */
 
-    public function handleAddAmount($id) {
+    public function handleAddAmount($id) {        
         $mnt = $this->cart->prd[$id];
         $mnt += 1;
         $this->cart->prd[$id] = $mnt;
-
-        if($this->isAjax()){
-            $this->invalidateControl('cartTable');   
-        }
-        else {
-        $this->presenter->redirect('this');
-        }
+                
+            if($this->isAjax()){
+                $this->invalidateControl('cartTable');   
+            }
+            else {
+                $this->presenter->redirect('this');
+            }
     }
 
     /*
@@ -96,20 +92,22 @@ class OrderPresenter extends BasePresenter {
      */
 
     public function handleRemoveAmount($id) {
-        $mnt = $this->cart->prd[$id];
-        $mnt -= 1;
+            $mnt = $this->cart->prd[$id];
+            $mnt -= 1;
 
-        if ($mnt > 0) {
-            $this->cart->prd[$id] = $mnt;
-            if($this->isAjax()){
-               $this->invalidateControl('cartTable');   
-             }
+            if ($mnt > 0) {
+                $this->cart->prd[$id] = $mnt;
+
+                    if($this->isAjax()){
+                       $this->invalidateControl('cartTable');   
+                     }
+                    else {
+                        $this->presenter->redirect('this');
+                    }
+                }
             else {
-                $this->presenter->redirect('this');
+                $this->handleRemoveItem($id);
             }
-        } else {
-            $this->handleRemoveItem($id);
-        }
     }
 
     /*

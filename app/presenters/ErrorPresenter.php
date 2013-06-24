@@ -16,6 +16,7 @@ class ErrorPresenter extends BasePresenter
 	 */
 	public function renderDefault($exception)
 	{
+            if($this->getUser()->isInRole('admin')){
 		if ($this->isAjax()) { // AJAX request? Just note this error in payload.
 			$this->payload->error = TRUE;
 			$this->terminate();
@@ -31,6 +32,7 @@ class ErrorPresenter extends BasePresenter
 			$this->setView('500'); // load template 500.latte
 			Debugger::log($exception, Debugger::ERROR); // and log exception
 		}
-	}
+            }
+        }
 
 }
