@@ -74,11 +74,13 @@
        {block #pageheader}
 
        {/block}
+             {snippet flashMessages}   
              {foreach $flashes as $flash}
                 <div class="{$flash->type}">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
               {$flash->message}</div>
               {/foreach}
+              {/snippet}
 
                 
                 <div class="row" n:snippet="content">

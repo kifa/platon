@@ -179,7 +179,13 @@ class ProductPresenter extends BasePresenter {
             $this->categoryModel->setCategoryStatus($catID, $categoryStatus);
             $e = 'Category status is now:';
             $this->flashMessage($e, 'alert');
+            
+            if($this->isAjax()) {
+                $this->invalidateControl('content');
+            }
+            else {
             $this->redirect('this', $catID);
+            }
         }
     }
 
