@@ -181,7 +181,9 @@ class ProductPresenter extends BasePresenter {
             $this->flashMessage($e, 'alert');
             
             if($this->isAjax()) {
-                $this->invalidateControl('content');
+                $this->invalidateControl('categoryStatus');
+                $this->invalidateControl('script');
+
             }
             else {
             $this->redirect('this', $catID);

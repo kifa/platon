@@ -23,17 +23,23 @@
 
                 </div>
 
-                <div class="btn-group">
+                <div class="btn-group" n:snippet="categoryStatus">
                             {if $category->CategoryStatus == 0}
                     <a class="btn" href="{plink setCategoryStatus! $category->CategoryID, 1}" class="ajax"><i class="icon-large icon-eye-open"></i> {_'Publish category'}</a>
-                           {elseif $category->CategoryStatus == 1}
-                    <a class="btn" href="{plink setCategoryStatus! $category->CategoryID, 0}" class="ajax"><i class="icon-large icon-eye-close"></i> {_'Unpublish category'}</a></button>
+                           {elseif $category->CategoryStatus >= 1}
+                    <a class="btn" href="{plink setCategoryStatus! $category->CategoryID, 0}" class="ajax"><i class="icon-large icon-eye-close"></i> {_'Unpublish category'}</a>
                    {/if}
                     <button class="btn dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="{plink setCategoryStatus! $category->CategoryID, 2}" class="ajax">{_'Feature category!'}</a></li>
+                        {if $category->CategoryStatus == 2}
+                        <li><a href="{plink setCategoryStatus! $category->CategoryID, 1}" class="ajax">
+                        <i class="icon-ok-sign"></i>{_'Feature category!'}</a></li>
+                        {else}
+                        <li><a href="{plink setCategoryStatus! $category->CategoryID, 2}" class="ajax">
+                        {_'Feature category!'}</a></li>
+                        {/if}
                         <li><a href="#deleteCategory" data-toggel="modal" data-target="#deleteCategory" id="deleteCategoryButton"><i class="icon-large icon-trash"></i> {_"Delete Category"}</a>
                         </li>
                     </ul>

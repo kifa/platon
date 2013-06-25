@@ -126,7 +126,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         
         if ($this->isAjax()) {
         $this->invalidateControl('flashMessages');
-    }
+        }
         
 
     }
