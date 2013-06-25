@@ -177,7 +177,9 @@ class ProductPresenter extends BasePresenter {
     public function handleSetCategoryStatus($catID, $categoryStatus) {
         if ($this->getUser()->isInRole('admin')) {
             $this->categoryModel->setCategoryStatus($catID, $categoryStatus);
-            $e = 'Category status is now:';
+            $status = $this->categoryModel->getStatusName($categoryStatus);
+          //  $status = $categoryStatus;
+            $e = 'Category status is now: ' . $status;
             $this->flashMessage($e, 'alert');
             
             if($this->isAjax()) {

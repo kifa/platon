@@ -122,6 +122,11 @@ class CategoryModel extends Repository {
         $update = array('CategoryPhoto' => NULL);
         return $this->getTable('category')->where('CategoryID', $id)->update($update);
     }
+    
+    public function getStatusName($categorystatusid) {
+        $row = $this->getTable('categorystatus')->where('CategoryStatusID', $categorystatusid)->fetch();
+        return $row->CategoryStatusName;
+    }
 }
 
 
