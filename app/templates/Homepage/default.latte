@@ -89,10 +89,10 @@
      
          </a>          
                    
-         <div class="caption .span3 productCaption">
+         <div class="caption .span3">
             <h4><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></h4>
             
-            <p class="productCaptionText">{!$product->ProductShort|striptags|truncate:60}</p>
+    {* productCaption        <p class="productCaptionText">{!$product->ProductShort|striptags|truncate:60}</p> *}
             </div>
             <hr>
             <div class="row .span3">
