@@ -199,7 +199,7 @@ class SmartPanelPresenter extends BasePresenter {
     public function handleSetOrderShipping($orderid) {
         if (!$this->getUser()->isInRole('admin')) {
 
-             if($this->isAjax()){
+         /*   if($this->isAjax()){
                $name = $_POST['id'];
                $content = $_POST['value'];
                $this->orderModel->updateOrder($orderid, $content[1], 0);
@@ -210,7 +210,10 @@ class SmartPanelPresenter extends BasePresenter {
                $this->payload->edit = $name;
                $this->sendPayload();
                $this->invalidateControl('shipping');
-           }
+           }  */
+            
+           dump($_POST['value']);
+           $this->redirect('SmartPanel:default');
         }
     }
 
