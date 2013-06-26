@@ -213,7 +213,7 @@
             <div class="span4">
                 <p>
                     <i class="icon-truck icon-large left"></i> {_'Shipping'}:&nbsp;
-                    <strong>{$order->DeliveryName}</strong>
+                    <strong n:snippet="shipping" class="shipping">{$order->DeliveryName}</strong>
                 </p>
             </div>
 
@@ -341,7 +341,19 @@
             }); 
         
      
-               
+     $('.shipping').editable( {link setOrderShipping! $order->OrderID }, { 
+                data      :'{$delivery}',
+                type      : 'select',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.shipping').text(json.edit);
+               }
+           });
+          
             
 </script>
 {/block}

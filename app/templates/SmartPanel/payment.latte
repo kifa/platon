@@ -1,7 +1,7 @@
 {block pageheader}
 {if $user->isInRole('admin')}
 <div class="page-header">
-<h1 n:block="title"><i class="icon-money"></i>{_'Payment'} <small>{_'Here you see all payment methods.'}</small></h1>
+<h1 n:block="title"><i class="icon-money"></i> {_'Payment'} <small>{_'Here you see all payment methods.'}</small></h1>
 
 <div class="row">
             <div class="span10">
@@ -10,6 +10,7 @@
             </div>
         </div>
 </div>
+
 {/if}
 {/block}
 
@@ -25,7 +26,7 @@
         <div class="tab-content">
             <div class="tab-pane active" id="overal">
                 <div class="span7">
-                    <table class="table">
+                    <table class="table" n:snippet="payment">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -39,20 +40,18 @@
 
                             <tr class="info">
                                 <td>{$iterator->counter}</td>
-                                <td>{$payment->PaymentName}</td>
-                                <td>{$payment->PaymentPrice},-</td>
+                                <td n:snippet="paymentName-{$payment->PaymentID}" class="paymentName-{$payment->PaymentID} edit">{$payment->PaymentName}</td>
+                                <td n:snippet="paymentPrice-{$payment->PaymentID}" class="paymentPrice-{$payment->PaymentID} edit">{$payment->PaymentPrice},-</td>
                                 <td>
-                                
-                                <a href="#edit{$payment->PaymentID}" data-toggel="modal" data-target="#edit{$payment->PaymentID}" id="edit{$payment->PaymentID}Button">
-                                    <i class="icon-large icon-pencil"></i> {_"Edit"}</a> |
-                                    
-                                    <a n:href="removePay! $payment->PaymentID"><i class="icon-trash icon-large"></i></a>
+                                                                 
+                                    <a n:href="removePay! $payment->PaymentID" class="ajax"><i class="icon-trash icon-large"></i></a>
                                 
                                 </td>
                                 
                                 
                             </tr>                     
                         {/foreach}
+                            <tr><td colspan="4"><span class="muted"><i class="icon-large icon-info-sign"></i> {_"Edit by clicking on any value"}</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -65,23 +64,6 @@
         </div>
     </div>
             
-    {foreach $payments as $payment} 
-    <div id="edit{$payment->PaymentID}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                      <h3 id="myModalLabel"><i class="icon-truck"></i> {_'Edit'} {$payment->PaymentName}</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>{_'Edit your description and click Save desccription.'}</p>
-                                     {var $edit = 'editPayment'.$payment->PaymentID}
-                                        <p>{control $edit}</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
-                                    </div>
-                            </div>
-    
-    {/foreach}
 {/if}
 </div>
 {/block}
@@ -100,17 +82,38 @@
    
     $(document).ready(function() {
         {foreach $payments as $payment} 
-                               $('#edit{$payment->PaymentID}Button').toggle(function(){
-                                     $('#edit{$payment->PaymentID}').modal('show');
-                                   },
-                                   function() {
-                                       $('#edit{$payment->PaymentID}').modal('hide');
-                                   });
+                          
+     $('.paymentName-{$payment->PaymentID}').editable( {plink editPaymentName! $payment->PaymentID, $payment->PaymentPrice }, { 
+         type      : 'text',
+         cancel    : {_'Cancel'},
+         submit    : 'OK',
+         indicator : '<i class="icon-spinner icon-spin"></i>',
+         tooltip   : 'Click to edit ...',
+         callback : function(value, settings) {
+            var json = $.parseJSON(value);
+            $('.paymentName-{$payment->PaymentID}').text(json.edit);
+        }
+        });                              
+                                   
+     $('.paymentPrice-{$payment->PaymentID}').editable( {plink editPaymentPrice! $payment->PaymentID, $payment->PaymentName }, { 
+         type      : 'text',
+         cancel    : {_'Cancel'},
+         submit    : 'OK',
+         indicator : '<i class="icon-spinner icon-spin"></i>',
+         tooltip   : 'Click to edit ...',
+         callback : function(value, settings) {
+            var json = $.parseJSON(value);
+            $('.paymentPrice-{$payment->PaymentID}').text(json.edit);
+        }
+        });                              
+                                   
                                    {/foreach}
       $('.upl').click(function() { 
                 $('.upl').button('toggle');
                 $('.upl').button('loading') });
         });
+        
+     $('td.edit').css('font-style', 'italic');
       
 </script>
                              

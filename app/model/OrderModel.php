@@ -132,8 +132,11 @@ class OrderModel extends Repository {
     }
     
     public function updateOrder($orderid, $shipping, $payment) {
+        
         $paymentPrice = $this->loadPaymentPrice($payment);
+       
         $deliveryPrice = $this->loadDeliveryPrice($shipping);
+       
         $deliveryPaymentPrice = $paymentPrice + $deliveryPrice;
         
         $productPrice = $this->loadOrder($orderid)->ProductsPrice;
@@ -333,14 +336,11 @@ class OrderModel extends Repository {
         return $this->getTable('delivery')->insert($insert);
     }
     
-    public function updateDelivery($id, $name, $description=NULL, $price, $free=NULL)
+    public function updateDeliveryName($id, $name)
     {
         $update = array(
             
-            'DeliveryName' => $name,
-            'DeliveryDescription' => $description,
-            'DeliveryPrice' => $price,
-            'FreeFromPrice' => $free
+            'DeliveryName' => $name
         );
         
         return $this->getTable('delivery')->where('DeliveryID', $id)->update($update);

@@ -25,7 +25,7 @@
         <div class="tab-content">
             <div class="tab-pane active" id="overal">
                 <div class="span7">
-                    <table class="table">
+                    <table class="table" n:snippet="shipping">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -41,16 +41,13 @@
 
                             <tr class="info">
                                 <td>{$iterator->counter}</td>
-                                <td class="DelName" n:snippet="DelName">{$deliver->DeliveryName}</td>
-                                <td class="DelDescription" n:snippet="DelDescription">{$deliver->DeliveryDescription}</td>
-                                <td class="DelPrice" n:snippet="DelPrice">{$deliver->DeliveryPrice},-</td>
-                                <td class="DelFF" n:snippet="DelFF">{$deliver->FreeFromPrice ? $deliver->FreeFromPrice : '-'},-</td>
+                                <td class="DelName-{$deliver->DeliveryID}" n:snippet="DelName-{$deliver->DeliveryID}">{$deliver->DeliveryName}</td>
+                                <td class="DelDescription-{$deliver->DeliveryID}" n:snippet="DelDescription-{$deliver->DeliveryID}">{$deliver->DeliveryDescription}</td>
+                                <td class="DelPrice-{$deliver->DeliveryID}" n:snippet="DelPrice-{$deliver->DeliveryID}">{$deliver->DeliveryPrice},-</td>
+                                <td class="DelFF-{$deliver->DeliveryID}" n:snippet="DelFF-{$deliver->DeliveryID}">{$deliver->FreeFromPrice ? $deliver->FreeFromPrice : '-'},-</td>
                                 <td>
-                                
-                                <a href="#edit{$deliver->DeliveryID}" data-toggel="modal" data-target="#edit{$deliver->DeliveryID}" id="edit{$deliver->DeliveryID}Button">
-                                    <i class="icon-large icon-pencil"></i> {_"Edit"}</a> |
-                                    
-                                    <a n:href="removeShip! $deliver->DeliveryID"><i class="icon-trash icon-large"></i></a>
+                                                                
+                                    <a href="{link removeShipping! $deliver->DeliveryID}" class="ajax"><i class="icon-trash icon-large"></i></a>
                                 
                                 </td>
                                 
@@ -69,25 +66,6 @@
         </div>
     </div>
     
-    {foreach $delivery as $deliver} 
-    <div id="edit{$deliver->DeliveryID}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                      <h3 id="myModalLabel"><i class="icon-truck"></i> {_'Edit'} {$deliver->DeliveryName}</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>{_'Edit your description and click Save desccription.'}</p>
-                                     {var $edit = 'editShipping'.$deliver->DeliveryID}
-                                        <p>{control $edit}</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
-                                    </div>
-                            </div>
-    
-{/foreach}
-
-
 {/if}
 </div>
 {/block}
@@ -106,69 +84,62 @@
    
     $(document).ready(function() {
         {foreach $delivery as $deliver} 
-                               $('#edit{$deliver->DeliveryID}Button').toggle(function(){
-                                     $('#edit{$deliver->DeliveryID}').modal('show');
-                                   },
-                                   function() {
-                                       $('#edit{$deliver->DeliveryID}').modal('hide');
-                                   });
-                                   {/foreach}
+        
+        
+            $('.DelName-{$deliver->DeliveryID}').editable( {link DelName! $deliver->DeliveryID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelName-{$deliver->DeliveryID}').text(json.edit);
+               }
+           });
+
+           $('.DelDescription-{$deliver->DeliveryID}').editable( {link DelDescription! $deliver->DeliveryID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelDescription-{$deliver->DeliveryID}').text(json.edit);
+               }
+           });
+
+           $('.DelPrice-{$deliver->DeliveryID}').editable( {link DelPrice! $deliver->DeliveryID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelPrice-{$deliver->DeliveryID}').text(json.edit);
+               }
+           });
+
+           $('.DelFF-{$deliver->DeliveryID}').editable( {link DelFF! $deliver->DeliveryID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelFF-{$deliver->DeliveryID}').text(json.edit);
+               }
+           });      
+        {/foreach}
+                               
       $('.upl').click(function() { 
                 $('.upl').button('toggle');
                 $('.upl').button('loading') });
         });
-   
-   {if $user->isInRole('admin')}
-        {foreach $delivery as $deliver}       
-            $('.DelName').editable( {link DelName! $deliver->DeliveryID }, { 
-                type      : 'text',
-                cancel    : {_'Cancel'},
-                submit    : 'OK',
-                indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
-                callback : function(value, settings) {
-                   var json = $.parseJSON(value);
-                   $('.DelName').text(json.edit);
-               }
-           });
-
-           $('.DelDescription').editable( {link DelDescription! $deliver->DeliveryID }, { 
-                type      : 'text',
-                cancel    : {_'Cancel'},
-                submit    : 'OK',
-                indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
-                callback : function(value, settings) {
-                   var json = $.parseJSON(value);
-                   $('.DelDescription').text(json.edit);
-               }
-           });
-
-           $('.DelPrice').editable( {link DelPrice! $deliver->DeliveryID }, { 
-                type      : 'text',
-                cancel    : {_'Cancel'},
-                submit    : 'OK',
-                indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
-                callback : function(value, settings) {
-                   var json = $.parseJSON(value);
-                   $('.DelPrice').text(json.edit);
-               }
-           });
-
-           $('.DelFF').editable( {link DelFF! $deliver->DeliveryID }, { 
-                type      : 'text',
-                cancel    : {_'Cancel'},
-                submit    : 'OK',
-                indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
-                callback : function(value, settings) {
-                   var json = $.parseJSON(value);
-                   $('.DelFF').text(json.edit);
-               }
-           });      
-        {/foreach}
-    {/if}
+    
 </script>
                              
                              

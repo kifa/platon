@@ -196,6 +196,24 @@ class SmartPanelPresenter extends BasePresenter {
     
     }
 
+    public function handleSetOrderShipping($orderid) {
+        if (!$this->getUser()->isInRole('admin')) {
+
+             if($this->isAjax()){
+               $name = $_POST['id'];
+               $content = $_POST['value'];
+               $this->orderModel->updateOrder($orderid, $content[1], 0);
+
+               
+           }
+           if(!$this->isControlInvalid('shipping')){
+               $this->payload->edit = $name;
+               $this->sendPayload();
+               $this->invalidateControl('shipping');
+           }
+        }
+    }
+
     protected function createComponentEditOrderInfoForm() {
         
         $shippers = array();
@@ -289,7 +307,7 @@ class SmartPanelPresenter extends BasePresenter {
         foreach ($this->productModel->loadCatalog('') as $id => $product) {
             $products[$product->ProductID] = $product->ProductName;
            
-            $editProducts->addHidden($product->ProductID, $product->FinalPrice);
+          //  $editProducts->addHidden($product->ProductID, $product->FinalPrice);
          }
         $editProducts->addSelect('product', 'Select Product to add', $products)
                 ->setRequired();
@@ -371,6 +389,20 @@ class SmartPanelPresenter extends BasePresenter {
             $this->template->address = $this->orderModel->loadOrderAddress($orderid);
             $this->template->notes = $this->orderModel->loadOrderNotes($orderid);
             $this->template->productsInOrder = $this->productInOrder;
+            
+            foreach ($this->orderModel->loadDelivery('') as $key => $value) {
+         
+            $shippers[$key] = $value->DeliveryName;
+        };
+
+            $this->template->delivery = $shippers;
+            
+        foreach ($this->orderModel->loadPayment('') as $key => $value) {
+            $payment[$key] = $value->PaymentName;
+        };
+            $this->template->payment = $payment;
+        
+            
                     
             $this->template->nextOrder = $this->orderModel->loadOrder($orderid+1);
         }
@@ -396,19 +428,19 @@ class SmartPanelPresenter extends BasePresenter {
         
     }
     
-    public function handleDelTitle($delid) {
+    public function handleDelName($delid) {
        if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            
                $content = $_POST['value']; //odesílaná nová hodnota
 
-               $this->orderModel->updateDelivery($delid, $content);
+               $this->orderModel->updateDeliveryName($delid, $content);
 
            }
-           if(!$this->isControlInvalid('DelTitle')){           
+           if(!$this->isControlInvalid('DelName'.$delid)){           
                $this->payload->edit = $content; //zaslání nové hodnoty do šablony
                $this->sendPayload();
                $this->invalidateControl('menu');       
-               $this->invalidateControl('DelTitle'); //invalidace snipetu
+               $this->invalidateControl('DelTitle'.$delid); //invalidace snipetu
 
            }
            else {
@@ -483,25 +515,23 @@ class SmartPanelPresenter extends BasePresenter {
        }
     }
 
-    public function handleRemoveShip($id) {
+    public function handleRemoveShipping($shipid) {
        if ($this->getUser()->isInRole('admin')) {
-         $row = $this->orderModel->loadDelivery($id);
-         if($row) {       
-            $this->orderModel->deleteDelivery($id);
+         
+            $this->orderModel->deleteDelivery($shipid);
             $message = Html::el('span', ' was removed.');
             $e = Html::el('i')->class('icon-ok-sign left');
-            $message->insert(0, ' '. $row->DeliveryName);
+            $message->insert(0, ' ');
             $message->insert(0, $e);
             $this->flashMessage($message, 'alert');
-            $this->presenter->redirect("this");
-         }
-         else {
-             
-             $this->flashMessage('This shipping cannot be removed.', 'alert');
+            
+            if($this->isAjax()) {
+                $this->invalidateControl();
+            }
+            else{
                 $this->presenter->redirect("this");
-             
-         }
-        }
+            }
+     }
     }
     
     protected function createComponentAddShippingForm() {
@@ -616,7 +646,14 @@ class SmartPanelPresenter extends BasePresenter {
             $message->insert(0, ' '. $row->PaymentName);
             $message->insert(0, $e);
             $this->flashMessage($message, 'alert');
+            
+            if($this->isAjax()) {
+                $this->invalidateControl();
+                
+            }
+            else {
             $this->presenter->redirect("this");
+            }
          }
          else {
              
@@ -698,7 +735,69 @@ class SmartPanelPresenter extends BasePresenter {
             $this->redirect('this');
           }
     }
+
+    public function handleEditPaymentName($paymentID, $price) {
+         if ($this->getUser()->isInRole('admin')) {
+         
+            
+               
+            if($this->isAjax()){
+               //$name = $_POST['id'];
+               $content = $_POST['value'];
+               $this->orderModel->updatePayment($paymentID, $content, $price);
+               
+               $ico = HTML::el('i')->class('icon-ok-sign left');
+               $message = HTML::el('span', ' was added sucessfully updates.');
+               $message->insert(0, ' ' . $content);
+               $message->insert(0, $ico);
+               $this->flashMessage($message, 'alert success');
+               
+           }
+           if(!$this->isControlInvalid('paymentName-'.$paymentID)){
+               $this->payload->edit = $content;
+               $this->sendPayload();
+               $this->invalidateControl('paymentName-'.$paymentID);
+               //$this->invalidateControl('flashMessages');
+
+           }
+            else {
+                 $this->redirect('this');
+
+            }
+          }
+    }
     
+    public function handleEditPaymentPrice($paymentID, $name) {
+         if ($this->getUser()->isInRole('admin')) {
+         
+           
+               
+            if($this->isAjax()){
+               //$name = $_POST['id'];
+               $content = $_POST['value'];
+               
+               $this->orderModel->updatePayment($paymentID, $name, $content);
+               
+                $ico = HTML::el('i')->class('icon-ok-sign left');
+               $message = HTML::el('span', ' was added sucessfully updates.');
+               $message->insert(0, ' ' . $name);
+               $message->insert(0, $ico);
+               $this->flashMessage($message, 'alert success');
+               
+           }
+           if(!$this->isControlInvalid('paymentPrice-'.$paymentID)){
+               $this->payload->edit = $content;
+               $this->sendPayload();
+               $this->invalidateControl('paymentPrice-'.$paymentID);
+              // $this->invalidateControl('flashMessages');
+
+           }
+            else {
+                 $this->redirect('this');
+
+            }
+          }
+    }
     /*
      * Render Payment
      */
