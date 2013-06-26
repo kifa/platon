@@ -204,40 +204,73 @@ class SmartPanelPresenter extends BasePresenter {
 
     public function handleEditOrderShipping($orderid) {
         if (!$this->getUser()->isInRole('admin')) {
-
-         /*   if($this->isAjax()){
-               $name = $_POST['id'];
+            
+            if($this->isAjax()){
+               //$name = $_POST['id'];
                $content = $_POST['value'];
-               $this->orderModel->updateOrder($orderid, $content[1], 0);
-
+               $this->orderModel->updateOrder($orderid, $content[1]);
                
            }
            if(!$this->isControlInvalid('shipping')){
                $this->payload->edit = $name;
                $this->sendPayload();
                $this->invalidateControl('shipping');
-           }  */
+           }  
            
-           $this->payload->edit = 'ahoj';
-           $this->sendPayload();
-           dump($_POST['value']);
-           $this->redirect('SmartPanel:default');
+           else {
+             $this->redirect('this');
+            }      
         }
     }
     
-    public function handleEditOrderStreet($orderid) {
-       if (!$this->getUser()->isInRole('admin')) {
-
-         if($this->isAjax()){
-              // $name = $_POST['id'];
-               $content = $_POST['value'];
-               $this->orderModel->updateOrderStreet($id, $content);
-           }
-           if(!$this->isControlInvalid('orderStreet')){
-               $this->payload->edit = $content;
-               $this->sendPayload();
-               $this->invalidateControl('orderStreet');
-           }  
+    public function handleEditOrderStreet($orderid){
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){            
+                $content = $_POST['value'];
+                $this->orderModel->updateOrderStreet($orderid,$content);
+            }
+            if(!$this->isControlInvalid('orderStreet')){
+                $this->payload->edit = $content;
+                $this->sendPayload();
+                $this->invalidateControl('orderStreet');
+            }
+            else {
+             $this->redirect('this');
+            }
+        }
+    }
+    
+    public function handleEditOrderCity($orderid){
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){            
+                $content = $_POST['value'];
+                $this->orderModel->updateOrderCity($orderid,$content);
+            }
+            if(!$this->isControlInvalid('orderCity')){
+                $this->payload->edit = $content;
+                $this->sendPayload();
+                $this->invalidateControl('orderCity');
+            }
+            else {
+             $this->redirect('this');
+            }
+        }
+    }
+    
+    public function handleEditOrderZIP($orderid){
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){            
+                $content = $_POST['value'];
+                $this->orderModel->updateOrderZIP($orderid,$content);
+            }
+            if(!$this->isControlInvalid('orderZIP')){
+                $this->payload->edit = $content;
+                $this->sendPayload();
+                $this->invalidateControl('orderZIP');
+            }
+            else {
+             $this->redirect('this');
+            }
         }
     }
 

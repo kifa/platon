@@ -62,13 +62,33 @@ class OrderModel extends Repository {
     
     
     public function updateOrderStreet($id, $street){
-        $user = $this->getTable('orders')->select('orders.UsersID')->where('OrderID',$id);
+        $user = $this->getTable('orders')->select('orders.UsersID')->where('OrderID',$id)->fetch();                
         
         $update = array('Street' => $street);
         
-        return $this->getTable('address')->where('UsersID',$user)->update($update);
+        return $this->getTable('address')->where('UsersID',$user['UsersID'])->update($update);
     }
     
+    public function updateOrderCity($id, $city){
+        $user = $this->getTable('orders')->select('orders.UsersID')->where('OrderID',$id)->fetch();
+        
+        $update = array(
+            'City' => $city
+        );
+        
+        return $this->getTable('address')->where('UsersID',$user['UsersID'])->update($update);
+    }
+
+    public function updateOrderZIP($id, $zip){
+        $user = $this->getTable('orders')->select('orders.UsersID')->where('OrderID',$id)->fetch();
+        
+        $update = array(
+            'ZIPCode' => $zip
+        );
+        
+        return $this->getTable('address')->where('UsersID',$user['UsersID'])->update($update);
+    }
+
     /*
      * Show product in order
      */
@@ -139,10 +159,17 @@ class OrderModel extends Repository {
             return $lastID['OrderID'];
     }
     
-    public function updateOrder($orderid, $shipping, $payment) {
+    public function updateOrder($orderid, $shipping, $payment=NULL) {
         
-        $paymentPrice = $this->loadPaymentPrice($payment);
-       
+        
+        if($payment!=NULL){
+            $paymentPrice = $this->loadPaymentPrice($payment);
+        }
+        else{
+            $payment = $this->getTable('orders')->select('PaymentID')->where('OrderID',$orderid)->fetch();
+            $paymentPrice = $this->loadPaymentPrice($payment['PaymentID']);
+        }
+            
         $deliveryPrice = $this->loadDeliveryPrice($shipping);
        
         $deliveryPaymentPrice = $paymentPrice + $deliveryPrice;

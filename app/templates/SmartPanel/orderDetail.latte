@@ -213,7 +213,7 @@
             <div class="span4">
                 <p>
                     <i class="icon-truck icon-large left"></i> {_'Shipping'}:&nbsp;
-                    <div n:snippet="orderShipping" class="orderShipping">{$order->DeliveryName}</div>
+                <div><span class="orderShipping" n:snippet="orderShipping">{$order->DeliveryName}</span></div>
                 </p>
             </div>
 
@@ -265,8 +265,8 @@
                 <dl>
 
                     <dd>{_'Street'}: <strong class="orderStreet" n:snippet="orderStreet">{$address->Street}</strong></dd>
-                    <dd>{_'City'}: <strong>{$address->City}</strong></dd>
-                    <dd>{_'ZIP'}: <strong>{$address->ZIPCode}</strong></dd>
+                    <dd>{_'City'}: <strong class="orderCity" n:snippet="orderCity">{$address->City}</strong></dd>
+                    <dd>{_'ZIP'}: <strong class="orderZIP" n:snippet="orderZIP">{$address->ZIPCode}</strong></dd>
                 </dl> 
 
             </div>
@@ -291,30 +291,6 @@
 {block script}
 <script>
 $(document).ready(function() {         
-     $('.orderShipping').editable( {link editOrderShipping! $order->OrderID }, { 
-                data      :'{$delivery}',
-                type      : 'select',
-                submit    : 'OK',
-                indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
-                callback : function(value, settings) {
-                   var json = $.parseJSON(value);
-                   $('.orderShipping').text(json.edit);
-               }
-           });
-    
-     $('.orderStreet').editable( {link editOrderStreet! $order->OrderID }, { 
-                type      : 'text',
-                submit    : 'OK',
-                indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
-                callback : function(value, settings) {
-                   var json = $.parseJSON(value);
-                   $('.orderStreet').text(json.edit);
-               }
-           });
-
-
 
  $('#editCustomerButton').toggle(function(){
               $('#editCustomer').modal('show');
@@ -366,6 +342,52 @@ $(document).ready(function() {
                 $(this).parent().parent().children('.del').show();
             }); 
           
-      });      
+    $('.orderShipping').editable( {link editOrderShipping! $order->OrderID }, { 
+                data      :'{$delivery}',
+                type      : 'select',
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.orderShipping').text(json.edit);
+               }
+           });
+    
+     $('.orderStreet').editable( {link editOrderStreet! $order->OrderID }, { 
+                type      : 'text',
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.orderStreet').text(json.edit);
+               }
+           });
+           
+    $('.orderCity').editable( {link editOrderCity! $order->OrderID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.orderCity').text(json.edit);
+               }
+           });      
+      
+      $('.orderZIP').editable( {link editOrderZIP! $order->OrderID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.orderZIP').text(json.edit);
+               }
+           });
+});
 </script>
 {/block}
