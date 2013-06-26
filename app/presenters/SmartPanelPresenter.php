@@ -67,8 +67,14 @@ class SmartPanelPresenter extends BasePresenter {
             else {
                  $this->flashMessage($message, 'alert alert-error');
             }
-                    
-        $this->redirect('this');
+            
+            if($this->isAjax()) {
+                $this->invalidateControl('status');
+                $this->invalidateControl('script');
+            }
+            else {  
+                $this->redirect('this');
+            }
     }
 
     protected function createComponentPasswordForm() {
@@ -196,7 +202,7 @@ class SmartPanelPresenter extends BasePresenter {
     
     }
 
-    public function handleSetOrderShipping($orderid) {
+    public function handleEditOrderShipping($orderid) {
         if (!$this->getUser()->isInRole('admin')) {
 
          /*   if($this->isAjax()){
@@ -211,9 +217,27 @@ class SmartPanelPresenter extends BasePresenter {
                $this->sendPayload();
                $this->invalidateControl('shipping');
            }  */
-            
+           
+           $this->payload->edit = 'ahoj';
+           $this->sendPayload();
            dump($_POST['value']);
            $this->redirect('SmartPanel:default');
+        }
+    }
+    
+    public function handleEditOrderStreet($orderid) {
+       if (!$this->getUser()->isInRole('admin')) {
+
+         if($this->isAjax()){
+              // $name = $_POST['id'];
+               $content = $_POST['value'];
+               $this->orderModel->updateOrderStreet($id, $content);
+           }
+           if(!$this->isControlInvalid('orderStreet')){
+               $this->payload->edit = $content;
+               $this->sendPayload();
+               $this->invalidateControl('orderStreet');
+           }  
         }
     }
 

@@ -110,7 +110,7 @@
 <div class="span10"> 
 {if $user->isInRole('admin')}
 
-    <div class="row">
+    <div class="row" n:snippet="status">
         <div class="span4 {if $order->StatusProgress == 0} grey {/if} alert alert-block">
             <div class="span5">
                 <p>
@@ -126,7 +126,7 @@
                 <ul class="inline">
                     {foreach $statuses as $id => $status}
                     {if !($iterator->isFirst())}
-                    <li>{if $id !== $order->StatusID}<a href="{plink setStatus! $order->OrderID, $id, $status->StatusName}" >{/if}{$status->StatusName}
+                    <li>{if $id !== $order->StatusID}<a href="{plink setStatus! $order->OrderID, $id, $status->StatusName}" class="ajax">{/if}{$status->StatusName}
                         {if !($iterator->isLast())}<i class="icon-arrow-right"></i>{/if}{if $iterator->isLast()}<i class="icon-ok"></i>{/if}{if $id !== $order->StatusID}</a>{/if}</li>
                     {/if}
                     {/foreach}
@@ -201,7 +201,7 @@
 
     </div>
     <div class="row">
-        <div class="span4 alert alert-info">
+        <div class="span4 alert alert-info" n:snippet="orderInfo">
 
             <div class="span4">
                 <p>
@@ -213,7 +213,7 @@
             <div class="span4">
                 <p>
                     <i class="icon-truck icon-large left"></i> {_'Shipping'}:&nbsp;
-                    <strong n:snippet="shipping" class="shipping">{$order->DeliveryName}</strong>
+                    <div n:snippet="orderShipping" class="orderShipping">{$order->DeliveryName}</div>
                 </p>
             </div>
 
@@ -241,7 +241,7 @@
         </div>
         <div class="span4 alert alert-info">
             <div class="span4">
-                <i class="icon-user left icon-large"></i><strong> Contact:</strong>
+                <i class="icon-user left icon-large"></i><strong> {_'Contact'}:</strong>
                 <p>
                 <dl>
                     <dd>{_'Name'}: <strong>{$order->Name}</strong></dd>
@@ -264,7 +264,7 @@
 
                 <dl>
 
-                    <dd>{_'Street'}: <strong>{$address->Street}</strong></dd>
+                    <dd>{_'Street'}: <strong class="orderStreet" n:snippet="orderStreet">{$address->Street}</strong></dd>
                     <dd>{_'City'}: <strong>{$address->City}</strong></dd>
                     <dd>{_'ZIP'}: <strong>{$address->ZIPCode}</strong></dd>
                 </dl> 
@@ -290,6 +290,32 @@
 
 {block script}
 <script>
+$(document).ready(function() {         
+     $('.orderShipping').editable( {link editOrderShipping! $order->OrderID }, { 
+                data      :'{$delivery}',
+                type      : 'select',
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.orderShipping').text(json.edit);
+               }
+           });
+    
+     $('.orderStreet').editable( {link editOrderStreet! $order->OrderID }, { 
+                type      : 'text',
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.orderStreet').text(json.edit);
+               }
+           });
+
+
+
  $('#editCustomerButton').toggle(function(){
               $('#editCustomer').modal('show');
             },
@@ -339,21 +365,7 @@
                 $(this).parent().hide();
                 $(this).parent().parent().children('.del').show();
             }); 
-        
-     
-     $('.shipping').editable( {link setOrderShipping! $order->OrderID }, { 
-                data      :'{$delivery}',
-                type      : 'select',
-                cancel    : {_'Cancel'},
-                submit    : 'OK',
-                indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
-                callback : function(value, settings) {
-                   var json = $.parseJSON(value);
-                   $('.shipping').text(json.edit);
-               }
-           });
           
-            
+      });      
 </script>
 {/block}
