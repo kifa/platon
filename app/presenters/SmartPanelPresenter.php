@@ -973,7 +973,7 @@ class SmartPanelPresenter extends BasePresenter {
             if($this->isAjax()){
                $name = $_POST['id'];
                $content = $_POST['value'];
-               $this->shopModel->setShopInfo($name, $content);
+               $this->shopModel->setShopInfo('Description', 'Eshop');
                              
            }
            if(!$this->isControlInvalid('shopinfo')){
