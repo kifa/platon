@@ -593,6 +593,27 @@ class SmartPanelPresenter extends BasePresenter {
        }
     }
     
+    public function handleDelStatus($delid) {
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){
+                $content = $_POST['value']; //odesílaná nová hodnota
+
+                $this->orderModel->updateDeliveryStatus($delid, $content);
+            }
+            
+            if(!$this->isControlInvalid('DelStatus')){           
+               $this->payload->edit = $content; //zaslání nové hodnoty do šablony
+               $this->sendPayload();
+               $this->invalidateControl('menu');       
+               $this->invalidateControl('DelStatus'); //invalidace snipetu
+           }
+           else {
+            $this->redirect('this');
+           }
+        }
+    }
+
+
     public function handleDelFF($delid) {
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax())
@@ -717,6 +738,13 @@ class SmartPanelPresenter extends BasePresenter {
     public function renderShipping() {
         
         $this->template->delivery = $this->orderModel->loadDelivery('');
+        $status = array();
+        
+        foreach ($this->orderModel->loadStatuses('') as $key => $value) {
+                $status[$key] = $value->StatusName;
+            };
+            
+        $this->template->status = $status;
         
     }
     
@@ -899,6 +927,26 @@ class SmartPanelPresenter extends BasePresenter {
             }
           }
     }
+    
+    public function handleEditPaymentStatus($payid) {
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){
+                $content = $_POST['value']; //odesílaná nová hodnota
+
+                $this->orderModel->updatePaymentStatus($payid, $content);
+            }
+            
+            if(!$this->isControlInvalid('PayStatus')){        
+                $this->payload->edit = $content; //zaslání nové hodnoty do šablony
+                $this->sendPayload();
+                $this->invalidateControl('menu');       
+                $this->invalidateControl('PayStatus'); //invalidace snipetu
+           }
+           else {
+            $this->redirect('this');
+           }
+        }
+    }
     /*
      * Render Payment
      */
@@ -906,6 +954,14 @@ class SmartPanelPresenter extends BasePresenter {
     public function renderPayment() {
 
         $this->template->payments = $this->orderModel->loadPayment('');
+        
+        $status = array();
+        
+        foreach ($this->orderModel->loadStatuses('') as $key => $value) {
+                $status[$key] = $value->StatusName;
+            };
+            
+        $this->template->status = $status;
     }
 
     /*

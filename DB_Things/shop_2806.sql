@@ -142,14 +142,17 @@ CREATE TABLE `delivery` (
   `DeliveryDescription` varchar(45) DEFAULT NULL,
   `DeliveryPrice` float DEFAULT NULL,
   `FreeFromPrice` float DEFAULT NULL,
+  `StatusID` int(11) NOT NULL DEFAULT '2',
   PRIMARY KEY (`DeliveryID`),
-  KEY `PriceID_idx` (`DeliveryPrice`)
+  KEY `PriceID_idx` (`DeliveryPrice`),
+  KEY `StatusID` (`StatusID`),
+  CONSTRAINT `delivery_ibfk_1` FOREIGN KEY (`StatusID`) REFERENCES `status` (`StatusID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `delivery` (`DeliveryID`, `DeliveryName`, `DeliveryDescription`, `DeliveryPrice`, `FreeFromPrice`) VALUES
-(1,	'Personal pick up',	'Personal in the shop',	0,	NULL),
-(2,	'Czech postal service',	'Send by transport company',	99,	1000),
-(3,	'DPD',	'Curier express shipping!',	160,	10000);
+INSERT INTO `delivery` (`DeliveryID`, `DeliveryName`, `DeliveryDescription`, `DeliveryPrice`, `FreeFromPrice`, `StatusID`) VALUES
+(1,	'Personal pick up',	'Personal in the shop',	0,	NULL,	1),
+(2,	'Czech postal service',	'Send by transport company',	99,	1000,	2),
+(3,	'DPD',	'Curier express shipping!',	160,	10000,	2);
 
 DROP TABLE IF EXISTS `documentation`;
 CREATE TABLE `documentation` (
@@ -302,13 +305,16 @@ CREATE TABLE `payment` (
   `PaymentID` int(11) NOT NULL AUTO_INCREMENT,
   `PaymentName` varchar(45) DEFAULT NULL,
   `PaymentPrice` float DEFAULT '1',
+  `StatusID` int(11) NOT NULL DEFAULT '2',
   PRIMARY KEY (`PaymentID`),
-  KEY `PriceID` (`PaymentPrice`)
+  KEY `PriceID` (`PaymentPrice`),
+  KEY `StatusID` (`StatusID`),
+  CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`StatusID`) REFERENCES `status` (`StatusID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `payment` (`PaymentID`, `PaymentName`, `PaymentPrice`) VALUES
-(1,	'Cash',	0),
-(3,	'Bankwire',	50);
+INSERT INTO `payment` (`PaymentID`, `PaymentName`, `PaymentPrice`, `StatusID`) VALUES
+(1,	'Cash',	0,	1),
+(3,	'Bankwire',	50,	1);
 
 DROP TABLE IF EXISTS `photo`;
 CREATE TABLE `photo` (
@@ -495,6 +501,18 @@ INSERT INTO `settings` (`SettingID`, `SettingName`, `Value`) VALUES
 (6,	'ProductLayout',	'default'),
 (7,	'TAX',	'21');
 
+DROP TABLE IF EXISTS `status`;
+CREATE TABLE `status` (
+  `StatusID` int(11) NOT NULL AUTO_INCREMENT,
+  `StatusName` varchar(30) COLLATE utf8_czech_ci NOT NULL,
+  PRIMARY KEY (`StatusID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+INSERT INTO `status` (`StatusID`, `StatusName`) VALUES
+(1,	'Active'),
+(2,	'Non-Active'),
+(3,	'Archived');
+
 DROP TABLE IF EXISTS `unit`;
 CREATE TABLE `unit` (
   `UnitID` int(11) NOT NULL AUTO_INCREMENT,
@@ -569,4 +587,4 @@ INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`
 ('tomik@tomas.com',	'$2a$07$xshgrgluo88ug5qvohjvme0',	'Tomas',	NULL,	NULL,	NULL,	'0'),
 ('yetty@himalaja.tib',	NULL,	'Yetty',	0,	NULL,	NULL,	'user');
 
--- 2013-06-28 00:16:38
+-- 2013-06-28 01:53:56
