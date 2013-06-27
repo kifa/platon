@@ -223,6 +223,12 @@ class SmartPanelPresenter extends BasePresenter {
         }
     }
     
+    public function handleEditOrderPayment($orderid) {
+        if (!$this->getUser()->isInRole('admin')) {
+            $this->redirect('SmartPanel:');
+        }
+    }
+
     public function handleEditOrderStreet($orderid){
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            

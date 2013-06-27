@@ -220,9 +220,10 @@
             <div class="span4">
                 <p>
                     <i class="icon-money icon-large left"></i> {_'Payment'}:&nbsp;
-                    <strong>{$order->PaymentName}</strong>
+                    <strong class="orderPayment" n:snippet="orderPayment">{$order->PaymentName}</strong>
                 </p>
             </div>
+              <span class="muted span4"><i class="icon-info-sign"></i> {_'EDIT shipping and payment by Double-clicking.'}</span>
         </div>
         <div class="row">
 
@@ -258,18 +259,20 @@
             </div>
         </div>
 
+
         <div class="span4 alert alert-info">
             <div class="span4">
                 <i class="icon-home left icon-large"></i><strong> {_'Address'}:</strong>
 
                 <dl>
 
-                    <dd>{_'Street'}: <strong class="orderStreet" n:snippet="orderStreet">{$address->Street}</strong></dd>
-                    <dd>{_'City'}: <strong class="orderCity" n:snippet="orderCity">{$address->City}</strong></dd>
-                    <dd>{_'ZIP'}: <strong class="orderZIP" n:snippet="orderZIP">{$address->ZIPCode}</strong></dd>
+                    <dd class="span4"><span class="span1">{_'Street'}:</span><strong class="orderStreet span2" n:snippet="orderStreet">{$address->Street}</strong></dd>
+                    <dd class="span4"><span class="span1">{_'City'}:</span><strong class="orderCity span2" n:snippet="orderCity">{$address->City}</strong></dd>
+                    <dd class="span4"><span class="span1">{_'ZIP'}:</span><strong class="orderZIP span2" n:snippet="orderZIP">{$address->ZIPCode}</strong></dd>
                 </dl> 
 
             </div>
+        <span class="muted span4"><i class="icon-info-sign"></i> {_'EDIT address by Double-clicking.'}</span>
         </div>
 
         
@@ -354,9 +357,23 @@ $(document).ready(function() {
                }
            });
     
+     $('.orderPayment').editable( {link editOrderPayment! $order->OrderID }, { 
+                data      :'{$payment}',
+                type      : 'select',
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.orderShipping').text(json.edit);
+               }
+           });
+           
      $('.orderStreet').editable( {link editOrderStreet! $order->OrderID }, { 
                 type      : 'text',
                 submit    : 'OK',
+                cancel    : {_'Cancel'},
+                event     : 'dblclick',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
                 tooltip   : 'Click to edit ...',
                 callback : function(value, settings) {
@@ -369,6 +386,7 @@ $(document).ready(function() {
                 type      : 'text',
                 cancel    : {_'Cancel'},
                 submit    : 'OK',
+                event     : 'dblclick',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
                 tooltip   : 'Click to edit ...',
                 callback : function(value, settings) {
@@ -381,6 +399,7 @@ $(document).ready(function() {
                 type      : 'text',
                 cancel    : {_'Cancel'},
                 submit    : 'OK',
+                event     : 'dblclick',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
                 tooltip   : 'Click to edit ...',
                 callback : function(value, settings) {
