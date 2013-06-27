@@ -18,12 +18,12 @@
     <table class="table span9 miniproduct">
     <thead class="table-bordered">
                 <tr>
-                    <th></th>
+                    <th colspan="2"></th>
                     <th>{_'Product'}</th>
                     <th>{_'Amount'}</th>
                     <th>{_'Item price'}</th>
                     <th>{_'Total price'}</th>
-                    <th></th>
+                    
                 </tr>
             </thead>
             
@@ -39,26 +39,26 @@
                              <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="width: 38px;"/>
                         {/if} 
                         {*$product->ProductNumber*}</td>
+                    <td><a n:href="removeItem! $id" class="ajax"><i class="icon-trash"></i></a></td>
                     <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
                     <td><a href="{plink addAmount! $id}" class="ajax"><i class="icon-plus-sign"></i></a> {$amnt} {_'pcs'}
                         
                         <a href="{plink removeAmount! $id}" class="ajax"><i class="icon-minus-sign"></i></a></td>
                     <td>{$product->FinalPrice},-</td>
                     <td>{$subtotal},-</td>
-                    <td><a n:href="removeItem! $id" class="ajax"><i class="icon-trash"></i></a></td>
+                    
                 </tr>
            {var $grandtotal = $grandtotal + $subtotal}
     {/foreach}
 {/foreach}
                
                 <tr>
-                    <td colspan="2"></td>
-                    <td> <strong>{_'Products'}:</strong>
-                        <span>{$grandtotal},-</span> </td>
+                    <td colspan="3"></td>
                     <td> <strong>{_'Shipping'}:</strong> 
                          <span class="shipping">0,-</span></td>
-                    <td class="2"> <strong>{_'Total'}:</strong>
+                    <td class="1"> <strong>{_'Total'}:</strong>
                          <span class="ordertotal">{$grandtotal},-</span></td>
+                    <td><a href="#orderform" class="btn btn-warning"><i class="icon-arrow-down"></i> Continue your Order</a></td>
                 </tr>
                 
             </tbody>
@@ -72,7 +72,7 @@
         {form cartForm}
         <fieldset>
             
-    <legend><span class="badge badge-info">1</span> {_'Choose your delivery option'}</legend>
+    <legend id="orderform"><span class="badge badge-info">1</span> {_'Choose your delivery option'}</legend>
     <div class="controls span4">
             {label shippers /}
             {input shippers}
