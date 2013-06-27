@@ -26,14 +26,19 @@ class ShopModel extends Repository {
      */
     public function getTax()
     {
-        $tax = $this->getTable('settings')->where('Name',"TAX")->fetch();
+        $tax = $this->getTable('settings')->where('SettingName',"TAX")->fetch();
         return $tax['Value'];
     }
     
     public function getShopInfo($name)
     {
-        $value = $this->getTable('settings')->where('Name', $name)->fetch();
-        return $value['Value'];
+        if($name != '') {
+            $value = $this->getTable('settings')->where('SettingName', $name)->fetch();
+            return $value['Value'];
+        }
+        else {
+            return $this->getTable('settings')->fetchPairs('SettingName');
+        }
     }
     
     public function setShopInfo($name, $value)
@@ -49,9 +54,9 @@ class ShopModel extends Repository {
           $name => $value  
         );
         }       
-        return $this->getTable('settings')->where('Name', $name)->update($update);
+        return $this->getTable('settings')->where('SettingName', $name)->update($update);
     }
-
+    
 
     /*
      * Load VAT etc

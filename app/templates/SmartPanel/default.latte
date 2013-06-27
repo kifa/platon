@@ -26,6 +26,7 @@
         <ul class="nav nav-tabs">
           <li class="active"><a href="#overal"  data-toggle="tab">{_'Overal'}</a></li>
           <li><a href="#account"  data-toggle="tab">{_'Account'}</a></li>
+          <li><a href="#shopinfo"  data-toggle="tab">{_'Shop info'}</a></li>
           <li><a href="#other"  data-toggle="tab">{_'Other'}</a></li>
         </ul>
         <div class="tab-content">
@@ -113,6 +114,24 @@
                  {control passwordForm}   
             
           </div>
+          <div class="tab-pane" id="shopinfo">
+              <h3>{_'Edit your shop info'}</h3>
+              <div class="span5">
+                  <table n:snippet="shopinfo">
+                      <thead>
+                      </thead>
+                      <tbody>
+                           {foreach $settings as $row}
+                          <tr>
+                              <td>{!$row->SettingName}</td>
+                              <td class="{!$row->SettingName}" n:snippet="{!$row->SettingName}">{$row->Value}</td>
+                          </tr>
+                              {/foreach}
+                          
+                      </tbody>
+                  </table>
+              </div>
+          </div>
             
             <div class="tab-pane" id="other">
                 <h3>{_'Regenerate Thumbnails'}</h3>
@@ -146,6 +165,21 @@
             });
      
       });
+      
+      {foreach $settings as $row}
+            
+        $('.{!$row->SettingName}').editable( {link setShopInfo! }, { 
+                                        type      : 'text',
+                                        cancel    : {_'Cancel'},
+                                        submit    : 'OK',
+                                        indicator : '<i class="icon-spinner icon-spin"></i>',
+                                        tooltip   : 'Click to edit ...',
+                                        callback : function(value, settings) {
+                                           var json = $.parseJSON(value);
+                                           $('.{!$row->SettingName}').text(json.edit);
+                                       }
+                                   })
+      {/foreach}
     </script>
 
 {/block}

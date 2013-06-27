@@ -968,6 +968,28 @@ class SmartPanelPresenter extends BasePresenter {
         $this->presenter->redirect("this");
     }
 
+    public function handleSetShopInfo() {
+        if ($this->getUser()->isInRole('admin')) {   
+            if($this->isAjax()){
+               $name = $_POST['id'];
+               $content = $_POST['value'];
+               $this->shopModel->setShopInfo($name, $content);
+                             
+           }
+           if(!$this->isControlInvalid('shopinfo')){
+               $this->payload->edit = $content;
+               $this->sendPayload();
+               $this->invalidateControl('shopinfo');
+               //$this->invalidateControl('flashMessages');
+
+           }
+            else {
+                 $this->redirect('this');
+
+            }
+          }
+    }
+            
     public function renderDefault() {
         if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
@@ -975,6 +997,7 @@ class SmartPanelPresenter extends BasePresenter {
             $this->template->usr = $this->getUser()->getIdentity();
             $this->template->ord = $this->orderModel->countOrder();
             $this->template->orders = $this->orderModel->loadOrders();
+            $this->template->settings = $this->shopModel->getShopInfo('');
             $this->template->anyVariable = 'any value';
         }
     }
