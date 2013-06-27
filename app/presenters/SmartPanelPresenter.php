@@ -229,6 +229,41 @@ class SmartPanelPresenter extends BasePresenter {
         }
     }
 
+    public function handleEditOrderPhone($userid, $name){
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){            
+                $content = $_POST['value'];
+                $this->userModel->updateUser($userid, $name, $content);
+            }
+            if(!$this->isControlInvalid('orderPhone')){
+                $this->payload->edit = $content;
+                $this->sendPayload();
+                $this->invalidateControl('orderPhone');
+            }
+            else {
+             $this->redirect('this');
+            }
+        }
+    }
+    
+     public function handleEditOrderName($userid, $phone){
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){            
+                $content = $_POST['value'];
+                $this->userModel->updateUser($userid, $content, $phone);
+            }
+            if(!$this->isControlInvalid('orderName')){
+                $this->payload->edit = $content;
+                $this->sendPayload();
+                $this->invalidateControl('orderName');
+            }
+            else {
+             $this->redirect('this');
+            }
+        }
+    }
+    
+    
     public function handleEditOrderStreet($orderid){
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            

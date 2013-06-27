@@ -16,7 +16,6 @@
         </div>
         <div class="btn-group">
         {if $order->StatusProgress !== 10}
-        <a class="btn" href="#editAddress" data-toggel="modal" data-target="#editAddress" id="editAddressButton"><i class="icon-large icon-home"></i> {_"Edit Address"}</a> 
         <a class="btn" href="#editOrderInfo" data-toggel="modal" data-target="#editOrderInfo" id="editOrderInfoButton"><i class="icon-large icon-list"></i> {_"Edit Order Info"}</a> 
         <a class="btn" href="#editProducts" data-toggel="modal" data-target="#editProducts" id="editProductsButton"><i class="icon-large icon-download"></i> {_"Edit Products"}</a> 
         </div>
@@ -28,20 +27,6 @@
     </div>
 </div>
 </div>
-    
-    <div id="editAddress" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-user"></i> {_'Edit Customer Address'}</h3>
-            </div>
-            <div class="modal-body">
-                <p>{_'Edit customer info and click save'}</p>
-              <p>{control editOrderAddressForm}</p>
-            </div>
-            <div class="modal-footer">
-              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            </div>
-    </div>
 
     <div id="editOrderInfo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-header">
@@ -245,9 +230,9 @@
                 <i class="icon-user left icon-large"></i><strong> {_'Contact'}:</strong>
                 <p>
                 <dl>
-                    <dd>{_'Name'}: <strong>{$order->Name}</strong></dd>
-                    <dd>{_'Email'}: <strong>{$order->UsersID}</strong></dd>
-                    <dd>{_'Phone'}: <strong>{if $order->PhoneNumber != !''}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
+                    <dd class="span4"><span class="span1">{_'Name'}:</span><strong class="orderName span2" n:snippet="orderName">{$order->Name}</strong></dd>
+                    <dd class="span4"><span class="span1">{_'Email'}:</span><strong class="span2">{$order->UsersID}</strong></dd>
+                    <dd class="span4"><span class="span1">{_'Phone'}:</span><strong class="orderPhone span2" n:snippet="orderPhone">{if $order->PhoneNumber}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
                 </dl>
                 </p>
         {if $order->CompanyName != ""}
@@ -257,6 +242,7 @@
                 </dl>
         {/if}
             </div>
+          <span class="muted span4"><i class="icon-info-sign"></i> {_'EDIT name and phone by Double-clicking.'}</span>
         </div>
 
 
@@ -345,6 +331,7 @@ $(document).ready(function() {
                 $(this).parent().parent().children('.del').show();
             }); 
           
+  {if $order->StatusProgress !== 10}
     $('.orderShipping').editable( {link editOrderShipping! $order->OrderID }, { 
                 data      :'{$delivery}',
                 type      : 'select',
@@ -407,6 +394,32 @@ $(document).ready(function() {
                    $('.orderZIP').text(json.edit);
                }
            });
+           
+      $('.orderPhone').editable( {link editOrderPhone! $order->UsersID, $order->Name }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                event     : 'dblclick',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.orderPhone').text(json.edit);
+               }
+           });
+      $('.orderName').editable( {link editOrderName! $order->UsersID, $order->PhoneNumber }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                event     : 'dblclick',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.orderName').text(json.edit);
+               }
+           });
+    {/if}
 });
 </script>
 {/block}
