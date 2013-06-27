@@ -354,18 +354,21 @@ class OrderPresenter extends BasePresenter {
      * @return void
      */
 
-    public function renderOrderDone($orderNo) {
+    public function renderOrderDone($orderNo, $track = NULL) {
 
         $this->template->products = $this->orderModel->loadOrderProduct($orderNo);
         $this->template->order = $this->orderModel->loadOrder($orderNo);
         $this->template->statuses = $this->orderModel->loadStatus('');
         $this->template->address = $this->orderModel->loadOrderAddress($orderNo);
+        $this->template->notes = $this->orderModel->loadOrderNotes($orderNo);
+
 
         $ico = HTML::el('i')->class('icon-ok-sign left');
         $message = HTML::el('span', ' Order has been successfully sent.');
         $message->insert(0, $ico);
         $this->flashMessage($message, 'alert alert-info');
         
+        if($track == NULL) {
         foreach ($this->cart->prd as $id => $amnt) {
 
             $this->productModel->decreaseProduct($id, $this->cart->prd[$id]);
@@ -373,6 +376,7 @@ class OrderPresenter extends BasePresenter {
            
         unset($this->cart->prd);
         $this->cart->numberItems = 0;
+        }
     }
    
     /*

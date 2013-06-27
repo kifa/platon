@@ -8,30 +8,30 @@
 
 
 {block content}
-<div class="span9">
+<div class="span9 miniproduct thumbnail">
        <div class="row">
-           <div class="span4 alert alert-block">
-                <div class="span4">
+           <div class="span8 alert alert-block">
+                <div class="span8">
                     <p>
                     <i class="icon-spinner progress-striped icon-spin left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
                 {$order->StatusName}
                     </p>
                 </div>
                 <br>
-                <div class="progress progress-info active span4">
+                <div class="progress progress-striped active span7">
                     <div class="bar" style="width: 20%"></div>
                 </div>
-                <div class="span4">
+                <div class="span8">
                 <ul class="inline">
                     <li>{_'Next progress'}:</li>
                     {foreach $statuses as $id => $status}
                     {if !($iterator->isFirst())}
-                    <li>{$status->StatusName}
+                    <li>{if $status->StatusName == $order->StatusName}<strong>{$status->StatusName}</strong>{else}{$status->StatusName}{/if}
                         {if !($iterator->isLast())}<i class="icon-arrow-right"></i>{/if}{if $iterator->isLast()}<i class="icon-ok"></i>{/if}</li>
                     {/if}
                     {/foreach}
                   </ul>
-            </div>
+                </div>
             </div>
            
             <table class="table table-hover span8">
@@ -57,7 +57,7 @@
                 {else}
                    <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="width: 38px;"/>
                 {/if}
-                             {$product->ProductNumber}</td>
+                        </td>
                         <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
                         <td>{$product->Quantity}</td>
                         <td>{$product->UnitPrice},-</td>
@@ -68,21 +68,12 @@
 
     {/foreach}
 
-                <div class="span3 alert alert-info">   
-            <div class="span5">                    
-                <i class="icon-shopping-cart icon-large left"></i> <strong>{_'Order n.'} {$order->OrderID}</strong></div>
-            <div class="span4">
-                <dl>
-                    <dd><strong >{_'Products'}:</strong> {$grandtotal},-</dd>
-                    <dd><strong >{_'Shipping'}:</strong> {$shipping = $order->DeliveryPrice},-</dd>
-                    <dd><strong >{_'Total'}:</strong> {$grandtotal += $shipping},-</dd>
-                
-                
-                </dl>
-                
-            </div>
-        </div>
-
+               <tr>
+                    <td colspan="2"></td>
+                    <td><strong >{_'Products'}:</strong> {$grandtotal},-</td>
+                    <td><strong >{_'Shipping'}:</strong> {$shipping = $order->DeliveryPrice},-</td>
+                    <td><strong >{_'Total'}:</strong> {$grandtotal += $shipping},-</td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -146,13 +137,23 @@
                  
             </div>
         </div>
+        
+        <div class="span3 alert {$order->Note ? 'alert-block' : 'alert-info'}">
+            <div class="span3">
+                <i class="icon-paper-clip left icon-large"></i><strong> {_'Note'}:</strong>
+                    {foreach $notes as $note}
+                <p>{$note->NotesName} - {$note->NotesDescription} - {$note->NotesDate}</p>
+                {/foreach}
+                 <a class="btn" href="#addNote" data-toggel="modal" data-target="#addNote" id="addNoteButton"><i class="icon-large icon-plus-sign"></i> {_"Add note"}</a> 
+            </div>
+        </div>
             </div>
         </div>
 
 {/block}
 
 {block sidebar}
-<div class="span3">
+<div class="span2">
 <div class="alert alert-block">
     <p><i class="icon-info-sign"></i><strong> Thank you for your order!</strong><br>
     We are currenty working on your order. On this page you can see all info about

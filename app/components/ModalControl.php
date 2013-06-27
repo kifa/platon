@@ -82,7 +82,7 @@ class ModalControl extends BaseControl {
             $this->presenter->redirect('this');
         }
         else  {
-            $this->presenter->redirect('Order:orderDone', $form->values->order);
+            $this->presenter->redirect('Order:orderDone', $form->values->order, 1);
         }        
     }
     /*
