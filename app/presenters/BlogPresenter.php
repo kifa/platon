@@ -38,7 +38,7 @@ class BlogPresenter extends BasePresenter {
     
      
     public function actionPost($postid) {
-         $row = $this->blog->loadPost($postid);
+        $row = $this->blog->loadPost($postid);
          if ($this->getUser()->isInRole('admin')) {
                 $this->row = array('BlogID' => $row->BlogID,
                     'BlogName' => $row->BlogName,

@@ -198,31 +198,29 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
 
             $addProduct = new Nette\Application\UI\Form;
-            $addProduct->setRenderer(new BootstrapRenderer);
+      //      $addProduct->setRenderer(new BootstrapRenderer);
             $addProduct->setTranslator($this->translator);
             $addProduct->addText('name', 'Name:')
-                    ->setRequired();
+                    ->setRequired()
+                    ->setAttribute('placeholder', "Enter product name…")
+                    ->setAttribute('class', '.span3');
             $addProduct->addText('price', 'Price:')
                     ->setRequired()
-                    ->addRule(FORM::FLOAT, 'It has to be a number!');
+                    ->addRule(FORM::FLOAT, 'It has to be a number!')
+                    ->setAttribute('class', 'span2');
             $addProduct->addText('amount', 'Amount')
                     ->setDefaultValue('1')
                     ->addRule(FORM::INTEGER, 'It has to be a number!')
-                    ->setRequired();
-           /* $addProduct->addTextArea('short', 'Impress: ', 3)
-                    ->setRequired();
-            /*$addProduct->addTextArea('desc', 'Description: ', 10)
                     ->setRequired()
-                    ->setAttribute('class', 'mceEditor'); */
+                    ->setAttribute('class', 'span2');
             $addProduct->addHidden('cat', $this->catId);
-           // $addProduct->addSelect('producer', 'Producer: ', $producers); */
             $addProduct->addUpload('image', 'Image:')
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
-                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024)
+                    ->setAttribute('class', 'span2');
             $addProduct->addSubmit('add', 'Add Product')
                     ->setAttribute('class', 'upl btn btn-primary')
                     ->setAttribute('data-loading-text', 'Adding...');
-           // $addProduct->onSubmit('tinyMCE.triggerSave()');
             $addProduct->onSuccess[] = $this->addProductFormSubmitted;
             return $addProduct;
         }
@@ -270,12 +268,9 @@ class ProductPresenter extends BasePresenter {
                 $image->save($imgUrl);
             }
 
-            if($this->isAjax()) {
-                $this->invalidateControl('content');
-            }
-            else {
             $this->redirect('Product:product', $return[0]);
-            }
+            
+            
         }
     }
 
@@ -752,9 +747,10 @@ class ProductPresenter extends BasePresenter {
             $addPhoto->addHidden('albumID', $this->row['PhotoAlbumID']);
             $addPhoto->addUpload('image', 'Photo:')
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
-                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024)
+                    ->setAttribute('class', 'span3');
             $addPhoto->addSubmit('add', 'Add Photo')
-                    ->setAttribute('class', 'btn-primary upl')
+                    ->setAttribute('class', 'btn-primary upl span2')
                     ->setAttribute('data-loading-text', 'Uploading...');
             $addPhoto->onSuccess[] = $this->addProductPhotoFormSubmitted;
             return $addPhoto;

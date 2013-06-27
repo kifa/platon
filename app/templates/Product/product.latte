@@ -77,7 +77,7 @@
                 <div class="tab-pane active" id="info">
 
                     <p n:block="metadesc" class="prodShort" n:snippet="prodShort">{!$product->ProductShort|striptags|truncate:180}</p>
-
+                    
                 </div>
                 <div class="tab-pane" id="spec">
                     <dl class="dl-horizontal">
@@ -171,7 +171,14 @@
 
                                         <ul class="thumbnails">
                                             {if $user->isInRole('admin')}
-                                            <div class="span9">{control addPhotoForm}</div>
+                                            
+                                            {form addPhotoForm class => 'span9'}
+                                            {label image /}
+                                            {input image}
+                                           
+                                            {input add}
+                                           
+                                            {/form}
                                             {/if}
                                 {foreach $album as $id => $photo}
                                             <li class="{if $photo->CoverPhoto}span3 {else} span3 {/if}">
@@ -311,13 +318,7 @@
                                         $('#addPhoto').modal('hide');
                                     });
             
-                                  $('#editDescButton').toggle(function(){
-                                      $('#editDesc').modal('show');
-                                    },
-                                    function() {
-                                        $('#editDesc').modal('hide');
-                                    });
-            
+                                         
                                   $('#editPriceButton').toggle(function(){
                                       $('#editPrice').modal('show');
                                     },

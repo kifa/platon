@@ -48,7 +48,7 @@ class BlogModel extends Repository {
                 SELECT * FROM blog
                 JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
-                WHERE blog.BlogID=?',$postid)->fetch();
+                WHERE blog.BlogID=?',$postid)->fetch();  
         
     }
 

@@ -2,28 +2,28 @@
 {block pageheader}
 
         <div class="page-header">
-        <h1 n:block="title">{_'Your cart'} <small>Here you can complete your order. Just fill fields bellow.</small></h1>
+        <h1 n:block="title"><i class="icon-shopping-cart"></i> {_'Your cart'} <small>Here you can complete your order. Just fill fields bellow.</small></h1>
         </div>
 
 {/block}
     
 {block content}
-<div class="span10" n:snippet="cartTable">    
+<div class="span12" n:snippet="cartTable">    
 {*foreach $flashes as $flash}
         <div class="{$flash->type}">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
 {$flash->message}</div>
 {/foreach*}
 
-<table class="table table-hover span9">
-            <thead>
+    <table class="table span9 miniproduct">
+    <thead class="table-bordered">
                 <tr>
-                    <th>#</th>
-                    <th>{_'Product Name'}</th>
+                    <th></th>
+                    <th>{_'Product'}</th>
                     <th>{_'Amount'}</th>
                     <th>{_'Item price'}</th>
                     <th>{_'Total price'}</th>
-                    <th>X</th>
+                    <th></th>
                 </tr>
             </thead>
             
@@ -34,45 +34,100 @@
         {var $subtotal = $amnt * $product->FinalPrice}
                 <tr>
                     <td>{if $product->PhotoAlbumID}
-                             <img src="{$basePath}/images/{$product->PhotoAlbumID}/50-{$product->PhotoURL}" class="img-circle" style="width: 38px;"/>
+                             <img src="{$basePath}/images/{$product->PhotoAlbumID}/50-{$product->PhotoURL}" class="img-circle" style="width: 100px;"/>
                         {else}
                              <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="width: 38px;"/>
                         {/if} 
-                        {$product->ProductNumber}</td>
+                        {*$product->ProductNumber*}</td>
                     <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
                     <td><a href="{plink addAmount! $id}" class="ajax"><i class="icon-plus-sign"></i></a> {$amnt} {_'pcs'}
                         
                         <a href="{plink removeAmount! $id}" class="ajax"><i class="icon-minus-sign"></i></a></td>
                     <td>{$product->FinalPrice},-</td>
                     <td>{$subtotal},-</td>
-                    <td><a n:href="removeItem! $id" class="ajax"><i class="icon-trash"></i> {_'remove'}</a></td>
+                    <td><a n:href="removeItem! $id" class="ajax"><i class="icon-trash"></i></a></td>
                 </tr>
            {var $grandtotal = $grandtotal + $subtotal}
     {/foreach}
 {/foreach}
+               
+                <tr>
+                    <td colspan="2"></td>
+                    <td> <strong>{_'Products'}:</strong>
+                        <span>{$grandtotal},-</span> </td>
+                    <td> <strong>{_'Shipping'}:</strong> 
+                         <span class="shipping">0,-</span></td>
+                    <td class="2"> <strong>{_'Total'}:</strong>
+                         <span class="ordertotal">{$grandtotal},-</span></td>
+                </tr>
                 
             </tbody>
             
         </table>
 
-<div class="span8 alert alert-info">   
-                        <div class="span1">                    
-                            <i class="icon-shopping-cart icon-4x"></i></div>
-                        <div class="span6">
-                            <h4 class="span2"><strong class="span1">{_'Products'}:</strong>
-                                <span class="span1">{$grandtotal},-</span></h4>
-                            <h4 class="span2"><strong class="span1">{_'Shipping'}:</strong> 
-                                <span class="shipping span1">0,-</span></h4>
-                            <h4 class="span2"><strong class="span1">{_'Total'}:</strong>
-                                <span class="ordertotal span1">{$grandtotal},-</span></h4>
-                        </div>
-                    </div>
-       
+<div class="span9 miniproduct thumbnail">
+    <div class="">
+    
         
-<div class="span9">
-            <fieldset>
-                {control cartForm}
+        {form cartForm}
+        <fieldset>
+            
+    <legend><span class="badge badge-info">1</span> {_'Choose your delivery option'}</legend>
+    <div class="controls span4">
+            {label shippers /}
+            {input shippers}
+    </div>
+            <legend><span class="badge badge-info">2</span> {_'Fill contact information'}</legend>
+            <div class="controls span3">
+                
+                {label name /}
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-user"></i></span>
+                {input name}
+                </div>
+                {label phone /}
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-phone"></i></span>
+                {input phone}
+                </div>
+                {label email /}
+                <div class="input-prepend">
+                    <span class="add-on">@</span>
+                {input email}
+                </div>
+            </div>
+            <div class="controls span4">
+                {label address /}
+                {input address}
+                {label city /}
+                {input city}
+                {label zip /}
+                {input zip}
+            </div>    
+            
+            <legend><span class="badge badge-info">3</span> {_'Select Payment method'}</legend>
+            <div class="controls span4">
+                {label payment /}
+                {input payment}
+            </div>
+            <legend><span class="badge badge-info">4</span> {_'Finish your order'}</legend>
+            <div class="controls span3">
+                {input send}
+                <hr>
+                {input termButton}
+                <div class="controls">
+                {label terms /}
+                {input terms}
+                </div>
+                
+            </div>
+             <div class="controls span4">
+                {label note /}
+                {input note}
+            </div>
             </fieldset>
+        {/form}
+    </div>
 <div class="span8 alert alert-info">   
                         <div class="span1">                    
                             <i class="icon-shopping-cart icon-4x"></i></div>
@@ -132,11 +187,8 @@
 {/block}
 
 {block sidebar}
-<div class="span2">
-    <a href="#termsButton" id="termsButton" class="btn btn-small btn-primary">READ</a>
     {var $i = 'Terms'}{var $ii = 'Violators will be prosecuted to the maximum extent possible.'}
     {control modalControl:info terms, $i, $ii}
-</div>
 {/block}
 
     {block script}

@@ -120,7 +120,6 @@
 
 {block content}
 <div class="span10" n:snippet="products">    
-
 <ul class="thumbnails">
     
     {if $user->isInRole('admin')}
@@ -128,20 +127,34 @@
     <li class="span3 setview miniproduct hide" n:snippet="newproduct" >
         <div class="thumbnail info">
             <div style="height: 527px">
-                <div class="row">
-
-                <div class="span3">
-                    <h3>{_"Add new product!"}</h3>
-                </div>
-
-                </div>
-                <hr>
-
-            <div class="span3">            
-              {control addProductForm}
+            <div class="">            
+{form addProductForm}
+  <fieldset>
+    <legend>Add new product</legend>
+    {label name /}
+    {input name}
+    {label price /}
+    <div class="input-prepend">
+  <span class="add-on">$</span>
+    {input price}
+    </div>
+    {label amount /}
+    <div class="input-prepend input-append">
+                <button class="btn" type="button" id="plusAmount">+</button>
+    {input amount}
+        <button class="btn" type="button" id="minusAmount">-</button>
+    </div>
+    {label image /}
+    {input image}
+    <div class="form-actions">
+    {input add}
+    <button class="btn" id="addProductButtonHide"><i class="icon-large icon-minus-sign"></i> {_'Hide'}</button>
+    </div>
+    <span class="help-block">Example block-level help text here.</span>
+  </fieldset>
+{/form}
 
             </div>
-                <a href="#addProduct" class="btn" id="addProductButtonHide"><i class="icon-large icon-minus-sign"></i> {_'Hide'}</a>
             </div>
         </div> <!--primary row -->
     </li>
@@ -228,24 +241,24 @@
     $(document).ready(function() {
         var amount = 1;
 
-    $('input[name=plusItem]').click(function() {
+    $('#plusAmount').click(function() {
             var i = $('input[name=amount]').val();
             amount = parseInt(i) + 1;
-        $('#frmaddProductForm-amount').val(amount);
+        $('#frm-addProductForm-amount').val(amount);
 
         });
 
-     $('input[name=minusItem]').click(function() {
+     $('#minusAmount').click(function() {
             var i = $('input[name=amount]').val();
 
             amount = parseInt(i);
 
             if(amount <= 0) {
-                $('#frmaddProductForm-amount').val(0);
+                $('#frm-addProductForm-amount').val(0);
             }
             else {
                 amount = amount -1;
-                $('#frmaddProductForm-amount').val(amount);
+                $('#frm-addProductForm-amount').val(amount);
             }
         });   
 

@@ -212,7 +212,7 @@ class OrderPresenter extends BasePresenter {
         };
         
         $cartForm = new Nette\Application\UI\Form;
-        $cartForm->setRenderer(new BootstrapRenderer);
+    //    $cartForm->setRenderer(new BootstrapRenderer);
         $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
         $cartForm->addGroup('Delivery info');
         $cartForm->addText('name', 'Name:', 40, 100)
@@ -223,7 +223,7 @@ class OrderPresenter extends BasePresenter {
                 ->addRule(Form::EMAIL, 'Would you fill your email, please?')
                 ->addRule(Form::FILLED, 'Would you fill your name, please?');
         $cartForm->addGroup('Address');
-        $cartForm->addText('address', 'Address:', 60, 100)
+        $cartForm->addText('address', 'Street:', 60, 100)
                 ->addRule(Form::FILLED);
         $cartForm->addText('city', 'City:', 40, 100)
                 ->addRule(Form::FILLED);
@@ -249,7 +249,7 @@ class OrderPresenter extends BasePresenter {
          $cartForm->addGroup('Notes');
         $cartForm->addTextArea('note', 'Note:', 50, 4);
         $cartForm->addGroup('Checkout');
-        $cartForm->addSubmit('send', 'Checkout here!')
+        $cartForm->addSubmit('send', 'Checkout')
                 ->setAttribute('class', 'btn btn-warning btn-large');
         
         $cartForm->onSuccess[] = $this->cartFormSubmitted;
