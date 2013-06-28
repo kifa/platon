@@ -291,13 +291,24 @@ class OrderModel extends Repository {
     /*
      * Load payment  for order
      */
-    public function loadPayment($id){
-        if($id==''){
-            return $this->getTable('payment')->select('payment.*, status.*')->fetchPairs('PaymentID');
+    public function loadPayment($id, $switch=NULL){
+        if($switch==NULL){
+            if($id==''){
+                return $this->getTable('payment')->select('payment.*, status.*')->fetchPairs('PaymentID');
+            }
+            else
+            {
+                return $this->getTable('payment.*, status.*')->where('PaymentID',$id);
+            }
         }
-        else
-        {
-            return $this->getTable('payment.*, status.*')->where('PaymentID',$id);
+        elseif ($switch=='active') {
+             if($id==''){
+                return $this->getTable('payment')->select('payment.*, status.*')->where('status.StatusName',$switch)->fetchPairs('PaymentID');
+            }
+            else
+            {
+                return $this->getTable('payment.*, status.*')->where('PaymentID',$id);
+            }
         }
     }
     
@@ -348,14 +359,25 @@ class OrderModel extends Repository {
     /*
      * Load delivery 
      */
-    public function loadDelivery($id)
+    public function loadDelivery($id,$switch=NULL)
     {
-        if($id==''){
-            return $this->getTable('delivery')->select('delivery.*, status.*')->fetchPairs('DeliveryID');
+        if($switch==NULL){
+            if($id==''){
+                return $this->getTable('delivery')->select('delivery.*, status.*')->fetchPairs('DeliveryID');
+            }
+            else
+            {
+                return $this->getTable('delivery')->select('delivery.*, status.*')->where('DeliveryID',$id)->where('StatusID',1)->fetch();
+            }
         }
-        else
-        {
-            return $this->getTable('delivery')->select('delivery.*, status.*')->where('DeliveryID',$id)->fetch();
+        elseif ($switch=='active') {
+             if($id==''){
+                return $this->getTable('delivery')->select('delivery.*, status.*')->where('status.StatusName',$switch)->fetchPairs('DeliveryID');
+            }
+            else
+            {
+                return $this->getTable('delivery.*, status.*')->where('DeliveryID',$id);
+            }
         }
     }
     
