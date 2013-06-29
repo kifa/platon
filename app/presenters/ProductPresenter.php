@@ -1101,6 +1101,8 @@ class ProductPresenter extends BasePresenter {
         $this->template->parameter = $this->productModel->loadParameters($id);
 
         $this->template->docs = $this->productModel->loadDocumentation($id)->fetchPairs('DocumentID');
+        
+        
     }
 
     /*     * ***********************************************************************
