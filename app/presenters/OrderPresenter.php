@@ -171,11 +171,11 @@ class OrderPresenter extends BasePresenter {
             $shippers = array();
             $payment = array();
 
-            foreach ($this->orderModel->loadDelivery('') as $key => $value) {
+            foreach ($this->orderModel->loadDelivery('','active') as $key => $value) {
                 $shippers[$key] = $value->DeliveryPrice;
             };
 
-            foreach ($this->orderModel->loadPayment('') as $key => $value) {
+            foreach ($this->orderModel->loadPayment('','active') as $key => $value) {
                 $payment[$key] = $value->PaymentPrice;
             };
 

@@ -32,6 +32,7 @@
                                 <th>#</th>
                                 <th>{_'Name'}</th>
                                 <th>{_'Price'}</th>
+                                <th>{_'Status'}</th>
                                 <th class="span2"></th>
                             </tr>
                         </thead>
@@ -42,6 +43,7 @@
                                 <td>{$iterator->counter}</td>
                                 <td n:snippet="paymentName-{$payment->PaymentID}" class="paymentName-{$payment->PaymentID} edit">{$payment->PaymentName}</td>
                                 <td n:snippet="paymentPrice-{$payment->PaymentID}" class="paymentPrice-{$payment->PaymentID} edit">{$payment->PaymentPrice},-</td>
+                                <td n:snippet="paymentStatus-{$payment->PaymentID}" class="paymentStatus-{$payment->PaymentID} edit">{$payment->StatusName}</td>
                                 <td>
                                                                  
                                     <a n:href="removePay! $payment->PaymentID" class="ajax"><i class="icon-trash icon-large"></i></a>
@@ -105,7 +107,20 @@
             var json = $.parseJSON(value);
             $('.paymentPrice-{$payment->PaymentID}').text(json.edit);
         }
-        });                              
+        });    
+        
+    $('.paymentStatus-{$payment->PaymentID}').editable( {link editPaymentStatus! $payment->PaymentID }, { 
+            data      :'{$status}',
+            type      : 'select',
+            cancel    : {_'Cancel'},
+            submit    : 'OK',
+            indicator : '<i class="icon-spinner icon-spin"></i>',
+            tooltip   : 'Click to edit ...',
+            callback : function(value, settings) {
+               var json = $.parseJSON(value);
+               $('.paymentStatus-{$payment->PaymentID}').text(json.edit);
+           }
+       }); 
                                    
                                    {/foreach}
       $('.upl').click(function() { 
