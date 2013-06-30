@@ -1,6 +1,6 @@
 
 {block pageheader}
-<div class="page-header">
+<div class="page-header" n:snippet="productHeader">
     <h1 n:block="title"><span class="prodTitle" n:snippet="prodTitle">{$product->ProductName}</span>
             <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>
             {if $user->isInRole('admin')}

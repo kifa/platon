@@ -226,7 +226,6 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-   /*****************************************************************
 
     public function handleDeleteProduct($catID, $id) {
         if ($this->getUser()->isInRole('admin')) {
@@ -273,7 +272,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
     
-    /*****************************************************************/
+
 
     
     public function handleSetCatalogLayout($catID, $layoutID) {
@@ -374,7 +373,7 @@ class ProductPresenter extends BasePresenter {
 
         }
     }
-    /*********************************************************************
+
     public function handleEditProdDescription($prodid) {
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            
@@ -494,7 +493,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
  
-     */
+
 
     public function handleEditCatDescription($catid) {
         if($this->getUser()->isInRole('admin')){
@@ -680,17 +679,17 @@ class ProductPresenter extends BasePresenter {
                     'CategoryID' => $row->CategoryID,
                     'PiecesAvailable' => $row->PiecesAvailable);
 
-              /*  $editForm = $this['editParamForm'];
+                $editForm = $this['editParamForm'];
                 $addForm = $this['addParamForm'];
                 $docsForm = $this['addDocumentationForm'];
-                $priceForm = $this['editPriceForm'];*/
+                $priceForm = $this['editPriceForm'];
                 // $this['editPriceForm']['price'] = $this->row['SellingPrice'];
             }
         }
     }
 
-    /**********************************************************************
-     * Adding product photos
+
+    
 
 
     public function createComponentAddPhotoForm() {
@@ -712,8 +711,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    /*
-     * Adding submit form for adding photos
+  
 
 
     public function addProductPhotoFormSubmitted($form) {
@@ -800,7 +798,7 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('this');
         }
     }
-/*********************************************************************
+
     protected function createComponentEditPriceForm() {
         if ($this->getUser()->isInRole('admin')) {
 
@@ -990,7 +988,7 @@ class ProductPresenter extends BasePresenter {
 
     /*
      * Adding product photos
-     
+     */
 
     protected function createComponentAddDocumentationForm() {
         if ($this->getUser()->isInRole('admin')) {
@@ -1012,7 +1010,7 @@ class ProductPresenter extends BasePresenter {
 
     /*
      * Adding submit form for adding photos
-     
+    */ 
 
     public function addDocumentationFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
@@ -1033,8 +1031,7 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('this');
         }
     }
- * 
- */
+
     
     protected function createComponentProduct() {
         $productControl = new productControl();
@@ -1048,10 +1045,24 @@ class ProductPresenter extends BasePresenter {
 
     public function renderProduct($id) {
 
-        $prod = new productControl;
-       
-        $this->template->productID = $id;
+       if ($this->presenter->getUser()->isInRole('admin')) { 
+            if ($this->edit->param != NULL) {
+                $this->template->attr = 1;
+                $this->edit->param = NULL;
+            } else {
+                $this->template->attr = 0;
+            }
+            
+            $this->template->categories = $this->categoryModel->loadCategoryList();
+            $this->template->producers = $this->productModel->loadProducers();
+       }
+        
+        $this->template->product = $this->productModel->loadProduct($id);
+        $this->template->photo = $this->productModel->loadCoverPhoto($id);
+        $this->template->album = $this->productModel->loadPhotoAlbum($id);
         $this->template->parameter = $this->productModel->loadParameters($id);
+      
+        $this->template->docs = $this->productModel->loadDocumentation($id)->fetchPairs('DocumentID');
 
     }
 

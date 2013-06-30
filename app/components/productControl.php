@@ -19,6 +19,8 @@ class productControl extends BaseControl{
     private $categoryModel;
     private $productModel;
     private $blogModel;
+    
+    private $parameters;
 
     private $row;
 
@@ -42,6 +44,7 @@ class productControl extends BaseControl{
     
     public function setRow($row) {
         $this->row = $row;
+        $this->parameters = $this->productModel->loadParameters($this->row['ProductID']);
     }   
 
     public function createTemplate($class = NULL)
@@ -97,7 +100,7 @@ class productControl extends BaseControl{
             $this->productModel->showProduct($id);
             
             if($this->presenter->isAjax()) {
-                $this->invalidateControl('products');
+                $this->invalidateControl();
                 $this->invalidateControl('script');
             }
             else {
@@ -170,7 +173,7 @@ class productControl extends BaseControl{
                 $this->invalidateControl('editProdTitle');
             }
             else {
-             $this->redirect('this');
+             $this->presenter->redirect('this');
             }
 
         }
@@ -188,7 +191,7 @@ class productControl extends BaseControl{
                 $this->invalidateControl('editProdDescription');
             }
             else {
-             $this->redirect('this');
+             $this->presenter->redirect('this');
             }
         }
     }
@@ -205,7 +208,7 @@ class productControl extends BaseControl{
                 $this->invalidateControl('editProdShort');
             }
             else {
-             $this->redirect('this');
+             $this->presenter->redirect('this');
             }
         }
     }
@@ -228,7 +231,7 @@ class productControl extends BaseControl{
                 $this->presenter->sendPayload();
             }
             else {
-             $this->redirect('this');
+             $this->presenter->redirect('this');
             }
         }
     }
@@ -240,7 +243,7 @@ class productControl extends BaseControl{
                 $this->invalidateControl('prodPrice');
             }
             else{
-              $this->redirect('this');  
+              $this->presenter->redirect('this');  
             }
         }
     }
@@ -260,7 +263,7 @@ class productControl extends BaseControl{
                 $this->invalidateControl('editProdAmount');
             }
             else {
-             $this->redirect('this');
+             $this->presenter->redirect('this');
             }
         }
     }
@@ -275,7 +278,7 @@ class productControl extends BaseControl{
 
             }
             else {
-             $this->redirect('this');
+             $this->presenter->redirect('this');
             }
         }
     }
@@ -285,12 +288,12 @@ class productControl extends BaseControl{
             if($this->presenter->isAjax())
             {            
                 $this->productModel->updateProduct($id, 'ProducerID', $producerid);
-                $this->invalidateControl('productProducer');
+                $this->invalidateControl('content');
                 $this->invalidateControl('script');
 
             }
             else {
-             $this->redirect('this');
+             $this->presenter->redirect('this');
             }
         }
     }
@@ -401,7 +404,7 @@ class productControl extends BaseControl{
                 $this->flashMessage($e, 'alert');
             }
 
-            $this->redirect('this');
+            $this->presenter->redirect('this');
         }
     }
     
@@ -439,7 +442,7 @@ class productControl extends BaseControl{
                 $this->invalidateControl('prodPrice');
             }
             else {
-            $this->redirect('this');
+            $this->presenter->redirect('this');
             }
         }
     }
@@ -454,6 +457,7 @@ class productControl extends BaseControl{
                 $units[$id] = $unit->UnitShort;
             }
             $prompt = Html::el('option')->setText("-- Select --")->class('prompt');
+
 
             foreach ($this->parameters as $id => $param) {
                 $editForm->addGroup($param->AttribName);
@@ -484,7 +488,7 @@ class productControl extends BaseControl{
                 $prevVal = $value;
             }
 
-            $this->redirect('this');
+            $this->presenter->redirect('this');
         }
     }
 
@@ -534,7 +538,7 @@ class productControl extends BaseControl{
                 $this->productModel->insertParameter($form->values->productID, $attrib, NULL, $form->values->unit);
             }
             $this->edit->param = 1;
-            $this->redirect('this');
+            $this->presenter->redirect('this');
         }
     }
 
@@ -564,7 +568,7 @@ class productControl extends BaseControl{
                     $this->productModel->deleteParameter($id);
                 }
             }
-            $this->redirect('this');
+            $this->presenter->redirect('this');
         }
     }
     
@@ -606,7 +610,7 @@ class productControl extends BaseControl{
                 $this->flashMessage($e, 'alert');
             }
 
-            $this->redirect('this');
+            $this->presenter->redirect('this');
         }
     }
 
