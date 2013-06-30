@@ -53,13 +53,24 @@ class SmartPanelPresenter extends BasePresenter {
     public function injectTranslator(NetteTranslator\Gettext $translator) {
         $this->translator = $translator;
     }
+    
+    protected function createComponentMail() {
+        $mailControl = new mailControl();
+        $mailControl->setTranslator($this->translator);
+        $mailControl->setProduct($this->productModel);
+        $mailControl->setCategory($this->categoryModel);
+        $mailControl->setBlog($this->blogModel);
+        return $mailControl;
+    }
 
     public function handleSetStatus($orderid, $statusID, $name) {
         
            
             $this->orderModel->setStatus($orderid, $statusID);
             
-            $this->sendSuperMail('luk.danek@gmail.com', 'Status objednavky je: ' . $name, "Dobrý den, status Vaší objednávky je nyní: " . $name);
+            $mailIT = new mailControl();
+            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Status objednavky je: ' . $name, "Dobrý den, status Vaší objednávky je nyní: " . $name);
+
         
             $message = Html::el('span', ' Order status in now: ' . $name);
             $e = Html::el('i')->class('icon-ok-sign left');
@@ -72,7 +83,7 @@ class SmartPanelPresenter extends BasePresenter {
             }
             
             if($this->isAjax()) {
-                $this->invalidateControl('status');
+                $this->invalidateControl('content');
                 $this->invalidateControl('script');
             }
             else {  
@@ -1084,27 +1095,7 @@ class SmartPanelPresenter extends BasePresenter {
             
         }
     }
-    
-    
-    
-    
-    private function sendSuperMail($to, $subject, $message) {
-        $mail = new Message;
-            $mail->setFrom('Lukas <luk.danek@gmail.com>')
-            ->addTo($to)
-            ->addTo('luk.danek@gmail.com')
-            ->addTo('jiri.kifa@gmail.com')
-            ->setSubject('Zpráva z BIRNE: ' . $subject)
-            ->setBody($message);
 
-           $mailer = new Nette\Mail\SmtpMailer(array(
-                'host' => 'smtp.gmail.com',
-                'username' => 'obchod@inlinebus.cz',
-                'password' => 'cerven31',
-                'secure' => 'ssl',
-                ));
-            $mailer->send($mail);
-    }
 
 }
 

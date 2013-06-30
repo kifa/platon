@@ -174,4 +174,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         return $productControl;
     }
     
+    protected function createComponentMail() {
+        $mailControl = new mailControl();
+        $mailControl->setTranslator($this->translator);
+        $mailControl->setProduct($this->productModel);
+        $mailControl->setCategory($this->categoryModel);
+        $mailControl->setBlog($this->blogModel);
+        return $mailControl;
+    }
+    
 }
