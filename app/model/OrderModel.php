@@ -1,4 +1,4 @@
-<?php
+f<?php
 
 /*
  * Class OrderModel
@@ -131,12 +131,13 @@ class OrderModel extends Repository {
             $paymentprice = $this->loadPaymentPrice($payment);
             $deliverypaymentprice = $deliveryprice + $paymentprice;
             
-            $tax1 = $this->getTable('settings')->select('Value')->where('Name',"TAX")->fetch();
+            $tax1 = $this->getTable('settings')->select('Value')->where('SettingName',"TAX")->fetch();
             $tax = $tax1['Value'];
             //settype($tax, 'float');
             $finaltax = $price * ($tax / 100);
             
-            $totalprice = $price + $finaltax;
+            $totalprice = $price + $deliverypaymentprice;
+            $pricewithouttax = $price - $finaltax;
 
             $insert =  array(
                  //'OrderID' => $id, //automaticky!
@@ -145,6 +146,7 @@ class OrderModel extends Repository {
                 'ProductsPrice' => $price,
                 'DeliveryPaymentPrice' => $deliverypaymentprice,
                 'TaxPrice' => $finaltax, //
+                'PriceWithoutTax' => $pricewithouttax,
                 'TotalPrice' => $totalprice,
                 'DateCreated' => $today,  //automaticky presenter
                 'DateOfLastChange' => $today, //pri vytvoreni stejne jako created
@@ -175,7 +177,7 @@ class OrderModel extends Repository {
         $deliveryPaymentPrice = $paymentPrice + $deliveryPrice;
         
         $productPrice = $this->loadOrder($orderid)->ProductsPrice;
-        $total = $productPrice + $deliveryPrice + $paymentPrice;
+        $total = $productPrice + $deliveryPaymentPrice;
         
         $insert = array(
                 'DeliveryID' => $shipping,
