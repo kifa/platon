@@ -137,6 +137,32 @@
 
 {block content}
 <div class="span10" n:snippet="products">    
+   <div class="span8 alert-block">
+    <div class="btn-group">
+        <a n:href="setFilter! 'price', 'asc'" class="btn ajax">{_'Price'}</a>
+        <a n:href="setFilter! 'price', 'asc'" class="btn ajax"><i class="icon-sort-by-order"></i></a>
+        <a n:href="setFilter! 'price', 'desc'" class="btn ajax"><i class="icon-sort-by-order-alt"></i></a>
+    </div>
+    
+    <div class="btn-group">
+        <a n:href="setFilter! 'name', 'asc'" class="btn ajax">{_'Name'}</a>
+        <a n:href="setFilter! 'name', 'asc'" class="btn ajax"><i class="icon-sort-by-alphabet"></i></a>
+        <a n:href="setFilter! 'name', 'desc'" class="btn ajax"><i class="icon-sort-by-alphabet-alt"></i></a>
+        
+    </div>
+    
+    <div class="btn-group">
+        <a n:href="setFilter! 'sale', 'desc'" class="btn ajax">{_'Sale'}</a>
+        <a n:href="setFilter! 'sale', 'asc'" class="btn ajax"><i class="icon-sort-up"></i></a>
+        <a n:href="setFilter! 'sale', 'desc'" class="btn ajax"><i class="icon-sort-down"></i></a>
+    </div>
+    
+    <div class="btn-group">
+        <a n:href="setFilter! 'pcs', 'desc'" class="btn ajax">{_'In Stock'}</a>
+        <a n:href="setFilter! 'pcs', 'asc'" class="btn ajax"><i class="icon-sort-up"></i></a>
+        <a n:href="setFilter! 'pcs', 'desc'" class="btn ajax"><i class="icon-sort-down"></i></a>
+    </div>
+       </div>
 <ul class="thumbnails">
     
     {if $user->isInRole('admin')}
