@@ -27,6 +27,7 @@ class ProductPresenter extends BasePresenter {
     private $parameters;
     private $edit;
     private $categoryParam;
+    private $filter;
 
     protected function startup() {
         parent::startup();
@@ -141,6 +142,23 @@ class ProductPresenter extends BasePresenter {
             }
             else {
             $this->redirect('this', $catID);
+            }
+        }
+    }
+    
+    public function handleSetFilter($filter, $sorting) {
+        if ($this->getUser()->isInRole('admin')) {
+            
+            $this->filter = 'FinalPrice';
+           
+            
+            if($this->isAjax()) {
+                $this->invalidateControl('products');
+                $this->invalidateControl('script');
+
+            }
+            else {
+            $this->redirect('this');
             }
         }
     }
@@ -639,11 +657,11 @@ class ProductPresenter extends BasePresenter {
 
         if ($this->getUser()->isInRole('admin')) {
             // load all products
-            $this->template->products = $this->productModel->loadCatalogAdmin($catID);
+            $this->template->products = $this->productModel->loadCatalogAdmin($catID, $this->filter);
             
         } else {
             // load published products
-            $this->template->products = $this->productModel->loadCatalog($catID);
+            $this->template->products = $this->productModel->loadCatalog($catID, $this->filter);
         }
 
         $this->template->categories = $this->categoryModel->loadCategoryList();
