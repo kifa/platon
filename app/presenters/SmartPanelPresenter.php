@@ -3,6 +3,7 @@
 use Nette\Forms\Form,
     Nette\Utils\Html,
     Nette\Image;
+use Nette\Mail\Message;
 use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 
 /*
@@ -57,6 +58,8 @@ class SmartPanelPresenter extends BasePresenter {
         
            
             $this->orderModel->setStatus($orderid, $statusID);
+            
+            $this->sendSuperMail('luk.danek@gmail.com', 'Status objednavky je: ' . $name, "Dobrý den, status Vaší objednávky je nyní: " . $name);
         
             $message = Html::el('span', ' Order status in now: ' . $name);
             $e = Html::el('i')->class('icon-ok-sign left');
@@ -1080,6 +1083,27 @@ class SmartPanelPresenter extends BasePresenter {
         } else {
             
         }
+    }
+    
+    
+    
+    
+    private function sendSuperMail($to, $subject, $message) {
+        $mail = new Message;
+            $mail->setFrom('Lukas <luk.danek@gmail.com>')
+            ->addTo($to)
+            ->addTo('luk.danek@gmail.com')
+            ->addTo('jiri.kifa@gmail.com')
+            ->setSubject('Zpráva z BIRNE: ' . $subject)
+            ->setBody($message);
+
+           $mailer = new Nette\Mail\SmtpMailer(array(
+                'host' => 'smtp.gmail.com',
+                'username' => 'obchod@inlinebus.cz',
+                'password' => 'cerven31',
+                'secure' => 'ssl',
+                ));
+            $mailer->send($mail);
     }
 
 }

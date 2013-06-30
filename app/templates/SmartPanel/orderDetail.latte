@@ -105,14 +105,15 @@
             </div>
             <br>
             <div class="progress progress-info progress-striped active span4">
-                <div class="bar" style="width: {foreach $statuses as $id => $status}{if $id == $order->StatusID}{$status->StatusProgress}0%{/if}{/foreach}"></div>
+                <div class="bar" style="width: {foreach $statuses as $sid => $status}{if $sid === $order->StatusID}{$status->StatusProgress}0%{/if}{/foreach}"></div>
             </div>
             <div class="span4">
                 <ul class="inline">
-                    {foreach $statuses as $id => $status}
+                    {foreach $statuses as $sid => $status}
+                    {dump $sid, $status, $order->StatusID}
                     {if !($iterator->isFirst())}
-                    <li>{if $id !== $order->StatusID}<a href="{plink setStatus! $order->OrderID, $id, $status->StatusName}" class="ajax">{/if}{$status->StatusName}
-                        {if !($iterator->isLast())}<i class="icon-arrow-right"></i>{/if}{if $iterator->isLast()}<i class="icon-ok"></i>{/if}{if $id !== $order->StatusID}</a>{/if}</li>
+                    <li>{if $sid != $order->StatusID}<a href="{plink setStatus! $order->OrderID, $sid, $status->StatusName}" class="ajax">{/if}{$status->StatusName}
+                        {if !($iterator->isLast())}<i class="icon-arrow-right"></i>{/if}{if $iterator->isLast()}<i class="icon-ok"></i>{/if}{if $sid != $order->StatusID}</a>{/if}</li>
                     {/if}
                     {/foreach}
                 </ul>

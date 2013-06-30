@@ -69,7 +69,7 @@
             </div>
             {block #bread}{/block}
 
-{block supercontent}
+
             <div id="content"> 
        {block #pageheader}
 
@@ -121,6 +121,9 @@
 
 
         {/block}  
+            </div>
+        </div>
+    </div>	
                 
       {block scripts}
         {ifCurrent Order:cart}
@@ -203,12 +206,7 @@
 
 	{/block}
     
+{*include ./components/footer.latte*}
     
-            </div>
-{/block}            
-
-        </div>
-    </div>
- 
     </body> 
 </html>

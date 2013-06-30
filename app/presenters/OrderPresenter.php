@@ -2,6 +2,7 @@
 
 use Nette\Forms\Form,
     Nette\Utils\Html;
+use Nette\Mail\Message;
 use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 
 /**
@@ -353,6 +354,33 @@ class OrderPresenter extends BasePresenter {
      * @param int
      * @return void
      */
+    
+    
+    private function sendSuperMail($to, $subject, $message) {
+        $mail = new Message;
+            $mail->setFrom('Lukas <luk.danek@gmail.com>')
+            ->addTo($to)
+            ->addTo('luk.danek@gmail.com')
+            ->addTo('jiri.kifa@gmail.com')
+            ->setSubject('Zpráva z BIRNE: ' . $subject)
+            ->setBody($message);
+
+           $mailer = new Nette\Mail\SmtpMailer(array(
+                'host' => 'smtp.gmail.com',
+                'username' => 'obchod@inlinebus.cz',
+                'password' => 'cerven31',
+                'secure' => 'ssl',
+                ));
+            $mailer->send($mail);
+    }
+
+    
+
+    public function actionOrderDone($orderNo, $track = NULL) {
+       if($track == NULL) {
+           $this->sendSuperMail('', 'Objednávka přijata!', 'Dobrý den \nVaše objednávka byla přijata!');
+       } 
+    }
 
     public function renderOrderDone($orderNo, $track = NULL) {
 
