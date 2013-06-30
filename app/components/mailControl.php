@@ -54,7 +54,7 @@ public function sendSuperMail($to, $subject, $message) {
             ->addTo('luk.danek@gmail.com')
             ->addTo('jiri.kifa@gmail.com')
             ->setSubject('Zpráva z BIRNE: ' . $subject)
-            ->setBody($message);
+            ->setHtmlBody($message);
 
            $mailer = new Nette\Mail\SmtpMailer(array(
                 'host' => 'smtp.gmail.com',

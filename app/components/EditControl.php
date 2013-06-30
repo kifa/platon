@@ -116,7 +116,7 @@ protected function createComponentEditParamForm() {
 
         $this->productID = $id;
         $this->parameters = $this->service->loadParameters($this->productID);
-        $this->template->setFile(__DIR__ . '/EditControl.latte');
+        $this->template->setFile( __DIR__ . '/EditControl.latte');
         
         $this->template->render();
     }

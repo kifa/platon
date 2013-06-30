@@ -68,8 +68,22 @@ class SmartPanelPresenter extends BasePresenter {
            
             $this->orderModel->setStatus($orderid, $statusID);
             
+            
+            $row = $this->orderModel->loadOrder($orderid);
+            $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrder.latte');
+            $template->registerFilter(new Nette\Latte\Engine);
+            $template->registerHelperLoader('Nette\Templating\Helpers::loader');
+            $template->orderId = $orderid;
+            $template->mailOrder = $row->UsersID;
+            $template->status = $name;
+            
+
+
+
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Status objednavky je: ' . $name, "Dobrý den, status Vaší objednávky je nyní: " . $name);
+            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Status objednavky je: ', $template);
+            
+            
 
         
             $message = Html::el('span', ' Order status in now: ' . $name);
@@ -174,6 +188,7 @@ class SmartPanelPresenter extends BasePresenter {
             $this->flashMessage($message, 'alert');
             $this->presenter->redirect('SmartPanel:Orders');
          }
+            
             $this->orderRow = array('Shipping' => $row->DeliveryID,
                                     'Payment' => $row->PaymentID,
                                    'OrderID' => $row->OrderID,
@@ -517,8 +532,6 @@ class SmartPanelPresenter extends BasePresenter {
         };
             $this->template->payment = $payment;
         
-            
-                    
             $this->template->nextOrder = $this->orderModel->loadOrder($orderid+1);
         }
     }
