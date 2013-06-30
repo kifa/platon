@@ -379,14 +379,14 @@ class OrderPresenter extends BasePresenter {
     public function actionOrderDone($orderNo, $track = NULL) {
        if($track == NULL) {
            try {
-                    $this->sendOrderDoneMail($orderNO);
+                    $this->sendOrderDoneMail($orderNo);
                 }
             catch (Exception $e) {
                     Debugger::log($e);
             }
             
             try {
-                    $this->sendAdminOrderDoneMail($orderNO);
+                    $this->sendAdminOrderDoneMail($orderNo);
                 }
             catch (Exception $e) {
                     Debugger::log($e);
