@@ -44,10 +44,7 @@ class productEditControl extends BaseControl{
 
     return $template;
     }
-    
-
-    
-     
+         
     
     
     public function render($id) {

@@ -983,7 +983,16 @@ class SmartPanelPresenter extends BasePresenter {
      *                      WAREHOUSE
      *********************************************************************/
   
-      
+  
+    protected function createComponentGrid($name) {
+    $grid = new Grido\Grid($this, $name);
+    $grid->setModel($this->productModel->loadCatalog(''));
+    $grid->setTranslator($this->translator);
+    $grid->setPrimaryKey('ProducerID');
+    $grid->addColumn('ProducerName', 'Name', Column::TYPE_TEXT);
+    $grid->addColumn('PiecesAvailable', 'PCS', Column::TYPE_TEXT);
+    }
+    
     
     
     public function renderWarehouse() {

@@ -19,6 +19,7 @@ class ProductPresenter extends BasePresenter {
     private $productModel;
     private $categoryModel;
     private $shopModel;
+    private $blogModel;
     private $id;
     private $catId;
     protected $translator;
@@ -32,7 +33,8 @@ class ProductPresenter extends BasePresenter {
         $this->productModel = $this->context->productModel;
         $this->categoryModel = $this->context->categoryModel;
         $this->shopModel = $this->context->shopModel;
-
+        $this->blogModel = $this->context->blogModel;
+        
         if ($this->getUser()->isInRole('admin')) {
             $this->edit = $this->getSession('edit');
         }
@@ -45,40 +47,6 @@ class ProductPresenter extends BasePresenter {
 
     public function injectTranslator(NetteTranslator\Gettext $translator) {
         $this->translator = $translator;
-    }
-
-    public function handleDeletePhoto($id, $photo) {
-        if ($this->getUser()->isInRole('admin')) {
-            $row = $this->productModel->loadPhoto($photo);
-            if (!$row) {
-                $this->flashMessage('There is no photo to delete', 'alert');
-            } else {
-
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/' . $row->PhotoURL;
-                if ($imgUrl) {
-                    unlink($imgUrl);
-                }
-
-
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/50-' . $row->PhotoURL;
-                if ($imgUrl) {
-                    unlink($imgUrl);
-                }
-
-
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/300-' . $row->PhotoURL;
-                if ($imgUrl) {
-                    unlink($imgUrl);
-                }
-
-                $e = 'Photo ' . $row->PhotoName . ' was sucessfully deleted.';
-
-                $this->productModel->deletePhoto($photo);
-                $this->flashMessage($e, 'alert');
-            }
-
-            $this->redirect('Product:product', $id);
-        }
     }
 
     public function handleDeletePhotoCategory($id, $name) {
@@ -106,23 +74,6 @@ class ProductPresenter extends BasePresenter {
             $this->flashMessage($e, 'alert');
 
             $this->redirect('Product:products', $id);
-        }
-    }
-
-    public function handleCoverPhoto($id, $photo) {
-        if ($this->getUser()->isInRole('admin')) {
-            $row = $this->productModel->loadPhoto($photo);
-            if (!$row) {
-                $this->flashMessage('There is no photo to set as cover', 'alert');
-            } else {
-                $this->productModel->updateCoverPhoto($id, $photo);
-                $e = 'Photo ' . $row->PhotoName . ' was sucessfully set as COVER.';
-
-                $this->productModel->coverPhoto($id);
-                $this->flashMessage($e, 'alert');
-            }
-
-            $this->redirect('Product:product', $id);
         }
     }
 
@@ -162,6 +113,7 @@ class ProductPresenter extends BasePresenter {
 
 
                 $row2 = $this->categoryModel->loadCategory($catID);
+                
                 $this->categoryParam = array('CategoryID' => $catID,
                     'CategoryName' => $row2->CategoryName,
                     'CategoryDescription' => $row2->CategoryDescription,
@@ -274,12 +226,9 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    /*
-     * Handle for removing products 
-     */
+   /*****************************************************************
 
-        
-       public function handleDeleteProduct($catID, $id) {
+    public function handleDeleteProduct($catID, $id) {
         if ($this->getUser()->isInRole('admin')) {
             $this->productModel->deleteProduct($id);
             $this->redirect('this', $catID);
@@ -314,7 +263,7 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             $this->productModel->showProduct($id);
             
-            if($this->isAjax()) {
+            if($this->presenter->isAjax()) {
                 $this->invalidateControl('products');
                 $this->invalidateControl('script');
             }
@@ -323,6 +272,8 @@ class ProductPresenter extends BasePresenter {
             }
         }
     }
+    
+    /*****************************************************************/
 
     
     public function handleSetCatalogLayout($catID, $layoutID) {
@@ -404,6 +355,8 @@ class ProductPresenter extends BasePresenter {
        }
     }
     
+    
+    
     public function handleEditProdTitle($prodid){
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            
@@ -421,7 +374,7 @@ class ProductPresenter extends BasePresenter {
 
         }
     }
-    
+    /*********************************************************************
     public function handleEditProdDescription($prodid) {
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            
@@ -540,6 +493,8 @@ class ProductPresenter extends BasePresenter {
             }
         }
     }
+ 
+     */
 
     public function handleEditCatDescription($catid) {
         if($this->getUser()->isInRole('admin')){
@@ -725,18 +680,18 @@ class ProductPresenter extends BasePresenter {
                     'CategoryID' => $row->CategoryID,
                     'PiecesAvailable' => $row->PiecesAvailable);
 
-                $editForm = $this['editParamForm'];
+              /*  $editForm = $this['editParamForm'];
                 $addForm = $this['addParamForm'];
                 $docsForm = $this['addDocumentationForm'];
-                $priceForm = $this['editPriceForm'];
+                $priceForm = $this['editPriceForm'];*/
                 // $this['editPriceForm']['price'] = $this->row['SellingPrice'];
             }
         }
     }
 
-    /*
+    /**********************************************************************
      * Adding product photos
-     */
+
 
     public function createComponentAddPhotoForm() {
         if ($this->getUser()->isInRole('admin')) {
@@ -759,7 +714,7 @@ class ProductPresenter extends BasePresenter {
 
     /*
      * Adding submit form for adding photos
-     */
+
 
     public function addProductPhotoFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
@@ -845,7 +800,7 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('this');
         }
     }
-
+/*********************************************************************
     protected function createComponentEditPriceForm() {
         if ($this->getUser()->isInRole('admin')) {
 
@@ -1035,9 +990,9 @@ class ProductPresenter extends BasePresenter {
 
     /*
      * Adding product photos
-     */
+     
 
-    public function createComponentAddDocumentationForm() {
+    protected function createComponentAddDocumentationForm() {
         if ($this->getUser()->isInRole('admin')) {
             $addPhoto = new Nette\Application\UI\Form;
             $addPhoto->setRenderer(new BootstrapRenderer);
@@ -1057,7 +1012,7 @@ class ProductPresenter extends BasePresenter {
 
     /*
      * Adding submit form for adding photos
-     */
+     
 
     public function addDocumentationFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
@@ -1078,31 +1033,26 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('this');
         }
     }
+ * 
+ */
+    
+    protected function createComponentProduct() {
+        $productControl = new productControl();
+        $productControl->setTranslator($this->translator);
+        $productControl->setProduct($this->productModel);
+        $productControl->setCategory($this->categoryModel);
+        $productControl->setBlog($this->blogModel);
+        $productControl->setRow($this->row);
+        return $productControl;
+    }
 
     public function renderProduct($id) {
-        if ($this->getUser()->isInRole('admin')) {
-            if ($this->edit->param != NULL) {
-                $this->template->attr = 1;
-                $this->edit->param = NULL;
-                
-                
-                
-            } else {
-                $this->template->attr = 0;
-            }
-            
-            $this->template->categories = $this->categoryModel->loadCategoryList();
-                $this->template->producers = $this->productModel->loadProducers();
-        }
-        
-        $this->template->product = $this->productModel->loadProduct($id);
-        $this->template->photo = $this->productModel->loadCoverPhoto($id);
-        $this->template->album = $this->productModel->loadPhotoAlbum($id);
+
+        $prod = new productControl;
+       
+        $this->template->productID = $id;
         $this->template->parameter = $this->productModel->loadParameters($id);
 
-        $this->template->docs = $this->productModel->loadDocumentation($id)->fetchPairs('DocumentID');
-        
-        
     }
 
     /*     * ***********************************************************************

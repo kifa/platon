@@ -6,7 +6,7 @@
  * CRUD operations, etc.
  * @author lukas
  */
-class ProductModel extends Repository {
+class ProductModel extends Repository implements Grido\DataSources\IDataSource {
 
     /**
      * Load Product Catalog
@@ -489,4 +489,35 @@ class ProductModel extends Repository {
         
         return $this->getTable('producer')->where('ProducerID',$id)->update($update);
     }
+    
+    
+    
+    
+    
+    
+    
+    public function getData() {
+        return $this->getTable('producer');
+    }
+    
+    public function getCount() {
+        return $this->getTable('producer')->count();
+    }
+    
+    public function filter(array $condition) {
+        return $this->getTable('producer')->where($condition);
+    }
+    
+    public function limit($offset, $limit) {
+        return $this->getTable('producer')->limit($limit, $offset);
+    }
+    
+    public function sort(array $sorting) {
+        return $this->getTable('producer')->where($sorting);
+    }
+    
+    public function suggest($column, array $conditions) {
+       return $this->getTable('producer')->select($columns)->where($condition);
+    }
+    
 }

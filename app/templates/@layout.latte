@@ -25,7 +25,7 @@
         
 	{block head}{/block}
     </head>
-    
+   
 <body>
     <script> document.body.className+=' js' </script>
 
@@ -69,18 +69,19 @@
             </div>
             {block #bread}{/block}
 
-
+{block supercontent}
             <div id="content"> 
        {block #pageheader}
 
        {/block}
-             {snippet flashMessages}   
-             {foreach $flashes as $flash}
-                <div class="{$flash->type}">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-              {$flash->message}</div>
-              {/foreach}
-              {/snippet}
+                
+                    {snippet flashMessages}   
+                    {foreach $flashes as $flash}
+                       <div class="{$flash->type}">
+                           <button type="button" class="close" data-dismiss="alert">&times;</button>
+                     {$flash->message}</div>
+                     {/foreach}
+                     {/snippet}
 
                 
                 <div class="row" n:snippet="content">
@@ -119,12 +120,9 @@
       {block modal}
 
 
-        {/block}      
-            </div>
-        </div>
-    </div>	
-
-{block scripts}
+        {/block}  
+                
+      {block scripts}
         {ifCurrent Order:cart}
 
         {else}
@@ -204,8 +202,13 @@
             {/block}
 
 	{/block}
-
-{*include ./components/footer.latte*}
     
-    </body>
+    
+            </div>
+{/block}            
+
+        </div>
+    </div>
+ 
+    </body> 
 </html>
