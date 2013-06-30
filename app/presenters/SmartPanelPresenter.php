@@ -225,13 +225,13 @@ class SmartPanelPresenter extends BasePresenter {
         if (!$this->getUser()->isInRole('admin')) {
             
             if($this->isAjax()){
-               //$name = $_POST['id'];
+               $name = $_POST['id'];
                $content = $_POST['value'];
-               $this->orderModel->updateOrder($orderid, $content[1]);
+               $this->orderModel->updateOrder($orderid, $content);
                
            }
            if(!$this->isControlInvalid('shipping')){
-               $this->payload->edit = $name;
+               $this->payload->edit = $content;
                $this->sendPayload();
                $this->invalidateControl('shipping');
            }  
@@ -521,6 +521,7 @@ class SmartPanelPresenter extends BasePresenter {
             $shippers[$key] = $value->DeliveryName;
         };
 
+            
             $this->template->delivery = $shippers;
             
         foreach ($this->orderModel->loadPayment('') as $key => $value) {

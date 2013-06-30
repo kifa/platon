@@ -101,6 +101,22 @@
     </span>
 </div>
 
+<div class="span10">
+{foreach $categories as $catID => $cat}
+                {if $cat->HigherCategoryID == $category->CategoryID}
+<div class="media">
+  <a class="pull-left" href="#">
+    <img class="media-object" data-src="holder.js/64x64">
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading"><a href="{plink product:products $catID}">  {$cat->CategoryName}</a></h4>
+    <p>{$cat->CategoryDescription|truncate:70}</p>
+  </div>
+</div>
+                {/if}
+                {/foreach}
+    <hr>
+</div>
 {/block}
 
 {block sidebar}

@@ -1,5 +1,6 @@
 <li class="{ifCurrent Homepage:default}active{/ifCurrent}"><a href="{plink Homepage:default}">{_"Home"}</a></li>
                 {foreach $category as $catID => $cat}
+                {if !$cat->HigherCategoryID}
                 {if $cat->CategoryStatus != 3}
 <li class="{ifCurrent Product:products $catID}active{/ifCurrent}"><a href="{plink product:products $catID}">
                         {if $img !== NULL}
@@ -9,7 +10,7 @@
                         {/if}
 
                     {$cat->CategoryName}</a></li> 
-                {/if}
+                {/if}{/if}
                 {/foreach}
 <li class="margin5 {ifCurrent product:productsBrand}active{/ifCurrent}}">
     <div class="btn-group">

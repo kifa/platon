@@ -469,6 +469,7 @@ class ProductPresenter extends BasePresenter {
             {            
                 $this->productModel->updateProduct($id, 'CategoryID', $catid);
                 $this->invalidateControl('productCategory');
+                $this->invalidateControl('bread');
                 $this->invalidateControl('script');
 
             }
@@ -524,6 +525,7 @@ class ProductPresenter extends BasePresenter {
            {            
                 $this->invalidateControl('parentCategory');
                 $this->invalidateControl('bread');
+                $this->invalidateControl('menu');
                 $this->invalidateControl('script');
 
            }
@@ -638,13 +640,13 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             // load all products
             $this->template->products = $this->productModel->loadCatalogAdmin($catID);
-            $this->template->categories = $this->categoryModel->loadCategoryList();
+            
         } else {
             // load published products
             $this->template->products = $this->productModel->loadCatalog($catID);
         }
 
-        
+        $this->template->categories = $this->categoryModel->loadCategoryList();
         $this->template->category = $this->categoryModel->loadCategory($catID);
     }
 
