@@ -68,24 +68,6 @@ class SmartPanelPresenter extends BasePresenter {
            
             $this->orderModel->setStatus($orderid, $statusID);
             
-            
-            $row = $this->orderModel->loadOrder($orderid);
-            $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrder.latte');
-            $template->registerFilter(new Nette\Latte\Engine);
-            $template->registerHelperLoader('Nette\Templating\Helpers::loader');
-            $template->orderId = $orderid;
-            $template->mailOrder = $row->UsersID;
-            $template->status = $name;
-            
-
-
-
-            $mailIT = new mailControl();
-            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Status objednavky je: ', $template);
-            
-            
-
-        
             $message = Html::el('span', ' Order status in now: ' . $name);
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
@@ -99,9 +81,17 @@ class SmartPanelPresenter extends BasePresenter {
             if($this->isAjax()) {
                 $this->invalidateControl('content');
                 $this->invalidateControl('script');
+                
             }
             else {  
                 $this->redirect('this');
+            }
+            
+            try {
+                    $this->sendStatusMail($orderid, $name);
+                }
+            catch (Exception $e) {
+                    Debugger::log($e);
             }
     }
 
@@ -495,7 +485,13 @@ class SmartPanelPresenter extends BasePresenter {
          if ($this->getUser()->isInRole('admin')) {
           
             $this->orderModel->addNote($form->values->orderID, $form->values->userName, $form->values->note);
-             
+           
+            try {
+                    $this->sendNoteMail($form->values->orderID, $form->values->note);
+                }
+            catch (Exception $e) {
+                    Debugger::log($e);
+            }
              
             $message = Html::el('span', ' Note was sucessfully added!');
             $e = Html::el('i')->class('icon-ok-sign left');
@@ -1109,6 +1105,33 @@ class SmartPanelPresenter extends BasePresenter {
         }
     }
 
+    
+    protected function sendStatusMail($orderid, $name) {
+        
+            $row = $this->orderModel->loadOrder($orderid);
+            $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrderStatus.latte');
+            $template->registerFilter(new Nette\Latte\Engine);
+            $template->registerHelperLoader('Nette\Templating\Helpers::loader');
+            $template->orderId = $orderid;
+            $template->mailOrder = $row->UsersID;
+            $template->status = $name;
+            
+            $mailIT = new mailControl();
+            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Status objednavky je: ', $template);
+    }
 
+    protected function sendNoteMail($orderid, $note) {
+        
+            //$row = $this->orderModel->loadOrder($orderid);
+            $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrderNote.latte');
+            $template->registerFilter(new Nette\Latte\Engine);
+            $template->registerHelperLoader('Nette\Templating\Helpers::loader');
+            $template->orderId = $orderid;
+            //$template->mailOrder = $row->UsersID;
+            $template->note = $note;
+            
+            $mailIT = new mailControl();
+            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Zprava k Vaší ojednávce', $template);
+    }
 }
 

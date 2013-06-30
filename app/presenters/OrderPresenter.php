@@ -378,8 +378,29 @@ class OrderPresenter extends BasePresenter {
 
     public function actionOrderDone($orderNo, $track = NULL) {
        if($track == NULL) {
-           $this->sendSuperMail('', 'Objednávka přijata!', 'Dobrý den \nVaše objednávka byla přijata!');
+           try {
+                    $this->sendOrderDoneMail($orderNO);
+                }
+            catch (Exception $e) {
+                    Debugger::log($e);
+            }
+            
+            try {
+                    $this->sendAdminOrderDoneMail($orderNO);
+                }
+            catch (Exception $e) {
+                    Debugger::log($e);
+            }
        } 
+    }
+    
+    protected function createComponentMail() {
+        $mailControl = new mailControl();
+        $mailControl->setTranslator($this->translator);
+        $mailControl->setProduct($this->productModel);
+        $mailControl->setCategory($this->categoryModel);
+        $mailControl->setBlog($this->blogModel);
+        return $mailControl;
     }
 
     public function renderOrderDone($orderNo, $track = NULL) {
@@ -416,6 +437,39 @@ class OrderPresenter extends BasePresenter {
 
     public function renderDefault() {
         $this->setView('Cart');
+    }
+    
+    
+    
+    
+    protected function sendOrderDoneMail($orderid) {
+        
+            $row = $this->orderModel->loadOrder($orderid);
+            $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrderDone.latte');
+            $template->registerFilter(new Nette\Latte\Engine);
+            $template->registerHelperLoader('Nette\Templating\Helpers::loader');
+            $template->orderId = $orderid;
+            $template->mailOrder = $row->UsersID;
+            
+            $mailIT = new mailControl();
+            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Zprava k Vaší ojednávce', $template);
+    }
+    
+    protected function sendAdminOrderDoneMail($orderid) {
+        
+            $row = $this->orderModel->loadOrder($orderid);
+            $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/adminOrderDone.latte');
+            $template->registerFilter(new Nette\Latte\Engine);
+            $template->registerHelperLoader('Nette\Templating\Helpers::loader');
+            $template->orderId = $orderid;
+            $template->customer = $row->Name;
+            $template->mailOrder = $row->UsersID;
+            if($row->Note !== NULL) {
+                $template->note = $row->Note;
+            }
+            
+            $mailIT = new mailControl();
+            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Zprava k Vaší ojednávce', $template);
     }
 
 }

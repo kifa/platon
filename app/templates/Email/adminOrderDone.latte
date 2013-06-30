@@ -1,0 +1,22 @@
+{var $mail->from = "Birne <birne@birnex.com>" }
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Nová objednávka</title>
+    <style>
+    body {
+       
+    }
+    </style>
+</head>
+<body>
+    <p>Birne zdraví!</p>
+
+    <p>Váš eshop pro Vás zpracoval {$orderId} objednávku.</p>
+    <p>Celková cena: {$finalprice}</p>
+    <p>Zákazník: {$customer}</p>
+    {if $note}
+    <p>Poznámka: {$note}</p>
+    {/if}
+</body>
+</html>
