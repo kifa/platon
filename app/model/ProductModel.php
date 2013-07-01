@@ -14,43 +14,26 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
      * @param ? example: pozice počátečního znaku
      * @return string
      */
-    public function loadCatalog($catID, $orderby=NULL, $ascdsc='ASC') {
+    public function loadCatalog($catID) {
         
         //load only published products
         
         //$id = '2';
         //return $this->getTable('Product')->select('Product.*,Price.*')->where('CategoryID', $id);
-        if($catID=='' and $orderby==NULL){
+        if($catID==''){
             //return $this->getTable('product')->select('product.ProductID, product.ProductName,
             //    product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*');            
             return $this->getDB()->query('SELECT * FROM product JOIN price 
                 ON price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE Photo.CoverPhoto="1" and product.ProductStatusID="2"');                                          
+                WHERE Photo.CoverPhoto="1" and product.ProductStatusID="2"');                              
+            
             }
-        elseif($catID=='' and $orderby!=NULL){
-            //return $this->getTable('product')->select('product.ProductID, product.ProductName,
-            //    product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*');            
-            return $this->getDB()->query('SELECT * FROM product JOIN price 
-                ON price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
-                JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE Photo.CoverPhoto="1" and product.ProductStatusID="2"
-                ORDER BY ', $orderby, $ascdsc);                                          
-            }
-        elseif($catID!='' and $orderby==NULL){  
-            return $this->getDB()->query('SELECT * FROM product JOIN price ON 
+        else
+        {  return $this->getDB()->query('SELECT * FROM product JOIN price ON 
             price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
             WHERE Photo.CoverPhoto="1" and product.ProductStatusID="2" and product.CategoryID=?',$catID);
-            //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
-              //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
-        }
-        elseif($catID!='' and $orderby!=NULL){             
-            return $this->getDB()->query('SELECT * FROM product JOIN price ON 
-            price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
-            JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID             
-            WHERE Photo.CoverPhoto="1" and product.ProductStatusID="2" and product.CategoryID=?',$catID,            
-            'ORDER BY ', $orderby, $ascdsc);                    
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
               //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
         }
@@ -67,40 +50,25 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
         
     }
     
-    public function loadCatalogAdmin($catID, $orderby=NULL, $ascdsc='ASC') {
+    public function loadCatalogAdmin($catID) {
         
         // load ALL products, even unpublished        
-        if($catID=='' and $orderby==NULL){
+        if($catID==''){
             //return $this->getTable('product')->select('product.ProductID, product.ProductName,
             //    product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*');            
             return $this->getDB()->query('SELECT * FROM product JOIN price 
                 ON price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE Photo.CoverPhoto="1"');                                          
+                WHERE Photo.CoverPhoto="1"');                              
+            
             }
-        elseif($catID=='' and $orderby!=NULL){
-            //return $this->getTable('product')->select('product.ProductID, product.ProductName,
-            //    product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*');            
-            return $this->getDB()->query('SELECT * FROM product JOIN price ON 
-                price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
-                JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE Photo.CoverPhoto="1"
-                ORDER BY ', $orderby, $ascdsc);                                                  
-        }
-        elseif($catID!='' and $orderby!=NULL){   
-            return $this->getDB()->query('SELECT * FROM product JOIN price ON 
+        else
+        {  return $this->getDB()->query('SELECT * FROM product JOIN price ON 
             price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
             WHERE Photo.CoverPhoto="1" and product.CategoryID=?',$catID);
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
               //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
-        }
-        elseif($catID!='' and $orderby!=NULL){
-            return $this->getDB()->query('SELECT * FROM product JOIN price ON 
-            price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
-            JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID             
-            WHERE Photo.CoverPhoto="1" and product.ProductStatusID="2" and product.CategoryID=?',$catID,
-            'ORDER BY ', $orderby, $ascdsc);
         }
     }
 
@@ -344,7 +312,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             //'PriceID'=>
             'ProductID'=>$product,
             //'BuyingPrice'=>
-            'SellingPrice'=>$final,
+            //'SellingPrice'=>$selling,
             'SALE'=>$sale,
             'FinalPrice'=>$final
             //'CurrencyID'=>
