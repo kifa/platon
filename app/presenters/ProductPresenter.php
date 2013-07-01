@@ -147,7 +147,7 @@ class ProductPresenter extends BasePresenter {
     }
     
     public function handleSetFilter($filter, $sorting) {
-        if ($this->getUser()->isInRole('admin')) {
+      
             
             $this->filter = 'FinalPrice';
            
@@ -160,7 +160,7 @@ class ProductPresenter extends BasePresenter {
             else {
             $this->redirect('this');
             }
-        }
+    
     }
 
     public function createComponentAddProductForm() {
