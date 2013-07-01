@@ -51,7 +51,7 @@ class ShopModel extends Repository {
         }
         else {
             $update = array(
-              $name => $value  
+              'Value' => $value  
             );
         }       
         return $this->getTable('settings')->where('SettingName', $name)->update($update);

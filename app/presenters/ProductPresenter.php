@@ -185,9 +185,9 @@ class ProductPresenter extends BasePresenter {
                     ->setAttribute('class', 'span2');
             $addProduct->addHidden('cat', $this->catId);
             $addProduct->addUpload('image', 'Image:')
+                    ->addCondition(Form::FILLED)                    
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
-                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024)
-                    ->setAttribute('class', 'span2');
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
             $addProduct->addSubmit('add', 'Add Product')
                     ->setAttribute('class', 'upl btn btn-primary')
                     ->setAttribute('data-loading-text', 'Adding...');

@@ -1081,7 +1081,45 @@ class SmartPanelPresenter extends BasePresenter {
             }
           }
     }
+    
+    protected function createComponentAddLogoForm() {
+        
+        $addLogo = new Nette\Application\UI\Form;
+        $addLogo->setTranslator($this->translator);
+        $addLogo->addUpload('logo', 'Select your logo')
+                 ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
+                 ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
+        $addLogo->addSubmit('upload', 'Upload');
+        $addLogo->onSuccess[] = $this->addLogoFormSubmitted;
+        return $addLogo;
+    }
+    
+    public function addLogoFormSubmitted($form){
+        if ($this->getUser()->isInRole('admin')) {
             
+            if($form->values->logo->isOK()){
+                
+                $this->shopModel->setShopInfo('Logo', $form->values->logo->name);
+                
+                $logoURL = $this->context->parameters['wwwDir']  . '/images/logo/' . $form->values->logo->name;
+                $form->values->logo->move($logoURL);
+                
+                $logo = Image::fromFile($logoURL);
+                $logo->resize(null, 300, Image::SHRINK_ONLY);
+                
+                $logoUrl = $this->context->parameters['wwwDir'] . '/images/logo/300-' . $form->values->logo->name;
+                $logo->save($logoUrl);  
+                
+                $logo->resize(null, 90, Image::SHRINK_ONLY);
+                
+                $logoUrl = $this->context->parameters['wwwDir'] . '/images/logo/90-' . $form->values->logo->name;
+                $logo->save($logoUrl); 
+            }
+            
+            $this->redirect('this');
+        }
+    }
+
     public function renderDefault() {
         if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
