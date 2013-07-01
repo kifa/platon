@@ -1060,12 +1060,12 @@ class SmartPanelPresenter extends BasePresenter {
         $this->presenter->redirect("this");
     }
 
-    public function handleSetShopInfo() {
+    public function handleSetShopInfo($id) {
         if ($this->getUser()->isInRole('admin')) {   
             if($this->isAjax()){
                $name = $_POST['id'];
                $content = $_POST['value'];
-               $this->shopModel->setShopInfo('Description', 'Eshop');
+               $this->shopModel->setShopInfoByID($id, $content);
                              
            }
            if(!$this->isControlInvalid('shopinfo')){

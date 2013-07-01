@@ -37,7 +37,7 @@ class ShopModel extends Repository {
             return $value['Value'];
         }
         else {
-            return $this->getTable('settings')->fetchPairs('SettingName');
+            return $this->getTable('settings')->fetchPairs('SettingID');
         }
     }
     
@@ -57,6 +57,15 @@ class ShopModel extends Repository {
         return $this->getTable('settings')->where('SettingName', $name)->update($update);
     }
     
+    public function setShopInfoByID($id, $value)
+    {
+        
+            $update = array(
+              'Value' => $value  
+            );
+       
+        return $this->getTable('settings')->where('SettingID', $id)->update($update);
+    }
 
     /*
      * Load VAT etc

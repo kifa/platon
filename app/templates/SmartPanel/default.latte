@@ -121,10 +121,10 @@
                       <thead>
                       </thead>
                       <tbody>
-                           {foreach $settings as $row}
+                           {foreach $settings as $id => $row}
                           <tr>
-                              <td>{!$row->SettingName}</td>
-                              <td class="{!$row->SettingName}" n:snippet="{!$row->SettingName}">{$row->Value}</td>
+                              <td>{$row->SettingName}</td>
+                              <td class="shopinfo-{$id}" n:snippet="shopinfo-{$id}">{$row->Value}</td>
                           </tr>
                               {/foreach}
                           
@@ -166,9 +166,9 @@
      
       });
       
-      {foreach $settings as $row}
+      {foreach $settings as $id => $row}
             
-        $('.{!$row->SettingName}').editable( {link setShopInfo! }, { 
+        $('.shopinfo-{$id}').editable( {link setShopInfo! $id }, { 
                                         type      : 'text',
                                         cancel    : {_'Cancel'},
                                         submit    : 'OK',
@@ -176,7 +176,7 @@
                                         tooltip   : 'Click to edit ...',
                                         callback : function(value, settings) {
                                            var json = $.parseJSON(value);
-                                           $('.{!$row->SettingName}').text(json.edit);
+                                           $('.shopinfo-{$id}').text(json.edit);
                                        }
                                    })
       {/foreach}
