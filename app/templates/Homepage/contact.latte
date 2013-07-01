@@ -1,0 +1,71 @@
+{block bread}
+{snippet bread}
+{*control menu:bread*}
+{/snippet}
+{/block}
+
+{block pageheader}
+<div class="page-header">
+    <h1 n:block="title"><i class="icon-mail-reply"></i> {_'Contact us'} <small>{_'Do you have any question? Ask us! We will be happy.'}</small></h1>
+
+</div>
+
+{/block}
+        
+        
+{block content}
+<div class="span10">
+    <div class="span5">
+        
+ {snippet form}       
+         {form contactForm class => ajax}
+<ul class="errors" n:if="$form->hasErrors()">
+        <li n:foreach="$form->errors as $error">{$error}</li>
+</ul>
+  <fieldset>
+    <legend>You can ask by filling this contact form</legend>
+    {label note /}
+    {input note}
+    
+    {label email /}
+    <div class="input-prepend input-append">
+        <span class="add-on">@</span>
+    {input email}
+    </div>
+    
+    <div class="form-actions">
+    {input send}
+    </div>
+    <span class="help-block"><i class="icon-info-sign"></i> {_'We will respond as soon as possible.'}</span>
+  </fieldset>
+{/form}
+{/snippet}
+    </div>
+    <div class="span4" n:snippet="contactText">
+    <legend>We are ready to help you. Just ask!</legend>
+    <button class="btn"><i class="icon-facebook"></i></button>
+        <button class="btn"><i class="icon-twitter"></i></button>
+        <button class="btn"><i class="icon-youtube"></i></button>
+    </div>
+</div>
+
+{/block}
+
+{block script}
+<div n:snippet="script">
+<script>
+    
+    $('a.ajax').click(function(){
+        $(this).html('<i class="icon-spinner icon-spin"></i>');
+    });
+    
+    $('input[name="send"]').click(function() { 
+                $('input[name="send"]').attr('class', 'btn btn-primary disabled');
+                $('input[name="send"]').attr('value', 'Sending...');
+            });
+    
+    
+</script>
+</div>
+
+{/block}

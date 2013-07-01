@@ -182,5 +182,5 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $mailControl->setBlog($this->blogModel);
         return $mailControl;
     }
-    
+       
 }
