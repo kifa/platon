@@ -78,7 +78,7 @@ class HomepagePresenter extends BasePresenter {
             $this->flashMessage('Great! We have received your question.', 'alert alert-info');
             $form->setValues(array(), TRUE);
             $this->invalidateControl('contact');  
-            $this->invalidateControl('content'); 
+            $this->invalidateControl('form'); 
             
         }
         else {
@@ -100,6 +100,10 @@ class HomepagePresenter extends BasePresenter {
 
     public function renderContact() {
         $this->template->anyVariable = 'any value';
+    }
+    
+    public function renderPhoto() {
+        $this->template->Albums = $this->productModel->loadPhotoAlbum('');
     }
 
     

@@ -1,0 +1,44 @@
+{block bread}
+{snippet bread}
+{*control menu:bread*}
+{/snippet}
+{/block}
+
+{block pageheader}
+<div class="page-header">
+    <h1 n:block="title"><i class="icon-instagram"></i> {_'Photo gallery'} <small>{_'Check our image gallery.'}</small></h1>
+
+</div>
+
+{/block}
+        
+        
+{block content}
+{dump $Albums}
+<div class="span10">
+<ul class="thumbnails">
+  <li class="span4">
+    <div class="thumbnail">
+      <img data-src="holder.js/300x200" alt="">
+      <h3>Thumbnail label</h3>
+    </div>
+  </li>
+  ...
+</ul>
+    
+</div>
+
+{/block}
+
+{block script}
+<div n:snippet="script">
+<script>
+    
+    $('a.ajax').click(function(){
+        $(this).html('<i class="icon-spinner icon-spin"></i>');
+    });
+    
+</script>
+</div>
+
+{/block}
