@@ -246,6 +246,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             //$row = $this->getDB()->query('SELECT * FROM photoalbum
                 //JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
                 //WHERE photo.CoverPhoto=1');
+            //return $row;
         }
         else{
             //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
