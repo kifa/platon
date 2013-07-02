@@ -94,7 +94,33 @@
                     Producer: {$product->ProducerName}
                 </div>
                 <div class="tab-pane" id="ask">
-                    <p>ASK ABOUT!</p>
+
+                  {snippet contact}       
+                                {form askForm class => ajax}
+                       <ul class="errors" n:if="$form->hasErrors()">
+                               <li n:foreach="$form->errors as $error">{$error}</li>
+                       </ul>
+                         <fieldset>
+                           {label note /}
+                           {input note}
+
+                           {label email /}
+                           <div class="input-prepend input-append">
+                               <span class="add-on">@</span>
+                           {input email}
+                           </div>
+
+                           <div class="form-actions">
+                           {input ask}
+                           </div>
+                           <span class="help-block"><i class="icon-info-sign"></i> {_'We will respond as soon as possible.'}</span>
+                         </fieldset>
+                       {/form}
+                  {/snippet}
+                    
+                    <button class="btn"><i class="icon-facebook"></i></button>
+        <button class="btn"><i class="icon-twitter"></i></button>
+        <button class="btn"><i class="icon-youtube"></i></button>
                 </div>
             </div>
         </div>
@@ -292,6 +318,11 @@
     $('a.ajax').click(function(){
         $(this).html('<i class="icon-spinner icon-spin"></i>');
     });
+
+    $('input[name="ask"]').click(function() { 
+            $('input[name="ask"]').attr('class', 'btn btn-primary disabled');
+            $('input[name="ask"]').attr('value', 'Asking...');
+        });
     
     
 </script>

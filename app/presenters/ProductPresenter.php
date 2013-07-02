@@ -3,6 +3,7 @@
 use Nette\Forms\Form,
     Nette\Utils\Html,
     Nette\Image;
+use Nette\Mail\Message;
 use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 
 /*
@@ -859,6 +860,55 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
+    protected function createComponentAskForm() {
+      
+            $askForm = new Nette\Application\UI\Form;
+            $askForm->setTranslator($this->translator);
+            $askForm->addTextArea('note', 'Question:')
+                    ->setRequired('Please enter your question.');
+            $askForm->addText('email', 'Email:')
+                    ->setEmptyValue('@')
+                    ->addRule(Form::EMAIL, 'Would you fill your email, please?')
+                    ->setRequired('Please fill your email.');
+            $askForm->addHidden('id', $this->row['ProductID']);
+            $askForm->addSubmit('ask', 'Ask')
+                    ->setAttribute('class', 'btn btn-primary')
+                    ->setHtmlId('askButton')
+                    ->setAttribute('data-loading-text', 'Asking...');
+            $askForm->onSuccess[] = $this->askFormSubmitted;
+            return $askForm;
+    }
+
+    public function askFormSubmitted($form) {
+
+        $email = $form->values->email;
+        $note = $form->values->note;
+        
+        $e = HTML::el('span', ' Great! We have received your question.');
+        $ico = HTML::el('i')->class('icon-ok-sign left');
+        $e->insert(0, $ico);
+        $this->flashMessage($e, 'alert alert-info');
+         
+        if($this->isAjax()){
+            
+           
+            $form->setValues(array(), TRUE);
+            $this->invalidateControl('contact');  
+//            $this->invalidateControl('content'); 
+            
+        }
+        else {
+            $this->redirect('this');
+        }
+        
+        try {
+            $this->sendAskMail($email, $note);
+        }
+        catch (Exception $e) {
+            \Nette\Diagnostics\Debugger::log($e);
+        }
+    }
+    
     protected function createComponentEditParamForm() {
         if ($this->getUser()->isInRole('admin')) {
             $editForm = new Nette\Application\UI\Form;
@@ -1094,6 +1144,22 @@ class ProductPresenter extends BasePresenter {
     public function renderDefault() {
         $this->redirect('Products');
         $this->template->anyVariable = 'any value';
+    }
+    
+    
+    
+    protected function sendAskMail($email, $note) {
+        
+            $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/askMail.latte');
+            $template->registerFilter(new Nette\Latte\Engine);
+            $template->registerHelperLoader('Nette\Templating\Helpers::loader');
+            $template->email = $email;
+            //$template->mailOrder = $row->UsersID;
+            $template->note = $note;
+            $template->product = $this->row['ProductName']; 
+            
+            $mailIT = new mailControl();
+            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Nový dotaz k produktu' . $this->row['ProductName'], $template);
     }
 
 }
