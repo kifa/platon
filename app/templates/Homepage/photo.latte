@@ -6,8 +6,9 @@
 
 {block pageheader}
 <div class="page-header">
-    <h1 n:block="title"><i class="icon-instagram"></i> {_'Photo album'} <small>{_'Check our image gallery.'}</small></h1>
+    <h1 n:block="title"><i class="icon-instagram"></i> {$product->ProductName} <small>{_'Check our product image gallery.'}</small></h1>
     <a href="{plink Homepage:photos}" class="btn"><i class="icon-arrow-left"></i> {_'Back to gallery'}</a>
+    <a href="{plink Product:product $product->ProductID}" class="btn btn-primary"><i class="icon-arrow-right"></i> {_'Shop it NOW'}</a>
 </div>
 
 {/block}

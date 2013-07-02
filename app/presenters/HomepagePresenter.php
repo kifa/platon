@@ -107,6 +107,7 @@ class HomepagePresenter extends BasePresenter {
     }
     
     public function renderPhoto($id) {
+        $this->template->product = $this->productModel->loadProduct($id);
         $this->template->Albums = $this->productModel->loadPhotoAlbum($id);
     }
 
