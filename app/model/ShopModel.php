@@ -67,6 +67,44 @@ class ShopModel extends Repository {
         return $this->getTable('settings')->where('SettingID', $id)->update($update);
     }
 
+    public function loadStaticText($id){
+        if($id==''){
+            return $this->getTable('statictext')->fetch();
+        }
+        else{
+            return $this->getTable('statictext')->where('StaticTextID',$id);
+        }
+    }
+    
+    public function loadActiveStaticText($id){
+        $activeID = $this->getTable('status')->where('StatusName','Active');        
+        if($id==''){
+            return $this->getTable('statictext')->where('StatusID',$activeID['StatusID'])->fetch();
+        }
+        else{
+            return $this->getTable('statictext')->where('StaticTextID',$id);
+        }
+    }
+    
+    public function insertStaticText($title, $content, $status){
+        $insert = array(
+            'StaticTextName' => $title,
+            'StaticTextContent' => $content,
+            'StatusID' => $status
+        );
+        
+        return $this->getTable('statictext')->insert($insert);
+    }
+    
+    public function updateStaticText($title, $content, $status){
+        $update = array(
+            'StaticTextName' => $title,
+            'StaticTextContent' => $content,
+            'StatusID' => $status
+        );
+        
+        return $this->getTable('statictext')->insert($update);
+    }
     /*
      * Load VAT etc
      * @param ?
