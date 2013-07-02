@@ -1,0 +1,48 @@
+{block bread}
+{snippet bread}
+{*control menu:bread*}
+{/snippet}
+{/block}
+
+{block pageheader}
+<div class="page-header">
+    <h1 n:block="title"><i class="icon-instagram"></i> {_'Photo gallery'} <small>{_'Check our image gallery.'}</small></h1>
+
+</div>
+
+{/block}
+        
+        
+{block content}
+
+<div class="span10">
+<ul class="thumbnails">
+    {foreach $Albums as $album}
+  <li class="span3">
+    <div class="thumbnail">
+         <a data-toggle="lightbox" href="{plink Homepage:photo $album->ProductID}" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
+      <img src="{$basePath}/images/{$album->PhotoAlbumID}/300-{$album->PhotoName}" alt="{$album->PhotoAlbumName}" width="150">
+         </a>
+      <h3>{$album->PhotoAlbumName}</h3>
+      <a href="{plink Homepage:photo $album->ProductID}" class="btn"><i class="icon-arrow-right"></i> {_'View gallery'}</a>
+    </div>
+  </li>
+ {/foreach}
+</ul>
+    
+</div>
+
+{/block}
+
+{block script}
+<div n:snippet="script">
+<script>
+    
+    $('a.ajax').click(function(){
+        $(this).html('<i class="icon-spinner icon-spin"></i>');
+    });
+    
+</script>
+</div>
+
+{/block}

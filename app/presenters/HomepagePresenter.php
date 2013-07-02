@@ -102,8 +102,12 @@ class HomepagePresenter extends BasePresenter {
         $this->template->anyVariable = 'any value';
     }
     
-    public function renderPhoto() {
+    public function renderPhotos() {
         $this->template->Albums = $this->productModel->loadPhotoAlbum('');
+    }
+    
+    public function renderPhoto($id) {
+        $this->template->Albums = $this->productModel->loadPhotoAlbum($id);
     }
 
     
