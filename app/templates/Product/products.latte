@@ -6,14 +6,29 @@
 
 {block pageheader}
 
-
-
 <div class="page-header">
+<div class="span4">
     <h1 n:block="title" class="CatTitle" n:snippet="CatTitle">{$category->CategoryName}</h1>
-    <small class="shortDesc"> {$category->CategoryDescription|striptags|truncate:50} </small>
+    <small class="shortDesc muted"> {$category->CategoryDescription|striptags|truncate:250} </small>
 <a href="#showcategoryinfo" id="morecategory">more about category...</a>
-<div class="row">
-    <div class="span10">
+</div>
+<div class="span7">
+    <h3><a href="#">{_'Best sellers'}</a></h3>
+    <ul class="thumbnails">       
+        <li class="thumbnail span2"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
+        <li class="thumbnail span2"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
+        <li class="thumbnail span2"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
+    </ul>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">       
+        <li><a tabindex="-1" href="#">{_'Featured'}</a></li>
+        <li class="divider"></li>
+        <li><a tabindex="-1" href="#">Product</a></li>
+        <li><a tabindex="-1" href="#">Product</a></li>
+        <li><a tabindex="-1" href="#">Product</a></li>
+    </ul>
+</div>
+
+<div class="span10">
         {if $user->isInRole('admin')}
                 <a href="#addProduct" class="btn" id="addProductButton"><i class="icon-large icon-plus"></i> {_"Add Product"}</a>
                 <div class="btn-group">
@@ -82,8 +97,6 @@
            {/if}
 
     </div>
-</div>
-
 </div>   
 
 <div class="alert alert-info span10 row" id="categoryinfo">
@@ -103,20 +116,20 @@
 
 
 {foreach $categories as $catID => $cat}
-                {if $cat->HigherCategoryID == $category->CategoryID}
-<div class="span10">
-<div class="media">
-  <a class="pull-left" href="#">
-    <img class="media-object" data-src="holder.js/64x64">
-  </a>
-  <div class="media-body">
-    <h4 class="media-heading"><a href="{plink product:products $catID}">  {$cat->CategoryName}</a></h4>
-    <p>{$cat->CategoryDescription|striptags|truncate:70}</p>
-  </div>
-</div>
-</div> 
-               {/if}
-                {/foreach}
+    {if $cat->HigherCategoryID == $category->CategoryID}
+                <div class="span10">
+                    <div class="media">
+                      <a class="pull-left" href="#">
+                        <img class="media-object" data-src="holder.js/64x64">
+                      </a>
+                      <div class="media-body">
+                        <h4 class="media-heading"><a href="{plink product:products $catID}">  {$cat->CategoryName}</a></h4>
+                        <p>{$cat->CategoryDescription|striptags|truncate:70}</p>
+                      </div>
+                    </div>
+                </div> 
+    {/if}
+ {/foreach}
 
 {/block}
 
@@ -213,9 +226,6 @@
                   {control product:productMini $product->ProductID}
             {/foreach}
 </ul>
-
-
-
 
 </div>    
 {/block}
@@ -362,30 +372,12 @@
     </div>
     <div class="modal-body">
         <p>{_'Please fill in these information'}</p>
-
-
+                        {control addCategoryPhotoForm}
     </div>
     <div class="modal-footer">
-                {control addCategoryPhotoForm}
         <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
     </div>
 </div>
-
-<div id="editCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel"><i class="icon-pencil"></i> Edit Category</h3>
-    </div>
-    <div class="modal-body">
-        <p>{_'Please fill in these information'}</p>
-
-    </div>
-    <div class="modal-footer" n:snippet="categoryInfoForm">
-                {control editCategoryForm}
-        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-    </div>
-</div>
-
 
 
 <div id="deleteCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -409,11 +401,11 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel"><i class="icon-pencil"></i> Add Category</h3>
     </div>
-    <div class="modal-body"></div>
+    <div class="modal-body">
+                <p>{_'Please fill in these information'}</p>
+    {control addCategoryForm}
+    </div>
     <div class="modal-footer">
-        <p>{_'Please fill in these information'}</p>
-              {control addCategoryForm}
-
         <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
     </div>
 </div>
