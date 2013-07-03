@@ -8,7 +8,7 @@
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
         <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
         <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap.min.css">
-        <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap-responsive.css">
+        <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap-responsive.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{$basePath}/css/font-awesome.min.css">
         <link rel="stylesheet" href="{$basePath}/css/bootstrap-lightbox.min.css">
@@ -57,9 +57,14 @@
                         <div class="navbar">
                             <div class="navbar-inner">
                                 <div class="container">
+                                    <a class="" data-toggle="collapse" data-target=".nav-collapse">
+                                        <strong class="btn pull-right">{_'Menu'} <i class="icon-reorder"></i></strong>
+                                    </a>
+                                    <div class="nav-collapse collapse">
                                     <ul class="nav" n:snippet="menu">
                                              {control menu 1}
                                     </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>

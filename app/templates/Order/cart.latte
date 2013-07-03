@@ -2,18 +2,13 @@
 {block pageheader}
 
         <div class="page-header">
-        <h1 n:block="title"><i class="icon-shopping-cart"></i> {_'Your cart'} <small>Here you can complete your order. Just fill fields bellow.</small></h1>
+        <h1 n:block="title"><i class="icon-shopping-cart"></i> {_'Your cart'} <small>{_'Here you can complete your order. Just fill fields bellow.'}</small></h1>
         </div>
 
 {/block}
     
 {block content}
 <div class="span12" n:snippet="cartTable">    
-{*foreach $flashes as $flash}
-        <div class="{$flash->type}">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-{$flash->message}</div>
-{/foreach*}
 
     <table class="table span9 miniproduct">
     <thead class="table-bordered">
@@ -58,7 +53,7 @@
                          <span class="shipping">0,-</span></td>
                     <td class="1"> <strong>{_'Total'}:</strong>
                          <span class="ordertotal">{$grandtotal},-</span></td>
-                    <td><a href="#orderform" class="btn btn-warning"><i class="icon-arrow-down"></i> Continue your Order</a></td>
+                    <td><a href="#orderform" class="btn btn-warning"><i class="icon-arrow-down"></i> {_'Continue your Order'}</a></td>
                 </tr>
                 
             </tbody>
@@ -160,7 +155,7 @@
        
         var shipping = 0;
         var payment = 0;
-        
+
         $('select[name="shippers"]').change(function() {
             i = $('select[name="shippers"] option:selected').val();
             shipping = sp[i];
