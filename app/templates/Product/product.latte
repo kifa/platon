@@ -5,6 +5,8 @@
 {/block}
 {block pageheader}
 {if $user->isInRole('admin')}
+      <div class="alert alert-error"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?'}</div>
+
     <div class="row">
         <div class="span10">
             <div class="btn-group">
@@ -39,7 +41,18 @@
 
                 </ul>
             </div>
+            
+            <div class="btn-group" n:snippet="productStatus">
+    
+              {if $product->ProductStatusID == 3} 
+                <a href="{plink setProductStatus! $product->ProductID, 2}" class="btn ajax active"><i class="icon-thumbs-up"></i></a>
+                   {else}
+                <a href="{plink setProductStatus! $product->ProductID, 3}" class="btn ajax"><i class="icon-thumbs-up"></i></a>
+                   {/if}
+                  
 
+
+            </div>
             <div class="btn-group">
                <a href="#editParam" class="btn" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Specs"}</a> |
             </div>
@@ -48,13 +61,10 @@
     </div>
 {/if}
 
-<div class="page-header">
+<div class="page-header" n:snippet="page-header">
     <h1 n:block="title"><span class="prodTitle" n:snippet="prodTitle">{$product->ProductName}</span>
-            <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>
+            <small><i class="icon-trophy"></i> {if $product->ProductStatusID == 3}<i class="icon-thumbs-up"></i>{/if}</small></h1>
 </div>
-
-        <div class="alert alert-error"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?'}</div>
-
 {/block}
 
 {block content}

@@ -22,9 +22,23 @@
 <a href="{link hideProduct! $product->CategoryID, $product->ProductID}" title="Hide product" class="ajax">
     <i id="hideProduct" class="icon-large icon-eye-close"></i></a>
 
+                {if $product->ProductStatusID == 3} 
+                <a href="{plink setProductStatus! $product->ProductID, 2}" class="btn ajax active"><i class="icon-thumbs-up"></i></a>
+                   {else}
+                <a href="{plink setProductStatus! $product->ProductID, 3}" class="btn ajax"><i class="icon-thumbs-up"></i></a>
+                   {/if}
+                
                 {else}
 <a href="{link hideProduct! $product->CategoryID, $product->ProductID}" class="ajax"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
-                {/if}
+                
+{if $product->ProductStatusID == 3} 
+                <a href="{plink setProductStatus! $product->ProductID, 2}" class="btn ajax active"><i class="icon-thumbs-up"></i></a>
+                   {else}
+                <a href="{plink setProductStatus! $product->ProductID, 3}" class="btn ajax"><i class="icon-thumbs-up"></i></a>
+                   {/if}
+
+
+{/if}
                 
             </div>
             {/ifCurrent}

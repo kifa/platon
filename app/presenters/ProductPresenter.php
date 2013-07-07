@@ -450,6 +450,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
     
+    
     public function handleSetSale($prodid, $amount, $type){
         if ($this->getUser()->isInRole('admin')) {            
             $this->productModel->updateSale($prodid, $amount, $type);
@@ -479,6 +480,42 @@ class ProductPresenter extends BasePresenter {
             else {
              $this->redirect('this');
             }
+        }
+    }
+    
+    
+    
+    public function handleDeletePhoto($id, $photo) {
+        if ($this->getUser()->isInRole('admin')) {
+            $row = $this->productModel->loadPhoto($photo);
+            if (!$row) {
+                $this->flashMessage('There is no photo to delete', 'alert');
+            } else {
+
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/' . $row->PhotoURL;
+                if ($imgUrl) {
+                    unlink($imgUrl);
+                }
+
+
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/50-' . $row->PhotoURL;
+                if ($imgUrl) {
+                    unlink($imgUrl);
+                }
+
+
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/300-' . $row->PhotoURL;
+                if ($imgUrl) {
+                    unlink($imgUrl);
+                }
+
+                $e = 'Photo ' . $row->PhotoName . ' was sucessfully deleted.';
+
+                $this->productModel->deletePhoto($photo);
+                $this->flashMessage($e, 'alert');
+            }
+
+            $this->redirect('this');
         }
     }
     
@@ -513,6 +550,23 @@ class ProductPresenter extends BasePresenter {
         }
     }
  
+
+    
+    public function handleSetProductStatus($id, $statusid) {
+        if($this->getUser()->isInRole('admin')){ 
+            if($this->isAjax())
+            {            
+                $this->productModel->updateProduct($id, 'ProductStatusID', $statusid);
+                $this->invalidateControl('page-header');
+                $this->invalidateControl('productStatus');
+                $this->invalidateControl('products');
+                $this->invalidateControl('script');
+            }
+            else {
+             $this->redirect('this');
+            }
+        }
+    }
 
 
     public function handleEditCatDescription($catid) {

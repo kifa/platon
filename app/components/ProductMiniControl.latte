@@ -13,19 +13,21 @@
                 
                 {_"Admin"}: 
                 {if $product->ProductStatusID == 1}
-<a href="{plink showProduct! $product->CategoryID, $product->ProductID}" title="Publish product" class="ajax">
-    <i id="showProduct" class="icon-large icon-eye-open"></i></a>
+<a href="{plink showProduct! $product->CategoryID, $product->ProductID}" title="{_'Publish product'}" class="ajax btn"><i id="showProduct" class="icon-large icon-eye-open"></i></a>
 
-<a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" title="Archive product" class="ajax">
-    <i id="deleteProduct" class="icon-large icon-inbox"></i></a>
+<a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" title="{_'Archive product'}" class="ajax btn"><i id="deleteProduct" class="icon-large icon-inbox"></i></a>
 
-                {elseif $product->ProductStatusID == 2}
-<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" title="Hide product" class="ajax">
-    <i id="hideProduct" class="icon-large icon-eye-close"></i></a>
-
-                {else}
-<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" class="ajax"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
-                {/if}
+    {elseif $product->ProductStatusID == 2}
+<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" title="{_'Hide product'}" class="ajax btn"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
+<a href="{plink setProductStatus! $product->ProductID, 3}" class="btn ajax"><i class="icon-thumbs-up"></i></a>
+    
+    {elseif $product->ProductStatusID == 3} 
+<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" title="{_'Hide product'}" class="ajax btn"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
+<a href="{plink setProductStatus! $product->ProductID, 2}" title="{_'Feature product'}" class="btn ajax active"><i class="icon-thumbs-up"></i></a>
+                   
+    {else}
+<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" class="btn ajax"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
+    {/if}
 
             </div>
             {/ifCurrent}
