@@ -4,58 +4,53 @@
 {/snippet}
 {/block}
 {block pageheader}
+{if $user->isInRole('admin')}
+    <div class="row">
+        <div class="span10">
+            <div class="btn-group">
+                <a class="btn">{_'Choose Category'}</a>
+                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" n:snippet="productCategory">
+                    {foreach $categories as $catID => $cat}
+                     {if $cat->CategoryStatus != 3}
+                    <li class="productcat"><a href="{plink setProductCategory!  $product->ProductID, $catID }" class="ajax">
+                    {if $product->CategoryID == $catID}<i class="icon-ok-sign"></i>{/if}
+                    {$cat->CategoryName}</a></li>
+                    {/if}
+                    {/foreach}
+
+                </ul>
+            </div>
+
+            <div class="btn-group">
+                <a class="btn">{_'Choose Producer'}</a>
+                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" n:snippet="productProducer">
+                    {foreach $producers as $producerID => $prod}
+
+                    <li class="productproducer"><a href="{plink setProductProducer!  $product->ProductID, $producerID }" class="ajax">
+                    {if $product->ProducerID == $producerID}<i class="icon-ok-sign"></i>{/if}
+                    {$prod->ProducerName}</a></li> 
+                    {/foreach}
+
+                </ul>
+            </div>
+
+            <div class="btn-group">
+               <a href="#editParam" class="btn" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Specs"}</a> |
+            </div>
+            <a href="#" class="btn" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+        </div>
+    </div>
+{/if}
+
 <div class="page-header">
     <h1 n:block="title"><span class="prodTitle" n:snippet="prodTitle">{$product->ProductName}</span>
             <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>
-            {if $user->isInRole('admin')}
-<div class="row">
-    <div class="span10">
-        <div class="btn-group">
-                    <a class="btn">{_'Choose Category'}</a>
-                    <button class="btn dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" n:snippet="productCategory">
-                        {foreach $categories as $catID => $cat}
-                         {if $cat->CategoryStatus != 3}
-                        <li class="productcat"><a href="{plink setProductCategory!  $product->ProductID, $catID }" class="ajax">
-                        {if $product->CategoryID == $catID}<i class="icon-ok-sign"></i>{/if}
-                        {$cat->CategoryName}</a></li>
-                        {/if}
-                        {/foreach}
-                   
-                    </ul>
-        </div>
-        
-        <div class="btn-group">
-                    <a class="btn">{_'Choose Producer'}</a>
-                    <button class="btn dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" n:snippet="productProducer">
-                        {foreach $producers as $producerID => $prod}
-                
-                        <li class="productproducer"><a href="{plink setProductProducer!  $product->ProductID, $producerID }" class="ajax">
-                        {if $product->ProducerID == $producerID}<i class="icon-ok-sign"></i>{/if}
-                        {$prod->ProducerName}</a></li> 
-                        {/foreach}
-                   
-                    </ul>
-        </div>
-        
-        <div class="btn-group">
-           <a href="#editParam" class="btn" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Specs"}</a> |
-        </div>
-        <a href="#" class="btn" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a> 
-
-    </div>
-    
-</div>
-
-            {/if}
-
-
-
 </div>
 
         <div class="alert alert-error"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?'}</div>

@@ -128,7 +128,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->invalidateControl('flashMessages');
         }
         
-
     }
 
     protected function createComponentBaseControl() {
@@ -180,6 +179,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $mailControl->setProduct($this->productModel);
         $mailControl->setCategory($this->categoryModel);
         $mailControl->setBlog($this->blogModel);
+        $mailControl->setShop($this->shopModel);
         return $mailControl;
     }
        

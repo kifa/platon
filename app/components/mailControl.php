@@ -17,14 +17,19 @@ class mailControl extends BaseControl {
     private $categoryModel;
     private $productModel;
     private $blogModel;
+    private $shopModel;
 
 
-   public function setCategory($cat) {
+    public function setCategory($cat) {
         $this->categoryModel = $cat;
 
     }
     
-    public function setBlog($blog) {
+    public function setShop($shop){
+        $this->shopModel = $shop;
+    }
+
+        public function setBlog($blog) {
         $this->blogModel = $blog;
 
     }
@@ -48,12 +53,12 @@ class mailControl extends BaseControl {
 }
     
 
-public function sendSuperMail($to, $subject, $message) {
+public function sendSuperMail($to, $subject, $message, $from='luk.danek@gmail.com') {
+
         $mail = new Message;
-            $mail->setFrom('Lukas <luk.danek@gmail.com>')
-            ->addTo('luk.danek@gmail.com')
-            ->addTo('jiri.kifa@gmail.com')
-            ->setSubject('Zpráva z BIRNE: ' . $subject)
+            $mail->setFrom($from)
+            ->addTo($to)
+            ->setSubject($subject)
             ->setHtmlBody($message);
 
            $mailer = new Nette\Mail\SmtpMailer(array(

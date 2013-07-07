@@ -15,7 +15,7 @@
         
 {block content}
 <div class="span10">
-    <div class="span5">
+    <div class="span4">
         
  {snippet form}       
          {form contactForm class => ajax}
@@ -41,15 +41,41 @@
 {/form}
 {/snippet}
     </div>
-    <div class="span4" n:snippet="contactText">
-    <legend>We are ready to help you. Just ask!</legend>
+    <div class="span5" n:snippet="contactBlock">
+    <legend class="contactHeading" n:snippet="contactHeading">{$contactText->StaticTextName}</legend>
     <button class="btn"><i class="icon-facebook"></i></button>
         <button class="btn"><i class="icon-twitter"></i></button>
         <button class="btn"><i class="icon-youtube"></i></button>
+        <hr>
+        <div class="contactText" n:snippet="contactText">
+        {$contactText->StaticTextContent}
+        </div>
     </div>
 </div>
 
 {/block}
+
+
+{block sidebar}
+                            <div class="span2">
+    {if $user->isInRole('admin')}
+        {control menu:admin}
+    {/if}
+
+
+                                <ul class="nav nav-list">
+                                    <li class="nav-header">Menu</li>
+
+                                      {control menu:side}
+                                    <li class="divider"></li>
+                                </ul>
+
+                                <i class="icon-camera-retro icon-2x"></i><strong>Google Nexus</strong>
+                                <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
+                                    <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
+                            </div>
+{/block}
+
 
 {block script}
 <div n:snippet="script">
@@ -67,5 +93,41 @@
     
 </script>
 </div>
+
+{if $user->isInRole('admin')}
+<script>
+  $('.contactText').editable( {link editContactText! $contactText->StaticTextID }, {
+                                        type      : 'wysiwyg',
+                                        onblur    : 'ignore',
+                                        cancel    : {_'Cancel'},
+                                        submit    : 'OK',
+                                        indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+                                        tooltip   : {_'Click to edit ...'},
+                                        wysiwyg   : { controls : { separator04         : { visible : true },
+                                                              insertOrderedList   : { visible : true },
+                                                              insertUnorderedList : { visible : true }
+                                               }
+                                        }, 
+                                       callback : function(value, settings) {
+                                           var json = $.parseJSON(value);
+                                           $('.contactText').html(json.edit);
+                                       }
+                                });
+                                
+   $('.contactHeading').editable( {link editContactTextHeading! $contactText->StaticTextID }, {
+                                        type      : 'text',
+                                        onblur    : 'ignore',
+                                        cancel    : {_'Cancel'},
+                                        submit    : 'OK', 
+                                        indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+                                        tooltip   : {_'Click to edit ...'},
+                                        callback : function(value, settings) {
+                                           var json = $.parseJSON(value);
+                                           $('.contactHeading').text(json.edit);
+                                       }
+                                });
+   
+</script>
+{/if}
 
 {/block}

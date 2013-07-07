@@ -79,6 +79,7 @@ class HomepagePresenter extends BasePresenter {
             $form->setValues(array(), TRUE);
             $this->invalidateControl('contact');  
             $this->invalidateControl('form'); 
+            $this->invalidateControl('script');
             
         }
         else {
@@ -97,9 +98,46 @@ class HomepagePresenter extends BasePresenter {
     public function actionContact(){
     
     }
+    
+    public function handleEditContactTextHeading($staticID) {
+        if($this->user->isInRole('admin')) {
+            if($this->isAjax()){            
+                $content = $_POST['value'];
+                $this->shopModel->updateStaticText($staticID, 'StaticTextName', $content);
+            }
+            if(!$this->isControlInvalid('contactTextHeading')){
+                $this->payload->edit = $content;
+                $this->sendPayload();
+                $this->invalidateControl('contactTextHeading');
+            }
+            else {
+             $this->redirect('this');
+            }
+        }
+           
+    }
+    
+    public function handleEditContactText($staticID) {
+        if($this->user->isInRole('admin')) {
+            if($this->isAjax()){            
+                $content = $_POST['value'];
+                $this->shopModel->updateStaticText($staticID, 'StaticTextContent', $content);
+            }
+            if(!$this->isControlInvalid('contactText')){
+                $this->payload->edit = $content;
+                $this->sendPayload();
+                $this->invalidateControl('contactText');
+            }
+            else {
+             $this->redirect('this');
+            }
+        }
+           
+    }
 
     public function renderContact() {
         $this->template->anyVariable = 'any value';
+        $this->template->contactText = $this->shopModel->loadStaticText(3);
     }
     
     public function renderPhotos() {
@@ -119,10 +157,12 @@ class HomepagePresenter extends BasePresenter {
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->email = $email;
-            //$template->mailOrder = $row->UsersID;
             $template->note = $note;
             
+            $orderMail = $this->shopModel->getShopInfo('OrderMail');
+            $shopName = $this->shopModel->getShopInfo('Name');
+        
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Nový dotaz', $template);
+            $mailIT->sendSuperMail($orderMail, $shopName . ': Nový dotaz', $template, $email);
     }
 }

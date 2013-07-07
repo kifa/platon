@@ -72,7 +72,7 @@ class ShopModel extends Repository {
             return $this->getTable('statictext')->fetch();
         }
         else{
-            return $this->getTable('statictext')->where('StaticTextID',$id);
+            return $this->getTable('statictext')->where('StaticTextID',$id)->fetch();
         }
     }
     
@@ -96,14 +96,12 @@ class ShopModel extends Repository {
         return $this->getTable('statictext')->insert($insert);
     }
     
-    public function updateStaticText($title, $content, $status){
+    public function updateStaticText($id, $type, $content){
         $update = array(
-            'StaticTextName' => $title,
-            'StaticTextContent' => $content,
-            'StatusID' => $status
+            $type => $content
         );
         
-        return $this->getTable('statictext')->insert($update);
+        return $this->getTable('statictext')->where('StaticTextID', $id)->update($update);
     }
     /*
      * Load VAT etc
@@ -117,5 +115,3 @@ class ShopModel extends Repository {
      * ETC...
      */
 }
-
-?>

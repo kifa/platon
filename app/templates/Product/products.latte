@@ -6,28 +6,6 @@
 
 {block pageheader}
 
-<div class="page-header">
-<div class="span4">
-    <h1 n:block="title" class="CatTitle" n:snippet="CatTitle">{$category->CategoryName}</h1>
-    <small class="shortDesc muted"> {$category->CategoryDescription|striptags|truncate:250} </small>
-<a href="#showcategoryinfo" id="morecategory">more about category...</a>
-</div>
-<div class="span7">
-    <h3><a href="#">{_'Best sellers'}</a></h3>
-    <ul class="thumbnails">       
-        <li class="thumbnail span2"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
-        <li class="thumbnail span2"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
-        <li class="thumbnail span2"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
-    </ul>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">       
-        <li><a tabindex="-1" href="#">{_'Featured'}</a></li>
-        <li class="divider"></li>
-        <li><a tabindex="-1" href="#">Product</a></li>
-        <li><a tabindex="-1" href="#">Product</a></li>
-        <li><a tabindex="-1" href="#">Product</a></li>
-    </ul>
-</div>
-
 <div class="span10">
         {if $user->isInRole('admin')}
                 <a href="#addProduct" class="btn" id="addProductButton"><i class="icon-large icon-plus"></i> {_"Add Product"}</a>
@@ -97,10 +75,11 @@
            {/if}
 
     </div>
-</div>   
 
-<div class="alert alert-info span10 row" id="categoryinfo">
-    {if $category->CategoryPhoto != NULL }
+<div class="page-header">
+<div class="span4">
+    <h1 n:block="title" class="CatTitle" n:snippet="CatTitle">{$category->CategoryName}</h1>
+    <small class="shortDesc muted"> {if $category->CategoryPhoto != NULL }
     <span class="span3">
 
         <img src="{$basePath}/images/category/150-{$category->CategoryPhoto}" class="img-circle" />
@@ -108,13 +87,28 @@
 
     </span>
     {/if}
-    <span class="{$category->CategoryPhoto ? span6 : span9}" n:block="metadesc">
-        <span class="CatDescription" n:snippet="CatDescription">{!$category->CategoryDescription}</span> <small><br/>
-        <a href="{plink Blog:category $category->CategoryID}">{_'Check news on blog'} <i class="icon-arrow-right"></i></a></small>
-    </span>
+    <span n:block="metadesc">
+        <span class="CatDescription" n:snippet="CatDescription">{!$category->CategoryDescription}</span>
+        <a href="{plink Blog:category $category->CategoryID}">{_'Check news on blog'} <i class="icon-arrow-right"></i></a>
+    </span> </small>
+</div>
+<div class="span7">
+    <h3><a href="#">{_'Best sellers'}</a></h3>
+    <ul class="thumbnails">       
+        <li class="thumbnail span2"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
+        <li class="thumbnail span2"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
+        <li class="thumbnail span2"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
+    </ul>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">       
+        <li><a tabindex="-1" href="#">{_'Featured'}</a></li>
+        <li class="divider"></li>
+        <li><a tabindex="-1" href="#">Product</a></li>
+        <li><a tabindex="-1" href="#">Product</a></li>
+        <li><a tabindex="-1" href="#">Product</a></li>
+    </ul>
 </div>
 
-
+    
 {foreach $categories as $catID => $cat}
     {if $cat->HigherCategoryID == $category->CategoryID}
                 <div class="span10">
@@ -123,14 +117,15 @@
                         <img class="media-object" data-src="holder.js/64x64">
                       </a>
                       <div class="media-body">
-                        <h4 class="media-heading"><a href="{plink product:products $catID}">  {$cat->CategoryName}</a></h4>
-                        <p>{$cat->CategoryDescription|striptags|truncate:70}</p>
+                          <h4 class="media-heading"><a href="{plink product:products $catID}"><i class="icon-chevron-sign-right"></i>  {$cat->CategoryName}</a></h4>
+                        <p class="muted">{$cat->CategoryDescription|striptags|truncate:70}</p>
                       </div>
                     </div>
                 </div> 
     {/if}
  {/foreach}
 
+</div>
 {/block}
 
 {block sidebar}
