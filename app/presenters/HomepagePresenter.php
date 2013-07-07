@@ -62,7 +62,7 @@ class HomepagePresenter extends BasePresenter {
             $contactForm->addTextArea('note', 'What would you like to know:')
                     ->setRequired();
             $contactForm->addSubmit('send', 'Ask')
-                    ->setAttribute('class', 'ajax btn btn-primary')
+                    ->setAttribute('class', 'ajax span2 btn btn-primary btn-large')
                     ->setAttribute('data-loading-text', 'Asking...');
             $contactForm->onSuccess[] = $this->contactFormSubmitted;
 
@@ -138,6 +138,10 @@ class HomepagePresenter extends BasePresenter {
     public function renderContact() {
         $this->template->anyVariable = 'any value';
         $this->template->contactText = $this->shopModel->loadStaticText(3);
+        $this->template->companyName = $this->shopModel->getShopInfo('Name');
+        $this->template->companyPhone = $this->shopModel->getShopInfo('ContactPhone');
+        $this->template->companyMail = $this->shopModel->getShopInfo('ContactMail');
+        $this->template->companyAddress = $this->shopModel->getShopInfo('CompanyAddress');
     }
     
     public function renderPhotos() {

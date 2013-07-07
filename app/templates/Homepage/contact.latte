@@ -14,8 +14,8 @@
         
         
 {block content}
-<div class="span10">
-    <div class="span4">
+<div class="span9">
+    <div class="span3">
         
  {snippet form}       
          {form contactForm class => ajax}
@@ -23,32 +23,34 @@
         <li n:foreach="$form->errors as $error">{$error}</li>
 </ul>
   <fieldset>
-    <legend>You can ask by filling this contact form</legend>
+      <legend><i class="icon-envelope"></i> {_'Write to us'}</legend>
     {label note /}
-    {input note}
+    {input note class => span3}
     
     {label email /}
     <div class="input-prepend input-append">
         <span class="add-on">@</span>
-    {input email}
+    {input email class => span3}
     </div>
-    
+     {input send}
     <div class="form-actions">
-    {input send}
+     <span class="help-block"><i class="icon-info-sign"></i> {_'We will respond as soon as possible.'}</span>
     </div>
-    <span class="help-block"><i class="icon-info-sign"></i> {_'We will respond as soon as possible.'}</span>
   </fieldset>
 {/form}
 {/snippet}
     </div>
     <div class="span5" n:snippet="contactBlock">
     <legend class="contactHeading" n:snippet="contactHeading">{$contactText->StaticTextName}</legend>
-    <button class="btn"><i class="icon-facebook"></i></button>
+        {if $user->isInRole('admin')}
+        <span class="muted"><i class="icon-info-sign"></i> {_'Edit this text and heading by clicking'}</span><br>   
+        {/if}
+        <button class="btn"><i class="icon-facebook"></i></button>
         <button class="btn"><i class="icon-twitter"></i></button>
         <button class="btn"><i class="icon-youtube"></i></button>
         <hr>
         <div class="contactText" n:snippet="contactText">
-        {$contactText->StaticTextContent}
+        {!$contactText->StaticTextContent}
         </div>
     </div>
 </div>
@@ -57,23 +59,22 @@
 
 
 {block sidebar}
-                            <div class="span2">
-    {if $user->isInRole('admin')}
-        {control menu:admin}
-    {/if}
+<div class="span3">
+    <ul class="nav nav-list">
+        <li class="nav-header"><i class="icon-group icon-large"></i> {_'Company info'}</a></li>
+        <li class="divider"></li>
+        <li><strong>{$companyName}</strong></li>
+        {if $companyPhone}
+        <li><i class="icon-phone"></i> {$companyPhone}</li>
+        {/if}
+        <li><i class="icon-envelope"></i> {$companyMail}</li>
+        <li class="divider"></li>
+        <li><i class="icon-home"></i> <strong>{_'Address'}</strong></li>
+        <li>{$companyAddress}</li>
+    </ul>
 
 
-                                <ul class="nav nav-list">
-                                    <li class="nav-header">Menu</li>
-
-                                      {control menu:side}
-                                    <li class="divider"></li>
-                                </ul>
-
-                                <i class="icon-camera-retro icon-2x"></i><strong>Google Nexus</strong>
-                                <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-                                    <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-                            </div>
+</div>
 {/block}
 
 
