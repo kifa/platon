@@ -8,6 +8,8 @@
 
 <div class="span10">
         {if $user->isInRole('admin')}
+     <div class="alert alert-error"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?'}</div>
+
                 <a href="#addProduct" class="btn" id="addProductButton"><i class="icon-large icon-plus"></i> {_"Add Product"}</a>
                 <div class="btn-group">
                     <a href="#" class="btn"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
@@ -76,7 +78,7 @@
 
     </div>
 
-<div class="page-header">
+<div>
 <div class="span4">
     <h1 n:block="title" class="CatTitle" n:snippet="CatTitle">{$category->CategoryName}</h1>
     <small class="shortDesc muted"> {if $category->CategoryPhoto != NULL }
