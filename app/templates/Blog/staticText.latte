@@ -1,0 +1,115 @@
+{*block bread}
+{control menu:breadBlog $post->CategoryID, $post->BlogID}
+{/block*}
+{block pageheader}
+<div class="page-header">
+    <h1 n:block="title"><span class="StaticTextName" n:snippet="StaticTextName">{$post->StaticTextName}</span> <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>
+            {if $user->isInRole('admin')}
+<div class="row">
+    <div class="span10">
+        <a href="#addPhoto" class="btn" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
+         <div class="btn-group">
+        <a href="#editDesc" class="btn" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
+       
+        <a href="#editDocs" class="btn" data-toggel="modal" data-target="#editDocs" id="editDocsButton"><i class="icon-large icon-download"></i> {_"Edit Documents"}</a> |
+         </div>
+        <a href="#" class="btn" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>         
+    </div>
+</div>
+            {/if}    
+        
+</div>
+{/block}
+
+{block content}
+
+<div class="span9">
+
+     
+        <div class="text-justified StaticTextContent" n:snippet="StaticTextContent">{!$post->StaticTextContent}</div>            
+
+    
+</div> <!-- class="span10" -->
+{/block}
+
+{block sidebar}
+            <div class="span3">
+{if $user->isInRole('admin')}
+{control menu:admin}
+{/if}
+
+
+                <ul class="nav nav-list">
+                    <li class="nav-header">Menu</li>
+                    {control menu:side}
+                    <li class="divider"></li>
+                </ul>
+
+               
+            </div>
+{/block}
+
+{block script}
+<script src="{$basePath}/js/bootstrap-lightbox.min.js"></script>
+
+<script>
+$(document).ready(function() {
+$(".imgLiquid").imgLiquid({
+    fill: true,
+    fadeInTime: 0,
+    delay: 0,
+    horizontalAlign: "left",
+    verticalAlign: "top"});
+});
+</script>
+
+{if $user->isInRole('admin')}
+    <script src="{$basePath}/js/droparea.js"></script>
+<script>
+$(document).ready(function() {
+
+
+    $('.StaticTextName').editable( {link editStaticTextName! $post->StaticTextID }, {
+            type      : 'text',
+            cancel    : {_'Cancel'},
+            submit    : 'OK',
+            indicator : '<i class="icon-spinner icon-spin"></i>',
+            tooltip   : 'Click to edit...',
+            callback : function(value, settings) {
+               var json = $.parseJSON(value);
+               $('.StaticTextName').text(json.edit);
+           }
+    });
+
+    $('.StaticTextContent').editable( {link editStaticTextContent! $post->StaticTextID }, {
+            type      : 'wysiwyg',
+            onblur    : 'ignore',
+            cancel    : {_'Cancel'},
+            submit    : 'OK',
+            cssclass  : 'span10',
+            colls     : '15',
+            rows      : '15',
+            indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+            tooltip   : {_'Click to edit ...'},
+            wysiwyg   : { controls : { separator04         : { visible : true },
+                           insertOrderedList   : { visible : true },
+                           insertUnorderedList : { visible : true }
+                        }
+                        }, 
+            callback : function(value, settings) {
+                var json = $.parseJSON(value);
+                $('.StaticTextContent').html(json.edit);
+            }
+    });
+    
+    
+});
+
+</script>
+
+{/if}
+{/block}
+
+{block modal}
+
+{/block}

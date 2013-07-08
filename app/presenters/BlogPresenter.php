@@ -14,6 +14,7 @@ class BlogPresenter extends BasePresenter {
     private $blog;
     private $productModel;
     private $categoryModel;
+    private $shopModel;
     private $row;
 
 
@@ -27,6 +28,7 @@ class BlogPresenter extends BasePresenter {
         $this->productModel = $this->context->productModel;
         $this->categoryModel = $this->context->categoryModel;
         $this->blog = $this->context->blogModel;
+        $this->shopModel = $this->context->shopModel;
         /* Kontrola přihlášení
          * 
          * if (!$this->getUser()->isInRole('admin')) {
@@ -333,6 +335,55 @@ class BlogPresenter extends BasePresenter {
         $this->template->album = $this->blog->loadPhotoAlbum($postid);
         $this->template->post = $this->blog->loadPost($postid);
         
+    }
+    
+    
+    public function handleEditStaticTextContent($postid) {
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax())
+            {            
+                $content = $_POST['value'];
+                $this->shopModel->updateStaticText($postid, 'StaticTextContent', $content);
+
+            }
+            if(!$this->isControlInvalid('StaticTextContent'))
+            {
+
+                $this->payload->edit = $content;
+                $this->sendPayload();
+                $this->invalidateControl('StaticTextContent');
+
+            }
+            else {
+             $this->redirect('this');
+            }
+        }
+    }
+    
+     public function handleEditStaticTextName($postid) {
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax())
+            {            
+                $content = $_POST['value'];
+                $this->shopModel->updateStaticText($postid, 'StaticTextName', $content);            
+            }
+            if(!$this->isControlInvalid('StaticTextName'))
+            {                        
+                $this->payload->edit = $content;
+                $this->sendPayload();
+                $this->invalidateControl('StaticTextName');
+
+            }
+            else {
+             $this->redirect('this');
+            }
+
+        }
+    }
+    
+    public function renderStaticText($postid) {
+        
+        $this->template->post = $this->shopModel->loadStaticText($postid);
     }
     
     

@@ -69,7 +69,7 @@ class ShopModel extends Repository {
 
     public function loadStaticText($id){
         if($id==''){
-            return $this->getTable('statictext')->fetch();
+            return $this->getTable('statictext')->fetchPairs('StaticTextID');
         }
         else{
             return $this->getTable('statictext')->where('StaticTextID',$id)->fetch();
@@ -79,7 +79,7 @@ class ShopModel extends Repository {
     public function loadActiveStaticText($id){
         $activeID = $this->getTable('status')->where('StatusName','Active');        
         if($id==''){
-            return $this->getTable('statictext')->where('StatusID',$activeID['StatusID'])->fetch();
+            return $this->getTable('statictext')->where('StatusID',$activeID['StatusID'])->fetchPairs('StaticTextID');
         }
         else{
             return $this->getTable('statictext')->where('StaticTextID',$id);

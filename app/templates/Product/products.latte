@@ -5,12 +5,12 @@
 {/block}
 
 {block pageheader}
-
+{if $user->isInRole('admin')}
 <div class="span10">
-        {if $user->isInRole('admin')}
-     <div class="alert alert-error"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?'}</div>
+        
+     <div class="alert alert-error"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this category by clicking on Title, Description or panel bellow etc. More info?'}</div>
 
-                <a href="#addProduct" class="btn" id="addProductButton"><i class="icon-large icon-plus"></i> {_"Add Product"}</a>
+                <a href="#snippet--products" class="btn" id="addProductButton"><i class="icon-large icon-plus"></i> {_"Add Product"}</a>
                 <div class="btn-group">
                     <a href="#" class="btn"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
                         {if $category->CategoryPhoto == NULL}
@@ -74,11 +74,10 @@
                         </li>
                     </ul>
                 </div>
-           {/if}
-
     </div>
+   {/if}
 
-<div>
+<div >
 <div class="span4">
     <h1 n:block="title" class="CatTitle" n:snippet="CatTitle">{$category->CategoryName}</h1>
     <small class="shortDesc muted"> {if $category->CategoryPhoto != NULL }
@@ -95,7 +94,7 @@
     </span> </small>
 </div>
 <div class="span7">
-    <h3><a href="#">{_'Best sellers'}</a></h3>
+    <h3>{_'Best sellers'}</h3>
     <ul class="thumbnails">       
         <li class="thumbnail span2"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
         <li class="thumbnail span2"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
@@ -188,7 +187,7 @@
         <li n:foreach="$form->errors as $error">{$error}</li>
 </ul>
   <fieldset>
-    <legend>Add new product</legend>
+    <legend>{_'Add new product'}</legend>
     {label name /}
     {input name}
     {label price /}
@@ -302,11 +301,10 @@
          onblur    : 'ignore',
          cancel    : {_'Cancel'},
          submit    : 'OK',
-         cssclass  : 'span6',
          colls     : '15',
-         rows      : '15',
+         rows      : '10',
          indicator : '<i class="icon-spinner icon-spin"></i>',
-         tooltip   : 'Click to edit ...',
+         tooltip   : '{_'Click to edit'} ...',
          wysiwyg   : { controls : { separator04         : { visible : true },
                                insertOrderedList   : { visible : true },
                                insertUnorderedList : { visible : true }

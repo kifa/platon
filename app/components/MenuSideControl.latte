@@ -1,6 +1,6 @@
 <!--    <li class="{ifCurrent Homepage:}active{/ifCurrent}"><a href="#"><i class="icon-home"></i>{_'Domů'}</a></li>-->
     {foreach $menu as $postID => $post}
-    <li class="{ifCurrent Blog:post $postID}active{/ifCurrent}"><a href="{plink Blog:post $postID}"><i class="icon-arrow-right"></i>{$post->BlogName}</a></li> 
+    <li class="{ifCurrent Blog:staticText $postID}active{/ifCurrent}"><a href="{plink Blog:staticText $postID}"><i class="icon-arrow-right"></i>{$post->StaticTextName}</a></li> 
     {/foreach}
 
     <li class="{ifCurrent Blog:category}active{/ifCurrent}"><a href="{plink Blog:category}"><i class="icon-large icon-star-empty"></i> {_"Blog"}</a></li>

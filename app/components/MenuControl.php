@@ -17,6 +17,7 @@ class MenuControl extends BaseControl {
     private $categoryModel;
     private $productModel;
     private $blogModel;
+    private $shopModel;
 
 
 
@@ -42,6 +43,10 @@ class MenuControl extends BaseControl {
         $this->productModel = $pro;
     }
 
+    public function setShop($shop) {
+        $this->shopModel = $shop;
+    }
+    
     public function createTemplate($class = NULL)
 {
     $template = parent::createTemplate($class);
@@ -69,7 +74,7 @@ class MenuControl extends BaseControl {
     }
 
     private function loadStaticMenu() {
-        return $this->blogModel->loadPosts(100);
+        return $this->shopModel->loadStaticText('');
     }
     
     public function renderAdmin() {
