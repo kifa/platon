@@ -42,14 +42,14 @@ class BlogModel extends Repository {
     }
     
     public function loadPost($postid){
-        //return $this->getTable('blog')->where('BlogID',$postid)->fetch();
+        return $this->getTable('blog')->where('BlogID',$postid)->fetch();
        
-        return $this->getDB()->query('
+      /*  return $this->getDB()->query('
                 SELECT * FROM blog
                 JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
                 WHERE blog.BlogID=?',$postid)->fetch();  
-        
+        */
     }
 
     public function insertPost($name,  $categoryID, $content) {
