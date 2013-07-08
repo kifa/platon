@@ -101,6 +101,10 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
     {
         $today = date("Y-m-d");
         
+        if($dataaval==''){
+            $dataaval = '0000-00-00';
+        };
+        
         $insert = array(
             'ProductID' => NULL,
             'ProductName' => $name,
