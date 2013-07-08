@@ -298,7 +298,7 @@ class OrderModel extends Repository {
             }
             else
             {
-                return $this->getTable('payment.*, status.*')->where('PaymentID',$id);
+                return $this->getTable('payment.*, status.*')->where('PaymentID',$id)->fetch();
             }
         }
         elseif ($switch=='active') {
@@ -307,7 +307,7 @@ class OrderModel extends Repository {
             }
             else
             {
-                return $this->getTable('payment.*, status.*')->where('PaymentID',$id);
+                return $this->getTable('payment.*, status.*')->where('PaymentID',$id)->fetch();
             }
         }
     }
@@ -376,7 +376,7 @@ class OrderModel extends Repository {
             }
             else
             {
-                return $this->getTable('delivery.*, status.*')->where('DeliveryID',$id);
+                return $this->getTable('delivery.*, status.*')->where('DeliveryID',$id)->fetch();
             }
         }
     }

@@ -179,6 +179,9 @@ class OrderPresenter extends BasePresenter {
             foreach ($this->orderModel->loadPayment('','active') as $key => $value) {
                 $payment[$key] = $value->PaymentPrice;
             };
+            
+            
+            
 
             $this->template->shippers = $shippers;
             $this->template->payment = $payment;
@@ -203,12 +206,12 @@ class OrderPresenter extends BasePresenter {
         
         
 
-        foreach ($this->orderModel->loadDelivery('') as $key => $value) {
+        foreach ($this->orderModel->loadDelivery('','active') as $key => $value) {
           //  $t = HTML::el('span', $value->DeliveryPrice)->class('text-info');
             $shippers[$key] = $value->DeliveryName . ' | ' . $value->DeliveryPrice .',-';
         };
 
-        foreach ($this->orderModel->loadPayment('') as $key => $value) {
+        foreach ($this->orderModel->loadPayment('','active') as $key => $value) {
             $payment[$key] = $value->PaymentName . ' | ' . $value->PaymentPrice.',-';
         };
         
