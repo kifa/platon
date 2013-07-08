@@ -74,7 +74,7 @@ class MenuControl extends BaseControl {
     }
 
     private function loadStaticMenu() {
-        return $this->shopModel->loadStaticText('');
+        return $this->shopModel->loadActiveStaticText('');
     }
     
     public function renderAdmin() {

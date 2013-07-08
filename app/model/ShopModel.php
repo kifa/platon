@@ -77,7 +77,7 @@ class ShopModel extends Repository {
     }
     
     public function loadActiveStaticText($id){
-        $activeID = $this->getTable('status')->where('StatusName','Active');        
+        $activeID = $this->getTable('status')->where('StatusName','Active')->fetch();     
         if($id==''){
             return $this->getTable('statictext')->where('StatusID',$activeID['StatusID'])->fetchPairs('StaticTextID');
         }
