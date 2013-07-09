@@ -390,7 +390,8 @@ INSERT INTO `photo` (`PhotoID`, `PhotoName`, `PhotoURL`, `PhotoAlbumID`, `PhotoA
 (47,	'About us',	'24.PNG',	16,	'About us',	1),
 (48,	'Spanche Bob',	'images.jpg',	17,	'Spanche Bob',	1),
 (49,	'Asus Vivobook',	'ImgW.jpg',	18,	'Asus Vivobook',	1),
-(50,	'Thinkpad',	'220px-IBM_Thinkpad_R51.jpg',	19,	'Thinkpad',	1);
+(50,	'Thinkpad',	'220px-IBM_Thinkpad_R51.jpg',	19,	'Thinkpad',	1),
+(51,	'L9',	'lg_optimus_l9-575x500.jpg',	20,	'L9',	1);
 
 DROP TABLE IF EXISTS `photoalbum`;
 CREATE TABLE `photoalbum` (
@@ -427,7 +428,8 @@ INSERT INTO `photoalbum` (`PhotoAlbumID`, `PhotoAlbumName`, `PhotoAlbumDescripti
 (16,	'About us',	'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel dui enim, vitae suscipit est. Donec enim justo, condimentum in dignissim sed, ultricies ut nisi. Nulla vel ligula turpis, pharetra rutrum magna. Maecenas faucibus dapibus nibh in euismod. Phasellus rutrum egestas dui eu fringilla. Nulla vitae sapien odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla et mi leo, vel tempus diam. Aenean bibendum, augue in imperdiet dignissim,',	NULL,	NULL,	2),
 (17,	'Spanche Bob',	'',	14,	NULL,	NULL),
 (18,	'Asus Vivobook',	'',	15,	NULL,	NULL),
-(19,	'Thinkpad',	'',	16,	NULL,	NULL);
+(19,	'Thinkpad',	'',	16,	NULL,	NULL),
+(20,	'L9',	'',	17,	NULL,	NULL);
 
 DROP TABLE IF EXISTS `price`;
 CREATE TABLE `price` (
@@ -457,7 +459,8 @@ INSERT INTO `price` (`PriceID`, `ProductID`, `SellingPrice`, `SALE`, `FinalPrice
 (10,	13,	3999,	0,	3999,	1),
 (11,	14,	9999,	0,	9999,	1),
 (12,	15,	19999,	0,	19999,	1),
-(13,	16,	1000,	0,	1000,	1);
+(13,	16,	1000,	0,	1000,	1),
+(14,	17,	0,	0,	6999,	1);
 
 DROP TABLE IF EXISTS `producer`;
 CREATE TABLE `producer` (
@@ -514,7 +517,8 @@ INSERT INTO `product` (`ProductID`, `ProductName`, `ProducerID`, `ProductNumber`
 (13,	'Sony Ericsson Xperia Mini',	2,	'11111',	'Skvělý malý telefon vhodný do každé malé kapsy. QWERTY klávesnice!\r\n',	'<p>Uživatel se díky operačnímu systému Android může těšit na špičkovou funkční základu. Ta je tvořena např. internetovým prohlížečem,<strong> e-mailovým klientem</strong>, multimediálním přehrávačem, bohatými možnostmi synchronizace, kvalitnímu funkcemi pro organizaci času, prohlížečem dokumentů, skvělým kalendářem či aplikacemi pro přístup na Facebook a Twitter. Přístup ke katalogu Android Market pak umožní instalaci dalších tisíců aplikací a her. Samozřejmostí je také povedený digitální fotoaparát s rozlišením pět megapixelů nebo vestavěná satelitní aGPS navigace. Telefonu nechybí ani podpora technologií Wi-Fi (včetně DLNA) a Bluetooth. Pro připojení sluchátek je k dispozici standardní 3,5 mm jack. O napájení se stará Li-Ion akumulátor o kapacitě 1200 mAh, jenž by měl telefonu na jedno nabití umožnit setrvat až 340 hodin v pohotovostním režimu nebo vykonat čtyři a půl hodiny hovoru.s</p>',	2,	'123456',	'122',	'rok',	11,	1003,	'0000-00-00',	2013,	1),
 (14,	'Spange Bob',	1,	'11111',	'Spange Bob je jediný chodící a mluvící keksík na celém širém světě.',	'',	1,	'123456',	'122',	'rok',	100,	1001,	'0000-00-00',	2013,	1),
 (15,	'Asus Vivobook',	1,	'11111',	'',	'',	2,	'123456',	'122',	'rok',	10,	1002,	'0000-00-00',	2013,	1),
-(16,	'Thinkpad',	1,	'11111',	'',	'',	1,	'123456',	'122',	'rok',	5,	1002,	'0000-00-00',	2013,	1);
+(16,	'Thinkpad',	1,	'11111',	'',	'',	1,	'123456',	'122',	'rok',	5,	1002,	'0000-00-00',	2013,	1),
+(17,	'L9',	1,	'11111',	'',	'',	1,	'123456',	'122',	'rok',	10,	1003,	'0000-00-00',	2013,	1);
 
 DROP TABLE IF EXISTS `productstatus`;
 CREATE TABLE `productstatus` (
@@ -657,4 +661,4 @@ INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`
 ('xxx@xxx.xxx',	NULL,	'Lumpiks',	71283912,	NULL,	NULL,	'user'),
 ('yetty@himalaja.tib',	NULL,	'Yetty',	0,	NULL,	NULL,	'user');
 
--- 2013-07-09 21:29:39
+-- 2013-07-09 22:51:09
