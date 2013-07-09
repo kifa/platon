@@ -191,7 +191,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
             $addForm = new Nette\Application\UI\Form;
             $addForm->setTranslator($this->translator);
 
-            foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
+            foreach ($this->categoryModel->loadCategoryListAdmin() as $id => $category) {
                 $categories[$id] = $category->CategoryName;
             }
             $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');

@@ -297,7 +297,7 @@ class ProductPresenter extends BasePresenter {
 
             $editForm->setRenderer(new BootstrapRenderer);
 
-            foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
+            foreach ($this->categoryModel->loadCategoryListAdmin() as $id => $category) {
                 $categories[$id] = $category->CategoryName;
             }
             $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
@@ -606,7 +606,7 @@ class ProductPresenter extends BasePresenter {
             $deleteForm->setTranslator($this->translator);
             $deleteForm->setRenderer(new BootstrapRenderer);
 
-            foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
+            foreach ($this->categoryModel->loadCategoryListAdmin() as $id => $category) {
                 $categories[$id] = $category->CategoryName;
             }
             $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
@@ -643,13 +643,13 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             // load all products
             $this->template->products = $this->productModel->loadCatalogAdmin($catID, $this->filter);
-            
+            $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
         } else {
             // load published products
             $this->template->products = $this->productModel->loadCatalog($catID, $this->filter);
+            $this->template->categories = $this->categoryModel->loadCategoryList();
         }
 
-        $this->template->categories = $this->categoryModel->loadCategoryList();
         $this->template->category = $this->categoryModel->loadCategory($catID);
     }
 
@@ -1107,7 +1107,7 @@ class ProductPresenter extends BasePresenter {
                 $this->template->attr = 0;
             }
             
-            $this->template->categories = $this->categoryModel->loadCategoryList();
+            $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
             $this->template->producers = $this->productModel->loadProducers();
        }
         
