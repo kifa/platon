@@ -104,6 +104,10 @@ class ShopModel extends Repository {
         
         return $this->getTable('statictext')->where('StaticTextID', $id)->update($update);
     }
+    
+    public function deleteStaticText($id){
+        return $this->getTable('statictext')->where('StaticTextID', $id)->delete();
+    }
     /*
      * Load VAT etc
      * @param ?
