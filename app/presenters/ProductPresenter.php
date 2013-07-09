@@ -98,33 +98,21 @@ class ProductPresenter extends BasePresenter {
      * ********************************************************************** */
 
     public function actionProducts($catID) {
+        $cat = $this->categoryModel->loadCategory($catID);
+        if (!isset($cat->CategoryName)) {
+            $this->flashMessage('Category not available', 'alert');
+            $this->redirect('Homepage:');
+        } 
+        
         if ($this->getUser()->isInRole('admin')) {
             // load all products
             $row = $this->productModel->loadCatalogAdmin($catID);
-        } else {
+            $editCategoryForm = $this['editCategoryForm'];
+            $addCategoryForm = $this['addCategoryForm'];
+        } 
+        else {
             // load published products
             $row = $this->productModel->loadCatalog($catID);
-        }
-        if (!$row) {
-            $this->flashMessage('Categry not available', 'alert');
-            $this->redirect('Homepage:');
-        } else {
-
-
-            if ($this->getUser()->isInRole('admin')) {
-
-
-                $row2 = $this->categoryModel->loadCategory($catID);
-                
-                $this->categoryParam = array('CategoryID' => $catID,
-                    'CategoryName' => $row2->CategoryName,
-                    'CategoryDescription' => $row2->CategoryDescription,
-                    'HigherCategoryID' => $row2->HigherCategoryID);
-
-                $editCategoryForm = $this['editCategoryForm'];
-                $addCategoryForm = $this['addCategoryForm'];
-                //$addForm = $this['addCategoryForm'];
-            }
         }
     }
 
@@ -626,7 +614,6 @@ class ProductPresenter extends BasePresenter {
             $deleteForm->addHidden('id', $this->categoryParam['CategoryID']);
             $deleteForm->addSelect('parent', 'Move products to category:', $categories)
                     ->setPrompt($prompt)
-                    ->setDefaultValue($this->categoryParam['HigherCategoryID'])
                     ->setRequired();
             $deleteForm->addSubmit('edit', 'Delete Category')
                     ->setAttribute('class', 'upl btn btn-danger')
