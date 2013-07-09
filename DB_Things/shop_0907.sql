@@ -30,11 +30,14 @@ INSERT INTO `address` (`AddressID`, `UsersID`, `Street`, `ZIPCode`, `City`, `Sta
 (64,	'12389@1234.xxx',	'qwer',	0,	'qwr',	NULL),
 (65,	'admin@admin.com',	'asdasd',	0,	'vdsfs',	NULL),
 (66,	'michal@prosek.cz',	'Zeleny pruha',	16000,	'Praha a',	NULL),
-(67,	'xxx@xxx.xxx',	'ADSD',	21899,	'Praha',	NULL),
+(67,	'xxx@xxx.xxx',	'213',	12311,	'123145',	NULL),
 (68,	'as@asd.ca',	'AS',	1823,	'SAF',	NULL),
 (69,	'asd@asda.sa',	'AS',	91827,	'AAA',	NULL),
 (70,	'qwe@qwe.qwe',	'QWE',	123,	'qwe',	NULL),
-(71,	'asd@qwe.wqe',	'AIDS',	0,	'qwe',	NULL);
+(71,	'asd@qwe.wqe',	'AIDS',	0,	'qwe',	NULL),
+(72,	'pepa@depa.zz',	'Pepikova',	12931,	'Josefov',	NULL),
+(73,	'thinki@mail.com',	'thinkithinki',	18211,	'Thinki',	NULL),
+(74,	'asus@vivo.boo',	'Asus street',	19299,	'Vivocity',	NULL);
 
 DROP TABLE IF EXISTS `attrib`;
 CREATE TABLE `attrib` (
@@ -157,7 +160,7 @@ CREATE TABLE `delivery` (
 
 INSERT INTO `delivery` (`DeliveryID`, `DeliveryName`, `DeliveryDescription`, `DeliveryPrice`, `FreeFromPrice`, `StatusID`) VALUES
 (1,	'Personal pick up',	'Personal in the shop',	0,	NULL,	1),
-(2,	'Czech postal service',	'Send by transport company',	99,	1000,	2),
+(2,	'Czech postal service',	'Send by transport company',	99,	1000,	1),
 (3,	'DPD',	'Curier express shipping!',	160,	10000,	2);
 
 DROP TABLE IF EXISTS `documentation`;
@@ -242,7 +245,12 @@ INSERT INTO `orderdetails` (`OrderDetailsID`, `OrderID`, `ProductID`, `Quantity`
 (39,	26,	3,	1,	8999),
 (40,	27,	16,	1,	1000),
 (41,	28,	16,	1,	1000),
-(42,	29,	16,	2,	1000);
+(42,	29,	16,	2,	1000),
+(43,	30,	17,	1,	6999),
+(44,	31,	15,	1,	10000),
+(45,	32,	15,	1,	10000),
+(46,	33,	16,	2,	400),
+(47,	34,	15,	1,	10000);
 
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
@@ -295,7 +303,12 @@ INSERT INTO `orders` (`OrderID`, `StatusID`, `UsersID`, `ProductsPrice`, `Delive
 (26,	2,	'as@asd.ca',	8999,	0,	1889.79,	NULL,	10888.8,	'2013-06-30',	'2013-06-30',	NULL,	1,	1,	'',	NULL,	NULL),
 (27,	1,	'asd@asda.sa',	1000,	0,	210,	NULL,	1210,	'2013-06-30',	'2013-06-30',	NULL,	1,	1,	'',	NULL,	NULL),
 (28,	1,	'qwe@qwe.qwe',	1000,	99,	210,	790,	1000,	'2013-06-30',	'2013-06-30',	NULL,	2,	1,	'',	NULL,	NULL),
-(29,	1,	'asd@qwe.wqe',	2000,	99,	420,	1580,	2099,	'2013-06-30',	'2013-06-30',	NULL,	2,	1,	'',	NULL,	NULL);
+(29,	1,	'asd@qwe.wqe',	2000,	99,	420,	1580,	2099,	'2013-06-30',	'2013-06-30',	NULL,	2,	1,	'',	NULL,	NULL),
+(30,	1,	'pepa@depa.zz',	6999,	0,	1469.79,	NULL,	8468.79,	'2013-07-09',	'2013-07-09',	NULL,	1,	1,	'',	NULL,	NULL),
+(31,	1,	'xxx@xxx.xxx',	10000,	0,	2100,	NULL,	12100,	'2013-07-09',	'2013-07-09',	NULL,	1,	1,	'',	NULL,	NULL),
+(32,	1,	'aaa@aaa.aaa',	10000,	0,	2100,	7900,	10000,	'2013-07-09',	'2013-07-09',	NULL,	1,	1,	'',	NULL,	NULL),
+(33,	1,	'thinki@mail.com',	800,	0,	168,	632,	800,	'2013-07-09',	'2013-07-09',	NULL,	1,	1,	'',	NULL,	NULL),
+(34,	1,	'asus@vivo.boo',	10000,	99,	2100,	7900,	10099,	'2013-07-09',	'2013-07-09',	NULL,	2,	1,	'',	NULL,	NULL);
 
 DROP TABLE IF EXISTS `orderstatus`;
 CREATE TABLE `orderstatus` (
@@ -458,8 +471,8 @@ INSERT INTO `price` (`PriceID`, `ProductID`, `SellingPrice`, `SALE`, `FinalPrice
 (9,	11,	20999,	1,	23999,	1),
 (10,	13,	3999,	0,	3999,	1),
 (11,	14,	9999,	0,	9999,	1),
-(12,	15,	19999,	0,	19999,	1),
-(13,	16,	1000,	0,	1000,	1),
+(12,	15,	19999,	9999,	10000,	1),
+(13,	16,	1000,	600,	400,	1),
 (14,	17,	0,	0,	6999,	1);
 
 DROP TABLE IF EXISTS `producer`;
@@ -515,10 +528,10 @@ INSERT INTO `product` (`ProductID`, `ProductName`, `ProducerID`, `ProductNumber`
 (10,	'Lenovo ThinkPad Tablet 2 64GB WiFi 3G 3679-4HG',	4,	'11111',	NULL,	'<p>Tablet Lenovo ThinkPad skr&yacute;v&aacute; v uhlazen&eacute;m čern&eacute;m &scaron;asi velmi atraktivn&iacute; hardwarovou v&yacute;bavu poh&aacute;něj&iacute;c&iacute; syst&eacute;m Microsoft Windows 8. Tablet je vhodn&yacute; pro n&aacute;ročn&eacute; uživatele na každodenn&iacute;ch cest&aacute;ch, kteř&iacute; potřebuj&iacute; předev&scaron;&iacute;m spolehlivě rychl&yacute; kancel&aacute;řsk&yacute; software, př&iacute;stup k internetu s nejrůzněj&scaron;&iacute;mi aplikacemi včetně vysoce kvalitn&iacute; videokomunikace a přehr&aacute;v&aacute;n&iacute; zvuku i videa. S v&yacute;drž&iacute; až 10 hodin na jedno nabit&iacute; s v&aacute;mi bude cel&yacute; den připraven&yacute; do služby. Ke v&scaron;em činnostem skvěle poslouž&iacute; multidotykov&yacute; displej v rozli&scaron;en&iacute; HD Ready. Displej je typu IPS jako z&aacute;ruka prvotř&iacute;dn&iacute;ho barevn&eacute;ho pod&aacute;n&iacute; s jemn&yacute;mi odst&iacute;ny. Pro roz&scaron;&iacute;řen&iacute; plochy potě&scaron;&iacute; konektor Mini HDMI. Pressure Sensitivy se postar&aacute; o zabr&aacute;něn&iacute; n&aacute;hodn&yacute;ch dotyků při nečinnosti. Pro jemněj&scaron;&iacute; ovl&aacute;d&aacute;n&iacute; a ručn&iacute; psan&iacute; i kreslen&iacute; si lze dokoupit pero. Pomoc&iacute; USB či BlueTooth v&scaron;ak připoj&iacute;te i fyzickou kl&aacute;vesnici. Pro data je &uacute;loži&scaron;tě o kapacitě 64 GB. Oproti standardn&iacute;m diskům přinese daleko men&scaron;&iacute; energetickou spotřebu, rychlej&scaron;&iacute; př&iacute;stup a</p>',	2,	'123456',	'122',	'rok',	1,	1004,	'0000-00-00',	0,	1),
 (11,	'Lenovo ThinkPad Edge E130 Arctic Blue 3358-8CG',	4,	'11111',	NULL,	'Velmi malý a tenký cestovní notebook LENOVO ThinkPad Edge E130 s nejnovějším procesorem a s <strong>3G připojením</strong> jako ideální každodenní parťák aktivních&nbsp;uživatelů. Notebook odpovídá displeji o kompromisní úhlopříčce <strong>11,6\"</strong>. Ten je v <strong>matné povrchové úpravě </strong>pro lepší viditelnost. Spolu s pokročilými funkcemi pro VoIP, ergonomickou klávesnicí a kombinací touchpadu s trackpointem nabízí komfort pro každodenní službu. Je vhodný pro pracovité jedince vyžadující flexibilní mobilní použití a dlouhou výdrž na baterií, která u tohoto modelu dosahuje neuvěřitelných <strong>8 hodin</strong>!<br><br>Pro vaše data je vložen <strong>nadstandardně rychlý disk o kapacitě 500 GB</strong>, takže s sebou budete mít vše důležité. Na disku je předinstalovaný operační systém <strong>Microsoft Windows 8</strong>, který přichází s přehledným dlaždicovým prostředím. Svižný chod tohoto lehce přenosného počítače je na procesoru se sníženou spotřebou z nejnovější série <strong>Ivy Bridge, Intel Core i3 3217U</strong>. Pokud si&nbsp;budete přát&nbsp;pustit například HD video, přijde vhod <strong>HDMI</strong> port, kterým můžete notebook připojit k televizím nebo projektorům ve velkém rozlišení. Další rozšíření lze uskutečnit přes vysokorychlostní <strong>UBS 3.0 </strong>či bezdrátový <strong>BlueTooth</strong>.<br><br>',	2,	'123456',	'122',	'rok',	0,	1002,	'0000-00-00',	0,	1),
 (13,	'Sony Ericsson Xperia Mini',	2,	'11111',	'Skvělý malý telefon vhodný do každé malé kapsy. QWERTY klávesnice!\r\n',	'<p>Uživatel se díky operačnímu systému Android může těšit na špičkovou funkční základu. Ta je tvořena např. internetovým prohlížečem,<strong> e-mailovým klientem</strong>, multimediálním přehrávačem, bohatými možnostmi synchronizace, kvalitnímu funkcemi pro organizaci času, prohlížečem dokumentů, skvělým kalendářem či aplikacemi pro přístup na Facebook a Twitter. Přístup ke katalogu Android Market pak umožní instalaci dalších tisíců aplikací a her. Samozřejmostí je také povedený digitální fotoaparát s rozlišením pět megapixelů nebo vestavěná satelitní aGPS navigace. Telefonu nechybí ani podpora technologií Wi-Fi (včetně DLNA) a Bluetooth. Pro připojení sluchátek je k dispozici standardní 3,5 mm jack. O napájení se stará Li-Ion akumulátor o kapacitě 1200 mAh, jenž by měl telefonu na jedno nabití umožnit setrvat až 340 hodin v pohotovostním režimu nebo vykonat čtyři a půl hodiny hovoru.s</p>',	2,	'123456',	'122',	'rok',	11,	1003,	'0000-00-00',	2013,	1),
-(14,	'Spange Bob',	1,	'11111',	'Spange Bob je jediný chodící a mluvící keksík na celém širém světě.',	'',	1,	'123456',	'122',	'rok',	100,	1001,	'0000-00-00',	2013,	1),
-(15,	'Asus Vivobook',	1,	'11111',	'',	'',	2,	'123456',	'122',	'rok',	10,	1002,	'0000-00-00',	2013,	1),
-(16,	'Thinkpad',	1,	'11111',	'',	'',	1,	'123456',	'122',	'rok',	5,	1002,	'0000-00-00',	2013,	1),
-(17,	'L9',	1,	'11111',	'',	'',	1,	'123456',	'122',	'rok',	10,	1003,	'0000-00-00',	2013,	1);
+(14,	'Spange Bob',	1,	'11111',	'Spange Bob je jediný chodící a mluvící keksík na celém širém světě.',	'',	2,	'123456',	'122',	'rok',	100,	1001,	'0000-00-00',	2013,	1),
+(15,	'Asus Vivobook',	1,	'11111',	'',	'',	2,	'123456',	'122',	'rok',	8,	1002,	'0000-00-00',	2013,	1),
+(16,	'Thinkpad',	1,	'11111',	'',	'',	2,	'123456',	'122',	'rok',	3,	1002,	'0000-00-00',	2013,	1),
+(17,	'L9',	1,	'11111',	'',	'',	2,	'123456',	'122',	'rok',	10,	1003,	'0000-00-00',	2013,	1);
 
 DROP TABLE IF EXISTS `productstatus`;
 CREATE TABLE `productstatus` (
@@ -612,7 +625,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`, `TIN`, `Permission`) VALUES
 ('1234@1234.com',	'',	'1234',	0,	'',	'',	'user'),
 ('12389@1234.xxx',	NULL,	'XXX',	0,	NULL,	NULL,	'user'),
-('aaa@aaa.aaa',	'',	'AAA',	0,	'',	'',	'user'),
+('aaa@aaa.aaa',	'',	'vivo',	1120120,	'',	'',	'user'),
 ('aaaa@aaa.aaa',	'',	'AAA',	0,	'',	'',	'user'),
 ('aaaaa@aaa.aaa',	'',	'AAA',	0,	'',	'',	'user'),
 ('aaaaaa@aaa.aaa',	'',	'AAA',	0,	'',	'',	'user'),
@@ -634,10 +647,12 @@ INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`
 ('asd@asfdg.dfg',	'',	'sdfghjk',	0,	'',	'',	'user'),
 ('asd@qwe.wqe',	NULL,	'AAA',	123,	NULL,	NULL,	'user'),
 ('asda@asd.ads',	'',	'asd',	0,	'',	'',	'user'),
+('asus@vivo.boo',	NULL,	'Vivo2',	1920129,	NULL,	NULL,	'user'),
 ('hddd@dsd.cdd',	'',	'Petr',	0,	'',	'',	'user'),
 ('jan.novak@company.com',	'novak',	'Jan',	999888777,	'Company',	'819281293',	'0'),
 ('kifa@mail.com',	'$2a$07$$$$$$$$$$$$$$$$$$$$$$.Y',	'Kifa',	NULL,	'',	'',	'admin'),
 ('michal@prosek.cz',	NULL,	'Michal Prošáků',	0,	NULL,	NULL,	'user'),
+('pepa@depa.zz',	NULL,	'Pepa Z Depa',	71812912,	NULL,	NULL,	'user'),
 ('petan@petr.com',	'',	'Petr',	0,	'',	'',	'user'),
 ('ppp@ppp.ppp',	'',	'09u7',	0,	'',	'',	'user'),
 ('ppp@pppa.ppp',	'',	'09u7',	0,	'',	'',	'user'),
@@ -657,8 +672,9 @@ INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`
 ('rte@gdsssdssf.fgd',	NULL,	'retr4et',	743,	NULL,	NULL,	'user'),
 ('tdanek@atlas.cz',	NULL,	'Karel',	0,	NULL,	NULL,	'user'),
 ('testovaci@subjekt.cz',	'$2a$07$67p8256pml1lrn1a8d986eN',	'Testovaci',	777888999,	'0',	'0',	'0'),
+('thinki@mail.com',	NULL,	'thinki',	1929912,	NULL,	NULL,	'user'),
 ('tomik@tomas.com',	'$2a$07$xshgrgluo88ug5qvohjvme0',	'Tomas',	NULL,	NULL,	NULL,	'0'),
-('xxx@xxx.xxx',	NULL,	'Lumpiks',	71283912,	NULL,	NULL,	'user'),
+('xxx@xxx.xxx',	NULL,	'testx',	21313123,	NULL,	NULL,	'user'),
 ('yetty@himalaja.tib',	NULL,	'Yetty',	0,	NULL,	NULL,	'user');
 
--- 2013-07-09 22:51:09
+-- 2013-07-09 23:31:48
