@@ -15,6 +15,10 @@ class CategoryModel extends Repository {
      * @return string
      */
     public function loadCategoryList(){
+        return $this->getTable('Category')->where('CategoryStatus',1)->fetchPairs('CategoryID');
+    }
+    
+    public function loadCategoryListAdmin(){
         return $this->getTable('Category')->fetchPairs('CategoryID');
     }
     /*

@@ -16,7 +16,7 @@
                 </button>
                 <ul class="dropdown-menu" n:snippet="productCategory">
                     {foreach $categories as $catID => $cat}
-                     {if $cat->CategoryStatus != 3}
+                     {if $cat->CategoryStatus != 4}
                     <li class="productcat"><a href="{plink setProductCategory!  $product->ProductID, $catID }" class="ajax">
                     {if $product->CategoryID == $catID}<i class="icon-ok-sign"></i>{/if}
                     {$cat->CategoryName}</a></li>

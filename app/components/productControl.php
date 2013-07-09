@@ -636,8 +636,11 @@ class productControl extends BaseControl{
             } else {
                 $this->template->attr = 0;
             }*/
-            
+        if ($this->presenter->getUser()->isInRole('admin')) {  
+            $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
+        } else {
             $this->template->categories = $this->categoryModel->loadCategoryList();
+        }
             $this->template->producers = $this->productModel->loadProducers();
        
         

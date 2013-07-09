@@ -1,7 +1,7 @@
 <li class="{ifCurrent Homepage:default}active{/ifCurrent}"><a href="{plink Homepage:default}">{_"Home"}</a></li>
                 {foreach $category as $catID => $cat}
                 {if !$cat->HigherCategoryID}
-                {if $cat->CategoryStatus != 3}
+                {if $cat->CategoryStatus != 4}
 <li class="{ifCurrent Product:products $catID}active{/ifCurrent}"><a href="{plink product:products $catID}">
                         {if $img !== NULL}
                             {if $cat->CategoryPhoto != NULL}

@@ -80,7 +80,7 @@ class MenuControl extends BaseControl {
     public function renderAdmin() {
         if($this->parent->getUser()->isLoggedIn()){
         $this->template->setFile(__DIR__.'/MenuAdminControl.latte');
-        $this->template->category = $this->categoryModel->loadCategoryList(); 
+        $this->template->category = $this->categoryModel->loadCategoryListAdmin(); 
         $this->template->render();
         }
     }

@@ -63,7 +63,7 @@ class BlogPresenter extends BasePresenter {
 
             $category = array();
 
-            foreach ($this->categoryModel->loadCategoryList() as $id => $name) {
+            foreach ($this->categoryModel->loadCategoryListAdmin() as $id => $name) {
                 $category[$id] = $name->CategoryName;
             }
             
@@ -212,7 +212,7 @@ class BlogPresenter extends BasePresenter {
             $editForm = new Nette\Application\UI\Form;
             $editForm->setTranslator($this->translator);
           //  $editForm->setRenderer(new BootstrapRenderer);
-            foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
+            foreach ($this->categoryModel->loadCategoryListAdmin() as $id => $category) {
                 $categories[$id] = $category->CategoryName;
             }
             
