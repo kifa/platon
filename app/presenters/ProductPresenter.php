@@ -649,7 +649,11 @@ class ProductPresenter extends BasePresenter {
             $this->template->products = $this->productModel->loadCatalog($catID, $this->filter);
             $this->template->categories = $this->categoryModel->loadCategoryList();
         }
-
+        if ($this->getUser()->isInRole('admin')) {        
+            $this->template->categories = $this->categoryModel->loadCategoryListAdmin();        
+        } else {
+            $this->template->categories = $this->categoryModel->loadCategoryList();       
+        }
         $this->template->category = $this->categoryModel->loadCategory($catID);
     }
 

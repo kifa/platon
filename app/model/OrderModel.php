@@ -131,12 +131,14 @@ class OrderModel extends Repository {
             $paymentprice = $this->loadPaymentPrice($payment);
             $deliverypaymentprice = $deliveryprice + $paymentprice;
             
-            $tax1 = $this->getTable('settings')->select('Value')->where('Name',"TAX")->fetch();
+            $tax1 = $this->getTable('settings')->select('Value')->where('SettingName',"TAX")->fetch();
             $tax = $tax1['Value'];
             //settype($tax, 'float');
             $finaltax = $price * ($tax / 100);
             
-            $totalprice = $price + $finaltax;
+            $pricetax = $price - $finaltax;
+            
+            $totalprice = $price + $deliverypaymentprice;
 
             $insert =  array(
                  //'OrderID' => $id, //automaticky!
@@ -145,6 +147,7 @@ class OrderModel extends Repository {
                 'ProductsPrice' => $price,
                 'DeliveryPaymentPrice' => $deliverypaymentprice,
                 'TaxPrice' => $finaltax, //
+                'PriceWithoutTax' => $pricetax,
                 'TotalPrice' => $totalprice,
                 'DateCreated' => $today,  //automaticky presenter
                 'DateOfLastChange' => $today, //pri vytvoreni stejne jako created
@@ -161,6 +164,7 @@ class OrderModel extends Repository {
     
     public function updateOrder($orderid, $shipping, $payment=NULL) {
         
+        $today = date("Y-m-d");
         
         if($payment!=NULL){
             $paymentPrice = $this->loadPaymentPrice($payment);
@@ -175,13 +179,14 @@ class OrderModel extends Repository {
         $deliveryPaymentPrice = $paymentPrice + $deliveryPrice;
         
         $productPrice = $this->loadOrder($orderid)->ProductsPrice;
-        $total = $productPrice + $deliveryPrice + $paymentPrice;
+        $total = $productPrice + $deliveryPaymentPrice;
         
         $insert = array(
                 'DeliveryID' => $shipping,
                 'PaymentID' => $payment,
                 'DeliveryPaymentPrice' => $deliveryPaymentPrice,
-                'TotalPrice' => $total
+                'TotalPrice' => $total,
+                'DateOfLastChange' => $today
                 );   
         
         return $this->getTable('orders')->where('OrderID',$orderid)->update($insert);
@@ -189,29 +194,41 @@ class OrderModel extends Repository {
     }
     
     
-    public function updateOrderProducts($orderid, $product, $newProduct, $shipping, $payment, $products) {
+    public function updateOrderProducts($orderid, $product, $newProduct, $delivery, $payment, $products) {
        
+        $today = date("Y-m-d");
+        
         //recalculating order
-        $deliveryPrice = $this->loadDeliveryPrice($shipping);
+        $deliveryPrice = $this->loadDeliveryPrice($delivery);
         $paymentPrice = $this->loadPaymentPrice($payment);
         $deliveryPaymentPrice = $paymentPrice + $deliveryPrice;
         
-        $total = $products + $deliveryPrice + $paymentPrice + $newProduct;
-        
+        $totalprod = $products + $newProduct;
+        $totalprice = $products + $deliveryPaymentPrice + $newProduct;
+                        
         //inserting order details - products
         $this->insertOrderDetails($orderid, $product, 1, $newProduct);
-        
+                            
+        $tax1 = $this->getTable('settings')->select('Value')->where('SettingName',"TAX")->fetch();
+        $tax = $tax1['Value'];
+            //settype($tax, 'float');
+        $finaltax = $totalprod * ($tax / 100);
+            
+        $pricetax = $totalprice - $finaltax;                    
         
         //updating order total info
-        $insert = array(
-                'DeliveryID' => $shipping,
-                'PaymentID' => $payment,
+        $update = array(
+                'ProductsPrice' => $totalprod,
                 'DeliveryPaymentPrice' => $deliveryPaymentPrice,
-                'TotalPrice' => $total,
-                'ProductsPrice' => $products + $newProduct
+                'TaxPrice' => $finaltax, //
+                'PriceWithoutTax' => $pricetax,
+                'TotalPrice' => $totalprice,
+                'DateOfLastChange' => $today, //pri vytvoreni stejne jako created
+                'DeliveryID' => $delivery,
+                'PaymentID' => $payment
                 );   
         
-        return $this->getTable('orders')->where('OrderID',$orderid)->update($insert);
+        return $this->getTable('orders')->where('OrderID',$orderid)->update($update);
         
     }
     
