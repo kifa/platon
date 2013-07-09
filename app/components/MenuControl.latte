@@ -26,11 +26,9 @@
 </li>
 
                 {if $user->isInRole('admin')}
-                {ifCurrent Product:products}
-<li><a href="#addCategory" data-toggel="modal" data-target="#addCategory" id="addCategoryButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Category"}</a></li>
-                {else}
 
-                {/ifCurrent}
+<li><a href="#addCategory" data-toggel="modal" data-target="#addCategory" id="addCategoryButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Category"}</a></li>
+
                 {/if}
 
 <li class="dropdown{ifCurrent Blog:category} active{/ifCurrent}{ifCurrent Homepage:photos} active{/ifCurrent}">

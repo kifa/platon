@@ -123,7 +123,35 @@
                     </div>
                 </div>
       {block modal}
-
+                {if $user->isInRole('admin')}
+                <div id="addCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Category'}</h3>
+    </div>
+    <div class="modal-body">
+                <p>{_'Please fill in these information'}</p>
+    {control addCategoryForm}
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+    </div>
+</div>
+                
+                <div id="addStaticText" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Text'}</h3>
+    </div>
+    <div class="modal-body">
+                <p>{_'Please fill in these information'}</p>
+    {control addStaticTextForm}
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+    </div>
+</div>
+{/if}
 
         {/block}  
             </div>
@@ -176,6 +204,12 @@
             $('#addCategory').modal('hide');
         });
         
+        $('#addStaticTextButton').toggle(function(){
+          $('#addStaticText').modal('show');
+        },
+        function() {
+            $('#addStaticText').modal('hide');
+        });
   
         {/if}
     

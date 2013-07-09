@@ -609,64 +609,7 @@ class ProductPresenter extends BasePresenter {
        }
     }
 
-    protected function createComponentAddCategoryForm() {
-        if ($this->getUser()->isInRole('admin')) {
-
-            $addForm = new Nette\Application\UI\Form;
-            $addForm->setTranslator($this->translator);
-            //$editForm->setRenderer(new BootstrapRenderer);
-
-            foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
-                $categories[$id] = $category->CategoryName;
-            }
-            $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
-
-            $addForm->addText('name', 'Name:')
-                    ->setRequired();
-            $addForm->addTextArea('text', 'Description:', 150, 150)
-                    ->setAttribute('class', 'mceEditor');
-            $addForm->addSelect('parent', 'Parent Category:', $categories)
-                    ->setPrompt($prompt);
-            $addForm->addUpload('image', 'Image:')
-                    ->addCondition(FORM::FILLED)
-                    ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
-                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
-            $addForm->addSubmit('edit', 'Create Category')
-                    ->setAttribute('class', 'upl btn btn-primary')
-                    ->setAttribute('data-loading-text', 'Creating...');
-            $addForm->onSubmit('tinyMCE.triggerSave()');
-            $addForm->onSuccess[] = $this->addCategoryFormSubmitted;
-            return $addForm;
-        }
-    }
-
-    public function addCategoryFormSubmitted($form) {
-        if ($this->getUser()->isInRole('admin')) {
-
-            if ($form->values->image->isOK()) {
-
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/' . $form->values->image->name;
-                $form->values->image->move($imgUrl);
-
-                $image = Image::fromFile($imgUrl);
-                $image->resize(null, 150, Image::SHRINK_ONLY);
-
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/150-' . $form->values->image->name;
-                $image->save($imgUrl);
-
-                $image = Image::fromFile($imgUrl);
-                $image->resize(null, 20, Image::SHRINK_ONLY);
-
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/20-' . $form->values->image->name;
-                $image->save($imgUrl);
-
-                $row = $this->categoryModel->createCategory($form->values->name, $form->values->text, $form->values->parent, $form->values->image->name);
-            } else {
-                $row = $this->categoryModel->createCategory($form->values->name, $form->values->text, $form->values->parent);
-            }
-            $this->redirect('Product:products', $row);
-        }
-    }
+    
 
     protected function createComponentDeleteCategoryForm() {
         if ($this->getUser()->isInRole('admin')) {

@@ -183,5 +183,61 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $mailControl->setShop($this->shopModel);
         return $mailControl;
     }
+    
+    
+    protected function createComponentAddCategoryForm() {
+        if ($this->getUser()->isInRole('admin')) {
+
+            $addForm = new Nette\Application\UI\Form;
+            $addForm->setTranslator($this->translator);
+
+            foreach ($this->categoryModel->loadCategoryList() as $id => $category) {
+                $categories[$id] = $category->CategoryName;
+            }
+            $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
+
+            $addForm->addText('name', 'Name:')
+                    ->setRequired();
+            
+            $addForm->addSelect('parent', 'Parent Category:', $categories)
+                    ->setPrompt($prompt);
+            
+            $addForm->addSubmit('add', 'Create Category')
+                    ->setAttribute('class', 'upl btn btn-primary')
+                    ->setAttribute('data-loading-text', 'Creating...');
+            $addForm->onSuccess[] = $this->addCategoryFormSubmitted;
+            return $addForm;
+        }
+    }
+
+    public function addCategoryFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            $row = $this->categoryModel->createCategory($form->values->name, NULL, $form->values->parent);
+            $this->redirect('Product:products', $row);
+        }
+    }
        
+    protected function createComponentAddStaticTextForm() {
+        if ($this->getUser()->isInRole('admin')) {
+
+            $addForm = new Nette\Application\UI\Form;
+            $addForm->setTranslator($this->translator);
+
+            $addForm->addText('name', 'Name:')
+                    ->setRequired();
+          
+            $addForm->addSubmit('add', 'Create')
+                    ->setAttribute('class', 'upl btn btn-primary')
+                    ->setAttribute('data-loading-text', 'Creating...');
+            $addForm->onSuccess[] = $this->addStaticTextFormSubmitted;
+            return $addForm;
+        }
+    }
+
+    public function addStaticTextFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            $row = $this->shopModel->insertStaticText($form->values->name, '', 2);
+            $this->redirect('Blog:staticText', $row);
+        }
+    }
 }

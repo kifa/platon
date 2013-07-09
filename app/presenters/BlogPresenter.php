@@ -381,6 +381,31 @@ class BlogPresenter extends BasePresenter {
         }
     }
     
+    public function handleSetStaticTextStatus($postid, $statusid) {
+        if($this->getUser()->isInRole('admin')){
+            
+            $this->shopModel->updateStaticText($postid, 'StatusID', $statusid);
+             
+             
+            if($this->isAjax()){            
+                $this->invalidateControl('controlPanel');
+            }
+            else {
+             $this->redirect('this');
+            }
+        }
+    }
+    
+     public function handleDeleteStaticText($postid) {
+        if($this->getUser()->isInRole('admin')){
+            
+            $this->shopModel->deleteStaticText($postid);
+
+            $this->redirect('Homepage:');
+          
+        }
+    }
+    
     public function renderStaticText($postid) {
         
         $this->template->post = $this->shopModel->loadStaticText($postid);

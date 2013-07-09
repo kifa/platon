@@ -93,7 +93,8 @@ class ShopModel extends Repository {
             'StatusID' => $status
         );
         
-        return $this->getTable('statictext')->insert($insert);
+        $row = $this->getTable('statictext')->insert($insert);
+        return $row->StaticTextID;
     }
     
     public function updateStaticText($id, $type, $content){

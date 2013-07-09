@@ -4,3 +4,9 @@
     {/foreach}
 
     <li class="{ifCurrent Blog:category}active{/ifCurrent}"><a href="{plink Blog:category}"><i class="icon-large icon-star-empty"></i> {_"Blog"}</a></li>
+    
+      {if $user->isInRole('admin')}
+
+<li><a href="#addStaticText" data-toggel="modal" data-target="#addStaticText" id="addStaticTextButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Text"}</a></li>
+
+                {/if}

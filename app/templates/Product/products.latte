@@ -6,7 +6,7 @@
 
 {block pageheader}
 {if $user->isInRole('admin')}
-<div class="span10">
+<div class="span10" n:snippet="controlPanel">
         
      <div class="alert alert-error"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this category by clicking on Title, Description or panel bellow etc. More info?'}</div>
 
@@ -14,16 +14,16 @@
                 <div class="btn-group">
                     <a href="#" class="btn"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
                         {if $category->CategoryPhoto == NULL}
-                    <a href="#addCategoryPhoto" class="btn" data-toggel="modal" data-target="#addCategoryPhoto" id="addCategoryPhotoButton"><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
+                    <a href="#addCategoryPhoto" class="btn" data-toggel="modal" data-target="#addCategoryPhoto" id="addCategoryPhotoButton"><i class="icon-large icon-camera-retro"></i> {_"Add Category Photo"}</a>
                         {/if}
 
                 </div>
 
                 <div class="btn-group" n:snippet="categoryStatus">
                             {if $category->CategoryStatus == 0}
-                    <a class="btn" href="{plink setCategoryStatus! $category->CategoryID, 1}" class="ajax"><i class="icon-large icon-eye-open"></i> {_'Publish category'}</a>
+                    <a class="btn ajax btn-primary" href="{plink setCategoryStatus! $category->CategoryID, 1}" ><i class="icon-large icon-eye-open"></i> {_'Publish category'}</a>
                            {elseif $category->CategoryStatus >= 1}
-                    <a class="btn" href="{plink setCategoryStatus! $category->CategoryID, 0}" class="ajax"><i class="icon-large icon-eye-close"></i> {_'Unpublish category'}</a>
+                    <a class="btn ajax" href="{plink setCategoryStatus! $category->CategoryID, 0}" ><i class="icon-large icon-eye-close"></i> {_'Unpublish category'}</a>
                    {/if}
                     <button class="btn dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
@@ -73,11 +73,11 @@
                         <li><a href="{plink setCatalogLayout! $category->CategoryID, 2}"><i class="icon-large icon-chevron-right"></i> {_"Right"}</a>
                         </li>
                     </ul>
-                </div>
-    </div>
+                </div>                
+   </div>
    {/if}
 
-<div >
+<div>
 <div class="span4">
     <h1 n:block="title" class="CatTitle" n:snippet="CatTitle">{$category->CategoryName}</h1>
     <small class="shortDesc muted"> {if $category->CategoryPhoto != NULL }
@@ -336,14 +336,6 @@
             });
         </script>
 <script>
-    $('#morecategory').toggle(function(){
-    $('#categoryinfo').fadeIn();
-       
-    },
-    function(){
-            
-     $('#categoryinfo').fadeOut();
-    });
     
     $('a.ajax').click(function(){
         $(this).html('<i class="icon-spinner icon-spin"></i>');
@@ -363,7 +355,7 @@
 <div id="addCategoryPhoto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel"><i class="icon-plus"></i> Add category photo</h3>
+        <h3 id="myModalLabel"><i class="icon-plus"></i> {_'Add category photo'}</h3>
     </div>
     <div class="modal-body">
         <p>{_'Please fill in these information'}</p>
@@ -378,7 +370,7 @@
 <div id="deleteCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel"><i class="icon-pencil"></i> Delete {$category->CategoryName} Category?</h3>
+        <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Delete'} {$category->CategoryName} {_'Category'}?</h3>
     </div>
     <div class="modal-body">
         <p>{_'Are you sure to delete this category?'}</p>
@@ -394,7 +386,7 @@
 <div id="addCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel"><i class="icon-pencil"></i> Add Category</h3>
+        <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Category'}</h3>
     </div>
     <div class="modal-body">
                 <p>{_'Please fill in these information'}</p>

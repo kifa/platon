@@ -2,21 +2,41 @@
 {control menu:breadBlog $post->CategoryID, $post->BlogID}
 {/block*}
 {block pageheader}
+{if $user->isInRole('admin')}
+<div class="row">
+        <div class="span10" n:snippet="controlPanel">
+            <div class="alert alert-error"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this text by clicking on Title, Content or panel bellow etc. More info?'}</div>
+
+            <div class="btn-group" n:snippet="textStatus">
+                        {if $post->StatusID != 1 }
+                    <a href="{plink setStaticTextStatus! $post->StaticTextID, 1}" class="btn-primary btn ajax"><i class="icon-large icon-eye-open"></i> {_"Publish text"}</a>
+                    {else}
+                    <a href="{plink setStaticTextStatus! $post->StaticTextID, 2}" class="btn ajax"><i class="icon-large icon-eye-close"></i> {_"Unpublish text"}</a>
+                    {/if}
+
+                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                         <li><a href="#deleteText" data-toggel="modal" data-target="#deleteText" id="deleteTextButton"><i class="icon-large icon-trash"></i> {_"Delete Text"}</a> </li>
+                    </ul>
+                </div>
+            
+          
+
+            <a href="#addPhoto" class="btn" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
+             <div class="btn-group">
+            <a href="#editDesc" class="btn" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
+
+            <a href="#editDocs" class="btn" data-toggel="modal" data-target="#editDocs" id="editDocsButton"><i class="icon-large icon-download"></i> {_"Edit Documents"}</a> |
+             </div>
+            <a href="#" class="btn" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>         
+        </div>
+</div>
+{/if}    
+
 <div class="page-header">
     <h1 n:block="title"><span class="StaticTextName" n:snippet="StaticTextName">{$post->StaticTextName}</span> <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>
-            {if $user->isInRole('admin')}
-<div class="row">
-    <div class="span10">
-        <a href="#addPhoto" class="btn" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
-         <div class="btn-group">
-        <a href="#editDesc" class="btn" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
-       
-        <a href="#editDocs" class="btn" data-toggel="modal" data-target="#editDocs" id="editDocsButton"><i class="icon-large icon-download"></i> {_"Edit Documents"}</a> |
-         </div>
-        <a href="#" class="btn" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>         
-    </div>
-</div>
-            {/if}    
         
 </div>
 {/block}
@@ -68,7 +88,14 @@ $(".imgLiquid").imgLiquid({
 <script>
 $(document).ready(function() {
 
+     $('#deleteTextButton').toggle(function(){
+          $('#deleteText').modal('show');
+        },
+        function() {
+            $('#deleteText').modal('hide');
+        });
 
+    
     $('.StaticTextName').editable( {link editStaticTextName! $post->StaticTextID }, {
             type      : 'text',
             cancel    : {_'Cancel'},
@@ -103,6 +130,8 @@ $(document).ready(function() {
     });
     
     
+    
+    
 });
 
 </script>
@@ -111,5 +140,20 @@ $(document).ready(function() {
 {/block}
 
 {block modal}
+{if $user->isInRole('admin')}
+<div id="deleteText" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Delete'} {$post->StaticTextName} ?</h3>
+    </div>
+    <div class="modal-body">
+        <p>{_'Are you sure to delete this text?'}</p>
 
+    </div>
+    <div class="modal-footer">
+        <a href="{plink deleteStaticText! $post->StaticTextID}" class="btn btn-danger">{_'Delete'}</a>       
+        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+    </div>
+</div>
+{/if}
 {/block}

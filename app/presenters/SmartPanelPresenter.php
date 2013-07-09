@@ -956,7 +956,6 @@ class SmartPanelPresenter extends BasePresenter {
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){
                 $content = $_POST['value']; //odesílaná nová hodnota
-                dump($_POST);
                 $this->orderModel->updatePaymentStatus($payid, $content);
             }
             
