@@ -2,78 +2,59 @@
 
 <div class="content">
     <div class="page-header">
-    <h1>{_'Invoice'} <small> {_'Complete summary order'}.</small></h1>
+        <h1 class="pull-left span10">{_'Invoice'} {$prefix}{$order->OrderID} <img class="pull-right span2" src="{$url}/images/logo/{$shopLogo}"></h1>
+        
     </div>
-    <div class="container span12">
+    <div class="container">
       
-        <div class="container">
-            <table>
-                <thead>
-                    <tr></tr>
-                    <tr></tr>
-                    <tr></tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <h3> {_'Company info'}</h3>
-               
-                            <p><strong>{$companyName}</strong></p>
-                {if $companyPhone}
-                 <p>{$companyPhone}</p>
+        <div style="margin-bottom: 30px">
+            <div class="">
+            <div class="span4 pull-left">
+                <legend class="muted">{_'Company info'}</legend>
+                <dl>
+                    <dd><strong>{$companyName}</strong></dd>
+                 {if $companyPhone}
+                    <dd>{$companyPhone}</dd>
                 {/if}
-                 <p>{$companyMail}</p>
-                 <p><strong>{_'Address'}</strong></p>
-                    <p>{$companyAddress}</p>
-                        </td>
-            <td>
-                <p>
-                        {_'Date created'}:&nbsp;<strong>{$order->DateCreated|date:'%d.%m.%Y'}</strong>
-                </p>
-
-                <p>
-                        {_'Shipping'}:&nbsp;<strong>{$order->DeliveryName}</strong>
-                </p>
-
-                <p>
-                   {_'Payment'}:&nbsp;<strong>{$order->PaymentName}</strong>
-                </p>
-            </td>
+                    <dd>{$companyMail}</dd>
+                    <dd><strong>{_'Address'}</strong></dd>
+                 <dd>{$companyAddress}</dd>
+                 </dl>
+            </div>
             
-            <td class="span3">
-
-                   <h3> {_'Bill to'}:</h3>
-                    <p>
+            <div class="span4 pull-right">
+                <legend class="muted">{_'Bill to'}</legend>
                     <dl>
-                        <dd class="span4"><span class="span1">{_'Name'}:</span><strong class="orderName span2" n:snippet="orderName">{$order->Name}</strong></dd>
-                        <dd class="span4"><span class="span1">{_'Email'}:</span><strong class="span2">{$order->UsersID}</strong></dd>
-                        <dd class="span4"><span class="span1">{_'Phone'}:</span><strong class="orderPhone span2" n:snippet="orderPhone">{if $order->PhoneNumber}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
+                        <dd><strong class="orderName span2" n:snippet="orderName">{$order->Name}</strong></dd>
+                        <dd>{$address->Street}</dd>
+                        <dd>{$address->City}</dd>
+                        <dd>{$address->ZIPCode}</dd>
                     </dl>
-                    </p>
-            {if $order->CompanyName != ""}
+                 {if $order->CompanyName != ""}
                     <dl>
                         <dt>{_'Company'}:</dt>
                         <dd>{$order->CompanyName}</dd>
                     </dl>
-            {/if}
-                   </td>
-                   <td>
-                    <strong> {_'Address'}:</strong>
-                    <dl>
-                        <dd class="span4"><span class="span1">{_'Street'}:</span><strong class="orderStreet span2" n:snippet="orderStreet">{$address->Street}</strong></dd>
-                        <dd class="span4"><span class="span1">{_'City'}:</span><strong class="orderCity span2" n:snippet="orderCity">{$address->City}</strong></dd>
-                        <dd class="span4"><span class="span1">{_'ZIP'}:</span><strong class="orderZIP span2" n:snippet="orderZIP">{$address->ZIPCode}</strong></dd>
-                    </dl> 
-            </td>
-                    </tr>
-                </tbody>
-            </table>
+                  {/if}
+            </div>
+            </div>
+            
+            <div class="span10">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>{_'Date created'}:&nbsp;<strong>{$order->DateCreated|date:'%d.%m.%Y'}</strong></td>
 
-                
+                            <td>{_'Shipping'}:&nbsp;<strong>{$order->DeliveryName}</strong></td>
 
+                            <td>{_'Payment'}:&nbsp;<strong>{$order->PaymentName}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>                
+            </div>
         </div>  
 
-            <table class="table span9">
+            <table class="table  table-bordered span10">
                 <thead>
                     <tr>
                         <th>{_'Product Name'}</th>
@@ -98,10 +79,20 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td></td>
-                        <td><strong >{_'Products'}:</strong> {$order->ProductsPrice},-</td>
-                        <td><strong >{_'Shipping'}:</strong> {$order->DeliveryPaymentPrice},-</td>
-                        <td><strong >{_'Total'}:</strong> {$order->TotalPrice},-</td>
+                        <td colspan="4" rowspan="1"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" rowspan="3"></td>
+                        <td><strong>{_'Products'}:</strong></td><td> {$order->ProductsPrice},-</td>
+                        
+                    </tr>
+                    <tr>
+
+                         <td><strong >{_'Shipping'}:</strong></td><td> {$order->DeliveryPaymentPrice},-</td>
+                    </tr>
+                    <tr>
+
+                        <td><strong >{_'Total'}:</strong></td><td> {$order->TotalPrice},-</td>
                     </tr>
                 </tfoot>
             </table>

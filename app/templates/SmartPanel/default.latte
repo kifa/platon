@@ -119,10 +119,13 @@
               <div class="span5">
                   <strong>{_'Upload your logo'}</strong>
                   {control addLogoForm}
-                  <table n:snippet="shopinfo">
+                  <table n:snippet="shopinfo" class="table table-bordered">
                       <thead>
+                        <th>{_'Option'}</th>
+                        <th><i class="icon-info-sign"></i> {_'Change value by clicking'}</th>
                       </thead>
                       <tbody>
+
                            {foreach $settings as $id => $row}
                           <tr>
                               <td>{$row->SettingName}</td>

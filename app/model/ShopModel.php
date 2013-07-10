@@ -41,6 +41,11 @@ class ShopModel extends Repository {
         }
     }
     
+     public function getShopInfoPublic() {
+         $param = array('Name', 'Description', 'CompanyAddress', 'TAX', 'OrderMail', 'ContactMail', 'ContactPhone', 'InvoicePrefix');
+        return $this->getTable('settings')->where('SettingName', $param)->fetchPairs('SettingID'); 
+     }
+    
     public function setShopInfo($name, $value)
     {
         if ($name == 'CatalogLayout') {

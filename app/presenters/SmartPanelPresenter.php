@@ -214,34 +214,32 @@ class SmartPanelPresenter extends BasePresenter {
         $template->companyPhone = $this->shopModel->getShopInfo('ContactPhone');
         $template->companyMail = $this->shopModel->getShopInfo('ContactMail');
         $template->companyAddress = $this->shopModel->getShopInfo('CompanyAddress');
+        $prefix = $this->shopModel->getShopInfo('InvoicePrefix');
+        $template->prefix = $prefix;
+        $template->url = $this->context->parameters['wwwDir'];
+       
         
         // Tip: In template to make a new page use <pagebreak>
 
         
         $pdf = new \PdfResponse($template);
-
+        $pdf->multiLanguage;
         
         }
         catch (Exception $e) {
                     \Nette\Diagnostics\Debugger::log($e);
             }
         // optional
-        $pdf->documentTitle = date('B') . " My super title"; // creates filename 2012-06-30-my-super-title.pdf
+        $pdf->documentTitle = 'invoice-' . $prefix . '' . $orderid; // creates filename 2012-06-30-my-super-title.pdf
         $pdf->pageFormat = "A4"; // wide format
         $pdf->getMPDF()->setFooter("|© www.mysite.com|"); // footer
         
-   //     $pdf->save($this->context->parameters['wwwDir'] . "/generated/"); // as a filename $this->documentTitle will be used
-        $pdf->setSaveMode(PdfResponse::INLINE);
-
+        //$pdf->save($this->context->parameters['wwwDir'] . "/generated/"); // as a filename $this->documentTitle will be used
+        
+        $pdf->setSaveMode(PdfResponse::DOWNLOAD);
         $this->sendResponse($pdf);
-        
-        $this->redirect('this');
-        if($this->isAjax()){
-        
-        }
-        
-        else {
-        }
+     
+          
     }
     
     
@@ -1175,7 +1173,7 @@ class SmartPanelPresenter extends BasePresenter {
             $this->template->usr = $this->getUser()->getIdentity();
             $this->template->ord = $this->orderModel->countOrder();
             $this->template->orders = $this->orderModel->loadOrders();
-            $this->template->settings = $this->shopModel->getShopInfo('');
+            $this->template->settings = $this->shopModel->getShopInfoPublic();
             $this->template->anyVariable = 'any value';
         }
     }
