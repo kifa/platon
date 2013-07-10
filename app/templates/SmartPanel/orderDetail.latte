@@ -24,6 +24,7 @@
         {/if}
         {/if}
         <a class="btn" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+        <a href="{plink generateInvoice! $order->OrderID}" class="btn"><i class="icon-file-alt icon-large"></i> {_'Generate INVOICE'}</a>
     </div>
 </div>
 </div>
@@ -119,9 +120,18 @@
             </div>
         </div>
 
+        <div class="span4 alert {$order->Note ? 'alert-block' : 'alert-info'}">
+            <div class="span4">
+                <i class="icon-paper-clip left icon-large"></i><strong> {_'Note'}:</strong>
+                    {foreach $notes as $note}
+                <p>{$note->NotesName} - {$note->NotesDescription} - {$note->NotesDate}</p>
+                {/foreach}
+                 <a class="btn" href="#addNote" data-toggel="modal" data-target="#addNote" id="addNoteButton"><i class="icon-large icon-plus-sign"></i> {_"Add note"}</a> 
+            </div>
+        </div>
         
-
-
+    </div>
+        <div class="row">
         <table class="table table-hover span9">
             <thead>
                 <tr>
@@ -168,20 +178,16 @@
                     {/foreach}
 
             </tbody>
-            <div class="span4 alert alert-info">   
-            <div class="span5">                    
-                <i class="icon-shopping-cart icon-large left"></i> <strong>{_'Order n.'} {$order->OrderID}</strong></div>
-            <div class="span4">
-                <dl>
-                    <dd><strong >{_'Products'}:</strong> {$grandtotal},-</dd>
-                    <dd><strong >{_'Shipping'}:</strong> {$shipping = $order->DeliveryPrice},-</dd>
-                    <dd><strong >{_'Total'}:</strong> {$grandtotal += $shipping},-</dd>
+            <tfoot>
+                <tr>
+                    <td colspan="2"></td>
+                    <td><strong >{_'Products'}:</strong> {$grandtotal},-</td>
+                    <td><strong >{_'Shipping'}:</strong> {$shipping = $order->DeliveryPrice},-</td>
+                    <td><strong >{_'Total'}:</strong> {$grandtotal += $shipping},-</td>
                 
                 
-                </dl>
-                
-            </div>
-        </div>
+                </tr>
+            </tfoot>
         </table>
 
     </div>
@@ -198,7 +204,7 @@
             <div class="span4">
                 <p>
                     <i class="icon-truck icon-large left"></i> {_'Shipping'}:&nbsp;
-                    <strong class="orderShipping" n:snippet="orderShipping">{$order->DeliveryName}</strong
+                    <strong class="orderShipping" n:snippet="orderShipping">{$order->DeliveryName}</strong>
                 </p>
             </div>
 
@@ -210,21 +216,7 @@
             </div>
               <span class="muted span4"><i class="icon-info-sign"></i> {_'EDIT shipping and payment by Double-clicking.'}</span>
         </div>
-        <div class="row">
 
-
-            <div class="span4 alert {$order->Note ? 'alert-block' : 'alert-info'}">
-            <div class="span4">
-                <i class="icon-paper-clip left icon-large"></i><strong> {_'Note'}:</strong>
-                    {foreach $notes as $note}
-                <p>{$note->NotesName} - {$note->NotesDescription} - {$note->NotesDate}</p>
-                {/foreach}
-                 <a class="btn" href="#addNote" data-toggel="modal" data-target="#addNote" id="addNoteButton"><i class="icon-large icon-plus-sign"></i> {_"Add note"}</a> 
-            </div>
-        </div>
-
-              
-        </div>
         <div class="span4 alert alert-info">
             <div class="span4">
                 <i class="icon-user left icon-large"></i><strong> {_'Contact'}:</strong>

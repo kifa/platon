@@ -1,0 +1,112 @@
+{block content}
+
+<div class="content">
+    <div class="page-header">
+    <h1>{_'Invoice'} <small> {_'Complete summary order'}.</small></h1>
+    </div>
+    <div class="container span12">
+      
+        <div class="container">
+            <table>
+                <thead>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h3> {_'Company info'}</h3>
+               
+                            <p><strong>{$companyName}</strong></p>
+                {if $companyPhone}
+                 <p>{$companyPhone}</p>
+                {/if}
+                 <p>{$companyMail}</p>
+                 <p><strong>{_'Address'}</strong></p>
+                    <p>{$companyAddress}</p>
+                        </td>
+            <td>
+                <p>
+                        {_'Date created'}:&nbsp;<strong>{$order->DateCreated|date:'%d.%m.%Y'}</strong>
+                </p>
+
+                <p>
+                        {_'Shipping'}:&nbsp;<strong>{$order->DeliveryName}</strong>
+                </p>
+
+                <p>
+                   {_'Payment'}:&nbsp;<strong>{$order->PaymentName}</strong>
+                </p>
+            </td>
+            
+            <td class="span3">
+
+                   <h3> {_'Bill to'}:</h3>
+                    <p>
+                    <dl>
+                        <dd class="span4"><span class="span1">{_'Name'}:</span><strong class="orderName span2" n:snippet="orderName">{$order->Name}</strong></dd>
+                        <dd class="span4"><span class="span1">{_'Email'}:</span><strong class="span2">{$order->UsersID}</strong></dd>
+                        <dd class="span4"><span class="span1">{_'Phone'}:</span><strong class="orderPhone span2" n:snippet="orderPhone">{if $order->PhoneNumber}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
+                    </dl>
+                    </p>
+            {if $order->CompanyName != ""}
+                    <dl>
+                        <dt>{_'Company'}:</dt>
+                        <dd>{$order->CompanyName}</dd>
+                    </dl>
+            {/if}
+                   </td>
+                   <td>
+                    <strong> {_'Address'}:</strong>
+                    <dl>
+                        <dd class="span4"><span class="span1">{_'Street'}:</span><strong class="orderStreet span2" n:snippet="orderStreet">{$address->Street}</strong></dd>
+                        <dd class="span4"><span class="span1">{_'City'}:</span><strong class="orderCity span2" n:snippet="orderCity">{$address->City}</strong></dd>
+                        <dd class="span4"><span class="span1">{_'ZIP'}:</span><strong class="orderZIP span2" n:snippet="orderZIP">{$address->ZIPCode}</strong></dd>
+                    </dl> 
+            </td>
+                    </tr>
+                </tbody>
+            </table>
+
+                
+
+        </div>  
+
+            <table class="table span9">
+                <thead>
+                    <tr>
+                        <th>{_'Product Name'}</th>
+                        <th>{_'Amount'}</th>
+                        <th>{_'Item price'}</th>
+                        <th>{_'Total price'}</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                        {foreach $products as $id => $product}
+
+
+                    <tr>
+                        <td>{$product->ProductName}</td>
+                        <td>{$product->Quantity}</td>
+                        <td>{$product->UnitPrice},-</td>
+                        <td>{$subtotal = $product->Quantity * $product->UnitPrice},-</td>
+                    </tr>
+                        {/foreach}
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td><strong >{_'Products'}:</strong> {$order->ProductsPrice},-</td>
+                        <td><strong >{_'Shipping'}:</strong> {$order->DeliveryPaymentPrice},-</td>
+                        <td><strong >{_'Total'}:</strong> {$order->TotalPrice},-</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+       
+         </div>
+</div>
+{/block}

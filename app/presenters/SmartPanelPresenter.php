@@ -6,6 +6,8 @@ use Nette\Forms\Form,
 use Nette\Mail\Message;
 use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 
+use \PdfResponse;
+
 /*
  * SettingsPreseter is used for setting up shop etc
  * 
@@ -91,7 +93,7 @@ class SmartPanelPresenter extends BasePresenter {
                     $this->sendStatusMail($orderid, $name);
                 }
             catch (Exception $e) {
-                    Debugger::log($e);
+                   \Nette\Diagnostics\Debugger::log($e);
             }
     }
 
@@ -196,6 +198,53 @@ class SmartPanelPresenter extends BasePresenter {
         }
         
     }
+    
+    public function handleGenerateInvoice($orderid)
+    {
+        try { 
+            
+        $this->setLayout("pdfLayout");
+        $template = $this->createTemplate()->setFile($this->context->parameters['appDir'] . "/templates/PDF/invoice.latte");
+        $template->products = $this->orderModel->loadOrderProduct($orderid);
+        $template->order = $this->orderModel->loadOrder($orderid);
+        $template->address = $this->orderModel->loadOrderAddress($orderid);
+        $template->productsInOrder = $this->productInOrder;
+        $template->companyName = $this->shopModel->getShopInfo('Name');
+        $template->shopLogo = $this->shopModel->getShopInfo('Logo');
+        $template->companyPhone = $this->shopModel->getShopInfo('ContactPhone');
+        $template->companyMail = $this->shopModel->getShopInfo('ContactMail');
+        $template->companyAddress = $this->shopModel->getShopInfo('CompanyAddress');
+        
+        // Tip: In template to make a new page use <pagebreak>
+
+        
+        $pdf = new \PdfResponse($template);
+
+        
+        }
+        catch (Exception $e) {
+                    \Nette\Diagnostics\Debugger::log($e);
+            }
+        // optional
+        $pdf->documentTitle = date('B') . " My super title"; // creates filename 2012-06-30-my-super-title.pdf
+        $pdf->pageFormat = "A4"; // wide format
+        $pdf->getMPDF()->setFooter("|© www.mysite.com|"); // footer
+        
+   //     $pdf->save($this->context->parameters['wwwDir'] . "/generated/"); // as a filename $this->documentTitle will be used
+        $pdf->setSaveMode(PdfResponse::INLINE);
+
+        $this->sendResponse($pdf);
+        
+        $this->redirect('this');
+        if($this->isAjax()){
+        
+        }
+        
+        else {
+        }
+    }
+    
+    
     
     public function handleRemoveProduct($orderid, $product, $amount) {
         
@@ -490,7 +539,7 @@ class SmartPanelPresenter extends BasePresenter {
                     $this->sendNoteMail($form->values->orderID, $form->values->note);
                 }
             catch (Exception $e) {
-                    Debugger::log($e);
+                   \Nette\Diagnostics\Debugger::log($e);
             }
              
             $message = Html::el('span', ' Note was sucessfully added!');
