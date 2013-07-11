@@ -74,11 +74,17 @@ class MenuControl extends BaseControl {
     }
 
     private function loadStaticMenu() {
-        return $this->shopModel->loadActiveStaticText('');
+         if($this->parent->getUser()->isInRole('admin')){
+             return $this->shopModel->loadStaticText(''); 
+         }
+         else {
+             return $this->shopModel->loadActiveStaticText(''); 
+         }
+       
     }
     
     public function renderAdmin() {
-        if($this->parent->getUser()->isLoggedIn()){
+        if($this->parent->getUser()->isInRole('admin')){
         $this->template->setFile(__DIR__.'/MenuAdminControl.latte');
         $this->template->category = $this->categoryModel->loadCategoryListAdmin(); 
         $this->template->render();
@@ -87,11 +93,11 @@ class MenuControl extends BaseControl {
     
     
 
-        public function render($img) {
+    public function render($img) {
         $this->template->setFile(__DIR__ . '/MenuControl.latte');
         $this->template->cart = $this->cart->numberItems;
        
-        if($this->parent->getUser()->isLoggedIn()){
+        if($this->parent->getUser()->isInRole('admin')){
             $this->template->category = $this->categoryModel->loadCategoryListAdmin(); 
         }
         else {

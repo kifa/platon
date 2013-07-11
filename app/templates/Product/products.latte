@@ -80,13 +80,28 @@
 <div>
 <div class="span4">
     <h1 n:block="title" class="CatTitle" n:snippet="CatTitle">{$category->CategoryName}</h1>
-    <small class="shortDesc muted"> {if $category->CategoryPhoto != NULL }
-    <span class="span3">
+{foreach $categories as $catID => $cat}
+    {if $cat->HigherCategoryID == $category->CategoryID}
+                <div class="span10">
+                    <div class="media">
+                      <a class="pull-left" href="#">
+                        <img class="media-object" data-src="holder.js/64x64">
+                      </a>
+                      <div class="media-body">
+                          <h4 class="media-heading"><a href="{plink product:products $catID}"><i class="icon-chevron-sign-right"></i>  {$cat->CategoryName}</a></h4>
+                      </div>
+                    </div>
+                </div> 
+    {/if}
+ {/foreach}
+    <small class="shortDesc muted">
+     {if $category->CategoryPhoto != NULL }
+        <span class="span3">
 
-        <img src="{$basePath}/images/category/150-{$category->CategoryPhoto}" class="img-circle" />
-     {if $user->isInRole('admin')}<a href="{plink deletePhotoCategory! $category->CategoryID, $category->CategoryPhoto }">{_'Delete photo'}</a> {/if}
+            <img src="{$basePath}/images/category/150-{$category->CategoryPhoto}" class="img-circle" />
+         {if $user->isInRole('admin')}<a href="{plink deletePhotoCategory! $category->CategoryID, $category->CategoryPhoto }">{_'Delete photo'}</a> {/if}
 
-    </span>
+        </span>
     {/if}
     <span n:block="metadesc">
         <span class="CatDescription" n:snippet="CatDescription">{!$category->CategoryDescription}</span>
@@ -108,23 +123,6 @@
         <li><a tabindex="-1" href="#">Product</a></li>
     </ul>
 </div>
-
-    
-{foreach $categories as $catID => $cat}
-    {if $cat->HigherCategoryID == $category->CategoryID}
-                <div class="span10">
-                    <div class="media">
-                      <a class="pull-left" href="#">
-                        <img class="media-object" data-src="holder.js/64x64">
-                      </a>
-                      <div class="media-body">
-                          <h4 class="media-heading"><a href="{plink product:products $catID}"><i class="icon-chevron-sign-right"></i>  {$cat->CategoryName}</a></h4>
-                        <p class="muted">{$cat->CategoryDescription|striptags|truncate:70}</p>
-                      </div>
-                    </div>
-                </div> 
-    {/if}
- {/foreach}
 
 </div>
 {/block}
