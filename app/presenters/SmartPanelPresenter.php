@@ -1174,6 +1174,7 @@ class SmartPanelPresenter extends BasePresenter {
             $this->template->ord = $this->orderModel->countOrder();
             $this->template->orders = $this->orderModel->loadOrders();
             $this->template->settings = $this->shopModel->getShopInfoPublic();
+            $this->template->productNumber = $this->productModel->countProducts();
             $this->template->anyVariable = 'any value';
         }
     }
