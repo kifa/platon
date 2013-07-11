@@ -464,10 +464,10 @@ class BlogPresenter extends BasePresenter {
     public function actionStaticText($postid) {
 
          if ($this->getUser()->isInRole('admin')) {
-                $name = $this->blog->loadPhotoAlbumStatic($postid);
+                $name = $this->shopModel->loadPhotoAlbumStatic($postid);
                 $this->row2 = $name->PhotoAlbumID;
 
-               $addPhotoStaticForm = $this['addPhotoStaticForm'];
+                $addPhotoStaticForm = $this['addPhotoStaticForm'];
             }
     }
     
