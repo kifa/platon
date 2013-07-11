@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{block #title|striptags|trim|strip}BirneShop{/block} | {$shopName}</title>
+        <title>{block #title|striptags|trim|strip} {/block} | {$shopName}</title>
         <meta name="description" content="{block #metadesc|striptags|strip|trim} {$shopDescription} {/block}">
         <meta name="robots" content="{$robots}" n:ifset="$robots">
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
@@ -20,76 +20,74 @@
         {ifCurrent Order:cart}
                 <script src="{$basePath}/js/jquery.js"></script>
                 {/ifCurrent}
-       
-       
-        
+
 	{block head}{/block}
     </head>
    
 <body>
     <script> document.body.className+=' js' </script>
 
-    <div class="container supercontainer"> 
+<div class="container supercontainer"> 
 
-        <div class="margin5 span3 pull-right btn-group">
-            <a class="btn pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="icon-globe"></i> {_'Choose language:'}
-                <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a n:href="this, lang => br" ><img src="{$basePath}/img/blank.gif" class="flag flag-br" alt="Brazil" /> Português</a></li>
-                <li><a n:href="this, lang => en" ><img src="{$basePath}/img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
-                <li><a n:href="this, lang => cs" ><img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" /> Česky</a></li>
-                <li><a n:href="this, lang => de" ><img src="{$basePath}/img/blank.gif" class="flag flag-de" alt="Deutsch" /> Deutsch</a></li>
-            </ul>
+    <div class="margin5 span3 pull-right btn-group">
+        <a class="btn pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-globe"></i> {_'Choose language:'}
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a n:href="this, lang => br" ><img src="{$basePath}/img/blank.gif" class="flag flag-br" alt="Brazil" /> Português</a></li>
+            <li><a n:href="this, lang => en" ><img src="{$basePath}/img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
+            <li><a n:href="this, lang => cs" ><img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" /> Česky</a></li>
+            <li><a n:href="this, lang => de" ><img src="{$basePath}/img/blank.gif" class="flag flag-de" alt="Deutsch" /> Deutsch</a></li>
+        </ul>
+    </div>
+
+<div class="container">
+    <div class="masterhead">
+        <div class="row">
+            <a href="{plink Homepage:default}" class="span5"><h1><img src="{$basePath}/images/logo/{$shopLogo}" alt="{$shopName}" title="{$shopName}"></h1></a>
+
+            {control menu:top}
+
         </div>
-
-        <div class="container">
-            <div class="masterhead">
-                <div class="row">
-                    <a href="{plink Homepage:default}" class="span5"><h1><img src="{$basePath}/images/logo/{$shopLogo}" alt="{$shopName}" title="{$shopName}"></h1></a>
-
-                    {control menu:top}
-
-                </div>
-                <div class="row">
-                    <div class="span12">
-                        <div class="navbar">
-                            <div class="navbar-inner">
-                                <div class="container">
-                                    <a class="btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                                        <strong class="btn pull-right">{_'Menu'} <i class="icon-reorder"></i></strong>
-                                    </a>
-                                    <div class="nav-collapse collapse">
-                                    <ul class="nav" n:snippet="menu">
-                                             {control menu 1}
-                                    </ul>
-                                    </div>
-                                </div>
+        <div class="row">
+            <div class="span12">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <a class="btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                                <strong class="btn pull-right">{_'Menu'} <i class="icon-reorder"></i></strong>
+                            </a>
+                            <div class="nav-collapse collapse">
+                            <ul class="nav" n:snippet="menu">
+                                     {control menu 1}
+                            </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-            {block #bread}{/block}
+        </div>
+
+    </div>
+       {block #bread}{/block}
 
 
-            <div id="content"> 
+    <div id="content"> 
        {block #pageheader}
 
        {/block}
                 
-                    {snippet flashMessages}   
-                    {foreach $flashes as $flash}
-                       <div class="{$flash->type}">
-                           <button type="button" class="close" data-dismiss="alert">&times;</button>
-                     {$flash->message}</div>
-                     {/foreach}
-                     {/snippet}
+            {snippet flashMessages}   
+            {foreach $flashes as $flash}
+               <div class="{$flash->type}">
+                   <button type="button" class="close" data-dismiss="alert">&times;</button>
+             {$flash->message}</div>
+             {/foreach}
+             {/snippet}
 
                 
-                <div class="row" n:snippet="content">
+    <div class="row" n:snippet="content">
             {block #content}
                    
             {/block}
@@ -108,144 +106,130 @@
             {/block}
 
 
-                </div>       
+    </div>       
 
-                <div class="footer">
-                    
-                    <div class="span10">
-                        <hr>
+    <div class="footer">         
+        <div class="span10">
+            <hr>
            {control menu:footer}
+        </div>
+        <div class="span12">     
+            &COPY; Birne shop 2013
+        </div>
+    </div>
+                
+{block modals}
+  {if $user->isInRole('admin')}
+                <div id="addCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Category'}</h3>
                     </div>
-                    <div class="span12">     
-                        &COPY; Birne shop 2013
-
-                {control modalControl:tracking}
+                    <div class="modal-body">
+                        <p>{_'Please fill in these information'}</p>
+                       {control addCategoryForm}
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
                     </div>
                 </div>
-      {block modal}
-                {if $user->isInRole('admin')}
-                <div id="addCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Category'}</h3>
-    </div>
-    <div class="modal-body">
-                <p>{_'Please fill in these information'}</p>
-    {control addCategoryForm}
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-    </div>
-</div>
-                
-                <div id="addStaticText" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Text'}</h3>
-    </div>
-    <div class="modal-body">
-                <p>{_'Please fill in these information'}</p>
-    {control addStaticTextForm}
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-    </div>
-</div>
-{/if}
 
-        {/block}  
+                <div id="addStaticText" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Text'}</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>{_'Please fill in these information'}</p>
+                      {control addStaticTextForm}
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+                    </div>
+                </div>
+{/if}
+   
+    {control modalControl:tracking}
+                
+    {block #modal}
+    {/block}
+{/block}  
             </div>
         </div>
     </div>	
                 
-      {block scripts}
-        {ifCurrent Order:cart}
+{block scripts}
+            {ifCurrent Order:cart}
 
-        {else}
-    <script src="{$basePath}/js/jquery.js"></script>
-                {/ifCurrent}
+            {else}
+        <script src="{$basePath}/js/jquery.js"></script>
+                    {/ifCurrent}
 
-    <script src="{$basePath}/js/netteForms.js"></script>
-   
-    <script src="{$basePath}/js/bootstrap.min.js"></script>
-    <script src="{$basePath}/js/live-form-validation.js"></script>
-    
-    <script src="{$basePath}/js/imgLiquid-min.js"></script>
-    
-    <script src="{$basePath}/js/nette.ajax.js"></script> 
-    <script src="{$basePath}/js/main.js"></script>
-    
-    <script src="{$basePath}/js/jquery.wysiwyg.js"></script>
-    <script src="{$basePath}/js/jquery.jeditable.mini.js"></script>
-    <script src="{$basePath}/js/jquery.jeditable.wysiwyg.js"></script>
+        <script src="{$basePath}/js/netteForms.js"></script>
 
-    
-    <script>
+        <script src="{$basePath}/js/bootstrap.min.js"></script>
+        <script src="{$basePath}/js/live-form-validation.js"></script>
 
-    $(document).ready(function() {
-            $(".imgLiquid").imgLiquid({
-                fill: true,
-                fadeInTime: 0,
-                delay: 0,
-                horizontalAlign: "left",
-                verticalAlign: "top"});
-                
-            $('#trackingButton').toggle(function(){
-                $('#tracking').modal('show');
-              },
-              function() {
-                  $('#tracking').modal('hide');
-              });
-         {if $user->isInRole('admin')}   
-           $('#addCategoryButton').toggle(function(){
-          $('#addCategory').modal('show');
-        },
-        function() {
-            $('#addCategory').modal('hide');
-        });
-        
-        $('#addStaticTextButton').toggle(function(){
-          $('#addStaticText').modal('show');
-        },
-        function() {
-            $('#addStaticText').modal('hide');
-        });
-  
-        {/if}
-    
-        });
-    </script>
-        {if $user->isInRole('admin')}
-    <script type="text/javascript" src="{$basePath}/js/tiny_mce/tiny_mce.js" ></script>
-    <script type="text/javascript" >
-        tinyMCE.init({
-                mode: "specific_textareas",
-                editor_selector: "mceEditor",
-                theme : "advanced",
-                height: '300px',
-                width: '300px'
-        });
-    </script> 
+        <script src="{$basePath}/js/imgLiquid-min.js"></script>
+
+        <script src="{$basePath}/js/nette.ajax.js"></script> 
+        <script src="{$basePath}/js/main.js"></script>
+
+        <script src="{$basePath}/js/jquery.wysiwyg.js"></script>
+        <script src="{$basePath}/js/jquery.jeditable.mini.js"></script>
+        <script src="{$basePath}/js/jquery.jeditable.wysiwyg.js"></script>
 
 
-        {/if}
+        <script>
 
-    <div n:snippet="script">
-<script>
-    
-    $('a.ajax').click(function(){
-        $(this).html('<i class="icon-spinner icon-spin"></i>');
-    });
-    
-    
-</script>
-    </div>
-            {block #script}
-            {/block}
+        $(document).ready(function() {
+                $(".imgLiquid").imgLiquid({
+                    fill: true,
+                    fadeInTime: 0,
+                    delay: 0,
+                    horizontalAlign: "left",
+                    verticalAlign: "top"});
 
-	{/block}
-    
-{*include ./components/footer.latte*}
-    
+                $('#trackingButton').toggle(function(){
+                    $('#tracking').modal('show');
+                  },
+                  function() {
+                      $('#tracking').modal('hide');
+                  });
+             {if $user->isInRole('admin')}   
+                    $('#addCategoryButton').toggle(function(){
+                   $('#addCategory').modal('show');
+                 },
+                 function() {
+                     $('#addCategory').modal('hide');
+                 });
+
+                 $('#addStaticTextButton').toggle(function(){
+                   $('#addStaticText').modal('show');
+                 },
+                 function() {
+                     $('#addStaticText').modal('hide');
+                 });
+
+            {/if}
+
+            });
+        </script>
+
+
+    {snippet script}
+        <script>
+
+            $('a.ajax').click(function(){
+                $(this).html('<i class="icon-spinner icon-spin"></i>');
+            });
+
+        </script>
+    {/snippet}
+
+    {block #script}
+    {/block}
+
+	{/block}   
     </body> 
 </html>

@@ -62,8 +62,21 @@
 {/if}
 
 <div class="page-header" n:snippet="page-header">
-    <h1 n:block="title"><span class="prodTitle" n:snippet="prodTitle">{$product->ProductName}</span>
-            <small><i class="icon-trophy"></i> {if $product->ProductStatusID == 3}<i class="icon-thumbs-up"></i>{/if}</small></h1>
+    <h1><span class="prodTitle" n:snippet="prodTitle" n:block="title">{$product->ProductName}</span>
+            <small>
+                    {if $product->PiecesAvailable > 5}
+            <span class="badge badge-info">{$product->PiecesAvailable}</span>
+                    {else}
+            <span class="badge badge-warning">{$product->PiecesAvailable} {_'LAST'}</span>
+                    {/if}
+            {if $product->ProductStatusID == 3}
+                <span class="badge badge-inverse"><i class="icon-thumbs-up icon-large"></i> {_'HOT'}</span>
+            {/if}
+            {if $product->SALE > 1}
+                <span class="badge badge-important"><i class="icon-money icon-large"></i> {_'SALE'}</span>
+            {/if}
+           
+            </small></h1>
 </div>
 {/block}
 
@@ -78,7 +91,7 @@
                 <li class="active"><a href="#info" data-toggle="tab"><i class="icon-info-sign"></i> {_'Info'}</a></li>
                 <li><a href="#spec" data-toggle="tab"><i class="icon-list"></i> {_'Spec'}</a></li>
                 <li><a href="#other" data-toggle="tab">{_'Other'}</a></li>
-                <li><a href="#ask" data-toggle="tab"><i class="icon-comment"></i> Ask &AMP; share</a></li>
+                <li><a href="#ask" data-toggle="tab"><i class="icon-comment"></i> {_'Ask'}</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="info">
@@ -105,7 +118,8 @@
                        <ul class="errors" n:if="$form->hasErrors()">
                                <li n:foreach="$form->errors as $error">{$error}</li>
                        </ul>
-                         <fieldset>
+                    <span class="help-block"><i class="icon-info-sign"></i> {_'We will respond as soon as possible.'}</span>
+                    <fieldset class="span3">
                            {label note /}
                            {input note}
 
@@ -114,18 +128,12 @@
                                <span class="add-on">@</span>
                            {input email}
                            </div>
-
-                           <div class="form-actions">
                            {input ask}
-                           </div>
-                           <span class="help-block"><i class="icon-info-sign"></i> {_'We will respond as soon as possible.'}</span>
+                           
                          </fieldset>
                        {/form}
                   {/snippet}
                     
-                    <button class="btn"><i class="icon-facebook"></i></button>
-        <button class="btn"><i class="icon-twitter"></i></button>
-        <button class="btn"><i class="icon-youtube"></i></button>
                 </div>
             </div>
         </div>
@@ -133,24 +141,28 @@
         <div class=".span4 alert alert-info">
             
               {if $user->isInRole('admin')}
+            <div class="btn-group span3 margin5">
               <button class="btn" id="editPriceOff" class="hide" style="display: none;">{_'Finish Editing Price'}</button>
               <button class="btn" id="editPrice">{_'Edit Price'}</button> 
+            </div>
               {/if}
+            
+            
             <div n:snippet="prodPrice">
               {if $user->isInRole('admin')}
                 
-                <div id="editProdPrice" class="hide span3">
-               <p>{_'Discount'}:</p>
-                    <div class="btn-group">
-                    
-                    <a href="{plink setSale! $product->ProductID, 5, 'percent'}" class="ajax btn discountbtn">5%</a>
-                    <a href="{plink setSale! $product->ProductID, 10, 'percent'}" class="ajax btn discountbtn">10%</a>
-                    <a href="{plink setSale! $product->ProductID, 15, 'percent'}" class="ajax btn discountbtn">15%</a>
-                    <hr>   
-                    </div>
-                {control editPriceForm}
+               <div id="editProdPrice" class="hide span3">
+                <p>{_'Discount'}:</p>
+                     <div class="btn-group">
+
+                     <a href="{plink setSale! $product->ProductID, 5, 'percent'}" class="ajax btn discountbtn">5%</a>
+                     <a href="{plink setSale! $product->ProductID, 10, 'percent'}" class="ajax btn discountbtn">10%</a>
+                     <a href="{plink setSale! $product->ProductID, 15, 'percent'}" class="ajax btn discountbtn">15%</a>
+                     <hr>   
+                     </div>
+                 {control editPriceForm}
                 </div>
-                {/if}
+              {/if}
              <div id="prodPrice">
  
             {if $product->SALE > 1}
@@ -281,221 +293,157 @@
 {/block}
 
 {block sidebar}
-                            <div class="span2">
-    {if $user->isInRole('admin')}
-        {control menu:admin}
-    {/if}
+      
+<div class="span2">
+{if $user->isInRole('admin')}
+    {control menu:admin}
+{/if}
+    <ul class="nav nav-list">
+        <li class="nav-header">Menu</li>
 
-
-                                <ul class="nav nav-list">
-                                    <li class="nav-header">Menu</li>
-
-                                      {control menu:side}
-                                    <li class="divider"></li>
-                                </ul>
-
-                                <i class="icon-camera-retro icon-2x"></i><strong>Google Nexus</strong>
-                                <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-                                    <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
-                            </div>
+          {control menu:side}
+        <li class="divider"></li>
+    </ul>
+</div>
 {/block}
 
 {block script}
-                            <script src="{$basePath}/js/bootstrap-lightbox.min.js"></script>
 
-                            <script>
-                               $(document).ready(function() {
-                                       $(".imgLiquid").imgLiquid({
-                                           fill: true,
-                                           fadeInTime: 0,
-                                           delay: 0,
-                                           horizontalAlign: "left",
-                                           verticalAlign: "top"});
-                                   });
-                            </script>
-
-         {if $user->isInRole('admin')}
-                            
-                            <script src="{$basePath}/js/droparea.js"></script>
-<div n:snippet="script">
+         {if $user->isInRole('admin')}           
+      {snippet script}
 <script>
     
     $('a.ajax').click(function(){
         $(this).html('<i class="icon-spinner icon-spin"></i>');
     });
-
-    $('input[name="ask"]').click(function() { 
-            $('input[name="ask"]').attr('class', 'btn btn-primary disabled');
-            $('input[name="ask"]').attr('value', 'Asking...');
-        });
-    
     
 </script>
-</div>
+{/snippet}
                             
-                            <script>
-                                $(document).ready(function() {
-                 
-                                  $('.nav-tabs').button();
-                                  $('.upl').click(function() { 
-                                        $('.upl').button('toggle');
-                                        $('.upl').button('loading') });
-                                  $('.upl-edit').click(function() { 
-                                        $('.upl-edit').button('toggle');
-                                        $('.upl-edit').button('loading') });
-                                    $('.upl-add').click(function() { 
-                                        $('.upl-add').button('toggle');
-                                        $('.upl-add').button('loading') });
-                                    $('.upl-del').click(function() { 
-                                        $('.upl-del').button('toggle');
-                                        $('.upl-del').button('loading') });
-                                  $('#addPhotoButton').toggle(function(){
-                                      $('#addPhoto').modal('show');
-                                    },
-                                    function() {
-                                        $('#addPhoto').modal('hide');
-                                    });
-            
-                                         
-                                  $('#editPriceButton').toggle(function(){
-                                      $('#editPrice').modal('show');
-                                    },
-                                    function() {
-                                        $('#editPrice').modal('hide');
-                                    });
-        
-                                 $('#editPiecesButton').toggle(function(){
-                                      $('#editPieces').modal('show');
-                                    },
-                                    function() {
-                                        $('#editPieces').modal('hide');
-                                    });
-            
-                                  $('#editParamButton').toggle(function(){
-                                      $('#editParam').modal('show');
-                                    },
-                                    function() {
-                                        $('#editParam').modal('hide');
-                                    });
-            
-                                   $('#editDocsButton').toggle(function(){
-                                      $('#editDocs').modal('show');
-                                    },
-                                    function() {
-                                        $('#editDocs').modal('hide');
-                                    });
-            
-                                    {if $attr == 1}
-                                        $('#editParam').modal('show');
-                                        {/if}
-                            });
-        
-                                    $('.prodTitle').editable( {link editProdTitle! $product->ProductID }, { 
-                                        type      : 'text',
-                                        cancel    : {_'Cancel'},
-                                        submit    : 'OK',
-                                        indicator : '<i class="icon-spinner icon-spin"></i>',
-                                        tooltip   : 'Click to edit ...',
-                                        callback : function(value, settings) {
-                                           var json = $.parseJSON(value);
-                                           $('.prodTitle').text(json.edit);
-                                       }
-                                   });
-           
-                                   $('.prodDescription').editable( {link editProdDescription! $product->ProductID }, {
-                                        type      : 'wysiwyg',
-                                        onblur    : 'ignore',
-                                        cancel    : {_'Cancel'},
-                                        submit    : 'OK',
-                                        cssclass  : 'span10',
-                                        colls     : '15',
-                                        rows      : '15',
-                                        indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
-                                        tooltip   : {_'Click to edit ...'},
-                                        wysiwyg   : { controls : { separator04         : { visible : true },
-                                                              insertOrderedList   : { visible : true },
-                                                              insertUnorderedList : { visible : true }
-                                               }
-                                        }, 
-                                       callback : function(value, settings) {
-                                           var json = $.parseJSON(value);
-                                           $('.prodDescription').html(json.edit);
-                                       }
-                                });
-                                
-                                $('.prodShort').editable( {link editProdShort! $product->ProductID }, {
-                                        type      : 'textarea',
-                                        onblur    : 'ignore',
-                                        cancel    : {_'Cancel'},
-                                        submit    : 'OK',
-                                        colls     : '6',
-                                        rows      : '7', 
-                                        indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
-                                        tooltip   : {_'Click to edit ...'},
-                                        callback : function(value, settings) {
-                                           var json = $.parseJSON(value);
-                                           $('.prodShort').text(json.edit);
-                                       }
-                                });
-                                
-                                $('.prodPrice').editable( {link editProdPrice! $product->ProductID, $product->SellingPrice, $product->SALE }, {
-                                        type      : 'text',
-                                        onblur    : 'ignore',
-                                        cancel    : {_'Cancel'},
-                                        submit    : 'OK', 
-                                        indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
-                                        tooltip   : {_'Click to edit ...'},
-                                        callback : function(value, settings) {
-                                           var json = $.parseJSON(value);
-                                           $('.prodPrice').text(json.edit);
-                                       }
-                                });
-                                
-                                $('.prodAmount').editable( {link editProdAmount! $product->ProductID }, {
-                                        type      : 'text',
-                                        onblur    : 'ignore',
-                                        cancel    : {_'Cancel'},
-                                        submit    : 'OK', 
-                                        colls     : '4',
-                                        rows      : '3',
-                                        indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
-                                        tooltip   : {_'Click to edit ...'},
-                                        callback : function(value, settings) {
-                                           var json = $.parseJSON(value);
-                                           $('.prodAmount').text(json.edit);
-                                       }
-                                });
-           
-                                $('#editPrice').click(function(){
-                                    $('#prodPrice').fadeOut(function(){
-                                      $('#editProdPrice').fadeIn(); 
-                                    $('#editPrice').hide();
-                                    $('#editPriceOff').show();
-                                    });
-                                    
-                                });
-                                
-                                $('#editPriceOff').click(function(){
-                                    $('#editProdPrice').fadeOut(function(){
-                                        $('#prodPrice').fadeIn();
-                                        $('#editPriceOff').hide();
-                                    $('#editPrice').show();
-                                    });
-                                    
-                                })
-                                
-                                $('#priceSave').click(function(){
-                                    $(this).attr('class', 'btn btn-primary disabled');
-                                    $('#editPriceOff').hide();
-                                    $('#editPrice').show();
-                                });
-                                
-                                $('.discountbtn').click(function(){
-                                    $(this).attr('class', 'btn btn-primary disabled');
-                                    $('#editPriceOff').hide();
-                                    $('#editPrice').show();
-                                });
-                            </script>
+<script>
+    $(document).ready(function() {
+
+            $('.nav-tabs').button();
+
+            $('#editParamButton').toggle(function(){
+                $('#editParam').modal('show');
+              },
+              function() {
+                  $('#editParam').modal('hide');
+              });
+
+              {if $attr == 1}
+                  $('#editParam').modal('show');
+                  {/if}
+
+
+              $('.prodTitle').editable( {link editProdTitle! $product->ProductID }, { 
+                  type      : 'text',
+                  cancel    : {_'Cancel'},
+                  submit    : 'OK',
+                  indicator : '<i class="icon-spinner icon-spin"></i>',
+                  tooltip   : 'Click to edit ...',
+                  callback : function(value, settings) {
+                     var json = $.parseJSON(value);
+                     $('.prodTitle').text(json.edit);
+                 }
+             });
+
+             $('.prodDescription').editable( {link editProdDescription! $product->ProductID }, {
+                  type      : 'wysiwyg',
+                  onblur    : 'ignore',
+                  cancel    : {_'Cancel'},
+                  submit    : 'OK',
+                  cssclass  : 'span10',
+                  colls     : '15',
+                  rows      : '15',
+                  indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+                  tooltip   : {_'Click to edit ...'},
+                  wysiwyg   : { controls : { separator04         : { visible : true },
+                                        insertOrderedList   : { visible : true },
+                                        insertUnorderedList : { visible : true }
+                         }
+                  }, 
+                 callback : function(value, settings) {
+                     var json = $.parseJSON(value);
+                     $('.prodDescription').html(json.edit);
+                 }
+          });
+
+          $('.prodShort').editable( {link editProdShort! $product->ProductID }, {
+                  type      : 'textarea',
+                  onblur    : 'ignore',
+                  cancel    : {_'Cancel'},
+                  submit    : 'OK',
+                  colls     : '6',
+                  rows      : '7', 
+                  indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+                  tooltip   : {_'Click to edit ...'},
+                  callback : function(value, settings) {
+                     var json = $.parseJSON(value);
+                     $('.prodShort').text(json.edit);
+                 }
+          });
+
+          $('.prodPrice').editable( {link editProdPrice! $product->ProductID, $product->SellingPrice, $product->SALE }, {
+                  type      : 'text',
+                  onblur    : 'ignore',
+                  cancel    : {_'Cancel'},
+                  submit    : 'OK', 
+                  indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+                  tooltip   : {_'Click to edit ...'},
+                  callback : function(value, settings) {
+                     var json = $.parseJSON(value);
+                     $('.prodPrice').text(json.edit);
+                 }
+          });
+
+          $('.prodAmount').editable( {link editProdAmount! $product->ProductID }, {
+                  type      : 'text',
+                  onblur    : 'ignore',
+                  cancel    : {_'Cancel'},
+                  submit    : 'OK', 
+                  colls     : '4',
+                  rows      : '3',
+                  indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+                  tooltip   : {_'Click to edit ...'},
+                  callback : function(value, settings) {
+                     var json = $.parseJSON(value);
+                     $('.prodAmount').text(json.edit);
+                 }
+          });
+
+          $('#editPrice').click(function(){
+              $('#prodPrice').fadeOut(function(){
+                $('#editProdPrice').fadeIn(); 
+              $('#editPrice').hide();
+              $('#editPriceOff').show();
+              });
+
+          });
+
+          $('#editPriceOff').click(function(){
+              $('#editProdPrice').fadeOut(function(){
+                  $('#prodPrice').fadeIn();
+                  $('#editPriceOff').hide();
+              $('#editPrice').show();
+              });
+
+          })
+
+          $('#priceSave').click(function(){
+              $(this).attr('class', 'btn btn-primary disabled');
+              $('#editPriceOff').hide();
+              $('#editPrice').show();
+          });
+
+          $('.discountbtn').click(function(){
+              $(this).attr('class', 'btn btn-primary disabled');
+              $('#editPriceOff').hide();
+              $('#editPrice').show();
+          });
+});
+</script>
 
     {/if}
 {/block}

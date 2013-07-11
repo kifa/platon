@@ -429,6 +429,7 @@ class ProductPresenter extends BasePresenter {
                 }
             }
             if(!$this->isControlInvalid('prodPrice')){
+                $this->invalidateControl('page-header');
                 $this->payload->edit = $content;
                 $this->sendPayload();
             }
@@ -444,6 +445,8 @@ class ProductPresenter extends BasePresenter {
             $this->productModel->updateSale($prodid, $amount, $type);
             if($this->isAjax()) {
                 $this->invalidateControl('prodPrice');
+                $this->invalidateControl('page-header');
+
             }
             else{
               $this->redirect('this');  
@@ -458,12 +461,13 @@ class ProductPresenter extends BasePresenter {
                 $content = $_POST['value'];
 
                 $this->productModel->updateProduct($prodid, 'PiecesAvailable', $content);
+                $this->invalidateControl('page-header');
             }
             if(!$this->isControlInvalid('editProdAmount'))
             {
+                $this->invalidateControl('editProdAmount');
                 $this->payload->edit = $content;
                 $this->sendPayload();
-                $this->invalidateControl('editProdAmount');
             }
             else {
              $this->redirect('this');
@@ -649,11 +653,7 @@ class ProductPresenter extends BasePresenter {
             $this->template->products = $this->productModel->loadCatalog($catID, $this->filter);
             $this->template->categories = $this->categoryModel->loadCategoryList();
         }
-        if ($this->getUser()->isInRole('admin')) {        
-            $this->template->categories = $this->categoryModel->loadCategoryListAdmin();        
-        } else {
-            $this->template->categories = $this->categoryModel->loadCategoryList();       
-        }
+
         $this->template->category = $this->categoryModel->loadCategory($catID);
     }
 
@@ -692,7 +692,13 @@ class ProductPresenter extends BasePresenter {
                 $addForm = $this['addParamForm'];
                 $docsForm = $this['addDocumentationForm'];
                 $priceForm = $this['editPriceForm'];
+                $askForm = $this['askForm'];
                 // $this['editPriceForm']['price'] = $this->row['SellingPrice'];
+            }
+            else{
+                $this->row = array('ProductID' => $row->ProductID,
+                    'ProductName' => $row->ProductName);
+                $askForm = $this['askForm'];
             }
         }
     }
@@ -852,15 +858,15 @@ class ProductPresenter extends BasePresenter {
       
             $askForm = new Nette\Application\UI\Form;
             $askForm->setTranslator($this->translator);
-            $askForm->addTextArea('note', 'Question:')
+            $askForm->addTextArea('note', 'Question:', 7, 4)
                     ->setRequired('Please enter your question.');
             $askForm->addText('email', 'Email:')
                     ->setEmptyValue('@')
                     ->addRule(Form::EMAIL, 'Would you fill your email, please?')
                     ->setRequired('Please fill your email.');
-            $askForm->addHidden('id', $this->row['ProductID']);
+            $askForm->addHidden('name', $this->row['ProductName']);
             $askForm->addSubmit('ask', 'Ask')
-                    ->setAttribute('class', 'btn btn-primary')
+                    ->setAttribute('class', 'btn btn-primary span2')
                     ->setHtmlId('askButton')
                     ->setAttribute('data-loading-text', 'Asking...');
             $askForm->onSuccess[] = $this->askFormSubmitted;
@@ -871,6 +877,7 @@ class ProductPresenter extends BasePresenter {
 
         $email = $form->values->email;
         $note = $form->values->note;
+        $name = $form->values->name;
         
         $e = HTML::el('span', ' Great! We have received your question.');
         $ico = HTML::el('i')->class('icon-ok-sign left');
@@ -890,7 +897,7 @@ class ProductPresenter extends BasePresenter {
         }
         
         try {
-            $this->sendAskMail($email, $note);
+            $this->sendAskMail($email, $note, $name);
         }
         catch (Exception $e) {
             \Nette\Diagnostics\Debugger::log($e);
@@ -1136,7 +1143,7 @@ class ProductPresenter extends BasePresenter {
     
     
     
-    protected function sendAskMail($email, $note) {
+    protected function sendAskMail($email, $note, $name) {
         
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/askMail.latte');
             $template->registerFilter(new Nette\Latte\Engine);
@@ -1144,7 +1151,7 @@ class ProductPresenter extends BasePresenter {
             $template->email = $email;
             //$template->mailOrder = $row->UsersID;
             $template->note = $note;
-            $template->product = $this->row['ProductName']; 
+            $template->product = $name; 
             
             $mailIT = new mailControl();
             $mailIT->sendSuperMail('luk.danek@gmail.com', 'Nový dotaz k produktu' . $this->row['ProductName'], $template);

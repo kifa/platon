@@ -35,13 +35,23 @@
             <hr>
             {/if}
 <div class="row">            
-            <div class="span3">
+            <div class="span3 pull-left">
                     {if $product->PiecesAvailable > 5}
             <span class="badge badge-info">{$product->PiecesAvailable}</span>
+                    {elseif $product->PiecesAvailable > 0}
+            <span class="badge badge-warning">{$product->PiecesAvailable} {_'LAST'}</span>
                     {else}
-            <span class="badge badge-warning">{$product->PiecesAvailable}</span>
+            <span class="badge badge-inverse">{$product->PiecesAvailable} {_'SOLD OUT'}</span>
                     {/if}
+            {if $product->ProductStatusID == 3}
+                <span class="badge badge-inverse"><i class="icon-thumbs-up icon-large"></i> {_'HOT'}</span>
+            {/if}
+            {if $product->SALE > 1}
+                <span class="badge badge-important"><i class="icon-money icon-large"></i> {_'SALE'}</span>
+            {/if}
             </div>
+    
+            
 
       <a class="span3 imgLiquid" style="height: 150px; width: auto;" href="{plink Product:product $product->ProductID}"> 
             
