@@ -100,4 +100,19 @@ class BlogModel extends Repository {
                 WHERE Blog.BlogID=?',$id);*/           
         }
     }
+    
+    public function loadPhotoAlbumStatic($postid){
+        if($postid==''){
+            return $this->getTable('PhotoAlbum');
+        }
+        else{
+            //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
+            return $this->getTable('photo')->select('photo.*,photoalbum.*')->where('photoalbum.StaticTextID',$postid)->fetch();
+            /*$row = $this->getDB()->query('
+                SELECT * FROM blog 
+                JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
+                JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+                WHERE Blog.BlogID=?',$id);*/           
+        }
+    }
 }

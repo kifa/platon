@@ -95,7 +95,14 @@ $(document).ready(function() {
             $('#deleteText').modal('hide');
         });
 
-    
+    $('#addPhotoButton').toggle(function(){
+$('#addPhoto').modal('show');
+},
+function() {
+$('#addPhoto').modal('hide');
+});
+
+
     $('.StaticTextName').editable( {link editStaticTextName! $post->StaticTextID }, {
             type      : 'text',
             cancel    : {_'Cancel'},
@@ -154,6 +161,21 @@ $(document).ready(function() {
         <a href="{plink deleteStaticText! $post->StaticTextID}" class="btn btn-danger">{_'Delete'}</a>       
         <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
     </div>
+</div>
+
+<div id="addPhoto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<h3 id="myModalLabel"><i class="icon-camera-retro"></i> Add new photo</h3>
+</div>
+<div class="modal-body">
+<p>{_'Select photo and click Add photo'}</p>
+<p></p>
+</div>
+<div class="modal-footer">
+{control addPhotoStaticForm}
+<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+</div>
 </div>
 {/if}
 {/block}

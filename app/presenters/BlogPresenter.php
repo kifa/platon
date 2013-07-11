@@ -16,6 +16,8 @@ class BlogPresenter extends BasePresenter {
     private $categoryModel;
     private $shopModel;
     private $row;
+    private $row2;
+            
 
 
      public function injectTranslator(NetteTranslator\Gettext $translator) {
@@ -276,7 +278,7 @@ class BlogPresenter extends BasePresenter {
             $addPhoto->addSubmit('add', 'Add Photo')
                     ->setAttribute('class', 'btn-primary upl')
                     ->setAttribute('data-loading-text', 'Uploading...');
-            $addPhoto->onSuccess[] = $this->addProductPhotoFormSubmitted;
+            $addPhoto->onSuccess[] = $this->addPhotoFormSubmitted;
             return $addPhoto;
         }
     }
@@ -285,7 +287,7 @@ class BlogPresenter extends BasePresenter {
      * Adding submit form for adding photos
      */
 
-    public function addProductPhotoFormSubmitted($form) {
+    public function addPhotoFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
             if ($form->values->image->isOK()) {
 
@@ -406,8 +408,71 @@ class BlogPresenter extends BasePresenter {
         }
     }
     
+    
+    public function createComponentAddPhotoStaticForm() {
+        if ($this->getUser()->isInRole('admin')) {
+            $addPhoto = new Nette\Application\UI\Form;
+            $addPhoto->setTranslator($this->translator);
+            $addPhoto->addHidden('name', 'name');
+            $addPhoto->addHidden('textalbumid', $this->row2);
+            $addPhoto->addUpload('image', 'Photo:')
+                    ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
+            $addPhoto->addSubmit('addPhoto', 'Add Photo')
+                    ->setAttribute('class', 'btn-primary upl');
+            $addPhoto->onSuccess[] = $this->addPhotoStaticFormSubmitted;
+            return $addPhoto;
+        }
+    }
+
+    /*
+     * Adding submit form for adding photos
+     */
+
+    public function addPhotoStaticFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            if ($form->values->image->isOK()) {
+
+                $this->productModel->insertPhoto(
+                        $form->values->name, $form->values->image->name, $form->values->textalbumid
+                );
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/static/' . $form->values->textalbumid . '/' . $form->values->image->name;
+                $form->values->image->move($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 300, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/static/' . $form->values->textalbumid . '/300-' . $form->values->image->name;
+                $image->save($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 50, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/static/' . $form->values->textalbumid . '/50-' . $form->values->image->name;
+                $image->save($imgUrl);
+
+                $e = HTML::el('span', ' Photo ' . $form->values->image->name . ' was sucessfully uploaded');
+                $ico = HTML::el('i')->class('icon-ok-sign left');
+                $e->insert(0, $ico);
+                $this->flashMessage($e, 'alert');
+            }
+
+            $this->redirect('this');
+        }
+    }
+    
+    public function actionStaticText($postid) {
+
+         if ($this->getUser()->isInRole('admin')) {
+                $name = $this->blog->loadPhotoAlbumStatic($postid);
+                $this->row2 = $name->PhotoAlbumID;
+
+               $addPhotoStaticForm = $this['addPhotoStaticForm'];
+            }
+    }
+    
     public function renderStaticText($postid) {
-        
+                
         $this->template->post = $this->shopModel->loadStaticText($postid);
     }
     

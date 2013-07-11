@@ -281,7 +281,7 @@
                     }
                     else
                     {
-                        var szURL = prompt('URL', 'http://');
+                        var szURL = prompt('Upload picture and than paste the URL here!', 'http://');
 
                         if ( szURL && szURL.length > 0 )
                             this.editorDoc.execCommand('insertImage', false, szURL);

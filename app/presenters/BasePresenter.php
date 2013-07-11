@@ -237,6 +237,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     public function addStaticTextFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
             $row = $this->shopModel->insertStaticText($form->values->name, '', 2);
+            $this->productModel->insertPhotoAlbum($form->values->name, '', NULL, NULL, $row);
             $this->redirect('Blog:staticText', $row);
         }
     }

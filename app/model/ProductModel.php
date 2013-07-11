@@ -265,13 +265,13 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
         }
     }
     
-    public function insertPhotoAlbum($name, $desc, $product = NULL, $blog = NULL) {
-         $insert = array(
-            'PhotoAlbumID' => NULL,             
+    public function insertPhotoAlbum($name, $desc, $product = NULL, $blog = NULL, $static = NULL) {
+         $insert = array(             
             'PhotoAlbumName' => $name,
             'PhotoAlbumDescription' => $desc,
             'ProductID' => $product,
-            'BlogID' => $blog
+            'BlogID' => $blog,
+            'StaticTextID' => $static
             );
          
            $row = $this->getTable('photoalbum')->insert($insert);
@@ -307,7 +307,6 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
     
     public function insertPhoto($name, $url, $albumID, $cover = null){
         $insert = array(
-        'PhotoID' => NULL,
         'PhotoName' => $name,
         'PhotoURL' => $url,
         'PhotoAlbumID' => $albumID,
