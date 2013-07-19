@@ -42,8 +42,18 @@ class BlogModel extends Repository {
     }
     
     public function loadPost($postid){
-        return $this->getTable('blog')->where('BlogID',$postid)->fetch();
-       
+        return $this->getTable('blog')->where('BlogID',$postid)->fetch();        
+        //$return = $this->getTable('blog')->where('BlogID',$postid)->fetch();        
+        //$returnX = array(
+        //    'BlogID' => $return['BlogID'],
+        //    'BlogName' => $return['BlogName'],
+        //    'PhotoAlbumID' => '0',
+        //    'BlogContent' => $return['BlogContent'],
+        //    'CategoryID' => NULL
+        //);
+                    
+        //return $returnX;
+        
       /*  return $this->getDB()->query('
                 SELECT * FROM blog
                 JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
@@ -61,6 +71,7 @@ class BlogModel extends Repository {
           'CategoryID' => $categoryID
         );
 
+        
         $return = $this->getTable('blog')->insert($insert);
         return $return->BlogID;
     }
@@ -99,22 +110,31 @@ class BlogModel extends Repository {
                 JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
                 WHERE Blog.BlogID=?',$id);*/           
-        }
+        }                
+                        
     }
  
     public function loadPhotoAlbumID($postid){
         if($postid==''){
-            return $this->getTable('PhotoAlbum');
+            $photoalbum = $this->getTable('PhotoAlbum');
         }
         else{
             //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
-            return $this->getTable('photoalbum')->where('photoalbum.blogID',$postid)->fetch();
+            $photoalbum = $this->getTable('photoalbum')->where('photoalbum.blogID',$postid)->fetch();
             /*$row = $this->getDB()->query('
                 SELECT * FROM blog 
                 JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
                 WHERE Blog.BlogID=?',$id);*/           
         }
+        
+        if($photoalbum == FALSE){
+            $photoalbum = array(
+                'PhotoAlbumID' => 0
+            );
+        }
+        
+        return $photoalbum;
     }
     
     public function loadPhotoAlbumStatic($postid){
