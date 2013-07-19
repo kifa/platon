@@ -380,11 +380,13 @@ class OrderModel extends Repository {
     {
         if($switch==NULL){
             if($id==''){
-                return $this->getTable('delivery')->select('delivery.*, status.*')->fetchPairs('DeliveryID');
+                return $this->getTable('delivery')->select('delivery.*, status.*')
+                        ->where('status.StatusName = ? OR status.StatusName = ?','active','non-active')
+                        ->fetchPairs('DeliveryID');
             }
             else
             {
-                return $this->getTable('delivery')->select('delivery.*, status.*')->where('DeliveryID',$id)->where('StatusID',1)->fetch();
+                return $this->getTable('delivery')->select('delivery.*, status.*')->where('DeliveryID',$id)->fetch();
             }
         }
         elseif ($switch=='active') {
