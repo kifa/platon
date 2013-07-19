@@ -52,7 +52,6 @@
                                                     <img style="" src="{$basePath}/images/blog/{$post->BlogID}/300-{$photo->PhotoURL}" alt="{$post->BlogName}">
                                                 </a>
                                                 {if $user->isInRole('admin')}
-          
                                                     <a href="{link deletePhoto! $post->BlogID, $photo->PhotoID}"><i class="icon-trash" ></i> Delete image</a>
                                                   {/if}
                                             </li>

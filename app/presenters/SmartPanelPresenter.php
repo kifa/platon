@@ -675,7 +675,6 @@ class SmartPanelPresenter extends BasePresenter {
             if(!$this->isControlInvalid('DelStatus')){           
                $this->payload->edit = $content; //zaslání nové hodnoty do šablony
                $this->sendPayload();
-               $this->invalidateControl('menu');       
                $this->invalidateControl('DelStatus'); //invalidace snipetu
            }
            else {
@@ -697,8 +696,7 @@ class SmartPanelPresenter extends BasePresenter {
            if(!$this->isControlInvalid('DelFF'))
            {           
                $this->payload->edit = $content; //zaslání nové hodnoty do šablony
-               $this->sendPayload();
-               $this->invalidateControl('menu');       
+               $this->sendPayload();       
                $this->invalidateControl('DelFF'); //invalidace snipetu
 
            }
@@ -711,15 +709,19 @@ class SmartPanelPresenter extends BasePresenter {
     public function handleRemoveShipping($shipid) {
        if ($this->getUser()->isInRole('admin')) {
          
-            $this->orderModel->deleteDelivery($shipid);
-            $message = Html::el('span', ' was removed.');
+            //$this->orderModel->deleteDelivery($shipid);
+           $this->orderModel->updateDeliveryStatus($shipid, 3);
+            $message = Html::el('span', ' Shipping was archived.');
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, ' ');
             $message->insert(0, $e);
             $this->flashMessage($message, 'alert');
             
             if($this->isAjax()) {
-                $this->invalidateControl();
+                $this->invalidateControl('shipping');
+                $this->invalidateControl('script');
+
+                
             }
             else{
                 $this->presenter->redirect("this");
