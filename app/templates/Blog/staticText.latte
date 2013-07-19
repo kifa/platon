@@ -45,9 +45,21 @@
 
 <div class="span9">
 
-     
-        <div class="text-justified StaticTextContent" n:snippet="StaticTextContent">{!$post->StaticTextContent}</div>            
 
+    <div class="text-justified StaticTextContent" n:snippet="StaticTextContent">{!$post->StaticTextContent}</div>    
+    
+    <ul class="thumbnails">
+        <li class="thumbnail span8"><strong>{_'To add photos, upload them and then "Click to edit" and drag photos to editor.'}</strong></li>
+{foreach $album as $id => $photo}
+    
+    <li class="span2">
+        <span style="height: 50px; width: 50px;">
+        <img  src="{$basePath}/images/static/{$albumID}/300-{$photo->PhotoURL}" alt="{$post->StaticTextName}">
+        </span>
+    </li>
+
+{/foreach}
+    </ul>
     
 </div> <!-- class="span10" -->
 {/block}
@@ -120,7 +132,7 @@ $('#addPhoto').modal('hide');
             onblur    : 'ignore',
             cancel    : {_'Cancel'},
             submit    : 'OK',
-            cssclass  : 'span10',
+            cssclass  : 'span9',
             colls     : '15',
             rows      : '15',
             indicator : '<i class="icon-spinner icon-spin icon-large"></i>',

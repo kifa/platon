@@ -91,13 +91,14 @@ class ShopModel extends Repository {
         }
     }
     
-    public function loadPhotoAlbumStatic($id){
-        $album = $this->getTable('photoalbum')->where('StaticTextID',$id);
+    public function loadPhotoAlbumStatic($postid){
         
-        if ($album['PhotoAlbumID'] == NULL){
-            $album['PhotoAlbumID'] = 1;
+        $album = $this->getTable('photoalbum')->where('StaticTextID', $postid)->fetch();
+        
+        if ($album->PhotoAlbumID == NULL){
+            $album->PhotoAlbumID = 1;
         }
-        return $album['PhotoAlbumID'];
+        return $album->PhotoAlbumID;
     }
     
     public function insertStaticText($title, $content, $status){

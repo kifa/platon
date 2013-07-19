@@ -86,13 +86,29 @@ class BlogModel extends Repository {
         return $photo["PhotoURL"];
     }
     
+    
      public function loadPhotoAlbum($id){
         if($id==''){
             return $this->getTable('PhotoAlbum');
         }
         else{
             //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
-            return $this->getTable('photo')->select('photo.*,photoalbum.*')->where('photoalbum.blogID',$id);
+            return $this->getTable('photo')->select('photo.*,photoalbum.*')->where('photoalbum.blogID',$id)->fetchPairs('PhotoID');
+            /*$row = $this->getDB()->query('
+                SELECT * FROM blog 
+                JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
+                JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+                WHERE Blog.BlogID=?',$id);*/           
+        }
+    }
+ 
+    public function loadPhotoAlbumID($postid){
+        if($postid==''){
+            return $this->getTable('PhotoAlbum');
+        }
+        else{
+            //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
+            return $this->getTable('photoalbum')->where('photoalbum.blogID',$postid)->fetch();
             /*$row = $this->getDB()->query('
                 SELECT * FROM blog 
                 JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 
@@ -107,7 +123,7 @@ class BlogModel extends Repository {
         }
         else{
             //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
-            return $this->getTable('photo')->select('photo.*,photoalbum.*')->where('photoalbum.StaticTextID',$postid)->fetch();
+            return $this->getTable('photo')->select('photo.*,photoalbum.*')->where('photoalbum.StaticTextID',$postid)->fetchPairs('PhotoID');
             /*$row = $this->getDB()->query('
                 SELECT * FROM blog 
                 JOIN photoalbum ON blog.BlogID=photoalbum.BlogID 

@@ -43,12 +43,13 @@ class BlogPresenter extends BasePresenter {
      
     public function actionPost($postid) {
         $row = $this->blog->loadPost($postid);
-         if ($this->getUser()->isInRole('admin')) {
+        
+        $row2 = $this->blog->loadPhotoAlbumID($postid);
+        if ($this->getUser()->isInRole('admin')) {
                 $this->row = array('BlogID' => $row->BlogID,
                     'BlogName' => $row->BlogName,
-
+                    'PhotoAlbumID' => $row2->PhotoAlbumID,
                     'BlogContent' => $row->BlogContent,
-                    'PhotoAlbumID' => $row->PhotoAlbumID,
                     'CategoryID' => $row->CategoryID);
 
                 $editDescForm = $this['editDescForm'];
@@ -75,18 +76,10 @@ class BlogPresenter extends BasePresenter {
             $addPost->setTranslator($this->translator);
             $addPost->addText('name', 'Name:')
                     ->setRequired();
-            $addPost->addTextArea('desc', 'Description: ', 10)
-                    ->setRequired()
-                    ->setAttribute('class', 'mceEditor');
             $addPost->addSelect('cat', 'Category: ', $category);
-            $addPost->addUpload('image', 'Image:')    
-                    ->addCondition(Form::FILLED)
-                    ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
-                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
             $addPost->addSubmit('add', 'Add Post')
                     ->setAttribute('class', 'upl btn btn-primary')
                     ->setAttribute('data-loading-text', 'Adding...');
-            $addPost->onSubmit('tinyMCE.triggerSave()');
             $addPost->onSuccess[] = $this->addPostFormSubmitted;
             return $addPost;
         }
@@ -102,36 +95,15 @@ class BlogPresenter extends BasePresenter {
             $return = $this->blog->insertPost(
                     $form->values->name, //Name
                     $form->values->cat,
-                    $form->values->desc
+                    ''
                      //Description
                     
             );
             
-            if ($form->values->image->isOK()) {
-
-                $albumid = $this->productModel->insertPhotoAlbum($form->values->name, $form->values->desc, null, $return);
-                
-                $this->productModel->insertPhoto(
-                        $form->values->name, $form->values->image->name, $albumid, 1
-                );
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/blog/' . $return . '/' . $form->values->image->name;
-                $form->values->image->move($imgUrl);
-                
-                $image = Image::fromFile($imgUrl);
-                $image->resize(null, 300, Image::SHRINK_ONLY);
-                
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/blog/' . $return . '/300-' . $form->values->image->name;
-                $image->save($imgUrl);
-                
-                $image = Image::fromFile($imgUrl);
-                $image->resize(null, 50, Image::SHRINK_ONLY);
-                
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/blog/' . $return . '/50-' . $form->values->image->name;
-                $image->save($imgUrl);
-            }
+           $this->productModel->insertPhotoAlbum($form->values->name, '', null, $return);
 
             
-          $this->redirect('Blog:post', $return);
+           $this->redirect('Blog:post', $return);
         }
     }
     
@@ -267,7 +239,6 @@ class BlogPresenter extends BasePresenter {
     public function createComponentAddPhotoForm() {
         if ($this->getUser()->isInRole('admin')) {
             $addPhoto = new Nette\Application\UI\Form;
-            $addPhoto->setRenderer(new BootstrapRenderer);
             $addPhoto->setTranslator($this->translator);
             $addPhoto->addHidden('name', 'name');
             $addPhoto->addHidden('blogID', $this->row['BlogID']);
@@ -276,8 +247,7 @@ class BlogPresenter extends BasePresenter {
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
             $addPhoto->addSubmit('add', 'Add Photo')
-                    ->setAttribute('class', 'btn-primary upl')
-                    ->setAttribute('data-loading-text', 'Uploading...');
+                    ->setAttribute('class', 'btn-primary');
             $addPhoto->onSuccess[] = $this->addPhotoFormSubmitted;
             return $addPhoto;
         }
@@ -464,18 +434,18 @@ class BlogPresenter extends BasePresenter {
     public function actionStaticText($postid) {
 
          if ($this->getUser()->isInRole('admin')) {
-                $name = $this->shopModel->loadPhotoAlbumStatic($postid);
-                $this->row2 = $name->PhotoAlbumID;
+                $this->row2 = $this->shopModel->loadPhotoAlbumStatic($postid);
 
                 $addPhotoStaticForm = $this['addPhotoStaticForm'];
             }
     }
     
     public function renderStaticText($postid) {
-                
+        if ($this->getUser()->isInRole('admin')) {
+            $this->template->album = $this->blog->loadPhotoAlbumStatic($postid);
+        }     
+        $this->template->albumID = $this->row2;
         $this->template->post = $this->shopModel->loadStaticText($postid);
     }
-    
-    
-    
+        
 }
