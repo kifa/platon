@@ -1,28 +1,25 @@
 {block pageheader}
 {if $user->isInRole('admin')}
-<div class="page-header">
-        <h1 n:block="title"><i class="icon-lightbulb"></i> {_"Smart Panel"}<small> {_"Here is all you need!"}</small></h1>
-     
-<div class="row">
-            <div class="span10">
+       <div class="span12 smartPanelBar">
                 <a class="btn" href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_"Orders"}</a> 
                 <a class="btn" href="{plink SmartPanel:warehouse }"><i class="icon-retweet"></i> {_"Warehouse"}</a> 
                 <a class="btn" href="{plink SmartPanel:shipping }"><i class="icon-truck"></i> {_"Shipping"}</a> 
                 <a class="btn" href="{plink SmartPanel:payment }"><i class="icon-money"></i> {_"Payment"}</a> 
                 <a class="btn" href="{plink SmartPanel:stats }"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
             </div>
-        </div>
+     
+<div class="page-header span12">
+        <h1 n:block="title"><i class="icon-lightbulb"></i> {_"Smart Panel"}<small> {_"Here is all you need!"}</small></h1>
 </div>
 
-</div>
 {/if}
 {/block}
 
 {block content}
-<div class="span10"> 
+<div class="span12"> 
     {if $user->isInRole('admin')}
 
-   <div class="tabbable"> <!-- Only required for left/right tabs -->
+   <div class="tabbable span12"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">
           <li class="active"><a href="#overal"  data-toggle="tab">{_'Overal'}</a></li>
           <li><a href="#account"  data-toggle="tab">{_'Account'}</a></li>
@@ -106,14 +103,11 @@
               </div>
           </div>
           <div class="tab-pane" id="account">
-              <div class="span5">
-            <h3><i class="icon-user"></i> {_'Account Info'}</h3>
-            {_'Name'}: {$usr->FirstName}
-              </div>
-            
-            <div class="span10">
+              
+            <div class="span7">
                 <h3><i class="icon-road"></i> {_'Your subscription'} <button class="btn btn-warning"><i class="icon-upload-alt"></i> {_'Upgrade'}</button></h3>
-             <div class="span5">
+            
+           <div class="span5">
                 <span>{_'Products'}:</span>
                 <div class="progress progress-info">
                     <div class="bar" style="width: {$productNumber}%"></div>
@@ -127,7 +121,7 @@
                     <div class="bar" style="width: 60%"></div>
                 </div>
              </div>
-             <div class="span3 alert alert-info">
+             <div class="span5 alert alert-info">
                  <dl class="">
                      <dt><i class="icon-star"></i> {_'Products'}</dt>
                      <dd>{$productNumber} / 100</dd>
@@ -139,21 +133,24 @@
                      <dd>450MB / 600MB</dd>
                      
                  </dl>       
-                 </p>
+                 
              </div>
             </div>
-
+              
+            <div class="span5">
+            <h3><i class="icon-user"></i> {_'Account Info'}</h3>
+            {_'Name'}: {$usr->FirstName}
+              </div>
             <div class="span5">    
                 <h3><i class="icon-lock"></i> {_'Change password'}</h3>
              {*control newUserForm*}
                  {control passwordForm}   
             </div>
           </div>
+            
           <div class="tab-pane" id="shopinfo">
               <h3>{_'Edit your shop info'}</h3>
               <div class="span5">
-                  <strong>{_'Upload your logo'}</strong>
-                  {control addLogoForm}
                   <table n:snippet="shopinfo" class="table table-bordered">
                       <thead>
                         <th>{_'Option'}</th>
@@ -167,13 +164,17 @@
                               <td class="shopinfo-{$id}" n:snippet="shopinfo-{$id}">{$row->Value}</td>
                           </tr>
                               {/foreach}
-                          
                       </tbody>
                   </table>
               </div>
+              <div class="span5">
+              
+                  <strong>{_'Upload your logo'}</strong>
+                  {control addLogoForm}
+              </div>
           </div>
             
-            <div class="tab-pane" id="other">
+         <div class="tab-pane" id="other">
                 <h3>{_'Regenerate Thumbnails'}</h3>
                 <a href="{plink regenerateThumb!}" id="regen" class="btn btn-primary"><i id="gen" class="icon-spinner"></i> <span class="gen">{_'Click to regenerate!'}</span></a>
             </div>

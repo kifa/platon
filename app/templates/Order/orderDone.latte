@@ -170,3 +170,31 @@
 
 {block sidebar}
 {/block}
+
+{block modal}
+<div id="addNote" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-ban-circle"></i> {_'Add Note'}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Add any note to this order'}</p>
+            </div>
+            <div class="modal-footer">
+                
+              {control addNoteForm}
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            </div>
+    </div>
+{/block}
+
+{block script}
+<script>
+ $('#addNoteButton').toggle(function(){
+              $('#addNote').modal('show');
+            },
+            function() {
+                $('#addNote').modal('hide');
+            });  
+    </script>
+{/block}

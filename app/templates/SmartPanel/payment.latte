@@ -1,16 +1,14 @@
 {block pageheader}
 {if $user->isInRole('admin')}
-<div class="page-header">
-<h1 n:block="title"><i class="icon-money"></i> {_'Payment'} <small>{_'Here you see all payment methods.'}</small></h1>
 
-<div class="row">
-            <div class="span10">
+       <div class="span12 smartPanelBar">
                 <a class="btn" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a> |
                 <a class="btn" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
             </div>
-        </div>
-</div>
 
+<div class="page-header span12">
+<h1 n:block="title"><i class="icon-money"></i> {_'Payment'} <small>{_'Here you see all payment methods.'}</small></h1>
+</div>
 {/if}
 {/block}
 

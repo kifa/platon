@@ -78,7 +78,14 @@ margin-left: 0!important;
     visibility:hidden;
 }
 
-.mceEditor {overflow:scroll; max-height:300px} 
+.tab-content {
+    background-color: white;
+    padding: 20px 0px 0px 5px; 
+}
+
+.tabbable > .nav-tabs {
+    margin-bottom: 0;
+}
 
 .lightbox {
 	background-color: transparent;

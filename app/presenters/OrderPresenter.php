@@ -260,6 +260,47 @@ class OrderPresenter extends BasePresenter {
         return $cartForm;
     }
 
+    
+    protected function createComponentAddNoteForm() {
+        
+               
+        $editProducts = new Nette\Application\UI\Form;
+        $editProducts->setTranslator($this->translator);
+       // $editProducts->setRenderer(new BootstrapRenderer);
+        $editProducts->addHidden('orderID', $this->orderNo);
+        $editProducts->addHidden('userName', '');
+        $editProducts->addTextArea('note', 'Your Note:')
+                ->setRequired();  
+        $editProducts->addSubmit('add' , 'Add note')
+                ->setAttribute('class', 'btn-primary upl')
+                    ->setAttribute('data-loading-text', 'Adding...');
+        $editProducts->onSuccess[] = $this->addNoteFormSubmitted;
+        return $editProducts;
+                
+        
+    }
+    
+    public function addNoteFormSubmitted($form) {
+         
+          
+            $this->orderModel->addNote($form->values->orderID, $form->values->userName, $form->values->note);
+           
+            try {
+                    $this->sendNoteMail($form->values->orderID, $form->values->note);
+                }
+            catch (Exception $e) {
+                   \Nette\Diagnostics\Debugger::log($e);
+            }
+             
+            $message = Html::el('span', ' Note was sucessfully added!');
+            $e = Html::el('i')->class('icon-ok-sign left');
+            $message->insert(0, $e);
+            $this->flashMessage($message, 'alert');
+            $this->redirect('this');
+         
+    }
+    
+    
     /*
      * Getting values from CartForm
      * 
@@ -395,6 +436,7 @@ class OrderPresenter extends BasePresenter {
                     Debugger::log($e);
             }
        } 
+       $this->orderNo = $orderNo;
     }
     
     protected function createComponentMail() {

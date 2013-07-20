@@ -184,7 +184,18 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         return $mailControl;
     }
     
+    protected function createComponentSmartPanelBar() {
+        $smartPanelBar = newSmartPanelBarControl();
+        $smartPanelBar->setTranslator($this->translator);
+        $smartPanelBar->setProduct($this->productModel);
+        $smartPanelBar->setCategory($this->categoryModel);
+        $smartPanelBar->setBlog($this->blogModel);
+        $smartPanelBar->setShop($this->shopModel);
+        return $smartPanelBar;
+    }
+
     
+
     protected function createComponentAddCategoryForm() {
         if ($this->getUser()->isInRole('admin')) {
 
