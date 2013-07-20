@@ -72,18 +72,18 @@
     </div>
        {block #bread}{/block}
 
-
-    <div id="content" class="row-fluid"> 
-        
-    <div class="span10" n:snippet="content">
-       
-        {snippet flashMessages}   
+{snippet flashMessages}   
             {foreach $flashes as $flash}
                <div class="{$flash->type} span12">
                    <button type="button" class="close" data-dismiss="alert">&times;</button>
              {$flash->message}</div>
              {/foreach}
              {/snippet}
+    <div id="content" class="row-fluid"> 
+        
+    <div class="span10" n:snippet="content">
+       
+        
         
         {block #pageheader}
 

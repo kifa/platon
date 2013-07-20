@@ -4,6 +4,18 @@
         Hello <strong>{$user->id}!</strong> <br><a href="{plink SmartPanel:}"><i class="icon-lightbulb"></i> SmartPanel</a> | 
         <a href="{plink SmartPanel:default}">{_"News"} <span class="badge badge-info"><i class="icon-envelope"></i> 2</span></a> |
         <a href="{plink Sign:out}">{_"Logout"} <i class="icon-signout"></i></a>
+        <div class="margin5 span3 pull-right btn-group">
+        <a class="btn pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-screenshot"></i> {_'Set layout:'}
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a n:href="setShopInfo! ''" >layout 1</a></li>
+            <li><a n:href="setShopInfo! 2" >layout 2</a></li>
+            <li><a n:href="setShopInfo! 3" >layout 3</a></li>
+            <li><a n:href="setShopInfo! 4" >layout 4</a></li>
+        </ul>
+    </div>
         {else}
         <a href="{plink Order:cart}"><i class="icon-large icon-shopping-cart"></i> {_"Cart"} {if $cart > 0}<span class="badge badge-info">{$cart}</span>{else}<span class="badge">0</span>{/if}</a> |
         <a href="#tracking" data-toggel="modal" data-target="#tracking" id="trackingButton"><i class="icon-large icon-search"></i> {_"Track order"}</a> |

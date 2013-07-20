@@ -83,6 +83,13 @@ class MenuControl extends BaseControl {
        
     }
     
+    public function handleSetShopInfo($id) {
+        if ($this->parent->getUser()->isInRole('admin')) {   
+              $this->shopModel->setShopInfo('CatalogLayout', $id);
+                 $this->redirect('this');
+          }
+    }
+    
     public function renderAdmin() {
         if($this->parent->getUser()->isInRole('admin')){
         $this->template->setFile(__DIR__.'/MenuAdminControl.latte');

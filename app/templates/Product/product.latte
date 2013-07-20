@@ -5,10 +5,10 @@
 {/block}
 {block pageheader}
 {if $user->isInRole('admin')}
-      <div class="alert alert-error"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?'}</div>
 
-    <div class="row">
-        <div class="span10">
+    <div class="span12">
+             <div class="alert alert-error span12"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?'}</div>
+
             <div class="btn-group">
                 <a class="btn"><i class="icon-sitemap"></i> {_'Choose Category'}</a>
                 <button class="btn dropdown-toggle" data-toggle="dropdown">
@@ -58,7 +58,6 @@
             </div>
             <a href="#" class="btn" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
         </div>
-    </div>
 {/if}
 
 <div class="page-header" n:snippet="page-header">
@@ -81,12 +80,12 @@
 {/block}
 
 {block content}
-<div class="span10">
+<div class="span12">
     <div class="span5">
         <img src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$photo->PhotoURL}" class="img-polaroid margin5"/>
     </div>
-    <div class="span4">
-        <div class="tabbable span4">
+    <div class="span6">
+        <div class="tabbable span9 pull-right">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#info" data-toggle="tab"><i class="icon-info-sign"></i> {_'Info'}</a></li>
                 <li><a href="#spec" data-toggle="tab"><i class="icon-list"></i> {_'Spec'}</a></li>
@@ -119,7 +118,7 @@
                                <li n:foreach="$form->errors as $error">{$error}</li>
                        </ul>
                     <span class="help-block"><i class="icon-info-sign"></i> {_'We will respond as soon as possible.'}</span>
-                    <fieldset class="span3">
+                    <fieldset class="span12">
                            {label note /}
                            {input note}
 
@@ -138,20 +137,20 @@
             </div>
         </div>
 
-        <div class=".span4 alert alert-info">
+        <div class="span9 pricetag alert alert-info pull-right">
             
               {if $user->isInRole('admin')}
-            <div class="btn-group span3 margin5">
+            <div class="btn-group span12 margin5">
               <button class="btn" id="editPriceOff" class="hide" style="display: none;">{_'Finish Editing Price'}</button>
               <button class="btn" id="editPrice">{_'Edit Price'}</button> 
             </div>
               {/if}
             
             
-            <div n:snippet="prodPrice">
+            <div n:snippet="prodPrice" class="span8">
               {if $user->isInRole('admin')}
                 
-               <div id="editProdPrice" class="hide span3">
+               <div id="editProdPrice" class="hide span12">
                 <p>{_'Discount'}:</p>
                      <div class="btn-group">
 
@@ -163,10 +162,10 @@
                  {control editPriceForm}
                 </div>
               {/if}
-             <div id="prodPrice">
+             <div id="prodPrice" class="span5">
  
             {if $product->SALE > 1}
-            <p class=".span2 alert alert-warning" n:snippet="prodSale">
+            <p class="span12 alert alert-warning" n:snippet="prodSale">
                 <i class="icon-money icon-large"></i>
 
                 <span class="badge badge-important">- {$product->SALE},- / {var $procent = 100 * ($product->SALE / $product->SellingPrice)} {$procent|number}%</span>
@@ -174,120 +173,207 @@
             </p>
             {/if}
 
-            <h2 class="text-info span3"><span class="prodPrice" >{$product->FinalPrice}</span>,- </h2>
-            <a href="{plink Order:cart $product->ProductID, "1"}" class="span2 btn btn-primary">
+            <h2 class="text-info span12"><span class="prodPrice" >{$product->FinalPrice}</span>,- </h2>
+
+            </div>
+                            <a href="{plink Order:cart $product->ProductID, "1"}" class="span8 btn btn-primary">
                 <i class="icon-shopping-cart"></i> {_'Buy'}</a>
 
             </div>
-            </div>
                 
                 
-            <div class="span2 clearfix">
-                <p class="">{_"In stock"}:
+            <div class="span3 text-center">
                     {if $product->PiecesAvailable >= 5}
-                    <span class="badge badge-info">
+                    <span class="badge badge-info span12">
                     {elseif $product->PiecesAvailable < 5 && $product->PiecesAvailable > 0}
-                        <span class="badge badge-warning">
-                    {elseif $product->PiecesAvailable = 0 }
-                            <span class="badge">
+                        <span class="badge badge-warning span12">
+                    {elseif $product->PiecesAvailable < 1 }
+                            <span class="badge badge-inverse span12">
                         {/if}
-                               <span class="prodAmount span1" n:snippet="prodAmount">{$product->PiecesAvailable}</span></span>
-                            </p>
+                                <span class="span12 text-center">{_"In stock"}</span> <span class="prodAmount span12 text-center" n:snippet="prodAmount">{$product->PiecesAvailable}</span></span>
+                           
 
                             </div>
-                            </div>
-                            </div>
+        </div>
+        </div>
 
-                            <div class="tabbable span9">
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#allinfo" data-toggle="tab"><i class="icon-info-sign"></i> Info</a></li>
-                                    <li><a href="#gal" data-toggle="tab"><i class="icon-camera-retro"></i> Gallery</a></li>
-                                    <li><a href="#vid" data-toggle="tab"><i class="icon-facetime-video"></i> Video</a></li>
-                                    <li><a href="#rew" data-toggle="tab"><i class="icon-check"></i> Review</a></li>
-                                    <li><a href="#docs" data-toggle="tab"><i class="icon-download"></i> Docs</a></li>
-                                </ul>
-                                <div class="tab-content">
-                                     <div class="tab-pane active" id="allinfo" >
-                                        <div class="prodDescription" n:snippet="prodDescription">{!$product->ProductDescription}</div>
-                                    </div>
+               
+    
+    
+    
+    
+    <div class="span12">
+        <h3 class="span12"><i class="icon-info-sign"></i> {_'Information about product'}</h3>
+        <div class="span8">
+         <div class="prodDescription span12 text-justified" n:snippet="prodDescription">{!$product->ProductDescription}</div>
+         
+         <div class="span12 product-gallery">
+           
+    <div class="span12">
+            {if $user->isInRole('admin')}
 
-                                    <div class="tab-pane" id="gal">
+                                {form addPhotoForm class => 'span9'}
+                                {label image /}
+                                {input image}
+
+                                {input add}
+
+                                {/form}
+                                {/if}
+         </div>
+                <ul class="thumbnails span12">
+                 {foreach $album as $id => $photo}
+                                <li class="span10 thumbnail imgLiquid" style="height: 250px; width: 250px;">
+                                        <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}">
+                                    {if $user->isInRole('admin')}
+                                       {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> Set as COVER image</a> {/if}
+                                    <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> {_'Delete image'}</a>
+                                      {/if}
+                                </li>
+
+                         {/foreach}
+                
+                    {*foreach $album as $id => $photo}
+                                <li class="span3">
+                                    <a data-toggle="lightbox" href="#photo{$id}" class="thumbnail imgLiquid" style="height: 90px; width: 90px;">
+                                        <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}">
+                                    </a>
+                                    {if $user->isInRole('admin')}
+                                       {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> Set as COVER image</a> {/if}
+                                    <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> {_'Delete image'}</a>
+                                      {/if}
+                                </li>
+
+                                {var $src = $basePath . '/images/' . $product->PhotoAlbumID .'/'.$photo->PhotoURL}
+                                {control modalControl:gallery $id, $product->ProductName, $src }
+
+                         {/foreach*}
+                   </ul>
+                        <div class="span12">
+                            <iframe class="span10 " src="http://www.youtube.com/embed/qN3EXAFRxKQ?rel=0" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        </div>
+
+        </div>
+        
+        <div class="span3">
+        <div class="span12 product-info-box">
+            <strong><i class="icon-download"></i> {_'Docs'}</strong>
+            <div class="span12">
+            {if $docs}
+                <ul class="nav">
+                {foreach $docs as $id => $doc}
+                <li><a href="{$basePath}/docs/{$product->ProductID}/{$doc->DocumentURL}" title="{_'Download'} {$doc->DocumentName}"><i class="icon-download" ></i> {$doc->DocumentName}</a>- {$doc->DocumentDescription}
+                                   {if $user->isInRole('admin')}
+                        <a href="{link deleteDocument! $product->ProductID, $doc->DocumentID}"><i class="icon-trash" ></i> {_'Delete document'}</a></li>
+                                      {/if}
+                              {/foreach}
+                </ul>
+                {/if}
+            </div>
+            <div class="span12">
+             {if $user->isInRole('admin')}
+                     {control addDocumentationForm}
+                                {/if}
+            </div>
+        </div>
+        <div class="span12 product-info-box">
+            <strong><i class="icon-check"></i> {_'Review'}</strong>
+        </div>
+        </div>
+                    </div>
+    
+    
+    
+    
+    {*
+    
+    <div class="tabbable span9">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#allinfo" data-toggle="tab"><i class="icon-info-sign"></i> {_'Info'}</a></li>
+                        <li><a href="#gal" data-toggle="tab"><i class="icon-camera-retro"></i> {_'Gallery'}</a></li>
+                        <li><a href="#vid" data-toggle="tab"><i class="icon-facetime-video"></i> {_'Video'}</a></li>
+                        <li><a href="#rew" data-toggle="tab"><i class="icon-check"></i> {_'Review'}</a></li>
+                        <li><a href="#docs" data-toggle="tab"><i class="icon-download"></i> {_'Docs'}</a></li>
+                    </ul>
+                    <div class="tab-content">
+                         <div class="tab-pane active" id="allinfo" >
+                            <div class="prodDescription" n:snippet="prodDescription">{!$product->ProductDescription}</div>
+                        </div>
+
+                        <div class="tab-pane" id="gal">
 
 
-                                        <ul class="thumbnails">
-                                            {if $user->isInRole('admin')}
-                                            
-                                            {form addPhotoForm class => 'span9'}
-                                            {label image /}
-                                            {input image}
-                                           
-                                            {input add}
-                                           
-                                            {/form}
-                                            {/if}
-                                {foreach $album as $id => $photo}
-                                            <li class="{if $photo->CoverPhoto}span3 {else} span3 {/if}">
-                                                <a data-toggle="lightbox" href="#photo{$id}" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
-                                                    <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}">
-                                                </a>
-                                                {if $user->isInRole('admin')}
-                                                   {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> Set as COVER image</a> {/if}
-                                                <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> Delete image</a>
-                                                  {/if}
-                                            </li>
+                            <ul class="thumbnails">
+                                {if $user->isInRole('admin')}
 
-                                            {var $src = $basePath . '/images/' . $product->PhotoAlbumID .'/'.$photo->PhotoURL}
-                                            {control modalControl:gallery $id, $product->ProductName, $src }
+                                {form addPhotoForm class => 'span9'}
+                                {label image /}
+                                {input image}
 
-                                     {/foreach}
-                                        </ul>
+                                {input add}
 
+                                {/form}
+                                {/if}
+                    {foreach $album as $id => $photo}
+                                <li class="{if $photo->CoverPhoto}span3 {else} span3 {/if}">
+                                    <a data-toggle="lightbox" href="#photo{$id}" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
+                                        <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}">
+                                    </a>
+                                    {if $user->isInRole('admin')}
+                                       {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> Set as COVER image</a> {/if}
+                                    <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> Delete image</a>
+                                      {/if}
+                                </li>
 
+                                {var $src = $basePath . '/images/' . $product->PhotoAlbumID .'/'.$photo->PhotoURL}
+                                {control modalControl:gallery $id, $product->ProductName, $src }
 
+                         {/foreach}
+                            </ul>
 
+                        </div>
+                        <div class="tab-pane" id="vid">
+                            <iframe width="853" height="480" src="http://www.youtube.com/embed/qN3EXAFRxKQ?rel=0" frameborder="0" allowfullscreen></iframe>
+                        </div>
 
-                                    </div>
-                                    <div class="tab-pane" id="vid">
-                                        <iframe width="853" height="480" src="http://www.youtube.com/embed/qN3EXAFRxKQ?rel=0" frameborder="0" allowfullscreen></iframe>
-                                    </div>
-                                   
-                                    <div class="tab-pane" id="docs">
-                                        {if $user->isInRole('admin')}
-                                            <div class="span8">
-                                        {control addDocumentationForm}</div>
-                                            {/if}
-                                         {if $docs}       
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>{_'Name'}</th>
-                                                    <th>{_'Description'}</th>
-                                                    <th>{_'Download link'}</th>
-                                                 {if $user->isInRole('admin')}
-                                                    <th></th>    
-                                                {/if}
-                                                </tr>
-                                            </thead>
-                                        {foreach $docs as $id => $doc}
-                                            <tbody>
-                                                <tr>
-                                                    <td>{$id}</td>
-                                                    <td>{$doc->DocumentName}</td>
-                                                    <td>{$doc->DocumentDescription}</td>
-                                                    <td><a href="{$basePath}/docs/{$product->ProductID}/{$doc->DocumentURL}" title="{_'Download'} {$doc->DocumentName}"><i class="icon-download" ></i> {$doc->DocumentURL}</a></td>
-                                               {if $user->isInRole('admin')}
-                                                    <td><a href="{link deleteDocument! $product->ProductID, $doc->DocumentID}"><i class="icon-trash" ></i> Delete document</a></td>
-                                                  {/if}
-                                          {/foreach}
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        {/if}
-                                    </div>
-                                    
-                                </div>
-                            </div>
+                        <div class="tab-pane" id="docs">
+                            {if $user->isInRole('admin')}
+                                <div class="span8">
+                            {control addDocumentationForm}</div>
+                                {/if}
+                             {if $docs}       
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>{_'Name'}</th>
+                                        <th>{_'Description'}</th>
+                                        <th>{_'Download link'}</th>
+                                     {if $user->isInRole('admin')}
+                                        <th></th>    
+                                    {/if}
+                                    </tr>
+                                </thead>
+                            {foreach $docs as $id => $doc}
+                                <tbody>
+                                    <tr>
+                                        <td>{$id}</td>
+                                        <td>{$doc->DocumentName}</td>
+                                        <td>{$doc->DocumentDescription}</td>
+                                        <td><a href="{$basePath}/docs/{$product->ProductID}/{$doc->DocumentURL}" title="{_'Download'} {$doc->DocumentName}"><i class="icon-download" ></i> {$doc->DocumentURL}</a></td>
+                                   {if $user->isInRole('admin')}
+                                        <td><a href="{link deleteDocument! $product->ProductID, $doc->DocumentID}"><i class="icon-trash" ></i> Delete document</a></td>
+                                      {/if}
+                              {/foreach}
+                                    </tr>
+                                </tbody>
+                            </table>
+                            {/if}
+                        </div>
+
+                    </div>
+                </div> *}
 
     </div> <!-- class="span10" -->
 {/block}
