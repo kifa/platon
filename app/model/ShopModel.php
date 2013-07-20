@@ -61,6 +61,13 @@ class ShopModel extends Repository {
               );
             
         }
+        elseif ($name == 'ProductMiniLayout') {
+            $update = array(
+                'Value' => "ProductMini" . $value
+              );
+            
+        }
+        
         else {
             $update = array(
               'Value' => $value  

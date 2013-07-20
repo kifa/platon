@@ -576,7 +576,8 @@ INSERT INTO `settings` (`SettingID`, `SettingName`, `Value`) VALUES
 (9,	'ContactMail',	'jiri.kifa@gmail.com'),
 (10,	'ContactPhone',	'+420333444'),
 (11,	'CompanyAddress',	'Zdice 18, U hřibitova 34567'),
-(12,	'InvoicePrefix',	'2013');
+(12,	'InvoicePrefix',	'2013'),
+(13,	'ProductMiniLayout',	'ProductMini4');
 
 DROP TABLE IF EXISTS `statictext`;
 CREATE TABLE `statictext` (
@@ -690,4 +691,4 @@ INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`
 ('xxx@xxx.xxx',	NULL,	'testx',	21313123,	NULL,	NULL,	'user'),
 ('yetty@himalaja.tib',	NULL,	'Yetty',	0,	NULL,	NULL,	'user');
 
--- 2013-07-20 22:00:40
+-- 2013-07-20 22:46:54

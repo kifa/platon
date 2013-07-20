@@ -1060,6 +1060,7 @@ class ProductPresenter extends BasePresenter {
         $productControl->setCategory($this->categoryModel);
         $productControl->setBlog($this->blogModel);
         $productControl->setRow($this->row);
+        $productControl->setShop($this->shopModel);
         return $productControl;
     }
 

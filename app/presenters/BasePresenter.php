@@ -171,6 +171,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $productControl->setProduct($this->productModel);
         $productControl->setCategory($this->categoryModel);
         $productControl->setBlog($this->blogModel);
+        $productControl->setShop($this->shopModel);
+
         return $productControl;
     }
     

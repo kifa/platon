@@ -19,7 +19,9 @@ class productControl extends BaseControl{
     private $categoryModel;
     private $productModel;
     private $blogModel;
-    
+    private $shopModel;
+
+
     private $parameters;
 
     private $row;
@@ -41,6 +43,11 @@ class productControl extends BaseControl{
     public function setProduct($pro) {
         $this->productModel = $pro;
     }
+    
+    public function setShop($shop) {
+        $this->shopModel = $shop;
+    }
+    
     
     public function setRow($row) {
         $this->row = $row;
@@ -619,7 +626,9 @@ class productControl extends BaseControl{
      */
     
     public function renderProductMini($id) {
-        $this->template->setFile(__DIR__ . '/productMiniControl.latte');    
+        $layout = $this->shopModel->getShopInfo('ProductMiniLayout');
+       
+        $this->template->setFile(__DIR__ . '/' . $layout . '.latte');    
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->render();
     }
