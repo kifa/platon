@@ -48,9 +48,16 @@ class ShopModel extends Repository {
     
     public function setShopInfo($name, $value)
     {
-        if ($name == 'CatalogLayout') {
+        if ($name == 'ShopLayout') {
             $update = array(
                 'Value' => "layout" . $value
+              );
+            
+        }
+        
+        elseif ($name == 'ProductLayout') {
+            $update = array(
+                'Value' => "product" . $value
               );
             
         }

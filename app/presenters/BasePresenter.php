@@ -122,7 +122,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->template->shopDescription = $this->shopModel->getShopInfo('Description');
         $this->template->shopLogo = $this->shopModel->getShopInfo('Logo');
         // set theme layout
-        $this->setLayout($this->shopModel->getShopInfo('CatalogLayout'));
+        $this->setLayout($this->shopModel->getShopInfo('ShopLayout'));
         
         if ($this->isAjax()) {
         $this->invalidateControl('flashMessages');

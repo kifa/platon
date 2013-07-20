@@ -1064,7 +1064,9 @@ class ProductPresenter extends BasePresenter {
     }
 
     public function renderProduct($id) {
-
+        $layout = $this->shopModel->getShopInfo('ProductLayout');
+        
+       $this->template->setFile( $this->context->parameters['appDir'] . '/templates/Product/'  . $layout . '.latte'); 
        if ($this->presenter->getUser()->isInRole('admin')) { 
             if ($this->edit->param != NULL) {
                 $this->template->attr = 1;

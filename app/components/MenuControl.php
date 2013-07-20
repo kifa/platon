@@ -83,9 +83,9 @@ class MenuControl extends BaseControl {
        
     }
     
-    public function handleSetShopInfo($id) {
+    public function handleSetShopInfo($layout, $id) {
         if ($this->parent->getUser()->isInRole('admin')) {   
-              $this->shopModel->setShopInfo('CatalogLayout', $id);
+              $this->shopModel->setShopInfo($layout, $id);
                  $this->redirect('this');
           }
     }
