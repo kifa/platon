@@ -8,20 +8,19 @@
 
 
 {block content}
-<div class="span9 miniproduct thumbnail">
-       <div class="row">
-           <div class="span8 alert alert-block">
-                <div class="span8">
+<div class="span12 miniproduct thumbnail row">
+      <div class="span8 alert alert-block">
+                <div class="span12">
                     <p>
                     <i class="icon-spinner progress-striped icon-spin left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
                 {$order->StatusName}
                     </p>
                 </div>
                 <br>
-                <div class="progress progress-striped active span7">
+                <div class="progress progress-striped active span10">
                     <div class="bar" style="width: 20%"></div>
                 </div>
-                <div class="span8">
+                <div class="span12">
                 <ul class="inline">
                     <li>{_'Next progress'}:</li>
                     {foreach $statuses as $id => $status}
@@ -33,8 +32,26 @@
                   </ul>
                 </div>
             </div>
+    
+    <div class="span4">
+    <div class="span12">
+<div class="alert alert-block">
+    <p><i class="icon-info-sign"></i><strong> {_'Thank you for your order!'}</strong><br>
+    {_'We are currenty procesing your order. On this page you can see all info about
+    your order, including current progress.'}
+    </p>
+
+</div>
+<div class="alert alert-block">
+    <p><i class="icon-envelope"></i><strong> {_'Questions?'}</strong>
+        <a href="#" class="btn btn-info">{_'Ask anything!'}</a>
+    </p>
+</div>
+</div>
+
+    </div>
            
-            <table class="table table-hover span8">
+            <table class="table table-hover span12">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -76,12 +93,10 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-         
-    <div class="row">
-        
+    
+    <div class="span12">        
           <div class="span4 alert alert-info">
-            <div class="span4">
+            <div class="span12">
             <i class="icon-user left icon-large"></i><strong> {_'Your contact'}:</strong>
             <p>
                 <dl>
@@ -101,21 +116,21 @@
         
             <div class="span3 alert alert-info">
 
-                <div class="span4">
+                <div class="span12">
                     <p>
                     <i class="icon-calendar icon-large left"></i><strong> {_'Date created'}:</strong>&nbsp;
                 {$order->DateCreated|date:'%d.%m.%Y'}
                     </p>
                 </div>
 
-                <div class="span4">
+                <div class="span12">
                     <p>
                     <i class="icon-truck icon-large left"></i><strong> {_'Shipping'}:</strong>&nbsp;
                 {$order->DeliveryName}
                     </p>
                 </div>
                 <br>
-                <div class="span4">
+                <div class="span12">
                     <p>
                     <i class="icon-money icon-large left"></i><strong> {_'Payment'}:</strong>&nbsp;
                 {$order->PaymentName}
@@ -126,7 +141,7 @@
           
 
         <div class="span4 alert alert-info">
-            <div class="span4">
+            <div class="span12">
                  <i class="icon-home left icon-large"></i><strong> {_'Your address'}:</strong>
             <dl>
               
@@ -137,9 +152,10 @@
                  
             </div>
         </div>
-        
+        </div>
+    <div class="span12">
         <div class="span3 alert {$order->Note ? 'alert-block' : 'alert-info'}">
-            <div class="span3">
+            <div class="span12">
                 <i class="icon-paper-clip left icon-large"></i><strong> {_'Note'}:</strong>
                     {foreach $notes as $note}
                 <p>{$note->NotesName} - {$note->NotesDescription} - {$note->NotesDate}</p>
@@ -147,24 +163,10 @@
                  <a class="btn" href="#addNote" data-toggel="modal" data-target="#addNote" id="addNoteButton"><i class="icon-large icon-plus-sign"></i> {_"Add note"}</a> 
             </div>
         </div>
+    </div>
             </div>
-        </div>
 
 {/block}
 
 {block sidebar}
-<div class="span2">
-<div class="alert alert-block">
-    <p><i class="icon-info-sign"></i><strong> {_'Thank you for your order!'}</strong><br>
-    {_'We are currenty working on your order. On this page you can see all info about
-    your order, including current progress.'}
-    </p>
-
-</div>
-<div class="alert alert-block">
-    <p><i class="icon-envelope"></i><strong> {_'Questions?'}</strong>
-        <a href="#" class="btn btn-info">{_'Ask anything!'}</a>
-    </p>
-</div>
-</div>
 {/block}
