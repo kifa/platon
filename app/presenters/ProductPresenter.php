@@ -1010,13 +1010,16 @@ class ProductPresenter extends BasePresenter {
     protected function createComponentAddDocumentationForm() {
         if ($this->getUser()->isInRole('admin')) {
             $addPhoto = new Nette\Application\UI\Form;
-            $addPhoto->setRenderer(new BootstrapRenderer);
             $addPhoto->setTranslator($this->translator);
-            $addPhoto->addText('name', 'Name:');
+            $addPhoto->addText('name', 'Name:')
+                    ->setRequired('Please fill document name')
+                    ->setAttribute('class', 'span10');
             $addPhoto->addHidden('productid', $this->row['ProductID']);
             $addPhoto->addUpload('doc', 'Document:')
-                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
-            $addPhoto->addText('desc', 'Description', 20, 100);
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024)
+                    ->setAttribute('class', 'span10');
+            $addPhoto->addText('desc', 'Description', 20, 100)
+                    ->setAttribute('class', 'span10');
             $addPhoto->addSubmit('add', 'Add Document')
                     ->setAttribute('class', 'btn-primary upl')
                     ->setAttribute('data-loading-text', 'Uploading...');

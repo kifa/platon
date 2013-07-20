@@ -84,8 +84,9 @@
     <div class="span5">
         <img src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$photo->PhotoURL}" class="img-polaroid margin5"/>
     </div>
+    
     <div class="span6">
-        <div class="tabbable span9 pull-right">
+        <div class="tabbable span12 pull-right">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#info" data-toggle="tab"><i class="icon-info-sign"></i> {_'Info'}</a></li>
                 <li><a href="#spec" data-toggle="tab"><i class="icon-list"></i> {_'Spec'}</a></li>
@@ -137,7 +138,8 @@
             </div>
         </div>
 
-        <div class="span9 pricetag alert alert-info pull-right">
+    </div>
+    <div class="span6 pricetag alert alert-info margin5 ">
             
               {if $user->isInRole('admin')}
             <div class="btn-group span12 margin5">
@@ -194,7 +196,6 @@
                            
 
                             </div>
-        </div>
         </div>
 
                
