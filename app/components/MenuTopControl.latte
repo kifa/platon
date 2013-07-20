@@ -48,6 +48,23 @@
     </div
 
 {/ifCurrent}
+    
+    
+{ifCurrent Homepage:default}
+<div class="margin5 span3 pull-right btn-group">
+        <a class="btn pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-screenshot"></i> {_'Set products layout:'}
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a n:href="setShopInfo! 'ProductMiniLayout', ''" >layout 1</a></li>
+            <li><a n:href="setShopInfo! 'ProductMiniLayout', 2" >layout 2</a></li>
+            <li><a n:href="setShopInfo! 'ProductMiniLayout', 3" >layout 3</a></li>
+            <li><a n:href="setShopInfo! 'ProductMiniLayout', 4" >layout 4</a></li>
+        </ul>
+    </div
+
+{/ifCurrent}
 
     
         {else}
