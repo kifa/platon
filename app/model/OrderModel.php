@@ -311,7 +311,9 @@ class OrderModel extends Repository {
     public function loadPayment($id, $switch=NULL){
         if($switch==NULL){
             if($id==''){
-                return $this->getTable('payment')->select('payment.*, status.*')->fetchPairs('PaymentID');
+                return $this->getTable('payment')->select('payment.*, status.*')
+                        ->where('status.StatusName = ? OR status.StatusName = ?','active','non-active')
+                        ->fetchPairs('PaymentID');
             }
             else
             {
@@ -320,7 +322,8 @@ class OrderModel extends Repository {
         }
         elseif ($switch=='active') {
              if($id==''){
-                return $this->getTable('payment')->select('payment.*, status.*')->where('status.StatusName',$switch)->fetchPairs('PaymentID');
+                return $this->getTable('payment')->select('payment.*, status.*')
+                        ->where('status.StatusName',$switch)->fetchPairs('PaymentID');
             }
             else
             {

@@ -48,7 +48,7 @@ class BlogPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
                 $this->row = array('BlogID' => $row->BlogID,
                     'BlogName' => $row->BlogName,
-                    'PhotoAlbumID' => $row2->PhotoAlbumID,
+                    'PhotoAlbumID' => $row2,
                     'BlogContent' => $row->BlogContent,
                     'CategoryID' => $row->CategoryID);
 
