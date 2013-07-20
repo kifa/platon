@@ -421,13 +421,17 @@ class OrderPresenter extends BasePresenter {
         $this->flashMessage($message, 'alert alert-info');
         
         if($track == NULL) {
-        foreach ($this->cart->prd as $id => $amnt) {
+            foreach ($this->cart->prd as $id => $amnt) {
 
-            $this->productModel->decreaseProduct($id, $this->cart->prd[$id]);
-           }
-           
-        unset($this->cart->prd);
-        $this->cart->numberItems = 0;
+                $this->productModel->decreaseProduct($id, $this->cart->prd[$id]);
+               }
+
+            unset($this->cart->prd);
+            $this->cart->numberItems = 0;
+            $this->template->track = NULL;
+        }
+        else{
+            $this->template->track = 1;
         }
     }
    

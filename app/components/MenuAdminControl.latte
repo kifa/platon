@@ -1,4 +1,4 @@
-{if $user->isLoggedIn()}
+{if $user->isInRole('admin')}
 <ul class="nav nav-list">
         <li class="nav-header"><a href="{plink SmartPanel:default}"><i class="icon-lightbulb icon-large"></i> Smart Panel</a></li>
         

@@ -107,7 +107,8 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             // load all products
             $row = $this->productModel->loadCatalogAdmin($catID);
-            $editCategoryForm = $this['editCategoryForm'];
+            $this->categoryParam = $catID;
+            
             $addCategoryForm = $this['addCategoryForm'];
         } 
         else {
@@ -162,16 +163,16 @@ class ProductPresenter extends BasePresenter {
             $addProduct->addText('name', 'Name:')
                     ->setRequired()
                     ->setAttribute('placeholder', "Enter product name…")
-                    ->setAttribute('class', '.span3');
+                    ->setAttribute('class', 'span10');
             $addProduct->addText('price', 'Price:')
                     ->setRequired()
                     ->addRule(FORM::FLOAT, 'It has to be a number!')
-                    ->setAttribute('class', 'span2');
+                    ->setAttribute('class', 'span10');
             $addProduct->addText('amount', 'Amount')
                     ->setDefaultValue('1')
                     ->addRule(FORM::INTEGER, 'It has to be a number!')
                     ->setRequired()
-                    ->setAttribute('class', 'span2');
+                    ->setAttribute('class', 'span7');
             $addProduct->addHidden('cat', $this->catId);
             $addProduct->addUpload('image', 'Image:')
                     ->addCondition(Form::FILLED)                    
@@ -289,53 +290,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    protected function createComponentEditCategoryForm() {
-        if ($this->getUser()->isInRole('admin')) {
-
-            $editForm = new Nette\Application\UI\Form;
-            $editForm->setTranslator($this->translator);
-
-            $editForm->setRenderer(new BootstrapRenderer);
-
-            foreach ($this->categoryModel->loadCategoryListAdmin() as $id => $category) {
-                $categories[$id] = $category->CategoryName;
-            }
-            $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
-
-            $editForm->addText('name', 'Name:')
-                    ->setRequired()
-                    ->setDefaultValue($this->categoryParam['CategoryName']);
-            $editForm->addTextArea('text', 'Description:', 150, 150)
-                    ->setDefaultValue($this->categoryParam['CategoryDescription'])
-                    ->setRequired()
-                    ->setAttribute('class', 'mceEditor');
-            $editForm->addSelect('parent', 'Parent Category:', $categories)
-                    ->setPrompt($prompt)
-                    ->setDefaultValue($this->categoryParam['HigherCategoryID']);
-            $editForm->addHidden('id', $this->categoryParam['CategoryID']);
-            $editForm->addSubmit('edit', 'Save description')
-                    ->setAttribute('class', 'upl btn btn-primary')
-                    ->setAttribute('data-loading-text', 'Saving...');
-            $editForm->onSubmit('tinyMCE.triggerSave()');
-            $editForm->onSuccess[] = $this->editCategoryFormSubmitted;
-            return $editForm;
-        }
-    }
-
-    public function editCategoryFormSubmitted($form) {
-        if ($this->getUser()->isInRole('admin')) {
-
-            $this->categoryModel->updateCategory($form->values->id, $form->values->name, $form->values->text, $form->values->parent, 1);
-
-            if (!$this->isAjax()) {
-                $this->redirect('this');
-            } else {
-               // $form->setValues(array(), TRUE);
-                $this->invalidateControl('categoryInfoForm');
-                $this->invalidateControl('categoryInfo');
-            }
-        }
-    }
+    
     
     public function handleEditCatTitle($catid) {
         if($this->getUser()->isInRole('admin')){
@@ -608,21 +563,20 @@ class ProductPresenter extends BasePresenter {
 
             $deleteForm = new Nette\Application\UI\Form;
             $deleteForm->setTranslator($this->translator);
-            $deleteForm->setRenderer(new BootstrapRenderer);
 
             foreach ($this->categoryModel->loadCategoryListAdmin() as $id => $category) {
                 $categories[$id] = $category->CategoryName;
             }
             $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
 
-            $deleteForm->addHidden('id', $this->categoryParam['CategoryID']);
+            $deleteForm->addHidden('id', $this->categoryParam);
             $deleteForm->addSelect('parent', 'Move products to category:', $categories)
                     ->setPrompt($prompt)
                     ->setRequired();
             $deleteForm->addSubmit('edit', 'Delete Category')
                     ->setAttribute('class', 'upl btn btn-danger')
                     ->setAttribute('data-loading-text', 'Deleting...');
-            $deleteForm->onSubmit('tinyMCE.triggerSave()');
+
             $deleteForm->onSuccess[] = $this->deleteCategoryFormSubmitted;
             return $deleteForm;
         }
@@ -764,9 +718,8 @@ class ProductPresenter extends BasePresenter {
     public function createComponentAddCategoryPhotoForm() {
         if ($this->getUser()->isInRole('admin')) {
             $addPhoto = new Nette\Application\UI\Form;
-            $addPhoto->setRenderer(new BootstrapRenderer);
             $addPhoto->setTranslator($this->translator);
-            $addPhoto->addHidden('categoryID', $this->categoryParam['CategoryID']);
+            $addPhoto->addHidden('categoryID', $this->categoryParam);
             $addPhoto->addUpload('image', 'Photo:')
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
@@ -785,7 +738,6 @@ class ProductPresenter extends BasePresenter {
     public function addCategoryPhotoFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
             if ($form->values->image->isOK()) {
-
 
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/' . $form->values->image->name;
                 $form->values->image->move($imgUrl);

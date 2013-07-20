@@ -41,7 +41,7 @@
     }
     
     .productCaption {
-        height: 60px!important
+        height: 85px!important
     }
     
     .supercontainer {
@@ -55,6 +55,8 @@
         -webkit-border-radius: 4px;
 -moz-border-radius: 4px;
 border-radius: 4px;
+padding: 5px;
+border: 1px solid #ccc;
     }
     
     .miniproduct > .alert {

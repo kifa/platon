@@ -6,7 +6,7 @@
 
 {block pageheader}
 {if $user->isInRole('admin')}
-<div class="span10" n:snippet="controlPanel">
+<div class="span12" n:snippet="controlPanel">
         
      <div class="alert alert-error"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this category by clicking on Title, Description or panel bellow etc. More info?'}</div>
 
@@ -77,9 +77,22 @@
    </div>
    {/if}
 
-<div>
-<div class="span4">
+<div class="span12">
+<div class="span3">
     <h1 n:block="title" class="CatTitle" n:snippet="CatTitle">{$category->CategoryName}</h1>
+    <small class="shortDesc muted">
+    <span n:block="metadesc">
+        <span class="CatDescription" n:snippet="CatDescription">{!$category->CategoryDescription}</span>
+        <a href="{plink Blog:category $category->CategoryID}">{_'Check news on blog'} <i class="icon-arrow-right"></i></a>
+    </span> 
+    {if $category->CategoryPhoto != NULL }
+    {if $user->isInRole('admin')}
+            <img src="{$basePath}/images/category/20-{$category->CategoryPhoto}" class="img-circle" />
+         <a href="{plink deletePhotoCategory! $category->CategoryID, $category->CategoryPhoto }">{_'Delete photo'}</a> {/if}
+    {/if} </small>
+</div>
+    <div class="span3 subcategories">
+        <h3>{_'Subcategories'}</h3>
 {foreach $categories as $catID => $cat}
     {if $cat->HigherCategoryID == $category->CategoryID}
                 <div class="span10">
@@ -94,26 +107,13 @@
                 </div> 
     {/if}
  {/foreach}
-    <small class="shortDesc muted">
-     {if $category->CategoryPhoto != NULL }
-        <span class="span3">
-
-            <img src="{$basePath}/images/category/150-{$category->CategoryPhoto}" class="img-circle" />
-         {if $user->isInRole('admin')}<a href="{plink deletePhotoCategory! $category->CategoryID, $category->CategoryPhoto }">{_'Delete photo'}</a> {/if}
-
-        </span>
-    {/if}
-    <span n:block="metadesc">
-        <span class="CatDescription" n:snippet="CatDescription">{!$category->CategoryDescription}</span>
-        <a href="{plink Blog:category $category->CategoryID}">{_'Check news on blog'} <i class="icon-arrow-right"></i></a>
-    </span> </small>
-</div>
-<div class="span7">
+    </div>
+<div class="span6">
     <h3>{_'Best sellers'}</h3>
     <ul class="thumbnails">       
-        <li class="thumbnail span2"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
-        <li class="thumbnail span2"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
-        <li class="thumbnail span2"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
+        <li class="thumbnail span3"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
+        <li class="thumbnail span3"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
+        <li class="thumbnail span3"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
     </ul>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">       
         <li><a tabindex="-1" href="#">{_'Featured'}</a></li>
@@ -124,14 +124,13 @@
     </ul>
 </div>
 
+    
 </div>
 {/block}
 
 {block sidebar}
-<div class="span2">   
-    {if $user->isInRole('admin')}
-        {control menu:admin}
-    {/if}
+<div>   
+    
     <ul class="nav nav-list">
         <li class="nav-header">Menu</li>
 
@@ -144,9 +143,8 @@
 {/block}
 
 {block content}
-<div class="span10" n:snippet="products">    
-   <div class="span8 alert-block">
-    {_'Order by'}: 
+<div class="span12" n:snippet="products">    
+   <div class="span12 alert-block">
     <div class="btn-group">
         <a n:href="setFilter! 'price', 'asc'" class="btn ajax">{_'Price'}</a>
         <a n:href="setFilter! 'price', 'asc'" class="btn ajax"><i class="icon-sort-by-order"></i></a>
@@ -172,20 +170,20 @@
         <a n:href="setFilter! 'pcs', 'desc'" class="btn ajax"><i class="icon-sort-down"></i></a>
     </div>
        </div>
-<ul class="thumbnails">
+<ul class="thumbnails span12">
     
     {if $user->isInRole('admin')}
              
-    <li class="span3 setview miniproduct hide" n:snippet="newproduct" >
-        <div class="thumbnail info">
-            <div style="height: 527px">
-            <div class="">            
+    <li class="span3 miniproduct hide" n:snippet="newproduct" >
+        
+            <div class="span12" style="height: 527px">
+                    
 {form addProductForm}
 <ul class="errors" n:if="$form->hasErrors()">
         <li n:foreach="$form->errors as $error">{$error}</li>
 </ul>
-  <fieldset>
-    <legend>{_'Add new product'}</legend>
+  <fieldset class="span12">
+      <legend class="span12 alert">{_'Add new product'}</legend>
     {label name /}
     {input name}
     {label price /}
@@ -209,8 +207,7 @@
   </fieldset>
 {/form}
 
-            </div>
-            </div>
+        
         </div> <!--primary row -->
     </li>
     

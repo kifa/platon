@@ -42,7 +42,7 @@
         </ul>
     </div>
 
-<div class="container">
+<div class="container-fluid">
     <div class="masterhead">
         <div class="row">
             <a href="{plink Homepage:default}" class="span5"><h1><img src="{$basePath}/images/logo/{$shopLogo}" alt="{$shopName}" title="{$shopName}"></h1></a>
@@ -73,41 +73,47 @@
        {block #bread}{/block}
 
 
-    <div id="content"> 
-       {block #pageheader}
-
-       {/block}
-                
-            {snippet flashMessages}   
+    <div id="content" class="row-fluid"> 
+        
+    <div class="span10" n:snippet="content">
+       
+        {snippet flashMessages}   
             {foreach $flashes as $flash}
-               <div class="{$flash->type}">
+               <div class="{$flash->type} span12">
                    <button type="button" class="close" data-dismiss="alert">&times;</button>
              {$flash->message}</div>
              {/foreach}
              {/snippet}
+        
+        {block #pageheader}
 
-                
-    <div class="row" n:snippet="content">
+       {/block}
+            
             {block #content}
                    
             {/block}
 
-            {block sidebar}
+    </div>       
+
+                <div class="span2">        
+            {block sidebars}
+
                 {if $user->isInRole('admin')}
                    {control menu:admin}
                 {/if}
-                    <div class="span2">
-                        <ul class="nav nav-list">
-                            <li class="nav-header">Menu</li>
-                           {control menu:side}
+                    
+                    <ul class="nav nav-list">
+                            <li class="nav-header">{_'Menu'}</li>
+                                     {control menu:side}
                             <li class="divider"></li>
                         </ul>
-                    </div>
-            {/block}
-
-
-    </div>       
-
+                            
+        
+                    {*block #sidebar}
+                    {/block*}
+               {/block}
+                </div>
+        
     <div class="footer">         
         <div class="span10">
             <hr>
