@@ -27,11 +27,12 @@
 <body>
     <script> document.body.className+=' js' </script>
 
-<div class="container supercontainer"> 
+
+<div class="shopHead"> 
 
     
-    
-<div class="container-fluid">
+<div class="container supercontainer container-fluid">
+  
     <div class="masterhead">
         <div class="row-fluid">
             <a href="{plink Homepage:default}" class="span3"><h1><img src="{$basePath}/images/logo/{$shopLogo}" alt="{$shopName}" title="{$shopName}"></h1></a>
@@ -84,11 +85,16 @@
              {/foreach}
              {/snippet}
 
-    <div id="content" class="row-fluid"> 
-           
+ </div> 
+</div> 
    {block #slider}
         {/block}
-        
+ <div class="">   
+ <div class="container supercontainer container-fluid">
+   
+    <div id="content" class="row-fluid"> 
+           
+      
 
                 {block sidebars} 
                  <div class="span2">            
