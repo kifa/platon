@@ -87,9 +87,15 @@
 
  </div> 
 </div> 
+
+<div class="shopSlider">   
+ <div class="container supercontainer container-fluid">
+
    {block #slider}
         {/block}
- <div class="">   
+ </div></div>
+    
+    <div class="shopContent">   
  <div class="container supercontainer container-fluid">
    
     <div id="content" class="row-fluid"> 
@@ -97,7 +103,7 @@
       
 
                 {block sidebars} 
-                 <div class="span2">            
+                 <div class="span2 shopSidebar">            
                
                 {if $user->isInRole('admin')}
                    {control menu:admin}
@@ -131,7 +137,12 @@
         {/block}
             
 
-      
+</div>
+ </div>
+    </div>
+        <div class="shopFooter">   
+ <div class="container supercontainer container-fluid">
+          
 
     <div class="footer">         
         <div class="span10">
