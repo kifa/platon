@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-04-26 00:08:29
+# Created: 2013-07-21 17:05:27
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-04-26 00:08+0200\n"
+"PO-Revision-Date: 2013-07-21 17:05+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -12,7 +12,25 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));\n"
 
 
+msgid "--No parent--"
+msgstr "-- žádná nadřazená --"
+
+msgid "2 in line"
+msgstr "2 v řadě"
+
+msgid "4 in line"
+msgstr "4 v řadě"
+
+msgid "@"
+msgstr "@"
+
 msgid "ADD Category"
+msgstr "Přidat kategorii"
+
+msgid "ADD Text"
+msgstr "Přidat položku/text"
+
+msgid "Add Category"
 msgstr "Přidat kategorii"
 
 msgid "Add Document"
@@ -30,6 +48,18 @@ msgstr "Přidat produkt"
 msgid "Add Spec"
 msgstr "Přidat specifikaci"
 
+msgid "Add Text"
+msgstr "Přidat text"
+
+msgid "Add category photo"
+msgstr "Přidat kategorii fotku"
+
+msgid "Add new product"
+msgstr "Přidat produkt"
+
+msgid "Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow."
+msgstr "Přidejte některou z dříve vytvořených, nebo vytvořte novou."
+
 msgid "Admin"
 msgstr "Správa"
 
@@ -39,14 +69,41 @@ msgstr "Množství"
 msgid "Are"
 msgstr "Jste"
 
+msgid "Are you sure to delete this category?"
+msgstr "Opravdu chcete smazat celou kategorii?"
+
+msgid "Ask"
+msgstr "Zeptejte se"
+
 msgid "Back to SmartPanel"
 msgstr "Zpět na Smart Panel"
+
+msgid "Best sellers"
+msgstr "Nejprodávanější"
+
+msgid "Big photo"
+msgstr "Velké fotky"
+
+msgid "Big slider"
+msgstr "Velký slider"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Blog and Gallery"
+msgstr "Blog a fotky"
 
 msgid "Buy"
 msgstr "Koupit"
 
+msgid "Cancel"
+msgstr "Zrušit"
+
 msgid "Cart"
 msgstr "Košík"
+
+msgid "Categories"
+msgstr "Kategorie"
 
 msgid "Category"
 msgstr "Kategorie"
@@ -57,14 +114,68 @@ msgstr "Kategorie:"
 msgid "Cellphone"
 msgstr "Mobilní telefon"
 
+msgid "Check news on blog"
+msgstr "Novinky na blogu"
+
+msgid "Checkout"
+msgstr "Objednat"
+
+msgid "Choose Brand"
+msgstr "Značka"
+
+msgid "Choose Category"
+msgstr "Kategorie"
+
+msgid "Choose Producer"
+msgstr "Výrobce"
+
 msgid "Choose language:"
 msgstr "Vyberte jazyk:"
+
+msgid "Choose your delivery option"
+msgstr "Vyberte způsob doručení"
+
+msgid "City:"
+msgstr "Město:"
+
+msgid "Click to edit"
+msgstr "Klikněte a vložte informace"
+
+msgid "Click to edit ..."
+msgstr "Klikněte a vložte informace ..."
+
+msgid "Close without adding"
+msgstr "Zavřít bez přidání"
 
 msgid "Close without saving"
 msgstr "Zavřít bez uložení"
 
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "Continue your Order"
+msgstr "Objednat zboží"
+
+msgid "Create"
+msgstr "Vytvořit"
+
+msgid "Create Category"
+msgstr "Přidat kategorii"
+
+msgid "Create a new one:"
+msgstr "Vytvořte novou:"
+
 msgid "Create new payment:"
 msgstr "Vytvořit novou platbu:"
+
+msgid "Delete"
+msgstr "Smazat"
+
+msgid "Delete Category"
+msgstr "Smazat kategorii"
+
+msgid "Delete photo"
+msgstr "Smazat fotku"
 
 msgid "Description"
 msgstr "Popis"
@@ -75,8 +186,17 @@ msgstr "Popis:"
 msgid "Description: "
 msgstr "Popis:"
 
+msgid "Discount"
+msgstr "Sleva"
+
 msgid "Discount:"
 msgstr "Sleva:"
+
+msgid "Docs"
+msgstr "Dokumenty"
+
+msgid "Document:"
+msgstr "Dokument:"
 
 msgid "Edit"
 msgstr "Upravit"
@@ -93,32 +213,119 @@ msgstr "Upravit Cenu"
 msgid "Edit Product"
 msgstr "Upravit Produkt"
 
+msgid "Edit Specification"
+msgstr "Upravit specifikace"
+
+msgid "Edit Specs"
+msgstr "Upravit specifikace"
+
 msgid "Edit payment"
 msgstr "Upravit platbu"
 
 msgid "Edit your description and click Save desccription."
 msgstr "Upravte popis a kliknete na Uložit popis"
 
+msgid "Email:"
+msgstr "Email:"
+
+msgid "Enter Value:"
+msgstr "Zadejte hodnotu:"
+
+msgid "Enter product name…"
+msgstr "Zadejte název produktu"
+
+msgid "Enter this basic info. All other can be added later."
+msgstr "Zadejte základní informace. Vše další přidáme následně."
+
+msgid "Feature category!"
+msgstr "Zvýraznit kategorii"
+
+msgid "Feature product"
+msgstr "Zvýraznit produkt"
+
+msgid "Featured"
+msgstr "Doporučené"
+
+msgid "Fill contact information"
+msgstr "Vložte své kontaktní údaje"
+
+msgid "Finish Editing Price"
+msgstr "Ukončit editaci"
+
+msgid "Finish your order"
+msgstr "Dokončete objednávku"
+
+msgid "Gallery"
+msgstr "Fotky"
+
+msgid "HOT"
+msgstr "SUPER"
+
 msgid "Here"
 msgstr "Zde"
+
+msgid "Here you can complete your order. Just fill fields bellow."
+msgstr "Zde můžete dokončit vaši objednávku. Jen vyplňte..."
 
 msgid "Here you see all payment methods."
 msgstr "Zde jsou všechny Vaše platební metody."
 
+msgid "Hide"
+msgstr "Skrýt"
+
+msgid "Hide product"
+msgstr "Skrýt produkt"
+
 msgid "Home"
 msgstr "Domů"
+
+msgid "Homepage layout"
+msgstr "Design úvodky"
+
+msgid "I accept Terms and condition."
+msgstr "Souhlasím bez výhrad s obchodními podmínkami."
+
+msgid "If so, choose where to move products!"
+msgstr "Pokud ano, rozhodněte, kam přesunout produkty!"
 
 msgid "Image:"
 msgstr "Obrázek:"
 
+msgid "In Stock"
+msgstr "Skladem"
+
+msgid "In order to continue checkout, you have to agree with Term."
+msgstr "Abyste mohli zboží objednat, je nutné souhlasit s obchodními podmínkami."
+
+msgid "In stock"
+msgstr "Skladem"
+
+msgid "Info"
+msgstr "Info"
+
 msgid "It has to be a number!"
 msgstr "Zde musí být číslo."
+
+msgid "Item price"
+msgstr "Cena"
+
+msgid "LAST"
+msgstr "POSLEDNÍ"
 
 msgid "Logout"
 msgstr "Odhlásit se"
 
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Move products to category:"
+msgstr "Přesunout produkty do kategorie:"
+
 msgid "Name"
 msgstr "Jméno"
+
+msgid "Name of new Spec:"
+msgstr "Název nové specifikace:"
 
 msgid "Name:"
 msgstr "Jméno:"
@@ -138,6 +345,12 @@ msgstr "Ostatní"
 msgid "Overal"
 msgstr "Přehled"
 
+msgid "Parent Category"
+msgstr "Nadřazená kategorie"
+
+msgid "Parent Category:"
+msgstr "Nadřazená kategorie"
+
 msgid "Payment"
 msgstr "Platby a slevy"
 
@@ -147,14 +360,38 @@ msgstr "Název platby"
 msgid "Payment price:"
 msgstr "Poplatek za platbu:"
 
+msgid "Phone:"
+msgstr "Telefon:"
+
+msgid "Photo gallery"
+msgstr "Fotky"
+
 msgid "Photo:"
 msgstr "Foto:"
 
 msgid "Please complete mandatory field."
 msgstr "Prosím vyplňte povinná pole."
 
+msgid "Please enter a valid email address."
+msgstr "Prosím zadejte email."
+
+msgid "Please enter your question."
+msgstr "Prosím vložte svou otázku."
+
+msgid "Please fill document name"
+msgstr "Prosím vložte název dokumentu"
+
 msgid "Please fill in these information"
 msgstr "Prosím vyplňte"
+
+msgid "Please fill your email."
+msgstr "Prosím vložte svůj email."
+
+msgid "Please select Payment method"
+msgstr "Vyberte způsob platby"
+
+msgid "Please select Shipping method"
+msgstr "Vyberte způsob dopravy"
 
 msgid "Price"
 msgstr "Cena"
@@ -165,26 +402,95 @@ msgstr "Cena:"
 msgid "Producer: "
 msgstr "Výrobce:"
 
+msgid "Product"
+msgstr "Produkt"
+
+msgid "Product layout"
+msgstr "Rozložení produktu"
+
+msgid "Products"
+msgstr "Za produkty"
+
+msgid "Products layout"
+msgstr "Rozvržení produktů"
+
+msgid "Question:"
+msgstr "Otázka:"
+
+msgid "Read Terms"
+msgstr "Přečíst podmínky"
+
+msgid "Review"
+msgstr "Recenze"
+
+msgid "SALE"
+msgstr "SLEVA"
+
+msgid "SOLD OUT"
+msgstr "VYPRODÁNO"
+
+msgid "Sale"
+msgstr "Sleva"
+
 msgid "Save description"
 msgstr "Uložit popis"
 
 msgid "Save price"
 msgstr "Uložit cenu"
 
+msgid "Select Payment method"
+msgstr "Vyberte platbu"
+
+msgid "Select one of already created:"
+msgstr "Vyberte z již vytvořených:"
+
 msgid "Select photo and click Add photo"
 msgstr "Vyberte foto a klikněte na Přidat Foto"
+
+msgid "Select spec:"
+msgstr "Vyberte specifikaci:"
+
+msgid "Select unit:"
+msgstr "Zvolte jednotku:"
+
+msgid "Set Catalog Layout"
+msgstr "Rozvržení katalogu"
 
 msgid "Shipping"
 msgstr "Poštovné"
 
+msgid "Shop layout"
+msgstr "Rozvržení shopu"
+
+msgid "Sidebar"
+msgstr "Boční panel"
+
 msgid "Sign In"
 msgstr "Přihlásit"
+
+msgid "Singleton"
+msgstr "Solitér"
+
+msgid "Small slider"
+msgstr "Malý slider"
 
 msgid "Smartphone"
 msgstr "Smartphone"
 
+msgid "Spec"
+msgstr "Specifikace"
+
+msgid "Static Text"
+msgstr "Stálý text"
+
 msgid "Stats"
 msgstr "Statistiky"
+
+msgid "Street:"
+msgstr "Ulice:"
+
+msgid "Subcategories"
+msgstr "Podkategorie"
 
 msgid "Tablets"
 msgstr "Tablet"
@@ -192,11 +498,26 @@ msgstr "Tablet"
 msgid "This has to be a number"
 msgstr "Zde by mělo být číslo"
 
+msgid "This has to be a number."
+msgstr "Zde musí být číslo. (Zkuste vložit nulu)"
+
+msgid "Total"
+msgstr "Celkem"
+
+msgid "Total price"
+msgstr "Za produkt"
+
 msgid "Track order"
 msgstr "Sledovat objednávku"
 
 msgid "Track your order"
 msgstr "Sledovat objednávku"
+
+msgid "Unpublish category"
+msgstr "Zneveřejni kategorii"
+
+msgid "Video"
+msgstr "Video"
 
 msgid "View"
 msgstr "Prohlédnout"
@@ -204,11 +525,26 @@ msgstr "Prohlédnout"
 msgid "Warehouse"
 msgstr "Sklad"
 
+msgid "We will respond as soon as possible."
+msgstr "Odpovíme tak rychle, jak to jen půjde."
+
+msgid "Would you fill your email, please?"
+msgstr "Prosím vyplňte svůj email."
+
+msgid "Would you fill your name, please?"
+msgstr "Vyplňte prosím své jméno"
+
 msgid "You"
 msgstr "Právě"
 
+msgid "You are logged in as admin. You can simply edit this category by clicking on Title, Description or panel bellow etc. More info?"
+msgstr "Jste přihlášení jako správce. Editujte jednoduše kliknutím na název, popis produktu, nebo na jakoukoliv další informaci."
+
 msgid "You cannot edit product here!"
 msgstr "Pro úpravu přejděte do kategorie!"
+
+msgid "Your cart"
+msgstr "Váš košík"
 
 msgid "Your email:"
 msgstr "Váš email:"
@@ -216,6 +552,12 @@ msgstr "Váš email:"
 msgid "Your order number:"
 msgstr "Číslo Vaší objednávky"
 
-msgid "Please enter a valid email address."
-msgstr "Prosím zadejte email."
+msgid "ZIP:"
+msgstr "PSČ:"
+
+msgid "pcs"
+msgstr "ks"
+
+msgid "Note:"
+msgstr "Poznámka:"
 

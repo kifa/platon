@@ -216,6 +216,8 @@ class OrderPresenter extends BasePresenter {
         };
         
         $cartForm = new Nette\Application\UI\Form;
+        $cartForm->setTranslator($this->translator);
+
     //    $cartForm->setRenderer(new BootstrapRenderer);
         $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
         $cartForm->addGroup('Delivery info');

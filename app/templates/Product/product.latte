@@ -284,97 +284,6 @@
         </div>
                     </div>
     
-    
-    
-    
-    {*
-    
-    <div class="tabbable span9">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#allinfo" data-toggle="tab"><i class="icon-info-sign"></i> {_'Info'}</a></li>
-                        <li><a href="#gal" data-toggle="tab"><i class="icon-camera-retro"></i> {_'Gallery'}</a></li>
-                        <li><a href="#vid" data-toggle="tab"><i class="icon-facetime-video"></i> {_'Video'}</a></li>
-                        <li><a href="#rew" data-toggle="tab"><i class="icon-check"></i> {_'Review'}</a></li>
-                        <li><a href="#docs" data-toggle="tab"><i class="icon-download"></i> {_'Docs'}</a></li>
-                    </ul>
-                    <div class="tab-content">
-                         <div class="tab-pane active" id="allinfo" >
-                            <div class="prodDescription" n:snippet="prodDescription">{!$product->ProductDescription}</div>
-                        </div>
-
-                        <div class="tab-pane" id="gal">
-
-
-                            <ul class="thumbnails">
-                                {if $user->isInRole('admin')}
-
-                                {form addPhotoForm class => 'span9'}
-                                {label image /}
-                                {input image}
-
-                                {input add}
-
-                                {/form}
-                                {/if}
-                    {foreach $album as $id => $photo}
-                                <li class="{if $photo->CoverPhoto}span3 {else} span3 {/if}">
-                                    <a data-toggle="lightbox" href="#photo{$id}" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
-                                        <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}">
-                                    </a>
-                                    {if $user->isInRole('admin')}
-                                       {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> Set as COVER image</a> {/if}
-                                    <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> Delete image</a>
-                                      {/if}
-                                </li>
-
-                                {var $src = $basePath . '/images/' . $product->PhotoAlbumID .'/'.$photo->PhotoURL}
-                                {control modalControl:gallery $id, $product->ProductName, $src }
-
-                         {/foreach}
-                            </ul>
-
-                        </div>
-                        <div class="tab-pane" id="vid">
-                            <iframe width="853" height="480" src="http://www.youtube.com/embed/qN3EXAFRxKQ?rel=0" frameborder="0" allowfullscreen></iframe>
-                        </div>
-
-                        <div class="tab-pane" id="docs">
-                            {if $user->isInRole('admin')}
-                                <div class="span8">
-                            {control addDocumentationForm}</div>
-                                {/if}
-                             {if $docs}       
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>{_'Name'}</th>
-                                        <th>{_'Description'}</th>
-                                        <th>{_'Download link'}</th>
-                                     {if $user->isInRole('admin')}
-                                        <th></th>    
-                                    {/if}
-                                    </tr>
-                                </thead>
-                            {foreach $docs as $id => $doc}
-                                <tbody>
-                                    <tr>
-                                        <td>{$id}</td>
-                                        <td>{$doc->DocumentName}</td>
-                                        <td>{$doc->DocumentDescription}</td>
-                                        <td><a href="{$basePath}/docs/{$product->ProductID}/{$doc->DocumentURL}" title="{_'Download'} {$doc->DocumentName}"><i class="icon-download" ></i> {$doc->DocumentURL}</a></td>
-                                   {if $user->isInRole('admin')}
-                                        <td><a href="{link deleteDocument! $product->ProductID, $doc->DocumentID}"><i class="icon-trash" ></i> Delete document</a></td>
-                                      {/if}
-                              {/foreach}
-                                    </tr>
-                                </tbody>
-                            </table>
-                            {/if}
-                        </div>
-
-                    </div>
-                </div> *}
 
     </div> <!-- class="span10" -->
 {/block}
@@ -389,7 +298,7 @@
         <li class="nav-header">Menu</li>
 
           {control menu:side}
-        <li class="divider"></li>
+        
     </ul>
 </div>
 {/block}
@@ -547,10 +456,8 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                     <h3 id="myModalLabel"><i class="icon-list"></i> Edit Specification</h3>
                                 </div>
-                                <div class="modal-body"> </div>
-                                <div class="modal-footer">
-
-                                    <div class="tabbable">
+                                <div class="modal-body"> 
+                                       <div class="tabbable">
 
                                         <ul class="nav nav-tabs">
                {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> Edit Specs</a></li> {/if}
@@ -578,6 +485,10 @@
                                         </div>
 
                                     </div>
+                                </div>
+                                <div class="modal-footer">
+
+                             
 
 
                                     <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>

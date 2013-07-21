@@ -465,17 +465,16 @@
 
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3 id="myModalLabel"><i class="icon-list"></i> Edit Specification</h3>
+                                    <h3 id="myModalLabel"><i class="icon-list"></i> {_'Edit Specification'}</h3>
                                 </div>
-                                <div class="modal-body"> </div>
-                                <div class="modal-footer">
-
+                                <div class="modal-body">
+                                
                                     <div class="tabbable">
 
                                         <ul class="nav nav-tabs">
-               {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> Edit Specs</a></li> {/if}
-                                            <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> Add Spec</a>
-               {if $parameter} <li><a href="#deleteParams" data-toggle="tab"><i class="icon-trash"></i> Delete Spec</a></li> {/if}
+               {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> {_'Edit Specs'}</a></li> {/if}
+                                            <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> {_'Add Spec'}</a>
+               {if $parameter} <li><a href="#deleteParams" data-toggle="tab"><i class="icon-trash"></i> {_'Delete Spec'}</a></li> {/if}
                                         </ul>
                                         <div class="tab-content">
                                             <div class="tab-pane {if $parameter}active{/if}" id="editParams">
@@ -498,6 +497,9 @@
                                         </div>
 
                                     </div>
+                                </div>
+                                <div class="modal-footer">
+
 
 
                                     <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
