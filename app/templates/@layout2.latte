@@ -29,7 +29,16 @@
 
 <div class="container supercontainer"> 
 
-    <div class="margin5 span3 pull-right btn-group">
+    
+    
+<div class="container-fluid">
+    <div class="masterhead">
+        <div class="row-fluid">
+            <a href="{plink Homepage:default}" class="span3"><h1><img src="{$basePath}/images/logo/{$shopLogo}" alt="{$shopName}" title="{$shopName}"></h1></a>
+
+            {control menu:top}
+
+            <div class="span2 btn-group">
         <a class="btn pull-right dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="icon-globe"></i> {_'Choose language:'}
             <span class="caret"></span>
@@ -42,14 +51,7 @@
         </ul>
     </div>
 
-    
-<div class="container-fluid">
-    <div class="masterhead">
-        <div class="row">
-            <a href="{plink Homepage:default}" class="span5"><h1><img src="{$basePath}/images/logo/{$shopLogo}" alt="{$shopName}" title="{$shopName}"></h1></a>
-
-            {control menu:top}
-
+            
         </div>
         <div class="row">
             <div class="span12">
@@ -83,11 +85,14 @@
              {/snippet}
 
     <div id="content" class="row-fluid"> 
-                
+           
+   {block #slider}
+        {/block}
+        
 
-                
+                {block sidebars} 
                  <div class="span2">            
-                {block sidebars}
+               
                 {if $user->isInRole('admin')}
                    {control menu:admin}
                 {/if}
@@ -102,9 +107,11 @@
                     {*block #sidebar}
                     {/block*}
 
+                  </div>
             {/block}
-                    </div>
-
+        
+        {block contents}
+            
         <div class="span10" n:snippet="content">
            {block #pageheader}
 
@@ -115,6 +122,7 @@
         
             {/block}
         </div>
+        {/block}
             
 
       

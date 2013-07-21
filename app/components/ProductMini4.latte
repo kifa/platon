@@ -48,7 +48,7 @@
             {/if}
             </div>
     
-            <a class="span12 imgLiquid" style="height: 250px; width: auto;" href="{plink Product:product $product->ProductID}"> 
+            <a class="span12 imgLiquid" style="height: 250px; max-width: 400px;" href="{plink Product:product $product->ProductID}"> 
             
                 {if $product->PhotoAlbumID}
                      <img src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$product->PhotoURL}" class="img-circle" />

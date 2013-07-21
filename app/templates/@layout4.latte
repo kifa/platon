@@ -83,10 +83,6 @@
              {/snippet}
     <div id="content" class="row-fluid"> 
         
-   {block #slider}
-        {/block}
-   
-        {block contents}
     <div class="span10" n:snippet="content">
        
         
@@ -99,11 +95,10 @@
                    
             {/block}
 
-    </div>    
-        {/block}
-{block sidebars}
+    </div>       
+
                 <div class="span2">        
-            
+            {block sidebars}
 
                 {if $user->isInRole('admin')}
                    {control menu:admin}
@@ -118,9 +113,9 @@
         
                     {*block #sidebar}
                     {/block*}
+               {/block}
                 </div>
-           {/block}
-            
+        
     <div class="footer">         
         <div class="span10">
             <hr>

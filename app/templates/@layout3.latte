@@ -51,7 +51,8 @@
     </div>
 
             
-        </div>
+        
+    </div>
         <div class="row">
             <div class="span12">
                 <div class="navbar">
@@ -82,7 +83,7 @@
              {/foreach}
              {/snippet}
     <div id="content" class="row-fluid"> 
-        
+     
    {block #slider}
         {/block}
    
@@ -99,10 +100,12 @@
                    
             {/block}
 
-    </div>    
+    </div>     
         {/block}
-{block sidebars}
-                <div class="span2">        
+
+            
+        {block sidebars}
+        <div class="span2">        
             
 
                 {if $user->isInRole('admin')}
@@ -118,9 +121,9 @@
         
                     {*block #sidebar}
                     {/block*}
+               
                 </div>
-           {/block}
-            
+        {/block}
     <div class="footer">         
         <div class="span10">
             <hr>
@@ -244,5 +247,7 @@
     {/block}
 
 	{/block}   
+        
+        
     </body> 
 </html>

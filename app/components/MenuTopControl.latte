@@ -1,12 +1,12 @@
-<div class="span3 pull-right">
-<div class="span3  alert alert-info">
-        {if $user->isInRole('admin')}
-        Hello <strong>{$user->id}!</strong> <br><a href="{plink SmartPanel:}"><i class="icon-lightbulb"></i> SmartPanel</a> | 
-        <a href="{plink SmartPanel:default}">{_"News"} <span class="badge badge-info"><i class="icon-envelope"></i> 2</span></a> |
-        <a href="{plink Sign:out}">{_"Logout"} <i class="icon-signout"></i></a>
-        <div class="margin5 span3 pull-right btn-group">
-        <a class="btn pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-screenshot"></i> {_'Set layout:'}
+<div class="{if $user->isInRole('admin')}span7{else} span4{/if}">
+           
+ {if $user->isInRole('admin')}
+
+    <div class="span6 alert alert-success">
+
+<div class="btn-group">
+        <a class="btn btn-small pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-screenshot"></i> {_'Shop layout'}
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
@@ -16,11 +16,12 @@
             <li><a n:href="setShopInfo! 'ShopLayout', 4" >layout 4</a></li>
         </ul>
     </div>
+    
 
-{ifCurrent Product:product}
-<div class="margin5 span3 pull-right btn-group">
-        <a class="btn pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-screenshot"></i> {_'Set product layout:'}
+    {ifCurrent Product:product}
+<div class="btn-group">
+        <a class="btn btn-small pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-screenshot"></i> {_'Product layout'}
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
@@ -29,49 +30,58 @@
             <li><a n:href="setShopInfo! 'ProductLayout', 3" >layout 3</a></li>
             <li><a n:href="setShopInfo! 'ProductLayout', 4" >layout 4</a></li>
         </ul>
-    </div
+</div>
 
 {/ifCurrent}
 
 {ifCurrent Product:products}
-<div class="margin5 span3 pull-right btn-group">
-        <a class="btn pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-screenshot"></i> {_'Set products layout:'}
+<div class="btn-group">
+        <a class="btn btn-small pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-screenshot"></i> {_'Products layout'}
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            <li><a n:href="setShopInfo! 'ProductMiniLayout', ''" >layout 1</a></li>
-            <li><a n:href="setShopInfo! 'ProductMiniLayout', 2" >layout 2</a></li>
-            <li><a n:href="setShopInfo! 'ProductMiniLayout', 3" >layout 3</a></li>
-            <li><a n:href="setShopInfo! 'ProductMiniLayout', 4" >layout 4</a></li>
+            <li><a n:href="setShopInfo! 'ProductMiniLayout', ''" >{_'4 in line'}</a></li>
+            <li><a n:href="setShopInfo! 'ProductMiniLayout', 2" >{_'2 in line'}</a></li>
+            <li><a n:href="setShopInfo! 'ProductMiniLayout', 3" >{_'Singleton'}</a></li>
+            <li><a n:href="setShopInfo! 'ProductMiniLayout', 4" >{_'Big photo'}</a></li>
         </ul>
-    </div
+</div>
 
 {/ifCurrent}
     
     
 {ifCurrent Homepage:default}
-<div class="margin5 span3 pull-right btn-group">
-        <a class="btn pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-screenshot"></i> {_'Set products layout:'}
+<div class="btn-group">
+        <a class="btn btn-small pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-screenshot"></i> {_'Products layout'}
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            <li><a n:href="setShopInfo! 'ProductMiniLayout', ''" >layout 1</a></li>
-            <li><a n:href="setShopInfo! 'ProductMiniLayout', 2" >layout 2</a></li>
-            <li><a n:href="setShopInfo! 'ProductMiniLayout', 3" >layout 3</a></li>
-            <li><a n:href="setShopInfo! 'ProductMiniLayout', 4" >layout 4</a></li>
+            <li><a n:href="setShopInfo! 'ProductMiniLayout', ''" >{_'4 in line'}</a></li>
+            <li><a n:href="setShopInfo! 'ProductMiniLayout', 2" >{_'2 in line'}</a></li>
+            <li><a n:href="setShopInfo! 'ProductMiniLayout', 3" >{_'Singleton'}</a></li>
+            <li><a n:href="setShopInfo! 'ProductMiniLayout', 4" >{_'Big photo'}</a></li>
         </ul>
-    </div
+</div>
 
 {/ifCurrent}
 
     
+    </div>
+{/if}
+    <div class="{if $user->isInRole('admin')}span6{else} span12{/if}  alert alert-info">
+        {if $user->isInRole('admin')}
+        Hello <strong>{$user->id}!</strong> <br><a href="{plink SmartPanel:}"><i class="icon-lightbulb"></i> SmartPanel</a> | 
+        <a href="{plink SmartPanel:default}">{_"News"} <span class="badge badge-info"><i class="icon-envelope"></i> 2</span></a> |
+        <a href="{plink Sign:out}">{_"Logout"} <i class="icon-signout"></i></a>
+        
         {else}
         <a href="{plink Order:cart}"><i class="icon-large icon-shopping-cart"></i> {_"Cart"} {if $cart > 0}<span class="badge badge-info">{$cart}</span>{else}<span class="badge">0</span>{/if}</a> |
         <a href="#tracking" data-toggel="modal" data-target="#tracking" id="trackingButton"><i class="icon-large icon-search"></i> {_"Track order"}</a> |
         <a href="{plink Sign:in}">{_"Sign In"} <i class="icon-signin"></i></a>
         {/if}
     </div>
+
 
 </div>
