@@ -242,7 +242,7 @@ margin-bottom: -90px;
     background: none repeat scroll 0 0 #154875 !important;
 }
 
-.shopSidebar, .shopContent {
+.shopSidebar, .shopInnerContent {
     background: white;
     border: 1px solid #ccc;
     -webkit-border-radius: 4px;
@@ -252,6 +252,10 @@ margin-bottom: -90px;
     border: 1px solid #ccc;      
 }
 
-.shopContent {
-    
+.shopSidebar {
+    border-right: none;
+}
+.shopInnerContent {
+    margin-left: 0!important;
+    border-left: none;
 }
