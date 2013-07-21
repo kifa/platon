@@ -54,6 +54,19 @@
 {ifCurrent Homepage:default}
 <div class="btn-group">
         <a class="btn btn-small pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-screenshot"></i> {_'Homepage layout'}
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a n:href="setShopInfo! 'HomepageLayout', 'default'" >{_'Small slider'}</a></li>
+            <li><a n:href="setShopInfo! 'HomepageLayout', 'homepage-bigslider'" >{_'Big slider'}</a></li>
+            <li><a n:href="setShopInfo! 'HomepageLayout', 'homepage-sidebar'" >{_'Sidebar'}</a></li>
+            <li><a n:href="setShopInfo! 'HomepageLayout', 4" >{_'Big photo'}</a></li>
+        </ul>
+</div>
+        
+<div class="btn-group">
+        <a class="btn btn-small pull-right dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="icon-screenshot"></i> {_'Products layout'}
             <span class="caret"></span>
         </a>

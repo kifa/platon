@@ -177,9 +177,13 @@ margin-left: 0!important;
                 }
                 
 .carousel-caption {
-
-    background: transparent;
-        
+    background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 45%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(45%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 45%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 45%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 45%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,1) 45%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 
 }
 
@@ -195,6 +199,18 @@ body {
     height: 170px;
 }
 
+.carousel-inner > .bigItem {
+    height: 500px;
+}
+
+.carousel-inner > img.bigSlide {
+    position: absolute;
+top: 0;
+left: 0;
+min-width: 100%;
+height: 500px;
+}
+
 .carousel-indicators li {
     background: #ccc!important;
 }
@@ -207,4 +223,14 @@ body {
     background: white;
     padding: 0px 8px 0px 8px;
 text-align: justify;
+}
+
+.absoluteHeader {
+    position: absolute;
+top: 0;
+left: 0;
+right: 0;
+z-index: 10;
+margin-top: 20px;
+margin-bottom: -90px;
 }

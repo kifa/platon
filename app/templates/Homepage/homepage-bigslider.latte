@@ -2,18 +2,15 @@
 {block head}<title>Homepage</title>{/block}
 
 {block slider}
-<div class="container supercontainer">   
- <div class="container-fluid">
- 
-<div id="myCarousel" class="carousel slide">
+<div id="myCarousel" class="carousel slide visible-desktop">
     <ol class="carousel-indicators">
         <li data-target= "#myCarousel"  data-slide-to="0" class="active"></li>
         <li data-target= "#myCarousel"  data-slide-to="1"></li>
         <li data-target= "#myCarousel"  data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner jumbotron">
-        <div class="item active">
-            <img class="" src="{$basePath}/images/birne.jpg" alt="">
+        <div class="item bigItem active">
+            <img class="bigSlide" src="{$basePath}/images/slider1.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
                     <h2>{_'Představujeme BIRNE SHOP!'}</h2>
@@ -22,8 +19,8 @@
                 </div>
             </div>
         </div>
-        <div class="item">
-            <img class="" src="{$basePath}/images/slider.jpg" alt="">
+        <div class="item bigItem">
+            <img class="bigSlide" src="{$basePath}/images/slider.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
                    <h2>{_'Nejdou obchody? BIRNE SHOP!'}</h2>
@@ -32,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div class="item ">
+        <div class="item bigItem">
             <!--<img src="{$basePath}/images/birne.jpg" alt=""> -->
             <div class="container">
                 <div class="carousel-caption">
@@ -45,8 +42,6 @@
     </div>
  <!--   <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
     <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>-->
-</div>
-</div>
 </div>
 
 {/block}

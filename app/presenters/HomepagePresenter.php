@@ -45,6 +45,10 @@ class HomepagePresenter extends BasePresenter {
         $this->template->products = $this->productModel->loadCatalog("");
         }
        
+        $layout = $this->shopModel->getShopInfo('HomepageLayout');
+        
+        $this->template->setFile( $this->context->parameters['appDir'] . '/templates/Homepage/'  . $layout . '.latte'); 
+       
         $this->template->category = $this->categoryModel->loadCategory("");
         $this->template->anyVariable = 'any value';
         

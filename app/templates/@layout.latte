@@ -27,7 +27,7 @@
 <body>
     <script> document.body.className+=' js' </script>
 
-<div class="container supercontainer"> 
+<div class="container supercontainer {if $bigSlider} absoluteHeader{/if}"> 
 
     
 <div class="container-fluid">
@@ -81,10 +81,18 @@
              {$flash->message}</div>
              {/foreach}
              {/snippet}
-    <div id="content" class="row-fluid"> 
-        
+    
+    
+</div> 
+</div> 
    {block #slider}
         {/block}
+ <div class="container supercontainer">   
+ <div class="container-fluid">
+   
+    <div id="content" class="row-fluid"> 
+   
+        
    
         {block contents}
     <div class="span10" n:snippet="content">
