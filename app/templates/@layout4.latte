@@ -27,10 +27,12 @@
 <body>
     <script> document.body.className+=' js' </script>
 
+
 <div class="shopHead"> 
 
     
 <div class="container supercontainer container-fluid">
+  
     <div class="masterhead">
         <div class="row-fluid">
             <a href="{plink Homepage:default}" class="span3"><h1><img src="{$basePath}/images/logo/{$shopLogo}" alt="{$shopName}" title="{$shopName}"></h1></a>
@@ -62,7 +64,8 @@
                             </a>
                             <div class="nav-collapse collapse">
                             <ul class="nav" n:snippet="menu">
-                                     {control menu 1}
+                                {control menu:side}
+
                             </ul>
                             </div>
                         </div>
@@ -74,69 +77,75 @@
     </div>
        {block #bread}{/block}
 
-{snippet flashMessages}   
+            {snippet flashMessages}   
             {foreach $flashes as $flash}
                <div class="{$flash->type} span10">
                    <button type="button" class="close" data-dismiss="alert">&times;</button>
              {$flash->message}</div>
              {/foreach}
              {/snippet}
+
+ </div> 
 </div> 
-</div> 
-    
-   
+
 <div class="shopSlider">   
  <div class="container supercontainer container-fluid">
 
    {block #slider}
         {/block}
- </div></div> 
-    
+ </div></div>
     
     <div class="shopContent">   
  <div class="container supercontainer container-fluid">
-    
+   
     <div id="content" class="row-fluid"> 
-        
-    <div class="span10" n:snippet="content">
-       
-        
-        
-        {block #pageheader}
+           
+      
 
-       {/block}
+                
+        {block contents}
             
+        <div class="span10" n:snippet="content">
+           {block #pageheader}
+
+                   {/block}
+
             {block #content}
                    
+        
             {/block}
-
-    </div>       
-            {block sidebars}
-
-                <div class="span2 shopSidebar">        
-
+        </div>
+        {/block}
+        
+        {block sidebars} 
+                 <div class="span2 shopSidebar">            
+               
                 {if $user->isInRole('admin')}
                    {control menu:admin}
                 {/if}
                     
                     <ul class="nav nav-list">
                             <li class="nav-header">{_'Menu'}</li>
-                                     {control menu:side}
+                                     {control menu 1}
                             <li class="divider"></li>
                         </ul>
                             
         
                     {*block #sidebar}
                     {/block*}
-                </div>
-                       {/block}
 
-  </div>
+                  </div>
+            {/block}
+        
+            
+
+</div>
  </div>
     </div>
         <div class="shopFooter">   
  <div class="container supercontainer container-fluid">
           
+
     <div class="footer">         
         <div class="span10">
             <hr>
@@ -149,44 +158,45 @@
                 
 {block modals}
   {if $user->isInRole('admin')}
-                <div id="addCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Category'}</h3>
-                    </div>
-                    <div class="modal-body">
-                        <p>{_'Please fill in these information'}</p>
-                       {control addCategoryForm}
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-                    </div>
-                </div>
+        <div id="addCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Category'}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Please fill in these information'}</p>
+               {control addCategoryForm}
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+            </div>
+        </div>
 
-                <div id="addStaticText" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Text'}</h3>
-                    </div>
-                    <div class="modal-body">
-                        <p>{_'Please fill in these information'}</p>
-                      {control addStaticTextForm}
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-                    </div>
-                </div>
-{/if}
+        <div id="addStaticText" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Text'}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Please fill in these information'}</p>
+              {control addStaticTextForm}
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+            </div>
+        </div>
+    {/if}
    
     {control modalControl:tracking}
                 
     {block #modal}
     {/block}
+        
 {/block}  
             </div>
         </div>
     </div>	
-                
+
 {block scripts}
             {ifCurrent Order:cart}
 
