@@ -2,11 +2,8 @@
 {control menu:breadBlog $post->CategoryID, $post->BlogID}
 {/block}
 {block pageheader}
-<div class="page-header">
-    <h1 n:block="title"><span class="BlogName" n:snippet="BlogName">{$post->BlogName}</span> <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>
-            {if $user->isInRole('admin')}
-<div class="row">
-    <div class="span10">
+ {if $user->isInRole('admin')}
+    <div class="span12">
         <a href="#addPhoto" class="btn" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
          <div class="btn-group">
         <a href="#editDesc" class="btn" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
@@ -15,18 +12,18 @@
          </div>
         <a href="#" class="btn" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>         
     </div>
-</div>
-            {/if}    
-        
+ {/if}  
+<div class="page-header">
+    <h1 n:block="title"><span class="BlogName" n:snippet="BlogName">{$post->BlogName}</span> <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>  
 </div>
 {/block}
 
 {block content}
 
-<div class="span9">
+<div class="span12">
 
     {if $post->CategoryID != 100}
-            <div class="tabbable span9">
+            <div class="tabbable span11">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#allinfo" data-toggle="tab"><i class="icon-info-sign"></i> {_'Post'}</a></li>
                     <li><a href="#gal" data-toggle="tab"><i class="icon-camera-retro"></i> {_'Gallery'}</a></li>

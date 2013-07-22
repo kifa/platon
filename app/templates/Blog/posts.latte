@@ -1,15 +1,13 @@
-<div class="row">
+<ul class="thumbnails">
             {foreach $posts as $id => $post}
-    <div class="span9 thumbnail post">
+    <li class="span4 thumbnail post miniproduct">
         <h2>{$post->BlogName}</h2>
         <div><p>
         {$post->BlogContent|striptags|truncate:400}</p><small><a href="{plink Blog:post $post->BlogID}">{_'Read more'} <i class="icon-arrow-right"></i></a></small></div>
-    </div>
-    <hr class="span9">
-    
-    
+    </li>
+   
             {/foreach}
-</div>
+</ul>
 
 {block script}
         

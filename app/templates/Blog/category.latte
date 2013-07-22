@@ -1,13 +1,10 @@
 {block bread}
 {control menu:breadBlog $category->CategoryID}
 {/block}
+
 {block pageheader}
-<div class="page-header">
-        <h1 n:block="title">{$category->CategoryName}<small> {$category->CategoryDescription|striptags|truncate:50}</small></h1>
-        
-        <div class="row">
-            <div class="span10">
-                {if $user->isInRole('admin')}
+{if $user->isInRole('admin')}
+        <div class="span11">
                 <a href="#addPost" class="btn" data-toggel="modal" data-target="#addPostButton" id="addPostButton"><i class="icon-large icon-plus"></i> {_"Add Post"}</a>
                 <div class="btn-group">
                 <a href="#" class="btn"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
@@ -29,29 +26,18 @@
 </li>
   </ul>
 </div>
-                
-               
-                
-               
-                    
-
-               
-
+                </div>
                 {/if}
-                
-            </div>
-        </div>
-        
-    </div>
-   
-    
-    
+<div class="page-header">
+        <h1 n:block="title">{$category->CategoryName}<small> {$category->CategoryDescription|striptags|truncate:50}</small></h1>    
+</div>
+  
 {/block}
     
 {block content}
-<div class="span9">    
+<div class="span12">    
     {include ../Blog/posts.latte}
-</div>    
+</div>
 {/block}
 
 {block sidebar}
