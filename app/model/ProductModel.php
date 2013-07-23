@@ -100,7 +100,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
      *  */
     public function insertProduct($name,$price,$producer,$prodnumber,
             $short,$description,$ean,$qr,$warranty,$pieces,$category,
-            $dataaval,$comment)
+            $dataaval,$comment=NULL)
     {
         $today = date("Y-m-d");
         
