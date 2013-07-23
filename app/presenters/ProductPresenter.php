@@ -203,8 +203,8 @@ class ProductPresenter extends BasePresenter {
                     'rok', //Warranty
                     $form->values->amount, //Pieces
                     $form->values->cat, //CatID
-                    '', //Date of avail.                
-                    1 //Comment   
+                    '' //Date of avail.                
+                    //NULL //Comment   
             );
 
             if ($form->values->image->isOK()) {

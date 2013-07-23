@@ -123,7 +123,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             'CategoryID' => $category,            
             'DateOfAvailable' => $dataaval,
             'ProductDateOfAdded' => $today,            
-            'CommentID' => $comment
+           // 'CommentID' => $comment
         );
         $row = $this->getTable('product')->insert($insert);   
         $lastprodid = $row["ProductID"];
