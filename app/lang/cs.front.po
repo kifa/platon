@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-07-23 21:26:28
+# Created: 2013-07-23 21:51:15
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-07-23 21:26+0200\n"
+"PO-Revision-Date: 2013-07-23 21:51+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -111,6 +111,9 @@ msgstr "Velké fotky"
 msgid "Big slider"
 msgstr "Velký slider"
 
+msgid "Bill to"
+msgstr "Odběratel"
+
 msgid "Blog"
 msgstr "Blog"
 
@@ -174,11 +177,17 @@ msgstr "Klikněte a vložte informace"
 msgid "Click to edit ..."
 msgstr "Klikněte a vložte informace ..."
 
+msgid "Close"
+msgstr "Zavřít"
+
 msgid "Close without adding"
 msgstr "Zavřít bez přidání"
 
 msgid "Close without saving"
 msgstr "Zavřít bez uložení"
+
+msgid "Company info"
+msgstr "Informace o firmě"
 
 msgid "Complete summary order"
 msgstr "Kompletní souhrn Vaší objednávky"
@@ -389,6 +398,9 @@ msgstr "Skladem"
 
 msgid "Info"
 msgstr "Info"
+
+msgid "Invoice"
+msgstr "Faktura"
 
 msgid "It has to be a number!"
 msgstr "Zde musí být číslo."
@@ -661,7 +673,7 @@ msgid "Video"
 msgstr "Video"
 
 msgid "View"
-msgstr "Prohlédnout"
+msgstr "Info"
 
 msgid "Warehouse"
 msgstr "Sklad"
@@ -711,6 +723,6 @@ msgstr "PSČ:"
 msgid "pcs"
 msgstr "ks"
 
-msgid "Close"
-msgstr "Zavřít"
+msgid "Order administration"
+msgstr "Správa objednávky"
 

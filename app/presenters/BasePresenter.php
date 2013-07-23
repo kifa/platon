@@ -126,13 +126,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         if($this->shopModel->getShopInfo('HomepageLayout') == 'homepage-bigslider') {
             
         $this->template->bigSlider = 1;
-        
         }
         else {
                  $this->template->bigSlider = NULL;
    
         }
-        
+        $this->template->slider = NULL;
+
         if ($this->isAjax()) {
         $this->invalidateControl('flashMessages');
         }

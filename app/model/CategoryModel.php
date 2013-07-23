@@ -45,7 +45,8 @@ class CategoryModel extends Repository {
             'CategoryName' => $name,
             'CategoryDescription' => $description,
             'HigherCategoryID' => $higher,
-            'CategoryPhoto' => $photo
+            'CategoryPhoto' => $photo,
+            'CategoryStatus' => 0
         );
         $row = $this->getTable('Category')->insert($insert);
         return $row->CategoryID;

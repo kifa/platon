@@ -49,6 +49,7 @@ class HomepagePresenter extends BasePresenter {
         
         $this->template->setFile( $this->context->parameters['appDir'] . '/templates/Homepage/'  . $layout . '.latte'); 
        
+        $this->template->slider = 1;
         $this->template->category = $this->categoryModel->loadCategory("");
         $this->template->anyVariable = 'any value';
         

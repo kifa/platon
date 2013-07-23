@@ -242,6 +242,10 @@ margin-bottom: -90px;
     background: none repeat scroll 0 0 #154875 !important;
 }
 
+.shopHead > .container {
+    padding: 18px 18px 0px 18px;
+}
+
 .shopSidebar, .shopInnerContent {
     background: white;
     border: 1px solid #ccc;

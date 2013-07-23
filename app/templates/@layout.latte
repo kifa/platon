@@ -72,7 +72,7 @@
         </div>
 
     </div>
-       {block #bread}{/block}
+      
 
 {snippet flashMessages}   
             {foreach $flashes as $flash}
@@ -85,17 +85,20 @@
     
 </div> 
 </div> 
+    {block #slider}
+    {if $slider}
 <div class="shopSlider">   
  <div class="container supercontainer container-fluid">
 
-   {block #slider}
-        {/block}
+   
+        
  </div></div>
-    
+    {/if}
+    {/block}
     
      <div class="shopContent">   
  <div class="container supercontainer container-fluid">
-   
+ {block #bread}{/block}   
     <div id="content" class="row-fluid"> 
    
         

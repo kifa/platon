@@ -608,6 +608,7 @@ class ProductPresenter extends BasePresenter {
             $this->template->categories = $this->categoryModel->loadCategoryList();
         }
 
+        $this->template->slider = NULL;
         $this->template->category = $this->categoryModel->loadCategory($catID);
     }
 
@@ -1084,7 +1085,7 @@ class ProductPresenter extends BasePresenter {
         $this->template->photo = $this->productModel->loadCoverPhoto($id);
         $this->template->album = $this->productModel->loadPhotoAlbum($id);
         $this->template->parameter = $this->productModel->loadParameters($id);
-      
+        $this->template->slider = NULL;
         $this->template->docs = $this->productModel->loadDocumentation($id)->fetchPairs('DocumentID');
 
     }
@@ -1095,7 +1096,8 @@ class ProductPresenter extends BasePresenter {
      * ********************************************************************** */
 
     public function renderDefault() {
-        $this->redirect('Products');
+        $this->redirect('products');
+        $this->template->slider = NULL;
         $this->template->anyVariable = 'any value';
     }
     
