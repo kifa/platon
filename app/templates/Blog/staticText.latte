@@ -17,9 +17,11 @@
                     <button class="btn dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
                     </button>
+                    {if $post->StaticTextID > 3}
                     <ul class="dropdown-menu">
                          <li><a href="#deleteText" data-toggel="modal" data-target="#deleteText" id="deleteTextButton"><i class="icon-large icon-trash"></i> {_"Delete Text"}</a> </li>
                     </ul>
+                    {/if}
                 </div>
             
           

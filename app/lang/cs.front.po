@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-07-21 17:05:27
+# Created: 2013-07-23 21:26:28
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-07-21 17:05+0200\n"
+"PO-Revision-Date: 2013-07-23 21:26+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -36,11 +36,17 @@ msgstr "Přidat kategorii"
 msgid "Add Document"
 msgstr "Přidat dokument"
 
+msgid "Add Note"
+msgstr "Přidat poznámku"
+
 msgid "Add Payment"
 msgstr "Přidat platební metodu"
 
 msgid "Add Photo"
 msgstr "Přidat Foto"
+
+msgid "Add Post"
+msgstr "Přidat příspěvek"
 
 msgid "Add Product"
 msgstr "Přidat produkt"
@@ -51,14 +57,26 @@ msgstr "Přidat specifikaci"
 msgid "Add Text"
 msgstr "Přidat text"
 
+msgid "Add any note to this order"
+msgstr "Přidejte jakoukoliv poznámku k této objednávce"
+
 msgid "Add category photo"
 msgstr "Přidat kategorii fotku"
 
 msgid "Add new product"
 msgstr "Přidat produkt"
 
+msgid "Add note"
+msgstr "Přidat poznámku"
+
 msgid "Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow."
 msgstr "Přidejte některou z dříve vytvořených, nebo vytvořte novou."
+
+msgid "Add products"
+msgstr "Přidat produkty"
+
+msgid "Address"
+msgstr "Adresa"
 
 msgid "Admin"
 msgstr "Správa"
@@ -72,8 +90,14 @@ msgstr "Jste"
 msgid "Are you sure to delete this category?"
 msgstr "Opravdu chcete smazat celou kategorii?"
 
+msgid "Are you sure to delete this text?"
+msgstr "Jste si jisti, že chcete tento text smazat?"
+
 msgid "Ask"
 msgstr "Zeptejte se"
+
+msgid "Back to Orders"
+msgstr "Zpět na objednávky"
 
 msgid "Back to SmartPanel"
 msgstr "Zpět na Smart Panel"
@@ -98,6 +122,9 @@ msgstr "Koupit"
 
 msgid "Cancel"
 msgstr "Zrušit"
+
+msgid "Cancel order"
+msgstr "Zrušit objednávku"
 
 msgid "Cart"
 msgstr "Košík"
@@ -135,6 +162,9 @@ msgstr "Vyberte jazyk:"
 msgid "Choose your delivery option"
 msgstr "Vyberte způsob doručení"
 
+msgid "City"
+msgstr "Město"
+
 msgid "City:"
 msgstr "Město:"
 
@@ -150,8 +180,14 @@ msgstr "Zavřít bez přidání"
 msgid "Close without saving"
 msgstr "Zavřít bez uložení"
 
+msgid "Complete summary order"
+msgstr "Kompletní souhrn Vaší objednávky"
+
 msgid "Contact"
 msgstr "Kontakt"
+
+msgid "Contact us"
+msgstr "Kontaktujte nás"
 
 msgid "Continue your Order"
 msgstr "Objednat zboží"
@@ -168,11 +204,17 @@ msgstr "Vytvořte novou:"
 msgid "Create new payment:"
 msgstr "Vytvořit novou platbu:"
 
+msgid "Date created"
+msgstr "Datum vytvoření"
+
 msgid "Delete"
 msgstr "Smazat"
 
 msgid "Delete Category"
 msgstr "Smazat kategorii"
+
+msgid "Delete Text"
+msgstr "Smazat text"
 
 msgid "Delete photo"
 msgstr "Smazat fotku"
@@ -192,11 +234,32 @@ msgstr "Sleva"
 msgid "Discount:"
 msgstr "Sleva:"
 
+msgid "Do you have any question? Ask us! We will be happy."
+msgstr "Máte jakoukoliv otázku? Napište nám. Rádi Vám odpovíme."
+
 msgid "Docs"
 msgstr "Dokumenty"
 
 msgid "Document:"
 msgstr "Dokument:"
+
+msgid "Download"
+msgstr "Stáhnout"
+
+msgid "Download INVOICE"
+msgstr "Stáhnout FAKTURU"
+
+msgid "Download link"
+msgstr "Odkaz na stažení"
+
+msgid "EDIT address by Double-clicking."
+msgstr "Upravte adresu dvojitým poklepáním na údaj."
+
+msgid "EDIT name and phone by Double-clicking."
+msgstr "Upravte jméno a telefon dvojitým klepnutím na údaj."
+
+msgid "EDIT shipping and payment by Double-clicking."
+msgstr "Upravte poštovné a platbu pouhým kliknutím na název."
 
 msgid "Edit"
 msgstr "Upravit"
@@ -207,11 +270,20 @@ msgstr "Upravit kategorii"
 msgid "Edit Description"
 msgstr "Upravit Popis"
 
+msgid "Edit Documents"
+msgstr "Upravit dokumenty"
+
+msgid "Edit Order Info"
+msgstr "Upravit info o objednávce"
+
 msgid "Edit Price"
 msgstr "Upravit Cenu"
 
 msgid "Edit Product"
 msgstr "Upravit Produkt"
+
+msgid "Edit Products"
+msgstr "Upravit produkty"
 
 msgid "Edit Specification"
 msgstr "Upravit specifikace"
@@ -219,11 +291,23 @@ msgstr "Upravit specifikace"
 msgid "Edit Specs"
 msgstr "Upravit specifikace"
 
+msgid "Edit info"
+msgstr "Upravit informace"
+
+msgid "Edit order info and click save"
+msgstr "Upravte informace o objednávce a klikněte na uložit."
+
 msgid "Edit payment"
 msgstr "Upravit platbu"
 
+msgid "Edit this text and heading by clicking"
+msgstr "Upravte tento text kliknutím na nadpis, nebo na obsah ..."
+
 msgid "Edit your description and click Save desccription."
 msgstr "Upravte popis a kliknete na Uložit popis"
+
+msgid "Email"
+msgstr "Email"
 
 msgid "Email:"
 msgstr "Email:"
@@ -260,6 +344,9 @@ msgstr "Fotky"
 
 msgid "HOT"
 msgstr "SUPER"
+
+msgid "Hello"
+msgstr "Vítejte"
 
 msgid "Here"
 msgstr "Zde"
@@ -333,8 +420,17 @@ msgstr "Jméno:"
 msgid "News"
 msgstr "Zprávy"
 
+msgid "Note"
+msgstr "Poznámka"
+
+msgid "Note:"
+msgstr "Poznámka:"
+
 msgid "Notebook"
 msgstr "Notebook"
+
+msgid "Order summary"
+msgstr "Shrnutí objednávky"
 
 msgid "Orders"
 msgstr "Objednávky"
@@ -359,6 +455,12 @@ msgstr "Název platby"
 
 msgid "Payment price:"
 msgstr "Poplatek za platbu:"
+
+msgid "Payment:"
+msgstr "Platba:"
+
+msgid "Phone"
+msgstr "Telefon"
 
 msgid "Phone:"
 msgstr "Telefon:"
@@ -393,6 +495,12 @@ msgstr "Vyberte způsob platby"
 msgid "Please select Shipping method"
 msgstr "Vyberte způsob dopravy"
 
+msgid "Post"
+msgstr "Příspěvek"
+
+msgid "Prev Order"
+msgstr "Předchozí obj."
+
 msgid "Price"
 msgstr "Cena"
 
@@ -405,6 +513,9 @@ msgstr "Výrobce:"
 msgid "Product"
 msgstr "Produkt"
 
+msgid "Product Name"
+msgstr "Název produktu"
+
 msgid "Product layout"
 msgstr "Rozložení produktu"
 
@@ -414,11 +525,17 @@ msgstr "Za produkty"
 msgid "Products layout"
 msgstr "Rozvržení produktů"
 
+msgid "Publish text"
+msgstr "Zveřejnit text"
+
 msgid "Question:"
 msgstr "Otázka:"
 
 msgid "Read Terms"
 msgstr "Přečíst podmínky"
+
+msgid "Read more"
+msgstr "Pokračovat ve čtení"
 
 msgid "Review"
 msgstr "Recenze"
@@ -435,11 +552,20 @@ msgstr "Sleva"
 msgid "Save description"
 msgstr "Uložit popis"
 
+msgid "Save post"
+msgstr "Uložit příspěvek"
+
 msgid "Save price"
 msgstr "Uložit cenu"
 
+msgid "Select Category:"
+msgstr "Vyberte kategorii:"
+
 msgid "Select Payment method"
 msgstr "Vyberte platbu"
+
+msgid "Select Product to add"
+msgstr "Vyberte produkt, který chcete přidat"
 
 msgid "Select one of already created:"
 msgstr "Vyberte z již vytvořených:"
@@ -458,6 +584,9 @@ msgstr "Rozvržení katalogu"
 
 msgid "Shipping"
 msgstr "Poštovné"
+
+msgid "Shipping:"
+msgstr "Doručení:"
 
 msgid "Shop layout"
 msgstr "Rozvržení shopu"
@@ -486,6 +615,12 @@ msgstr "Stálý text"
 msgid "Stats"
 msgstr "Statistiky"
 
+msgid "Status"
+msgstr "Stav"
+
+msgid "Street"
+msgstr "Ulice"
+
 msgid "Street:"
 msgstr "Ulice:"
 
@@ -500,6 +635,9 @@ msgstr "Zde by mělo být číslo"
 
 msgid "This has to be a number."
 msgstr "Zde musí být číslo. (Zkuste vložit nulu)"
+
+msgid "To add photos, upload them and then \"Click to edit\" and drag photos to editor."
+msgstr "Pro přidání fotky ji nejprve nahrajte. Následně \"Klikněte pro vložení textu\" a fotky přetáhněte do editoru."
 
 msgid "Total"
 msgstr "Celkem"
@@ -516,6 +654,9 @@ msgstr "Sledovat objednávku"
 msgid "Unpublish category"
 msgstr "Zneveřejni kategorii"
 
+msgid "Unpublish text"
+msgstr "Zneveřejnit"
+
 msgid "Video"
 msgstr "Video"
 
@@ -528,11 +669,17 @@ msgstr "Sklad"
 msgid "We will respond as soon as possible."
 msgstr "Odpovíme tak rychle, jak to jen půjde."
 
+msgid "What would you like to know:"
+msgstr "Co byste rádi věděli:"
+
 msgid "Would you fill your email, please?"
 msgstr "Prosím vyplňte svůj email."
 
 msgid "Would you fill your name, please?"
 msgstr "Vyplňte prosím své jméno"
+
+msgid "Write to us"
+msgstr "Napište nám"
 
 msgid "You"
 msgstr "Právě"
@@ -543,6 +690,9 @@ msgstr "Jste přihlášení jako správce. Editujte jednoduše kliknutím na ná
 msgid "You cannot edit product here!"
 msgstr "Pro úpravu přejděte do kategorie!"
 
+msgid "Your Note:"
+msgstr "Vaše poznámka:"
+
 msgid "Your cart"
 msgstr "Váš košík"
 
@@ -552,12 +702,15 @@ msgstr "Váš email:"
 msgid "Your order number:"
 msgstr "Číslo Vaší objednávky"
 
+msgid "ZIP"
+msgstr "PSČ"
+
 msgid "ZIP:"
 msgstr "PSČ:"
 
 msgid "pcs"
 msgstr "ks"
 
-msgid "Note:"
-msgstr "Poznámka:"
+msgid "Close"
+msgstr "Zavřít"
 
