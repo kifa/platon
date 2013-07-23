@@ -193,6 +193,7 @@ class ProductPresenter extends BasePresenter {
     public function addProductFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
 
+          try {
             $return = $this->productModel->insertProduct(
                     $form->values->name, //Name
                     $form->values->price, 1, //Producer                
@@ -227,8 +228,16 @@ class ProductPresenter extends BasePresenter {
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $return[1] . '/50-' . $form->values->image->name;
                 $image->save($imgUrl);
             }
-
+            
             $this->redirect('Product:product', $return[0]);
+
+             }
+            catch (Exception $e) {
+                 \Nette\Diagnostics\Debugger::log($e);
+                 $this->redirect('this');
+            }
+            
+            
             
             
         }
