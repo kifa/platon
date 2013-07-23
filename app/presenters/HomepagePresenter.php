@@ -66,7 +66,7 @@ class HomepagePresenter extends BasePresenter {
             $contactForm->addTextArea('note', 'What would you like to know:')
                     ->setRequired();
             $contactForm->addSubmit('send', 'Ask')
-                    ->setAttribute('class', 'ajax span2 btn btn-primary btn-large')
+                    ->setAttribute('class', 'ajax span4 btn btn-primary btn-large')
                     ->setAttribute('data-loading-text', 'Asking...');
             $contactForm->onSuccess[] = $this->contactFormSubmitted;
 

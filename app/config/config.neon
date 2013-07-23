@@ -21,7 +21,7 @@ common:
 			password: ''
 
 		session:
-			expiration: 1 days
+			expiration: 30 days
 
 
 	services:
@@ -36,7 +36,7 @@ common:
 		userModel: UserModel
 		blogModel: BlogModel
 	netteTranslator:
-		lang: en
+		lang: cs
 		files:
 			front: %appDir%/lang
 		#translatorModel: TranslatorModel

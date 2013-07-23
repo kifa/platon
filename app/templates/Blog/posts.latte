@@ -1,9 +1,9 @@
 <ul class="thumbnails">
             {foreach $posts as $id => $post}
     <li class="span4 thumbnail post miniproduct">
-        <h2>{$post->BlogName}</h2>
+    <h2 class="text-left"><a href="{plink Blog:post $post->BlogID}">{$post->BlogName}</a></h2>
         <div><p>
-        {$post->BlogContent|striptags|truncate:400}</p><small><a href="{plink Blog:post $post->BlogID}">{_'Read more'} <i class="icon-arrow-right"></i></a></small></div>
+        {$post->BlogContent|striptags|truncate:400}</p><small><a href="{plink Blog:post $post->BlogID}" class="btn btn-small margin5">{_'Read more'} <i class="icon-arrow-right"></i></a></small></div>
     </li>
    
             {/foreach}

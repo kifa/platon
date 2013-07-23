@@ -110,10 +110,7 @@
                 {input send}
                 <hr>
                 {input termButton}
-                <div class="controls">
-                {label terms /}
-                {input terms}
-                </div>
+                {_'I accept Terms and condition.'}
                 
             </div>
              <div class="controls span6">
@@ -139,6 +136,7 @@
     
     
       </div> 
+{control modalControl:info terms, $terms->StaticTextName, $terms->StaticTextContent}
 <script>
 
         var sp = new Array(); 
@@ -182,8 +180,7 @@
 {/block}
 
 {block sidebar}
-    {var $i = 'Terms'}{var $ii = 'Violators will be prosecuted to the maximum extent possible.'}
-    {control modalControl:info terms, $i, $ii}
+    
 {/block}
 
     {block script}

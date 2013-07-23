@@ -126,9 +126,9 @@ class OrderPresenter extends BasePresenter {
        $row = $this->productModel->loadProduct($product);
         if (!$row || !$product) {
              if ($this->cart->numberItems > 0) {
-                $this->setView('Cart');
+                $this->setView('cart');
             } else {
-                $this->setView('CartEmpty');
+                $this->setView('cartEmpty');
             }
         }
         else {
@@ -180,9 +180,7 @@ class OrderPresenter extends BasePresenter {
                 $payment[$key] = $value->PaymentPrice;
             };
             
-            
-            
-
+            $this->template->terms = $this->shopModel->loadStaticText(1);
             $this->template->shippers = $shippers;
             $this->template->payment = $payment;
             $this->template->cart = $this->c2;
@@ -218,7 +216,6 @@ class OrderPresenter extends BasePresenter {
         $cartForm = new Nette\Application\UI\Form;
         $cartForm->setTranslator($this->translator);
 
-    //    $cartForm->setRenderer(new BootstrapRenderer);
         $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
         $cartForm->addGroup('Delivery info');
         $cartForm->addText('name', 'Name:', 40, 100)
@@ -244,11 +241,6 @@ class OrderPresenter extends BasePresenter {
               //  ->setAttribute('class', '.span1 radio')
                 ->setRequired('Please select Payment method');
         $cartForm->addGroup('Terms');
-        
-        $cartForm->addCheckbox('terms', 'I accept Terms and condition.')
-                ->setRequired()
-                ->setDefaultValue('TRUE')
-                ->addRule(Form::FILLED, 'In order to continue checkout, you have to agree with Term.');
         $cartForm->addButton('termButton', 'Read Terms')
                 ->setHtmlId('termsButton')
                 ->setAttribute('class', 'btn btn-small btn-primary');
@@ -487,7 +479,7 @@ class OrderPresenter extends BasePresenter {
      */
 
     public function renderDefault() {
-        $this->setView('Cart');
+        $this->setView('cart');
     }
     
     

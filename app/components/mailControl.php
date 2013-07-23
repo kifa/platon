@@ -29,7 +29,7 @@ class mailControl extends BaseControl {
         $this->shopModel = $shop;
     }
 
-        public function setBlog($blog) {
+    public function setBlog($blog) {
         $this->blogModel = $blog;
 
     }
@@ -45,7 +45,7 @@ class mailControl extends BaseControl {
     
  
     public function createTemplate($class = NULL)
-{
+    {
     $template = parent::createTemplate($class);
     $template->setTranslator($this->translator);
 
@@ -59,15 +59,16 @@ public function sendSuperMail($to, $subject, $message, $from='luk.danek@gmail.co
             $mail->setFrom($from)
             ->addTo($to)
             ->setSubject($subject)
-            ->setHtmlBody($message);
-
+            ->setHtmlBody($message)
+                    ->send();
+/*
            $mailer = new Nette\Mail\SmtpMailer(array(
                 'host' => 'smtp.gmail.com',
                 'username' => 'obchod@inlinebus.cz',
                 'password' => 'cerven31',
                 'secure' => 'ssl',
                 ));
-            $mailer->send($mail);
+            $mailer->send($mail); */
     }
 }
 
