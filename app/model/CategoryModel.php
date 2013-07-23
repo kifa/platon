@@ -15,22 +15,22 @@ class CategoryModel extends Repository {
      * @return string
      */
     public function loadCategoryList(){
-        return $this->getTable('Category')->where('CategoryStatus',1)->fetchPairs('CategoryID');
+        return $this->getTable('category')->where('CategoryStatus',1)->fetchPairs('CategoryID');
     }
     
     public function loadCategoryListAdmin(){
-        return $this->getTable('Category')->fetchPairs('CategoryID');
+        return $this->getTable('category')->fetchPairs('CategoryID');
     }
     /*
      * Load Category info
      */
     
     public function loadCategory($id){
-        return $this->getTable('Category')->where('CategoryID', $id)->fetch();
+        return $this->getTable('category')->where('CategoryID', $id)->fetch();
     }
     
     public function loadCategory2($id){
-        return $this->getTable('Category')->where('CategoryID', $id);
+        return $this->getTable('category')->where('CategoryID', $id);
     }
     
     /*
@@ -48,7 +48,7 @@ class CategoryModel extends Repository {
             'CategoryPhoto' => $photo,
             'CategoryStatus' => 0
         );
-        $row = $this->getTable('Category')->insert($insert);
+        $row = $this->getTable('category')->insert($insert);
         return $row->CategoryID;
         
     }

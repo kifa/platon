@@ -26,7 +26,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             return $this->getDB()->query('SELECT * FROM product JOIN price 
                 ON price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE Photo.CoverPhoto="1" and product.ProductStatusID="2"');                              
+                WHERE photo.CoverPhoto="1" and product.ProductStatusID="2"');                              
             
             }
         else
@@ -34,7 +34,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             return $this->getDB()->query('SELECT * FROM product JOIN price ON 
             price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-            WHERE Photo.CoverPhoto="1" and product.ProductStatusID="2" and product.CategoryID=? ORDER BY ',$catID, 'price.FinalPrice ASC');
+            WHERE photo.CoverPhoto="1" and product.ProductStatusID="2" and product.CategoryID=? ORDER BY ',$catID, 'price.FinalPrice ASC');
             
 
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
@@ -47,7 +47,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
           return $this->getDB()->query('SELECT * FROM product JOIN price ON 
             price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-            WHERE Photo.CoverPhoto="1" and product.ProductStatusID="2" and product.ProducerID=?', $prodID);
+            WHERE photo.CoverPhoto="1" and product.ProductStatusID="2" and product.ProducerID=?', $prodID);
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
               //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
         
@@ -62,14 +62,14 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             return $this->getDB()->query('SELECT * FROM product JOIN price 
                 ON price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE Photo.CoverPhoto="1"');                              
+                WHERE photo.CoverPhoto="1"');                              
             
             }
         else
         {  return $this->getDB()->query('SELECT * FROM product JOIN price ON 
             price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-            WHERE Photo.CoverPhoto="1" and product.CategoryID=?',$catID);
+            WHERE photo.CoverPhoto="1" and product.CategoryID=?',$catID);
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
               //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
         }
@@ -88,7 +88,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             JOIN producer ON product.ProducerID=producer.ProducerID
             JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
-            WHERE Product.ProductID=?',$id)->fetch();
+            WHERE product.ProductID=?',$id)->fetch();
         //return $this->getTable('Product')->select('Product.*,Price.*,PhotoAlbum.*,photo.*')->where('Product.ProductID',$id)->fetch()
     }
 
@@ -125,7 +125,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             'ProductDateOfAdded' => $today,            
             'CommentID' => $comment
         );
-        $row = $this->getTable('Product')->insert($insert);   
+        $row = $this->getTable('product')->insert($insert);   
         $lastprodid = $row["ProductID"];
         
         $albumid = $this->insertPhotoAlbum($name, $description,$lastprodid, null);
@@ -152,14 +152,14 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             $update = array(
                 $update => $value
                 );        
-        return $this->getTable('Product')->where('ProductID',$id)->update($update);
+        return $this->getTable('Product')->where('productID',$id)->update($update);
     }
     
     public function updateProductName($id,$value){
         $update = array(
             'ProductName' => $value
         );
-        return $this->getTable('Product')->where('ProductID',$id)->update($update);
+        return $this->getTable('product')->where('ProductID',$id)->update($update);
     }
 
 
@@ -172,12 +172,12 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
                 'FinalPrice' => $final,
                 'SALE' => $sale
                 );        
-        return $this->getTable('Price')->where('ProductID',$id)->update($update);
+        return $this->getTable('price')->where('ProductID',$id)->update($update);
     }
 
     public function updateSale($prodid,$sale,$type=NULL){
         if($type==NULL){
-            $productprice = $this->getTable('Price')->select('SellingPrice')->where('ProductID',$prodid)->fetch();            
+            $productprice = $this->getTable('price')->select('SellingPrice')->where('ProductID',$prodid)->fetch();            
             
             $finalprice = $productprice['SellingPrice'] - $sale;
                         
@@ -187,7 +187,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             );
         }
         elseif ($type=='percent') {
-            $productprice = $this->getTable('Price')->select('SellingPrice')->where('ProductID',$prodid)->fetch();            
+            $productprice = $this->getTable('price')->select('SellingPrice')->where('ProductID',$prodid)->fetch();            
             
             $sale = $sale/100;
             
@@ -200,16 +200,16 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             );            
     }
                 
-        return $this->getTable('Price')->where('ProductID',$prodid)->update($update);
+        return $this->getTable('price')->where('ProductID',$prodid)->update($update);
     }
 
         public function decreaseProduct($id, $amnt) {
-        $cur = $this->getTable('Product')->where('ProductID',$id)->fetch()->PiecesAvailable;
+        $cur = $this->getTable('product')->where('ProductID',$id)->fetch()->PiecesAvailable;
         $cur = $cur - $amnt;
         $update = array(
                 'PiecesAvailable' => $cur
                 );        
-        return $this->getTable('Product')->where('ProductID',$id)->update($update);
+        return $this->getTable('product')->where('ProductID',$id)->update($update);
     }
     /*
      * Delete Product
@@ -218,7 +218,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
      * @return string 
      */
     public function deleteProduct($id){
-        return $this->getTable('Product')->where('ProductID',$id)->delete();
+        return $this->getTable('product')->where('ProductID',$id)->delete();
     }
     
     public function hideProduct($id){
@@ -226,14 +226,14 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             'ProductStatusID' => 1
         );
         
-        return $this->getTable('Product')->where('ProductID',$id)->update($insert);
+        return $this->getTable('product')->where('ProductID',$id)->update($insert);
     }
     
      public function showProduct($id){
         $insert = array(
             'ProductStatusID' => 2
         );
-        return $this->getTable('Product')->where('ProductID',$id)->update($insert);
+        return $this->getTable('product')->where('ProductID',$id)->update($insert);
     }
     
     /*
@@ -259,7 +259,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
             $row = $this->getDB()->query('SELECT * FROM product JOIN photoalbum 
                 ON product.ProductID=photoalbum.ProductID JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE Product.ProductID=?',$id); 
+                WHERE product.ProductID=?',$id); 
            // dump($row);
             return $row;
         }
@@ -328,7 +328,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             //'CurrencyID'=>
         );
                 
-        return $this->getTable('Price')->insert($insert);
+        return $this->getTable('price')->insert($insert);
     }
     
     public function loadParameters($id){
@@ -499,12 +499,6 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
         
         return $this->getTable('producer')->where('ProducerID',$id)->update($update);
     }
-    
-    
-    
-    
-    
-    
     
     public function getData() {
         return $this->getTable('producer');

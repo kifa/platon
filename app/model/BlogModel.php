@@ -116,7 +116,7 @@ class BlogModel extends Repository {
  
     public function loadPhotoAlbumID($postid){
         if($postid==''){
-            $photoalbum = $this->getTable('PhotoAlbum');
+            $photoalbum = $this->getTable('photoalbum');
         }
         else{
             //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
@@ -139,7 +139,7 @@ class BlogModel extends Repository {
     
     public function loadPhotoAlbumStatic($postid){
         if($postid==''){
-            return $this->getTable('PhotoAlbum');
+            return $this->getTable('photoalbum');
         }
         else{
             //return $this->getTable('PhotoAlbum')->where('ProductID',$id);
