@@ -916,6 +916,8 @@ class ProductPresenter extends BasePresenter {
             $addForm->setTranslator($this->translator);
             $addForm->setRenderer(new BootstrapRenderer);
 
+            $options = array();
+            $units = array();
             foreach ($this->productModel->loadAttribute('') as $id => $param) {
                 $options[$id] = $param->AttribName;
             }
