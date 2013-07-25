@@ -2,7 +2,8 @@
 
 use Nette\Forms\Form,
     Nette\Utils\Html,
-    Nette\Image;
+    Nette\Image,
+    Nette\Templates\FileTemplate;
 use Nette\Mail\Message;
 
 /**
@@ -34,12 +35,6 @@ class HomepagePresenter extends BasePresenter {
     }
 
     
-    public function renderSitemap() {
-     
-        $this->template->products = $this->productModel->loadCatalog("");
-         $this->template->category = $this->categoryModel->loadCategory("");
-        
-    }
   
     
     public function renderDefault() {

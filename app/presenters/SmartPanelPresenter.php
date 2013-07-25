@@ -1167,6 +1167,31 @@ class SmartPanelPresenter extends BasePresenter {
             $this->redirect('this');
         }
     }
+    
+        public function handleSitemap() {
+        try {
+            $template = $this->createTemplate();
+            $template->setFile($this->context->parameters['appDir'] . '/templates/Homepage/sitemap.latte');
+            $template->registerFilter(new Nette\Latte\Engine);
+            $template->registerHelperLoader('Nette\Templating\Helpers::loader');
+
+            $template->products = $this->productModel->loadCatalog("");
+            $template->category = $this->categoryModel->loadCategory("");
+
+
+            $template->save($this->context->parameters['wwwDir'] . '/sitemap.xml');
+            $this->flashMessage('Sitemap sucessfully generated.', 'alert alert-success');
+        }
+        catch(Exception $e) {
+            
+                   \Nette\Diagnostics\Debugger::log($e);
+                   $this->flashMessage('Sitemap crashed. I´m so sorry.', 'alert alert-danger');
+
+        }
+        $this->redirect('this');
+   
+    }
+
 
     public function renderDefault() {
         if (!$this->getUser()->isInRole('admin')) {

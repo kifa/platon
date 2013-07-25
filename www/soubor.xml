@@ -1,14 +1,12 @@
-{contentType application/xml}
-<?xml version="1.0" encoding="UTF-8"?>
+{block content}
+<?xml version="1.0" encoding="UTF-8"?> 
 <urlset xmlns="http://www.google.com/schemas/sitemap/0.84"> 
-
+    
     {foreach $products as $id => $product}
 <url> 
-    <loc>{link //Product:product $product->ProductID, $product->ProductName}</loc> 
+    <loc>{plink //Product:product $product->ProductID, $product->ProductName}</loc> 
 <lastmod>{$product->ProductDateOfAdded|date:'%Y-%m-%d.'}</lastmod> 
 <changefreq>daily</changefreq> 
 <priority>0.8</priority> 
 </url> 
     {/foreach}
-    
-</urlset>
