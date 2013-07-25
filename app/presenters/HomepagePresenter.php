@@ -33,6 +33,13 @@ class HomepagePresenter extends BasePresenter {
         $this->translator = $translator;
     }
 
+    
+    public function renderSitemap() {
+     
+        $this->template->products = $this->productModel->loadCatalog("");
+         $this->template->category = $this->categoryModel->loadCategory("");
+        
+    }
   
     
     public function renderDefault() {

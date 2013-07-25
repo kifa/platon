@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{block #title|striptags|trim|strip} {/block} | {$shopName}</title>
+        <title>{block #title|striptags|trim|strip} {/block} {$shopName}</title>
         <meta name="description" content="{block #metadesc|striptags|strip|trim} {$shopDescription} {/block}">
         <meta name="robots" content="{$robots}" n:ifset="$robots">
         <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
@@ -34,7 +34,7 @@
 <div class="container supercontainer container-fluid">
     <div class="masterhead">
         <div class="row-fluid">
-            <a href="{plink Homepage:default}" class="span3"><h1><img src="{$basePath}/images/logo/{$shopLogo}" alt="{$shopName}" title="{$shopName}"></h1></a>
+            <a href="{plink Homepage:default}" class="span5"><h1><img src="{$basePath}/images/logo/{$shopLogo}" alt="{$shopName}" title="{$shopName}"></h1></a>
 
             {control menu:top}
 

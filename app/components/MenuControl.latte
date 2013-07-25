@@ -2,7 +2,7 @@
                 {foreach $category as $catID => $cat}
                 {if !$cat->HigherCategoryID}
                 {if $cat->CategoryStatus != 4}
-<li class="{ifCurrent Product:products $catID}active{/ifCurrent}"><a href="{plink product:products $catID}">
+<li class="{ifCurrent Product:products $catID, $cat->CategoryName}active{/ifCurrent}"><a href="{plink product:products $catID, $cat->CategoryName}">
                         {if $img !== NULL}
                             {if $cat->CategoryPhoto != NULL}
         <img src="{$basePath}/images/category/20-{$cat->CategoryPhoto}" class="img-circle" alt="{$cat->CategoryName}"/>

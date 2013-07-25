@@ -97,7 +97,7 @@ class ProductPresenter extends BasePresenter {
      * @param 
      * ********************************************************************** */
 
-    public function actionProducts($catID) {
+    public function actionProducts($catID, $slug) {
         $cat = $this->categoryModel->loadCategory($catID);
         if (!isset($cat->CategoryName)) {
             $this->flashMessage('Category not available', 'alert');
@@ -603,7 +603,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    public function renderProducts($catID) {
+    public function renderProducts($catID, $slug) {
 
         $this->catId = $catID;
 
@@ -633,7 +633,7 @@ class ProductPresenter extends BasePresenter {
      * rendering Product with full info
      * ********************************************************************* */
 
-    public function actionProduct($id) {
+    public function actionProduct($id, $slug = NULL) {
         $row = $this->productModel->loadProduct($id);
         if (!$row) {
             $this->flashMessage('Product not available', 'alert');
@@ -1076,7 +1076,7 @@ class ProductPresenter extends BasePresenter {
         return $productControl;
     }
 
-    public function renderProduct($id) {
+    public function renderProduct($id, $slug) {
         $layout = $this->shopModel->getShopInfo('ProductLayout');
         
        $this->template->setFile( $this->context->parameters['appDir'] . '/templates/Product/'  . $layout . '.latte'); 

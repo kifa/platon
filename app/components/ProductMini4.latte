@@ -47,8 +47,8 @@
                 <span class="badge badge-important"><i class="icon-money icon-large"></i> {_'SALE'}</span>
             {/if}
             </div>
-    
-            <a class="span12 imgLiquid" style="height: 250px; max-width: 400px;" href="{plink Product:product $product->ProductID}"> 
+            
+            <a class="span12 imgLiquid" style="height: 250px; max-width: 400px;" href="{plink Product:product $product->ProductID, $product->ProductName}"> 
             
                 {if $product->PhotoAlbumID}
                      <img src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$product->PhotoURL}" class="img-circle" />
@@ -63,7 +63,8 @@
 
    
     <div class="span12 text-center">
-            <h4><a href="{plink Product:product $product->ProductID}">{$product->ProductName|truncate:30}</a></h4>
+
+            <h4><a href="{plink Product:product $product->ProductID, $product->ProductName}">{$product->ProductName|truncate:30}</a></h4>
             </div>
           
            
