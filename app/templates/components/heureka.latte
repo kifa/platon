@@ -1,0 +1,30 @@
+{contentType application/xml}
+<?xml version="1.0" encoding="utf-8"?>
+<SHOP>
+     {foreach $products as $id => $product}
+  <SHOPITEM>
+    <ITEM_ID>{$product->ProductNumber}</ITEM_ID>
+    <PRODUCTNAME>{$product->ProductName}</PRODUCTNAME>
+    <PRODUCT>{$product->ProductName}</PRODUCT>
+    <DESCRIPTION>{$product->ProductShort}</DESCRIPTION>
+    <URL>{link //Product:product $product->ProductID, $product->ProductName}</URL>
+    <IMGURL>{$baseUrl}/images/{$product->PhotoAlbumID}/300-{$product->PhotoURL}</IMGURL>
+    {if $product->Video}
+    <VIDEO_URL>{$product->Video}</VIDEO_URL>
+    {/if}
+    <PRICE_VAT>{$product->SellingPrice}</PRICE_VAT>
+    <HEUREKA_CPC>5,8</HEUREKA_CPC>
+    <MANUFACTURER>{*$product->ProducerName*}</MANUFACTURER>
+    <CATEGORYTEXT>{*$product->CategoryName*}</CATEGORYTEXT>
+    <EAN>{$product->ProductEAN}</EAN>
+    <PRODUCTNO>{$product->ProductNumber}</PRODUCTNO>
+    {*foreach $parameter as $parameter}
+      <PARAM>
+        <PARAM_NAME>{$parameter->AttribName}</PARAM_NAME>
+        <VAL>{$parameter->Val}{$parameter->UnitShort}</VAL>
+      </PARAM>
+    {/foreach*}    
+   <DELIVERY_DATE>2</DELIVERY_DATE>
+  </SHOPITEM>
+    {/foreach}
+</SHOP>

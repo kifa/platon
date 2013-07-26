@@ -195,6 +195,7 @@
     </div>	
                 
 {block scripts}
+    
             {ifCurrent Order:cart}
 
             {else}
@@ -215,7 +216,7 @@
         <script src="{$basePath}/js/jquery.jeditable.mini.js"></script>
         <script src="{$basePath}/js/jquery.jeditable.wysiwyg.js"></script>
 
-
+        {include 'components/GA.latte', GA => $GA}
         <script>
 
         $(document).ready(function() {

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SHOP>
+  <SHOPITEM>
+    <ITEM_ID></ITEM_ID>
+    <PRODUCTNAME>Samsung Galaxy S4</PRODUCTNAME>
+    <PRODUCT>Samsung Galaxy S4</PRODUCT>
+    <DESCRIPTION></DESCRIPTION>
+    <URL>http://localhost/platon/www/koupit/3-samsung-galaxy-s4/cs</URL>
+    <IMGURL>http://localhost/platon/www/images/3/300-sony.jpg</IMGURL>
+    <PRICE_VAT>7999</PRICE_VAT>
+    <HEUREKA_CPC>5,8</HEUREKA_CPC>
+    <MANUFACTURER></MANUFACTURER>
+    <CATEGORYTEXT></CATEGORYTEXT>
+    <EAN></EAN>
+    <PRODUCTNO></PRODUCTNO>
+        
+   <DELIVERY_DATE>2</DELIVERY_DATE>
+  </SHOPITEM>
+  <SHOPITEM>
+    <ITEM_ID>11111</ITEM_ID>
+    <PRODUCTNAME>Apple iPad</PRODUCTNAME>
+    <PRODUCT>Apple iPad</PRODUCT>
+    <DESCRIPTION></DESCRIPTION>
+    <URL>http://localhost/platon/www/koupit/9-apple-ipad/cs</URL>
+    <IMGURL>http://localhost/platon/www/images/7/300-ipad-mini-scaled-1.jpg</IMGURL>
+    <PRICE_VAT>11999</PRICE_VAT>
+    <HEUREKA_CPC>5,8</HEUREKA_CPC>
+    <MANUFACTURER></MANUFACTURER>
+    <CATEGORYTEXT></CATEGORYTEXT>
+    <EAN>123456</EAN>
+    <PRODUCTNO>11111</PRODUCTNO>
+        
+   <DELIVERY_DATE>2</DELIVERY_DATE>
+  </SHOPITEM>
+  <SHOPITEM>
+    <ITEM_ID>11111</ITEM_ID>
+    <PRODUCTNAME>Lenovo ThinkPad Tablet 2 64GB WiFi 3G 3679-4HG</PRODUCTNAME>
+    <PRODUCT>Lenovo ThinkPad Tablet 2 64GB WiFi 3G 3679-4HG</PRODUCT>
+    <DESCRIPTION></DESCRIPTION>
+    <URL>http://localhost/platon/www/koupit/10-lenovo-thinkpad-tablet-2-64gb-wifi-3g-3679-4hg/cs</URL>
+    <IMGURL>http://localhost/platon/www/images/8/300-ImgW (1).jpg</IMGURL>
+    <PRICE_VAT>20</PRICE_VAT>
+    <HEUREKA_CPC>5,8</HEUREKA_CPC>
+    <MANUFACTURER></MANUFACTURER>
+    <CATEGORYTEXT></CATEGORYTEXT>
+    <EAN>123456</EAN>
+    <PRODUCTNO>11111</PRODUCTNO>
+        
+   <DELIVERY_DATE>2</DELIVERY_DATE>
+  </SHOPITEM>
+  <SHOPITEM>
+    <ITEM_ID>11111</ITEM_ID>
+    <PRODUCTNAME>Lenovo ThinkPad Edge E130 Arctic Blue 3358-8CG</PRODUCTNAME>
+    <PRODUCT>Lenovo ThinkPad Edge E130 Arctic Blue 3358-8CG</PRODUCT>
+    <DESCRIPTION>Velmi malý a tenký cestovní notebook LENOVO ThinkPad Edge E130 s nejnovějším procesorem a s 3G připojením jako ideální každodenní parťák aktivních uživatelů. Notebook odpovídá displeji o kompromisní úhlopříčce 11,6&quot;. Ten je v matné povrchové úpravě pro le</DESCRIPTION>
+    <URL>http://localhost/platon/www/koupit/11-lenovo-thinkpad-edge-e130-arctic-blue-3358-8cg/cs</URL>
+    <IMGURL>http://localhost/platon/www/images/9/300-ImgW.jpg</IMGURL>
+    <PRICE_VAT>20999</PRICE_VAT>
+    <HEUREKA_CPC>5,8</HEUREKA_CPC>
+    <MANUFACTURER></MANUFACTURER>
+    <CATEGORYTEXT></CATEGORYTEXT>
+    <EAN>123456</EAN>
+    <PRODUCTNO>11111</PRODUCTNO>
+        
+   <DELIVERY_DATE>2</DELIVERY_DATE>
+  </SHOPITEM>
+  <SHOPITEM>
+    <ITEM_ID>11111</ITEM_ID>
+    <PRODUCTNAME>Sony Ericsson Xperia Mini</PRODUCTNAME>
+    <PRODUCT>Sony Ericsson Xperia Mini</PRODUCT>
+    <DESCRIPTION>Skvělý malý telefon vhodný do každé malé kapsy. QWERTY klávesnice!
+</DESCRIPTION>
+    <URL>http://localhost/platon/www/koupit/13-sony-ericsson-xperia-mini/cs</URL>
+    <IMGURL>http://localhost/platon/www/images/11/300-mini.jpg</IMGURL>
+    <PRICE_VAT>3999</PRICE_VAT>
+    <HEUREKA_CPC>5,8</HEUREKA_CPC>
+    <MANUFACTURER></MANUFACTURER>
+    <CATEGORYTEXT></CATEGORYTEXT>
+    <EAN>123456</EAN>
+    <PRODUCTNO>11111</PRODUCTNO>
+        
+   <DELIVERY_DATE>2</DELIVERY_DATE>
+  </SHOPITEM>
+  <SHOPITEM>
+    <ITEM_ID>11111</ITEM_ID>
+    <PRODUCTNAME>Spange Bob</PRODUCTNAME>
+    <PRODUCT>Spange Bob</PRODUCT>
+    <DESCRIPTION>Spange Bob je jediný chodící a mluvící keksík na celém širém světě.</DESCRIPTION>
+    <URL>http://localhost/platon/www/koupit/14-spange-bob/cs</URL>
+    <IMGURL>http://localhost/platon/www/images/17/300-images.jpg</IMGURL>
+    <PRICE_VAT>9999</PRICE_VAT>
+    <HEUREKA_CPC>5,8</HEUREKA_CPC>
+    <MANUFACTURER></MANUFACTURER>
+    <CATEGORYTEXT></CATEGORYTEXT>
+    <EAN>123456</EAN>
+    <PRODUCTNO>11111</PRODUCTNO>
+        
+   <DELIVERY_DATE>2</DELIVERY_DATE>
+  </SHOPITEM>
+  <SHOPITEM>
+    <ITEM_ID>11111</ITEM_ID>
+    <PRODUCTNAME>Asus Vivobook</PRODUCTNAME>
+    <PRODUCT>Asus Vivobook</PRODUCT>
+    <DESCRIPTION></DESCRIPTION>
+    <URL>http://localhost/platon/www/koupit/15-asus-vivobook/cs</URL>
+    <IMGURL>http://localhost/platon/www/images/18/300-ImgW.jpg</IMGURL>
+    <PRICE_VAT>19999</PRICE_VAT>
+    <HEUREKA_CPC>5,8</HEUREKA_CPC>
+    <MANUFACTURER></MANUFACTURER>
+    <CATEGORYTEXT></CATEGORYTEXT>
+    <EAN>123456</EAN>
+    <PRODUCTNO>11111</PRODUCTNO>
+        
+   <DELIVERY_DATE>2</DELIVERY_DATE>
+  </SHOPITEM>
+  <SHOPITEM>
+    <ITEM_ID>11111</ITEM_ID>
+    <PRODUCTNAME>Thinkpad</PRODUCTNAME>
+    <PRODUCT>Thinkpad</PRODUCT>
+    <DESCRIPTION></DESCRIPTION>
+    <URL>http://localhost/platon/www/koupit/16-thinkpad/cs</URL>
+    <IMGURL>http://localhost/platon/www/images/19/300-220px-IBM_Thinkpad_R51.jpg</IMGURL>
+    <PRICE_VAT>1000</PRICE_VAT>
+    <HEUREKA_CPC>5,8</HEUREKA_CPC>
+    <MANUFACTURER></MANUFACTURER>
+    <CATEGORYTEXT></CATEGORYTEXT>
+    <EAN>123456</EAN>
+    <PRODUCTNO>11111</PRODUCTNO>
+        
+   <DELIVERY_DATE>2</DELIVERY_DATE>
+  </SHOPITEM>
+</SHOP>

@@ -1171,7 +1171,7 @@ class SmartPanelPresenter extends BasePresenter {
         public function handleSitemap() {
         try {
             $template = $this->createTemplate();
-            $template->setFile($this->context->parameters['appDir'] . '/templates/Homepage/sitemap.latte');
+            $template->setFile($this->context->parameters['appDir'] . '/templates/components/sitemap.latte');
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
 
@@ -1186,6 +1186,31 @@ class SmartPanelPresenter extends BasePresenter {
             
                    \Nette\Diagnostics\Debugger::log($e);
                    $this->flashMessage('Sitemap crashed. I´m so sorry.', 'alert alert-danger');
+
+        }
+        $this->redirect('this');
+   
+    }
+    
+     public function handleXMLFeed() {
+        try {
+            $template = $this->createTemplate();
+            $template->setFile($this->context->parameters['appDir'] . '/templates/components/heureka.latte');
+            $template->registerFilter(new Nette\Latte\Engine);
+            $template->registerHelperLoader('Nette\Templating\Helpers::loader');
+
+            $template->products = $this->productModel->loadCatalog("");
+            $template->category = $this->categoryModel->loadCategory("");
+            $template->url = $this->shopModel->getShopInfo('ShopURL');
+
+
+            $template->save($this->context->parameters['wwwDir'] . '/heureka.xml');
+            $this->flashMessage('Heureka XML feed sucessfully generated.', 'alert alert-success');
+        }
+        catch(Exception $e) {
+            
+                   \Nette\Diagnostics\Debugger::log($e);
+                   $this->flashMessage('XML feed crashed. I´m so sorry.', 'alert alert-danger');
 
         }
         $this->redirect('this');
