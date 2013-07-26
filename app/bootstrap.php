@@ -59,6 +59,7 @@ $router[] = new Route('kosik/', 'Order:cart');
 $router[] = new Route('objednavka-dokoncena/<orderNO>/<lang>', 'Order:cartDone');
 $router[] = new Route('prihlaseni/', 'Sign:in');
 $router[] = new Route('informace/<postid>-<slug>/<lang>', 'Blog:staticText');
+$router[] = new Route('<presenter>/<action>[/<id>]/<lang>', 'SmartPanel:default');
 $router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 
 $container->addService('router', $router);

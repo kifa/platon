@@ -733,8 +733,7 @@ class SmartPanelPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             $addForm = new Nette\Application\UI\Form;
             $addForm->setTranslator($this->translator);
-            $addForm->setRenderer(new BootstrapRenderer);
-
+            
             $addForm->addGroup('Create new shipping:');
             $addForm->addText('newShip', 'Shipping name:')
                     ->setRequired();
@@ -760,7 +759,8 @@ class SmartPanelPresenter extends BasePresenter {
             $this->orderModel->insertDelivery($form->values->newShip,
                                               $form->values->priceShip,
                                               $form->values->descShip,
-                                              $form->values->freeShip);
+                                              $form->values->freeShip,
+                                                1);
             
             $ico = HTML::el('i')->class('icon-ok-sign left');
             $message = HTML::el('span', ' was added sucessfully to your shipping method.');
@@ -1168,6 +1168,18 @@ class SmartPanelPresenter extends BasePresenter {
         }
     }
     
+    
+        public function handleCRON() {
+            try {
+                $this->handleSitemap();
+                $this->handleXMLFeed();
+                $this->handleDownloadXML();
+            }
+            catch (Exception $e) {
+                \Nette\Diagnostics\Debugger::log($e);
+            }
+        }
+
         public function handleSitemap() {
         try {
             $template = $this->createTemplate();
@@ -1216,7 +1228,22 @@ class SmartPanelPresenter extends BasePresenter {
         $this->redirect('this');
    
     }
-
+    
+    public function handleDownloadXML() {
+        try {
+         $API = $this->shopModel->getShopInfo('API');
+         $file = file_get_contents('http://www.zasilkovna.cz/api/v2/' . $API . '/branch.xml');
+         
+         $soubor = fopen($this->context->parameters['appDir'] . "/zasilkovna.xml", "a+");
+        fwrite($soubor, $file);
+        fclose($soubor);
+        
+        }
+        catch(Exception $e) {   
+                   \Nette\Diagnostics\Debugger::log($e);
+                   $this->flashMessage('XML feed crashed. I´m so sorry.', 'alert alert-danger');
+        }
+    }
 
     public function renderDefault() {
         if (!$this->getUser()->isInRole('admin')) {
