@@ -104,7 +104,6 @@ class zasilkovnaControl extends moduleControl {
                    $this->flashMessage('XML feed crashed. I´m so sorry.', 'alert alert-danger');
         }
    }
-
    
    /***********************************************************************
      * RENDERY
@@ -115,5 +114,4 @@ class zasilkovnaControl extends moduleControl {
         $this->template->setFile(__DIR__ . '/zasilkovnaAdminModule.latte');
         $this->template->render();
     }
-    
 }
