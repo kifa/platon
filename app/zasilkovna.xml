@@ -673,15 +673,16 @@ Nakládka a vykládka zboží před vchodem bez problémů.&lt;/p&gt;</direction
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–17:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:30–12:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–17:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:30–12:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–17:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:30–12:00&lt;br /&gt;&lt;strong style='color: red;'&gt;17. 8.&lt;/strong&gt; zavřeno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–17:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:30–12:00&lt;br /&gt;&lt;strong style='color: red;'&gt;17. 8.&lt;/strong&gt; zavřeno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;08:30–12:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;17. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -1451,6 +1452,43 @@ Autobusová linka 20, 27, 28, 34, 41, 56, 71, 101, 103 zastávka Sady Pětatřic
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;09:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;09:00–15:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+      </openingHours>
+    </branch>
+    <branch>
+      <id>133</id>
+      <name>Praha 1, Klimentská</name>
+      <nameStreet>Praha 1, Klimentská 34</nameStreet>
+      <place>SKETA Shop</place>
+      <street>Klimentská 34</street>
+      <city>Praha</city>
+      <zip>110 00</zip>
+      <country>cz</country>
+      <currency>CZK</currency>
+      <openSince>2013-08-01</openSince>
+      <wheelchairAccessible>no</wheelchairAccessible>
+      <latitude>50.09203</latitude>
+      <longitude>14.43151</longitude>
+      <url>http://www.zasilkovna.cz/point/praha-1-klimentska</url>
+      <dressingRoom>0</dressingRoom>
+      <claimAssistant>1</claimAssistant>
+      <packetConsignment>1</packetConsignment>
+      <maxWeight>5</maxWeight>
+      <photos>
+        <photo>
+          <thumbnail>http://www.zasilkovna.cz/images/branch/thumb/sketashop.jpg</thumbnail>
+          <normal>http://www.zasilkovna.cz/images/branch/normal/sketashop.jpg</normal>
+        </photo>
+      </photos>
+      <openingHours>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 12:00–18:00&lt;br /&gt;&lt;strong&gt;Nové!&lt;/strong&gt; Výdej od  1. srpna.</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 12:00–18:00&lt;br /&gt;&lt;strong&gt;Nové!&lt;/strong&gt; Na pobočku již můžete objednávat, výdej bude možný nejdříve dne  1. srpna, kdy pobočka otevírá.</compactLong>
+        <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;br /&gt;&lt;strong&gt;Nové!&lt;/strong&gt; Na pobočku již můžete objednávat, výdej bude možný nejdříve dne  1. srpna, kdy pobočka otevírá.</tableLong>
       </openingHours>
     </branch>
     <branch>

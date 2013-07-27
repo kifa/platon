@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-07-23 21:51:15
+# Created: 2013-07-27 09:49:17
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-07-23 21:51+0200\n"
+"PO-Revision-Date: 2013-07-27 09:49+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -30,8 +30,17 @@ msgstr "Přidat kategorii"
 msgid "ADD Text"
 msgstr "Přidat položku/text"
 
+msgid "Account"
+msgstr "Účet"
+
+msgid "Account Info"
+msgstr "Informace o účtu"
+
 msgid "Add Category"
 msgstr "Přidat kategorii"
+
+msgid "Add Category Photo"
+msgstr "Přidat fotku kategorie"
 
 msgid "Add Document"
 msgstr "Přidat dokument"
@@ -50,6 +59,9 @@ msgstr "Přidat příspěvek"
 
 msgid "Add Product"
 msgstr "Přidat produkt"
+
+msgid "Add Shipping"
+msgstr "Přidat způsob doručení"
 
 msgid "Add Spec"
 msgstr "Přidat specifikaci"
@@ -81,8 +93,14 @@ msgstr "Adresa"
 msgid "Admin"
 msgstr "Správa"
 
+msgid "All orders"
+msgstr "Všechny objednávky"
+
 msgid "Amount"
 msgstr "Množství"
+
+msgid "Archive product"
+msgstr "Archivovat produkt"
 
 msgid "Are"
 msgstr "Jste"
@@ -144,6 +162,12 @@ msgstr "Kategorie:"
 msgid "Cellphone"
 msgstr "Mobilní telefon"
 
+msgid "Change password"
+msgstr "Změnit heslo"
+
+msgid "Change value by clicking"
+msgstr "Hodnotu upravte kliknutím na ni"
+
 msgid "Check news on blog"
 msgstr "Novinky na blogu"
 
@@ -171,11 +195,17 @@ msgstr "Město"
 msgid "City:"
 msgstr "Město:"
 
+msgid "Click to Generate!"
+msgstr "Generovat"
+
 msgid "Click to edit"
 msgstr "Klikněte a vložte informace"
 
 msgid "Click to edit ..."
 msgstr "Klikněte a vložte informace ..."
+
+msgid "Click to regenerate!"
+msgstr "Renegerovat"
 
 msgid "Close"
 msgstr "Zavřít"
@@ -213,6 +243,15 @@ msgstr "Vytvořte novou:"
 msgid "Create new payment:"
 msgstr "Vytvořit novou platbu:"
 
+msgid "Create new shipping:"
+msgstr "Vytvořit nový způsob doručení:"
+
+msgid "Customer"
+msgstr "Zákazník"
+
+msgid "Date"
+msgstr "Datum"
+
 msgid "Date created"
 msgstr "Datum vytvoření"
 
@@ -224,6 +263,12 @@ msgstr "Smazat kategorii"
 
 msgid "Delete Text"
 msgstr "Smazat text"
+
+msgid "Delete document"
+msgstr "Smazat dokument"
+
+msgid "Delete image"
+msgstr "Smazat obrázek"
 
 msgid "Delete photo"
 msgstr "Smazat fotku"
@@ -257,6 +302,9 @@ msgstr "Stáhnout"
 
 msgid "Download INVOICE"
 msgstr "Stáhnout FAKTURU"
+
+msgid "Download XML feed"
+msgstr "Stáhnout XML feed"
 
 msgid "Download link"
 msgstr "Odkaz na stažení"
@@ -315,6 +363,9 @@ msgstr "Upravte tento text kliknutím na nadpis, nebo na obsah ..."
 msgid "Edit your description and click Save desccription."
 msgstr "Upravte popis a kliknete na Uložit popis"
 
+msgid "Edit your shop info"
+msgstr "Upravit informace a nastavení eshopu"
+
 msgid "Email"
 msgstr "Email"
 
@@ -348,8 +399,20 @@ msgstr "Ukončit editaci"
 msgid "Finish your order"
 msgstr "Dokončete objednávku"
 
+msgid "Free from"
+msgstr "Zdarma od"
+
+msgid "Free from:"
+msgstr "Zdarma od:"
+
 msgid "Gallery"
 msgstr "Fotky"
+
+msgid "Generate Sitemap"
+msgstr "Generovat mapu webu (sitemap)"
+
+msgid "Generate XML feed"
+msgstr "Generovat XML feed"
 
 msgid "HOT"
 msgstr "SUPER"
@@ -399,6 +462,9 @@ msgstr "Skladem"
 msgid "Info"
 msgstr "Info"
 
+msgid "Information about product"
+msgstr "Informace o produktu"
+
 msgid "Invoice"
 msgstr "Faktura"
 
@@ -408,14 +474,29 @@ msgstr "Zde musí být číslo."
 msgid "Item price"
 msgstr "Cena"
 
+msgid "Keep me signed in"
+msgstr "Zůstat přihlášen"
+
 msgid "LAST"
 msgstr "POSLEDNÍ"
+
+msgid "Latest Comments"
+msgstr "Nejnovější komentáře"
+
+msgid "Latest Orders"
+msgstr "Nejnovější objednávky"
 
 msgid "Logout"
 msgstr "Odhlásit se"
 
 msgid "Menu"
 msgstr "Menu"
+
+msgid "More comments"
+msgstr "Více komentářů"
+
+msgid "More stats"
+msgstr "Více statistik"
 
 msgid "Move products to category:"
 msgstr "Přesunout produkty do kategorie:"
@@ -441,6 +522,12 @@ msgstr "Poznámka:"
 msgid "Notebook"
 msgstr "Notebook"
 
+msgid "Option"
+msgstr "Nastavení"
+
+msgid "Order administration"
+msgstr "Správa objednávky"
+
 msgid "Order summary"
 msgstr "Shrnutí objednávky"
 
@@ -458,6 +545,9 @@ msgstr "Nadřazená kategorie"
 
 msgid "Parent Category:"
 msgstr "Nadřazená kategorie"
+
+msgid "Password:"
+msgstr "Heslo:"
 
 msgid "Payment"
 msgstr "Platby a slevy"
@@ -489,8 +579,14 @@ msgstr "Prosím vyplňte povinná pole."
 msgid "Please enter a valid email address."
 msgstr "Prosím zadejte email."
 
+msgid "Please enter your password."
+msgstr "Prosím zadejte své heslo"
+
 msgid "Please enter your question."
 msgstr "Prosím vložte svou otázku."
+
+msgid "Please enter your username."
+msgstr "Zadejte svůj email"
 
 msgid "Please fill document name"
 msgstr "Prosím vložte název dokumentu"
@@ -537,6 +633,12 @@ msgstr "Za produkty"
 msgid "Products layout"
 msgstr "Rozvržení produktů"
 
+msgid "Publish category"
+msgstr "Zveřejnit kategorii"
+
+msgid "Publish product"
+msgstr "Zveřejnit produkt"
+
 msgid "Publish text"
 msgstr "Zveřejnit text"
 
@@ -548,6 +650,9 @@ msgstr "Přečíst podmínky"
 
 msgid "Read more"
 msgstr "Pokračovat ve čtení"
+
+msgid "Regenerate Thumbnails"
+msgstr "Zregenerovat náhledy fotek"
 
 msgid "Review"
 msgstr "Recenze"
@@ -591,14 +696,26 @@ msgstr "Vyberte specifikaci:"
 msgid "Select unit:"
 msgstr "Zvolte jednotku:"
 
+msgid "Select your logo"
+msgstr "Vyberte logo"
+
 msgid "Set Catalog Layout"
 msgstr "Rozvržení katalogu"
 
 msgid "Shipping"
 msgstr "Poštovné"
 
+msgid "Shipping name:"
+msgstr "Název služby:"
+
+msgid "Shipping price:"
+msgstr "Cena služby:"
+
 msgid "Shipping:"
 msgstr "Doručení:"
+
+msgid "Shop info"
+msgstr "Informace o eshopu"
 
 msgid "Shop layout"
 msgstr "Rozvržení shopu"
@@ -607,6 +724,9 @@ msgid "Sidebar"
 msgstr "Boční panel"
 
 msgid "Sign In"
+msgstr "Přihlásit"
+
+msgid "Sign in"
 msgstr "Přihlásit"
 
 msgid "Singleton"
@@ -630,6 +750,9 @@ msgstr "Statistiky"
 msgid "Status"
 msgstr "Stav"
 
+msgid "Storage"
+msgstr "Úložiště"
+
 msgid "Street"
 msgstr "Ulice"
 
@@ -639,6 +762,9 @@ msgstr "Ulice:"
 msgid "Subcategories"
 msgstr "Podkategorie"
 
+msgid "Subject"
+msgstr "Předmět"
+
 msgid "Tablets"
 msgstr "Tablet"
 
@@ -647,6 +773,9 @@ msgstr "Zde by mělo být číslo"
 
 msgid "This has to be a number."
 msgstr "Zde musí být číslo. (Zkuste vložit nulu)"
+
+msgid "This month"
+msgstr "Tento měsíc"
 
 msgid "To add photos, upload them and then \"Click to edit\" and drag photos to editor."
 msgstr "Pro přidání fotky ji nejprve nahrajte. Následně \"Klikněte pro vložení textu\" a fotky přetáhněte do editoru."
@@ -668,6 +797,18 @@ msgstr "Zneveřejni kategorii"
 
 msgid "Unpublish text"
 msgstr "Zneveřejnit"
+
+msgid "Upgrade"
+msgstr "Upgrade"
+
+msgid "Upload"
+msgstr "Nahrát"
+
+msgid "Upload your logo"
+msgstr "Nahrát logo eshopu"
+
+msgid "Users"
+msgstr "Uživatelé"
 
 msgid "Video"
 msgstr "Video"
@@ -714,6 +855,9 @@ msgstr "Váš email:"
 msgid "Your order number:"
 msgstr "Číslo Vaší objednávky"
 
+msgid "Your subscription"
+msgstr "Vaše předplatné"
+
 msgid "ZIP"
 msgstr "PSČ"
 
@@ -723,6 +867,6 @@ msgstr "PSČ:"
 msgid "pcs"
 msgstr "ks"
 
-msgid "Order administration"
-msgstr "Správa objednávky"
+msgid "Click to Download!"
+msgstr "Stáhnout"
 

@@ -1213,9 +1213,7 @@ class SmartPanelPresenter extends BasePresenter {
 
             $template->products = $this->productModel->loadCatalog("");
             $template->category = $this->categoryModel->loadCategory("");
-            $template->url = $this->shopModel->getShopInfo('ShopURL');
-
-
+           
             $template->save($this->context->parameters['wwwDir'] . '/heureka.xml');
             $this->flashMessage('Heureka XML feed sucessfully generated.', 'alert alert-success');
         }
@@ -1234,15 +1232,27 @@ class SmartPanelPresenter extends BasePresenter {
          $API = $this->shopModel->getShopInfo('API');
          $file = file_get_contents('http://www.zasilkovna.cz/api/v2/' . $API . '/branch.xml');
          
-         $soubor = fopen($this->context->parameters['appDir'] . "/zasilkovna.xml", "a+");
+        
+        $soubor = fopen($this->context->parameters['appDir'] . "/zasilkovna.xml", "w+");
         fwrite($soubor, $file);
         fclose($soubor);
+        
+        
+        $xml = simplexml_load_file($this->context->parameters['appDir'] . "/zasilkovna.xml");
+        
+        foreach ($xml->branches->branch as $branch) {
+            dump($branch->name);
+            dump($branch->nameStreet);
+            
+        }
         
         }
         catch(Exception $e) {   
                    \Nette\Diagnostics\Debugger::log($e);
                    $this->flashMessage('XML feed crashed. I´m so sorry.', 'alert alert-danger');
         }
+        
+        //$this->redirect('this');
     }
 
     public function renderDefault() {
@@ -1270,7 +1280,16 @@ class SmartPanelPresenter extends BasePresenter {
         }
     }
 
+    protected function createComponentModuleControl() {
+        $moduleControl = new moduleControl;
+        $moduleControl->setTranslator($this->translator);
+        $moduleControl->setProduct($this->productModel);
+        $moduleControl->setCategory($this->categoryModel);
+        $moduleControl->setShop($this->shopModel);
+        
+        return $moduleControl;
     
+    }
     protected function sendStatusMail($orderid, $name) {
         
             $row = $this->orderModel->loadOrder($orderid);
