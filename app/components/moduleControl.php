@@ -66,10 +66,10 @@ class moduleControl extends BaseControl{
        
    }
    
-   
-   protected function createComponent($name) {
+
+   protected function loadComponents() {
         try { 
-            $component = $this->getComponent($name);
+            $component = $this->getComponents(TRUE);
             return $component;
         }
         catch (Exception $e) {
@@ -102,8 +102,15 @@ class moduleControl extends BaseControl{
     
     public function renderShippingModules() {
         
-        $this->template->setFile(__DIR__ . '/shippingModul.latte');
-        $this->shopModel->loadModules('shipping');
+        $this->template->setFile(__DIR__ . '/shippingModules.latte');
+        //;
+    foreach ($this->shopModel->loadModules('shipping') as $component) {
+        $this->createComponent($component->ModuleName);
+    }
+        
+        $components = $this->getComponents();
+        dump($components);
+        
         $this->template->render();
     }
     

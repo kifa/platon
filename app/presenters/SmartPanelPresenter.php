@@ -595,8 +595,9 @@ class SmartPanelPresenter extends BasePresenter {
                 'FreeFromPrice' => $deliver->FreeFromPrice
             );
             $this['editShipping'.$deliver->DeliveryID] = $this->createComponentEditShippingForm($deliveryInfo);
+        
+            }
         }
-          }
         
     }
     
@@ -817,6 +818,7 @@ class SmartPanelPresenter extends BasePresenter {
                 $status[$key] = $value->StatusName;
             };
             
+        
         $this->template->status = $status;
         
     }
@@ -1236,7 +1238,6 @@ class SmartPanelPresenter extends BasePresenter {
         $soubor = fopen($this->context->parameters['appDir'] . "/zasilkovna.xml", "w+");
         fwrite($soubor, $file);
         fclose($soubor);
-        
         
         $xml = simplexml_load_file($this->context->parameters['appDir'] . "/zasilkovna.xml");
         
