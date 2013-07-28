@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-07-27 09:49:17
+# Created: 2013-07-28 19:41:22
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-07-27 09:49+0200\n"
+"PO-Revision-Date: 2013-07-28 19:41+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -194,6 +194,9 @@ msgstr "Město"
 
 msgid "City:"
 msgstr "Město:"
+
+msgid "Click to Download!"
+msgstr "Stáhnout"
 
 msgid "Click to Generate!"
 msgstr "Generovat"
@@ -864,9 +867,12 @@ msgstr "PSČ"
 msgid "ZIP:"
 msgstr "PSČ:"
 
+msgid "by post/delivery service"
+msgstr "poštou/doručovací službou"
+
 msgid "pcs"
 msgstr "ks"
 
-msgid "Click to Download!"
-msgstr "Stáhnout"
+msgid "personal pick up"
+msgstr "osobní převzetí"
 

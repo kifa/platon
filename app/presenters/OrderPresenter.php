@@ -176,6 +176,7 @@ class OrderPresenter extends BasePresenter {
                 $shippers[$key] = $value->DeliveryPrice;
             };
 
+            
             foreach ($this->orderModel->loadPayment('','active') as $key => $value) {
                 $payment[$key] = $value->PaymentPrice;
             };
@@ -202,16 +203,21 @@ class OrderPresenter extends BasePresenter {
         $shippers = array();
         $payment = array();
         
-        
+        $lowerShippers = NULL;
 
         foreach ($this->orderModel->loadDelivery('','active') as $key => $value) {
           //  $t = HTML::el('span', $value->DeliveryPrice)->class('text-info');
+            if($value->HigherDelivery === NULL) {
             $shippers[$key] = $value->DeliveryName . ' | ' . $value->DeliveryPrice .',-';
-        };
-
+            }
+            else {
+                $lowerShippers[$value->HigherDelivery] = $value->HigherDelivery;
+            }
+        }
+        
         foreach ($this->orderModel->loadPayment('','active') as $key => $value) {
             $payment[$key] = $value->PaymentName . ' | ' . $value->PaymentPrice.',-';
-        };
+        }
         
         $cartForm = new Nette\Application\UI\Form;
         $cartForm->setTranslator($this->translator);
@@ -233,9 +239,26 @@ class OrderPresenter extends BasePresenter {
         $cartForm->addText('zip', 'ZIP:', 40, 100)
                 ->addRule(Form::FILLED);
         $cartForm->addGroup('Shipping');
-        $cartForm->addSelect('shippers', '', $shippers)
+        $cartForm->addSelect('shippers', 'by post/delivery service', $shippers);
+                //->setAttribute('class', ' radio')
+              //  ->setRequired('Please select Shipping method');
+        if(isset($lowerShippers)) {
+           
+            
+            foreach($lowerShippers as $lower) {
+                $lowerShippers2 = array();
+                foreach($this->orderModel->loadSubDelivery($lower) as $key2 => $value2){
+                   $lowerShippers2[$key2] = $value2->DeliveryName . ' | ' . $value2->DeliveryPrice .',-';
+                }   
+            
+        
+        $cartForm->addSelect('lowerShippers'.$lower, 'personal pick up', $lowerShippers2)
+                      ->setAttribute('class', 'span10');
               //  ->setAttribute('class', '.span1 radio')
-                ->setRequired('Please select Shipping method');
+              }
+        $this->template->lowerShippers = $lowerShippers;
+        }
+        
         $cartForm->addGroup('Payment');
         $cartForm->addSelect('payment', '', $payment)
               //  ->setAttribute('class', '.span1 radio')

@@ -67,10 +67,29 @@
         {form cartForm}
         <fieldset>
             
-    <legend id="orderform"><span class="badge badge-info">1</span> {_'Choose your delivery option'}</legend>
-    <div class="controls span4">
+            <legend id="orderform"><span class="badge badge-info">1</span> {_'Choose your delivery option'}</legend>
+    <div class="controls span12">
+        <div class="span4">
+           {ifset $lowerShippers}
             {label shippers /}
+            {/ifset}
+            <div>
+           
             {input shippers}
+            </div>
+        </div>
+        {ifset $lowerShippers}
+        <div class="span8">
+          {foreach $lowerShippers as $lower}
+                {label lowerShippers$lower /}
+            <div>
+                {input lowerShippers$lower}
+            </div>
+            {/foreach}
+        
+        </div>
+        {/ifset}
+        <div class="span10 margin5"><strong>{_'Selected shipping:'} </strong><span class="shipping"></span></div>
     </div>
             <legend><span class="badge badge-info">2</span> {_'Fill contact information'}</legend>
             <div class="controls span5">
@@ -158,10 +177,33 @@
             i = $('select[name="shippers"] option:selected').val();
             shipping = sp[i];
              var grandtotal = shipping + {$grandtotal} + payment;
-        $('.shipping').html(shipping + ',-');
+        
+        g = $('select[name="shippers"] option:selected').text();
+        $('.shipping').html(g);
+        $('.ordertotal').html(grandtotal + ',-'); 
+        //$('select[name="shippers"] option:selected').text().html().appendTo('#orderform');
+        });
+        
+        
+         {ifset $lowerShippers}
+          {foreach $lowerShippers as $lower}
+                    
+        $('select[name="lowerShippers{!$lower}"]').change(function() {
+            i = $('select[name="lowerShippers{!$lower}"] option:selected').val();
+            shipping = sp[i];
+             var grandtotal = shipping + {$grandtotal} + payment;
+        
+        g = $('select[name="lowerShippers{!$lower}"] option:selected').text();
+        $('.shipping').html(g);
         
         $('.ordertotal').html(grandtotal + ',-'); 
         });
+        $('#sel0').fadeOut();
+        
+        $('#sel{!$lower}').fadeIn();
+        {/foreach}
+        {/ifset}
+        
         
         $('select[name=payment]').change(function() {
             p = $('select[name=payment] option:selected').val();         

@@ -66,10 +66,13 @@ class moduleControl extends BaseControl{
        
    }
    
-
-   protected function loadComponents() {
+/*
+   protected function createComponent($name) {
         try { 
-            $component = $this->getComponents(TRUE);
+            $component = $this[$name];
+            $component->setTranslator($this->translator);
+            $component->setShop($this->shopModel);
+            
             return $component;
         }
         catch (Exception $e) {
@@ -77,7 +80,7 @@ class moduleControl extends BaseControl{
         }
             return FALSE;
    }
-
+*/
 
    protected function createComponentZasilkovna() {
        
@@ -103,13 +106,11 @@ class moduleControl extends BaseControl{
     public function renderShippingModules() {
         
         $this->template->setFile(__DIR__ . '/shippingModules.latte');
-        //;
-    foreach ($this->shopModel->loadModules('shipping') as $component) {
-        $this->createComponent($component->ModuleName);
-    }
         
-        $components = $this->getComponents();
-        dump($components);
+        foreach ($this->shopModel->loadModule('') as $component) {
+            $comp = $this->createComponent($component->ModuleName);
+            $this->addComponent($comp, $component->ModuleName);
+        }
         
         $this->template->render();
     }

@@ -395,7 +395,7 @@ class OrderModel extends Repository {
         elseif ($switch=='active') {
              if($id==''){
                 return $this->getTable('delivery')->select('delivery.*, status.*')
-                        ->where('delivery.HigherDelivery IS NULL')
+                      //  ->where('delivery.HigherDelivery IS NULL')
                         ->where('status.StatusName',$switch)                        
                         ->fetchPairs('DeliveryID');
             }
@@ -419,6 +419,9 @@ class OrderModel extends Repository {
                 ->where('status.StatusName = "active"')
                 ->fetchPairs('DeliveryID');
     }
+    
+    
+    
     
     public function loadDeliveryPrice($id){
         //return $this->getTable('delivery')->select('DeliveryPrice')->where('DeliveryID',$id)->fetch();
