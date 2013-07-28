@@ -1,5 +1,10 @@
 <?php
 
+use Nette\Forms\Form,
+    Nette\Utils\Html,
+    Nette\Image;
+
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -41,7 +46,33 @@ class zasilkovnaControl extends moduleControl {
     return $template;
     }
     
-     
+
+    
+    protected function createComponentInstallModule() {
+        if ($this->presenter->getUser()->isInRole('admin')) {
+            $installForm = new Nette\Application\UI\Form;
+            $installForm->setTranslator($this->translator);
+            $installForm->addText('api', 'API:')
+                    ->setRequired('Please enter your API key.');
+            $installForm->addSubmit('install', 'Install module')
+                    ->setAttribute('class', 'btn-primary upl span2')
+                    ->setAttribute('data-loading-text', 'Uploading...');
+            $installForm->onSuccess[] = $this->installModuleSubmitted;
+            return $installForm;
+        }
+    }
+    
+    
+    public function installModuleSubmitted($form) {
+        if ($this->presenter->getUser()->isInRole('admin')) {
+            
+            $this->shopModel->insertShopInfo('zasilkovnaAPI', $form->values->api);
+            $this->installModule();
+            $this->shopModel->updateModuleStatus('zasilkovna', 1);
+            $this->presenter->redirect('this');
+        }
+    }
+
 
    /*****************************************************************
     * HANDLE
@@ -53,7 +84,7 @@ class zasilkovnaControl extends moduleControl {
            $this->redirect('this');
        }
        else {
-            if($this->shopModel->getShopInfo('API')) {
+            if($this->shopModel->getShopInfo('zasilkovnaAPI')) {
                 $this->reloadXML();
             }   
             else {
@@ -77,7 +108,7 @@ class zasilkovnaControl extends moduleControl {
    }
 
    public function updateXML() {
-       if($this->shopModel->isModuleActive() && $this->shopModel->getShopInfo('API')) {
+       if($this->shopModel->isModuleActive() && $this->shopModel->getShopInfo('zasilkovnaAPI')) {
            $this->reloadXML();
        }
        else {
@@ -89,7 +120,7 @@ class zasilkovnaControl extends moduleControl {
 
    protected function reloadXML() {
        try {
-        $API = $this->shopModel->getShopInfo('API');
+        $API = $this->shopModel->getShopInfo('zasilkovnaAPI');
         $file = file_get_contents('http://www.zasilkovna.cz/api/v2/' . $API . '/branch.xml');
          
         $soubor = fopen($this->context->parameters['appDir'] . "/zasilkovna.xml", "a+");
@@ -114,7 +145,7 @@ class zasilkovnaControl extends moduleControl {
                                               $branch->special . ' - ' .$branch->place,
                                               NULL,
                                                 1,
-                                                $zasilkovnaID['DeliveryID']);
+                                               $zasilkovnaID['DeliveryID']);
         }
         
         return TRUE;
@@ -138,7 +169,12 @@ class zasilkovnaControl extends moduleControl {
     public function renderInstall() {
         
         $this->template->setFile(__DIR__ . '/zasilkovnaInstallModule.latte');
-        $this->template->name = $this->shopModel->loadModule();
+        
+        $info = $this->shopModel->loadModuleByName('zasilkovna');
+        $this->template->name = $info->ModuleName;
+        $this->template->desc = $info->ModuleDescription;
+        $this->template->status = $info->StatusID; 
+                
         $this->template->render();
     }
 }

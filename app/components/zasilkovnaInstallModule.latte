@@ -1,6 +1,11 @@
 <li>
     <strong>{$name}</strong>
     <p>{$desc}</p>
+    {if $status !== 1}
     {control installModule}
+    {else}
+    <p class="text-success">{_'Module installed'}</p>
+    <a class="btn btn-warning" href="">{_'Deactivate Module'}</a>
+    {/if}
 
 </li>
