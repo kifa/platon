@@ -429,7 +429,7 @@ class OrderModel extends Repository {
     /*
      * Insert new delivery 
      */
-    public function insertDelivery($name,$price,$description=NULL,$free=NULL, $status=NULL)
+    public function insertDelivery($name,$price,$description=NULL,$free=NULL, $status=NULL, $higher=NULL)
     {
         $insert = array(
             'DeliveryID' => NULL,
@@ -437,7 +437,8 @@ class OrderModel extends Repository {
             'DeliveryDescription' => $description,
             'DeliveryPrice' => $price,
             'FreeFromPrice' => $free,
-            'StatusID' => $status
+            'StatusID' => $status,
+            'HigherDelivery' => $higher
         );
         
         return $this->getTable('delivery')->insert($insert);
