@@ -77,13 +77,21 @@ class ShopModel extends Repository {
     }
     
     public function setShopInfoByID($id, $value)
-    {
-        
+    {        
             $update = array(
               'Value' => $value  
             );
        
         return $this->getTable('settings')->where('SettingID', $id)->update($update);
+    }
+    
+    public function insertShopInfo($name, $value){
+        $insert = array(
+            'SettingName' => $name,
+            'Value' => $value
+        )
+                
+        return $this->getTable('settings')->insert($insert);
     }
 
     public function loadStaticText($id){
@@ -162,6 +170,10 @@ class ShopModel extends Repository {
         }
     }
     
+    public function loadModulebyName($name){
+		return $this->getTable('module')->where('CompModuleName',$name);
+	}
+    
     public function insertModule($name, $compname, $description=NULL, $type='Default', $status='2'){
         $insert = array(
             'ModuleName' => $name,
@@ -174,7 +186,7 @@ class ShopModel extends Repository {
         return $this->getTable('module')->insert($insert);
     }
     
-    public function updateModule($id, $name, $compname, $description, $type, $status){
+    public function updateModule($compnameold, $name, $compname, $description, $type, $status){
         $update = array(
             'ModuleName' => $name,
             'CompModuleName' => $compname,
@@ -183,14 +195,14 @@ class ShopModel extends Repository {
             'StatusID' => $status
         );
         
-        return $this->getTable('module')->where('ModuleID',$id)->update($update);
+        return $this->getTable('module')->where('CompModuleName', $compnameold)->update($update);
     }
     
-    public function updateModuleStatus($id,$status){
+    public function updateModuleStatus($compname,$status){
         $update = array(
             'StatusID' => $status
         );
                 
-        return $this->getTable('module')->where('ModuleID',$id)->update($update);
+        return $this->getTable('module')->where('CompModuleName',$compname->update($update);
     }
 }
