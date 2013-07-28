@@ -89,7 +89,7 @@ class ShopModel extends Repository {
         $insert = array(
             'SettingName' => $name,
             'Value' => $value
-        )
+        );
                 
         return $this->getTable('settings')->insert($insert);
     }
@@ -170,8 +170,8 @@ class ShopModel extends Repository {
         }
     }
     
-    public function loadModulebyName($name){
-		return $this->getTable('module')->where('CompModuleName',$name);
+    public function loadModuleByName($name){
+		return $this->getTable('module')->where('CompModuleName',$name)->fetch();
 	}
     
     public function insertModule($name, $compname, $description=NULL, $type='Default', $status='2'){
@@ -203,6 +203,6 @@ class ShopModel extends Repository {
             'StatusID' => $status
         );
                 
-        return $this->getTable('module')->where('CompModuleName',$compname->update($update);
+        return $this->getTable('module')->where('CompModuleName',$compname)->update($update);
     }
 }

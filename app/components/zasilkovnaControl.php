@@ -108,7 +108,7 @@ class zasilkovnaControl extends moduleControl {
    }
 
    public function updateXML() {
-       if($this->shopModel->isModuleActive() && $this->shopModel->getShopInfo('zasilkovnaAPI')) {
+       if($this->shopModel->isModuleActive('zasilkovna') && $this->shopModel->getShopInfo('zasilkovnaAPI')) {
            $this->reloadXML();
        }
        else {
