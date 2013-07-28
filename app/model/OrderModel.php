@@ -384,7 +384,7 @@ class OrderModel extends Repository {
         if($switch==NULL){
             if($id==''){
                 return $this->getTable('delivery')->select('delivery.*, status.*')
-                        ->where('status.StatusName = ? OR status.StatusName = ?','active','non-active')
+                        ->where('status.StatusName = ? OR status.StatusName = ?','active', 'non-active')
                         ->fetchPairs('DeliveryID');
             }
             else
@@ -394,13 +394,30 @@ class OrderModel extends Repository {
         }
         elseif ($switch=='active') {
              if($id==''){
-                return $this->getTable('delivery')->select('delivery.*, status.*')->where('status.StatusName',$switch)->fetchPairs('DeliveryID');
+                return $this->getTable('delivery')->select('delivery.*, status.*')
+                        ->where('delivery.HigherDelivery IS NULL')
+                        ->where('status.StatusName',$switch)                        
+                        ->fetchPairs('DeliveryID');
             }
             else
             {
                 return $this->getTable('delivery.*, status.*')->where('DeliveryID',$id)->fetch();
             }
         }
+    }
+    
+    public function loadDeliveryList(){
+        return $this->getTable('delivery')
+                ->where('status.StatusName = ? OR status.StatusName = ?','active', 'non-active')
+                ->fetchPairs('DeliveryID');
+    }
+
+    public function loadSubDelivery($higher)
+    {
+        return $this->getTable('delivery')->select('delivery.*, status.*')
+                ->where('delivery.HigherDelivery',$higher)
+                ->where('status.StatusName = "active"')
+                ->fetchPairs('DeliveryID');
     }
     
     public function loadDeliveryPrice($id){
@@ -471,13 +488,26 @@ class OrderModel extends Repository {
         return $this->getTable('delivery')->where('DeliveryID', $id)->update($update);
                 
     }
+    
+    public function updateHigherDelivery($id, $HigherDelID){
+        $update = array(
+            'HigherDelivery' => $HigherDelID
+        );
+        
+        return $this->getTable('delivery')->where('DeliveryID', $id)->update($update);
+                
+    }
 
-        public function deleteDelivery($id) {
+    public function deleteDelivery($id) {
         
         return $this->getTable('delivery')->where('DeliveryID',$id)->delete();
     }
-      
-    public function countOrder()  {
+    
+    public function deleteSubDelivery($higher){
+        return $this->getTable('delivery')->where('HigherDelivery',$higher)->delete();
+    }
+
+    public function countOrder(){
         return $this->getTable('orders')->count();
     }
     
