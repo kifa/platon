@@ -205,4 +205,18 @@ class ShopModel extends Repository {
                 
         return $this->getTable('module')->where('CompModuleName',$compname)->update($update);
     }
+    
+        public function isActive($compname){
+        $query = $this->getTable('module')
+                ->select('module.*,status.*')
+                ->where('module.CompModuleName', $compname)
+                ->where('status.StatusName', 'active');
+        
+        if($query == ''){
+            return 'FALSE';
+        }
+        else{
+            return 'TRUE';
+        }           
+    }
 }
