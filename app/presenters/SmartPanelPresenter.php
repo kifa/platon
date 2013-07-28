@@ -684,6 +684,24 @@ class SmartPanelPresenter extends BasePresenter {
         }
     }
 
+        public function handleDelHigher($delid) {
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){
+                $content = $_POST['value']; //odesílaná nová hodnota
+
+                $this->orderModel->updateHigherDelivery($delid, $content);
+            }
+            
+            if(!$this->isControlInvalid('DelHigher')){           
+               $this->payload->edit = $content; //zaslání nové hodnoty do šablony
+               $this->sendPayload();
+               $this->invalidateControl('DelHigher'); //invalidace snipetu
+           }
+           else {
+            $this->redirect('this');
+           }
+        }
+    }
 
     public function handleDelFF($delid) {
         if($this->getUser()->isInRole('admin')){
@@ -821,6 +839,10 @@ class SmartPanelPresenter extends BasePresenter {
         
         $this->template->status = $status;
         
+        foreach ($this->orderModel->loadDeliveryList('') as $key => $value){
+            $list[$key] = $value->DeliveryName;
+        }
+        $this->template->deliveryList = $list;
     }
     
     /**************************************************************************/

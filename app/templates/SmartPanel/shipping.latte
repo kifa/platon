@@ -35,6 +35,7 @@
                                 <th>{_'Price'}</th>
                                 <th>{_'Free from'}</th>
                                 <th>{_'Status'}</th>
+                                <th>{_'Higher Shipping'}</th>
                                 <th class="span2"></th>
                             </tr>
                         </thead>
@@ -48,6 +49,7 @@
                                 <td class="DelPrice-{$deliver->DeliveryID}" n:snippet="DelPrice-{$deliver->DeliveryID}">{$deliver->DeliveryPrice},-</td>
                                 <td class="DelFF-{$deliver->DeliveryID}" n:snippet="DelFF-{$deliver->DeliveryID}">{$deliver->FreeFromPrice ? $deliver->FreeFromPrice : '-'},-</td>
                                 <td class="DelStatus-{$deliver->DeliveryID}" n:snippet="DelStatus-{$deliver->DeliveryID}">{$deliver->StatusName}</td>
+                                <td class="DelHigher-{$deliver->HigherDelivery}" n:snippet="DelHigher-{$deliver->HigherDelivery}">{$deliver->HigherDelivery}</td>
                                 <td>
                                                                 
                                     <a href="{link removeShipping! $deliver->DeliveryID}" class="ajax"><i class="icon-trash icon-large"></i></a>
@@ -153,6 +155,18 @@
                    $('.DelStatus-{$deliver->DeliveryID}').text(json.edit);
                }
            });    
+           
+            $('.DelHigher-{$deliver->HigherDelivery}').editable( {link DelHigher! $deliver->DeliveryID }, { 
+                data      :'{$deliveryList}',
+                type      : 'select',
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelHigher-{$deliver->DeliveryID}').text(json.edit);
+               }
+           });  
         {/foreach}
                                
       $('.upl').click(function() { 
