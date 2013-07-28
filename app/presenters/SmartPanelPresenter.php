@@ -1309,6 +1309,7 @@ class SmartPanelPresenter extends BasePresenter {
         $moduleControl->setProduct($this->productModel);
         $moduleControl->setCategory($this->categoryModel);
         $moduleControl->setShop($this->shopModel);
+        $moduleControl->setOrder($this->orderModel);
         
         return $moduleControl;
     

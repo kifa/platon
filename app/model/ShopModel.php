@@ -148,7 +148,7 @@ class ShopModel extends Repository {
     /*
      * ETC...
      */
-    public function loadModule($id, $switch=NULL){
+    public function loadModule($id, $type=NULL){
         if($switch=NULL){
             if($id==''){
                 return $this->getTable('module')->fetchPairs('ModuleID');
@@ -160,6 +160,7 @@ class ShopModel extends Repository {
         else{
             return $this->getTable('module')->where('ModuleType',$type)->fetchPairs('ModuleID');
         }
+    }
     
     public function insertModule($name, $compname, $description=NULL, $type='Default', $status='2'){
         $insert = array(

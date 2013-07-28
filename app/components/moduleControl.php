@@ -22,6 +22,7 @@ class moduleControl extends BaseControl{
     private $productModel;
     private $blogModel;
     private $shopModel;
+    private $orderModel;
 
     public function setTranslator($translator) {
         $this->translator = $translator;
@@ -29,6 +30,11 @@ class moduleControl extends BaseControl{
 
     public function setCategory($cat) {
         $this->categoryModel = $cat;
+
+    }
+    
+    public function setOrder($order) {
+        $this->orderModel = $order;
 
     }
     
@@ -87,6 +93,7 @@ class moduleControl extends BaseControl{
        $zasilkovna = new ZasilkovnaControl();
        $zasilkovna->setTranslator($this->translator);
        $zasilkovna->setShop($this->shopModel);
+       $zasilkovna->setOrder($this->orderModel);
        return $zasilkovna;
    }
 
@@ -107,9 +114,14 @@ class moduleControl extends BaseControl{
         
         $this->template->setFile(__DIR__ . '/shippingModules.latte');
         
-        foreach ($this->shopModel->loadModule('') as $component) {
-            $comp = $this->createComponent($component->ModuleName);
-            $this->addComponent($comp, $component->ModuleName);
+        try { 
+            foreach ($this->shopModel->loadModule('', 'shipping') as $component) {
+                $comp = $this->createComponent($component->CompModuleName);
+                $this->addComponent($comp, $component->CompModuleName);
+            }
+        }
+        catch (Exception $e) {
+            \Nette\Diagnostics\Debugger::log($e);
         }
         
         $this->template->render();

@@ -18,7 +18,8 @@ class zasilkovnaControl extends moduleControl {
     /** @var NetteTranslator\Gettext */
     protected $translator;
     private $shopModel;
-
+    private $orderModel;
+    
     public function setTranslator($translator) {
         $this->translator = $translator;
     }
@@ -27,6 +28,10 @@ class zasilkovnaControl extends moduleControl {
         $this->shopModel = $shop;
     }
   
+     public function setOrder($order) {
+        $this->orderModel = $order;
+    }
+    
     public function createTemplate($class = NULL)
     {
     $template = parent::createTemplate($class);
@@ -43,7 +48,7 @@ class zasilkovnaControl extends moduleControl {
     */
     
    protected function installModule() {
-       if($this->shopModel->isModuleActive()) {
+       if($this->shopModel->isModuleActive('zasilkovna')) {
            $this->flashMessage('Module already installed.', 'alert alert-warning');
            $this->redirect('this');
        }
@@ -93,11 +98,26 @@ class zasilkovnaControl extends moduleControl {
         
         $xml = simplexml_load_file($soubor);
         
+        
+        $zasilkovnaID = $this->orderModel->insertDelivery('Zásilkovna',
+                                          49,
+                                          'osobní převzetí v síti Zásilkovna.cz',
+                                          NULL,
+                                            1,
+                                           NULL);
+        
+        $this->orderModel->updateHigherDelivery($zasilkovnaID['DeliveryID'], $zasilkovnaID['DeliveryID']);
+
         foreach ($xml->branches->branch as $branch) {
-            dump($branch->name);
-            dump($branch->nameStreet);
+            $this->orderModel->insertDelivery($branch->name,
+                                              49,
+                                              $branch->special . ' - ' .$branch->place,
+                                              NULL,
+                                                1,
+                                                $zasilkovnaID['DeliveryID']);
         }
         
+        return TRUE;
         }
         catch(Exception $e) {   
                    \Nette\Diagnostics\Debugger::log($e);
@@ -112,6 +132,13 @@ class zasilkovnaControl extends moduleControl {
    public function renderAdmin() {
         
         $this->template->setFile(__DIR__ . '/zasilkovnaAdminModule.latte');
+        $this->template->render();
+    }
+    
+    public function renderInstall() {
+        
+        $this->template->setFile(__DIR__ . '/zasilkovnaInstallModule.latte');
+        $this->template->name = $this->shopModel->loadModule();
         $this->template->render();
     }
 }

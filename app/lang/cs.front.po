@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-07-28 19:41:22
+# Created: 2013-07-28 20:52:42
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-07-28 19:41+0200\n"
+"PO-Revision-Date: 2013-07-28 20:52+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -875,4 +875,46 @@ msgstr "ks"
 
 msgid "personal pick up"
 msgstr "osobní převzetí"
+
+msgid "Selected shipping:"
+msgstr "Vybraná doprava:"
+
+msgid "Personal pick up | 0,-"
+msgstr ""
+
+msgid "DPD | 160,-"
+msgstr ""
+
+msgid "Czech postal service | 99,-"
+msgstr ""
+
+msgid "Central Warehouse | 0,-"
+msgstr ""
+
+msgid "2222 | 2222,-"
+msgstr ""
+
+msgid "DWEW | 111,-"
+msgstr ""
+
+msgid "Cash | 0,-"
+msgstr ""
+
+msgid "Bankwire | 50,-"
+msgstr ""
+
+msgid "Vypršel časový limit, odešlete formulář znovu"
+msgstr ""
+
+msgid "Domů"
+msgstr ""
+
+msgid "Smartphones"
+msgstr ""
+
+msgid "Ta-ble-ty"
+msgstr ""
+
+msgid "Washmashine"
+msgstr ""
 
