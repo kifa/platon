@@ -148,29 +148,37 @@ class ShopModel extends Repository {
     /*
      * ETC...
      */
-    public function loadModule($id){
-        if($id==''){
-            return $this->getTable('module')->fetchPairs('ModuleID');
+    public function loadModule($id, $switch=NULL){
+        if($switch=NULL){
+            if($id==''){
+                return $this->getTable('module')->fetchPairs('ModuleID');
+            }
+            else{
+                return $this->getTable('module')->where('ModuleID',$id);
+            }
         }
         else{
-            return $this->getTable('module')->where('ModuleID',$id);
+            return $this->getTable('module')->where('ModuleType',$type)->fetchPairs('ModuleID');
         }
-    }
     
-    public function insertModule($name,$description=NULL,$status='2'){
+    public function insertModule($name, $compname, $description=NULL, $type='Default', $status='2'){
         $insert = array(
             'ModuleName' => $name,
+            'CompModuleName' => $compname,
             'ModuleDescription' => $description,
+            'ModuleType' => $type,
             'StatusID' => $status
         );
         
         return $this->getTable('module')->insert($insert);
     }
     
-    public function updateModule($id, $name, $description, $status){
+    public function updateModule($id, $name, $compname, $description, $type, $status){
         $update = array(
             'ModuleName' => $name,
+            'CompModuleName' => $compname,
             'ModuleDescription' => $description,
+            'ModuleType' => $type,
             'StatusID' => $status
         );
         
