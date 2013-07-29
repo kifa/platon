@@ -280,16 +280,15 @@ autobusy z této stanice: 44, 84, 91&lt;/p&gt;</directionsPublic>
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–11:00, 12:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;19.7.–28.7.&lt;/strong&gt; zavřeno</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–11:00, 12:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;19.7.–28.7.&lt;/strong&gt; zavřeno</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–11:00, 12:00–17:00</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–11:00, 12:00–17:00</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:00–11:00&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–11:00&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–11:00&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;09:00–11:00&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;09:00–11:00&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th style='color: red;'&gt;19.7.–28.7.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -1568,7 +1567,7 @@ Tramvaj: 7, 19, 26 stanice Metro Strašnická - cca 150 metrů.&lt;br /&gt;
       <maxWeight>5</maxWeight>
       <holidayStart>2013-07-29</holidayStart>
       <holidayEnd>2013-08-11</holidayEnd>
-      <noticeMessage>Zvolená pobočka bude v termínu &lt;strong style='color: red'&gt;od 29. července do 11. srpna uzavřena&lt;/strong&gt; z důvodu dovolené. Během této doby nebude převzetí zásilek na pobočce možné. Za způsobené komplikace se omlouváme.</noticeMessage>
+      <noticeMessage>Zvolená pobočka je &lt;strong style='color: red'&gt;do 11. srpna uzavřena&lt;/strong&gt; z důvodu dovolené. Do tohoto data není převzetí zásilek na pobočce možné. Za způsobené komplikace se omlouváme.</noticeMessage>
       <photos>
         <photo>
           <thumbnail>http://www.zasilkovna.cz/images/branch/thumb/IMG_9335.jpg</thumbnail>
@@ -2329,8 +2328,8 @@ vejdete po schodišti u pošty, zeleninového stánku vyjdete až úplně nahoru
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29.7.–2.8.&lt;/strong&gt; zavřeno</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29.7.–2.8.&lt;/strong&gt; zavřeno</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29.7.–2.8.&lt;/strong&gt; zavřeno&lt;br /&gt;&lt;strong style='color: red;'&gt;19.8.–23.8.&lt;/strong&gt; zavřeno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29.7.–2.8.&lt;/strong&gt; zavřeno&lt;br /&gt;&lt;strong style='color: red;'&gt;19.8.–23.8.&lt;/strong&gt; zavřeno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
@@ -2338,7 +2337,8 @@ vejdete po schodišti u pošty, zeleninového stánku vyjdete až úplně nahoru
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th style='color: red;'&gt;29.7.–2.8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th style='color: red;'&gt;29.7.–2.8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;19.8.–23.8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3833,7 +3833,7 @@ Trasa od MHD zastávka Fatranská: od zastávky po ulici       Vysokoškolákov 
       <maxWeight>5</maxWeight>
       <holidayStart>2013-07-29</holidayStart>
       <holidayEnd>2013-08-11</holidayEnd>
-      <noticeMessage>Zvolená pobočka bude v termíne &lt;strong style='color: red'&gt;od 29. júla do 11. augusta uzavretá&lt;/strong&gt; z dôvodu dovolenky. Počas tejto doby nebude prevzatia zásielok na pobočke možné. Za spôsobené komplikácie sa ospravedlňujeme.</noticeMessage>
+      <noticeMessage>Zvolená pobočka je &lt;strong style='color: red'&gt;do 11. augusta uzavretá&lt;/strong&gt; z dôvodu dovolenky. Do tohto dátumu nie je prevzatia zásielok na pobočke možné. Za spôsobené komplikácie sa ospravedlňujeme.</noticeMessage>
       <photos>
         <photo>
           <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/Vchod_do_budovy_VUVT-Zasielkovna_RUNO.jpg</thumbnail>

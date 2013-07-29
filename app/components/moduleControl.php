@@ -67,27 +67,17 @@ class moduleControl extends BaseControl{
     */
     
    public function handleInstallModule($name) {
-       $component = $this->createComponent($name);
+       $component = $this[$name];
+       
+       try{
        $component->installModule();
        
-   }
-   
-/*
-   protected function createComponent($name) {
-        try { 
-            $component = $this[$name];
-            $component->setTranslator($this->translator);
-            $component->setShop($this->shopModel);
-            
-            return $component;
-        }
-        catch (Exception $e) {
+       }
+       catch (Exception $e) {
             \Nette\Diagnostics\Debugger::log($e);
         }
-            return FALSE;
    }
-*/
-
+   
    protected function createComponentZasilkovna() {
        
        $zasilkovna = new ZasilkovnaControl();
@@ -112,10 +102,29 @@ class moduleControl extends BaseControl{
     
     public function renderShippingModules() {
         
-        $this->template->setFile(__DIR__ . '/shippingModules.latte');
+        $this->template->setFile(__DIR__ . '/listOfModules.latte');
         
         try { 
-            foreach ($this->shopModel->loadModule('', 'shipping') as $component) {
+            foreach ($this->shopModel->loadModules('shipping') as $id => $component) {
+                $comp = $this->createComponent($component->CompModuleName);
+                
+                $this->addComponent($comp, $component->CompModuleName);
+                
+            }
+        }
+        catch (Exception $e) {
+            \Nette\Diagnostics\Debugger::log($e);
+        }
+        
+        $this->template->render();
+    }
+    
+    public function renderShippingAdminModules() {
+        
+        $this->template->setFile(__DIR__ . '/adminModules.latte');
+        
+        try { 
+            foreach ($this->shopModel->loadModules('shipping') as $id => $component) {
                 $comp = $this->createComponent($component->CompModuleName);
                 $this->addComponent($comp, $component->CompModuleName);
             }

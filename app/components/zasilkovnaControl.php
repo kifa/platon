@@ -53,9 +53,10 @@ class zasilkovnaControl extends moduleControl {
             $installForm = new Nette\Application\UI\Form;
             $installForm->setTranslator($this->translator);
             $installForm->addText('api', 'API:')
-                    ->setRequired('Please enter your API key.');
+                    ->setRequired('Please enter your API key.')
+                    ->setAttribute('class', 'span12');
             $installForm->addSubmit('install', 'Install module')
-                    ->setAttribute('class', 'btn-primary upl span2')
+                    ->setAttribute('class', 'btn-primary upl span12')
                     ->setAttribute('data-loading-text', 'Uploading...');
             $installForm->onSuccess[] = $this->installModuleSubmitted;
             return $installForm;
@@ -67,8 +68,13 @@ class zasilkovnaControl extends moduleControl {
         if ($this->presenter->getUser()->isInRole('admin')) {
             
             $this->shopModel->insertShopInfo('zasilkovnaAPI', $form->values->api);
-            $this->installModule();
-            $this->shopModel->updateModuleStatus('zasilkovna', 1);
+            try {
+                $this->installModule();
+                $this->shopModel->updateModuleStatus('zasilkovna', 1);
+            }catch(Exception $e) {   
+                   \Nette\Diagnostics\Debugger::log($e);
+            }          
+            
             $this->presenter->redirect('this');
         }
     }
@@ -79,43 +85,54 @@ class zasilkovnaControl extends moduleControl {
     */
     
    protected function installModule() {
-       if($this->shopModel->isModuleActive('zasilkovna')) {
-           $this->flashMessage('Module already installed.', 'alert alert-warning');
-           $this->redirect('this');
+      /* if($this->shopModel->isModuleActive('zasilkovna')) {
+           $this->presenter->flashMessage('Module already installed.', 'alert alert-warning');
+           return TRUE;
        }
-       else {
-            if($this->shopModel->getShopInfo('zasilkovnaAPI')) {
-                $this->reloadXML();
-            }   
-            else {
-                $this->flashMessage('Module installation OK, please ENTER your API key!', 'alert alert-warning');
-                $this->redirect('this');
-            }
-
-       }
-       $this->flashMessage('Module installation OK!', 'alert alert-success');
-       $this->redirect('this');
+       else {}*/
        
+      if($this->shopModel->getShopInfo('zasilkovnaAPI')) {
+                try {$this->reloadXML();
+                     }catch(Exception $e) {   
+                   \Nette\Diagnostics\Debugger::log($e);
+                }          
+               }   
+            else {
+                $this->presenter->flashMessage('Module installation OK, please ENTER your API key!', 'alert alert-warning');
+            }
+       $this->presenter->flashMessage('Module installation OK!', 'alert alert-success');        
    }
    
-   protected function uninstallModule() {
-       if($this->shopModel->isModuleActive()) {
+   public function handleUninstallModule() {
+       if($this->shopModel->isModuleActive('zasilkovna')) {
+           $delid = $this->shopModel->getShopInfo('zasilkovnaID');
+           $delivery = $this->orderModel->loadDelivery('', 'active');
+           dump($delivery);
+                      foreach($delivery as $id => $del) {
+               $this->orderModel->deleteSubDelivery($delid);
+           }
+           
+            $this->shopModel->updateModuleStatus('zasilkovna', 2);
+           
+           $this->shopModel->deleteShopInfo('zasilkovnaID');
+           $this->shopModel->deleteShopInfo('zasilkovnaAPI');
            
        }
        else {
            
        }
+       $this->presenter->redirect('this');
    }
 
-   public function updateXML() {
+   public function handleUpdateXML() {
        if($this->shopModel->isModuleActive('zasilkovna') && $this->shopModel->getShopInfo('zasilkovnaAPI')) {
-           $this->reloadXML();
+         //  $this->updateXML();
        }
        else {
            $this->flashMessage('Please enter your API key', 'alert alert-warning');
        }
        
-       $this->redirect('this');
+       $this->presenter->redirect('this');
    }
 
    protected function reloadXML() {
@@ -123,14 +140,14 @@ class zasilkovnaControl extends moduleControl {
         $API = $this->shopModel->getShopInfo('zasilkovnaAPI');
         $file = file_get_contents('http://www.zasilkovna.cz/api/v2/' . $API . '/branch.xml');
          
-        $soubor = fopen($this->context->parameters['appDir'] . "/zasilkovna.xml", "a+");
+        $soubor = fopen($this->presenter->context->parameters['appDir'] . "/zasilkovna.xml", "w+");
         fwrite($soubor, $file);
         fclose($soubor);
         
+        $soubor = $this->presenter->context->parameters['appDir'] . "/zasilkovna.xml";  
         $xml = simplexml_load_file($soubor);
         
-        
-        $zasilkovnaID = $this->orderModel->insertDelivery('Zásilkovna',
+       $zasilkovnaID = $this->orderModel->insertDelivery('Zásilkovna',
                                           49,
                                           'osobní převzetí v síti Zásilkovna.cz',
                                           NULL,
@@ -138,21 +155,21 @@ class zasilkovnaControl extends moduleControl {
                                            NULL);
         
         $this->orderModel->updateHigherDelivery($zasilkovnaID['DeliveryID'], $zasilkovnaID['DeliveryID']);
-
+        $this->shopModel->insertShopInfo('zasilkovnaID', $zasilkovnaID['DeliveryID']);
         foreach ($xml->branches->branch as $branch) {
-            $this->orderModel->insertDelivery($branch->name,
+            $name = $branch->country[0]->__toString() . ' - ' . $branch->name[0]->__toString();
+            $this->orderModel->insertDelivery($name,
                                               49,
-                                              $branch->special . ' - ' .$branch->place,
+                                              $branch->place[0]->__toString(),
                                               NULL,
                                                 1,
                                                $zasilkovnaID['DeliveryID']);
-        }
+        } 
         
-        return TRUE;
         }
         catch(Exception $e) {   
                    \Nette\Diagnostics\Debugger::log($e);
-                   $this->flashMessage('XML feed crashed. I´m so sorry.', 'alert alert-danger');
+                   $this->presenter->flashMessage('XML feed crashed. I´m so sorry.', 'alert alert-danger');
         }
    }
    
@@ -163,6 +180,11 @@ class zasilkovnaControl extends moduleControl {
    public function renderAdmin() {
         
         $this->template->setFile(__DIR__ . '/zasilkovnaAdminModule.latte');
+        $info = $this->shopModel->loadModuleByName('zasilkovna');
+       
+        $this->template->name = $info->ModuleName;
+        $this->template->desc = $info->ModuleDescription;
+        $this->template->status = $info->StatusID; 
         $this->template->render();
     }
     
@@ -171,6 +193,7 @@ class zasilkovnaControl extends moduleControl {
         $this->template->setFile(__DIR__ . '/zasilkovnaInstallModule.latte');
         
         $info = $this->shopModel->loadModuleByName('zasilkovna');
+       
         $this->template->name = $info->ModuleName;
         $this->template->desc = $info->ModuleDescription;
         $this->template->status = $info->StatusID; 

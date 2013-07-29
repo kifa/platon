@@ -93,6 +93,10 @@ class ShopModel extends Repository {
                 
         return $this->getTable('settings')->insert($insert);
     }
+    
+    public function deleteShopInfo($name) {
+        return $this->getTable('settings')->where('SettingName', $name)->delete();
+    }
 
     public function loadStaticText($id){
         if($id==''){
@@ -157,12 +161,12 @@ class ShopModel extends Repository {
      * ETC...
      */
     public function loadModule($id, $type=NULL){
-        if($switch=NULL){
+        if($type=NULL){
             if($id==''){
                 return $this->getTable('module')->fetchPairs('ModuleID');
             }
             else{
-                return $this->getTable('module')->where('ModuleID',$id);
+                return $this->getTable('module')->where('ModuleID',$id)->fetchPairs('ModuleID');
             }
         }
         else{
@@ -170,6 +174,11 @@ class ShopModel extends Repository {
         }
     }
     
+    public function loadModules($type) {
+        return $this->getTable('module')->where('ModuleType', $type)->fetchPairs('ModuleID');
+    }
+
+
     public function loadModuleByName($name){
 		return $this->getTable('module')->where('CompModuleName',$name)->fetch();
 	}
@@ -206,7 +215,7 @@ class ShopModel extends Repository {
         return $this->getTable('module')->where('CompModuleName',$compname)->update($update);
     }
     
-        public function isActive($compname){
+        public function isModuleActive($compname){
         $query = $this->getTable('module')
                 ->select('module.*,status.*')
                 ->where('module.CompModuleName', $compname)

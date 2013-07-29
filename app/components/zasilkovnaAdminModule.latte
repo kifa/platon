@@ -1,3 +1,7 @@
-<div class="span12">
-BLEEEEEEEEEE
+{if $status == 1}
+<div class="alert alert-info">
+    <strong>{$name}</strong>
+    <p>{$desc}</p>
+    <a n:href="updateXML!" class="btn btn-primary">{_'Update'} Zásilkovna</a>
 </div>
+{/if}

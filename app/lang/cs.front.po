@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-07-28 20:52:42
+# Created: 2013-07-28 22:50:59
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-07-28 20:52+0200\n"
+"PO-Revision-Date: 2013-07-28 22:50+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -29,6 +29,9 @@ msgstr "Přidat kategorii"
 
 msgid "ADD Text"
 msgstr "Přidat položku/text"
+
+msgid "API:"
+msgstr "API:"
 
 msgid "Account"
 msgstr "Účet"
@@ -258,6 +261,9 @@ msgstr "Datum"
 msgid "Date created"
 msgstr "Datum vytvoření"
 
+msgid "Deactivate Module"
+msgstr "Deaktivovat modul"
+
 msgid "Delete"
 msgstr "Smazat"
 
@@ -438,6 +444,9 @@ msgstr "Skrýt"
 msgid "Hide product"
 msgstr "Skrýt produkt"
 
+msgid "Higher Shipping"
+msgstr "Nadřazené poštovné"
+
 msgid "Home"
 msgstr "Domů"
 
@@ -468,6 +477,9 @@ msgstr "Info"
 msgid "Information about product"
 msgstr "Informace o produktu"
 
+msgid "Install module"
+msgstr "Instalovat modul"
+
 msgid "Invoice"
 msgstr "Faktura"
 
@@ -494,6 +506,9 @@ msgstr "Odhlásit se"
 
 msgid "Menu"
 msgstr "Menu"
+
+msgid "Module installed"
+msgstr "Modul instalován"
 
 msgid "More comments"
 msgstr "Více komentářů"
@@ -581,6 +596,9 @@ msgstr "Prosím vyplňte povinná pole."
 
 msgid "Please enter a valid email address."
 msgstr "Prosím zadejte email."
+
+msgid "Please enter your API key."
+msgstr "Prosím zadejte svůj API klíč."
 
 msgid "Please enter your password."
 msgstr "Prosím zadejte své heslo"
@@ -701,6 +719,9 @@ msgstr "Zvolte jednotku:"
 
 msgid "Select your logo"
 msgstr "Vyberte logo"
+
+msgid "Selected shipping:"
+msgstr "Vybraná doprava:"
 
 msgid "Set Catalog Layout"
 msgstr "Rozvržení katalogu"
@@ -876,45 +897,6 @@ msgstr "ks"
 msgid "personal pick up"
 msgstr "osobní převzetí"
 
-msgid "Selected shipping:"
-msgstr "Vybraná doprava:"
-
-msgid "Personal pick up | 0,-"
-msgstr ""
-
-msgid "DPD | 160,-"
-msgstr ""
-
-msgid "Czech postal service | 99,-"
-msgstr ""
-
-msgid "Central Warehouse | 0,-"
-msgstr ""
-
-msgid "2222 | 2222,-"
-msgstr ""
-
-msgid "DWEW | 111,-"
-msgstr ""
-
-msgid "Cash | 0,-"
-msgstr ""
-
-msgid "Bankwire | 50,-"
-msgstr ""
-
-msgid "Vypršel časový limit, odešlete formulář znovu"
-msgstr ""
-
-msgid "Domů"
-msgstr ""
-
-msgid "Smartphones"
-msgstr ""
-
-msgid "Ta-ble-ty"
-msgstr ""
-
-msgid "Washmashine"
-msgstr ""
+msgid "Here you see all shipping methods."
+msgstr "Zde jsou všechny informace o způsobech doručení."
 

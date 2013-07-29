@@ -435,7 +435,6 @@ class OrderModel extends Repository {
     public function insertDelivery($name,$price,$description=NULL,$free=NULL, $status=NULL, $higher=NULL)
     {
         $insert = array(
-            'DeliveryID' => NULL,
             'DeliveryName' => $name,
             'DeliveryDescription' => $description,
             'DeliveryPrice' => $price,
@@ -503,12 +502,17 @@ class OrderModel extends Repository {
     }
 
     public function deleteDelivery($id) {
-        
-        return $this->getTable('delivery')->where('DeliveryID',$id)->delete();
+        $update = array(
+            "StatusID" => 3
+        );
+        return $this->getTable('delivery')->where('DeliveryID',$id)->update($update);
     }
     
     public function deleteSubDelivery($higher){
-        return $this->getTable('delivery')->where('HigherDelivery',$higher)->delete();
+        $update = array(
+            "StatusID" => 3
+        );
+        return $this->getTable('delivery')->where('HigherDelivery',$higher)->update($update);
     }
 
     public function countOrder(){
