@@ -107,7 +107,6 @@ class zasilkovnaControl extends moduleControl {
        if($this->shopModel->isModuleActive('zasilkovna')) {
            $delid = $this->shopModel->getShopInfo('zasilkovnaID');
            $delivery = $this->orderModel->loadDelivery('', 'active');
-           dump($delivery);
                       foreach($delivery as $id => $del) {
                $this->orderModel->deleteSubDelivery($delid);
            }

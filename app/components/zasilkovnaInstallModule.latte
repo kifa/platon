@@ -1,10 +1,7 @@
+{if $status != 1}
 <div class="alert alert-info">
-    <strong>{if $status == 1}<i class="icon-ok-sign"></i> {/if}{$name}</strong>
+    <strong>{$name}</strong>
     <p>{$desc}</p>
-    {if $status != 1}
     {control installModule}
-    {else}
-    <a class="btn btn-warning" n:href="uninstallModule">{_'Deactivate Module'}</a>
-    {/if}
-
 </div>
+{/if}
