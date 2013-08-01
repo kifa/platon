@@ -4,7 +4,6 @@ use Nette\Forms\Form,
     Nette\Utils\Html,
     Nette\Image;
 use Nette\Mail\Message;
-use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 
 use \PdfResponse;
 
@@ -99,7 +98,6 @@ class SmartPanelPresenter extends BasePresenter {
 
     protected function createComponentPasswordForm() {
         $form = new Nette\Application\UI\Form;
-        $form->setRenderer(new BootstrapRenderer);
         $form->setTranslator($this->translator);
         $form->addHidden('login', $this->getUser()->getIdentity()->id);
         $form->addPassword('newPassword', 'Nové heslo:', 30)
@@ -131,7 +129,6 @@ class SmartPanelPresenter extends BasePresenter {
 
     protected function createComponentNewUserForm() {
         $form = new Form();
-        $form->setRenderer(new BootstrapRenderer);
         $form->setTranslator($this->translator);
         $form->addText('username', 'Uživatelské jméno:', 10);
         $form->addText('name', 'Vaše jméno', 30);
@@ -396,7 +393,6 @@ class SmartPanelPresenter extends BasePresenter {
         };
         
         $editForm = new Nette\Application\UI\Form;
-        $editForm->setRenderer(new BootstrapRenderer);
         $editForm->setTranslator($this->translator);
         $editForm->addHidden('orderID', $this->orderRow['OrderID']);
         $editForm->addSelect('shipper', 'Shipping:', $shippers)
@@ -429,7 +425,6 @@ class SmartPanelPresenter extends BasePresenter {
         
                 
         $editForm = new Nette\Application\UI\Form;
-        $editForm->setRenderer(new BootstrapRenderer);
         $editForm->setTranslator($this->translator);
         $editForm->addHidden('orderID', $this->orderRow['OrderID']);
         $editForm->addText('street', 'Street:')
@@ -467,11 +462,10 @@ class SmartPanelPresenter extends BasePresenter {
                
         $editProducts = new Nette\Application\UI\Form;
         $editProducts->setTranslator($this->translator);
-       // $editProducts->setRenderer(new BootstrapRenderer);
         $editProducts->addHidden('orderID', $this->orderRow['OrderID']);
         $editProducts->addHidden('totalProducts', $this->orderRow['TotalProducts'] );
         
-        foreach ($this->productModel->loadCatalog('') as $id => $product) {
+        foreach ($this->productModel->loadCatalogAdmin('') as $id => $product) {
             $products[$product->ProductID] = $product->ProductName;
            
           //  $editProducts->addHidden($product->ProductID, $product->FinalPrice);
@@ -492,6 +486,8 @@ class SmartPanelPresenter extends BasePresenter {
          if ($this->getUser()->isInRole('admin')) {
              $pID = $form->values->product;
           
+             dump($pID);
+             exit();
              $this->orderModel->updateOrderProducts($form->values->orderID, $form->values->product,
                      $form->values->$pID,
                      $this->orderRow['Shipping'], 
@@ -513,7 +509,6 @@ class SmartPanelPresenter extends BasePresenter {
                
         $editProducts = new Nette\Application\UI\Form;
         $editProducts->setTranslator($this->translator);
-       // $editProducts->setRenderer(new BootstrapRenderer);
         $editProducts->addHidden('orderID', $this->orderRow['OrderID']);
         $editProducts->addHidden('userName', $this->getUser()->getId());
         $editProducts->addTextArea('note', 'Your Note:')
@@ -795,7 +790,6 @@ class SmartPanelPresenter extends BasePresenter {
         $editShip = new Nette\Application\UI\Form;
         
         $editShip->setTranslator($this->translator);
-        $editShip->setRenderer(new BootstrapRenderer);
         $editShip->addText('name', 'Name:')
                 ->setDefaultValue($deliveryID['DeliveryName'])
                 ->setRequired();
@@ -864,8 +858,7 @@ class SmartPanelPresenter extends BasePresenter {
     
     public function handleRemovePay($id) {
        if ($this->getUser()->isInRole('admin')) {
-         $row = $this->orderModel->loadPayment($id)->fetch();
-         if($row) {       
+            
             $this->orderModel->deletePayment($id);
             $message = Html::el('span', ' was removed.');
             $e = Html::el('i')->class('icon-ok-sign left');
@@ -874,19 +867,15 @@ class SmartPanelPresenter extends BasePresenter {
             $this->flashMessage($message, 'alert');
             
             if($this->isAjax()) {
-                $this->invalidateControl();
+                $this->invalidateControl('paymentName-'.$id);
+                $this->invalidateControl('payment');
+                $this->invalidateControl('content');
                 
             }
             else {
-            $this->presenter->redirect("this");
+            $this->redirect("this");
             }
-         }
-         else {
-             
-             $this->flashMessage('This payment cannot be removed.', 'alert');
-                $this->presenter->redirect("this");
-             
-         }
+       
         }
     }
     
@@ -894,7 +883,6 @@ class SmartPanelPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             $addForm = new Nette\Application\UI\Form;
             $addForm->setTranslator($this->translator);
-            $addForm->setRenderer(new BootstrapRenderer);
 
             $addForm->addGroup('Create new payment:');
             $addForm->addText('newPay', 'Payment name:')
@@ -934,7 +922,6 @@ class SmartPanelPresenter extends BasePresenter {
         $editPay = new Nette\Application\UI\Form;
         
         $editPay->setTranslator($this->translator);
-        $editPay->setRenderer(new BootstrapRenderer);
         $editPay->addText('name', 'Name:')
                 ->setDefaultValue($paymentID['PaymentName'])
                 ->setRequired();
@@ -1034,8 +1021,7 @@ class SmartPanelPresenter extends BasePresenter {
             
             if(!$this->isControlInvalid('PayStatus')){        
                 $this->payload->edit = $content; //zaslání nové hodnoty do šablony
-                $this->sendPayload();
-                $this->invalidateControl('menu');       
+                $this->sendPayload();     
                 $this->invalidateControl('PayStatus'); //invalidace snipetu
            }
            else {

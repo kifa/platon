@@ -64,7 +64,7 @@ class moduleControl extends BaseControl{
 
    /*****************************************************************
     * HANDLE
-    */
+    
     
    public function handleInstallModule($name) {
        $component = $this[$name];
@@ -76,16 +76,46 @@ class moduleControl extends BaseControl{
        catch (Exception $e) {
             \Nette\Diagnostics\Debugger::log($e);
         }
-   }
+   }*/
    
+   
+   /************************************************************
+    *               SHIPPING MODULE
+    ***********************************************************/
    protected function createComponentZasilkovna() {
        
-       $zasilkovna = new ZasilkovnaControl();
+       $zasilkovna = new ZasilkovnaModule();
        $zasilkovna->setTranslator($this->translator);
        $zasilkovna->setShop($this->shopModel);
        $zasilkovna->setOrder($this->orderModel);
        return $zasilkovna;
    }
+   
+   protected function createComponentUlozenka() {
+       
+       $ulozenka = new UlozenkaModule();
+       $ulozenka->setTranslator($this->translator);
+       $ulozenka->setShop($this->shopModel);
+       $ulozenka->setOrder($this->orderModel);
+       return $ulozenka;
+   }
+   
+   
+   /************************************************************
+    *               PAYMENT MODULE
+    ***********************************************************/
+   
+   protected function createComponentCod() {
+       
+       $cod = new CashOnDeliveryModule();
+       $cod->setTranslator($this->translator);
+       $cod->setShop($this->shopModel);
+       $cod->setOrder($this->orderModel);
+       return $cod;
+   }
+   
+   
+   
 
    /***********************************************************************
      * RENDERY
@@ -119,12 +149,12 @@ class moduleControl extends BaseControl{
         $this->template->render();
     }
     
-    public function renderShippingAdminModules() {
+    public function renderPaymentModules() {
         
-        $this->template->setFile(__DIR__ . '/adminModules.latte');
+        $this->template->setFile(__DIR__ . '/listOfModules.latte');
         
         try { 
-            foreach ($this->shopModel->loadModules('shipping') as $id => $component) {
+            foreach ($this->shopModel->loadModules('payment') as $id => $component) {
                 $comp = $this->createComponent($component->CompModuleName);
                 $this->addComponent($comp, $component->CompModuleName);
             }

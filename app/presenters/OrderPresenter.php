@@ -124,6 +124,7 @@ class OrderPresenter extends BasePresenter {
     public function actionCart($product, $amnt) {
      
        $row = $this->productModel->loadProduct($product);
+       
         if (!$row || !$product) {
              if ($this->cart->numberItems > 0) {
                 $this->setView('cart');
@@ -269,6 +270,7 @@ class OrderPresenter extends BasePresenter {
                 ->setAttribute('class', 'btn btn-small btn-primary');
          $cartForm->addGroup('Notes');
         $cartForm->addTextArea('note', 'Note:', 50, 4);
+        $cartForm->addHidden('shipping','shipping');
         $cartForm->addGroup('Checkout');
         $cartForm->addSubmit('send', 'Checkout')
                 ->setAttribute('class', 'btn btn-warning btn-large');
@@ -377,7 +379,7 @@ class OrderPresenter extends BasePresenter {
         $orderNo = $this->orderModel->insertOrder(
                 $form->values->email,
                 $total,
-                $form->values->shippers,
+                $form->values->shipping,
                 $form->values->payment,
                 $form->values->note
         );
@@ -443,14 +445,14 @@ class OrderPresenter extends BasePresenter {
                     $this->sendOrderDoneMail($orderNo);
                 }
             catch (Exception $e) {
-                    Debugger::log($e);
+                   \Nette\Diagnostics\Debugger::log($e);
             }
             
             try {
                     $this->sendAdminOrderDoneMail($orderNo);
                 }
             catch (Exception $e) {
-                    Debugger::log($e);
+                   \Nette\Diagnostics\Debugger::log($e);
             }
        } 
        $this->orderNo = $orderNo;
@@ -501,7 +503,7 @@ class OrderPresenter extends BasePresenter {
      * @return void
      */
 
-    public function renderDefault() {
+    public function actionDefault() {
         $this->setView('cart');
     }
     

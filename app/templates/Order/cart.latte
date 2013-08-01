@@ -89,7 +89,7 @@
         
         </div>
         {/ifset}
-        <div class="span10 margin5"><strong>{_'Selected shipping:'} </strong><span class="shipping"></span></div>
+        <div class="span10 margin5"><strong>{_'Selected shipping:'} </strong><span class="shipping">{_'not selected'}</span></div>
     </div>
             <legend><span class="badge badge-info">2</span> {_'Fill contact information'}</legend>
             <div class="controls span5">
@@ -135,6 +135,7 @@
              <div class="controls span6">
                 {label note /}
                 {input note}
+                 {input shipping}
             </div>
             </fieldset>
         {/form}
@@ -181,6 +182,7 @@
         g = $('select[name="shippers"] option:selected').text();
         $('.shipping').html(g);
         $('.ordertotal').html(grandtotal + ',-'); 
+        $('input[name=shipping]').val(i);
         //$('select[name="shippers"] option:selected').text().html().appendTo('#orderform');
         });
         
@@ -192,7 +194,7 @@
             i = $('select[name="lowerShippers{!$lower}"] option:selected').val();
             shipping = sp[i];
              var grandtotal = shipping + {$grandtotal} + payment;
-        
+        $('input[name=shipping]').val(i);
         g = $('select[name="lowerShippers{!$lower}"] option:selected').text();
         $('.shipping').html(g);
         
@@ -201,6 +203,7 @@
         $('#sel0').fadeOut();
         
         $('#sel{!$lower}').fadeIn();
+        
         {/foreach}
         {/ifset}
         

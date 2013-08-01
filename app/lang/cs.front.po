@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-07-28 22:50:59
+# Created: 2013-07-30 12:37:00
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-07-28 22:50+0200\n"
+"PO-Revision-Date: 2013-07-30 12:37+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -117,6 +117,9 @@ msgstr "Jste si jisti, že chcete tento text smazat?"
 msgid "Ask"
 msgstr "Zeptejte se"
 
+msgid "Ask anything!"
+msgstr "Zeptejte se!"
+
 msgid "Back to Orders"
 msgstr "Zpět na objednávky"
 
@@ -173,6 +176,9 @@ msgstr "Hodnotu upravte kliknutím na ni"
 
 msgid "Check news on blog"
 msgstr "Novinky na blogu"
+
+msgid "Check our latest"
+msgstr "Prohlédněte si nejnovější"
 
 msgid "Checkout"
 msgstr "Objednat"
@@ -438,6 +444,9 @@ msgstr "Zde můžete dokončit vaši objednávku. Jen vyplňte..."
 msgid "Here you see all payment methods."
 msgstr "Zde jsou všechny Vaše platební metody."
 
+msgid "Here you see all shipping methods."
+msgstr "Zde jsou všechny informace o způsobech doručení."
+
 msgid "Hide"
 msgstr "Skrýt"
 
@@ -486,6 +495,9 @@ msgstr "Faktura"
 msgid "It has to be a number!"
 msgstr "Zde musí být číslo."
 
+msgid "It seems to be empty."
+msgstr "Vypadá, že je prázdný. To nevadí, zkuste..."
+
 msgid "Item price"
 msgstr "Cena"
 
@@ -530,6 +542,9 @@ msgstr "Jméno:"
 
 msgid "News"
 msgstr "Zprávy"
+
+msgid "Next progress"
+msgstr "Další postup"
 
 msgid "Note"
 msgstr "Poznámka"
@@ -666,8 +681,14 @@ msgstr "Zveřejnit text"
 msgid "Question:"
 msgstr "Otázka:"
 
+msgid "Questions?"
+msgstr "Otázky?"
+
 msgid "Read Terms"
 msgstr "Přečíst podmínky"
+
+msgid "Read about our product on"
+msgstr "Přečtěte si o našich produktech"
 
 msgid "Read more"
 msgstr "Pokračovat ve čtení"
@@ -792,6 +813,9 @@ msgstr "Předmět"
 msgid "Tablets"
 msgstr "Tablet"
 
+msgid "Thank you for your order!"
+msgstr "Děkujeme za Vaši objednávku!"
+
 msgid "This has to be a number"
 msgstr "Zde by mělo být číslo"
 
@@ -870,8 +894,14 @@ msgstr "Pro úpravu přejděte do kategorie!"
 msgid "Your Note:"
 msgstr "Vaše poznámka:"
 
+msgid "Your address"
+msgstr "Vaše adresa"
+
 msgid "Your cart"
 msgstr "Váš košík"
+
+msgid "Your contact"
+msgstr "Váš kontakt"
 
 msgid "Your email:"
 msgstr "Váš email:"
@@ -891,12 +921,15 @@ msgstr "PSČ:"
 msgid "by post/delivery service"
 msgstr "poštou/doručovací službou"
 
+msgid "not selected"
+msgstr "nevybrána"
+
 msgid "pcs"
 msgstr "ks"
 
 msgid "personal pick up"
 msgstr "osobní převzetí"
 
-msgid "Here you see all shipping methods."
-msgstr "Zde jsou všechny informace o způsobech doručení."
+msgid "Do you want to"
+msgstr "Potřebujete pomoct?"
 

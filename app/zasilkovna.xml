@@ -48,15 +48,24 @@
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:00–16:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:00–11:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:00–16:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:00–11:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:00–16:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:00–11:00&lt;br /&gt;&lt;strong style='color: red;'&gt;&lt;br&gt;Od 1.8. změna!&lt;/strong&gt; &lt;br /&gt;&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:30–16:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:30–11:30&lt;br /&gt;&lt;strong&gt;&amp;nbsp;&lt;/strong&gt; </compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:00–16:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:00–11:00&lt;br /&gt;&lt;strong style='color: red;'&gt;&lt;br&gt;Od 1.8. změna!&lt;/strong&gt; &lt;br /&gt;&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:30–16:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:30–11:30&lt;br /&gt;&lt;strong&gt;&amp;nbsp;&lt;/strong&gt; </compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;08:00–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;08:00–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;08:00–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;08:00–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;08:00–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;08:00–11:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;&lt;br&gt;Od 1.8. změna!&lt;/th&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:30–16:30&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:30–16:30&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:30–16:30&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;09:30–16:30&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;09:30–16:30&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;09:30–11:30&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;&amp;nbsp;&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -2478,13 +2487,13 @@ vejdete po schodišti u pošty, zeleninového stánku vyjdete až úplně nahoru
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Út–Pá&lt;/strong&gt; 09:30–11:30, 12:00–16:00</compactShort>
-        <compactLong>&lt;strong&gt;Út–Pá&lt;/strong&gt; 09:30–11:30, 12:00–16:00</compactLong>
+        <compactShort>&lt;strong&gt;Út–Pá&lt;/strong&gt; 10:00–11:30, 12:30–16:00</compactShort>
+        <compactLong>&lt;strong&gt;Út–Pá&lt;/strong&gt; 10:00–11:30, 12:30–16:00</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:30–11:30&lt;/td&gt;&lt;td&gt;12:00–16:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:30–11:30&lt;/td&gt;&lt;td&gt;12:00–16:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;09:30–11:30&lt;/td&gt;&lt;td&gt;12:00–16:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;09:30–11:30&lt;/td&gt;&lt;td&gt;12:00–16:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;10:00–11:30&lt;/td&gt;&lt;td&gt;12:30–16:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;10:00–11:30&lt;/td&gt;&lt;td&gt;12:30–16:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;10:00–11:30&lt;/td&gt;&lt;td&gt;12:30–16:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;10:00–11:30&lt;/td&gt;&lt;td&gt;12:30–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
@@ -2602,15 +2611,16 @@ vejdete po schodišti u pošty, zeleninového stánku vyjdete až úplně nahoru
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Út,Čt&lt;/strong&gt; 13:00–17:00&lt;br /&gt;&lt;strong&gt;St,Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Út,Čt&lt;/strong&gt; 13:00–17:00&lt;br /&gt;&lt;strong&gt;St,Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Út,Čt&lt;/strong&gt; 13:00–17:00&lt;br /&gt;&lt;strong&gt;St,Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;9. 8.&lt;/strong&gt; zavřeno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Út,Čt&lt;/strong&gt; 13:00–17:00&lt;br /&gt;&lt;strong&gt;St,Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;9. 8.&lt;/strong&gt; zavřeno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;9. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>

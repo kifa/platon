@@ -372,7 +372,10 @@ class OrderModel extends Repository {
     }
 
         public function deletePayment($id){
-        return $this->getTable('payment')->where('PaymentID',$id)->delete();
+            $update = array(
+            'StatusID' => 3
+        );
+        return $this->getTable('payment')->where('PaymentID',$id)->update($update);
     }
 
 

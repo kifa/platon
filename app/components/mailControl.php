@@ -59,16 +59,16 @@ public function sendSuperMail($to, $subject, $message, $from='luk.danek@gmail.co
             $mail->setFrom($from)
             ->addTo($to)
             ->setSubject($subject)
-            ->setHtmlBody($message)
-                    ->send();
-/*
+            ->setHtmlBody($message);
+   //                 ->send();
+
            $mailer = new Nette\Mail\SmtpMailer(array(
                 'host' => 'smtp.gmail.com',
                 'username' => 'obchod@inlinebus.cz',
                 'password' => 'cerven31',
                 'secure' => 'ssl',
                 ));
-            $mailer->send($mail); */
+            $mailer->send($mail); 
     }
 }
 

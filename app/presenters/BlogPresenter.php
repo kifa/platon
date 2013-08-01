@@ -39,9 +39,11 @@ class BlogPresenter extends BasePresenter {
     }
     
     
-    
-     
-    public function actionPost($postid) {
+    public function actionDefault() {
+        $this->setView('Category');
+    }
+
+        public function actionPost($postid) {
         $row = $this->blog->loadPost($postid);
         
         $row2 = $this->blog->loadPhotoAlbumID($postid);

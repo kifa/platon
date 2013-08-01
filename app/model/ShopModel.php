@@ -219,13 +219,13 @@ class ShopModel extends Repository {
         $query = $this->getTable('module')
                 ->select('module.*,status.*')
                 ->where('module.CompModuleName', $compname)
-                ->where('status.StatusName', 'active');
-        
+                ->where('status.StatusName', 'active')->fetch();
+    
         if($query == ''){
-            return 'FALSE';
+            return FALSE;
         }
         else{
-            return 'TRUE';
+            return TRUE;
         }           
     }
 }

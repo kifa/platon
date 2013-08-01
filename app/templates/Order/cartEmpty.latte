@@ -1,9 +1,19 @@
 {block pageheader}
  <div class="page-header">
-        <h1 n:block="title">Your cart <small>It seems to be empty.</small></h1>
+        <h1 n:block="title">{_'Your cart'} <small>{_'It seems to be empty.'}</small></h1>
         </div>
 {/block}
 {block content}
 <div class="span12">
+    <ul class="thumbnails text-center">
+        <li class="thumbnail">{_'Read about our product on'}
+            <a n:href="Blog:" class="btn btn-primary btn-large span12">{_'Blog'}</a>
+        </li>
+        <li class="thumbnail">{_'Check our latest'}
+            <a n:href="Product:products" class="btn btn-primary btn-large span12">{_'Sale'}</a></li>
+        <li class="thumbnail">{_'Do you want to'}
+            <a n:href="Homepage:contact" class="btn btn-primary btn-large span12">{_'Contact us'}</a>
+        </li>
+    </ul>
 </div>
 {/block}
