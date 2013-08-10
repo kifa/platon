@@ -3,7 +3,6 @@
 use Nette\Application\UI,
     Nette\Forms\Form,
     Nette\Utils\Html;
-use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 /*
  * Component to render modal window
  */
@@ -51,7 +50,6 @@ class ModalControl extends BaseControl {
     protected function createComponentTrackingForm(){
        
         $trackingForm = new Nette\Application\UI\Form;
-        $trackingForm->setRenderer(new BootstrapRenderer);
         $trackingForm->setTranslator($this->translator);
         $trackingForm->addText('user', 'Your email:')
                 ->addRule(FORM::EMAIL)
