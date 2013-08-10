@@ -25,9 +25,6 @@ $webloaderExtension = new \WebLoader\Nette\Extension();
 $webloaderExtension->install($configurator);
 
 
-//Replicator
-Kdyby\Replicator\Container::register();
-
 // Translation setup
 $configurator->onCompile[] = function ($configurator, $compiler) {
     $compiler->addExtension('netteTranslator', new NetteTranslator\NetteTranslatorExtension);
@@ -51,21 +48,21 @@ Route::setStyleProperty('slug', Route::FILTER_IN, function($url) {
     return Strings::webalize($url);
 });
 
-$router[] = new Route('<catID>-<slug>/<lang>', 'Product:products');
+$router[] = new Route('<catID>[-<slug>][/<lang>]', 'Product:products');
 
-$router[] = new Route('koupit/<id>-<slug>/<lang>', 'Product:product');
-$router[] = new Route('koupit/<id>/<lang>', 'Product:product');
-$router[] = new Route('novinky/<id>-<slug>/<lang>', 'Blog:posts');
-$router[] = new Route('novinky/clanek/<postid>-<slug>/<lang>', 'Blog:post');
+$router[] = new Route('koupit/<id>[-<slug>][/<lang>]', 'Product:product');
+$router[] = new Route('koupit/<id>[/<lang>]', 'Product:product');
+$router[] = new Route('novinky/<id>-<slug>[/<lang>]', 'Blog:posts');
+$router[] = new Route('novinky/clanek/<postid>[-<slug>][/<lang>]', 'Blog:post');
 $router[] = new Route('kosik/', 'Order:cart');
 $router[] = new Route('kosik/', 'Order:cartEmpty');
-$router[] = new Route('objednavka-dokoncena/<orderNO>/<lang>', 'Order:cartDone');
-$router[] = new Route('objednavka/<lang>', 'Order:default');
+$router[] = new Route('objednavka-dokoncena/<orderNO>[/<lang>]', 'Order:cartDone');
+$router[] = new Route('objednavka[/<lang>]', 'Order:default');
 $router[] = new Route('prihlaseni/', 'Sign:in');
-$router[] = new Route('informace/<postid>-<slug>/<lang>', 'Blog:staticText');
-$router[] = new Route('<presenter>/<action>[/<id>]/<lang>', 'SmartPanel:default');
+$router[] = new Route('informace/<postid>-<slug>[/<lang>]', 'Blog:staticText');
+$router[] = new Route('<presenter>/<action>[/<id>][/<lang>]', 'SmartPanel:default');
 $router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
-$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
+$router[] = new Route('<presenter>/<action>[/<id>][/<lang>]', 'Homepage:default');
 
 $container->addService('router', $router);
 
