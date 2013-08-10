@@ -162,15 +162,14 @@ class HomepagePresenter extends BasePresenter {
 
     
     protected function sendNoteMail($email, $note) {
-        
-            //$row = $this->orderModel->loadOrder($orderid);
+
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/contactMail.latte');
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->email = $email;
             $template->note = $note;
             
-            $orderMail = $this->shopModel->getShopInfo('OrderMail');
+            $orderMail = $this->shopModel->getShopInfo('ContactMail');
             $shopName = $this->shopModel->getShopInfo('Name');
         
             $mailIT = new mailControl();

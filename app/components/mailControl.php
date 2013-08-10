@@ -54,7 +54,7 @@ class mailControl extends BaseControl {
     
 
 public function sendSuperMail($to, $subject, $message, $from='luk.danek@gmail.com') {
-
+        
         $mail = new Message;
             $mail->setFrom($from)
             ->addTo($to)

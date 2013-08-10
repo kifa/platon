@@ -1303,6 +1303,7 @@ class SmartPanelPresenter extends BasePresenter {
     protected function sendStatusMail($orderid, $name) {
         
             $row = $this->orderModel->loadOrder($orderid);
+             $adminMail = $this->shopModel->getShopInfo('OrderMail');
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrderStatus.latte');
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
@@ -1311,12 +1312,13 @@ class SmartPanelPresenter extends BasePresenter {
             $template->status = $name;
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Status objednavky je: ', $template);
+            $mailIT->sendSuperMail($row->UsersID, 'Status objednavky je: ', $template, $adminMail);
     }
 
     protected function sendNoteMail($orderid, $note) {
         
-            //$row = $this->orderModel->loadOrder($orderid);
+            $row = $this->orderModel->loadOrder($orderid);
+             $adminMail = $this->shopModel->getShopInfo('OrderMail');
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrderNote.latte');
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
@@ -1325,7 +1327,7 @@ class SmartPanelPresenter extends BasePresenter {
             $template->note = $note;
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Zprava k Vaší ojednávce', $template);
+            $mailIT->sendSuperMail($row->UserID, 'Zprava k Vaší ojednávce', $template, $adminMail);
     }
 }
 

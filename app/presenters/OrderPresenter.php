@@ -418,26 +418,7 @@ class OrderPresenter extends BasePresenter {
      * @return void
      */
     
-    
-    private function sendSuperMail($to, $subject, $message) {
-        $mail = new Message;
-            $mail->setFrom('Lukas <luk.danek@gmail.com>')
-            ->addTo($to)
-            ->addTo('luk.danek@gmail.com')
-            ->addTo('jiri.kifa@gmail.com')
-            ->setSubject('Zpráva z BIRNE: ' . $subject)
-            ->setBody($message);
-
-           $mailer = new Nette\Mail\SmtpMailer(array(
-                'host' => 'smtp.gmail.com',
-                'username' => 'obchod@inlinebus.cz',
-                'password' => 'cerven31',
-                'secure' => 'ssl',
-                ));
-            $mailer->send($mail);
-    }
-
-    
+   
 
     public function actionOrderDone($orderNo, $track = NULL) {
        if($track == NULL) {
@@ -513,6 +494,7 @@ class OrderPresenter extends BasePresenter {
     protected function sendOrderDoneMail($orderid) {
         
             $row = $this->orderModel->loadOrder($orderid);
+            $adminMail = $this->shopModel->getShopInfo('OrderMail');
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrderDone.latte');
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
@@ -520,12 +502,13 @@ class OrderPresenter extends BasePresenter {
             $template->mailOrder = $row->UsersID;
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Zprava k Vaší ojednávce', $template);
+            $mailIT->sendSuperMail($row->UsersID, 'Zpráva k Vaší ojednávce', $template, $adminMail);
     }
     
     protected function sendAdminOrderDoneMail($orderid) {
         
             $row = $this->orderModel->loadOrder($orderid);
+            $adminMail = $this->shopModel->getShopInfo('OrderMail');
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/adminOrderDone.latte');
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
@@ -537,7 +520,7 @@ class OrderPresenter extends BasePresenter {
             }
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Zprava k Vaší ojednávce', $template);
+            $mailIT->sendSuperMail($adminMail, 'Zprava k Vaší ojednávce', $template, $adminMail);
     }
 
 }
