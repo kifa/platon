@@ -14,7 +14,6 @@ namespace Nette\Forms\Controls;
 use Nette;
 
 
-
 /**
  * Select box control that allows single item selection.
  *
@@ -27,9 +26,6 @@ use Nette;
  */
 class SelectBox extends BaseControl
 {
-	/** validation rule */
-	const VALID = ':selectBoxValid';
-
 	/** @var array */
 	private $items = array();
 
@@ -41,7 +37,6 @@ class SelectBox extends BaseControl
 
 	/** @var bool */
 	private $useKeys = TRUE;
-
 
 
 	/**
@@ -57,9 +52,7 @@ class SelectBox extends BaseControl
 		if ($items !== NULL) {
 			$this->setItems($items);
 		}
-		$this->addRule($this->validateSelectBoxValid, Nette\Forms\Rules::$defaultMessages[self::VALID]);
 	}
-
 
 
 	/**
@@ -72,7 +65,6 @@ class SelectBox extends BaseControl
 	}
 
 
-
 	/**
 	 * Returns selected item key (not checked).
 	 * @return mixed
@@ -81,7 +73,6 @@ class SelectBox extends BaseControl
 	{
 		return is_scalar($this->value) ? $this->value : NULL;
 	}
-
 
 
 	/**
@@ -95,16 +86,14 @@ class SelectBox extends BaseControl
 	}
 
 
-
 	/**
 	 * Sets first prompt item in select box.
 	 * @param  string
-	 * @return SelectBox  provides a fluent interface
+	 * @return self
 	 */
 	public function setPrompt($prompt)
 	{
 		if ($prompt === TRUE) { // back compatibility
-			trigger_error(__METHOD__ . '(TRUE) is deprecated; argument must be string.', E_USER_DEPRECATED);
 			$prompt = reset($this->items);
 			unset($this->allowed[key($this->items)], $this->items[key($this->items)]);
 		}
@@ -112,6 +101,13 @@ class SelectBox extends BaseControl
 		return $this;
 	}
 
+
+	/** @deprecated */
+	function skipFirst($v = NULL)
+	{
+		trigger_error(__METHOD__ . '() is deprecated; use setPrompt() instead.', E_USER_WARNING);
+		return $this->setPrompt($v);
+	}
 
 
 	/**
@@ -124,7 +120,6 @@ class SelectBox extends BaseControl
 	}
 
 
-
 	/**
 	 * Are the keys used?
 	 * @return bool
@@ -135,12 +130,11 @@ class SelectBox extends BaseControl
 	}
 
 
-
 	/**
 	 * Sets items from which to choose.
 	 * @param  array
 	 * @param  bool
-	 * @return SelectBox  provides a fluent interface
+	 * @return self
 	 */
 	public function setItems(array $items, $useKeys = TRUE)
 	{
@@ -169,7 +163,6 @@ class SelectBox extends BaseControl
 	}
 
 
-
 	/**
 	 * Returns items from which to choose.
 	 * @return array
@@ -178,7 +171,6 @@ class SelectBox extends BaseControl
 	{
 		return $this->items;
 	}
-
 
 
 	/**
@@ -190,7 +182,6 @@ class SelectBox extends BaseControl
 		$value = $this->getValue();
 		return ($this->useKeys && $value !== NULL) ? $this->allowed[$value] : $value;
 	}
-
 
 
 	/**
@@ -221,29 +212,18 @@ class SelectBox extends BaseControl
 
 			foreach ($value as $key2 => $value2) {
 				if ($value2 instanceof Nette\Utils\Html) {
-					$dest->add((string) $value2->selected(isset($selected[$key2])));
+					$dest->add((string) $value2->value($key2)
+						->selected(isset($selected[$key2])));
 
 				} else {
 					$key2 = $this->useKeys ? $key2 : $value2;
-					$value2 = $this->translate((string) $value2);
 					$dest->add((string) $option->value($key2)
 						->selected(isset($selected[$key2]))
-						->setText($value2));
+						->setText($this->translate((string) $value2)));
 				}
 			}
 		}
 		return $control;
-	}
-
-
-
-	/**
-	 * Checks if a valid option was selected.
-	 * @return bool
-	 */
-	public static function validateSelectBoxValid(Nette\Forms\IControl $control)
-	{
-		return $control->prompt !== FALSE || $control->getValue() !== NULL;
 	}
 
 }

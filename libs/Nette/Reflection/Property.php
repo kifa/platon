@@ -15,7 +15,6 @@ use Nette,
 	Nette\ObjectMixin;
 
 
-
 /**
  * Reports information about a classes variable.
  *
@@ -39,13 +38,11 @@ class Property extends \ReflectionProperty
 
 	public function __toString()
 	{
-		return parent::getDeclaringClass()->getName() . '::$' . $this->getName();
+		return 'Property ' . parent::getDeclaringClass()->getName() . '::$' . $this->getName();
 	}
 
 
-
 	/********************* Reflection layer ****************d*g**/
-
 
 
 	/**
@@ -57,9 +54,7 @@ class Property extends \ReflectionProperty
 	}
 
 
-
 	/********************* Nette\Annotations support ****************d*g**/
-
 
 
 	/**
@@ -74,7 +69,6 @@ class Property extends \ReflectionProperty
 	}
 
 
-
 	/**
 	 * Returns an annotation value.
 	 * @param  string
@@ -87,7 +81,6 @@ class Property extends \ReflectionProperty
 	}
 
 
-
 	/**
 	 * Returns all annotations.
 	 * @return IAnnotation[][]
@@ -96,7 +89,6 @@ class Property extends \ReflectionProperty
 	{
 		return AnnotationsParser::getAll($this);
 	}
-
 
 
 	/**
@@ -109,19 +101,16 @@ class Property extends \ReflectionProperty
 	}
 
 
-
 	/********************* Nette\Object behaviour ****************d*g**/
-
 
 
 	/**
 	 * @return ClassType
 	 */
-	public /**/static/**/ function getReflection()
+	public static function getReflection()
 	{
-		return new ClassType(/*5.2*$this*//**/get_called_class()/**/);
+		return new ClassType(get_called_class());
 	}
-
 
 
 	public function __call($name, $args)
@@ -130,12 +119,10 @@ class Property extends \ReflectionProperty
 	}
 
 
-
 	public function &__get($name)
 	{
 		return ObjectMixin::get($this, $name);
 	}
-
 
 
 	public function __set($name, $value)
@@ -144,12 +131,10 @@ class Property extends \ReflectionProperty
 	}
 
 
-
 	public function __isset($name)
 	{
 		return ObjectMixin::has($this, $name);
 	}
-
 
 
 	public function __unset($name)

@@ -14,7 +14,6 @@ namespace Nette;
 use Nette;
 
 
-
 /**
  * Nette\Object is the ultimate ancestor of all instantiable classes.
  *
@@ -62,11 +61,10 @@ abstract class Object
 	 * Access to reflection.
 	 * @return Nette\Reflection\ClassType
 	 */
-	public /**/static/**/ function getReflection()
+	public static function getReflection()
 	{
-		return new Reflection\ClassType(/*5.2*$this*//**/get_called_class()/**/);
+		return new Reflection\ClassType(get_called_class());
 	}
-
 
 
 	/**
@@ -82,7 +80,6 @@ abstract class Object
 	}
 
 
-
 	/**
 	 * Call to undefined static method.
 	 * @param  string  method name (in lower case!)
@@ -94,7 +91,6 @@ abstract class Object
 	{
 		return ObjectMixin::callStatic(get_called_class(), $name, $args);
 	}
-
 
 
 	/**
@@ -110,13 +106,13 @@ abstract class Object
 		} else {
 			list($class, $name) = explode('::', $name);
 		}
+		$class = new Reflection\ClassType($class);
 		if ($callback === NULL) {
-			return ObjectMixin::getExtensionMethod($class, $name);
+			return $class->getExtensionMethod($name);
 		} else {
-			ObjectMixin::setExtensionMethod($class, $name, $callback);
+			$class->setExtensionMethod($name, $callback);
 		}
 	}
-
 
 
 	/**
@@ -129,7 +125,6 @@ abstract class Object
 	{
 		return ObjectMixin::get($this, $name);
 	}
-
 
 
 	/**
@@ -145,7 +140,6 @@ abstract class Object
 	}
 
 
-
 	/**
 	 * Is property defined?
 	 * @param  string  property name
@@ -155,7 +149,6 @@ abstract class Object
 	{
 		return ObjectMixin::has($this, $name);
 	}
-
 
 
 	/**

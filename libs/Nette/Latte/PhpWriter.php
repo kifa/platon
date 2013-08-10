@@ -14,7 +14,6 @@ namespace Nette\Latte;
 use Nette;
 
 
-
 /**
  * PHP code generator helpers.
  *
@@ -32,12 +31,10 @@ class PhpWriter extends Nette\Object
 	private $compiler;
 
 
-
 	public static function using(MacroNode $node, Compiler $compiler = NULL)
 	{
 		return new static($node->tokenizer, $node->modifiers, $compiler);
 	}
-
 
 
 	public function __construct(MacroTokenizer $argsTokenizer, $modifiers = NULL, Compiler $compiler = NULL)
@@ -46,7 +43,6 @@ class PhpWriter extends Nette\Object
 		$this->modifiers = $modifiers;
 		$this->compiler = $compiler;
 	}
-
 
 
 	/**
@@ -60,29 +56,29 @@ class PhpWriter extends Nette\Object
 		array_shift($args);
 		$word = strpos($mask, '%node.word') === FALSE ? NULL : $this->argsTokenizer->fetchWord();
 		$me = $this;
-		$mask = Nette\Utils\Strings::replace($mask, '#%escape(\(([^()]*+|(?1))+\))#', /*5.2* new Nette\Callback(*/function($m) use ($me) {
+		$mask = Nette\Utils\Strings::replace($mask, '#%escape(\(([^()]*+|(?1))+\))#', function($m) use ($me) {
 			return $me->escape(substr($m[1], 1, -1));
-		}/*5.2* )*/);
-		$mask = Nette\Utils\Strings::replace($mask, '#%modify(\(([^()]*+|(?1))+\))#', /*5.2* new Nette\Callback(*/function($m) use ($me) {
+		});
+		$mask = Nette\Utils\Strings::replace($mask, '#%modify(\(([^()]*+|(?1))+\))#', function($m) use ($me) {
 			return $me->formatModifiers(substr($m[1], 1, -1));
-		}/*5.2* )*/);
+		});
 
 		return Nette\Utils\Strings::replace($mask, '#([,+]\s*)?%(node\.word|node\.array|node\.args|var|raw)(\?)?(\s*\+\s*)?()#',
-			/*5.2* new Nette\Callback(*/function($m) use ($me, $word, & $args) {
+		function($m) use ($me, $word, & $args) {
 			list(, $l, $macro, $cond, $r) = $m;
 
 			switch ($macro) {
-			case 'node.word':
-				$code = $me->formatWord($word); break;
-			case 'node.args':
-				$code = $me->formatArgs(); break;
-			case 'node.array':
-				$code = $me->formatArray();
-				$code = $cond && $code === 'array()' ? '' : $code; break;
-			case 'var':
-				$code = var_export(array_shift($args), TRUE); break;
-			case 'raw':
-				$code = (string) array_shift($args); break;
+				case 'node.word':
+					$code = $me->formatWord($word); break;
+				case 'node.args':
+					$code = $me->formatArgs(); break;
+				case 'node.array':
+					$code = $me->formatArray();
+					$code = $cond && $code === 'array()' ? '' : $code; break;
+				case 'var':
+					$code = var_export(array_shift($args), TRUE); break;
+				case 'raw':
+					$code = (string) array_shift($args); break;
 			}
 
 			if ($cond && $code === '') {
@@ -90,9 +86,8 @@ class PhpWriter extends Nette\Object
 			} else {
 				return $l . $code . $r;
 			}
-		}/*5.2* )*/);
+		});
 	}
-
 
 
 	/**
@@ -142,7 +137,6 @@ class PhpWriter extends Nette\Object
 	}
 
 
-
 	/**
 	 * Formats macro arguments to PHP code.
 	 * @return string
@@ -156,7 +150,6 @@ class PhpWriter extends Nette\Object
 		}
 		return $out;
 	}
-
 
 
 	/**
@@ -188,7 +181,6 @@ class PhpWriter extends Nette\Object
 	}
 
 
-
 	/**
 	 * Formats parameter to PHP string.
 	 * @param  string
@@ -201,7 +193,6 @@ class PhpWriter extends Nette\Object
 	}
 
 
-
 	/**
 	 * @return bool
 	 */
@@ -211,7 +202,6 @@ class PhpWriter extends Nette\Object
 			&& (!$tokenizer->hasPrev() || $tokenizer->isPrev(',', '(', '[', '=', '=>', ':', '?'))
 			&& (!$tokenizer->hasNext() || $tokenizer->isNext(',', ')', ']', '=', '=>', ':', '|'));
 	}
-
 
 
 	/**
@@ -279,42 +269,39 @@ class PhpWriter extends Nette\Object
 	}
 
 
-
 	public function escape($s)
 	{
 		switch ($this->compiler->getContentType()) {
-		case Compiler::CONTENT_XHTML:
-		case Compiler::CONTENT_HTML:
-			$context = $this->compiler->getContext();
-			switch ($context[0]) {
-			case Compiler::CONTEXT_SINGLE_QUOTED_ATTR:
-			case Compiler::CONTEXT_DOUBLE_QUOTED_ATTR:
-			case Compiler::CONTEXT_UNQUOTED_ATTR:
-				if ($context[1] === Compiler::CONTENT_JS) {
-					$s = "Nette\\Templating\\Helpers::escapeJs($s)";
-				} elseif ($context[1] === Compiler::CONTENT_CSS) {
-					$s = "Nette\\Templating\\Helpers::escapeCss($s)";
+			case Compiler::CONTENT_XHTML:
+			case Compiler::CONTENT_HTML:
+				$context = $this->compiler->getContext();
+				switch ($context[0]) {
+					case Compiler::CONTEXT_SINGLE_QUOTED:
+					case Compiler::CONTEXT_DOUBLE_QUOTED:
+						if ($context[1] === Compiler::CONTENT_JS) {
+							$s = "Nette\\Templating\\Helpers::escapeJs($s)";
+						} elseif ($context[1] === Compiler::CONTENT_CSS) {
+							$s = "Nette\\Templating\\Helpers::escapeCss($s)";
+						}
+						$quote = $context[0] === Compiler::CONTEXT_DOUBLE_QUOTED ? '' : ', ENT_QUOTES';
+						return "htmlSpecialChars($s$quote)";
+					case Compiler::CONTEXT_COMMENT:
+						return "Nette\\Templating\\Helpers::escapeHtmlComment($s)";
+					case Compiler::CONTENT_JS:
+					case Compiler::CONTENT_CSS:
+						return 'Nette\Templating\Helpers::escape' . ucfirst($context[0]) . "($s)";
+					default:
+						return "Nette\\Templating\\Helpers::escapeHtml($s, ENT_NOQUOTES)";
 				}
-				$quote = $context[0] === Compiler::CONTEXT_SINGLE_QUOTED_ATTR ? ', ENT_QUOTES' : '';
-				$s = "htmlSpecialChars($s$quote)";
-				return $context[0] === Compiler::CONTEXT_UNQUOTED_ATTR ? "'\"' . $s . '\"'" : $s;
-			case Compiler::CONTEXT_COMMENT:
-				return "Nette\\Templating\\Helpers::escapeHtmlComment($s)";
+			case Compiler::CONTENT_XML:
 			case Compiler::CONTENT_JS:
 			case Compiler::CONTENT_CSS:
-				return 'Nette\Templating\Helpers::escape' . ucfirst($context[0]) . "($s)";
+			case Compiler::CONTENT_ICAL:
+				return 'Nette\Templating\Helpers::escape' . ucfirst($this->compiler->getContentType()) . "($s)";
+			case Compiler::CONTENT_TEXT:
+				return $s;
 			default:
-				return "Nette\\Templating\\Helpers::escapeHtml($s, ENT_NOQUOTES)";
-			}
-		case Compiler::CONTENT_XML:
-		case Compiler::CONTENT_JS:
-		case Compiler::CONTENT_CSS:
-		case Compiler::CONTENT_ICAL:
-			return 'Nette\Templating\Helpers::escape' . ucfirst($this->compiler->getContentType()) . "($s)";
-		case Compiler::CONTENT_TEXT:
-			return $s;
-		default:
-			return "\$template->escape($s)";
+				return "\$template->escape($s)";
 		}
 	}
 

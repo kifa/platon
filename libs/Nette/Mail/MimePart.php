@@ -15,7 +15,6 @@ use Nette,
 	Nette\Utils\Strings;
 
 
-
 /**
  * MIME message part.
  *
@@ -48,13 +47,12 @@ class MimePart extends Nette\Object
 	private $body;
 
 
-
 	/**
 	 * Sets a header.
 	 * @param  string
 	 * @param  string|array  value or pair email => name
 	 * @param  bool
-	 * @return MimePart  provides a fluent interface
+	 * @return self
 	 */
 	public function setHeader($name, $value, $append = FALSE)
 	{
@@ -95,7 +93,6 @@ class MimePart extends Nette\Object
 	}
 
 
-
 	/**
 	 * Returns a header.
 	 * @param  string
@@ -107,18 +104,16 @@ class MimePart extends Nette\Object
 	}
 
 
-
 	/**
 	 * Removes a header.
 	 * @param  string
-	 * @return MimePart  provides a fluent interface
+	 * @return self
 	 */
 	public function clearHeader($name)
 	{
 		unset($this->headers[$name]);
 		return $this;
 	}
-
 
 
 	/**
@@ -138,10 +133,7 @@ class MimePart extends Nette\Object
 			$s = '';
 			foreach ($this->headers[$name] as $email => $name) {
 				if ($name != NULL) { // intentionally ==
-					$s .= self::encodeHeader(
-						strpbrk($name, '.,;<@>()[]"=?') ? '"' . addcslashes($name, '"\\') . '"' : $name,
-						$offset
-					);
+					$s .= self::encodeHeader($name, $offset, strpbrk($name, '.,;<@>()[]"=?'));
 					$email = " <$email>";
 				}
 				$email .= ',';
@@ -164,7 +156,6 @@ class MimePart extends Nette\Object
 	}
 
 
-
 	/**
 	 * Returns all headers.
 	 * @return array
@@ -175,12 +166,11 @@ class MimePart extends Nette\Object
 	}
 
 
-
 	/**
 	 * Sets Content-Type header.
 	 * @param  string
 	 * @param  string
-	 * @return MimePart  provides a fluent interface
+	 * @return self
 	 */
 	public function setContentType($contentType, $charset = NULL)
 	{
@@ -189,18 +179,16 @@ class MimePart extends Nette\Object
 	}
 
 
-
 	/**
 	 * Sets Content-Transfer-Encoding header.
 	 * @param  string
-	 * @return MimePart  provides a fluent interface
+	 * @return self
 	 */
 	public function setEncoding($encoding)
 	{
 		$this->setHeader('Content-Transfer-Encoding', $encoding);
 		return $this;
 	}
-
 
 
 	/**
@@ -213,7 +201,6 @@ class MimePart extends Nette\Object
 	}
 
 
-
 	/**
 	 * Adds or creates new multipart.
 	 * @return MimePart
@@ -224,17 +211,15 @@ class MimePart extends Nette\Object
 	}
 
 
-
 	/**
 	 * Sets textual body.
-	 * @return MimePart  provides a fluent interface
+	 * @return self
 	 */
 	public function setBody($body)
 	{
 		$this->body = $body;
 		return $this;
 	}
-
 
 
 	/**
@@ -247,16 +232,14 @@ class MimePart extends Nette\Object
 	}
 
 
-
 	/********************* building ****************d*g**/
-
 
 
 	/**
 	 * Returns encoded message.
 	 * @return string
 	 */
-	public function getEncodedMessage()
+	public function generateMessage()
 	{
 		$output = '';
 		$boundary = '--------' . Strings::random();
@@ -273,26 +256,26 @@ class MimePart extends Nette\Object
 		$body = (string) $this->body;
 		if ($body !== '') {
 			switch ($this->getEncoding()) {
-			case self::ENCODING_QUOTED_PRINTABLE:
-				$output .= function_exists('quoted_printable_encode') ? quoted_printable_encode($body) : self::encodeQuotedPrintable($body);
-				break;
+				case self::ENCODING_QUOTED_PRINTABLE:
+					$output .= function_exists('quoted_printable_encode') ? quoted_printable_encode($body) : self::encodeQuotedPrintable($body);
+					break;
 
-			case self::ENCODING_BASE64:
-				$output .= rtrim(chunk_split(base64_encode($body), self::LINE_LENGTH, self::EOL));
-				break;
+				case self::ENCODING_BASE64:
+					$output .= rtrim(chunk_split(base64_encode($body), self::LINE_LENGTH, self::EOL));
+					break;
 
-			case self::ENCODING_7BIT:
-				$body = preg_replace('#[\x80-\xFF]+#', '', $body);
-				// break intentionally omitted
+				case self::ENCODING_7BIT:
+					$body = preg_replace('#[\x80-\xFF]+#', '', $body);
+					// break intentionally omitted
 
-			case self::ENCODING_8BIT:
-				$body = str_replace(array("\x00", "\r"), '', $body);
-				$body = str_replace("\n", self::EOL, $body);
-				$output .= $body;
-				break;
+				case self::ENCODING_8BIT:
+					$body = str_replace(array("\x00", "\r"), '', $body);
+					$body = str_replace("\n", self::EOL, $body);
+					$output .= $body;
+					break;
 
-			default:
-				throw new Nette\InvalidStateException('Unknown encoding.');
+				default:
+					throw new Nette\InvalidStateException('Unknown encoding.');
 			}
 		}
 
@@ -301,7 +284,7 @@ class MimePart extends Nette\Object
 				$output .= self::EOL;
 			}
 			foreach ($this->parts as $part) {
-				$output .= '--' . $boundary . self::EOL . $part->getEncodedMessage() . self::EOL;
+				$output .= '--' . $boundary . self::EOL . $part->generateMessage() . self::EOL;
 			}
 			$output .= '--' . $boundary.'--';
 		}
@@ -310,19 +293,17 @@ class MimePart extends Nette\Object
 	}
 
 
-
 	/********************* QuotedPrintable helpers ****************d*g**/
 
 
-
 	/**
-	 * Converts a 8 bit header to a quoted-printable string.
-	 * @param  string
+	 * Converts a 8 bit header to a string.
 	 * @param  string
 	 * @param  int
+	 * @param  bool
 	 * @return string
 	 */
-	private static function encodeHeader($s, & $offset = 0)
+	private static function encodeHeader($s, & $offset = 0, $force = FALSE)
 	{
 		$o = '';
 		if ($offset >= 55) { // maximum for iconv_mime_encode
@@ -330,7 +311,7 @@ class MimePart extends Nette\Object
 			$offset = 1;
 		}
 
-		if (strspn($s, "!\"#$%&\'()*+,-./0123456789:;<>@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^`abcdefghijklmnopqrstuvwxyz{|}=? _\r\n\t") === strlen($s)
+		if (!$force && strspn($s, "!\"#$%&\'()*+,-./0123456789:;<>@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^`abcdefghijklmnopqrstuvwxyz{|}=? _\r\n\t") === strlen($s)
 			&& ($offset + strlen($s) <= self::LINE_LENGTH)
 		) {
 			$offset += strlen($s);
@@ -348,43 +329,8 @@ class MimePart extends Nette\Object
 	}
 
 
-
 	/**
 	 * Converts a 8 bit string to a quoted-printable string.
 	 * @param  string
 	 * @return string
-	 *//*5.2*
-	public static function encodeQuotedPrintable($s)
-	{
-		$range = '!"#$%&\'()*+,-./0123456789:;<>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}'; // \x21-\x7E without \x3D
-		$pos = 0;
-		$len = 0;
-		$o = '';
-		$size = strlen($s);
-		while ($pos < $size) {
-			if ($l = strspn($s, $range, $pos)) {
-				while ($len + $l > self::LINE_LENGTH - 1) { // 1 = length of suffix =
-					$lx = self::LINE_LENGTH - $len - 1;
-					$o .= substr($s, $pos, $lx) . '=' . self::EOL;
-					$pos += $lx;
-					$l -= $lx;
-					$len = 0;
-				}
-				$o .= substr($s, $pos, $l);
-				$len += $l;
-				$pos += $l;
-
-			} else {
-				$len += 3;
-				if ($len > self::LINE_LENGTH - 1) {
-					$o .= '=' . self::EOL;
-					$len = 3;
-				}
-				$o .= '=' . strtoupper(bin2hex($s[$pos]));
-				$pos++;
-			}
-		}
-		return rtrim($o, '=' . self::EOL);
-	}*/
-
-}
+	 */}

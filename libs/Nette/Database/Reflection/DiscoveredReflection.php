@@ -14,19 +14,22 @@ namespace Nette\Database\Reflection;
 use Nette;
 
 
-
 /**
  * Reflection metadata class with discovery for a database.
  *
  * @author     Jan Skrasek
+ * @property-write Nette\Database\Connection $connection
  */
 class DiscoveredReflection extends Nette\Object implements Nette\Database\IReflection
 {
-	/** @var Nette\Database\Connection */
-	protected $connection;
-
 	/** @var Nette\Caching\Cache */
 	protected $cache;
+
+	/** @var Nette\Caching\IStorage */
+	protected $cacheStorage;
+
+	/** @var Nette\Database\Connection */
+	protected $connection;
 
 	/** @var array */
 	protected $structure = array();
@@ -35,19 +38,23 @@ class DiscoveredReflection extends Nette\Object implements Nette\Database\IRefle
 	protected $loadedStructure;
 
 
-
 	/**
 	 * Create autodiscovery structure.
 	 */
-	public function __construct(Nette\Database\Connection $connection, Nette\Caching\IStorage $cacheStorage = NULL)
+	public function __construct(Nette\Caching\IStorage $storage = NULL)
 	{
-		$this->connection = $connection;
-		if ($cacheStorage) {
-			$this->cache = new Nette\Caching\Cache($cacheStorage, 'Nette.Database.' . md5($connection->getDsn()));
-			$this->structure = $this->loadedStructure = $this->cache->load('structure') ?: array();
-		}
+		$this->cacheStorage = $storage;
 	}
 
+
+	public function setConnection(Nette\Database\Connection $connection)
+	{
+		$this->connection = $connection;
+		if ($this->cacheStorage) {
+			$this->cache = new Nette\Caching\Cache($this->cacheStorage, 'Nette.Database.' . md5($connection->getDsn()));
+			$this->structure = $this->loadedStructure = $this->cache->load('structure') ?: $this->structure;
+		}
+	}
 
 
 	public function __destruct()
@@ -56,7 +63,6 @@ class DiscoveredReflection extends Nette\Object implements Nette\Database\IRefle
 			$this->cache->save('structure', $this->structure);
 		}
 	}
-
 
 
 	public function getPrimary($table)
@@ -82,7 +88,6 @@ class DiscoveredReflection extends Nette\Object implements Nette\Database\IRefle
 
 		return $primary;
 	}
-
 
 
 	public function getHasManyReference($table, $key, $refresh = TRUE)
@@ -131,7 +136,6 @@ class DiscoveredReflection extends Nette\Object implements Nette\Database\IRefle
 	}
 
 
-
 	public function getBelongsToReference($table, $key, $refresh = TRUE)
 	{
 		if (isset($this->structure['belongsTo'][strtolower($table)])) {
@@ -151,9 +155,10 @@ class DiscoveredReflection extends Nette\Object implements Nette\Database\IRefle
 	}
 
 
-
 	protected function reloadAllForeignKeys()
 	{
+		$this->structure['hasMany'] = $this->structure['belongsTo'] = array();
+
 		foreach ($this->connection->getSupplementalDriver()->getTables() as $table) {
 			if ($table['view'] == FALSE) {
 				$this->reloadForeignKeys($table['name']);
@@ -166,7 +171,6 @@ class DiscoveredReflection extends Nette\Object implements Nette\Database\IRefle
 			});
 		}
 	}
-
 
 
 	protected function reloadForeignKeys($table)

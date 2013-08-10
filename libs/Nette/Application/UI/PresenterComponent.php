@@ -14,7 +14,6 @@ namespace Nette\Application\UI;
 use Nette;
 
 
-
 /**
  * PresenterComponent is the base class for all Presenter components.
  *
@@ -33,7 +32,6 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	protected $params = array();
 
 
-
 	/**
 	 * Returns the presenter where this component belongs to.
 	 * @param  bool   throw exception if presenter doesn't exist?
@@ -45,7 +43,6 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	}
 
 
-
 	/**
 	 * Returns a fully-qualified name that uniquely identifies the component
 	 * within the presenter hierarchy.
@@ -55,7 +52,6 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	{
 		return $this->lookupPath('Nette\Application\UI\Presenter', TRUE);
 	}
-
 
 
 	/**
@@ -72,7 +68,6 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	}
 
 
-
 	/**
 	 * @return void
 	 */
@@ -81,7 +76,6 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 		parent::validateParent($parent);
 		$this->monitor('Nette\Application\UI\Presenter');
 	}
-
 
 
 	/**
@@ -105,7 +99,6 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	}
 
 
-
 	/**
 	 * Checks for requirements such as authorization.
 	 * @return void
@@ -115,20 +108,17 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	}
 
 
-
 	/**
 	 * Access to reflection.
 	 * @return PresenterComponentReflection
 	 */
-	public /**/static/**/ function getReflection()
+	public static function getReflection()
 	{
-		return new PresenterComponentReflection(/*5.2*$this*//**/get_called_class()/**/);
+		return new PresenterComponentReflection(get_called_class());
 	}
 
 
-
 	/********************* interface IStatePersistent ****************d*g**/
-
 
 
 	/**
@@ -141,7 +131,7 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 		$reflection = $this->getReflection();
 		foreach ($reflection->getPersistentParams() as $name => $meta) {
 			if (isset($params[$name])) { // NULLs are ignored
-				$type = gettype($meta['def']);
+				$type = gettype($meta['def'] === NULL ? $params[$name] : $meta['def']); // compatible with 2.0.x
 				if (!$reflection->convertType($params[$name], $type)) {
 					throw new Nette\Application\BadRequestException("Invalid value for persistent parameter '$name' in '{$this->getName()}', expected " . ($type === 'NULL' ? 'scalar' : $type) . ".");
 				}
@@ -152,7 +142,6 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 		}
 		$this->params = $params;
 	}
-
 
 
 	/**
@@ -179,7 +168,7 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 				continue; // ignored parameter
 			}
 
-			$type = gettype($meta['def']);
+			$type = gettype($meta['def'] === NULL ? $params[$name] : $meta['def']); // compatible with 2.0.x
 			if (!PresenterComponentReflection::convertType($params[$name], $type)) {
 				throw new InvalidLinkException("Invalid value for persistent parameter '$name' in '{$this->getName()}', expected " . ($type === 'NULL' ? 'scalar' : $type) . ".");
 			}
@@ -191,9 +180,9 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	}
 
 
-
 	/**
 	 * Returns component param.
+	 * If no key is passed, returns the entire array.
 	 * @param  string key
 	 * @param  mixed  default value
 	 * @return mixed
@@ -201,7 +190,6 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	final public function getParameter($name = NULL, $default = NULL)
 	{
 		if (func_num_args() === 0) {
-			trigger_error('Calling ' . __METHOD__ . ' with no arguments to get all parameters is deprecated, use getParameters() instead.', E_USER_DEPRECATED);
 			return $this->params;
 
 		} elseif (isset($this->params[$name])) {
@@ -211,18 +199,6 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 			return $default;
 		}
 	}
-
-
-
-	/**
-	 * Returns component parameters.
-	 * @return array
-	 */
-	final public function getParameters()
-	{
-		return $this->params;
-	}
-
 
 
 	/**
@@ -237,14 +213,20 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	}
 
 
-
 	/** @deprecated */
 	function getParam($name = NULL, $default = NULL)
 	{
-		//trigger_error(__METHOD__ . '() is deprecated; use getParameter() instead.', E_USER_DEPRECATED);
+		//trigger_error(__METHOD__ . '() is deprecated; use getParameter() instead.', E_USER_WARNING);
 		return func_num_args() ? $this->getParameter($name, $default) : $this->getParameter();
 	}
 
+
+	/** @deprecated */
+	function getParamId($name)
+	{
+		trigger_error(__METHOD__ . '() is deprecated; use getParameterId() instead.', E_USER_WARNING);
+		return $this->getParameterId($name);
+	}
 
 
 	/**
@@ -254,8 +236,7 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	 */
 	public static function getPersistentParams()
 	{
-		/*5.2*$arg = func_get_arg(0);*/
-		$rc = new Nette\Reflection\ClassType(/*5.2*$arg*//**/get_called_class()/**/);
+		$rc = new Nette\Reflection\ClassType(get_called_class());
 		$params = array();
 		foreach ($rc->getProperties(\ReflectionProperty::IS_PUBLIC) as $rp) {
 			if (!$rp->isStatic() && $rp->hasAnnotation('persistent')) {
@@ -266,9 +247,7 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	}
 
 
-
 	/********************* interface ISignalReceiver ****************d*g**/
-
 
 
 	/**
@@ -286,7 +265,6 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	}
 
 
-
 	/**
 	 * Formats signal handler method name -> case sensitivity doesn't matter.
 	 * @param  string
@@ -298,9 +276,7 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	}
 
 
-
 	/********************* navigation ****************d*g**/
-
 
 
 	/**
@@ -312,19 +288,13 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	 */
 	public function link($destination, $args = array())
 	{
-		if (!is_array($args)) {
-			$args = func_get_args();
-			array_shift($args);
-		}
-
 		try {
-			return $this->getPresenter()->createRequest($this, $destination, $args, 'link');
+			return $this->getPresenter()->createRequest($this, $destination, is_array($args) ? $args : array_slice(func_get_args(), 1), 'link');
 
 		} catch (InvalidLinkException $e) {
 			return $this->getPresenter()->handleInvalidLink($e);
 		}
 	}
-
 
 
 	/**
@@ -335,14 +305,8 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	 */
 	public function lazyLink($destination, $args = array())
 	{
-		if (!is_array($args)) {
-			$args = func_get_args();
-			array_shift($args);
-		}
-
-		return new Link($this, $destination, $args);
+		return new Link($this, $destination, is_array($args) ? $args : array_slice(func_get_args(), 1));
 	}
-
 
 
 	/**
@@ -355,15 +319,10 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	public function isLinkCurrent($destination = NULL, $args = array())
 	{
 		if ($destination !== NULL) {
-			if (!is_array($args)) {
-				$args = func_get_args();
-				array_shift($args);
-			}
-			$this->getPresenter()->createRequest($this, $destination, $args, 'test');
+			$this->getPresenter()->createRequest($this, $destination, is_array($args) ? $args : array_slice(func_get_args(), 1), 'test');
 		}
 		return $this->getPresenter()->getLastCreatedRequestFlag('current');
 	}
-
 
 
 	/**
@@ -383,10 +342,7 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 		}
 
 		if (!is_array($args)) {
-			$args = func_get_args();
-			if (is_numeric(array_shift($args))) {
-				array_shift($args);
-			}
+			$args = array_slice(func_get_args(), is_numeric($code) ? 2 : 1);
 		}
 
 		$presenter = $this->getPresenter();
@@ -394,9 +350,7 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	}
 
 
-
 	/********************* interface \ArrayAccess ****************d*g**/
-
 
 
 	/**
@@ -411,7 +365,6 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	}
 
 
-
 	/**
 	 * Returns component specified by name. Throws exception if component doesn't exist.
 	 * @param  string  component name
@@ -424,7 +377,6 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	}
 
 
-
 	/**
 	 * Does component specified by name exists?
 	 * @param  string  component name
@@ -434,7 +386,6 @@ abstract class PresenterComponent extends Nette\ComponentModel\Container impleme
 	{
 		return $this->getComponent($name, FALSE) !== NULL;
 	}
-
 
 
 	/**

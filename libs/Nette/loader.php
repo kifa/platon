@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Nette Framework (version 2.1-dev released on $WCDATE$, http://nette.org)
+ * Nette Framework (version 2.0.12 released on 2013-08-08, http://nette.org)
  *
  * Copyright (c) 2004, 2013 David Grudl (http://davidgrudl.com)
  *
@@ -10,22 +10,16 @@
  */
 
 
-
 /**
  * Check and reset PHP configuration.
  */
-/*5.2*
-if (!defined('PHP_VERSION_ID')) {
-	$tmp = explode('.', PHP_VERSION);
-	define('PHP_VERSION_ID', ($tmp[0] * 10000 + $tmp[1] * 100 + $tmp[2]));
-}
-
-if (PHP_VERSION_ID < 50200) {
-	throw new Exception('Nette Framework requires PHP 5.2.0 or newer.');
-}
-*/
+error_reporting(E_ALL | E_STRICT);
+@set_magic_quotes_runtime(FALSE); // @ - deprecated since PHP 5.3.0
+iconv_set_encoding('internal_encoding', 'UTF-8');
+extension_loaded('mbstring') && mb_internal_encoding('UTF-8');
+umask(0);
+@header('X-Powered-By: Nette Framework'); // @ - headers may be sent
 @header('Content-Type: text/html; charset=utf-8'); // @ - headers may be sent
-
 
 
 /**
@@ -33,9 +27,8 @@ if (PHP_VERSION_ID < 50200) {
  */
 define('NETTE', TRUE);
 define('NETTE_DIR', __DIR__);
-define('NETTE_VERSION_ID', 20100); // v2.1.0
+define('NETTE_VERSION_ID', 20012); // v2.0.12
 define('NETTE_PACKAGE', '5.3');
-
 
 
 require_once __DIR__ . '/common/exceptions.php';
@@ -54,6 +47,7 @@ Nette\Diagnostics\Debugger::_init();
 
 Nette\Utils\SafeStream::register();
 
+class_alias('Nette\Config\Configurator', 'Nette\Configurator');
 
 
 /**

@@ -14,7 +14,6 @@ namespace Nette\Forms;
 use Nette;
 
 
-
 /**
  * Container for form controls.
  *
@@ -36,19 +35,17 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	protected $currentGroup;
 
 	/** @var bool */
-	private $validated;
-
+	protected $valid;
 
 
 	/********************* data exchange ****************d*g**/
-
 
 
 	/**
 	 * Fill-in with default values.
 	 * @param  array|Traversable  values used to fill the form
 	 * @param  bool     erase other default values?
-	 * @return Container  provides a fluent interface
+	 * @return self
 	 */
 	public function setDefaults($values, $erase = FALSE)
 	{
@@ -60,12 +57,11 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/**
 	 * Fill-in with values.
 	 * @param  array|Traversable  values used to fill the form
 	 * @param  bool     erase other controls?
-	 * @return Container  provides a fluent interface
+	 * @return self
 	 */
 	public function setValues($values, $erase = FALSE)
 	{
@@ -73,7 +69,7 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 			$values = iterator_to_array($values);
 
 		} elseif (!is_array($values)) {
-			throw new Nette\InvalidArgumentException("First parameter must be an array, " . gettype($values) ." given.");
+			throw new Nette\InvalidArgumentException('First parameter must be an array, ' . gettype($values) . ' given.');
 		}
 
 		foreach ($this->getComponents() as $name => $control) {
@@ -98,7 +94,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/**
 	 * Returns the values submitted by the form.
 	 * @param  bool  return values as an array?
@@ -119,9 +114,7 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/********************* validation ****************d*g**/
-
 
 
 	/**
@@ -130,12 +123,11 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	 */
 	public function isValid()
 	{
-		if (!$this->validated) {
+		if ($this->valid === NULL) {
 			$this->validate();
 		}
-		return !$this->getAllErrors();
+		return $this->valid;
 	}
-
 
 
 	/**
@@ -144,43 +136,27 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	 */
 	public function validate()
 	{
+		$this->valid = TRUE;
 		foreach ($this->getControls() as $control) {
-			$control->validate();
+			if (!$control->getRules()->validate()) {
+				$this->valid = FALSE;
+			}
 		}
 		$this->onValidate($this);
-		$this->validated = TRUE;
 	}
-
-
-
-	/**
-	 * Returns all validation errors.
-	 * @return array
-	 */
-	public function getAllErrors()
-	{
-		$errors = array();
-		foreach ($this->getControls() as $control) {
-			$errors = array_merge($errors, $control->getErrors());
-		}
-		return array_unique($errors);
-	}
-
 
 
 	/********************* form building ****************d*g**/
 
 
-
 	/**
-	 * @return Container  provides a fluent interface
+	 * @return self
 	 */
 	public function setCurrentGroup(ControlGroup $group = NULL)
 	{
 		$this->currentGroup = $group;
 		return $this;
 	}
-
 
 
 	/**
@@ -193,13 +169,12 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/**
 	 * Adds the specified component to the IContainer.
 	 * @param  IComponent
 	 * @param  string
 	 * @param  string
-	 * @return Container  provides a fluent interface
+	 * @return self
 	 * @throws Nette\InvalidStateException
 	 */
 	public function addComponent(Nette\ComponentModel\IComponent $component, $name, $insertBefore = NULL)
@@ -212,7 +187,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/**
 	 * Iterates over all form controls.
 	 * @return \ArrayIterator
@@ -221,7 +195,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	{
 		return $this->getComponents(TRUE, 'Nette\Forms\IControl');
 	}
-
 
 
 	/**
@@ -235,9 +208,7 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/********************* control factories ****************d*g**/
-
 
 
 	/**
@@ -252,7 +223,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	{
 		return $this[$name] = new Controls\TextInput($label, $cols, $maxLength);
 	}
-
 
 
 	/**
@@ -271,7 +241,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/**
 	 * Adds multi-line text input control to the form.
 	 * @param  string  control name
@@ -286,7 +255,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/**
 	 * Adds control that allows the user to upload files.
 	 * @param  string  control name
@@ -297,7 +265,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	{
 		return $this[$name] = new Controls\UploadControl($label);
 	}
-
 
 
 	/**
@@ -314,7 +281,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/**
 	 * Adds check box control to the form.
 	 * @param  string  control name
@@ -325,7 +291,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	{
 		return $this[$name] = new Controls\Checkbox($caption);
 	}
-
 
 
 	/**
@@ -339,7 +304,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	{
 		return $this[$name] = new Controls\RadioList($label, $items);
 	}
-
 
 
 	/**
@@ -356,7 +320,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/**
 	 * Adds select box control that allows multiple item selection.
 	 * @param  string  control name
@@ -371,7 +334,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/**
 	 * Adds button used to submit form.
 	 * @param  string  control name
@@ -384,7 +346,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/**
 	 * Adds push buttons with no default behavior.
 	 * @param  string  control name
@@ -395,7 +356,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	{
 		return $this[$name] = new Controls\Button($caption);
 	}
-
 
 
 	/**
@@ -411,7 +371,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/**
 	 * Adds naming container to the form.
 	 * @param  string  name
@@ -425,9 +384,7 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/********************* interface \ArrayAccess ****************d*g**/
-
 
 
 	/**
@@ -442,7 +399,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/**
 	 * Returns component specified by name. Throws exception if component doesn't exist.
 	 * @param  string  component name
@@ -455,7 +411,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/**
 	 * Does component specified by name exists?
 	 * @param  string  component name
@@ -465,7 +420,6 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	{
 		return $this->getComponent($name, FALSE) !== NULL;
 	}
-
 
 
 	/**
@@ -482,13 +436,22 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 	}
 
 
-
 	/**
 	 * Prevents cloning.
 	 */
 	final public function __clone()
 	{
 		throw new Nette\NotImplementedException('Form cloning is not supported yet.');
+	}
+
+
+	/********************* deprecated ****************d*g**/
+
+	/** @deprecated */
+	function addFile($name, $label = NULL)
+	{
+		trigger_error(__METHOD__ . '() is deprecated; use addUpload() instead.', E_USER_WARNING);
+		return $this->addUpload($name, $label);
 	}
 
 }

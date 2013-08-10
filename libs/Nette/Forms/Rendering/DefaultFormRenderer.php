@@ -15,7 +15,6 @@ use Nette,
 	Nette\Utils\Html;
 
 
-
 /**
  * Converts a Form into the HTML output.
  *
@@ -26,7 +25,7 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 	/**
 	 *  /--- form.container
 	 *
-	 *    /--- error.container
+	 *    /--- if (form.errors) error.container
 	 *      .... error.item [.class]
 	 *    \---
 	 *
@@ -52,7 +51,7 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 	 *            .... CONTROL [.required .text .password .file .submit .button]
 	 *            .... control.requiredsuffix
 	 *            .... control.description
-	 *            .... control.errorcontainer + control.erroritem
+	 *            .... if (control.errors) error.container
 	 *          \---
 	 *        \---
 	 *      \---
@@ -63,6 +62,7 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 	public $wrappers = array(
 		'form' => array(
 			'container' => NULL,
+			'errors' => TRUE,
 		),
 
 		'error' => array(
@@ -91,10 +91,9 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 			'container' => 'td',
 			'.odd' => NULL,
 
+			'errors' => FALSE,
 			'description' => 'small',
 			'requiredsuffix' => '',
-			'errorcontainer' => 'span class=error',
-			'erroritem' => '',
 
 			'.required' => 'required',
 			'.text' => 'text',
@@ -123,7 +122,6 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 	protected $counter;
 
 
-
 	/**
 	 * Provides complete form rendering.
 	 * @param  Nette\Forms\Form
@@ -141,7 +139,7 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 		if (!$mode || $mode === 'begin') {
 			$s .= $this->renderBegin();
 		}
-		if (!$mode || $mode === 'errors') {
+		if ((!$mode && $this->getValue('form errors')) || $mode === 'errors') {
 			$s .= $this->renderErrors();
 		}
 		if (!$mode || $mode === 'body') {
@@ -153,6 +151,13 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 		return $s;
 	}
 
+
+	/** @deprecated */
+	public function setClientScript()
+	{
+		trigger_error(__METHOD__ . '() is deprecated; use unobstructive JavaScript instead.', E_USER_WARNING);
+		return $this;
+	}
 
 
 	/**
@@ -174,7 +179,6 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 			}
 		}
 	}
-
 
 
 	/**
@@ -213,7 +217,6 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 	}
 
 
-
 	/**
 	 * Renders form end.
 	 * @return string
@@ -237,32 +240,29 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 	}
 
 
-
 	/**
 	 * Renders validation errors (per form or per control).
 	 * @return string
 	 */
 	public function renderErrors(Nette\Forms\IControl $control = NULL)
 	{
-		$errors = $control ? $control->getErrors() : $this->form->getErrors();
-		if (!$errors) {
-			return;
-		}
-		$container = $this->getWrapper($control ? 'control errorcontainer' : 'error container');
-		$item = $this->getWrapper($control ? 'control erroritem' : 'error item');
+		$errors = $control === NULL ? $this->form->getErrors() : $control->getErrors();
+		if (count($errors)) {
+			$ul = $this->getWrapper('error container');
+			$li = $this->getWrapper('error item');
 
-		foreach ($errors as $error) {
-			$item = clone $item;
-			if ($error instanceof Html) {
-				$item->add($error);
-			} else {
-				$item->setText($error);
+			foreach ($errors as $error) {
+				$item = clone $li;
+				if ($error instanceof Html) {
+					$item->add($error);
+				} else {
+					$item->setText($error);
+				}
+				$ul->add($item);
 			}
-			$container->add($item);
+			return "\n" . $ul->render(0);
 		}
-		return "\n" . $container->render($control ? 1 : 0);
 	}
-
 
 
 	/**
@@ -325,7 +325,6 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 	}
 
 
-
 	/**
 	 * Renders group of controls.
 	 * @param  Nette\Forms\Container|FormGroup
@@ -369,7 +368,6 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 	}
 
 
-
 	/**
 	 * Renders single visual row.
 	 * @return string
@@ -389,7 +387,6 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 	}
 
 
-
 	/**
 	 * Renders single visual row of multiple controls.
 	 * @param  IFormControl[]
@@ -402,25 +399,13 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 			if (!$control instanceof Nette\Forms\IControl) {
 				throw new Nette\InvalidArgumentException("Argument must be array of IFormControl instances.");
 			}
-			$description = $control->getOption('description');
-			if ($description instanceof Html) {
-				$description = ' ' . $control->getOption('description');
-
-			} elseif (is_string($description)) {
-				$description = ' ' . $this->getWrapper('control description')->setText($control->translate($description));
-
-			} else {
-				$description = '';
-			}
-
-			$s[] = (string) $control->getControl() . $description;
+			$s[] = (string) $control->getControl();
 		}
 		$pair = $this->getWrapper('pair container');
 		$pair->add($this->renderLabel($control));
 		$pair->add($this->getWrapper('control container')->setHtml(implode(" ", $s)));
 		return $pair->render(0);
 	}
-
 
 
 	/**
@@ -444,7 +429,6 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 			return $head->setHtml((string) $label . $suffix);
 		}
 	}
-
 
 
 	/**
@@ -473,7 +457,9 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 			$description = $this->getValue('control requiredsuffix') . $description;
 		}
 
-		$description .= $this->renderErrors($control);
+		if ($this->getValue('control errors')) {
+			$description .= $this->renderErrors($control);
+		}
 
 		if ($control instanceof Nette\Forms\Controls\Checkbox || $control instanceof Nette\Forms\Controls\Button) {
 			return $body->setHtml((string) $control->getControl() . (string) $control->getLabel() . $description);
@@ -482,7 +468,6 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 			return $body->setHtml((string) $control->getControl() . $description);
 		}
 	}
-
 
 
 	/**
@@ -494,7 +479,6 @@ class DefaultFormRenderer extends Nette\Object implements Nette\Forms\IFormRende
 		$data = $this->getValue($name);
 		return $data instanceof Html ? clone $data : Html::el($data);
 	}
-
 
 
 	/**

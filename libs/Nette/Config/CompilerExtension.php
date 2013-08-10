@@ -15,7 +15,6 @@ use Nette,
 	Nette\DI\ContainerBuilder;
 
 
-
 /**
  * Configurator compiling extension.
  *
@@ -32,14 +31,12 @@ abstract class CompilerExtension extends Nette\Object
 	protected $name;
 
 
-
 	public function setCompiler(Compiler $compiler, $name)
 	{
 		$this->compiler = $compiler;
 		$this->name = $name;
 		return $this;
 	}
-
 
 
 	/**
@@ -58,7 +55,6 @@ abstract class CompilerExtension extends Nette\Object
 	}
 
 
-
 	/**
 	 * @return Nette\DI\ContainerBuilder
 	 */
@@ -66,7 +62,6 @@ abstract class CompilerExtension extends Nette\Object
 	{
 		return $this->compiler->getContainerBuilder();
 	}
-
 
 
 	/**
@@ -86,7 +81,6 @@ abstract class CompilerExtension extends Nette\Object
 	}
 
 
-
 	/**
 	 * Prepend extension name to identifier or service name.
 	 * @param  string
@@ -98,7 +92,6 @@ abstract class CompilerExtension extends Nette\Object
 	}
 
 
-
 	/**
 	 * Processes configuration data. Intended to be overridden by descendant.
 	 * @return void
@@ -106,7 +99,6 @@ abstract class CompilerExtension extends Nette\Object
 	public function loadConfiguration()
 	{
 	}
-
 
 
 	/**
@@ -118,12 +110,11 @@ abstract class CompilerExtension extends Nette\Object
 	}
 
 
-
 	/**
 	 * Adjusts DI container compiled to PHP class. Intended to be overridden by descendant.
 	 * @return void
 	 */
-	public function afterCompile(Nette\PhpGenerator\ClassType $class)
+	public function afterCompile(Nette\Utils\PhpGenerator\ClassType $class)
 	{
 	}
 

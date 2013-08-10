@@ -14,7 +14,6 @@ namespace Nette\Database;
 use Nette;
 
 
-
 /**
  * Supplemental PDO database driver.
  *
@@ -32,13 +31,6 @@ interface ISupplementalDriver
 	 * @return string
 	 */
 	function delimite($name);
-
-	/**
-	 * Formats boolean for use in a SQL statement.
-	 * @param  bool
-	 * @return mixed
-	 */
-	function formatBool($value);
 
 	/**
 	 * Formats date-time for use in a SQL statement.
@@ -62,7 +54,7 @@ interface ISupplementalDriver
 	 * @param  int
 	 * @return void
 	 */
-	function applyLimit(&$sql, $limit, $offset);
+	function applyLimit(& $sql, $limit, $offset);
 
 	/**
 	 * Normalizes result row.

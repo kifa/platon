@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-07-30 12:37:00
+# Created: 2013-08-10 15:54:21
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-07-30 12:37+0200\n"
+"PO-Revision-Date: 2013-08-10 15:54+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -11,6 +11,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));\n"
 
+
+msgid " Doc "
+msgstr "Dokumentace"
+
+msgid " Photo "
+msgstr " Fotka "
+
+msgid " was successfully added to your cart. "
+msgstr " je úspěšně ve Vašem košíku. "
+
+msgid " was sucessfully deleted."
+msgstr " byla úspěšně smazána."
+
+msgid " was sucessfully uploaded"
+msgstr " byla úspěšně nahrána"
 
 msgid "--No parent--"
 msgstr "-- žádná nadřazená --"
@@ -162,6 +177,9 @@ msgstr "Kategorie"
 msgid "Category"
 msgstr "Kategorie"
 
+msgid "Category status is now: "
+msgstr "Kategorie je nyní ve stavu: "
+
 msgid "Category: "
 msgstr "Kategorie:"
 
@@ -176,6 +194,9 @@ msgstr "Hodnotu upravte kliknutím na ni"
 
 msgid "Check news on blog"
 msgstr "Novinky na blogu"
+
+msgid "Check our image gallery."
+msgstr "Prohlédněte si galerii."
 
 msgid "Check our latest"
 msgstr "Prohlédněte si nejnovější"
@@ -305,6 +326,15 @@ msgstr "Sleva:"
 
 msgid "Do you have any question? Ask us! We will be happy."
 msgstr "Máte jakoukoliv otázku? Napište nám. Rádi Vám odpovíme."
+
+msgid "Do you really want to CANCEL this order?"
+msgstr "Opravdu chcete ZRUŠIT tuto objednávku?"
+
+msgid "Do you want to"
+msgstr "Potřebujete pomoct?"
+
+msgid "Doc "
+msgstr "Dokumentace"
 
 msgid "Docs"
 msgstr "Dokumenty"
@@ -496,7 +526,7 @@ msgid "It has to be a number!"
 msgstr "Zde musí být číslo."
 
 msgid "It seems to be empty."
-msgstr "Vypadá, že je prázdný. To nevadí, zkuste..."
+msgstr "Vypadá to, že je prázdný. To nevadí, zkuste..."
 
 msgid "Item price"
 msgstr "Cena"
@@ -650,6 +680,9 @@ msgstr "Cena"
 
 msgid "Price:"
 msgstr "Cena:"
+
+msgid "Proceed to checkout "
+msgstr "Přejít k objednání "
 
 msgid "Producer: "
 msgstr "Výrobce:"
@@ -846,6 +879,9 @@ msgstr "Zneveřejni kategorii"
 msgid "Unpublish text"
 msgstr "Zneveřejnit"
 
+msgid "Update"
+msgstr "Aktualizovat"
+
 msgid "Upgrade"
 msgstr "Upgrade"
 
@@ -863,6 +899,9 @@ msgstr "Video"
 
 msgid "View"
 msgstr "Info"
+
+msgid "View gallery"
+msgstr "Prohlédnout galerii"
 
 msgid "Warehouse"
 msgstr "Sklad"
@@ -887,6 +926,9 @@ msgstr "Právě"
 
 msgid "You are logged in as admin. You can simply edit this category by clicking on Title, Description or panel bellow etc. More info?"
 msgstr "Jste přihlášení jako správce. Editujte jednoduše kliknutím na název, popis produktu, nebo na jakoukoliv další informaci."
+
+msgid "You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?"
+msgstr "Jste přihlášeni jako správce. Pro editaci stačí kliknout na Název, popis, cenu atd. Více informací?"
 
 msgid "You cannot edit product here!"
 msgstr "Pro úpravu přejděte do kategorie!"
@@ -930,6 +972,57 @@ msgstr "ks"
 msgid "personal pick up"
 msgstr "osobní převzetí"
 
-msgid "Do you want to"
-msgstr "Potřebujete pomoct?"
+msgid "Photo "
+msgstr " Fotka "
+
+msgid "Představujeme BIRNE SHOP!"
+msgstr ""
+
+msgid "Začněte již dnes"
+msgstr ""
+
+msgid "Nejdou obchody? BIRNE SHOP!"
+msgstr ""
+
+msgid "Zjistit více"
+msgstr ""
+
+msgid "Radost prodávat? BIRNE SHOP!"
+msgstr ""
+
+msgid "Přesvědčete se"
+msgstr ""
+
+msgid "Domů"
+msgstr ""
+
+msgid "Smartphones"
+msgstr ""
+
+msgid "Ta-ble-ty"
+msgstr ""
+
+msgid "Washmashine"
+msgstr ""
+
+msgid "It should be less then price"
+msgstr ""
+
+msgid "Je podporován pouze soubor JPG, PNG a GIF"
+msgstr ""
+
+msgid "Maximálně 2MB"
+msgstr ""
+
+msgid "g"
+msgstr ""
+
+msgid "mAh"
+msgstr ""
+
+msgid "px"
+msgstr ""
+
+msgid "\""
+msgstr ""
 

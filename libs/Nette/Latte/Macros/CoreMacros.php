@@ -18,7 +18,6 @@ use Nette,
 	Nette\Latte\PhpWriter;
 
 
-
 /**
  * Basic macros for Latte.
  *
@@ -88,7 +87,6 @@ class CoreMacros extends MacroSet
 	}
 
 
-
 	/**
 	 * Finishes template parsing.
 	 * @return array(prolog, epilog)
@@ -100,9 +98,7 @@ class CoreMacros extends MacroSet
 	}
 
 
-
 	/********************* macros ****************d*g**/
-
 
 
 	/**
@@ -118,7 +114,6 @@ class CoreMacros extends MacroSet
 		}
 		return $writer->write('if (%node.args):');
 	}
-
 
 
 	/**
@@ -140,7 +135,6 @@ class CoreMacros extends MacroSet
 	}
 
 
-
 	/**
 	 * {else}
 	 */
@@ -156,7 +150,6 @@ class CoreMacros extends MacroSet
 		}
 		return 'else:';
 	}
-
 
 
 	/**
@@ -176,7 +169,6 @@ class CoreMacros extends MacroSet
 	}
 
 
-
 	/**
 	 * {include "file" [,] [params]}
 	 */
@@ -193,7 +185,6 @@ class CoreMacros extends MacroSet
 	}
 
 
-
 	/**
 	 * {use class MacroSet}
 	 */
@@ -203,7 +194,6 @@ class CoreMacros extends MacroSet
 			->invoke($this->getCompiler())
 			->initialize();
 	}
-
 
 
 	/**
@@ -220,7 +210,6 @@ class CoreMacros extends MacroSet
 	}
 
 
-
 	/**
 	 * {/capture}
 	 */
@@ -228,7 +217,6 @@ class CoreMacros extends MacroSet
 	{
 		return $node->data->variable . $writer->write(" = %modify(ob_get_clean())");
 	}
-
 
 
 	/**
@@ -247,7 +235,6 @@ class CoreMacros extends MacroSet
 	}
 
 
-
 	/**
 	 * n:class="..."
 	 */
@@ -255,7 +242,6 @@ class CoreMacros extends MacroSet
 	{
 		return $writer->write('if ($_l->tmp = array_filter(%node.array)) echo \' class="\' . %escape(implode(" ", array_unique($_l->tmp))) . \'"\'');
 	}
-
 
 
 	/**
@@ -267,17 +253,14 @@ class CoreMacros extends MacroSet
 	}
 
 
-
 	/**
 	 * {attr ...}
 	 * @deprecated
 	 */
 	public function macroOldAttr(MacroNode $node)
 	{
-		trigger_error('Macro {attr} is deprecated; use n:attr="..." instead.', E_USER_DEPRECATED);
 		return Nette\Utils\Strings::replace($node->args . ' ', '#\)\s+#', ')->');
 	}
-
 
 
 	/**
@@ -291,7 +274,6 @@ class CoreMacros extends MacroSet
 	}
 
 
-
 	/**
 	 * {debugbreak ...}
 	 */
@@ -302,16 +284,12 @@ class CoreMacros extends MacroSet
 	}
 
 
-
 	/**
 	 * {var ...}
 	 * {default ...}
 	 */
 	public function macroVar(MacroNode $node, PhpWriter $writer)
 	{
-		if ($node->name === 'assign') {
-			trigger_error('Macro {assign} is deprecated; use {var} instead.', E_USER_DEPRECATED);
-		}
 		$out = '';
 		$var = TRUE;
 		$tokenizer = $writer->preprocess();
@@ -343,7 +321,6 @@ class CoreMacros extends MacroSet
 	}
 
 
-
 	/**
 	 * {= ...}
 	 * {? ...}
@@ -354,9 +331,7 @@ class CoreMacros extends MacroSet
 	}
 
 
-
 	/********************* run-time helpers ****************d*g**/
-
 
 
 	/**
@@ -388,7 +363,6 @@ class CoreMacros extends MacroSet
 		$tpl->setParameters($params); // interface?
 		return $tpl;
 	}
-
 
 
 	/**

@@ -14,7 +14,6 @@ namespace Nette\Http;
 use Nette;
 
 
-
 /**
  * HttpRequest provides access scheme for request sent via HTTP.
  *
@@ -63,7 +62,6 @@ class Request extends Nette\Object implements IRequest
 	private $remoteHost;
 
 
-
 	public function __construct(UrlScript $url, $query = NULL, $post = NULL, $files = NULL, $cookies = NULL,
 		$headers = NULL, $method = NULL, $remoteAddress = NULL, $remoteHost = NULL)
 	{
@@ -84,7 +82,6 @@ class Request extends Nette\Object implements IRequest
 	}
 
 
-
 	/**
 	 * Returns URL object.
 	 * @return UrlScript
@@ -95,9 +92,15 @@ class Request extends Nette\Object implements IRequest
 	}
 
 
+	/** @deprecated */
+	function getUri()
+	{
+		trigger_error(__METHOD__ . '() is deprecated; use ' . __CLASS__ . '::getUrl() instead.', E_USER_WARNING);
+		return $this->getUrl();
+	}
+
 
 	/********************* query, post, files & cookies ****************d*g**/
-
 
 
 	/**
@@ -121,7 +124,6 @@ class Request extends Nette\Object implements IRequest
 	}
 
 
-
 	/**
 	 * Returns variable provided to the script via POST method ($_POST).
 	 * If no key is passed, returns the entire array.
@@ -143,7 +145,6 @@ class Request extends Nette\Object implements IRequest
 	}
 
 
-
 	/**
 	 * Returns uploaded file.
 	 * @param  string key (or more keys)
@@ -151,10 +152,8 @@ class Request extends Nette\Object implements IRequest
 	 */
 	final public function getFile($key)
 	{
-		$args = func_get_args();
-		return Nette\Utils\Arrays::get($this->files, $args, NULL);
+		return Nette\Utils\Arrays::get($this->files, func_get_args(), NULL);
 	}
-
 
 
 	/**
@@ -165,7 +164,6 @@ class Request extends Nette\Object implements IRequest
 	{
 		return $this->files;
 	}
-
 
 
 	/**
@@ -188,7 +186,6 @@ class Request extends Nette\Object implements IRequest
 	}
 
 
-
 	/**
 	 * Returns variables provided to the script via HTTP cookies.
 	 * @return array
@@ -199,9 +196,7 @@ class Request extends Nette\Object implements IRequest
 	}
 
 
-
 	/********************* method & headers ****************d*g**/
-
 
 
 	/**
@@ -212,7 +207,6 @@ class Request extends Nette\Object implements IRequest
 	{
 		return $this->method;
 	}
-
 
 
 	/**
@@ -226,7 +220,6 @@ class Request extends Nette\Object implements IRequest
 	}
 
 
-
 	/**
 	 * Checks if the request method is POST.
 	 * @return bool
@@ -235,7 +228,6 @@ class Request extends Nette\Object implements IRequest
 	{
 		return $this->isMethod('POST');
 	}
-
 
 
 	/**
@@ -256,7 +248,6 @@ class Request extends Nette\Object implements IRequest
 	}
 
 
-
 	/**
 	 * Returns all HTTP headers.
 	 * @return array
@@ -265,7 +256,6 @@ class Request extends Nette\Object implements IRequest
 	{
 		return $this->headers;
 	}
-
 
 
 	/**
@@ -278,7 +268,6 @@ class Request extends Nette\Object implements IRequest
 	}
 
 
-
 	/**
 	 * Is the request is sent via secure channel (https).
 	 * @return bool
@@ -287,7 +276,6 @@ class Request extends Nette\Object implements IRequest
 	{
 		return $this->url->scheme === 'https';
 	}
-
 
 
 	/**
@@ -300,7 +288,6 @@ class Request extends Nette\Object implements IRequest
 	}
 
 
-
 	/**
 	 * Returns the IP address of the remote client.
 	 * @return string
@@ -309,7 +296,6 @@ class Request extends Nette\Object implements IRequest
 	{
 		return $this->remoteAddress;
 	}
-
 
 
 	/**
@@ -323,7 +309,6 @@ class Request extends Nette\Object implements IRequest
 		}
 		return $this->remoteHost;
 	}
-
 
 
 	/**

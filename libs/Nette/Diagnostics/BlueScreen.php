@@ -14,7 +14,6 @@ namespace Nette\Diagnostics;
 use Nette;
 
 
-
 /**
  * Red BlueScreen.
  *
@@ -25,15 +24,11 @@ class BlueScreen extends Nette\Object
 	/** @var array */
 	private $panels = array();
 
-	/** @var string[] paths to be collapsed in stack trace (e.g. core libraries) */
-	public $collapsePaths = array();
-
-
 
 	/**
 	 * Add custom panel.
 	 * @param  callable
-	 * @return BlueScreen  provides a fluent interface
+	 * @return self
 	 */
 	public function addPanel($panel)
 	{
@@ -42,7 +37,6 @@ class BlueScreen extends Nette\Object
 		}
 		return $this;
 	}
-
 
 
 	/**
@@ -55,7 +49,6 @@ class BlueScreen extends Nette\Object
 		$panels = $this->panels;
 		require __DIR__ . '/templates/bluescreen.phtml';
 	}
-
 
 
 	/**
@@ -72,7 +65,6 @@ class BlueScreen extends Nette\Object
 			return static::highlightPhp($source, $line, $lines, $vars);
 		}
 	}
-
 
 
 	/**
@@ -132,28 +124,11 @@ class BlueScreen extends Nette\Object
 
 		$out = preg_replace_callback('#">\$(\w+)(&nbsp;)?</span>#', function($m) use ($vars) {
 			return isset($vars[$m[1]])
-				? '" title="' . str_replace('"', '&quot;', strip_tags(Dumper::toHtml($vars[$m[1]]))) . $m[0]
+				? '" title="' . str_replace('"', '&quot;', strip_tags(Helpers::htmlDump($vars[$m[1]]))) . $m[0]
 				: $m[0];
 		}, $out);
 
-		return "<pre class='php'><div>$out</div></pre>";
-	}
-
-
-
-	/**
-	 * Should a file be collapsed in stack trace?
-	 * @param  string
-	 * @return bool
-	 */
-	public function isCollapsed($file)
-	{
-		foreach ($this->collapsePaths as $path) {
-			if (strpos(strtr($file, '\\', '/'), strtr("$path/", '\\', '/')) === 0) {
-				return TRUE;
-			}
-		}
-		return FALSE;
+		return "<pre><div>$out</div></pre>";
 	}
 
 }

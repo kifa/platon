@@ -16,7 +16,6 @@ use Nette,
 	Nette\Latte\MacroNode;
 
 
-
 /**
  * Base IMacro implementation. Allows add multiple macros.
  *
@@ -31,12 +30,10 @@ class MacroSet extends Nette\Object implements Latte\IMacro
 	private $macros;
 
 
-
 	public function __construct(Latte\Compiler $compiler)
 	{
 		$this->compiler = $compiler;
 	}
-
 
 
 	public function addMacro($name, $begin, $end = NULL, $attr = NULL)
@@ -47,12 +44,10 @@ class MacroSet extends Nette\Object implements Latte\IMacro
 	}
 
 
-
 	public static function install(Latte\Compiler $compiler)
 	{
 		return new static($compiler);
 	}
-
 
 
 	/**
@@ -64,7 +59,6 @@ class MacroSet extends Nette\Object implements Latte\IMacro
 	}
 
 
-
 	/**
 	 * Finishes template parsing.
 	 * @return array(prolog, epilog)
@@ -74,16 +68,15 @@ class MacroSet extends Nette\Object implements Latte\IMacro
 	}
 
 
-
 	/**
 	 * New node is found.
 	 * @return bool
 	 */
 	public function nodeOpened(MacroNode $node)
 	{
-		if ($this->macros[$node->name][2] && $node->prefix) {
+		if ($this->macros[$node->name][2] && $node->htmlNode) {
 			$node->isEmpty = TRUE;
-			$this->compiler->setContext(Latte\Compiler::CONTEXT_DOUBLE_QUOTED_ATTR);
+			$this->compiler->setContext(Latte\Compiler::CONTEXT_DOUBLE_QUOTED);
 			$res = $this->compile($node, $this->macros[$node->name][2]);
 			$this->compiler->setContext(NULL);
 			if (!$node->attrCode) {
@@ -100,7 +93,6 @@ class MacroSet extends Nette\Object implements Latte\IMacro
 	}
 
 
-
 	/**
 	 * Node is closed.
 	 * @return void
@@ -114,7 +106,6 @@ class MacroSet extends Nette\Object implements Latte\IMacro
 	}
 
 
-
 	/**
 	 * Generates code.
 	 * @return string
@@ -123,13 +114,12 @@ class MacroSet extends Nette\Object implements Latte\IMacro
 	{
 		$node->tokenizer->reset();
 		$writer = Latte\PhpWriter::using($node, $this->compiler);
-		if (is_string($def)/*5.2* && substr($def, 0, 1) !== "\0"*/) {
+		if (is_string($def)) {
 			return $writer->write($def);
 		} else {
 			return Nette\Callback::create($def)->invoke($node, $writer);
 		}
 	}
-
 
 
 	/**

@@ -51,6 +51,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->productModel = $productModel;
     }
     
+
+
     public function handleAddToCart($product, $amnt) {
      
        $row = $this->productModel->loadProduct($product);
@@ -72,9 +74,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
             $this->cart->lastItem = $product;
             $this->cart->numberItems = Count($this->cart->prd);
 
+            $mess = ' was successfully added to your cart. ';
+            $mess = $this->translator->translate($mess);
+            $mess2 = 'Proceed to checkout ';
+            $mess2 = $this->translator->translate($mess2);
             $ico = HTML::el('i')->class('icon-ok-sign left');
-            $message = HTML::el('span', ' ' . $row->ProductName . ' was successfully added to your cart. ');
-            $link = HTML::el('a', 'Proceed to checkout ')->href($this->link('Order:cart'))->class('btn btn-primary btn-small');
+            $message = HTML::el('span', ' ' . $row->ProductName . '' . $mess);
+            
+            $link = HTML::el('a', $mess2)->href($this->link('Order:cart'))->class('btn btn-primary btn-small');
             $ico2 = HTML::el('i')->class('icon-arrow-right right');
             $message->insert(0, $ico);
             $message->insert(2, $link);
@@ -117,7 +124,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     public function beforeRender() {
         parent::beforeRender();
-       
+        
+     
         $this->template->shopName = $this->shopModel->getShopInfo('Name');
         $this->template->shopDescription = $this->shopModel->getShopInfo('Description');
         $this->template->shopLogo = $this->shopModel->getShopInfo('Logo');
@@ -138,6 +146,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->invalidateControl('flashMessages');
         }
         
+    }
+    
+     public function handleSetShopLayout($layout, $value) {
+        if ($this->getUser()->isInRole('admin')) {   
+              $this->shopModel->setShopInfo($layout, $value);
+                 $this->redirect('this');
+          }
     }
 
     protected function createComponentBaseControl() {

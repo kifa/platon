@@ -14,7 +14,6 @@ namespace Nette\Latte;
 use Nette;
 
 
-
 /**
  * The exception occured during Latte compilation.
  *
@@ -25,4 +24,4 @@ class CompileException extends Nette\Templating\FilterException
 }
 
 
-/**/class_alias('Nette\Latte\CompileException', 'Nette\Latte\ParseException');/**/
+class_alias('Nette\Latte\CompileException', 'Nette\Latte\ParseException');

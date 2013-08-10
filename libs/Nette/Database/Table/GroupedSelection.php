@@ -14,7 +14,6 @@ namespace Nette\Database\Table;
 use Nette;
 
 
-
 /**
  * Representation of filtered table grouped by some column.
  * GroupedSelection is based on the great library NotORM http://www.notorm.com written by Jakub Vrana.
@@ -34,7 +33,6 @@ class GroupedSelection extends Selection
 	protected $active;
 
 
-
 	/**
 	 * Creates filtered and grouped table representation.
 	 * @param  Selection  $refTable
@@ -43,11 +41,10 @@ class GroupedSelection extends Selection
 	 */
 	public function __construct(Selection $refTable, $table, $column)
 	{
+		parent::__construct($table, $refTable->connection);
 		$this->refTable = $refTable;
 		$this->column = $column;
-		parent::__construct($refTable->connection, $table, $refTable->reflection, $refTable->cache ? $refTable->cache->getStorage() : NULL);
 	}
-
 
 
 	/**
@@ -63,16 +60,14 @@ class GroupedSelection extends Selection
 	}
 
 
-
 	/** @deprecated */
 	public function through($column)
 	{
-		trigger_error(__METHOD__ . '() is deprecated; use ' . __CLASS__ . '::related("' . $this->name . '", "' . $column . '") instead.', E_USER_DEPRECATED);
+		trigger_error(__METHOD__ . '() is deprecated; use ' . __CLASS__ . '::related("' . $this->name . '", "' . $column . '") instead.', E_USER_WARNING);
 		$this->column = $column;
 		$this->delimitedColumn = $this->refTable->connection->getSupplementalDriver()->delimite($this->column);
 		return $this;
 	}
-
 
 
 	public function select($columns)
@@ -83,7 +78,6 @@ class GroupedSelection extends Selection
 
 		return parent::select($columns);
 	}
-
 
 
 	public function order($columns)
@@ -97,9 +91,7 @@ class GroupedSelection extends Selection
 	}
 
 
-
 	/********************* aggregations ****************d*g**/
-
 
 
 	public function aggregation($function)
@@ -128,7 +120,6 @@ class GroupedSelection extends Selection
 	}
 
 
-
 	public function count($column = NULL)
 	{
 		$return = parent::count($column);
@@ -136,9 +127,7 @@ class GroupedSelection extends Selection
 	}
 
 
-
 	/********************* internal ****************d*g**/
-
 
 
 	protected function execute()
@@ -148,18 +137,19 @@ class GroupedSelection extends Selection
 			return;
 		}
 
-		$hash = $this->getSpecificCacheKey();
+		$hash = md5($this->getSql() . json_encode($this->sqlBuilder->getParameters()));
 		$accessedColumns = $this->accessedColumns;
 
-		$referencing = & $this->refCache['referencing'][$this->getGeneralCacheKey()];
-		$this->observeCache      = & $referencing['observeCache'];
-		$this->accessedColumns   = & $referencing[$hash]['accessed'];
-		$this->specificCacheKey  = & $referencing[$hash]['specificCacheKey'];
-		$this->rows              = & $referencing[$hash]['rows'];
-		$data                    = & $referencing[$hash]['data'];
+		$referencingBase = & $this->getRefTable($refPath)->referencing[$this->getCacheKey()];
+		$referencing = & $referencingBase[$refPath . $hash];
+		$this->rows = & $referencing['rows'];
+		$this->referenced = & $referencing['refs'];
+		$this->accessedColumns = & $referencing['accessed'];
+		$this->observeCache = & $referencingBase['observeCache'];
+		$refData = & $referencing['data'];
 
-		if ($data === NULL) {
-			// we have not fetched any data yet => init accessedColumns by cached accessedColumns
+		if ($refData === NULL) {
+			// we have not fetched any data => init accessedColumns by cached accessedColumns
 			$this->accessedColumns = $accessedColumns;
 
 			$limit = $this->sqlBuilder->getLimit();
@@ -169,11 +159,11 @@ class GroupedSelection extends Selection
 			}
 			parent::execute();
 			$this->sqlBuilder->setLimit($limit, NULL);
-			$data = array();
+			$refData = array();
 			$offset = array();
 			$this->accessColumn($this->column);
 			foreach ((array) $this->rows as $key => $row) {
-				$ref = & $data[$row[$this->column]];
+				$ref = & $refData[$row[$this->column]];
 				$skip = & $offset[$row[$this->column]];
 				if ($limit === NULL || $rows <= 1 || (count($ref) < $limit && $skip >= $this->sqlBuilder->getOffset())) {
 					$ref[$key] = $row;
@@ -186,7 +176,7 @@ class GroupedSelection extends Selection
 		}
 
 		$this->observeCache = $this;
-		$this->data = & $data[$this->active];
+		$this->data = & $refData[$this->active];
 		if ($this->data === NULL) {
 			$this->data = array();
 		} else {
@@ -194,9 +184,9 @@ class GroupedSelection extends Selection
 				$row->setTable($this); // injects correct parent GroupedSelection
 			}
 			reset($this->data);
+			$this->checkReferenced = TRUE;
 		}
 	}
-
 
 
 	protected function getRefTable(& $refPath)
@@ -212,9 +202,7 @@ class GroupedSelection extends Selection
 	}
 
 
-
 	/********************* manipulation ****************d*g**/
-
 
 
 	public function insert($data)
@@ -223,7 +211,7 @@ class GroupedSelection extends Selection
 			$data = iterator_to_array($data);
 		}
 
-		if (Nette\Utils\Arrays::isList($data)) {
+		if (Nette\Utils\Validators::isList($data)) {
 			foreach (array_keys($data) as $key) {
 				$data[$key][$this->column] = $this->active;
 			}
@@ -233,7 +221,6 @@ class GroupedSelection extends Selection
 
 		return parent::insert($data);
 	}
-
 
 
 	public function update($data)
@@ -247,7 +234,6 @@ class GroupedSelection extends Selection
 		$this->sqlBuilder = $builder;
 		return $return;
 	}
-
 
 
 	public function delete()

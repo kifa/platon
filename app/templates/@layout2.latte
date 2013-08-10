@@ -27,6 +27,8 @@
 <body>
     <script> document.body.className+=' js' </script>
 
+{include './components/languageBar.latte'}
+    
 
 <div class="shopHead"> 
 
@@ -38,20 +40,6 @@
 
             {control menu:top}
 
-            <div class="span2 btn-group">
-        <a class="btn pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-globe"></i> {_'Choose language:'}
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a n:href="this, lang => br" ><img src="{$basePath}/img/blank.gif" class="flag flag-br" alt="Brazil" /> Português</a></li>
-            <li><a n:href="this, lang => en" ><img src="{$basePath}/img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
-            <li><a n:href="this, lang => cs" ><img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" /> Česky</a></li>
-            <li><a n:href="this, lang => de" ><img src="{$basePath}/img/blank.gif" class="flag flag-de" alt="Deutsch" /> Deutsch</a></li>
-        </ul>
-    </div>
-
-            
         
     </div>
         <div class="row">

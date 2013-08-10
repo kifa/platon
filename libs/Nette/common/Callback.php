@@ -14,7 +14,6 @@ namespace Nette;
 use Nette;
 
 
-
 /**
  * PHP callback encapsulation.
  *
@@ -29,7 +28,6 @@ final class Callback extends Object
 	private $cb;
 
 
-
 	/**
 	 * Factory. Workaround for missing (new Callback)->invoke() in PHP 5.3.
 	 * @param  mixed   class, object, callable
@@ -40,7 +38,6 @@ final class Callback extends Object
 	{
 		return new self($callback, $m);
 	}
-
 
 
 	/**
@@ -57,19 +54,11 @@ final class Callback extends Object
 			return;
 		}
 
-		/*5.2*
-		if (PHP_VERSION_ID < 50202 && is_string($cb) && strpos($cb, '::')) {
-			$cb = explode('::', $cb, 2);
-		} elseif (is_object($cb) && !$cb instanceof Closure) {
-			$cb = array($cb, '__invoke');
-		}
-  		*/
 		if (!is_callable($cb, TRUE)) {
 			throw new InvalidArgumentException("Invalid callback.");
 		}
 		$this->cb = $cb;
 	}
-
 
 
 	/**
@@ -81,10 +70,8 @@ final class Callback extends Object
 		if (!is_callable($this->cb)) {
 			throw new InvalidStateException("Callback '$this' is not callable.");
 		}
-		$args = func_get_args();
-		return call_user_func_array($this->cb, $args);
+		return call_user_func_array($this->cb, func_get_args());
 	}
-
 
 
 	/**
@@ -96,10 +83,8 @@ final class Callback extends Object
 		if (!is_callable($this->cb)) {
 			throw new InvalidStateException("Callback '$this' is not callable.");
 		}
-		$args = func_get_args();
-		return call_user_func_array($this->cb, $args);
+		return call_user_func_array($this->cb, func_get_args());
 	}
-
 
 
 	/**
@@ -116,7 +101,6 @@ final class Callback extends Object
 	}
 
 
-
 	/**
 	 * Verifies that callback can be called.
 	 * @return bool
@@ -127,7 +111,6 @@ final class Callback extends Object
 	}
 
 
-
 	/**
 	 * Returns PHP callback pseudotype.
 	 * @return string|array|\Closure
@@ -136,7 +119,6 @@ final class Callback extends Object
 	{
 		return $this->cb;
 	}
-
 
 
 	/**
@@ -157,7 +139,6 @@ final class Callback extends Object
 	}
 
 
-
 	/**
 	 * @return bool
 	 */
@@ -165,23 +146,6 @@ final class Callback extends Object
 	{
 		return is_array($this->cb) ? is_string($this->cb[0]) : is_string($this->cb);
 	}
-
-
-
-	/**
-	 * Duplicates the callback with a new bound object.
-	 * @return Callback
-	 */
-	public function bindTo($newthis)
-	{
-		if (is_string($this->cb) && strpos($this->cb, '::')) {
-			$this->cb = explode('::', $this->cb);
-		} elseif (!is_array($this->cb)) {
-			throw new InvalidStateException("Callback '$this' have not any bound object.");
-		}
-		return new static($newthis, $this->cb[1]);
-	}
-
 
 
 	/**

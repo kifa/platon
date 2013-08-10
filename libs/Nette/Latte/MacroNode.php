@@ -1,18 +1,17 @@
 <?php
 
 /**
- * This file is part of the Nette Framework.
+ * This file is part of the Nette Framework (http://nette.org)
  *
  * Copyright (c) 2004 David Grudl (http://davidgrudl.com)
  *
- * This source file is subject to the "Nette license", and/or
- * GPL license. For more information please see http://nette.org
+ * For the full copyright and license information, please view
+ * the file license.txt that was distributed with this source code.
  */
 
 namespace Nette\Latte;
 
 use Nette;
-
 
 
 /**
@@ -23,8 +22,7 @@ use Nette;
 class MacroNode extends Nette\Object
 {
 	const PREFIX_INNER = 'inner',
-		PREFIX_TAG = 'tag',
-		PREFIX_NONE = 'none';
+		PREFIX_TAG = 'tag';
 
 	/** @var IMacro */
 	public $macro;
@@ -65,17 +63,16 @@ class MacroNode extends Nette\Object
 	/** @var \stdClass  user data */
 	public $data;
 
-	/** @var HtmlNode  closest HTML node */
+	/** @var HtmlNode  for n:attr macros */
 	public $htmlNode;
 
-	/** @var string  indicates n:attribute macro and type of prefix (PREFIX_INNER, PREFIX_TAG, PREFIX_NONE) */
+	/** @var string  for n:attr macros (NULL, PREFIX_INNER, PREFIX_TAG) */
 	public $prefix;
 
 	public $saved;
 
 
-
-	public function __construct(IMacro $macro, $name, $args = NULL, $modifiers = NULL, self $parentNode = NULL, HtmlNode $htmlNode = NULL, $prefix = NULL)
+	public function __construct(IMacro $macro, $name, $args = NULL, $modifiers = NULL, MacroNode $parentNode = NULL, HtmlNode $htmlNode = NULL, $prefix = NULL)
 	{
 		$this->macro = $macro;
 		$this->name = (string) $name;
@@ -87,7 +84,6 @@ class MacroNode extends Nette\Object
 		$this->data = new \stdClass;
 		$this->setArgs($args);
 	}
-
 
 
 	public function setArgs($args)

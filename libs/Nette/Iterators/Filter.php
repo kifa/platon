@@ -14,16 +14,15 @@ namespace Nette\Iterators;
 use Nette;
 
 
-
 /**
- * CallbackFilterIterator for PHP < 5.4.
+ * Callback iterator filter.
  *
  * @author     David Grudl
  */
 class Filter extends \FilterIterator
 {
 	/** @var callable */
-	protected $callback;
+	private $callback;
 
 
 	public function __construct(\Iterator $iterator, $callback)
@@ -33,10 +32,9 @@ class Filter extends \FilterIterator
 	}
 
 
-
 	public function accept()
 	{
-		return $this->callback->invoke($this->current(), $this->key(), $this);
+		return $this->callback->invoke($this);
 	}
 
 }

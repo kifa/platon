@@ -14,7 +14,6 @@ namespace Nette\Utils;
 use Nette;
 
 
-
 /**
  * Validation utilites.
  *
@@ -34,7 +33,7 @@ class Validators extends Nette\Object
 		'string' =>  'is_string',
 		'unicode' => array(__CLASS__, 'isUnicode'),
 		'array' => 'is_array',
-		'list' => array('Nette\Utils\Arrays', 'isList'),
+		'list' => array(__CLASS__, 'isList'),
 		'object' => 'is_object',
 		'resource' => 'is_resource',
 		'scalar' => 'is_scalar',
@@ -68,7 +67,6 @@ class Validators extends Nette\Object
 	);
 
 
-
 	/**
 	 * Throws exception if a variable is of unexpected type.
 	 * @param  mixed
@@ -94,7 +92,6 @@ class Validators extends Nette\Object
 	}
 
 
-
 	/**
 	 * Throws exception if an array field is missing or of unexpected type.
 	 * @param  array
@@ -112,7 +109,6 @@ class Validators extends Nette\Object
 			static::assert($arr[$field], $expected, str_replace('%', $field, $label));
 		}
 	}
-
 
 
 	/**
@@ -160,7 +156,6 @@ class Validators extends Nette\Object
 	}
 
 
-
 	/**
 	 * Finds whether a value is an integer.
 	 * @return bool
@@ -169,7 +164,6 @@ class Validators extends Nette\Object
 	{
 		return is_int($value) || is_string($value) && preg_match('#^-?[0-9]+\z#', $value);
 	}
-
 
 
 	/**
@@ -182,7 +176,6 @@ class Validators extends Nette\Object
 	}
 
 
-
 	/**
 	 * Finds whether a value is a syntactically correct callback.
 	 * @return bool
@@ -191,7 +184,6 @@ class Validators extends Nette\Object
 	{
 		return $value && is_callable($value, TRUE);
 	}
-
 
 
 	/**
@@ -205,7 +197,6 @@ class Validators extends Nette\Object
 	}
 
 
-
 	/**
 	 * Finds whether a value is "falsy".
 	 * @return bool
@@ -216,7 +207,6 @@ class Validators extends Nette\Object
 	}
 
 
-
 	/**
 	 * Finds whether a variable is a zero-based integer indexed array.
 	 * @param  array
@@ -224,9 +214,8 @@ class Validators extends Nette\Object
 	 */
 	public static function isList($value)
 	{
-		return Arrays::isList($value);
+		return is_array($value) && (!$value || array_keys($value) === range(0, count($value) - 1));
 	}
-
 
 
 	/**
@@ -239,7 +228,6 @@ class Validators extends Nette\Object
 	{
 		return (!isset($range[0]) || $value >= $range[0]) && (!isset($range[1]) || $value <= $range[1]);
 	}
-
 
 
 	/**
@@ -258,7 +246,6 @@ class Validators extends Nette\Object
 	}
 
 
-
 	/**
 	 * Finds whether a string is a valid URL.
 	 * @param  string
@@ -269,11 +256,10 @@ class Validators extends Nette\Object
 		$alpha = "a-z\x80-\xFF";
 		$domain = "[0-9$alpha](?:[-0-9$alpha]{0,61}[0-9$alpha])?";
 		$topDomain = "[$alpha][-0-9$alpha]{0,17}[$alpha]";
-		return (bool) preg_match("(^https?://(?:(?:$domain\\.)*$topDomain|\\d{1,3}\.\\d{1,3}\.\\d{1,3}\.\\d{1,3})(:\\d{1,5})?(/\\S*)?\\z)i", $value);
+		return (bool) preg_match("(^https?://(?:(?:$domain\\.)*$topDomain|\\d{1,3}\.\\d{1,3}\.\\d{1,3}\.\\d{1,3}|\[[0-9a-f:]{3,39}\])(:\\d{1,5})?(/\\S*)?\\z)i", $value);
 	}
 
 }
-
 
 
 /**

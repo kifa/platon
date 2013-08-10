@@ -16,17 +16,16 @@ use Nette,
 	PDO;
 
 
-
 /**
  * Represents a connection between PHP and a database server.
  *
  * @author     David Grudl
  *
+ * @property       IReflection          $databaseReflection
  * @property-read  ISupplementalDriver  $supplementalDriver
  * @property-read  string               $dsn
- * @property-read  PDO                  $pdo
  */
-class Connection extends Nette\Object
+class Connection extends PDO
 {
 	/** @var string */
 	private $dsn;
@@ -37,44 +36,32 @@ class Connection extends Nette\Object
 	/** @var SqlPreprocessor */
 	private $preprocessor;
 
-	/** @var Table\SelectionFactory */
-	private $selectionFactory;
+	/** @var IReflection */
+	private $databaseReflection;
 
-	/** @var PDO */
-	private $pdo;
+	/** @var Nette\Caching\Cache */
+	private $cache;
 
 	/** @var array of function(Statement $result, $params); Occurs after query is executed */
 	public $onQuery;
 
 
-
-	public function __construct($dsn, $user = NULL, $password = NULL, array $options = NULL, $driverClass = NULL)
+	public function __construct($dsn, $username = NULL, $password = NULL, array $options = NULL, $driverClass = NULL)
 	{
-		$this->pdo = $pdo = new PDO($this->dsn = $dsn, $user, $password, $options);
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$pdo->setAttribute(PDO::ATTR_STATEMENT_CLASS, array('Nette\Database\Statement', array($this)));
+		parent::__construct($this->dsn = $dsn, $username, $password, $options);
+		$this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$this->setAttribute(PDO::ATTR_STATEMENT_CLASS, array('Nette\Database\Statement', array($this)));
 
-		$driverClass = $driverClass ?: 'Nette\Database\Drivers\\' . ucfirst(str_replace('sql', 'Sql', $pdo->getAttribute(PDO::ATTR_DRIVER_NAME))) . 'Driver';
+		$driverClass = $driverClass ?: 'Nette\Database\Drivers\\' . ucfirst(str_replace('sql', 'Sql', $this->getAttribute(PDO::ATTR_DRIVER_NAME))) . 'Driver';
 		$this->driver = new $driverClass($this, (array) $options);
 		$this->preprocessor = new SqlPreprocessor($this);
 	}
 
 
-
-	/** @return string */
 	public function getDsn()
 	{
 		return $this->dsn;
 	}
-
-
-
-	/** @return PDO */
-	public function getPdo()
-	{
-		return $this->pdo;
-	}
-
 
 
 	/** @return ISupplementalDriver */
@@ -84,52 +71,43 @@ class Connection extends Nette\Object
 	}
 
 
-
-	/** @return bool */
-	public function beginTransaction()
+	/**
+	 * Sets database reflection.
+	 * @return self
+	 */
+	public function setDatabaseReflection(IReflection $databaseReflection)
 	{
-		return $this->pdo->beginTransaction();
+		$databaseReflection->setConnection($this);
+		$this->databaseReflection = $databaseReflection;
+		return $this;
 	}
 
 
-
-	/** @return bool */
-	public function commit()
+	/** @return IReflection */
+	public function getDatabaseReflection()
 	{
-		return $this->pdo->commit();
+		if (!$this->databaseReflection) {
+			$this->setDatabaseReflection(new Reflection\ConventionalReflection);
+		}
+		return $this->databaseReflection;
 	}
-
-
-
-	/** @return bool */
-	public function rollBack()
-	{
-		return $this->pdo->rollBack();
-	}
-
 
 
 	/**
-	 * @param  string  sequence object
-	 * @return string
+	 * Sets cache storage engine.
+	 * @return self
 	 */
-	public function getInsertId($name = NULL)
+	public function setCacheStorage(Nette\Caching\IStorage $storage = NULL)
 	{
-		return $this->pdo->lastInsertId($name);
+		$this->cache = $storage ? new Nette\Caching\Cache($storage, 'Nette.Database.' . md5($this->dsn)) : NULL;
+		return $this;
 	}
 
 
-
-	/**
-	 * @param  string  string to be quoted
-	 * @param  int     data type hint
-	 * @return string
-	 */
-	public function quote($string, $type = PDO::PARAM_STR)
+	public function getCache()
 	{
-		return $this->pdo->quote($string, $type);
+		return $this->cache;
 	}
-
 
 
 	/**
@@ -145,7 +123,6 @@ class Connection extends Nette\Object
 	}
 
 
-
 	/**
 	 * Generates and executes SQL query.
 	 * @param  string  statement
@@ -159,24 +136,27 @@ class Connection extends Nette\Object
 	}
 
 
-
 	/**
 	 * @param  string  statement
 	 * @param  array
 	 * @return Statement
 	 */
-	public function queryArgs($statement, array $params)
+	public function queryArgs($statement, $params)
 	{
-		if ($params) {
+		foreach ($params as $value) {
+			if (is_array($value) || is_object($value)) {
+				$need = TRUE; break;
+			}
+		}
+		if (isset($need) && $this->preprocessor !== NULL) {
 			list($statement, $params) = $this->preprocessor->process($statement, $params);
 		}
-		return $this->pdo->prepare($statement)->execute($params);
+
+		return $this->prepare($statement)->execute($params);
 	}
 
 
-
 	/********************* shortcuts ****************d*g**/
-
 
 
 	/**
@@ -192,6 +172,18 @@ class Connection extends Nette\Object
 	}
 
 
+	/**
+	 * Shortcut for query()->fetchField()
+	 * @param  string  statement
+	 * @param  mixed   [parameters, ...]
+	 * @return mixed
+	 */
+	public function fetchField($args)
+	{
+		$args = func_get_args();
+		return $this->queryArgs(array_shift($args), $args)->fetchField();
+	}
+
 
 	/**
 	 * Shortcut for query()->fetchColumn()
@@ -204,7 +196,6 @@ class Connection extends Nette\Object
 		$args = func_get_args();
 		return $this->queryArgs(array_shift($args), $args)->fetchColumn();
 	}
-
 
 
 	/**
@@ -220,7 +211,6 @@ class Connection extends Nette\Object
 	}
 
 
-
 	/**
 	 * Shortcut for query()->fetchAll()
 	 * @param  string  statement
@@ -234,9 +224,7 @@ class Connection extends Nette\Object
 	}
 
 
-
-	/********************* Selection ****************d*g**/
-
+	/********************* selector ****************d*g**/
 
 
 	/**
@@ -246,47 +234,49 @@ class Connection extends Nette\Object
 	 */
 	public function table($table)
 	{
-		if (!$this->selectionFactory) {
-			$this->selectionFactory = new Table\SelectionFactory($this);
-		}
-		return $this->selectionFactory->create($table);
+		return new Table\Selection($table, $this);
 	}
 
+
+	/********************* Nette\Object behaviour ****************d*g**/
 
 
 	/**
-	 * @return Connection   provides a fluent interface
+	 * @return Nette\Reflection\ClassType
 	 */
-	public function setSelectionFactory(Table\SelectionFactory $selectionFactory)
+	public static function getReflection()
 	{
-		$this->selectionFactory = $selectionFactory;
-		return $this;
+		return new Nette\Reflection\ClassType(get_called_class());
 	}
 
 
-
-	/** @deprecated */
-	function setDatabaseReflection()
+	public function __call($name, $args)
 	{
-		trigger_error(__METHOD__ . '() is deprecated; use setSelectionFactory() instead.', E_USER_DEPRECATED);
-		return $this;
+		return ObjectMixin::call($this, $name, $args);
 	}
 
 
-
-	/** @deprecated */
-	function setCacheStorage()
+	public function &__get($name)
 	{
-		trigger_error(__METHOD__ . '() is deprecated; use setSelectionFactory() instead.', E_USER_DEPRECATED);
+		return ObjectMixin::get($this, $name);
 	}
 
 
-
-	/** @deprecated */
-	function lastInsertId($name = NULL)
+	public function __set($name, $value)
 	{
-		trigger_error(__METHOD__ . '() is deprecated; use getInsertId() instead.', E_USER_DEPRECATED);
-		return $this->getInsertId($name);
+		return ObjectMixin::set($this, $name, $value);
+	}
+
+
+	public function __isset($name)
+	{
+		return ObjectMixin::has($this, $name);
+	}
+
+
+	public function __unset($name)
+	{
+		ObjectMixin::remove($this, $name);
 	}
 
 }

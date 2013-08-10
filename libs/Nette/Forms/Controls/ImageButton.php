@@ -14,7 +14,6 @@ namespace Nette\Forms\Controls;
 use Nette;
 
 
-
 /**
  * Submittable image button form control.
  *
@@ -36,30 +35,26 @@ class ImageButton extends SubmitButton
 	}
 
 
-
-	/**
-	 * Sets coordinates as a value if available.
-	 * @param  bool|array
-	 * @return ImageButton  provides a fluent interface
-	 */
-	public function setValue($value)
-	{
-		parent::setValue($value);
-		if (is_array($value) && isset($value[0], $value[1])) {
-			$this->value = $value;
-		}
-		return $this;
-	}
-
-
-
 	/**
 	 * Returns HTML name of control.
 	 * @return string
 	 */
 	public function getHtmlName()
 	{
-		return parent::getHtmlName() . '[]';
+		$name = parent::getHtmlName();
+		return strpos($name, '[') === FALSE ? $name : $name . '[]';
+	}
+
+
+	/**
+	 * Loads HTTP data.
+	 * @return void
+	 */
+	public function loadHttpData()
+	{
+		$path = $this->getHtmlName(); // img_x or img['x']
+		$path = explode('[', strtr(str_replace(']', '', strpos($path, '[') === FALSE ? $path . '.x' : substr($path, 0, -2)), '.', '_'));
+		$this->setValue(Nette\Utils\Arrays::get($this->getForm()->getHttpData(), $path, NULL));
 	}
 
 }

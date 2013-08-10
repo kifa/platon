@@ -14,7 +14,6 @@ namespace Nette\Diagnostics;
 use Nette;
 
 
-
 /**
  * Debug Bar.
  *
@@ -26,12 +25,11 @@ class Bar extends Nette\Object
 	private $panels = array();
 
 
-
 	/**
 	 * Add custom panel.
 	 * @param  IBarPanel
 	 * @param  string
-	 * @return Bar  provides a fluent interface
+	 * @return self
 	 */
 	public function addPanel(IBarPanel $panel, $id = NULL)
 	{
@@ -44,19 +42,6 @@ class Bar extends Nette\Object
 		$this->panels[$id] = $panel;
 		return $this;
 	}
-
-
-
-	/**
-	 * Returns panel with given id
-	 * @param  string
-	 * @return IBarPanel|NULL
-	 */
-	public function getPanel($id)
-	{
-		return isset($this->panels[$id]) ? $this->panels[$id] : NULL;
-	}
-
 
 
 	/**
@@ -85,27 +70,6 @@ class Bar extends Nette\Object
 				}
 			}
 		}
-
-		@session_start();
-		$session = & $_SESSION['__NF']['debuggerbar'];
-		if (preg_match('#^Location:#im', implode("\n", headers_list()))) {
-			$session[] = $panels;
-			return;
-		}
-
-		foreach (array_reverse((array) $session) as $reqId => $oldpanels) {
-			$panels[] = array(
-				'tab' => '<span title="Previous request before redirect">previous</span>',
-				'panel' => NULL,
-				'previous' => TRUE,
-			);
-			foreach ($oldpanels as $panel) {
-				$panel['id'] .= '-' . $reqId;
-				$panels[] = $panel;
-			}
-		}
-		$session = NULL;
-
 		require __DIR__ . '/templates/bar.phtml';
 	}
 

@@ -14,7 +14,6 @@ namespace Nette\Loaders;
 use Nette;
 
 
-
 /**
  * Auto loader is responsible for loading classes and interfaces.
  *
@@ -27,7 +26,6 @@ abstract class AutoLoader extends Nette\Object
 
 	/** @var int  for profiling purposes */
 	public static $count = 0;
-
 
 
 	/**
@@ -45,7 +43,6 @@ abstract class AutoLoader extends Nette\Object
 	}
 
 
-
 	/**
 	 * Return all registered autoloaders.
 	 * @return AutoLoader[]
@@ -56,22 +53,19 @@ abstract class AutoLoader extends Nette\Object
 	}
 
 
-
 	/**
 	 * Register autoloader.
-	 * @param  bool  prepend autoloader?
 	 * @return void
 	 */
-	public function register(/**/$prepend = FALSE/**/)
+	public function register()
 	{
 		if (!function_exists('spl_autoload_register')) {
 			throw new Nette\NotSupportedException('spl_autoload does not exist in this PHP installation.');
 		}
 
-		spl_autoload_register(array($this, 'tryLoad')/**/, TRUE, (bool) $prepend/**/);
+		spl_autoload_register(array($this, 'tryLoad'));
 		self::$loaders[spl_object_hash($this)] = $this;
 	}
-
 
 
 	/**
@@ -83,7 +77,6 @@ abstract class AutoLoader extends Nette\Object
 		unset(self::$loaders[spl_object_hash($this)]);
 		return spl_autoload_unregister(array($this, 'tryLoad'));
 	}
-
 
 
 	/**

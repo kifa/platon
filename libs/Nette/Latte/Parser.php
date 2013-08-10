@@ -15,7 +15,6 @@ use Nette,
 	Nette\Utils\Strings;
 
 
-
 /**
  * Latte parser.
  *
@@ -66,19 +65,18 @@ class Parser extends Nette\Object
 	private $xmlMode;
 
 	/** @internal states */
-	const CONTEXT_HTML_TEXT = 'htmlText',
+	const CONTEXT_TEXT = 'text',
 		CONTEXT_CDATA = 'cdata',
-		CONTEXT_HTML_TAG = 'htmlTag',
-		CONTEXT_HTML_ATTRIBUTE = 'htmlAttribute',
-		CONTEXT_RAW = 'raw',
-		CONTEXT_HTML_COMMENT = 'htmlComment';
-
+		CONTEXT_TAG = 'tag',
+		CONTEXT_ATTRIBUTE = 'attribute',
+		CONTEXT_NONE = 'none',
+		CONTEXT_COMMENT = 'comment';
 
 
 	/**
 	 * Process all {macros} and <tags/>.
 	 * @param  string
-	 * @return Token[]
+	 * @return array
 	 */
 	public function parse($input)
 	{
@@ -94,7 +92,7 @@ class Parser extends Nette\Object
 		$this->offset = 0;
 
 		$this->setSyntax($this->defaultSyntax);
-		$this->setContext(self::CONTEXT_HTML_TEXT);
+		$this->setContext(self::CONTEXT_TEXT);
 		$this->lastHtmlTag = $this->syntaxEndTag = NULL;
 
 		while ($this->offset < strlen($input)) {
@@ -121,11 +119,10 @@ class Parser extends Nette\Object
 	}
 
 
-
 	/**
-	 * Handles CONTEXT_HTML_TEXT.
+	 * Handles CONTEXT_TEXT.
 	 */
-	private function contextHtmlText()
+	private function contextText()
 	{
 		$matches = $this->match('~
 			(?:(?<=\n|^)[ \t]*)?<(?P<closing>/?)(?P<tag>[a-z0-9:]+)|  ##  begin of HTML tag <tag </tag - ignores <!DOCTYPE
@@ -135,18 +132,17 @@ class Parser extends Nette\Object
 
 		if (!empty($matches['htmlcomment'])) { // <!--
 			$this->addToken(Token::HTML_TAG_BEGIN, $matches[0]);
-			$this->setContext(self::CONTEXT_HTML_COMMENT);
+			$this->setContext(self::CONTEXT_COMMENT);
 
 		} elseif (!empty($matches['tag'])) { // <tag or </tag
 			$token = $this->addToken(Token::HTML_TAG_BEGIN, $matches[0]);
 			$token->name = $matches['tag'];
 			$token->closing = (bool) $matches['closing'];
 			$this->lastHtmlTag = $matches['closing'] . strtolower($matches['tag']);
-			$this->setContext(self::CONTEXT_HTML_TAG);
+			$this->setContext(self::CONTEXT_TAG);
 		}
 		return $matches;
 	}
-
 
 
 	/**
@@ -164,17 +160,16 @@ class Parser extends Nette\Object
 			$token->name = $this->lastHtmlTag;
 			$token->closing = TRUE;
 			$this->lastHtmlTag = '/' . $this->lastHtmlTag;
-			$this->setContext(self::CONTEXT_HTML_TAG);
+			$this->setContext(self::CONTEXT_TAG);
 		}
 		return $matches;
 	}
 
 
-
 	/**
-	 * Handles CONTEXT_HTML_TAG.
+	 * Handles CONTEXT_TAG.
 	 */
-	private function contextHtmlTag()
+	private function contextTag()
 	{
 		$matches = $this->match('~
 			(?P<end>\ ?/?>)([ \t]*\n)?|  ##  end of HTML tag
@@ -184,7 +179,7 @@ class Parser extends Nette\Object
 
 		if (!empty($matches['end'])) { // end of HTML tag />
 			$this->addToken(Token::HTML_TAG_END, $matches[0]);
-			$this->setContext(!$this->xmlMode && in_array($this->lastHtmlTag, array('script', 'style')) ? self::CONTEXT_CDATA : self::CONTEXT_HTML_TEXT);
+			$this->setContext(!$this->xmlMode && in_array($this->lastHtmlTag, array('script', 'style')) ? self::CONTEXT_CDATA : self::CONTEXT_TEXT);
 
 		} elseif (isset($matches['attr']) && $matches['attr'] !== '') { // HTML attribute
 			$token = $this->addToken(Token::HTML_ATTRIBUTE, $matches[0]);
@@ -199,7 +194,7 @@ class Parser extends Nette\Object
 						$token->text .= $m[0];
 					}
 				} else {
-					$this->setContext(self::CONTEXT_HTML_ATTRIBUTE, $matches['value']);
+					$this->setContext(self::CONTEXT_ATTRIBUTE, $matches['value']);
 				}
 			}
 		}
@@ -207,11 +202,10 @@ class Parser extends Nette\Object
 	}
 
 
-
 	/**
-	 * Handles CONTEXT_HTML_ATTRIBUTE.
+	 * Handles CONTEXT_ATTRIBUTE.
 	 */
-	private function contextHtmlAttribute()
+	private function contextAttribute()
 	{
 		$matches = $this->match('~
 			(?P<quote>'.$this->context[1].')|  ##  end of HTML attribute
@@ -220,17 +214,16 @@ class Parser extends Nette\Object
 
 		if (!empty($matches['quote'])) { // (attribute end) '"
 			$this->addToken(Token::TEXT, $matches[0]);
-			$this->setContext(self::CONTEXT_HTML_TAG);
+			$this->setContext(self::CONTEXT_TAG);
 		}
 		return $matches;
 	}
 
 
-
 	/**
-	 * Handles CONTEXT_HTML_COMMENT.
+	 * Handles CONTEXT_COMMENT.
 	 */
-	private function contextHtmlComment()
+	private function contextComment()
 	{
 		$matches = $this->match('~
 			(?P<htmlcomment>--\s*>)|   ##  end of HTML comment
@@ -239,24 +232,22 @@ class Parser extends Nette\Object
 
 		if (!empty($matches['htmlcomment'])) { // --\s*>
 			$this->addToken(Token::HTML_TAG_END, $matches[0]);
-			$this->setContext(self::CONTEXT_HTML_TEXT);
+			$this->setContext(self::CONTEXT_TEXT);
 		}
 		return $matches;
 	}
 
 
-
 	/**
-	 * Handles CONTEXT_RAW.
+	 * Handles CONTEXT_NONE.
 	 */
-	private function contextRaw()
+	private function contextNone()
 	{
 		$matches = $this->match('~
 			'.$this->macroRe.'     ##  macro tag
 		~xsi');
 		return $matches;
 	}
-
 
 
 	/**
@@ -278,9 +269,8 @@ class Parser extends Nette\Object
 	}
 
 
-
 	/**
-	 * @return Parser  provides a fluent interface
+	 * @return self
 	 */
 	public function setContext($context, $quote = NULL)
 	{
@@ -289,11 +279,10 @@ class Parser extends Nette\Object
 	}
 
 
-
 	/**
 	 * Changes macro tag delimiters.
 	 * @param  string
-	 * @return Parser  provides a fluent interface
+	 * @return self
 	 */
 	public function setSyntax($type)
 	{
@@ -307,12 +296,11 @@ class Parser extends Nette\Object
 	}
 
 
-
 	/**
 	 * Changes macro tag delimiters.
 	 * @param  string  left regular expression
 	 * @param  string  right regular expression
-	 * @return Parser  provides a fluent interface
+	 * @return self
 	 */
 	public function setDelimiters($left, $right)
 	{
@@ -327,7 +315,6 @@ class Parser extends Nette\Object
 		';
 		return $this;
 	}
-
 
 
 	/**
@@ -348,15 +335,15 @@ class Parser extends Nette\Object
 		if (!$match) {
 			return FALSE;
 		}
+		$modifiers = preg_replace('#\|noescape\s?(?=\||\z)#i', '', $match['modifiers'], -1, $noescape);
 		if ($match['name'] === '') {
 			$match['name'] = $match['shortname'] ?: '=';
-			if (!$match['noescape'] && substr($match['shortname'], 0, 1) !== '/' && $match['shortname'] !== '#') { // workaround for #block
-				$match['modifiers'] .= '|escape';
+			if (!$noescape && !$match['noescape'] && substr($match['shortname'], 0, 1) !== '/') {
+				$modifiers .= '|escape';
 			}
 		}
-		return array($match['name'], trim($match['args']), $match['modifiers']);
+		return array($match['name'], trim($match['args']), $modifiers);
 	}
-
 
 
 	private function addToken($type, $text)
@@ -367,7 +354,6 @@ class Parser extends Nette\Object
 		$token->line = substr_count($this->input, "\n", 0, max(1, $this->offset - 1)) + 1;
 		return $token;
 	}
-
 
 
 	/**
@@ -395,9 +381,9 @@ class Parser extends Nette\Object
 		} elseif ($token->type === Token::MACRO_TAG && $token->name === 'contentType') {
 			if (preg_match('#html|xml#', $token->value, $m)) {
 				$this->xmlMode = $m[0] === 'xml';
-				$this->setContext(self::CONTEXT_HTML_TEXT);
+				$this->setContext(self::CONTEXT_TEXT);
 			} else {
-				$this->setContext(self::CONTEXT_RAW);
+				$this->setContext(self::CONTEXT_NONE);
 			}
 		}
 	}

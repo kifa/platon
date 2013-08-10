@@ -14,8 +14,7 @@ namespace Nette\Application\Diagnostics;
 use Nette,
 	Nette\Application\Routers,
 	Nette\Application\UI\Presenter, // templates
-	Nette\Diagnostics\Dumper;
-
+	Nette\Diagnostics\Debugger;
 
 
 /**
@@ -38,18 +37,16 @@ class RoutingPanel extends Nette\Object implements Nette\Diagnostics\IBarPanel
 	private $request;
 
 
-
 	public static function initializePanel(Nette\Application\Application $application)
 	{
-		Nette\Diagnostics\Debugger::$blueScreen->addPanel(function($e) use ($application) {
+		Debugger::$blueScreen->addPanel(function($e) use ($application) {
 			return $e ? NULL : array(
 				'tab' => 'Nette Application',
-				'panel' => '<h3>Requests</h3>' . Dumper::toHtml($application->getRequests())
-					. '<h3>Presenter</h3>' . Dumper::toHtml($application->getPresenter())
+				'panel' => '<h3>Requests</h3>' . Nette\Diagnostics\Helpers::clickableDump($application->getRequests())
+					. '<h3>Presenter</h3>' . Nette\Diagnostics\Helpers::clickableDump($application->getPresenter())
 			);
 		});
 	}
-
 
 
 	public function __construct(Nette\Application\IRouter $router, Nette\Http\IRequest $httpRequest)
@@ -57,7 +54,6 @@ class RoutingPanel extends Nette\Object implements Nette\Diagnostics\IBarPanel
 		$this->router = $router;
 		$this->httpRequest = $httpRequest;
 	}
-
 
 
 	/**
@@ -73,7 +69,6 @@ class RoutingPanel extends Nette\Object implements Nette\Diagnostics\IBarPanel
 	}
 
 
-
 	/**
 	 * Renders panel.
 	 * @return string
@@ -84,7 +79,6 @@ class RoutingPanel extends Nette\Object implements Nette\Diagnostics\IBarPanel
 		require __DIR__ . '/templates/RoutingPanel.panel.phtml';
 		return ob_get_clean();
 	}
-
 
 
 	/**

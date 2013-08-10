@@ -11,8 +11,8 @@
 
 namespace Nette\Security\Diagnostics;
 
-use Nette;
-
+use Nette,
+	Nette\Diagnostics\Helpers;
 
 
 /**
@@ -26,12 +26,10 @@ class UserPanel extends Nette\Object implements Nette\Diagnostics\IBarPanel
 	private $user;
 
 
-
 	public function __construct(Nette\Security\User $user)
 	{
 		$this->user = $user;
 	}
-
 
 
 	/**
@@ -44,7 +42,6 @@ class UserPanel extends Nette\Object implements Nette\Diagnostics\IBarPanel
 		require __DIR__ . '/templates/UserPanel.tab.phtml';
 		return ob_get_clean();
 	}
-
 
 
 	/**

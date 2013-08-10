@@ -14,32 +14,44 @@ namespace Nette\Iterators;
 use Nette;
 
 
-
 /**
- * RecursiveCallbackFilterIterator for PHP < 5.4.
+ * Callback recursive iterator filter.
  *
  * @author     David Grudl
  */
-class RecursiveFilter extends Filter implements \RecursiveIterator
+class RecursiveFilter extends \FilterIterator implements \RecursiveIterator
 {
+	/** @var callable */
+	private $callback;
 
-	public function __construct(\RecursiveIterator $iterator, $callback)
+	/** @var callable */
+	private $childrenCallback;
+
+
+	public function __construct(\RecursiveIterator $iterator, $callback, $childrenCallback = NULL)
 	{
-		parent::__construct($iterator, $callback);
+		parent::__construct($iterator);
+		$this->callback = $callback === NULL ? NULL : new Nette\Callback($callback);
+		$this->childrenCallback = $childrenCallback === NULL ? NULL : new Nette\Callback($childrenCallback);
 	}
 
+
+	public function accept()
+	{
+		return $this->callback === NULL || $this->callback->invoke($this);
+	}
 
 
 	public function hasChildren()
 	{
-		return $this->getInnerIterator()->hasChildren();
+		return $this->getInnerIterator()->hasChildren()
+			&& ($this->childrenCallback === NULL || $this->childrenCallback->invoke($this));
 	}
-
 
 
 	public function getChildren()
 	{
-		return new static($this->getInnerIterator()->getChildren(), $this->callback);
+		return new static($this->getInnerIterator()->getChildren(), $this->callback, $this->childrenCallback);
 	}
 
 }

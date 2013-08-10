@@ -18,7 +18,6 @@ use Nette,
 	Nette\Database\SqlLiteral;
 
 
-
 /**
  * Builds SQL query.
  * SqlBuilder is based on great library NotORM http://www.notorm.com written by Jakub Vrana.
@@ -71,16 +70,14 @@ class SqlBuilder extends Nette\Object
 	protected $having = '';
 
 
-
 	public function __construct($tableName, Connection $connection, IReflection $reflection)
 	{
 		$this->tableName = $tableName;
 		$this->databaseReflection = $reflection;
 		$this->driver = $connection->getSupplementalDriver();
-		$this->driverName = $connection->getPdo()->getAttribute(\PDO::ATTR_DRIVER_NAME);
+		$this->driverName = $connection->getAttribute(\PDO::ATTR_DRIVER_NAME);
 		$this->delimitedTable = $this->tryDelimite($tableName);
 	}
-
 
 
 	public function buildInsertQuery()
@@ -89,19 +86,16 @@ class SqlBuilder extends Nette\Object
 	}
 
 
-
 	public function buildUpdateQuery()
 	{
 		return "UPDATE{$this->buildTopClause()} {$this->delimitedTable} SET ?" . $this->buildConditions();
 	}
 
 
-
 	public function buildDeleteQuery()
 	{
 		return "DELETE{$this->buildTopClause()} FROM {$this->delimitedTable}" . $this->buildConditions();
 	}
-
 
 
 	public function importConditions(SqlBuilder $builder)
@@ -112,9 +106,7 @@ class SqlBuilder extends Nette\Object
 	}
 
 
-
 	/********************* SQL selectors ****************d*g**/
-
 
 
 	public function addSelect($columns)
@@ -126,12 +118,10 @@ class SqlBuilder extends Nette\Object
 	}
 
 
-
 	public function getSelect()
 	{
 		return $this->select;
 	}
-
 
 
 	public function addWhere($condition, $parameters = array())
@@ -153,6 +143,7 @@ class SqlBuilder extends Nette\Object
 			array_shift($args);
 		}
 
+		$condition = trim($condition);
 		if ($placeholderCount === 0 && count($args) === 1) {
 			$condition .= ' ?';
 		} elseif ($placeholderCount !== count($args)) {
@@ -162,7 +153,7 @@ class SqlBuilder extends Nette\Object
 		$replace = NULL;
 		$placeholderNum = 0;
 		foreach ($args as $arg) {
-			preg_match('#(?:.*?\?.*?){' . $placeholderNum . '}(((?:&|\||^|~|\+|-|\*|/|%|\(|,|<|>|=|ALL|AND|ANY|BETWEEN|EXISTS|IN|LIKE|OR|NOT|SOME)\s*)?\?)#', $condition, $match, PREG_OFFSET_CAPTURE);
+			preg_match('#(?:.*?\?.*?){' . $placeholderNum . '}(((?:&|\||^|~|\+|-|\*|/|%|\(|,|<|>|=|(?<=\W|^)(?:REGEXP|ALL|AND|ANY|BETWEEN|EXISTS|IN|R?LIKE|OR|NOT|SOME))\s*)?(?:\(\?\)|\?))#s', $condition, $match, PREG_OFFSET_CAPTURE);
 			$hasOperator = ($match[1][0] === '?' && $match[1][1] === 0) ? TRUE : !empty($match[2][0]);
 
 			if ($arg === NULL) {
@@ -211,12 +202,10 @@ class SqlBuilder extends Nette\Object
 					$replace = $match[2][0] . '(NULL)';
 				} else {
 					$replace = $match[2][0] . '(?)';
-					$this->parameters[] = $arg;
+					$this->parameters[] = array_values($arg);
 				}
 			} else {
-				if ($hasOperator) {
-					$replace = $match[2][0] . '?';
-				} else {
+				if (!$hasOperator) {
 					$replace = '= ?';
 				}
 				$this->parameters[] = $arg;
@@ -237,12 +226,10 @@ class SqlBuilder extends Nette\Object
 	}
 
 
-
 	public function getConditions()
 	{
 		return array_values($this->conditions);
 	}
-
 
 
 	public function addOrder($columns)
@@ -251,12 +238,10 @@ class SqlBuilder extends Nette\Object
 	}
 
 
-
 	public function getOrder()
 	{
 		return $this->order;
 	}
-
 
 
 	public function setLimit($limit, $offset)
@@ -266,19 +251,16 @@ class SqlBuilder extends Nette\Object
 	}
 
 
-
 	public function getLimit()
 	{
 		return $this->limit;
 	}
 
 
-
 	public function getOffset()
 	{
 		return $this->offset;
 	}
-
 
 
 	public function setGroup($columns, $having)
@@ -288,12 +270,10 @@ class SqlBuilder extends Nette\Object
 	}
 
 
-
 	public function getGroup()
 	{
 		return $this->group;
 	}
-
 
 
 	public function getHaving()
@@ -302,9 +282,7 @@ class SqlBuilder extends Nette\Object
 	}
 
 
-
 	/********************* SQL building ****************d*g**/
-
 
 
 	/**
@@ -337,12 +315,10 @@ class SqlBuilder extends Nette\Object
 	}
 
 
-
 	public function getParameters()
 	{
 		return $this->parameters;
 	}
-
 
 
 	protected function buildJoins($val, $inner = FALSE)
@@ -379,7 +355,6 @@ class SqlBuilder extends Nette\Object
 	}
 
 
-
 	protected function buildConditions()
 	{
 		$return = '';
@@ -409,7 +384,6 @@ class SqlBuilder extends Nette\Object
 	}
 
 
-
 	protected function buildTopClause()
 	{
 		if ($this->limit !== NULL && $this->driverName === 'dblib') {
@@ -419,7 +393,6 @@ class SqlBuilder extends Nette\Object
 	}
 
 
-
 	protected function tryDelimite($s)
 	{
 		$driver = $this->driver;
@@ -427,7 +400,6 @@ class SqlBuilder extends Nette\Object
 			return strtoupper($m[0]) === $m[0] ? $m[0] : $driver->delimite($m[0]);
 		}, $s);
 	}
-
 
 
 	protected function removeExtraTables($expression)

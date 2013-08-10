@@ -14,18 +14,20 @@ namespace Nette\DI;
 use Nette;
 
 
-
 /**
  * The dependency injection container default implementation.
  *
  * @author     David Grudl
  */
-class Container extends Nette\FreezableObject
+class Container extends Nette\FreezableObject implements IContainer
 {
 	const TAGS = 'tags';
 
 	/** @var array  user parameters */
 	/*private*/public $parameters = array();
+
+	/** @deprecated */
+	public $params = array();
 
 	/** @var array */
 	public $classes = array();
@@ -43,12 +45,11 @@ class Container extends Nette\FreezableObject
 	private $creating;
 
 
-
 	public function __construct(array $params = array())
 	{
 		$this->parameters = $params + $this->parameters;
+		$this->params = &$this->parameters;
 	}
-
 
 
 	/**
@@ -60,13 +61,12 @@ class Container extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Adds the service or service factory to the container.
 	 * @param  string
 	 * @param  mixed   object, class name or callable
 	 * @param  array   service meta information
-	 * @return Container  provides a fluent interface
+	 * @return self
 	 */
 	public function addService($name, $service, array $meta = NULL)
 	{
@@ -84,7 +84,7 @@ class Container extends Nette\FreezableObject
 			$this->meta[$name] = $meta;
 			return $this;
 
-		} elseif (!is_string($service) || strpos($service, ':') !== FALSE/*5.2* || $service[0] === "\0"*/) { // callable
+		} elseif (!is_string($service) || strpos($service, ':') !== FALSE) { // callable
 			$service = new Nette\Callback($service);
 		}
 
@@ -93,7 +93,6 @@ class Container extends Nette\FreezableObject
 		$this->meta[$name] = $meta;
 		return $this;
 	}
-
 
 
 	/**
@@ -106,7 +105,6 @@ class Container extends Nette\FreezableObject
 		$this->updating();
 		unset($this->registry[$name], $this->factories[$name], $this->meta[$name]);
 	}
-
 
 
 	/**
@@ -141,7 +139,7 @@ class Container extends Nette\FreezableObject
 			} else {
 				$this->creating[$name] = TRUE;
 				try {
-					$service = $factory/*5.2*->invoke*/($this);
+					$service = $factory($this);
 				} catch (\Exception $e) {}
 			}
 
@@ -168,7 +166,6 @@ class Container extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Does the service exist?
 	 * @param  string service name
@@ -180,7 +177,6 @@ class Container extends Nette\FreezableObject
 			|| isset($this->factories[$name])
 			|| method_exists($this, $method = Container::getMethodName($name)) && $this->getReflection()->getMethod($method)->getName() === $method;
 	}
-
 
 
 	/**
@@ -195,7 +191,6 @@ class Container extends Nette\FreezableObject
 		}
 		return isset($this->registry[$name]);
 	}
-
 
 
 	/**
@@ -220,7 +215,6 @@ class Container extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Gets the service names of the specified tag.
 	 * @param  string
@@ -238,9 +232,7 @@ class Container extends Nette\FreezableObject
 	}
 
 
-
 	/********************* autowiring ****************d*g**/
-
 
 
 	/**
@@ -266,31 +258,6 @@ class Container extends Nette\FreezableObject
 	}
 
 
-
-	/**
-	 * Calls all methods starting with with "inject" using autowiring.
-	 * @param  object
-	 * @return void
-	 */
-	public function callInjects($service)
-	{
-		if (!is_object($service)) {
-			throw new Nette\InvalidArgumentException("Service must be object, " . gettype($service) . " given.");
-		}
-
-		foreach (array_reverse(get_class_methods($service)) as $method) {
-			if (substr($method, 0, 6) === 'inject') {
-				$this->callMethod(array($service, $method));
-			}
-		}
-
-		foreach (Helpers::getInjectProperties(Nette\Reflection\ClassType::from($service)) as $property => $type) {
-			$service->$property = $this->getByType($type);
-		}
-	}
-
-
-
 	/**
 	 * Calls method using autowiring.
 	 * @param  mixed   class, object, function, callable
@@ -304,9 +271,7 @@ class Container extends Nette\FreezableObject
 	}
 
 
-
 	/********************* shortcuts ****************d*g**/
-
 
 
 	/**
@@ -318,7 +283,6 @@ class Container extends Nette\FreezableObject
 	{
 		return Helpers::expand($s, $this->parameters);
 	}
-
 
 
 	/**
@@ -333,7 +297,6 @@ class Container extends Nette\FreezableObject
 		}
 		return $this->registry[$name];
 	}
-
 
 
 	/**
@@ -358,7 +321,6 @@ class Container extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Does the service exist?
 	 * @param  string
@@ -370,7 +332,6 @@ class Container extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Removes the service, shortcut for removeService().
 	 * @return void
@@ -379,7 +340,6 @@ class Container extends Nette\FreezableObject
 	{
 		$this->removeService($name);
 	}
-
 
 
 	public static function getMethodName($name, $isService = TRUE)

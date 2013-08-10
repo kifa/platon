@@ -14,7 +14,6 @@ namespace Nette\Forms;
 use Nette;
 
 
-
 /**
  * Defines method that must be implemented to allow a component to act like a form control.
  *
@@ -43,9 +42,9 @@ interface IControl
 	function getValue();
 
 	/**
-	 * @return void
+	 * @return Rules
 	 */
-	function validate();
+	function getRules();
 
 	/**
 	 * Returns errors corresponding to control.

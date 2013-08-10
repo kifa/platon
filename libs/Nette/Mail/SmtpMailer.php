@@ -14,7 +14,6 @@ namespace Nette\Mail;
 use Nette;
 
 
-
 /**
  * Sends emails via the SMTP server.
  *
@@ -44,7 +43,6 @@ class SmtpMailer extends Nette\Object implements IMailer
 	private $timeout;
 
 
-
 	public function __construct(array $options = array())
 	{
 		if (isset($options['host'])) {
@@ -64,7 +62,6 @@ class SmtpMailer extends Nette\Object implements IMailer
 	}
 
 
-
 	/**
 	 * Sends email.
 	 * @return void
@@ -75,10 +72,10 @@ class SmtpMailer extends Nette\Object implements IMailer
 
 		$this->connect();
 
-		$from = $mail->getHeader('From');
-		if ($from) {
-			$from = array_keys($from);
-			$this->write("MAIL FROM:<$from[0]>", 250);
+		if (($from = $mail->getHeader('Return-Path'))
+			|| ($from = key($mail->getHeader('From'))))
+		{
+			$this->write("MAIL FROM:<$from>", 250);
 		}
 
 		foreach (array_merge(
@@ -102,7 +99,6 @@ class SmtpMailer extends Nette\Object implements IMailer
 	}
 
 
-
 	/**
 	 * Connects and authenticates to SMTP server.
 	 * @return void
@@ -119,7 +115,7 @@ class SmtpMailer extends Nette\Object implements IMailer
 		stream_set_timeout($this->connection, $this->timeout, 0);
 		$this->read(); // greeting
 
-		$self = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost';
+		$self = isset($_SERVER['HTTP_HOST']) && preg_match('#^[\w.-]+\z#', $_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost';
 		$this->write("EHLO $self");
 		if ((int) $this->read() !== 250) {
 			$this->write("HELO $self", 250);
@@ -141,7 +137,6 @@ class SmtpMailer extends Nette\Object implements IMailer
 	}
 
 
-
 	/**
 	 * Disconnects from SMTP server.
 	 * @return void
@@ -151,7 +146,6 @@ class SmtpMailer extends Nette\Object implements IMailer
 		fclose($this->connection);
 		$this->connection = NULL;
 	}
-
 
 
 	/**
@@ -168,7 +162,6 @@ class SmtpMailer extends Nette\Object implements IMailer
 			throw new SmtpException('SMTP server did not accept ' . ($message ? $message : $line));
 		}
 	}
-
 
 
 	/**
@@ -188,7 +181,6 @@ class SmtpMailer extends Nette\Object implements IMailer
 	}
 
 }
-
 
 
 /**

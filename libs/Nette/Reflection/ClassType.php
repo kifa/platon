@@ -15,7 +15,6 @@ use Nette,
 	Nette\ObjectMixin;
 
 
-
 /**
  * Reports information about a class.
  *
@@ -52,6 +51,9 @@ use Nette,
 class ClassType extends \ReflectionClass
 {
 
+	/** @var array (method => array(type => callable)) */
+	private static $extMethods;
+
 
 	/**
 	 * @param  string|object
@@ -63,12 +65,72 @@ class ClassType extends \ReflectionClass
 	}
 
 
-
 	public function __toString()
 	{
-		return $this->getName();
+		return 'Class ' . $this->getName();
 	}
 
+
+	/**
+	 * @return bool
+	 */
+	public function hasEventProperty($name)
+	{
+		if (preg_match('#^on[A-Z]#', $name) && $this->hasProperty($name)) {
+			$rp = $this->getProperty($name);
+			return $rp->isPublic() && !$rp->isStatic();
+		}
+		return FALSE;
+	}
+
+
+	/**
+	 * Adds a method to class.
+	 * @param  string  method name
+	 * @param  mixed   callable
+	 * @return self
+	 */
+	public function setExtensionMethod($name, $callback)
+	{
+		$l = & self::$extMethods[strtolower($name)];
+		$l[strtolower($this->getName())] = new Nette\Callback($callback);
+		$l[''] = NULL;
+		return $this;
+	}
+
+
+	/**
+	 * Returns extension method.
+	 * @param  string  method name
+	 * @return mixed
+	 */
+	public function getExtensionMethod($name)
+	{
+		$class = strtolower($this->getName());
+		$l = & self::$extMethods[strtolower($name)];
+
+		if (empty($l)) {
+			return FALSE;
+
+		} elseif (isset($l[''][$class])) { // cached value
+			return $l[''][$class];
+		}
+
+		$cl = $class;
+		do {
+			if (isset($l[$cl])) {
+				return $l[''][$class] = $l[$cl];
+			}
+		} while (($cl = strtolower(get_parent_class($cl))) !== '');
+
+		foreach (class_implements($class) as $cl) {
+			$cl = strtolower($cl);
+			if (isset($l[$cl])) {
+				return $l[''][$class] = $l[$cl];
+			}
+		}
+		return $l[''][$class] = FALSE;
+	}
 
 
 	/**
@@ -81,9 +143,7 @@ class ClassType extends \ReflectionClass
 	}
 
 
-
 	/********************* Reflection layer ****************d*g**/
-
 
 
 	/**
@@ -95,7 +155,6 @@ class ClassType extends \ReflectionClass
 	}
 
 
-
 	/**
 	 * @return Extension|NULL
 	 */
@@ -103,7 +162,6 @@ class ClassType extends \ReflectionClass
 	{
 		return ($name = $this->getExtensionName()) ? new Extension($name) : NULL;
 	}
-
 
 
 	/**
@@ -119,7 +177,6 @@ class ClassType extends \ReflectionClass
 	}
 
 
-
 	/**
 	 * @return Method
 	 */
@@ -127,7 +184,6 @@ class ClassType extends \ReflectionClass
 	{
 		return new Method($this->getName(), $name);
 	}
-
 
 
 	/**
@@ -142,7 +198,6 @@ class ClassType extends \ReflectionClass
 	}
 
 
-
 	/**
 	 * @return ClassType|NULL
 	 */
@@ -150,7 +205,6 @@ class ClassType extends \ReflectionClass
 	{
 		return ($ref = parent::getParentClass()) ? new static($ref->getName()) : NULL;
 	}
-
 
 
 	/**
@@ -165,7 +219,6 @@ class ClassType extends \ReflectionClass
 	}
 
 
-
 	/**
 	 * @return Property
 	 */
@@ -175,9 +228,7 @@ class ClassType extends \ReflectionClass
 	}
 
 
-
 	/********************* Nette\Annotations support ****************d*g**/
-
 
 
 	/**
@@ -192,7 +243,6 @@ class ClassType extends \ReflectionClass
 	}
 
 
-
 	/**
 	 * Returns an annotation value.
 	 * @param  string
@@ -205,7 +255,6 @@ class ClassType extends \ReflectionClass
 	}
 
 
-
 	/**
 	 * Returns all annotations.
 	 * @return IAnnotation[][]
@@ -214,7 +263,6 @@ class ClassType extends \ReflectionClass
 	{
 		return AnnotationsParser::getAll($this);
 	}
-
 
 
 	/**
@@ -227,19 +275,16 @@ class ClassType extends \ReflectionClass
 	}
 
 
-
 	/********************* Nette\Object behaviour ****************d*g**/
-
 
 
 	/**
 	 * @return ClassType
 	 */
-	public /**/static/**/ function getReflection()
+	public static function getReflection()
 	{
-		return new ClassType(/*5.2*$this*//**/get_called_class()/**/);
+		return new ClassType(get_called_class());
 	}
-
 
 
 	public function __call($name, $args)
@@ -248,12 +293,10 @@ class ClassType extends \ReflectionClass
 	}
 
 
-
 	public function &__get($name)
 	{
 		return ObjectMixin::get($this, $name);
 	}
-
 
 
 	public function __set($name, $value)
@@ -262,12 +305,10 @@ class ClassType extends \ReflectionClass
 	}
 
 
-
 	public function __isset($name)
 	{
 		return ObjectMixin::has($this, $name);
 	}
-
 
 
 	public function __unset($name)

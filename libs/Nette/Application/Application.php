@@ -14,7 +14,6 @@ namespace Nette\Application;
 use Nette;
 
 
-
 /**
  * Front Controller.
  *
@@ -51,6 +50,9 @@ class Application extends Nette\Object
 	/** @var array of function(Application $sender, \Exception $e); Occurs when an unhandled exception occurs in the application */
 	public $onError;
 
+	/** @deprecated */
+	public $allowedMethods;
+
 	/** @var Request[] */
 	private $requests = array();
 
@@ -70,7 +72,6 @@ class Application extends Nette\Object
 	private $router;
 
 
-
 	public function __construct(IPresenterFactory $presenterFactory, IRouter $router, Nette\Http\IRequest $httpRequest, Nette\Http\IResponse $httpResponse)
 	{
 		$this->httpRequest = $httpRequest;
@@ -78,7 +79,6 @@ class Application extends Nette\Object
 		$this->presenterFactory = $presenterFactory;
 		$this->router = $router;
 	}
-
 
 
 	/**
@@ -141,39 +141,54 @@ class Application extends Nette\Object
 				break;
 
 			} catch (\Exception $e) {
+				// fault barrier
 				$this->onError($this, $e);
 
-				if ($repeatedError) {
-					$e = new ApplicationException("An error occurred while executing error-presenter '$this->errorPresenter'.", 0, $e);
-				}
-				if ($repeatedError || !$this->catchExceptions) {
+				if (!$this->catchExceptions) {
 					$this->onShutdown($this, $e);
 					throw $e;
 				}
 
-				$repeatedError = TRUE;
-				$this->errorPresenter = $this->errorPresenter ?: 'Nette:Error';
+				if ($repeatedError) {
+					$e = new ApplicationException('An error occurred while executing error-presenter', 0, $e);
+				}
 
 				if (!$this->httpResponse->isSent()) {
 					$this->httpResponse->setCode($e instanceof BadRequestException ? $e->getCode() : 500);
 				}
 
-				if ($this->presenter instanceof UI\Presenter) {
-					try {
-						$this->presenter->forward(":$this->errorPresenter:", array('exception' => $e));
-					} catch (AbortException $foo) {
-						$request = $this->presenter->getLastCreatedRequest();
+				if (!$repeatedError && $this->errorPresenter) {
+					$repeatedError = TRUE;
+					if ($this->presenter instanceof UI\Presenter) {
+						try {
+							$this->presenter->forward(":$this->errorPresenter:", array('exception' => $e));
+						} catch (AbortException $foo) {
+							$request = $this->presenter->getLastCreatedRequest();
+						}
+					} else {
+						$request = new Request(
+							$this->errorPresenter,
+							Request::FORWARD,
+							array('exception' => $e)
+						);
 					}
-				} else {
-					$request = new Request($this->errorPresenter, Request::FORWARD, array('exception' => $e));
+					// continue
+
+				} else { // default error handler
+					if ($e instanceof BadRequestException) {
+						$code = $e->getCode();
+					} else {
+						$code = 500;
+						Nette\Diagnostics\Debugger::log($e, Nette\Diagnostics\Debugger::ERROR);
+					}
+					require __DIR__ . '/templates/error.phtml';
+					break;
 				}
-				// continue
 			}
 		} while (1);
 
 		$this->onShutdown($this, isset($e) ? $e : NULL);
 	}
-
 
 
 	/**
@@ -186,7 +201,6 @@ class Application extends Nette\Object
 	}
 
 
-
 	/**
 	 * Returns current presenter.
 	 * @return IPresenter
@@ -197,9 +211,7 @@ class Application extends Nette\Object
 	}
 
 
-
 	/********************* services ****************d*g**/
-
 
 
 	/**
@@ -212,7 +224,6 @@ class Application extends Nette\Object
 	}
 
 
-
 	/**
 	 * Returns presenter factory.
 	 * @return IPresenterFactory
@@ -223,22 +234,18 @@ class Application extends Nette\Object
 	}
 
 
-
 	/********************* request serialization ****************d*g**/
-
 
 
 	/** @deprecated */
 	function storeRequest($expiration = '+ 10 minutes')
 	{
-		trigger_error(__METHOD__ . '() is deprecated; use $presenter->storeRequest() instead.', E_USER_DEPRECATED);
 		return $this->presenter->storeRequest($expiration);
 	}
 
 	/** @deprecated */
 	function restoreRequest($key)
 	{
-		trigger_error(__METHOD__ . '() is deprecated; use $presenter->restoreRequest() instead.', E_USER_DEPRECATED);
 		return $this->presenter->restoreRequest($key);
 	}
 

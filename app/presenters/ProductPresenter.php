@@ -70,7 +70,9 @@ class ProductPresenter extends BasePresenter {
                 unlink($imgUrl);
             }
 
-            $e = 'Photo ' . $name . ' was sucessfully deleted.';
+            $photo = $this->translator->translate('Photo ');
+            $text = $this->translator->translate(' was sucessfully deleted.');
+            $e = $photo . $name . $text;
 
             $this->categoryModel->deletePhoto($id);
             $this->flashMessage($e, 'alert');
@@ -122,7 +124,8 @@ class ProductPresenter extends BasePresenter {
             $this->categoryModel->setCategoryStatus($catID, $categoryStatus);
             $status = $this->categoryModel->getStatusName($categoryStatus);
           //  $status = $categoryStatus;
-            $e = 'Category status is now: ' . $status;
+            $text = $this->translator->translate('Category status is now: ');
+            $e = $text . $status;
             $this->flashMessage($e, 'alert');
             
             if($this->isAjax()) {
@@ -465,7 +468,9 @@ class ProductPresenter extends BasePresenter {
                     unlink($imgUrl);
                 }
 
-                $e = 'Photo ' . $row->PhotoName . ' was sucessfully deleted.';
+                $photo = $this->translator->translate('Photo ');
+                $text = $this->translator->translate(' was sucessfully deleted.');
+                $e = $photo . $row->PhotoName . $text;
 
                 $this->productModel->deletePhoto($photo);
                 $this->flashMessage($e, 'alert');
@@ -715,7 +720,9 @@ class ProductPresenter extends BasePresenter {
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $form->values->albumID . '/50-' . $form->values->image->name;
                 $image->save($imgUrl);
 
-                $e = HTML::el('span', ' Photo ' . $form->values->image->name . ' was sucessfully uploaded');
+                $message = $this->translator->translate(' was sucessfully uploaded');
+                $photo = $this->translator->translate(' Photo ');
+                $e = HTML::el('span', $photo . $form->values->image->name . '' . $message);
                 $ico = HTML::el('i')->class('icon-ok-sign left');
                 $e->insert(0, $ico);
                 $this->flashMessage($e, 'alert');
@@ -766,7 +773,9 @@ class ProductPresenter extends BasePresenter {
 
                 $this->categoryModel->addPhoto($form->values->categoryID, $form->values->image->name);
 
-                $e = HTML::el('span', ' Photo ' . $form->values->image->name . ' was sucessfully uploaded');
+                $message = $this->translator->translate(' was sucessfully uploaded');
+                $photo = $this->translator->translate(' Photo ');
+                $e = HTML::el('span', $photo . $form->values->image->name . '' . $message);
                 $ico = HTML::el('i')->class('icon-ok-sign left');
                 $e->insert(0, $ico);
                 $this->flashMessage($e, 'alert');
@@ -841,7 +850,8 @@ class ProductPresenter extends BasePresenter {
         $note = $form->values->note;
         $name = $form->values->name;
         
-        $e = HTML::el('span', ' Great! We have received your question.');
+        $message = $this->translator->translate(' Great! We have received your question.');
+        $e = HTML::el('span', $message);
         $ico = HTML::el('i')->class('icon-ok-sign left');
         $e->insert(0, $ico);
         $this->flashMessage($e, 'alert alert-info');
@@ -1005,7 +1015,9 @@ class ProductPresenter extends BasePresenter {
                     unlink($docUrl);
                 }
 
-                $e = 'Doc ' . $row->DocumentName . ' was sucessfully deleted.';
+                $doc = $this->translator->translate('Doc ');
+                $text = $this->translator->translate(' was sucessfully deleted.');
+                $e = $doc . $row->DocumentName . $text;
 
                 $this->productModel->deleteDocumentation($id);
                 $this->flashMessage($e, 'alert');
@@ -1054,7 +1066,9 @@ class ProductPresenter extends BasePresenter {
                 $imgUrl = $this->context->parameters['wwwDir'] . '/docs/' . $form->values->productid . '/' . $form->values->doc->name;
                 $form->values->doc->move($imgUrl);
 
-                $e = HTML::el('span', ' Docs ' . $form->values->doc->name . ' was sucessfully uploaded');
+                $doc = $this->translator->translate(' Doc ');
+                $text = $this->translator->translate(' was sucessfully uploaded');
+                $e = HTML::el('span', $doc . $form->values->doc->name . $text);
                 $ico = HTML::el('i')->class('icon-ok-sign left');
                 $e->insert(0, $ico);
                 $this->flashMessage($e, 'alert');

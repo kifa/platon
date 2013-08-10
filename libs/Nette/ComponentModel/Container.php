@@ -14,7 +14,6 @@ namespace Nette\ComponentModel;
 use Nette;
 
 
-
 /**
  * ComponentContainer is default implementation of IContainer.
  *
@@ -31,9 +30,7 @@ class Container extends Component implements IContainer
 	private $cloning;
 
 
-
 	/********************* interface IContainer ****************d*g**/
-
 
 
 	/**
@@ -41,7 +38,7 @@ class Container extends Component implements IContainer
 	 * @param  IComponent
 	 * @param  string
 	 * @param  string
-	 * @return Container  provides a fluent interface
+	 * @return self
 	 * @throws Nette\InvalidStateException
 	 */
 	public function addComponent(IComponent $component, $name, $insertBefore = NULL)
@@ -99,7 +96,6 @@ class Container extends Component implements IContainer
 	}
 
 
-
 	/**
 	 * Removes a component from the IContainer.
 	 * @return void
@@ -114,7 +110,6 @@ class Container extends Component implements IContainer
 		unset($this->components[$name]);
 		$component->setParent(NULL);
 	}
-
 
 
 	/**
@@ -167,7 +162,6 @@ class Container extends Component implements IContainer
 	}
 
 
-
 	/**
 	 * Component factory. Delegates the creation of components to a createComponent<Name> method.
 	 * @param  string      component name
@@ -188,7 +182,6 @@ class Container extends Component implements IContainer
 	}
 
 
-
 	/**
 	 * Iterates over a components.
 	 * @param  bool    recursive?
@@ -203,13 +196,10 @@ class Container extends Component implements IContainer
 			$iterator = new \RecursiveIteratorIterator($iterator, $deep);
 		}
 		if ($filterType) {
-			$iterator = new Nette\Iterators\Filter($iterator, function($item) use ($filterType) {
-				return $item instanceof $filterType;
-			});
+			$iterator = new Nette\Iterators\InstanceFilter($iterator, $filterType);
 		}
 		return $iterator;
 	}
-
 
 
 	/**
@@ -222,9 +212,7 @@ class Container extends Component implements IContainer
 	}
 
 
-
 	/********************* cloneable, serializable ****************d*g**/
-
 
 
 	/**
@@ -242,7 +230,6 @@ class Container extends Component implements IContainer
 		}
 		parent::__clone();
 	}
-
 
 
 	/**

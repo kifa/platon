@@ -14,7 +14,6 @@ namespace Nette\DI;
 use Nette;
 
 
-
 /**
  * Definition used by ContainerBuilder.
  *
@@ -44,11 +43,7 @@ class ServiceDefinition extends Nette\Object
 	public $shared = TRUE;
 
 	/** @var bool */
-	public $inject = TRUE;
-
-	/** @var string  interface name */
-	public $implement;
-
+	public $internal = FALSE;
 
 
 	public function setClass($class, array $args = array())
@@ -61,13 +56,11 @@ class ServiceDefinition extends Nette\Object
 	}
 
 
-
 	public function setFactory($factory, array $args = array())
 	{
 		$this->factory = new Statement($factory, $args);
 		return $this;
 	}
-
 
 
 	public function setArguments(array $args = array())
@@ -81,17 +74,11 @@ class ServiceDefinition extends Nette\Object
 	}
 
 
-
 	public function addSetup($target, $args = NULL)
 	{
-		if (!is_array($args)) {
-			$args = func_get_args();
-			array_shift($args);
-		}
-		$this->setup[] = new Statement($target, $args);
+		$this->setup[] = new Statement($target, is_array($args) ? $args : array_slice(func_get_args(), 1));
 		return $this;
 	}
-
 
 
 	public function setParameters(array $params)
@@ -102,7 +89,6 @@ class ServiceDefinition extends Nette\Object
 	}
 
 
-
 	public function addTag($tag, $attrs = TRUE)
 	{
 		$this->tags[$tag] = $attrs;
@@ -110,13 +96,11 @@ class ServiceDefinition extends Nette\Object
 	}
 
 
-
 	public function setAutowired($on)
 	{
 		$this->autowired = $on;
 		return $this;
 	}
-
 
 
 	public function setShared($on)
@@ -127,19 +111,9 @@ class ServiceDefinition extends Nette\Object
 	}
 
 
-
-	public function setInject($on)
+	public function setInternal($on)
 	{
-		$this->inject = (bool) $on;
-		return $this;
-	}
-
-
-
-	public function setImplement($implement)
-	{
-		$this->implement = $implement;
-		$this->shared = TRUE;
+		$this->internal = (bool) $on;
 		return $this;
 	}
 

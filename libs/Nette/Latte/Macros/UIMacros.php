@@ -19,7 +19,6 @@ use Nette,
 	Nette\Utils\Strings;
 
 
-
 /**
  * Macros for Nette\Application\UI.
  *
@@ -40,7 +39,6 @@ class UIMacros extends MacroSet
 	private $extends;
 
 
-
 	public static function install(Latte\Compiler $compiler)
 	{
 		$me = new static($compiler);
@@ -49,7 +47,6 @@ class UIMacros extends MacroSet
 		$me->addMacro('extends', array($me, 'macroExtends'));
 		$me->addMacro('layout', array($me, 'macroExtends'));
 		$me->addMacro('block', array($me, 'macroBlock'), array($me, 'macroBlockEnd'));
-		$me->addMacro('#', array($me, 'macroBlock'), array($me, 'macroBlockEnd'));
 		$me->addMacro('define', array($me, 'macroBlock'), array($me, 'macroBlockEnd'));
 		$me->addMacro('snippet', array($me, 'macroBlock'), array($me, 'macroBlockEnd'));
 		$me->addMacro('ifset', array($me, 'macroIfset'), 'endif');
@@ -69,7 +66,6 @@ class UIMacros extends MacroSet
 	}
 
 
-
 	/**
 	 * Initializes before template parsing.
 	 * @return void
@@ -81,7 +77,6 @@ class UIMacros extends MacroSet
 	}
 
 
-
 	/**
 	 * Finishes template parsing.
 	 * @return array(prolog, epilog)
@@ -89,9 +84,9 @@ class UIMacros extends MacroSet
 	public function finalize()
 	{
 		// try close last block
-		$last = $this->getCompiler()->getMacroNode();
-		if ($last && ($last->name === 'block' || $last->name === '#')) {
-			$this->getCompiler()->writeMacro('/' . $last->name);
+		try {
+			$this->getCompiler()->writeMacro('/block');
+		} catch (CompileException $e) {
 		}
 
 		$epilog = $prolog = array();
@@ -136,9 +131,7 @@ if (!empty($_control->snippetMode)) {
 	}
 
 
-
 	/********************* macros ****************d*g**/
-
 
 
 	/**
@@ -176,7 +169,6 @@ if (!empty($_control->snippetMode)) {
 	}
 
 
-
 	/**
 	 * {includeblock "file"}
 	 */
@@ -187,20 +179,19 @@ if (!empty($_control->snippetMode)) {
 	}
 
 
-
 	/**
 	 * {extends auto | none | $var | "file"}
 	 */
 	public function macroExtends(MacroNode $node, PhpWriter $writer)
 	{
 		if (!$node->args) {
-			throw new CompileException("Missing destination in {extends}");
+			throw new CompileException('Missing destination in {' . $node->name . '}');
 		}
 		if (!empty($node->parentNode)) {
-			throw new CompileException("{extends} must be placed outside any macro.");
+			throw new CompileException('{' . $node->name . '} must be placed outside any macro.');
 		}
 		if ($this->extends !== NULL) {
-			throw new CompileException("Multiple {extends} declarations are not allowed.");
+			throw new CompileException('Multiple {' . $node->name . '} declarations are not allowed.');
 		}
 		if ($node->args === 'none') {
 			$this->extends = 'FALSE';
@@ -211,7 +202,6 @@ if (!empty($_control->snippetMode)) {
 		}
 		return;
 	}
-
 
 
 	/**
@@ -243,7 +233,7 @@ if (!empty($_control->snippetMode)) {
 				$node->data->leave = TRUE;
 				$node->closingCode = "<?php \$_dynSnippets[\$_dynSnippetId] = ob_get_flush() ?>";
 
-				if ($node->prefix) {
+				if ($node->htmlNode) {
 					$node->attrCode = $writer->write("<?php echo ' id=\"' . (\$_dynSnippetId = \$_control->getSnippetId({$writer->formatWord($name)})) . '\"' ?>");
 					return $writer->write('ob_start()');
 				}
@@ -283,7 +273,7 @@ if (!empty($_control->snippetMode)) {
 		}
 
 		if ($node->name === 'snippet') {
-			if ($node->prefix) {
+			if ($node->htmlNode) {
 				$node->attrCode = $writer->write('<?php echo \' id="\' . $_control->getSnippetId(%var) . \'"\' ?>', (string) substr($name, 1));
 				return $writer->write($prolog . $include, $name);
 			}
@@ -302,7 +292,6 @@ if (!empty($_control->snippetMode)) {
 	}
 
 
-
 	/**
 	 * {/block}
 	 * {/snippet}
@@ -311,7 +300,7 @@ if (!empty($_control->snippetMode)) {
 	public function macroBlockEnd(MacroNode $node, PhpWriter $writer)
 	{
 		if (isset($node->data->name)) { // block, snippet, define
-			if ($node->name === 'snippet' && $node->prefix === MacroNode::PREFIX_NONE // n:snippet -> n:inner-snippet
+			if ($node->name === 'snippet' && $node->htmlNode && !$node->prefix // n:snippet -> n:inner-snippet
 				&& preg_match('#^.*? n:\w+>\n?#s', $node->content, $m1) && preg_match('#[ \t]*<[^<]+\z#s', $node->content, $m2))
 			{
 				$node->openingCode = $m1[0] . $node->openingCode;
@@ -334,7 +323,6 @@ if (!empty($_control->snippetMode)) {
 	}
 
 
-
 	/**
 	 * {ifset #block}
 	 */
@@ -351,15 +339,11 @@ if (!empty($_control->snippetMode)) {
 	}
 
 
-
 	/**
 	 * {control name[:method] [params]}
 	 */
 	public function macroControl(MacroNode $node, PhpWriter $writer)
 	{
-		if ($node->name === 'widget') {
-			trigger_error('Macro {widget} is deprecated; use {control} instead.', E_USER_DEPRECATED);
-		}
 		$pair = $node->tokenizer->fetchWord();
 		if ($pair === FALSE) {
 			throw new CompileException("Missing control name in {control}");
@@ -379,7 +363,6 @@ if (!empty($_control->snippetMode)) {
 	}
 
 
-
 	/**
 	 * {link destination [,] [params]}
 	 * {plink destination [,] [params]}
@@ -391,7 +374,6 @@ if (!empty($_control->snippetMode)) {
 	}
 
 
-
 	/**
 	 * {ifCurrent destination [,] [params]}
 	 */
@@ -400,7 +382,6 @@ if (!empty($_control->snippetMode)) {
 		return $writer->write(($node->args ? 'try { $_presenter->link(%node.word, %node.array?); } catch (Nette\Application\UI\InvalidLinkException $e) {}' : '')
 			. '; if ($_presenter->getLastCreatedRequestFlag("current")):');
 	}
-
 
 
 	/**
@@ -437,7 +418,6 @@ if (!empty($_control->snippetMode)) {
 	}
 
 
-
 	/**
 	 * {status ...}
 	 */
@@ -449,9 +429,7 @@ if (!empty($_control->snippetMode)) {
 	}
 
 
-
 	/********************* run-time writers ****************d*g**/
-
 
 
 	/**
@@ -468,7 +446,6 @@ if (!empty($_control->snippetMode)) {
 	}
 
 
-
 	/**
 	 * Calls parent block.
 	 * @return void
@@ -480,7 +457,6 @@ if (!empty($_control->snippetMode)) {
 		}
 		$block($context, $params);
 	}
-
 
 
 	public static function renderSnippets(Nette\Application\UI\Control $control, \stdClass $local, array $params)

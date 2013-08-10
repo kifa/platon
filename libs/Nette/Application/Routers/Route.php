@@ -16,7 +16,6 @@ use Nette,
 	Nette\Utils\Strings;
 
 
-
 /**
  * The bidirectional route is responsible for mapping
  * HTTP request to a Request object for dispatch and vice-versa.
@@ -111,7 +110,6 @@ class Route extends Nette\Object implements Application\IRouter
 	private $flags;
 
 
-
 	/**
 	 * @param  string  URL mask, e.g. '<presenter>/<action>/<id \d{1,3}>'
 	 * @param  array|string   default values or metadata
@@ -140,7 +138,6 @@ class Route extends Nette\Object implements Application\IRouter
 	}
 
 
-
 	/**
 	 * Maps HTTP request to a Request object.
 	 * @return Nette\Application\Request|NULL
@@ -151,16 +148,9 @@ class Route extends Nette\Object implements Application\IRouter
 
 		// 1) URL MASK
 		$url = $httpRequest->getUrl();
-		$re = $this->re;
 
 		if ($this->type === self::HOST) {
 			$path = '//' . $url->getHost() . $url->getPath();
-			$host = array_reverse(explode('.', $url->getHost()));
-			$re = strtr($re, array(
-				'/%basePath%/' => preg_quote($url->getBasePath(), '#'),
-				'%tld%' => $host[0],
-				'%domain%' => isset($host[1]) ? "$host[1]\\.$host[0]" : $host[0],
-			));
 
 		} elseif ($this->type === self::RELATIVE) {
 			$basePath = $url->getBasePath();
@@ -177,7 +167,7 @@ class Route extends Nette\Object implements Application\IRouter
 			$path = rtrim($path, '/') . '/';
 		}
 
-		if (!$matches = Strings::match($path, $re)) {
+		if (!$matches = Strings::match($path, $this->re)) {
 			// stop, not matched
 			return NULL;
 		}
@@ -237,6 +227,8 @@ class Route extends Nette\Object implements Application\IRouter
 		// 5) BUILD Request
 		if (!isset($params[self::PRESENTER_KEY])) {
 			throw new Nette\InvalidStateException('Missing presenter in route definition.');
+		} elseif (!is_string($params[self::PRESENTER_KEY])) {
+			return NULL;
 		}
 		if (isset($this->metadata[self::MODULE_KEY])) {
 			if (!isset($params[self::MODULE_KEY])) {
@@ -259,7 +251,6 @@ class Route extends Nette\Object implements Application\IRouter
 			array(Application\Request::SECURED => $httpRequest->isSecured())
 		);
 	}
-
 
 
 	/**
@@ -313,9 +304,7 @@ class Route extends Nette\Object implements Application\IRouter
 				}
 			}
 
-			if (!is_scalar($params[$name])) {
-
-			} elseif (isset($meta['filterTable2'][$params[$name]])) {
+			if (is_scalar($params[$name]) && isset($meta['filterTable2'][$params[$name]])) {
 				$params[$name] = $meta['filterTable2'][$params[$name]];
 
 			} elseif (isset($meta['filterTable2']) && !empty($meta[self::FILTER_STRICT])) {
@@ -379,28 +368,6 @@ class Route extends Nette\Object implements Application\IRouter
 		} while (TRUE);
 
 
-		// absolutize path
-		if ($this->type === self::RELATIVE) {
-			$url = '//' . $refUrl->getAuthority() . $refUrl->getBasePath() . $url;
-
-		} elseif ($this->type === self::PATH) {
-			$url = '//' . $refUrl->getAuthority() . $url;
-
-		} else {
-			$host = array_reverse(explode('.', $refUrl->getHost()));
-			$url = strtr($url, array(
-				'/%basePath%/' => $refUrl->getBasePath(),
-				'%tld%' => $host[0],
-				'%domain%' => isset($host[1]) ? "$host[1].$host[0]" : $host[0],
-			));
-		}
-
-		if (strpos($url, '//', 2) !== FALSE) {
-			return NULL; // TODO: implement counterpart in match() ?
-		}
-
-		$url = ($this->flags & self::SECURED ? 'https:' : 'http:') . $url;
-
 		// build query string
 		if ($this->xlat) {
 			$params = self::renameKeys($params, $this->xlat);
@@ -412,9 +379,22 @@ class Route extends Nette\Object implements Application\IRouter
 			$url .= '?' . $query;
 		}
 
+		// absolutize path
+		if ($this->type === self::RELATIVE) {
+			$url = '//' . $refUrl->getAuthority() . $refUrl->getBasePath() . $url;
+
+		} elseif ($this->type === self::PATH) {
+			$url = '//' . $refUrl->getAuthority() . $url;
+		}
+
+		if (strpos($url, '//', 2) !== FALSE) {
+			return NULL; // TODO: implement counterpart in match() ?
+		}
+
+		$url = ($this->flags & self::SECURED ? 'https:' : 'http:') . $url;
+
 		return $url;
 	}
-
 
 
 	/**
@@ -526,9 +506,8 @@ class Route extends Nette\Object implements Application\IRouter
 			array_unshift($sequence, $name);
 
 			if ($name[0] === '?') { // "foo" parameter
-				$name = substr($name, 1);
-				$re = $pattern ? '(?:' . preg_quote($name, '#') . "|$pattern)$re" : preg_quote($name, '#') . $re;
-				$sequence[1] = $name . $sequence[1];
+				$re = '(?:' . preg_quote(substr($name, 1), '#') . '|' . $pattern . ')' . $re;
+				$sequence[1] = substr($name, 1) . $sequence[1];
 				continue;
 			}
 
@@ -610,7 +589,6 @@ class Route extends Nette\Object implements Application\IRouter
 	}
 
 
-
 	/**
 	 * Returns mask.
 	 * @return string
@@ -619,7 +597,6 @@ class Route extends Nette\Object implements Application\IRouter
 	{
 		return $this->mask;
 	}
-
 
 
 	/**
@@ -638,7 +615,6 @@ class Route extends Nette\Object implements Application\IRouter
 	}
 
 
-
 	/**
 	 * Returns flags.
 	 * @return int
@@ -649,9 +625,7 @@ class Route extends Nette\Object implements Application\IRouter
 	}
 
 
-
 	/********************* Utilities ****************d*g**/
-
 
 
 	/**
@@ -682,7 +656,6 @@ class Route extends Nette\Object implements Application\IRouter
 	}
 
 
-
 	/**
 	 * Rename keys in array.
 	 * @param  array
@@ -709,9 +682,7 @@ class Route extends Nette\Object implements Application\IRouter
 	}
 
 
-
 	/********************* Inflectors ****************d*g**/
-
 
 
 	/**
@@ -726,7 +697,6 @@ class Route extends Nette\Object implements Application\IRouter
 		$s = rawurlencode($s);
 		return $s;
 	}
-
 
 
 	/**
@@ -745,7 +715,6 @@ class Route extends Nette\Object implements Application\IRouter
 	}
 
 
-
 	/**
 	 * PascalCase:Presenter name -> dash-and-dot-separated.
 	 * @param  string
@@ -759,7 +728,6 @@ class Route extends Nette\Object implements Application\IRouter
 		$s = rawurlencode($s);
 		return $s;
 	}
-
 
 
 	/**
@@ -778,7 +746,6 @@ class Route extends Nette\Object implements Application\IRouter
 	}
 
 
-
 	/**
 	 * Url encode.
 	 * @param  string
@@ -790,9 +757,7 @@ class Route extends Nette\Object implements Application\IRouter
 	}
 
 
-
 	/********************* Route::$styles manipulator ****************d*g**/
-
 
 
 	/**
@@ -817,7 +782,6 @@ class Route extends Nette\Object implements Application\IRouter
 			static::$styles[$style] = array();
 		}
 	}
-
 
 
 	/**

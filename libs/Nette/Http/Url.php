@@ -14,7 +14,6 @@ namespace Nette\Http;
 use Nette;
 
 
-
 /**
  * URI Syntax (RFC 3986).
  *
@@ -87,7 +86,6 @@ class Url extends Nette\FreezableObject
 	private $fragment = '';
 
 
-
 	/**
 	 * @param  string  URL
 	 * @throws Nette\InvalidArgumentException
@@ -120,11 +118,10 @@ class Url extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Sets the scheme part of URI.
 	 * @param  string
-	 * @return Url  provides a fluent interface
+	 * @return self
 	 */
 	public function setScheme($value)
 	{
@@ -132,7 +129,6 @@ class Url extends Nette\FreezableObject
 		$this->scheme = (string) $value;
 		return $this;
 	}
-
 
 
 	/**
@@ -145,11 +141,10 @@ class Url extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Sets the user name part of URI.
 	 * @param  string
-	 * @return Url  provides a fluent interface
+	 * @return self
 	 */
 	public function setUser($value)
 	{
@@ -157,7 +152,6 @@ class Url extends Nette\FreezableObject
 		$this->user = (string) $value;
 		return $this;
 	}
-
 
 
 	/**
@@ -170,11 +164,10 @@ class Url extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Sets the password part of URI.
 	 * @param  string
-	 * @return Url  provides a fluent interface
+	 * @return self
 	 */
 	public function setPassword($value)
 	{
@@ -182,7 +175,6 @@ class Url extends Nette\FreezableObject
 		$this->pass = (string) $value;
 		return $this;
 	}
-
 
 
 	/**
@@ -195,11 +187,10 @@ class Url extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Sets the host part of URI.
 	 * @param  string
-	 * @return Url  provides a fluent interface
+	 * @return self
 	 */
 	public function setHost($value)
 	{
@@ -207,7 +198,6 @@ class Url extends Nette\FreezableObject
 		$this->host = (string) $value;
 		return $this;
 	}
-
 
 
 	/**
@@ -220,11 +210,10 @@ class Url extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Sets the port part of URI.
 	 * @param  string
-	 * @return Url  provides a fluent interface
+	 * @return self
 	 */
 	public function setPort($value)
 	{
@@ -232,7 +221,6 @@ class Url extends Nette\FreezableObject
 		$this->port = (int) $value;
 		return $this;
 	}
-
 
 
 	/**
@@ -245,11 +233,10 @@ class Url extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Sets the path part of URI.
 	 * @param  string
-	 * @return Url  provides a fluent interface
+	 * @return self
 	 */
 	public function setPath($value)
 	{
@@ -257,7 +244,6 @@ class Url extends Nette\FreezableObject
 		$this->path = (string) $value;
 		return $this;
 	}
-
 
 
 	/**
@@ -270,11 +256,10 @@ class Url extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Sets the query part of URI.
 	 * @param  string|array
-	 * @return Url  provides a fluent interface
+	 * @return self
 	 */
 	public function setQuery($value)
 	{
@@ -284,20 +269,17 @@ class Url extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Appends the query part of URI.
 	 * @param  string|array
-	 * @return Url
+	 * @return void
 	 */
 	public function appendQuery($value)
 	{
 		$this->updating();
 		$value = (string) (is_array($value) ? http_build_query($value, '', '&') : $value);
 		$this->query .= ($this->query === '' || $value === '') ? $value : '&' . $value;
-		return $this;
 	}
-
 
 
 	/**
@@ -310,11 +292,10 @@ class Url extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Sets the fragment part of URI.
 	 * @param  string
-	 * @return Url  provides a fluent interface
+	 * @return self
 	 */
 	public function setFragment($value)
 	{
@@ -322,7 +303,6 @@ class Url extends Nette\FreezableObject
 		$this->fragment = (string) $value;
 		return $this;
 	}
-
 
 
 	/**
@@ -335,18 +315,16 @@ class Url extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Returns the entire URI including query string and fragment.
 	 * @return string
 	 */
 	public function getAbsoluteUrl()
 	{
-		return $this->scheme . '://' . $this->getAuthority() . $this->path
+		return $this->getHostUrl() . $this->path
 			. ($this->query === '' ? '' : '?' . $this->query)
 			. ($this->fragment === '' ? '' : '#' . $this->fragment);
 	}
-
 
 
 	/**
@@ -356,7 +334,7 @@ class Url extends Nette\FreezableObject
 	public function getAuthority()
 	{
 		$authority = $this->host;
-		if ($this->port && isset(self::$defaultPorts[$this->scheme]) && $this->port !== self::$defaultPorts[$this->scheme]) {
+		if ($this->port && (!isset(self::$defaultPorts[$this->scheme]) || $this->port !== self::$defaultPorts[$this->scheme])) {
 			$authority .= ':' . $this->port;
 		}
 
@@ -368,16 +346,14 @@ class Url extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Returns the scheme and authority part of URI.
 	 * @return string
 	 */
 	public function getHostUrl()
 	{
-		return $this->scheme . '://' . $this->getAuthority();
+		return ($this->scheme ? $this->scheme . ':' : '') . '//' . $this->getAuthority();
 	}
-
 
 
 	/**
@@ -391,16 +367,14 @@ class Url extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Returns the base-URI.
 	 * @return string
 	 */
 	public function getBaseUrl()
 	{
-		return $this->scheme . '://' . $this->getAuthority() . $this->getBasePath();
+		return $this->getHostUrl() . $this->getBasePath();
 	}
-
 
 
 	/**
@@ -411,7 +385,6 @@ class Url extends Nette\FreezableObject
 	{
 		return (string) substr($this->getAbsoluteUrl(), strlen($this->getBaseUrl()));
 	}
-
 
 
 	/**
@@ -434,7 +407,7 @@ class Url extends Nette\FreezableObject
 			}
 
 		} else {
-			if ($part !== $this->scheme . '://' . $this->getAuthority() . $this->path) {
+			if ($part !== $this->getHostUrl() . $this->path) {
 				return FALSE;
 			}
 		}
@@ -448,10 +421,9 @@ class Url extends Nette\FreezableObject
 	}
 
 
-
 	/**
 	 * Transform to canonical form.
-	 * @return Url
+	 * @return void
 	 */
 	public function canonicalize()
 	{
@@ -459,9 +431,7 @@ class Url extends Nette\FreezableObject
 		$this->path = $this->path === '' ? '/' : self::unescape($this->path, '%/');
 		$this->host = strtolower(rawurldecode($this->host));
 		$this->query = self::unescape(strtr($this->query, '+', ' '), '%&;=+');
-		return $this;
 	}
-
 
 
 	/**
@@ -471,7 +441,6 @@ class Url extends Nette\FreezableObject
 	{
 		return $this->getAbsoluteUrl();
 	}
-
 
 
 	/**
@@ -493,6 +462,35 @@ class Url extends Nette\FreezableObject
 			}
 		}
 		return $s;
+	}
+
+
+	/** @deprecated */
+	function getRelativeUri()
+	{
+		trigger_error(__METHOD__ . '() is deprecated; use ' . __CLASS__ . '::getRelativeUrl() instead.', E_USER_WARNING);
+		return $this->getRelativeUrl();
+	}
+
+	/** @deprecated */
+	function getAbsoluteUri()
+	{
+		trigger_error(__METHOD__ . '() is deprecated; use ' . __CLASS__ . '::getAbsoluteUrl() instead.', E_USER_WARNING);
+		return $this->getAbsoluteUrl();
+	}
+
+	/** @deprecated */
+	function getHostUri()
+	{
+		trigger_error(__METHOD__ . '() is deprecated; use ' . __CLASS__ . '::getHostUrl() instead.', E_USER_WARNING);
+		return $this->getHostUrl();
+	}
+
+	/** @deprecated */
+	function getBaseUri()
+	{
+		trigger_error(__METHOD__ . '() is deprecated; use ' . __CLASS__ . '::getBaseUrl() instead.', E_USER_WARNING);
+		return $this->getBaseUrl();
 	}
 
 }
