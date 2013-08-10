@@ -24,8 +24,6 @@ $configurator->createRobotLoader()
 $webloaderExtension = new \WebLoader\Nette\Extension();
 $webloaderExtension->install($configurator);
 
-//Bootstrap forms
-Kdyby\BootstrapFormRenderer\DI\RendererExtension::register($configurator);
 
 //Replicator
 Kdyby\Replicator\Container::register();

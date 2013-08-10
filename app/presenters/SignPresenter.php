@@ -3,7 +3,6 @@
 use Nette\Application\UI;
 use Nette\Application\UI\Form;
 use Nette\Utils\Html;
-use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 
 /**
  * Sign in/out presenters.
@@ -34,7 +33,7 @@ class SignPresenter extends BasePresenter {
     
     protected function createComponentSignInForm() {
         $form = new UI\Form;
-        $form->setRenderer(new BootstrapRenderer);
+
         $form->setTranslator($this->translator);
         $form->addText('username', 'Uživatelské jméno:')
                 ->setRequired('Please enter your username.');

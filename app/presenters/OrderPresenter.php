@@ -3,7 +3,6 @@
 use Nette\Forms\Form,
     Nette\Utils\Html;
 use Nette\Mail\Message;
-use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 
 /**
  * Order presenter.
@@ -283,18 +282,17 @@ class OrderPresenter extends BasePresenter {
     protected function createComponentAddNoteForm() {
         
                
-        $editProducts = new Nette\Application\UI\Form;
-        $editProducts->setTranslator($this->translator);
-       // $editProducts->setRenderer(new BootstrapRenderer);
-        $editProducts->addHidden('orderID', $this->orderNo);
-        $editProducts->addHidden('userName', '');
-        $editProducts->addTextArea('note', 'Your Note:')
+        $addNote = new Nette\Application\UI\Form;
+        $addNote->setTranslator($this->translator);
+        $addNote->addHidden('orderID', $this->orderNo);
+        $addNote->addHidden('userName', '');
+        $addNote->addTextArea('note', 'Your Note:')
                 ->setRequired();  
-        $editProducts->addSubmit('add' , 'Add note')
+        $addNote->addSubmit('add' , 'Add note')
                 ->setAttribute('class', 'btn-primary upl')
                     ->setAttribute('data-loading-text', 'Adding...');
-        $editProducts->onSuccess[] = $this->addNoteFormSubmitted;
-        return $editProducts;
+        $addNote->onSuccess[] = $this->addNoteFormSubmitted;
+        return $addNote;
                 
         
     }
@@ -310,8 +308,9 @@ class OrderPresenter extends BasePresenter {
             catch (Exception $e) {
                    \Nette\Diagnostics\Debugger::log($e);
             }
-             
-            $message = Html::el('span', ' Note was sucessfully added!');
+            
+            $text = $this->translator->translate(' Note was sucessfully added!');
+            $message = Html::el('span', $text);
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
             $this->flashMessage($message, 'alert');
@@ -456,9 +455,10 @@ class OrderPresenter extends BasePresenter {
         $this->template->address = $this->orderModel->loadOrderAddress($orderNo);
         $this->template->notes = $this->orderModel->loadOrderNotes($orderNo);
 
+        $text = $this->translator->translate(' Order has been successfully sent.');
 
         $ico = HTML::el('i')->class('icon-ok-sign left');
-        $message = HTML::el('span', ' Order has been successfully sent.');
+        $message = HTML::el('span', $text);
         $message->insert(0, $ico);
         $this->flashMessage($message, 'alert alert-info');
         

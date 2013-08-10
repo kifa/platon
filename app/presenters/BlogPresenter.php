@@ -3,7 +3,6 @@
 use Nette\Forms\Form,
     Nette\Utils\Html,
         Nette\Image;
-use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -74,7 +73,6 @@ class BlogPresenter extends BasePresenter {
             
             
             $addPost = new Nette\Application\UI\Form;
-            //      $addProduct->setRenderer(new BootstrapRenderer);
             $addPost->setTranslator($this->translator);
             $addPost->addText('name', 'Name:')
                     ->setRequired();
@@ -187,7 +185,7 @@ class BlogPresenter extends BasePresenter {
 
             $editForm = new Nette\Application\UI\Form;
             $editForm->setTranslator($this->translator);
-          //  $editForm->setRenderer(new BootstrapRenderer);
+ 
             foreach ($this->categoryModel->loadCategoryListAdmin() as $id => $category) {
                 $categories[$id] = $category->CategoryName;
             }

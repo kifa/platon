@@ -4,7 +4,6 @@ use Nette\Forms\Form,
     Nette\Utils\Html,
     Nette\Image;
 use Nette\Mail\Message;
-use Kdyby\BootstrapFormRenderer\BootstrapRenderer;
 
 /*
  * class ProductPresenter
@@ -161,7 +160,6 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
 
             $addProduct = new Nette\Application\UI\Form;
-      //      $addProduct->setRenderer(new BootstrapRenderer);
             $addProduct->setTranslator($this->translator);
             $addProduct->addText('name', 'Name:')
                     ->setRequired()
@@ -679,7 +677,6 @@ class ProductPresenter extends BasePresenter {
     public function createComponentAddPhotoForm() {
         if ($this->getUser()->isInRole('admin')) {
             $addPhoto = new Nette\Application\UI\Form;
-           // $addPhoto->setRenderer(new BootstrapRenderer);
             $addPhoto->setTranslator($this->translator);
             $addPhoto->addHidden('name', 'name');
             $addPhoto->addHidden('albumID', $this->row['PhotoAlbumID']);
@@ -790,7 +787,6 @@ class ProductPresenter extends BasePresenter {
 
             $priceForm = new Nette\Application\UI\Form;
             $priceForm->setTranslator($this->translator);
-            $priceForm->setRenderer(new BootstrapRenderer);
             $priceForm->addText('price', 'Price:')
                     ->setDefaultValue($this->row['SellingPrice'])
                     ->setRequired()
@@ -880,7 +876,6 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             $editForm = new Nette\Application\UI\Form;
             $editForm->setTranslator($this->translator);
-            $editForm->setRenderer(new BootstrapRenderer());
 
             foreach ($this->productModel->loadUnit('') as $id => $unit) {
                 $units[$id] = $unit->UnitShort;
@@ -924,7 +919,6 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             $addForm = new Nette\Application\UI\Form;
             $addForm->setTranslator($this->translator);
-            $addForm->setRenderer(new BootstrapRenderer);
 
             $options = array();
             $units = array();
@@ -976,7 +970,6 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             $editForm = new Nette\Application\UI\Form;
             $editForm->setTranslator($this->translator);
-            $editForm->setRenderer(new BootstrapRenderer());
             foreach ($this->parameters as $id => $param) {
                 $editForm->addCheckbox($param->ParameterID, $param->AttribName)
                         ->setDefaultValue(FALSE);
