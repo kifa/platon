@@ -188,7 +188,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 }
 
 body {
-    background: url(bg.png) repeat top left grey;
+    background: url('../img/bg.png') repeat top left grey;
 }
 
 .container {

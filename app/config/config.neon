@@ -43,8 +43,6 @@ common:
 
 
 	factories:
-
-
 production < common:
 
 development < common:

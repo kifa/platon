@@ -161,6 +161,50 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
             return $base;
     }
     
+    public function createComponentCss() {
+    // připravíme seznam souborů
+    // FileCollection v konstruktoru může dostat výchozí adresář, pak není potřeba psát absolutní cesty
+        $wwwDir = $this->context->parameters['wwwDir'];
+    $files = new \WebLoader\FileCollection($wwwDir . '/css');
+    $files->addFiles(array(
+        'screen.css',
+        'print.css',
+        'bootstrap.min.css',
+        'bootstrap-responsive.min.css',
+        'flag.css',
+        'font-awesome-ie7.min.css',
+        'font-awesome.min.css',
+        '/user/theme.css'
+    ));
+
+    // kompilátoru seznam předáme a určíme adresář, kam má kompilovat
+    $compiler = \WebLoader\Compiler::createCssCompiler($files, $wwwDir . '/webtemp');
+
+    // nette komponenta pro výpis <link>ů přijímá kompilátor a cestu k adresáři na webu
+    return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
+    }
+    
+    public function createComponentJs() {
+    $wwwDir = $this->context->parameters['wwwDir'];
+    $files = new \WebLoader\FileCollection($wwwDir . '/js');
+    // můžeme načíst i externí js
+    $files->addRemoteFile('http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js');
+    $files->addFiles(array(
+        'netteForms.js',
+        'bootstrap.min.js',
+        'live-form-validation.js',
+        'nette.ajax.js',
+        'main.js',
+        'imgLiquid-min.js',
+        'jquery.wysiwyg.js',
+        'jquery.jeditable.mini.js',
+        'jquery.jeditable.wysiwyg.js'));
+
+    $compiler = \WebLoader\Compiler::createJsCompiler($files, $wwwDir . '/webtemp');
+
+    return new \WebLoader\Nette\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
+    }
+    
     protected function createComponentMenu() {
         $menuControl = new MenuControl();
         $menuControl->setCart($this->cart);

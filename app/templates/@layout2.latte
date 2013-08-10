@@ -5,18 +5,13 @@
         <title>{block #title|striptags|trim|strip} {/block} {$shopName}</title>
         <meta name="description" content="{block #metadesc|striptags|strip|trim} {$shopDescription} {/block}">
         <meta name="robots" content="{$robots}" n:ifset="$robots">
-        <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/css/screen.css">
-        <link rel="stylesheet" media="print" href="{$basePath}/css/print.css">
-        <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap.min.css">
-        <link rel="stylesheet" media="screen" href="{$basePath}/css/bootstrap-responsive.min.css">
+       
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{$basePath}/css/font-awesome.min.css">
-        <link rel="stylesheet" href="{$basePath}/css/bootstrap-lightbox.min.css">
-        <link rel="stylesheet" href="{$basePath}/css/user/theme.css">
-        <link rel="stylesheet" href="{$basePath}/css/flag.css">
+        
+        {control css}
+        
         <link rel="shortcut icon" href="{$basePath}/favicon.ico">
-        <link rel="stylesheet" media="screen" href="{$basePath}/css/jquery.wysiwyg.css">
-
+       
         {ifCurrent Order:cart}
                 <script src="{$basePath}/js/jquery.js"></script>
                 {/ifCurrent}
@@ -188,25 +183,8 @@
     </div>	
                 
 {block scripts}
-            {ifCurrent Order:cart}
-
-            {else}
-        <script src="{$basePath}/js/jquery.js"></script>
-                    {/ifCurrent}
-
-        <script src="{$basePath}/js/netteForms.js"></script>
-
-        <script src="{$basePath}/js/bootstrap.min.js"></script>
-        <script src="{$basePath}/js/live-form-validation.js"></script>
-
-        <script src="{$basePath}/js/imgLiquid-min.js"></script>
-
-        <script src="{$basePath}/js/nette.ajax.js"></script> 
-        <script src="{$basePath}/js/main.js"></script>
-
-        <script src="{$basePath}/js/jquery.wysiwyg.js"></script>
-        <script src="{$basePath}/js/jquery.jeditable.mini.js"></script>
-        <script src="{$basePath}/js/jquery.jeditable.wysiwyg.js"></script>
+        
+        {control js}
 
         {include 'components/GA.latte', GA => $GA}
         <script>

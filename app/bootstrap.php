@@ -21,6 +21,9 @@ $configurator->createRobotLoader()
 	->addDirectory(__DIR__ . '/../libs')
 	->register();
 
+$webloaderExtension = new \WebLoader\Nette\Extension();
+$webloaderExtension->install($configurator);
+
 //Bootstrap forms
 Kdyby\BootstrapFormRenderer\DI\RendererExtension::register($configurator);
 
