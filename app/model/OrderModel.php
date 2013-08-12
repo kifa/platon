@@ -111,7 +111,7 @@ class OrderModel extends Repository {
         
         $insert =  array(
             'OrderID' => $id,
-            'NotesDate' => date("Y-m-d"),
+            'NotesDate' => date("Y-m-d H:i:s"),
             'NotesName' => $name,
             'NotesDescription' => $note
         );
@@ -125,7 +125,7 @@ class OrderModel extends Repository {
      */
     public function insertOrder($user, $price, $delivery, $payment, $note)
     {                 
-            $today = date("Y-m-d");
+            $today = date("Y-m-d H:i:s");
             
             $deliveryprice = $this->loadDeliveryPrice($delivery);            
             $paymentprice = $this->loadPaymentPrice($payment);
@@ -164,7 +164,7 @@ class OrderModel extends Repository {
     
     public function updateOrder($orderid, $shipping, $payment=NULL) {
         
-        $today = date("Y-m-d");
+        $today = date("Y-m-d H:i:s");
         
         if($payment!=NULL){
             $paymentPrice = $this->loadPaymentPrice($payment);
@@ -196,7 +196,7 @@ class OrderModel extends Repository {
     
     public function updateOrderProducts($orderid, $product, $newProduct, $delivery, $payment, $products) {
        
-        $today = date("Y-m-d");
+        $today = date("Y-m-d H:i:s");
         
         //recalculating order
         $deliveryPrice = $this->loadDeliveryPrice($delivery);
@@ -232,6 +232,20 @@ class OrderModel extends Repository {
         
     }
     
+    public function loadUnreadOrder(){
+        return $this->getTable('orders')->select('orders.*,delivery.*,payment.*,users.*,status.*')
+                ->where('orders.Readed = 0')
+                ->order('orders.OrderID DESC')->fetchPairs('OrderID');
+    }
+
+    public function updateOrderRead($orderid, $value){
+        $update = array(
+            'Readed' => $value
+        );
+        
+        return $this->getTable('orders')->where('OrderID',$orderid)->update($update);
+    }
+
     public function removeOrderProducts($orderid, $product) {
         $price = $this->removeOrderDetail($orderid, $product);
         
@@ -422,10 +436,6 @@ class OrderModel extends Repository {
                 ->where('status.StatusName = "active"')
                 ->fetchPairs('DeliveryID');
     }
-    
-    
-
-    
     
     public function loadDeliveryPrice($id){
         //return $this->getTable('delivery')->select('DeliveryPrice')->where('DeliveryID',$id)->fetch();
