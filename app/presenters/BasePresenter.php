@@ -24,9 +24,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     private $categoryModel;
     private $productModel;
     private $blogModel;
+    
     private $cart;
+    protected $usertracking;
+
 
     private $orderModel;
+    
 
 
     public $backlink;
@@ -46,6 +50,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->blogModel = $this->context->blogModel;
         $salt = $this->shopModel->getShopInfo('Salt');
         $this->cart = $this->getSession('cart'.$salt);
+        $salt = md5($this->getUser()->getId());
+        $this->usertracking = $this->getSession('user'.$salt);
     }
     
     public function injectProductModel(ProductModel $productModel) {
@@ -215,6 +221,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $menuControl->setBlog($this->blogModel);
         $menuControl->setTranslator($this->translator);
         $menuControl->setShop($this->shopModel);
+        $menuControl->setUserTracking($this->usertracking);
         return $menuControl;
     }
     
