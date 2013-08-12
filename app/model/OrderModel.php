@@ -232,7 +232,7 @@ class OrderModel extends Repository {
         
     }
     
-    public function loadUnreadOrder(){
+    public function loadUnreadOrders(){
         return $this->getTable('orders')->select('orders.*,delivery.*,payment.*,users.*,status.*')
                 ->where('orders.Readed = 0')
                 ->order('orders.OrderID DESC')->fetchPairs('OrderID');
