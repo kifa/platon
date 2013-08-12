@@ -44,7 +44,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->categoryModel = $this->context->categoryModel;
         $this->orderModel = $this->context->orderModel;
         $this->blogModel = $this->context->blogModel;
-        $this->cart = $this->getSession('cart');
+        $salt = $this->shopModel->getShopInfo('Salt');
+        $this->cart = $this->getSession('cart'.$salt);
     }
     
     public function injectProductModel(ProductModel $productModel) {

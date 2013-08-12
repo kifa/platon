@@ -36,7 +36,8 @@ class OrderPresenter extends BasePresenter {
         $this->productModel = $this->context->productModel;
         $this->shopModel = $this->context->shopModel;
         $this->userModel = $this->context->userModel;
-        $this->cart = $this->getSession('cart');
+        $salt = $this->shopModel->getShopInfo('Salt');
+        $this->cart = $this->getSession('cart'.$salt);
         
        
     }
