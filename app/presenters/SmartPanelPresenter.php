@@ -1268,6 +1268,8 @@ class SmartPanelPresenter extends BasePresenter {
         if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
         } else {
+            $this->usertracking->date = date("Y-m-d H:i:s");
+            
             $this->template->usr = $this->getUser()->getIdentity();
             $this->template->ord = $this->orderModel->countOrder();
             $this->template->orders = $this->orderModel->loadOrders();

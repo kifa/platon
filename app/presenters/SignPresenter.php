@@ -66,6 +66,7 @@ class SignPresenter extends BasePresenter {
 			return;
 		}
 
+                $this->usertracking->date = date("Y-m-d H:i:s");
 		$this->redirect('SmartPanel:default'); 
     }
 
