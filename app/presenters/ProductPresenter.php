@@ -1107,6 +1107,7 @@ class ProductPresenter extends BasePresenter {
         $this->template->album = $this->productModel->loadPhotoAlbum($id);
         $this->template->parameter = $this->productModel->loadParameters($id);
         $this->template->slider = NULL;
+        $this->template->shippingPrice = $this->productModel->loadCheapestDelivery();
         $this->template->docs = $this->productModel->loadDocumentation($id)->fetchPairs('DocumentID');
 
     }

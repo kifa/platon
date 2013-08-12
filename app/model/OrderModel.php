@@ -423,12 +423,7 @@ class OrderModel extends Repository {
                 ->fetchPairs('DeliveryID');
     }
     
-    public function loadCheapestDelivery(){
-        $delivery = $this->getTable('delivery')->select('DeliveryPrice')->where('DeliveryPrice != "0"')->order('DeliveryPrice')->fetch();
-        
-        return $delivery[0];
-    }
-
+    
 
     
     
