@@ -246,6 +246,10 @@ class OrderModel extends Repository {
         return $this->getTable('orders')->where('OrderID',$orderid)->update($update);
     }
 
+    public function loadUnreadOrderCount($date){
+        return $this->getTable('orders')->where('DateCreated>',$date)->count();
+    }
+
     public function removeOrderProducts($orderid, $product) {
         $price = $this->removeOrderDetail($orderid, $product);
         
