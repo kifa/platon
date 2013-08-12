@@ -158,8 +158,8 @@ class OrderModel extends Repository {
                 'IP' => NULL,
                 'SessionID' => NULL
             );
-            $lastID = $this->getTable('orders')->insert($insert);
-            return $lastID['OrderID'];
+           
+            return $this->getTable('orders')->insert($insert); /*$lastID =  $lastID['OrderID']; */
     }
     
     public function updateOrder($orderid, $shipping, $payment=NULL) {

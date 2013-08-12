@@ -826,14 +826,16 @@ class ProductPresenter extends BasePresenter {
             $askForm = new Nette\Application\UI\Form;
             $askForm->setTranslator($this->translator);
             $askForm->addTextArea('note', 'Question:', 7, 4)
+                    ->setAttribute('class', 'span11')
                     ->setRequired('Please enter your question.');
             $askForm->addText('email', 'Email:')
                     ->setEmptyValue('@')
                     ->addRule(Form::EMAIL, 'Would you fill your email, please?')
-                    ->setRequired('Please fill your email.');
+                    ->setRequired('Please fill your email.')
+                    ->setAttribute('class', 'span11');
             $askForm->addHidden('name', $this->row['ProductName']);
             $askForm->addSubmit('ask', 'Ask')
-                    ->setAttribute('class', 'btn btn-primary span2')
+                    ->setAttribute('class', 'btn btn-primary span5')
                     ->setHtmlId('askButton')
                     ->setAttribute('data-loading-text', 'Asking...');
             $askForm->onSuccess[] = $this->askFormSubmitted;
@@ -850,7 +852,7 @@ class ProductPresenter extends BasePresenter {
         $e = HTML::el('span', $message);
         $ico = HTML::el('i')->class('icon-ok-sign left');
         $e->insert(0, $ico);
-        $this->flashMessage($e, 'alert alert-info');
+        $this->flashMessage($e, 'alert alert-success');
          
         if($this->isAjax()){
             
@@ -1099,6 +1101,7 @@ class ProductPresenter extends BasePresenter {
             $this->template->producers = $this->productModel->loadProducers();
        }
         
+        
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->photo = $this->productModel->loadCoverPhoto($id);
         $this->template->album = $this->productModel->loadPhotoAlbum($id);
@@ -1123,6 +1126,7 @@ class ProductPresenter extends BasePresenter {
     
     protected function sendAskMail($email, $note, $name) {
         
+            $contactMail = $this->shopModel->getShopInfo('ContactMail');
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/askMail.latte');
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
@@ -1132,7 +1136,7 @@ class ProductPresenter extends BasePresenter {
             $template->product = $name; 
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail('luk.danek@gmail.com', 'Nový dotaz k produktu' . $this->row['ProductName'], $template);
+            $mailIT->sendSuperMail($contactMail, 'Nový dotaz k produktu' . $this->row['ProductName'], $template, $email);
     }
 
 }

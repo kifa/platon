@@ -172,6 +172,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         'print.css',
         'bootstrap.min.css',
         'bootstrap-responsive.min.css',
+        'jquery.wysiwyg.css',
         'flag.css',
         'font-awesome-ie7.min.css',
         'font-awesome.min.css',

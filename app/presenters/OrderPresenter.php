@@ -22,7 +22,7 @@ class OrderPresenter extends BasePresenter {
     private $userModel;
     
     /* @var int */
-    private $orderNo;
+    private $orderid;
     
     /* @var Session */
     private $cart;
@@ -285,7 +285,7 @@ class OrderPresenter extends BasePresenter {
                
         $addNote = new Nette\Application\UI\Form;
         $addNote->setTranslator($this->translator);
-        $addNote->addHidden('orderID', $this->orderNo);
+        $addNote->addHidden('orderID', $this->orderid);
         $addNote->addHidden('userName', '');
         $addNote->addTextArea('note', 'Your Note:')
                 ->setRequired();  
@@ -376,13 +376,16 @@ class OrderPresenter extends BasePresenter {
         }
         
         //STEP 3 - insert order info, assign customer
-        $orderNo = $this->orderModel->insertOrder(
+        $order = $this->orderModel->insertOrder(
                 $form->values->email,
                 $total,
                 $form->values->shipping,
                 $form->values->payment,
                 $form->values->note
         );
+        
+        $orderid = $order->OrderID;
+        
 
         //STEP 4 - insert Order Details and assign them to Order
         foreach ($this->cart->prd as $id => $amnt) {
@@ -390,14 +393,37 @@ class OrderPresenter extends BasePresenter {
             $price = $this->productModel->loadProduct($id)->FinalPrice;
             $amnt = $this->cart->prd[$id];
             $this->orderModel->insertOrderDetails(
-                    $orderNo,
+                    $orderid,
                     $id,
                     $amnt,
                     $price);
            }
            
         //STEP 5 - redirect to Order Summary
-        $this->redirect('Order:orderDone', $orderNo);
+           
+           try {
+                    $this->sendOrderDoneMail($orderid);
+                }
+            catch (Exception $e) {
+                   \Nette\Diagnostics\Debugger::log($e);
+            }
+            
+            try {
+                    $this->sendAdminOrderDoneMail($orderid);
+                }
+            catch (Exception $e) {
+                   \Nette\Diagnostics\Debugger::log($e);
+            }
+            foreach ($this->cart->prd as $id => $amnt) {
+
+                $this->productModel->decreaseProduct($id, $this->cart->prd[$id]);
+               }
+
+            unset($this->cart->prd);
+            $this->cart->numberItems = 0;
+            $track = md5($form->values->email . $orderid . $order->DateCreated);
+        
+            $this->redirect('Order:orderDone', $orderid, $track);
     }
 
     /*
@@ -420,23 +446,18 @@ class OrderPresenter extends BasePresenter {
     
    
 
-    public function actionOrderDone($orderNo, $track = NULL) {
-       if($track == NULL) {
-            try {
-                    $this->sendOrderDoneMail($orderNo);
-                }
-            catch (Exception $e) {
-                   \Nette\Diagnostics\Debugger::log($e);
-            }
-            
-            try {
-                    $this->sendAdminOrderDoneMail($orderNo);
-                }
-            catch (Exception $e) {
-                   \Nette\Diagnostics\Debugger::log($e);
-            }
-       } 
-       $this->orderNo = $orderNo;
+    public function actionOrderDone($orderid, $track) {
+        $row = $this->orderModel->loadOrder($orderid);
+        if($track !== md5($row->UsersID . $row->OrderID . $row->DateCreated)){
+             $text = $this->translator->translate(' Your password is incorrect. Please try again.');
+            $message = HTML::el('span', $text);
+            $message->insert(0, $e);
+            $this->flashMessage($message, 'alert');
+            $this->redirect('this');
+        }
+        else {
+       $this->orderid = $orderid;
+        }
     }
     
     protected function createComponentMail() {
@@ -448,13 +469,13 @@ class OrderPresenter extends BasePresenter {
         return $mailControl;
     }
 
-    public function renderOrderDone($orderNo, $track = NULL) {
+    public function renderOrderDone($orderid, $track) {
 
-        $this->template->products = $this->orderModel->loadOrderProduct($orderNo);
-        $this->template->order = $this->orderModel->loadOrder($orderNo);
+        $this->template->products = $this->orderModel->loadOrderProduct($orderid);
+        $this->template->order = $this->orderModel->loadOrder($orderid);
         $this->template->statuses = $this->orderModel->loadStatus('');
-        $this->template->address = $this->orderModel->loadOrderAddress($orderNo);
-        $this->template->notes = $this->orderModel->loadOrderNotes($orderNo);
+        $this->template->address = $this->orderModel->loadOrderAddress($orderid);
+        $this->template->notes = $this->orderModel->loadOrderNotes($orderid);
 
         $text = $this->translator->translate(' Order has been successfully sent.');
 
@@ -463,19 +484,9 @@ class OrderPresenter extends BasePresenter {
         $message->insert(0, $ico);
         $this->flashMessage($message, 'alert alert-info');
         
-        if($track == NULL) {
-            foreach ($this->cart->prd as $id => $amnt) {
-
-                $this->productModel->decreaseProduct($id, $this->cart->prd[$id]);
-               }
-
-            unset($this->cart->prd);
-            $this->cart->numberItems = 0;
-            $this->template->track = NULL;
-        }
-        else{
+       
             $this->template->track = 1;
-        }
+        
     }
    
     /*
@@ -501,6 +512,7 @@ class OrderPresenter extends BasePresenter {
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->orderId = $orderid;
             $template->mailOrder = $row->UsersID;
+            $template->pass = md5($row->UsersID . $row->OrderID . $row->DateCreated);
             
             $mailIT = new mailControl();
             $mailIT->sendSuperMail($row->UsersID, 'Zpráva k Vaší ojednávce', $template, $adminMail);
@@ -516,6 +528,7 @@ class OrderPresenter extends BasePresenter {
             $template->orderId = $orderid;
             $template->customer = $row->Name;
             $template->mailOrder = $row->UsersID;
+            $template->finalprice = $row->TotalPrice;
             if($row->Note !== NULL) {
                 $template->note = $row->Note;
             }

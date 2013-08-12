@@ -291,13 +291,13 @@ class BlogPresenter extends BasePresenter {
     
     
     
-    public function renderCategory($id,$postid) {
-        $this->template->category = $this->blog->loadCategory($id);
-        if($id == NULL) {
+    public function renderCategory($blogid,$postid) {
+        $this->template->category = $this->blog->loadCategory($blogid);
+        if($blogid == NULL) {
         $this->template->posts = $this->blog->loadPosts();
         }
         else {
-            $this->template->posts = $this->blog->loadPosts($id);                     
+            $this->template->posts = $this->blog->loadPosts($blogid);                     
         }
         
     }
@@ -431,21 +431,21 @@ class BlogPresenter extends BasePresenter {
         }
     }
     
-    public function actionStaticText($postid) {
+    public function actionStaticText($spostid) {
 
          if ($this->getUser()->isInRole('admin')) {
-                $this->row2 = $this->shopModel->loadPhotoAlbumStatic($postid);
+                $this->row2 = $this->shopModel->loadPhotoAlbumStatic($spostid);
 
                 $addPhotoStaticForm = $this['addPhotoStaticForm'];
             }
     }
     
-    public function renderStaticText($postid) {
+    public function renderStaticText($spostid) {
         if ($this->getUser()->isInRole('admin')) {
-            $this->template->album = $this->blog->loadPhotoAlbumStatic($postid);
+            $this->template->album = $this->blog->loadPhotoAlbumStatic($spostid);
         }     
         $this->template->albumID = $this->row2;
-        $this->template->post = $this->shopModel->loadStaticText($postid);
+        $this->template->post = $this->shopModel->loadStaticText($spostid);
     }
         
 }

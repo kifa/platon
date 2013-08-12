@@ -113,6 +113,8 @@ class MenuControl extends BaseControl {
         $this->template->producers = $this->productModel->loadProducers();
       //  $this->template->menuItems = $this->ShopModel->getMenu();
         $this->template->img = $img;
+        $this->template->menu = $this->loadStaticMenu();
+        $this->template->lang = $this->lang;
         $this->template->render();
     }
     

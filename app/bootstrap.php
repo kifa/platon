@@ -50,20 +50,23 @@ Route::setStyleProperty('slug', Route::FILTER_IN, function($url) {
     return Strings::webalize($url);
 });
 
-$router[] = new Route('<catID>-<slug>[/<lang>]', 'Product:products');
+$router[] = new Route('<catID>[-<slug>][/<lang [a-z]{2}>]', 'Product:products');
 
-$router[] = new Route('koupit/<id>[-<slug>][/<lang>]', 'Product:product');
-$router[] = new Route('koupit/<id>[/<lang>]', 'Product:product');
-$router[] = new Route('novinky/<id>-<slug>[/<lang>]', 'Blog:posts');
-$router[] = new Route('novinky/clanek/<postid>[-<slug>][/<lang>]', 'Blog:post');
-$router[] = new Route('kosik[/<lang>]', 'Order:cart');
-$router[] = new Route('objednavka-dokoncena/<orderNO>[/<lang>]', 'Order:cartDone');
-$router[] = new Route('objednavka[/<lang>]', 'Order:default');
-$router[] = new Route('prihlaseni[/<lang>]', 'Sign:in');
-$router[] = new Route('informace/<postid>-<slug>[/<lang>]', 'Blog:staticText');
+$router[] = new Route('koupit/<id>[-<slug>][/<lang [a-z]{2}>]', 'Product:product');
+$router[] = new Route('koupit/<id>[/<lang [a-z]{2}>]', 'Product:product');
+$router[] = new Route('novinky/<blogid>-<slug>[/<lang [a-z]{2}>]', 'Blog:posts');
+$router[] = new Route('novinky/clanek/<postid>[-<slug>][/<lang [a-z]{2}>]', 'Blog:post');
+
+$router[] = new Route('objednavka-dokoncena/<orderid>-<track>[/<lang [a-z]{2}>]', 'Order:orderDone');
+
+$router[] = new Route('kosik/<action>[/<lang [a-z]{2}>]', 'Order:cart');
+
+$router[] = new Route('objednavka[/<lang [a-z]{2}>]', 'Order:default');
+
+$router[] = new Route('informace/<spostid>-<slug>[/<lang [a-z]{2}>]', 'Blog:staticText');
 
 $router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
-$router[] = new Route('<presenter>/<action>[/<id>][/<lang>]', 'Homepage:default');
+$router[] = new Route('<presenter>/<action>[/<id>][/<lang [a-z]{2}>]', 'Homepage:default');
 
 $container->addService('router', $router);
 

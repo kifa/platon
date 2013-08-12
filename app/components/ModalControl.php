@@ -56,6 +56,8 @@ class ModalControl extends BaseControl {
                 ->setRequired();
         $trackingForm->addText('order', 'Your order number:')
                 ->setRequired();
+        $trackingForm->addText('pass', 'Your secret code:')
+                ->setRequired('Please enter your secret code from mail');
         $trackingForm->addSubmit('track', 'Track order')
                 ->setAttribute('class', 'btn btn-primary')
                 ->setHtmlId('track');
@@ -68,19 +70,28 @@ class ModalControl extends BaseControl {
         $e = Html::el('i')->class('icon-warning-sign');
         
         if (!$row) {
-            $message = HTML::el('span', ' Order not found. Please try again!');
+            $text = $this->translator->translate(' Order not found. Please try again!');
+            $message = HTML::el('span', $text);
             $message->insert(0, $e);
             $this->presenter->flashMessage($message, 'alert');
             $this->presenter->redirect('this');
         }
         elseif ($row->UsersID !== $form->values->user) {
-            $message = HTML::el('span',' Email not found. Please try again!');
+            $text = $this->translator->translate(' Email not found. Please try again!');
+            $message = HTML::el('span', $text);
+            $message->insert(0, $e);
+            $this->presenter->flashMessage($message, 'alert');
+            $this->presenter->redirect('this');
+        }
+        elseif (md5($row->UsersID . $row->OrderID . $row->DateCreated ) !== $form->values->pass) {
+            $text = $this->translator->translate(' Your password is incorrect. Please try again.');
+            $message = HTML::el('span', $text);
             $message->insert(0, $e);
             $this->presenter->flashMessage($message, 'alert');
             $this->presenter->redirect('this');
         }
         else  {
-            $this->presenter->redirect('Order:orderDone', $form->values->order, 1);
+            $this->presenter->redirect('Order:orderDone', $row->OrderID, $form->values->pass);
         }        
     }
     /*
