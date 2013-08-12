@@ -34,7 +34,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
             return $this->getDB()->query('SELECT * FROM product JOIN price ON 
             price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-            WHERE photo.CoverPhoto="1" and product.ProductStatusID="2" and product.CategoryID=? ORDER BY ',$catID, 'price.FinalPrice ASC');
+            WHERE photo.CoverPhoto="1" and product.ProductStatusID="2" and product.CategoryID=?',$catID);
             
 
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
