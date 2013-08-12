@@ -57,11 +57,7 @@ $router[] = new Route('koupit/<id>[/<lang [a-z]{2}>]', 'Product:product');
 $router[] = new Route('novinky/<blogid>-<slug>[/<lang [a-z]{2}>]', 'Blog:posts');
 $router[] = new Route('novinky/clanek/<postid>[-<slug>][/<lang [a-z]{2}>]', 'Blog:post');
 
-$router[] = new Route('objednavka-dokoncena/<orderid>-<track>[/<lang [a-z]{2}>]', 'Order:orderDone');
 
-$router[] = new Route('kosik/<action>[/<lang [a-z]{2}>]', 'Order:cart');
-
-$router[] = new Route('objednavka[/<lang [a-z]{2}>]', 'Order:default');
 
 $router[] = new Route('informace/<spostid>-<slug>[/<lang [a-z]{2}>]', 'Blog:staticText');
 

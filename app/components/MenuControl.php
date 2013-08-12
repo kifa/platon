@@ -157,7 +157,6 @@ class MenuControl extends BaseControl {
         $this->template->setFile(__DIR__ . '/MenuTopControl.latte');
         $this->template->cart = $this->cart->numberItems;
         $news = $this->orderModel->loadUnreadOrdersCount($this->usertracking->date);
-        
         $this->template->news = $news;
         $this->template->render();
     }

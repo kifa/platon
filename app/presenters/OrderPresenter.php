@@ -451,7 +451,8 @@ class OrderPresenter extends BasePresenter {
         if($track !== md5($row->UsersID . $row->OrderID . $row->DateCreated)){
              $text = $this->translator->translate(' Your password is incorrect. Please try again.');
             $message = HTML::el('span', $text);
-            $message->insert(0, $e);
+            $ico = HTML::el('i')->class('icon-ok-sign left');
+            $message->insert(0, $ico);
             $this->flashMessage($message, 'alert');
             $this->redirect('this');
         }
