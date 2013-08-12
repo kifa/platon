@@ -19,6 +19,7 @@ class MenuControl extends BaseControl {
     private $blogModel;
     private $shopModel;
     private $usertracking;
+    private $orderModel;
 
 
 
@@ -48,6 +49,9 @@ class MenuControl extends BaseControl {
         $this->usertracking = $usertracking;
     }
 
+    public function setOrder($order) {
+        $this->orderModel = $order;
+    }
 
     public function setShop($shop) {
         $this->shopModel = $shop;
@@ -152,8 +156,9 @@ class MenuControl extends BaseControl {
     public function renderTop() {
         $this->template->setFile(__DIR__ . '/MenuTopControl.latte');
         $this->template->cart = $this->cart->numberItems;
+        $news = $this->orderModel->loadUnreadOrdersCount($this->usertracking->date);
         
-        $this->usertracking->date;
+        $this->template->news = $news;
         $this->template->render();
     }
     

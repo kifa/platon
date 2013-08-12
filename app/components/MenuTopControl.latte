@@ -2,7 +2,7 @@
     <div class="{if $user->isInRole('admin')}span6{else} span12{/if}  alert alert-info">
         {if $user->isInRole('admin')}
         {_'Hello'} <strong>{$user->id}!</strong> <br><a href="{plink SmartPanel:}"><i class="icon-lightbulb"></i> SmartPanel</a> | 
-        <a href="{plink SmartPanel:default}">{_"News"} <span class="badge badge-info"><i class="icon-envelope"></i> 2</span></a> |
+        <a href="{plink SmartPanel:default}">{_"News"} <span class="badge badge-info"><i class="icon-envelope"></i> {$news}</span></a> |
         <a href="{plink Sign:out}">{_"Logout"} <i class="icon-signout"></i></a>
         
         {else}

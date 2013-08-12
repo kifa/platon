@@ -246,7 +246,7 @@ class OrderModel extends Repository {
         return $this->getTable('orders')->where('OrderID',$orderid)->update($update);
     }
 
-    public function loadUnreadOrderCount($date){
+    public function loadUnreadOrdersCount($date){
         return $this->getTable('orders')->where('DateCreated>',$date)->count();
     }
 

@@ -185,6 +185,7 @@ class SmartPanelPresenter extends BasePresenter {
                                     'TotalProducts' => $row->ProductsPrice,
                                      'Note' => $row->Note);
             $adress = $this->orderModel->loadOrderAddress($orderid);
+            
             $this->orderAddress = array('Street' => $adress->Street,
                                        'ZIPCode' => $adress->ZIPCode,
                                        'City' => $adress->City);
@@ -551,6 +552,7 @@ class SmartPanelPresenter extends BasePresenter {
         if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
         } else {
+            $this->orderModel->updateOrderRead($orderid, 1);
             $this->template->products = $this->orderModel->loadOrderProduct($orderid);
             $this->template->order = $this->orderModel->loadOrder($orderid);
             $this->template->statuses = $this->orderModel->loadStatus('');
@@ -1272,7 +1274,7 @@ class SmartPanelPresenter extends BasePresenter {
             
             $this->template->usr = $this->getUser()->getIdentity();
             $this->template->ord = $this->orderModel->countOrder();
-            $this->template->orders = $this->orderModel->loadOrders();
+            $this->template->orders = $this->orderModel->loadUnreadOrders();
             $this->template->settings = $this->shopModel->getShopInfoPublic();
             $this->template->productNumber = $this->productModel->countProducts();
             $this->template->anyVariable = 'any value';

@@ -18,21 +18,23 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Date</th>
-                    <th>Customer</th>
-                    <th>Total Payment</th>
-                    <th>Status</th>
+                    <th>{_'Date'}</th>
+                    <th>{_'Customer'}</th>
+                    <th>{_'Total Payment'}</th>
+                    <th>{_'Status'}</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 {foreach $orders as $id => $order}
                 
-                <tr class="{if $order->StatusID == 10} success {elseif $order->StatusID == 2} info {elseif $order->StatusID == 0} grey {else} warning {/if}">
+                <tr class="{if $order->StatusProgress == 10} success {elseif $order->StatusProgress >= 5} info {elseif $order->StatusProgress == 0} grey {else} warning {/if}">
                     <td>{$id}</td>
                     <td>{$order->DateCreated|date:'%d.%m.%Y'}</td>
                     <td><a href="{plink SmartPanel:orderDetail $id}">{$order->Name}</a></td>
                     <td>{$order->TotalPrice},-</td>
                     <td><i class="{if $order->StatusProgress == 10}icon-ok {elseif $order->StatusProgress == 0} icon-ban-circle {else} icon-spinner icon-spin{/if} left"></i> {$order->StatusName}</td>
+                    <td>{if $order->Read == 0}<i class="icon-flag"></i>{/if}</td>
                 </tr>
                 
                 {/foreach}
