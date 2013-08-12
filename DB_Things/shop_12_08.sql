@@ -389,7 +389,7 @@ CREATE TABLE `orders` (
   `Note` longtext,
   `IP` varchar(15) DEFAULT NULL,
   `SessionID` int(11) DEFAULT NULL,
-  `Readed` bit(1) DEFAULT b'0',
+  `Read` bit(1) DEFAULT b'0',
   PRIMARY KEY (`OrderID`),
   KEY `StatusID_idx` (`StatusID`),
   KEY `DeliveryID_idx` (`DeliveryID`),
@@ -401,7 +401,7 @@ CREATE TABLE `orders` (
   CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`UsersID`) REFERENCES `users` (`UsersID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `orders` (`OrderID`, `StatusID`, `UsersID`, `ProductsPrice`, `DeliveryPaymentPrice`, `TaxPrice`, `PriceWithoutTax`, `TotalPrice`, `DateCreated`, `DateOfLastChange`, `DateFinished`, `DeliveryID`, `PaymentID`, `Note`, `IP`, `SessionID`, `Readed`) VALUES
+INSERT INTO `orders` (`OrderID`, `StatusID`, `UsersID`, `ProductsPrice`, `DeliveryPaymentPrice`, `TaxPrice`, `PriceWithoutTax`, `TotalPrice`, `DateCreated`, `DateOfLastChange`, `DateFinished`, `DeliveryID`, `PaymentID`, `Note`, `IP`, `SessionID`, `Read`) VALUES
 (1,	1,	'aaaaaaa@aaa.aaa',	9098,	NULL,	90.98,	NULL,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	2,	1,	NULL,	NULL,	NULL,	0),
 (2,	1,	'qwe@qrw.as',	99,	NULL,	0.99,	NULL,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	2,	NULL,	NULL,	NULL,	NULL,	0),
 (3,	1,	'1234@1234.com',	11999,	NULL,	119.99,	NULL,	NULL,	'2013-03-30',	'2013-03-30',	NULL,	1,	1,	NULL,	NULL,	NULL,	0),
@@ -817,4 +817,4 @@ INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`
 ('xxx@xxx.xxx',	NULL,	'testx',	21313123,	NULL,	NULL,	'user'),
 ('yetty@himalaja.tib',	NULL,	'Yetty',	0,	NULL,	NULL,	'user');
 
--- 2013-08-12 22:16:41
+-- 2013-08-12 22:34:12

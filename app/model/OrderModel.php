@@ -234,13 +234,13 @@ class OrderModel extends Repository {
     
     public function loadUnreadOrders(){
         return $this->getTable('orders')->select('orders.*,delivery.*,payment.*,users.*,status.*')
-                ->where('orders.Readed = 0')
+                ->where('orders.Read = 0')
                 ->order('orders.OrderID DESC')->fetchPairs('OrderID');
     }
 
     public function updateOrderRead($orderid, $value){
         $update = array(
-            'Readed' => $value
+            'Read' => $value
         );
         
         return $this->getTable('orders')->where('OrderID',$orderid)->update($update);
