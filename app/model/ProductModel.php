@@ -531,9 +531,7 @@ class ProductModel extends Repository implements Grido\DataSources\IDataSource {
         $delivery = $this->getTable('delivery')->select('DeliveryPrice')->where('DeliveryPrice != "0"')->order('DeliveryPrice')->fetchPairs('DeliveryPrice');
         $price = reset($delivery);
         $price = $price->DeliveryPrice;
-        dump($price);
-        exit();
-        return $delivery[0];
+        return $price;
     }
 
     
