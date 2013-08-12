@@ -156,8 +156,10 @@ class MenuControl extends BaseControl {
     public function renderTop() {
         $this->template->setFile(__DIR__ . '/MenuTopControl.latte');
         $this->template->cart = $this->cart->numberItems;
+        if($this->presenter->getUser()->isInRole('admin')){
         $news = $this->orderModel->loadUnreadOrdersCount($this->usertracking->date);
         $this->template->news = $news;
+        }
         $this->template->render();
     }
     
