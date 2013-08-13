@@ -118,8 +118,8 @@ CREATE TABLE `comment` (
   `CommentContent` text,
   `DateOfAdded` date DEFAULT NULL,
   `Author` varchar(60) DEFAULT NULL,
-  `PreviousCommentID` int(11) DEFAULT '0',
   `ProductID` int(11) DEFAULT NULL,
+  `PreviousCommentID` int(11) DEFAULT '0',
   PRIMARY KEY (`CommentID`),
   KEY `CommentID_idx` (`PreviousCommentID`),
   KEY `ProductID` (`ProductID`),
@@ -815,4 +815,4 @@ INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`
 ('xxx@xxx.xxx',	NULL,	'testx',	21313123,	NULL,	NULL,	'user'),
 ('yetty@himalaja.tib',	NULL,	'Yetty',	0,	NULL,	NULL,	'user');
 
--- 2013-08-13 23:05:10
+-- 2013-08-13 23:08:29

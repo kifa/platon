@@ -530,7 +530,7 @@ class ProductModel extends Repository {
         return $price;
     }        
 
-    public function insertComment($title,$content,$author,$previous,$product){
+    public function insertComment($title,$content,$author,$product,$previous=0){
         $today = date("Y-m-d");
         
         $insert = array(
@@ -538,8 +538,8 @@ class ProductModel extends Repository {
             'CommentContent' => $content,
             'DateOfAdded' => $today,
             'Author' => $author,
-            'PreviousCommentID' => $previous,
-            'ProductID' => $product
+            'ProductID' => $product,
+            'PreviousCommentID' => $previous
         );
         
         return $this->getTable('comment')->insert($insert);
