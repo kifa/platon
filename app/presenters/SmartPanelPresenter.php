@@ -1293,17 +1293,7 @@ class SmartPanelPresenter extends BasePresenter {
         }
     }
 
-    protected function createComponentModuleControl() {
-        $moduleControl = new moduleControl;
-        $moduleControl->setTranslator($this->translator);
-        $moduleControl->setProduct($this->productModel);
-        $moduleControl->setCategory($this->categoryModel);
-        $moduleControl->setShop($this->shopModel);
-        $moduleControl->setOrder($this->orderModel);
-        
-        return $moduleControl;
     
-    }
     protected function sendStatusMail($orderid, $name) {
         
             $row = $this->orderModel->loadOrder($orderid);

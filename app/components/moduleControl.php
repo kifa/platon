@@ -117,7 +117,25 @@ class moduleControl extends BaseControl{
    
    
 
-   /***********************************************************************
+   /**************************************************************
+    *           PRODUCT MODULE
+    *
+    ***********************************************************************/
+     
+    protected function createComponentComment() {
+       
+       $comment = new CommentModule();
+       $comment->setTranslator($this->translator);
+       $comment->setShop($this->shopModel);
+       $comment->setOrder($this->orderModel);
+       $comment->setCategory($this->categoryModel);
+       $comment->setBlog($this->blogModel);
+       
+       return $comment;
+   }
+    
+   
+    /*******************************************************
      * RENDERY
      */
     
@@ -164,6 +182,25 @@ class moduleControl extends BaseControl{
         }
         
         $this->template->render();
+    }
+    
+    public function renderProductModule($name, $id) {
+        
+        $this->template->setFile(__DIR__ . '/renderModule.latte');
+        
+        $component = $this->shopModel->loadModuleByName($name);
+
+        if($component !== FALSE) {
+             $comp = $this->createComponent($component->CompModuleName);
+             $this->addComponent($comp, $component->CompModuleName);
+             $this->template->id = $id;
+             $this->template->render();
+        }
+        else {
+            $text = $this->translator->translate('Module not available: ');
+           $this->presenter->flashMessage($text . $name, 'alert alert-warning');
+           //$this->presenter->redirect('this');
+        }
     }
     
 }

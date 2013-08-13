@@ -287,6 +287,18 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     }
 
     
+    protected function createComponentModuleControl() {
+        $moduleControl = new moduleControl;
+        $moduleControl->setTranslator($this->translator);
+        $moduleControl->setProduct($this->productModel);
+        $moduleControl->setCategory($this->categoryModel);
+        $moduleControl->setShop($this->shopModel);
+        $moduleControl->setOrder($this->orderModel);
+        
+        return $moduleControl;
+    
+    }
+    
 
     protected function createComponentAddCategoryForm() {
         if ($this->getUser()->isInRole('admin')) {
