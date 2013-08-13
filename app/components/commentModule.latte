@@ -1,3 +1,6 @@
+{if $status == 1}
+<div class="span12 product-info-box">
+    <strong><i class="icon-check"></i> {_'Review'}</strong>
 <div class="modal-body span12">
 {_'Chcek this!'}
 {$id}
@@ -36,3 +39,10 @@ Pouliční švihák, nebo zálesák
 V Mladé Boleslavi vytvořili rovnou dvě verze vzhledu. Stylovější, jakousi "městskou" variantu a pak robustněji vyhlížející verzi pro výlety do přírody. Odlišíte je hlavně podle nárazníků. Městský frajer má také lakované boční lišty, dobrodružněji pojatý sourozenec zůstane u černých, nelakovaných.
 Zdroj: http://auto.idnes.cz/skoda-yeti-facelift-0ow-/ak_aktual.aspx?c=A130813_154845_ak_aktual_fdv</p>
 </div>
+    {if $user->isInRole('admin')}
+    <a href='{plink smartPanel:modules}' class="btn btn-primary">{_'Remove Comments module'}</a>
+    {/if}
+</div>
+{elseif $user->isInRole('admin')}
+<a n:href='installModule' class="btn btn-primary">{_'Add Comments module'}</a>
+{/if}

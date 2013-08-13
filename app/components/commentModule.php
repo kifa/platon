@@ -55,8 +55,66 @@ class commentModule extends moduleControl {
 }
     
     
+
+     public function handleInstallModule() {
+         if($this->presenter->getUser()->isInRole('admin')){
+      /* if($this->shopModel->isModuleActive('zasilkovna')) {
+           $this->presenter->flashMessage('Module already installed.', 'alert alert-warning');
+           return TRUE;
+       }
+       else {}*/
+       
+       $this->shopModel->updateModuleStatus('comment', 1);
+       $this->presenter->flashMessage('Module installation OK!', 'alert alert-success');  
+       $this->presenter->redirect('this');
+         }
+   }
+   
+    public function handleUninstallModule() {
+         if($this->presenter->getUser()->isInRole('admin')){
+      /* if($this->shopModel->isModuleActive('zasilkovna')) {
+           $this->presenter->flashMessage('Module already installed.', 'alert alert-warning');
+           return TRUE;
+       }
+       else {}*/
+       
+       $this->shopModel->updateModuleStatus('comment', 2);
+       $this->presenter->flashMessage('Module uninstallation OK!', 'alert alert-success');  
+       $this->presenter->redirect('this');
+         }
+   }
+   
+   public function renderAdmin() {
+        
+        $this->template->setFile(__DIR__ . '/commentAdminModule.latte');
+        $info = $this->shopModel->loadModuleByName('comment');
+       
+        $this->template->name = $info->ModuleName;
+        $this->template->desc = $info->ModuleDescription;
+        $this->template->status = $info->StatusID; 
+        $this->template->render();
+    }
+    
+    public function renderInstall() {
+        
+        $this->template->setFile(__DIR__ . '/commentInstallModule.latte');
+        
+        $info = $this->shopModel->loadModuleByName('comment');
+       
+        $this->template->name = $info->ModuleName;
+        $this->template->desc = $info->ModuleDescription;
+        $this->template->status = $info->StatusID; 
+                
+        $this->template->render();
+    }
+    
+    
    public function render($id) {
         $this->template->setFile(__DIR__ . '/commentModule.latte');
+        $info = $this->shopModel->loadModuleByName('comment');
+
+        $this->template->status = $info->StatusID; 
+        
         $this->template->id = $id;
         $this->template->render();
     }

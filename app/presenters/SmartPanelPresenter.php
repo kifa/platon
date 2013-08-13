@@ -1292,6 +1292,16 @@ class SmartPanelPresenter extends BasePresenter {
             
         }
     }
+    
+    
+     public function renderModules() {
+        if (!$this->getUser()->isInRole('admin')) {
+            $this->redirect('Sign:in');
+        } else {
+            
+                      
+        }
+    }
 
     
     protected function sendStatusMail($orderid, $name) {

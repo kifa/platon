@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-08-10 15:54:21
+# Created: 2013-08-13 22:05:17
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-08-10 15:54+0200\n"
+"PO-Revision-Date: 2013-08-13 22:05+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -552,6 +552,9 @@ msgstr "Menu"
 msgid "Module installed"
 msgstr "Modul instalován"
 
+msgid "Module not available: "
+msgstr "Modul není dostupný:"
+
 msgid "More comments"
 msgstr "Více komentářů"
 
@@ -629,6 +632,9 @@ msgstr "Telefon"
 
 msgid "Phone:"
 msgstr "Telefon:"
+
+msgid "Photo "
+msgstr " Fotka "
 
 msgid "Photo gallery"
 msgstr "Fotky"
@@ -972,57 +978,6 @@ msgstr "ks"
 msgid "personal pick up"
 msgstr "osobní převzetí"
 
-msgid "Photo "
-msgstr " Fotka "
-
-msgid "Představujeme BIRNE SHOP!"
-msgstr ""
-
-msgid "Začněte již dnes"
-msgstr ""
-
-msgid "Nejdou obchody? BIRNE SHOP!"
-msgstr ""
-
-msgid "Zjistit více"
-msgstr ""
-
-msgid "Radost prodávat? BIRNE SHOP!"
-msgstr ""
-
-msgid "Přesvědčete se"
-msgstr ""
-
-msgid "Domů"
-msgstr ""
-
-msgid "Smartphones"
-msgstr ""
-
-msgid "Ta-ble-ty"
-msgstr ""
-
-msgid "Washmashine"
-msgstr ""
-
-msgid "It should be less then price"
-msgstr ""
-
-msgid "Je podporován pouze soubor JPG, PNG a GIF"
-msgstr ""
-
-msgid "Maximálně 2MB"
-msgstr ""
-
-msgid "g"
-msgstr ""
-
-msgid "mAh"
-msgstr ""
-
-msgid "px"
-msgstr ""
-
-msgid "\""
-msgstr ""
+msgid "Add Comments module"
+msgstr "Přidat komentářový modul"
 

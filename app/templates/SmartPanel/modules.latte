@@ -1,0 +1,49 @@
+{block pageheader}
+{if $user->isInRole('admin')}
+
+       <div class="span12 smartPanelBar">
+                <a class="btn" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a> |
+                <a class="btn" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+            </div>
+
+<div class="page-header span12">
+<h1 n:block="title"><i class="icon-money"></i> {_'Modules'} <small>{_'Here you see all possible function you can activated.'}</small></h1>
+</div>
+{/if}
+{/block}
+
+{block content}
+<div class="span10"> 
+{if $user->isInRole('admin')}
+
+    <div class="tabbable"> <!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#overal"  data-toggle="tab">{_'Overal'}</a></li>
+            
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="overal">
+                <div class="span7">
+
+                     {control moduleControl:productModules}
+
+            </div>    
+        </div>
+    </div>
+            
+{/if}
+</div>
+{/block}
+
+{block sidebar}
+<div class="span2"> 
+  {if $user->isInRole('admin')}
+        {control menu:admin}
+        {/if}
+</div>
+{/block}
+    
+    {block script}
+                            
+                             
+{/block}

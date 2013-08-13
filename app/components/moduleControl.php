@@ -139,14 +139,7 @@ class moduleControl extends BaseControl{
      * RENDERY
      */
     
-    public function renderProductMini($id) {
-        $layout = $this->shopModel->getShopInfo('ProductMiniLayout');
-       
-        $this->template->setFile(__DIR__ . '/' . $layout . '.latte');    
-        $this->template->product = $this->productModel->loadProduct($id);
-        $this->template->render();
-    }
-    
+   
     
     public function renderShippingModules() {
         
@@ -201,6 +194,23 @@ class moduleControl extends BaseControl{
            $this->presenter->flashMessage($text . $name, 'alert alert-warning');
            //$this->presenter->redirect('this');
         }
+    }
+    
+    public function renderProductModules() {
+        
+        $this->template->setFile(__DIR__ . '/listOfModules.latte');
+        
+        try { 
+            foreach ($this->shopModel->loadModules('product') as $id => $component) {
+                $comp = $this->createComponent($component->CompModuleName);
+                $this->addComponent($comp, $component->CompModuleName);
+            }
+        }
+        catch (Exception $e) {
+            \Nette\Diagnostics\Debugger::log($e);
+        }
+        
+        $this->template->render();
     }
     
 }
