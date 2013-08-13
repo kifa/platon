@@ -6,7 +6,7 @@
  * CRUD operations, etc.
  * @author lukas
  */
-class ProductModel extends Repository implements Grido\DataSources\IDataSource {
+class ProductModel extends Repository {
 
     /**
      * Load Product Catalog

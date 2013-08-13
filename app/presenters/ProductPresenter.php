@@ -1084,6 +1084,16 @@ class ProductPresenter extends BasePresenter {
         $productControl->setShop($this->shopModel);
         return $productControl;
     }
+    
+     protected function createComponentComment() {
+        $commentControl = new commentControl();
+        $commentControl->setTranslator($this->translator);
+        $commentControl->setProduct($this->productModel);
+        $commentControl->setCategory($this->categoryModel);
+        $commentControl->setBlog($this->blogModel);
+        $commentControl->setShop($this->shopModel);
+        return $commentControl;
+    }
 
     public function renderProduct($id, $slug) {
         $layout = $this->shopModel->getShopInfo('ProductLayout');

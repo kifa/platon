@@ -1,6 +1,7 @@
 <?php
 
 use Nette\Utils\Html;
+
 /**
  * Base presenter for eshop.
  * Presenting skeleton of shop - header - content link - footer
@@ -27,6 +28,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     
     private $cart;
     protected $usertracking;
+    protected $gapisession;
 
 
     private $orderModel;
@@ -52,6 +54,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->cart = $this->getSession('cart'.$salt);
         $salt = md5($this->getUser()->getId());
         $this->usertracking = $this->getSession('user'.$salt);
+        $this->gapisession = $this->getSession('gapitoken');
     }
     
     public function injectProductModel(ProductModel $productModel) {
@@ -59,6 +62,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     }
     
 
+    private function flflf() {
+
+        $analy = new Birne\Gapi\Gapi($this->gapisession->token);
+       
+        dump($analy);
+        exit();
+    }
 
     public function handleAddToCart($product, $amnt) {
      
@@ -133,6 +143,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         parent::beforeRender();
         
      
+        
         $this->template->shopName = $this->shopModel->getShopInfo('Name');
         $this->template->shopDescription = $this->shopModel->getShopInfo('Description');
         $this->template->shopLogo = $this->shopModel->getShopInfo('Logo');

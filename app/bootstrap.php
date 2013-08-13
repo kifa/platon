@@ -26,6 +26,8 @@ $configurator->createRobotLoader()
 $webloaderExtension = new \WebLoader\Nette\Extension();
 $webloaderExtension->install($configurator);
 
+$gapiExtension = new \Birne\Gapi\Extension();
+$gapiExtension->install($configurator);
 
 // Translation setup
 $configurator->onCompile[] = function ($configurator, $compiler) {
@@ -56,8 +58,6 @@ $router[] = new Route('koupit/<id>[-<slug>][/<lang [a-z]{2}>]', 'Product:product
 $router[] = new Route('koupit/<id>[/<lang [a-z]{2}>]', 'Product:product');
 $router[] = new Route('novinky/<blogid>-<slug>[/<lang [a-z]{2}>]', 'Blog:posts');
 $router[] = new Route('novinky/clanek/<postid>[-<slug>][/<lang [a-z]{2}>]', 'Blog:post');
-
-
 
 $router[] = new Route('informace/<spostid>-<slug>[/<lang [a-z]{2}>]', 'Blog:staticText');
 
