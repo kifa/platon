@@ -1,0 +1,28 @@
+{if $status == 1}
+<div class="span12 product-info-box">
+            <strong><i class="icon-download"></i> {_'Docs'}</strong>
+            <div class="span12">
+            {if $docs}
+                <ul class="nav">
+                {foreach $docs as $id => $doc}
+                <li><a href="{$basePath}/docs/{$product}/{$doc->DocumentURL}" title="{_'Download'} {$doc->DocumentName}"><i class="icon-download" ></i> {$doc->DocumentName}</a>- {$doc->DocumentDescription}
+                                   {if $user->isInRole('admin')}
+                        <a href="{link deleteDocument! $product, $doc->DocumentID}"><i class="icon-trash" ></i> {_'Delete document'}</a></li>
+                                      {/if}
+                              {/foreach}
+                </ul>
+                {/if}
+            </div>
+            <div class="span12">
+             {if $user->isInRole('admin')}
+                     {control addDocumentationForm}
+                                {/if}
+            </div>
+        
+    {if $user->isInRole('admin')}
+    <a href='{plink smartPanel:modules}' class="btn btn-primary">{_'Remove Documents module'}</a>
+    {/if}
+</div>
+{elseif $user->isInRole('admin')}
+<a n:href='installModule' class="btn btn-primary">{_'Add Documents module'}</a>
+{/if}

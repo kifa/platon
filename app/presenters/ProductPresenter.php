@@ -657,7 +657,7 @@ class ProductPresenter extends BasePresenter {
 
                 $editForm = $this['editParamForm'];
                 $addForm = $this['addParamForm'];
-                $docsForm = $this['addDocumentationForm'];
+              //  $docsForm = $this['addDocumentationForm'];
                 $priceForm = $this['editPriceForm'];
                 $askForm = $this['askForm'];
                 // $this['editPriceForm']['price'] = $this->row['SellingPrice'];
@@ -997,81 +997,13 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    public function handleDeleteDocument($product, $id) {
-        if ($this->getUser()->isInRole('admin')) {
-            $row = $this->productModel->loadDocumentation($product)->fetch();
-            if (!$row) {
-                $this->flashMessage('There is no Docs to delete', 'alert');
-            } else {
-
-
-                $docUrl = $this->context->parameters['wwwDir'] . '/docs/' . $row->ProductID . '/' . $row->DocumentURL;
-                if ($docUrl) {
-                    unlink($docUrl);
-                }
-
-                $doc = $this->translator->translate('Doc ');
-                $text = $this->translator->translate(' was sucessfully deleted.');
-                $e = $doc . $row->DocumentName . $text;
-
-                $this->productModel->deleteDocumentation($id);
-                $this->flashMessage($e, 'alert');
-            }
-
-            $this->redirect('Product:product', $product);
-        }
-    }
+   
 
     /*
      * Adding product photos
      */
 
-    protected function createComponentAddDocumentationForm() {
-        if ($this->getUser()->isInRole('admin')) {
-            $addPhoto = new Nette\Application\UI\Form;
-            $addPhoto->setTranslator($this->translator);
-            $addPhoto->addText('name', 'Name:')
-                    ->setRequired('Please fill document name')
-                    ->setAttribute('class', 'span10');
-            $addPhoto->addHidden('productid', $this->row['ProductID']);
-            $addPhoto->addUpload('doc', 'Document:')
-                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024)
-                    ->setAttribute('class', 'span10');
-            $addPhoto->addText('desc', 'Description', 20, 100)
-                    ->setAttribute('class', 'span10');
-            $addPhoto->addSubmit('add', 'Add Document')
-                    ->setAttribute('class', 'btn-primary upl')
-                    ->setAttribute('data-loading-text', 'Uploading...');
-            $addPhoto->onSuccess[] = $this->addDocumentationFormSubmitted;
-            return $addPhoto;
-        }
-    }
-
-    /*
-     * Adding submit form for adding photos
-    */ 
-
-    public function addDocumentationFormSubmitted($form) {
-        if ($this->getUser()->isInRole('admin')) {
-            if ($form->values->doc->isOK()) {
-
-                $this->productModel->insertDocumentation(
-                        $form->values->name, $form->values->doc->name, $form->values->productid, $form->values->desc
-                );
-                $imgUrl = $this->context->parameters['wwwDir'] . '/docs/' . $form->values->productid . '/' . $form->values->doc->name;
-                $form->values->doc->move($imgUrl);
-
-                $doc = $this->translator->translate(' Doc ');
-                $text = $this->translator->translate(' was sucessfully uploaded');
-                $e = HTML::el('span', $doc . $form->values->doc->name . $text);
-                $ico = HTML::el('i')->class('icon-ok-sign left');
-                $e->insert(0, $ico);
-                $this->flashMessage($e, 'alert');
-            }
-
-            $this->redirect('this');
-        }
-    }
+   
 
     
     protected function createComponentProduct() {

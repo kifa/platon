@@ -273,28 +273,9 @@
         
         <div class="span3">
             
-        <div class="span12 product-info-box">
-            <strong><i class="icon-download"></i> {_'Docs'}</strong>
-            <div class="span12">
-            {if $docs}
-                <ul class="nav">
-                {foreach $docs as $id => $doc}
-                <li><a href="{$basePath}/docs/{$product->ProductID}/{$doc->DocumentURL}" title="{_'Download'} {$doc->DocumentName}"><i class="icon-download" ></i> {$doc->DocumentName}</a>- {$doc->DocumentDescription}
-                                   {if $user->isInRole('admin')}
-                        <a href="{link deleteDocument! $product->ProductID, $doc->DocumentID}"><i class="icon-trash" ></i> {_'Delete document'}</a></li>
-                                      {/if}
-                              {/foreach}
-                </ul>
-                {/if}
-            </div>
-            <div class="span12">
-             {if $user->isInRole('admin')}
-                     {control addDocumentationForm}
-                                {/if}
-            </div>
-        </div>
         
-            
+        
+            {control moduleControl:productModule 'document', $product->ProductID}
             
             {control moduleControl:productModule 'comment', $product->ProductID}
             {*control comment $product->ProductID*}

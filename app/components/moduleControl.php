@@ -134,6 +134,18 @@ class moduleControl extends BaseControl{
        return $comment;
    }
     
+   protected function createComponentDocument() {
+       
+       $document = new documentModule();
+       $document->setTranslator($this->translator);
+       $document->setShop($this->shopModel);
+       $document->setOrder($this->orderModel);
+       $document->setCategory($this->categoryModel);
+       $document->setBlog($this->blogModel);
+       $document->setProduct($this->productModel);
+       
+       return $document;
+   }
    
     /*******************************************************
      * RENDERY
