@@ -100,7 +100,7 @@ class ProductModel extends Repository {
      *  */
     public function insertProduct($name,$price,$producer,$prodnumber,
             $short,$description,$ean,$qr,$warranty,$pieces,$category,
-            $dataaval,$comment=NULL)
+            $dataaval)
     {
         $today = date("Y-m-d");
         
@@ -123,7 +123,6 @@ class ProductModel extends Repository {
             'CategoryID' => $category,            
             'DateOfAvailable' => $dataaval,
             'ProductDateOfAdded' => $today,            
-           // 'CommentID' => $comment
         );
         $row = $this->getTable('product')->insert($insert);   
         $lastprodid = $row["ProductID"];
@@ -522,17 +521,43 @@ class ProductModel extends Repository {
     
     public function suggest($column, array $conditions) {
        return $this->getTable('producer')->select($columns)->where($condition);
-    }
-    
-    
-    
+    }           
     
     public function loadCheapestDelivery(){
         $delivery = $this->getTable('delivery')->select('DeliveryPrice')->where('DeliveryPrice != "0"')->order('DeliveryPrice')->fetchPairs('DeliveryPrice');
         $price = reset($delivery);
         $price = $price->DeliveryPrice;
         return $price;
-    }
+    }        
 
+    public function insertComment($title,$content,$author,$product,$previous=0){
+        $today = date("Y-m-d");
+        
+        $insert = array(
+            'CommentTitle' => $title,
+            'CommentContent' => $content,
+            'DateOfAdded' => $today,
+            'Author' => $author,
+            'ProductID' => $product,
+            'PreviousCommentID' => $previous
+        );
+        
+        return $this->getTable('comment')->insert($insert);
+    }
     
+    public function loadProductComments($idproduct){
+        return $this->getTable('comment')->where('ProductID',$idproduct)->fetchPairs('CommentID');
+    }
+    
+    public function deleteComment($idcomment){
+        return $this->getTable('comment')->where('CommentID',$idcomment)->delete();
+    }
+    
+    public function loadComments(){
+        return $this->getTable('comment')->fetchPairs('CommentID');
+    }
+    
+    public function loadCommentsByDate(){
+        return $this->getTable('comment')->order('DateOfAdded DESC')->fetchPairs('CommentID');
+    }
 }
