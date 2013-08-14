@@ -8,7 +8,7 @@
                 {foreach $comments as $id => $comment}
                     <li><strong>{$comment->CommentTitle}</strong>{$comment->CommentContent}
                                    {if $user->isInRole('admin')}
-                        <a href="{link deleteComment! $id}"><i class="icon-trash" ></i> {_'Delete comment'}</a></li>
+                            <a href="{link deleteComment! $id}"><i class="icon-trash" ></i> {_'Delete comment'}</a></li>
                                       {/if}
                               {/foreach}
                 </ul>
@@ -21,7 +21,8 @@
 
 </div>
     {if $user->isInRole('admin')}
-    <a href='{plink smartPanel:modules}' class="btn btn-primary">{_'Remove Comments module'}</a>
+            <p class="muted"><i class="icon-info-sign"></i> {_'To remove this module visit'} <a href='{plink smartPanel:modules}' >{_'SmartPanel'}</a>
+                </p>
     {/if}
 </div>
 {elseif $user->isInRole('admin')}

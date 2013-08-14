@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-08-14 10:20:35
+# Created: 2013-08-14 12:09:48
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-08-14 10:20+0200\n"
+"PO-Revision-Date: 2013-08-14 12:09+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -98,6 +98,9 @@ msgstr "Přidat příspěvek"
 
 msgid "Add Product"
 msgstr "Přidat produkt"
+
+msgid "Add Review"
+msgstr "Přidat recenzi"
 
 msgid "Add Shipping"
 msgstr "Přidat způsob doručení"
@@ -492,11 +495,17 @@ msgstr "Vítejte"
 msgid "Here"
 msgstr "Zde"
 
+msgid "Here is all you need!"
+msgstr "Zde naleznete vše potřebné"
+
 msgid "Here you can complete your order. Just fill fields bellow."
 msgstr "Zde můžete dokončit vaši objednávku. Jen vyplňte..."
 
 msgid "Here you see all payment methods."
 msgstr "Zde jsou všechny Vaše platební metody."
+
+msgid "Here you see all possible function you can activated."
+msgstr "Všechny funkce eshopu pohromadě. Aktivujte je již teď"
 
 msgid "Here you see all shipping methods."
 msgstr "Zde jsou všechny informace o způsobech doručení."
@@ -552,6 +561,9 @@ msgstr "Zde musí být číslo."
 msgid "It seems to be empty."
 msgstr "Vypadá to, že je prázdný. To nevadí, zkuste..."
 
+msgid "It should be less then price"
+msgstr "Měla by být méně než cena"
+
 msgid "Item price"
 msgstr "Cena"
 
@@ -579,6 +591,9 @@ msgstr "Modul instalován"
 msgid "Module not available: "
 msgstr "Modul není dostupný:"
 
+msgid "Modules"
+msgstr "Moduly"
+
 msgid "More comments"
 msgstr "Více komentářů"
 
@@ -596,6 +611,9 @@ msgstr "Název nové specifikace:"
 
 msgid "Name:"
 msgstr "Jméno:"
+
+msgid "New functions"
+msgstr "Nové funkce"
 
 msgid "News"
 msgstr "Zprávy"
@@ -681,6 +699,9 @@ msgstr "Prosím zadejte své heslo"
 msgid "Please enter your question."
 msgstr "Prosím vložte svou otázku."
 
+msgid "Please enter your secret code from mail"
+msgstr "Prosím zadejte váš tajný kód z emailu"
+
 msgid "Please enter your username."
 msgstr "Zadejte svůj email"
 
@@ -759,6 +780,12 @@ msgstr "Pokračovat ve čtení"
 msgid "Regenerate Thumbnails"
 msgstr "Zregenerovat náhledy fotek"
 
+msgid "Remove Comments module"
+msgstr "Odebrat komentářový modul"
+
+msgid "Remove Documents module"
+msgstr "Odebrat modul dokumentů"
+
 msgid "Review"
 msgstr "Recenze"
 
@@ -809,6 +836,12 @@ msgstr "Vybraná doprava:"
 
 msgid "Set Catalog Layout"
 msgstr "Rozvržení katalogu"
+
+msgid "Set new Zasilkovna price"
+msgstr "Nastavit cenu Zásilkovně"
+
+msgid "Settings"
+msgstr "Nastavení"
 
 msgid "Shipping"
 msgstr "Poštovné"
@@ -888,10 +921,16 @@ msgstr "Zde musí být číslo. (Zkuste vložit nulu)"
 msgid "This month"
 msgstr "Tento měsíc"
 
+msgid "Title:"
+msgstr "Titulek:"
+
 msgid "To add photos, upload them and then \"Click to edit\" and drag photos to editor."
 msgstr "Pro přidání fotky ji nejprve nahrajte. Následně \"Klikněte pro vložení textu\" a fotky přetáhněte do editoru."
 
 msgid "Total"
+msgstr "Celkem"
+
+msgid "Total Payment"
 msgstr "Celkem"
 
 msgid "Total price"
@@ -984,6 +1023,9 @@ msgstr "Vaše jméno"
 msgid "Your order number:"
 msgstr "Číslo Vaší objednávky"
 
+msgid "Your secret code:"
+msgstr "Váš tajný kód:"
+
 msgid "Your subscription"
 msgstr "Vaše předplatné"
 
@@ -1008,6 +1050,6 @@ msgstr "ks"
 msgid "personal pick up"
 msgstr "osobní převzetí"
 
-msgid "Title:"
-msgstr "Titulek:"
+msgid "Please set new price."
+msgstr "Prosím zadejte novou cenu."
 

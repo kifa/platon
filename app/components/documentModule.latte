@@ -51,19 +51,9 @@
                             {/if*}
             
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
     {if $user->isInRole('admin')}
-    <a href='{plink smartPanel:modules}' class="btn btn-primary">{_'Remove Documents module'}</a>
+            <p class="muted"><i class="icon-info-sign"></i> {_'To remove this module visit'} <a href='{plink smartPanel:modules}' >{_'SmartPanel'}</a>
+                </p>
     {/if}
 </div>
 {elseif $user->isInRole('admin')}

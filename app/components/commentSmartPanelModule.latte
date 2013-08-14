@@ -1,4 +1,4 @@
-<h3>{_'Latest Comments'} <small><a href="{plink SmartPanel:default}">{_'More comments'} <i class="icon-comments"></i></a></small></h3>
+<h3>{_'Latest Comments & Reviews'} <small><a href="{plink SmartPanel:default}">{_'More comments'} <i class="icon-comments"></i></a></small></h3>
                 <table class="table">
                     <thead>
                         <tr>
@@ -15,9 +15,9 @@
                         <tr class="">
                             <td>{$id}</td>
                             <td>{$comment->DateOfAdded|date:'%d.%m.%Y'}</td>
-                            <td><a href="{plink SmartPanel:orderDetail $id}">{$comment->CommentTitle}</a></td>
+                            <td><a href="{plink Product:product $comment->ProductID}">{$comment->CommentTitle}</a></td>
                             <td>{$comment->Author},-</td>
-                            <td>--</td>
+                            <td><a href='{link deleteComment! $id}'><i class='icon-trash'></i></a></td>
                         </tr>
 
                         {/foreach}

@@ -172,6 +172,7 @@ class ProductPresenter extends BasePresenter {
             $addProduct->addText('amount', 'Amount')
                     ->setDefaultValue('1')
                     ->addRule(FORM::INTEGER, 'It has to be a number!')
+                    ->setType('number')
                     ->setRequired()
                     ->setAttribute('class', 'span7');
             $addProduct->addHidden('cat', $this->catId);

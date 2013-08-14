@@ -81,6 +81,45 @@ class ulozenkaModule extends moduleControl {
         }
     }
 
+    
+     protected function createComponentPriceForm() {
+        if ($this->presenter->getUser()->isInRole('admin')) {
+            $priceForm = new Nette\Application\UI\Form;
+            $priceForm->setTranslator($this->translator);
+            $priceForm->addText('price', 'Price:')
+                    ->setType('number')
+                    ->setRequired('Please set new price.')
+                    ->setAttribute('class', 'span12');
+            $priceForm->addText('freefrom', 'Free from:')
+                    ->setType('number')
+                    ->setAttribute('class', 'span12');
+            $priceForm->addSubmit('set', 'Set new Ulozenka price')
+                    ->setAttribute('class', 'btn-primary upl span12')
+                    ->setAttribute('data-loading-text', 'Setting...');
+            $priceForm->onSuccess[] = $this->priceFormSubmitted;
+            return $priceForm;
+        }
+        
+    }
+    
+    public function priceFormSubmitted($form) {
+        if ($this->presenter->getUser()->isInRole('admin')) {
+            
+            $ulozenkaID = $this->shopModel->getShopInfo('ulozenkaID');
+            
+            $delivery = $this->orderModel->loadSubDelivery($ulozenkaID);
+            try {
+                foreach($delivery as $id => $delivery) {
+                    $this->orderModel->updateDeliveryPrice($id, $form->values->price);
+                    $this->orderModel->updateDeliveryFreeFrom($id, $form->values->freefrom);
+                }
+            }catch(Exception $e) {   
+                   \Nette\Diagnostics\Debugger::log($e);
+            }          
+            
+            $this->presenter->redirect('this');
+        }
+    }
 
    /*****************************************************************
     * HANDLE

@@ -112,14 +112,14 @@ class commentModule extends moduleControl {
                     ->setRequired('Please fill document name')
                     ->setAttribute('class', 'span10');
             $addComment->addHidden('productid', $this->id);
-            $addComment->addTextArea('content', 'Comment', 20, 5)
+            $addComment->addTextArea('content', 'Review', 20, 5)
                     ->setAttribute('class', 'span10');
             $addComment->addText('author', 'Your name:')
                     ->setRequired('Please fill document name')
                     ->setAttribute('class', 'span10');
-            $addComment->addSubmit('add', 'Add Comment')
+            $addComment->addSubmit('add', 'Add Review')
                     ->setAttribute('class', 'btn-primary upl')
-                    ->setAttribute('data-loading-text', 'Uploading...');
+                    ->setAttribute('data-loading-text', 'Adding...');
             $addComment->onSuccess[] = $this->addCommentFormSubmitted;
             return $addComment;
         }
