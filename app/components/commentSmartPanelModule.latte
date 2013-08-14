@@ -1,0 +1,25 @@
+<h3>{_'Latest Comments'} <small><a href="{plink SmartPanel:default}">{_'More comments'} <i class="icon-comments"></i></a></small></h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{_'Date'}</th>
+                            <th>{_'Subject'}</th>
+                            <th>{_'Name'}</th>
+                            <th>{_'Status'}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach $comments as $id => $comment}
+
+                        <tr class="">
+                            <td>{$id}</td>
+                            <td>{$comment->DateOfAdded|date:'%d.%m.%Y'}</td>
+                            <td><a href="{plink SmartPanel:orderDetail $id}">{$comment->CommentTitle}</a></td>
+                            <td>{$comment->Author},-</td>
+                            <td>--</td>
+                        </tr>
+
+                        {/foreach}
+                    </tbody>
+                </table>

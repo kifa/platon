@@ -531,8 +531,8 @@ class ProductModel extends Repository {
     }        
 
     public function insertComment($title,$content,$author,$product,$previous=0){
-        $today = date("Y-m-d");
-        
+        $today = date("Y-m-d H:i:s");
+            
         $insert = array(
             'CommentTitle' => $title,
             'CommentContent' => $content,
@@ -545,12 +545,12 @@ class ProductModel extends Repository {
         return $this->getTable('comment')->insert($insert);
     }
     
-    public function loadProductComments($idproduct){
-        return $this->getTable('comment')->where('ProductID',$idproduct)->fetchPairs('CommentID');
+    public function loadProductComments($id){
+        return $this->getTable('comment')->where('ProductID',$id)->fetchPairs('CommentID');
     }
     
-    public function deleteComment($idcomment){
-        return $this->getTable('comment')->where('CommentID',$idcomment)->delete();
+    public function deleteComment($commentid){
+        return $this->getTable('comment')->where('CommentID',$commentid)->delete();
     }
     
     public function loadComments(){
@@ -559,5 +559,9 @@ class ProductModel extends Repository {
     
     public function loadCommentsByDate(){
         return $this->getTable('comment')->order('DateOfAdded DESC')->fetchPairs('CommentID');
+    }
+    
+    public function loadUnreadCommentsCount($date){
+        return $this->getTable('comment')->where('DateOfAdded>',$date)->count();
     }
 }

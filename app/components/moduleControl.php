@@ -130,6 +130,7 @@ class moduleControl extends BaseControl{
        $comment->setOrder($this->orderModel);
        $comment->setCategory($this->categoryModel);
        $comment->setBlog($this->blogModel);
+       $comment->setProduct($this->productModel);
        
        return $comment;
    }
@@ -198,14 +199,19 @@ class moduleControl extends BaseControl{
         if($component !== FALSE) {
              $comp = $this->createComponent($component->CompModuleName);
              $this->addComponent($comp, $component->CompModuleName);
-             $this->template->id = $id;
-             $this->template->render();
+             $this->template->comp = $comp;
+                      
+             
         }
         else {
             $text = $this->translator->translate('Module not available: ');
            $this->presenter->flashMessage($text . $name, 'alert alert-warning');
            //$this->presenter->redirect('this');
         }
+        
+
+        $this->template->id = $id;
+        $this->template->render();
     }
     
     public function renderProductModules() {
@@ -225,4 +231,26 @@ class moduleControl extends BaseControl{
         $this->template->render();
     }
     
+    public function renderSmartPanelModule($name){
+        
+     
+        $this->template->setFile(__DIR__ . '/renderSmartPanelModule.latte');
+        
+        $component = $this->shopModel->loadModuleByName($name);
+
+        if($component !== FALSE) {
+             $comp = $this->createComponent($component->CompModuleName);
+             $this->addComponent($comp, $component->CompModuleName);
+             $this->template->comp = $comp;
+                      
+             
+        }
+        else {
+            $text = $this->translator->translate('Module not available: ');
+           $this->presenter->flashMessage($text . $name, 'alert alert-warning');
+           //$this->presenter->redirect('this');
+        }
+        
+        $this->template->render();
+    }
 }

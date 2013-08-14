@@ -2,6 +2,9 @@
 
 use Nette\Application\UI;
 
+use Nette\Forms\Form,
+    Nette\Utils\Html,
+    Nette\Image;
 /*
  * Menu Control component
  */
@@ -18,6 +21,7 @@ class commentModule extends moduleControl {
     private $productModel;
     private $blogModel;
     private $shopModel;
+    private $id;
 
 
 
@@ -84,6 +88,68 @@ class commentModule extends moduleControl {
          }
    }
    
+   public function handleDeleteComment($commentid) {
+       if($this->presenter->getUser()->isInRole('admin')){
+           $this->productModel->deleteComment($commentid);
+           
+                $doc = $this->translator->translate(' Comment');
+                $text = $this->translator->translate(' was sucessfully deleted');
+                $e = HTML::el('span', $doc . $text);
+                $ico = HTML::el('i')->class('icon-ok-sign left');
+                $e->insert(0, $ico);
+                $this->presenter->flashMessage($e, 'alert');
+                
+                
+           $this->presenter->redirect('this');
+       }
+   }
+
+   protected function createComponentAddCommentForm() {
+        if ($this->presenter->getUser()->isInRole('admin')) {
+            $addComment = new Nette\Application\UI\Form;
+            $addComment->setTranslator($this->translator);
+            $addComment->addText('title', 'Title:')
+                    ->setRequired('Please fill document name')
+                    ->setAttribute('class', 'span10');
+            $addComment->addHidden('productid', $this->id);
+            $addComment->addTextArea('content', 'Comment', 20, 5)
+                    ->setAttribute('class', 'span10');
+            $addComment->addText('author', 'Your name:')
+                    ->setRequired('Please fill document name')
+                    ->setAttribute('class', 'span10');
+            $addComment->addSubmit('add', 'Add Comment')
+                    ->setAttribute('class', 'btn-primary upl')
+                    ->setAttribute('data-loading-text', 'Uploading...');
+            $addComment->onSuccess[] = $this->addCommentFormSubmitted;
+            return $addComment;
+        }
+    }
+
+    /*
+     * Adding submit form for adding photos
+    */ 
+
+    public function addCommentFormSubmitted($form) {
+        if ($this->presenter->getUser()->isInRole('admin')) {
+
+            $this->productModel->insertComment(
+                        $form->values->title, $form->values->content, $form->values->author, $form->values->productid, NULL
+                );
+
+
+                $doc = $this->translator->translate(' Comment ');
+                $text = $this->translator->translate(' was sucessfully added');
+                $e = HTML::el('span', $doc . $form->values->title . $text);
+                $ico = HTML::el('i')->class('icon-ok-sign left');
+                $e->insert(0, $ico);
+                $this->presenter->flashMessage($e, 'alert alert-success');
+  
+
+            $this->presenter->redirect('this');
+        }
+    }
+    
+    
    public function renderAdmin() {
         
         $this->template->setFile(__DIR__ . '/commentAdminModule.latte');
@@ -110,12 +176,29 @@ class commentModule extends moduleControl {
     
     
    public function render($id) {
+       $this->id = $id;
         $this->template->setFile(__DIR__ . '/commentModule.latte');
         $info = $this->shopModel->loadModuleByName('comment');
 
         $this->template->status = $info->StatusID; 
         
-        $this->template->id = $id;
+        if($info->StatusID  == 1) {
+        $this->template->comments = $this->productModel->loadProductComments($id);
+        $this->template->product = $id;
+        }
+        $this->template->render();
+    }
+    
+    
+    public function renderSmartPanel() {
+        $this->template->setFile(__DIR__ . '/commentSmartPanelModule.latte');
+        $info = $this->shopModel->loadModuleByName('comment');
+
+        $this->template->status = $info->StatusID; 
+        
+        if($info->StatusID  == 1) {
+        $this->template->comments = $this->productModel->loadCommentsByDate();
+        }
         $this->template->render();
     }
     

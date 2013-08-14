@@ -157,7 +157,7 @@ class documentModule extends moduleControl {
                 $this->flashMessage($e, 'alert');
             }
 
-            $this->redirect('this');
+            $this->presenter->redirect('this');
         }
     }
     
@@ -194,9 +194,11 @@ class documentModule extends moduleControl {
 
         $this->template->status = $info->StatusID; 
         
+        if($info->StatusID == 1) {
         $this->template->docs = $this->productModel->loadDocumentation($id)->fetchPairs('DocumentID');
        
         $this->template->product = $id;
+        }
         $this->template->render();
     }
     

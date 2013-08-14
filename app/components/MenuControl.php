@@ -158,7 +158,8 @@ class MenuControl extends BaseControl {
         $this->template->cart = $this->cart->numberItems;
         if($this->presenter->getUser()->isInRole('admin')){
         $news = $this->orderModel->loadUnreadOrdersCount($this->usertracking->date);
-        $this->template->news = $news;
+        $comments = $this->productModel->loadUnreadCommentsCount($this->usertracking->date);
+        $this->template->news = $news + $comments;
         }
         $this->template->render();
     }

@@ -50,7 +50,21 @@
                 <a href="{plink setProductStatus! $product->ProductID, 3}" class="btn ajax"><i class="icon-thumbs-up"></i></a>
                    {/if}
                   
+                {if $product->ProductStatusID == 1}
+<a href="{plink showProduct! $product->CategoryID, $product->ProductID}" title="{_'Publish product'}" class="ajax btn"><i id="showProduct" class="icon-large icon-eye-open"></i></a>
 
+<a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" title="{_'Archive product'}" class="ajax btn"><i id="deleteProduct" class="icon-large icon-inbox"></i></a>
+
+    {elseif $product->ProductStatusID == 2}
+<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" title="{_'Hide product'}" class="ajax btn"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
+
+    
+    {elseif $product->ProductStatusID == 3} 
+<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" title="{_'Hide product'}" class="ajax btn"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
+                   
+    {else}
+<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" class="btn ajax"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
+    {/if}
 
             </div>
             <div class="btn-group">
@@ -64,7 +78,7 @@
     <h1><span class="prodTitle" n:snippet="prodTitle" n:block="title">{$product->ProductName}</span>
             <small>
                     {if $product->PiecesAvailable > 5}
-            <span class="badge badge-info">{$product->PiecesAvailable}</span>
+            <span class="badge badge-success">{$product->PiecesAvailable}</span>
                     {else}
             <span class="badge badge-warning">{$product->PiecesAvailable} {_'LAST'}</span>
                     {/if}
@@ -85,12 +99,11 @@
         <img src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$photo->PhotoURL}" class="img-polaroid margin5"/>
     </div>
     
-    <div class="span6">
+    <div class="span6" style="min-height: 114px;">
         <div class="tabbable span12 pull-right">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#info" data-toggle="tab"><i class="icon-info-sign"></i> {_'Info'}</a></li>
                 <li><a href="#spec" data-toggle="tab"><i class="icon-list"></i> {_'Spec'}</a></li>
-                <li><a href="#other" data-toggle="tab">{_'Other'}</a></li>
                 <li><a href="#ask" data-toggle="tab"><i class="icon-comment"></i> {_'Ask'}</a></li>
             </ul>
             <div class="tab-content">
@@ -104,12 +117,10 @@
                         {foreach $parameter as $parameter}
                         <dt>{$parameter->AttribName}:</dt>
                         <dd>{$parameter->Val}{$parameter->UnitShort}</dd>
-                        {/foreach}                        
+                        {/foreach}      
+                        <dt>{_'Producer'}:</dt>
+                        <dd>{$product->ProducerName}</dd>
                     </dl>
-                </div>
-                <div class="tab-pane" id="other">
-                    <p>Other infos</p>
-                    Producer: {$product->ProducerName}
                 </div>
                 <div class="tab-pane" id="ask">
 
@@ -119,12 +130,12 @@
                                <li n:foreach="$form->errors as $error">{$error}</li>
                        </ul>
                     <span class="help-block"><i class="icon-info-sign"></i> {_'We will respond as soon as possible.'}</span>
-                    <fieldset class="span12">
+                    <fieldset class="span10">
                            {label note /}
                            {input note}
 
                            {label email /}
-                           <div class="input-prepend input-append">
+                           <div class="input-prepend input-append span6">
                                <span class="add-on">@</span>
                            {input email}
                            </div>
@@ -139,7 +150,8 @@
         </div>
 
     </div>
-    <div class="span6 pricetag alert alert-info margin5 ">
+    
+    <div class="span6 pricetag margin5 ">
             
               {if $user->isInRole('admin')}
             <div class="btn-group span12 margin5">
@@ -149,7 +161,9 @@
               {/if}
             
             
-            <div n:snippet="prodPrice" class="span8">
+            
+        
+            <div n:snippet="prodPrice" class="span4 text-center">
               {if $user->isInRole('admin')}
                 
                <div id="editProdPrice" class="hide span12">
@@ -164,38 +178,47 @@
                  {control editPriceForm}
                 </div>
               {/if}
-             <div id="prodPrice" class="span5">
- 
-            {if $product->SALE > 1}
-            <p class="span12 alert alert-warning" n:snippet="prodSale">
-                <i class="icon-money icon-large"></i>
+             <div id="prodPrice" class="span12 text-center">
+                 <span class="badge badge-info span12">
+                
 
-                <span class="badge badge-important">- {$product->SALE},- / {var $procent = 100 * ($product->SALE / $product->SellingPrice)} {$procent|number}%</span>
-                <span class="muted" style="text-decoration: line-through;">{$product->SellingPrice},-</span>
-            </p>
-            {/if}
+                                 <span class="span12 text-center">{_"Price"}</span> 
+                                 {if $product->SALE > 1}
+                                 <span n:snippet="prodSale" class="span12">
+                    <span class="badge badge-important">- {$product->SALE},- / {var $procent = 100 * ($product->SALE / $product->SellingPrice)} {$procent|number}%</span>
+                        <span class="span12" style="text-decoration: line-through;">{$product->SellingPrice},-</span>
+                                 </span>
+                {/if}
+                                 <h2 class="span12 text-center prodPrice">{$product->FinalPrice},-</h2>
 
-            <h2 class="text-info span12"><span class="prodPrice" >{$product->FinalPrice}</span>,- </h2>
-
+                                 </span>
             </div>
-                            <a href="{plink Order:cart $product->ProductID, "1"}" class="span8 btn btn-primary">
-                <i class="icon-shopping-cart"></i> {_'Buy'}</a>
+                            
 
             </div>
                 
                 
             <div class="span3 text-center">
                     {if $product->PiecesAvailable >= 5}
-                    <span class="badge badge-info span12">
+                    <span class="badge badge-success span12">
                     {elseif $product->PiecesAvailable < 5 && $product->PiecesAvailable > 0}
                         <span class="badge badge-warning span12">
                     {elseif $product->PiecesAvailable < 1 }
                             <span class="badge badge-inverse span12">
                         {/if}
-                                <span class="span12 text-center">{_"In stock"}</span> <span class="prodAmount span12 text-center" n:snippet="prodAmount">{$product->PiecesAvailable}</span></span>
+                                <span class="span12 text-center">{_"In stock"}</span> <h3 class="prodAmount span12 text-center" n:snippet="prodAmount">{$product->PiecesAvailable} ks</h3></span>
                            
 
                             </div>
+        
+               <div class="span3 text-center">
+                    <span class="badge badge-inverse span12">
+                             <span class="span12 text-center">{_"Shipping"} {_'from'}</span> 
+                             <h3 class="span12 text-center">{$shippingPrice|number},-</h3></span>
+                            </div>
+        
+        <a href="{plink Order:cart $product->ProductID, "1"}" class="span9 btn btn-primary margin5">
+                <i class="icon-shopping-cart"></i> {_'Buy'}</a>
         </div>
 
                
@@ -204,24 +227,15 @@
     
     
     <div class="span12">
-      
-    
-    <div class="tabbable span11">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#allinfo" data-toggle="tab"><i class="icon-info-sign"></i> {_'Info'}</a></li>
-                        <li><a href="#gal" data-toggle="tab"><i class="icon-camera-retro"></i> {_'Gallery'}</a></li>
-                        <li><a href="#vid" data-toggle="tab"><i class="icon-facetime-video"></i> {_'Video'}</a></li>
-                        <li><a href="#rew" data-toggle="tab"><i class="icon-check"></i> {_'Review'}</a></li>
-                        <li><a href="#docs" data-toggle="tab"><i class="icon-download"></i> {_'Docs'}</a></li>
-                    </ul>
-                    <div class="tab-content">
-                         <div class="tab-pane active" id="allinfo" >
-                            <div class="prodDescription" n:snippet="prodDescription">{!$product->ProductDescription}</div>
-                        </div>
+        <h3 class="span12"><i class="icon-info-sign"></i> {_'Information about product'}</h3>
+        <div class="span8">
+         <div class="prodDescription span12 text-justified" n:snippet="prodDescription">{!$product->ProductDescription}</div>
+         
+         <div class="span12 product-gallery">
+           
+    <div class="span12">
+            {if $user->isInRole('admin')}
 
-                        <div class="tab-pane" id="gal">
-{if $user->isInRole('admin')}
-                            <div class="span12">
                                 {form addPhotoForm class => 'span9'}
                                 {label image /}
                                 {input image}
@@ -229,46 +243,52 @@
                                 {input add}
 
                                 {/form}
-                        </div>                            
-    {/if}
-                            
+                                {/if}
+         </div>
+                <ul class="thumbnails span12">
+                 {foreach $album as $id => $photo}
+                                <li class="span10 thumbnail">
+                                        <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}">
+                                    {if $user->isInRole('admin')}
+                                       {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> Set as COVER image</a> {/if}
+                                    <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> {_'Delete image'}</a>
+                                      {/if}
+                                </li>
 
-                            <ul class="thumbnails">
-                                
-                    {foreach $album as $id => $photo}
-                                <li class="{if $photo->CoverPhoto}span4 {else} span4 {/if}">
-                                    <a data-toggle="lightbox" href="#photo{$id}" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
+                         {/foreach}
+                
+                    {*foreach $album as $id => $photo}
+                                <li class="span3">
+                                    <a data-toggle="lightbox" href="#photo{$id}" class="thumbnail imgLiquid" style="height: 90px; width: 90px;">
                                         <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}">
                                     </a>
                                     {if $user->isInRole('admin')}
                                        {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> Set as COVER image</a> {/if}
-                                    <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> Delete image</a>
+                                    <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> {_'Delete image'}</a>
                                       {/if}
                                 </li>
 
                                 {var $src = $basePath . '/images/' . $product->PhotoAlbumID .'/'.$photo->PhotoURL}
                                 {control modalControl:gallery $id, $product->ProductName, $src }
 
-                         {/foreach}
-                            </ul>
-
+                         {/foreach*}
+                   </ul>
+                        <div class="span12">
+                            <iframe width="560" height="315" src="//www.youtube.com/embed/jwkXHG1IRZU?rel=0" frameborder="0" allowfullscreen></iframe>
                         </div>
-                        <div class="tab-pane" id="vid">
-                            <iframe width="853" height="480" src="http://www.youtube.com/embed/qN3EXAFRxKQ?rel=0" frameborder="0" allowfullscreen></iframe>
-                        </div>
-
-                        <div class="tab-pane" id="rew">
-                        {control moduleControl:productModule 'comment', $product->ProductID}
-                        </div>
-                        <div class="tab-pane" id="docs">
-                           {control moduleControl:productModule 'document', $product->ProductID}
                         </div>
 
+        </div>
+        
+        <div class="span3">
+            {control moduleControl:productModule 'document', $product->ProductID}
+            
+            {control moduleControl:productModule 'comment', $product->ProductID}
+        </div>
                     </div>
-                </div> 
+    
 
-    </div>
-</div> <!-- class="span10" -->
+    </div> <!-- class="span10" -->
 {/block}
 
 {block sidebar}
@@ -281,7 +301,7 @@
         <li class="nav-header">Menu</li>
 
           {control menu:side}
-        <li class="divider"></li>
+        
     </ul>
 </div>
 {/block}
@@ -364,18 +384,7 @@
                  }
           });
 
-          $('.prodPrice').editable( {link editProdPrice! $product->ProductID, $product->SellingPrice, $product->SALE }, {
-                  type      : 'text',
-                  onblur    : 'ignore',
-                  cancel    : {_'Cancel'},
-                  submit    : 'OK', 
-                  indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
-                  tooltip   : {_'Click to edit ...'},
-                  callback : function(value, settings) {
-                     var json = $.parseJSON(value);
-                     $('.prodPrice').text(json.edit);
-                 }
-          });
+
 
           $('.prodAmount').editable( {link editProdAmount! $product->ProductID }, {
                   type      : 'text',
@@ -437,16 +446,15 @@
 
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3 id="myModalLabel"><i class="icon-list"></i> {_'Edit Specification'}</h3>
+                                    <h3 id="myModalLabel"><i class="icon-list"></i> Edit Specification</h3>
                                 </div>
-                                <div class="modal-body">
-                                
-                                    <div class="tabbable">
+                                <div class="modal-body"> 
+                                       <div class="tabbable">
 
                                         <ul class="nav nav-tabs">
-               {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> {_'Edit Specs'}</a></li> {/if}
-                                            <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> {_'Add Spec'}</a>
-               {if $parameter} <li><a href="#deleteParams" data-toggle="tab"><i class="icon-trash"></i> {_'Delete Spec'}</a></li> {/if}
+               {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> Edit Specs</a></li> {/if}
+                                            <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> Add Spec</a>
+               {if $parameter} <li><a href="#deleteParams" data-toggle="tab"><i class="icon-trash"></i> Delete Spec</a></li> {/if}
                                         </ul>
                                         <div class="tab-content">
                                             <div class="tab-pane {if $parameter}active{/if}" id="editParams">
@@ -472,6 +480,7 @@
                                 </div>
                                 <div class="modal-footer">
 
+                             
 
 
                                     <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>

@@ -31,7 +31,7 @@
         </ul>
         <div class="tab-content">
           <div class="tab-pane active" id="overal">
-              <div class="span5"> 
+              <div class="span7"> 
               <h3>{_'Latest Orders'} <small><a n:href="SmartPanel:orders">{_'All orders'} <i class="icon-spinner"></i></a></small></h3>
                 <table class="table">
                     <thead>
@@ -61,48 +61,25 @@
               
               <div class="span4">
                   <h3>{_'Stats'} <small><a n:href="SmartPanel:stats">{_'More stats'} <i class="icon-bar-chart"></i></a></small></h3>
-                  <div class="alert alert-info span4">
+                  <div class="alert alert-info span12">
                   <h4>{_'This month'}</h4>
-                  <p class="span4"><strong>Successfull orders:</strong> {$ord}
+                  <p class="span12"><strong>Successfull orders:</strong> {$ord}
                         </p>
                         <p class="span4"><strong>Total revenue:</strong> $50 000</p>
                         <p class="span4"><strong>Best seller:</strong> Nexus 4</p>
                   </div>
-                  <div class="alert alert-info span4">
+                  <div class="alert alert-info span12">
                    <h4>{_'Overal'}</h4>  
-                   <p class="span4"><strong>Successfull orders:</strong> {$ord}
+                   <p class="span12"><strong>Successfull orders:</strong> {$ord}
                         </p>
                         <p class="span4"><strong>Total revenue:</strong> $50 000</p>
                         <p class="span4"><strong>Best seller:</strong> Nexus 4</p>
                   </div>
               </div>
               
-              <div class="span5">
-                <h3>{_'Latest Comments'} <small><a n:href="SmartPanel:default">{_'More comments'} <i class="icon-comments"></i></a></small></h3>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>{_'Date'}</th>
-                            <th>{_'Subject'}</th>
-                            <th>{_'Name'}</th>
-                            <th>{_'Status'}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {foreach $orders as $id => $order}
-
-                        <tr class="{if $order->StatusID == 3}success {elseif $order->StatusID == 2} info {else} warning {/if}">
-                            <td>{$id}</td>
-                            <td>{$order->DateCreated|date:'%d.%m.%Y'}</td>
-                            <td><a href="{plink SmartPanel:orderDetail $id}">{$order->Name}</a></td>
-                            <td>{$order->TotalPrice},-</td>
-                            <td>{$order->StatusName}</td>
-                        </tr>
-
-                        {/foreach}
-                    </tbody>
-                </table>
+              <div class="span11">
+                  {control moduleControl:smartPanelModule 'comment'}
+                
               </div>
           </div>
           <div class="tab-pane" id="account">
