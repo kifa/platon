@@ -384,6 +384,24 @@ class OrderModel extends Repository {
         return $this->getTable('payment')->where('PaymentID',$id)->update($update);
     }
     
+    public function updatePaymentName($id,$name)
+    {
+        $update = array(
+            'PaymentName' => $name
+        );
+                
+        return $this->getTable('payment')->where('PaymentID',$id)->update($update);
+    }
+    
+    public function updatePaymentPrice($id,$name)
+    {
+        $update = array(
+            'PaymentPrice' => $name
+        );
+                
+        return $this->getTable('payment')->where('PaymentID',$id)->update($update);
+    }
+    
     public function updatePaymentStatus($id,$status){
         $update = array(
             'StatusID' => $status

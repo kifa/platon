@@ -203,13 +203,18 @@ class OrderPresenter extends BasePresenter {
 
         $shippers = array();
         $payment = array();
-        
+        $defaultShipping = NULL;
         $lowerShippers = NULL;
 
         foreach ($this->orderModel->loadDelivery('','active') as $key => $value) {
           //  $t = HTML::el('span', $value->DeliveryPrice)->class('text-info');
             if($value->HigherDelivery === NULL) {
             $shippers[$key] = $value->DeliveryName . ' | ' . $value->DeliveryPrice .',-';
+            
+            if($defaultShipping == NULL) {
+                $defaultShipping = $key;
+            }
+            
             }
             else {
                 $lowerShippers[$value->HigherDelivery] = $value->HigherDelivery;
@@ -271,7 +276,8 @@ class OrderPresenter extends BasePresenter {
                 ->setAttribute('class', 'btn btn-small btn-primary');
          $cartForm->addGroup('Notes');
         $cartForm->addTextArea('note', 'Note:', 50, 4);
-        $cartForm->addHidden('shipping','shipping');
+        $cartForm->addHidden('shipping','shipping')
+                ->setDefaultValue($defaultShipping);
         $cartForm->addGroup('Checkout');
         $cartForm->addSubmit('send', 'Checkout')
                 ->setAttribute('class', 'btn btn-warning btn-large');

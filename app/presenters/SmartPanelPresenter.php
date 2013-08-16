@@ -961,7 +961,7 @@ class SmartPanelPresenter extends BasePresenter {
             if($this->isAjax()){
                //$name = $_POST['id'];
                $content = $_POST['value'];
-               $this->orderModel->updatePayment($paymentID, $content, $price);
+               $this->orderModel->updatePaymentName($paymentID, $content);
                
                $ico = HTML::el('i')->class('icon-ok-sign left');
                $message = HTML::el('span', ' was added sucessfully updates.');
@@ -993,7 +993,7 @@ class SmartPanelPresenter extends BasePresenter {
                //$name = $_POST['id'];
                $content = $_POST['value'];
                
-               $this->orderModel->updatePayment($paymentID, $name, $content);
+               $this->orderModel->updatePaymentPrice($paymentID, $content);
                
                 $ico = HTML::el('i')->class('icon-ok-sign left');
                $message = HTML::el('span', ' was added sucessfully updates.');
