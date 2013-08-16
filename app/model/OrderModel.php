@@ -247,6 +247,9 @@ class OrderModel extends Repository {
     }
 
     public function loadUnreadOrdersCount($date){
+        if ($date == NULL) {
+            $date =  date("Y-m-d H:i:s");
+        }
         return $this->getTable('orders')->where('DateCreated>',$date)->count();
     }
 

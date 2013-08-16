@@ -329,11 +329,11 @@ class ProductPresenter extends BasePresenter {
     
     
     
-    public function handleEditProdTitle($prodid){
+    public function handleEditProdTitle($id){
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            
                 $content = $_POST['value'];
-                $this->productModel->updateProduct($prodid, 'ProductName', $content);
+                $this->productModel->updateProduct($id, 'ProductName', $content);
             }
             if(!$this->isControlInvalid('editProdTitle')){
                 $this->payload->edit = $content;
@@ -347,11 +347,11 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    public function handleEditProdDescription($prodid) {
+    public function handleEditProdDescription($id) {
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            
                 $content = $_POST['value'];
-                $this->productModel->updateProduct($prodid, 'ProductDescription', $content);
+                $this->productModel->updateProduct($id, 'ProductDescription', $content);
             }
             if(!$this->isControlInvalid('editProdDescription')){
                 $this->payload->edit = $content;
@@ -364,11 +364,11 @@ class ProductPresenter extends BasePresenter {
         }
     }
     
-    public function handleEditProdShort($prodid) {
+    public function handleEditProdShort($id) {
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            
                 $content = $_POST['value'];
-                $this->productModel->updateProduct($prodid, 'ProductShort', $content);
+                $this->productModel->updateProduct($id, 'ProductShort', $content);
             }
             if(!$this->isControlInvalid('editProdShort')){
                 $this->payload->edit = $content;
@@ -381,17 +381,17 @@ class ProductPresenter extends BasePresenter {
         }
     }
     
-    public function handleEditProdPrice($prodid, $sellingprice, $sale) {
+    public function handleEditProdPrice($id, $sellingprice, $sale) {
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            
                 $content = $_POST['value'];
 
                 if ($sale == 0) {
-                $this->productModel->updatePrice($prodid, $content, $sale);    
+                $this->productModel->updatePrice($id, $content, $sale);    
                 }
                 else {
                   $sale = $sellingprice - $content;
-                $this->productModel->updatePrice($prodid, $sellingprice, $sale); 
+                $this->productModel->updatePrice($id, $sellingprice, $sale); 
                 }
             }
             if(!$this->isControlInvalid('prodPrice')){
@@ -406,9 +406,9 @@ class ProductPresenter extends BasePresenter {
     }
     
     
-    public function handleSetSale($prodid, $amount, $type){
+    public function handleSetSale($id, $amount, $type){
         if ($this->getUser()->isInRole('admin')) {            
-            $this->productModel->updateSale($prodid, $amount, $type);
+            $this->productModel->updateSale($id, $amount, $type);
             if($this->isAjax()) {
                 $this->invalidateControl('prodPrice');
                 $this->invalidateControl('page-header');
@@ -420,13 +420,13 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    public function handleEditProdAmount($prodid) {        
+    public function handleEditProdAmount($id) {        
         if($this->getUser()->isInRole('admin')){ 
             if($this->isAjax())
             {            
                 $content = $_POST['value'];
 
-                $this->productModel->updateProduct($prodid, 'PiecesAvailable', $content);
+                $this->productModel->updateProduct($id, 'PiecesAvailable', $content);
                 $this->invalidateControl('page-header');
             }
             if(!$this->isControlInvalid('editProdAmount'))

@@ -838,7 +838,9 @@ class SmartPanelPresenter extends BasePresenter {
         foreach ($this->orderModel->loadDeliveryList('') as $key => $value){
             $list[$key] = $value->DeliveryName;
         }
+        if(isset($list)){
         $this->template->deliveryList = $list;
+        }
     }
     
     /**************************************************************************/

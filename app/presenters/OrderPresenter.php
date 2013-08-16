@@ -240,7 +240,8 @@ class OrderPresenter extends BasePresenter {
         $cartForm->addText('zip', 'ZIP:', 40, 100)
                 ->addRule(Form::FILLED);
         $cartForm->addGroup('Shipping');
-        $cartForm->addSelect('shippers', 'by post/delivery service', $shippers);
+        $cartForm->addSelect('shippers', 'by post/delivery service', $shippers)
+                ->setPrompt('-- select shipping --');
                 //->setAttribute('class', ' radio')
               //  ->setRequired('Please select Shipping method');
         if(isset($lowerShippers)) {

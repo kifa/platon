@@ -42,7 +42,7 @@ $configurator->addConfig(__DIR__ . '/config/config.local.neon', $configurator::N
 $container = $configurator->createContainer();
 
 $router = new RouteList;
-
+/*
 Route::addStyle('slug');
 Route::setStyleProperty('slug', Route::FILTER_OUT, function($url) {
     return Strings::webalize($url);
@@ -64,7 +64,7 @@ $router[] = new Route('informace/<spostid>-<slug>[/<lang [a-z]{2}>]', 'Blog:stat
 $router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
 $router[] = new Route('<presenter>/<action>[/<id>][/<lang [a-z]{2}>]', 'Homepage:default');
 
-$container->addService('router', $router);
+$container->addService('router', $router); */
 
 
 

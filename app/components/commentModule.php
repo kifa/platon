@@ -105,7 +105,6 @@ class commentModule extends moduleControl {
    }
 
    protected function createComponentAddCommentForm() {
-        if ($this->presenter->getUser()->isInRole('admin')) {
             $addComment = new Nette\Application\UI\Form;
             $addComment->setTranslator($this->translator);
             $addComment->addText('title', 'Title:')
@@ -122,7 +121,7 @@ class commentModule extends moduleControl {
                     ->setAttribute('data-loading-text', 'Adding...');
             $addComment->onSuccess[] = $this->addCommentFormSubmitted;
             return $addComment;
-        }
+        
     }
 
     /*
@@ -130,8 +129,7 @@ class commentModule extends moduleControl {
     */ 
 
     public function addCommentFormSubmitted($form) {
-        if ($this->presenter->getUser()->isInRole('admin')) {
-
+ 
             $this->productModel->insertComment(
                         $form->values->title, $form->values->content, $form->values->author, $form->values->productid, NULL
                 );
@@ -146,7 +144,6 @@ class commentModule extends moduleControl {
   
 
             $this->presenter->redirect('this');
-        }
     }
     
     

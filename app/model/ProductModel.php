@@ -19,7 +19,7 @@ class ProductModel extends Repository {
         //load only published products
         
         //$id = '2';
-        //return $this->getTable('Product')->select('Product.*,Price.*')->where('CategoryID', $id);
+        //return $this->getTable('product')->select('Product.*,Price.*')->where('CategoryID', $id);
         if($catID==''){
             //return $this->getTable('product')->select('product.ProductID, product.ProductName,
             //    product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*');            
@@ -89,7 +89,7 @@ class ProductModel extends Repository {
             JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
             WHERE product.ProductID=?',$id)->fetch();
-        //return $this->getTable('Product')->select('Product.*,Price.*,PhotoAlbum.*,photo.*')->where('Product.ProductID',$id)->fetch()
+        //return $this->getTable('product')->select('Product.*,Price.*,PhotoAlbum.*,photo.*')->where('Product.ProductID',$id)->fetch()
     }
 
     /*
@@ -151,7 +151,7 @@ class ProductModel extends Repository {
             $update = array(
                 $update => $value
                 );        
-        return $this->getTable('Product')->where('productID',$id)->update($update);
+        return $this->getTable('product')->where('productID',$id)->update($update);
     }
     
     public function updateProductName($id,$value){
@@ -562,6 +562,9 @@ class ProductModel extends Repository {
     }
     
     public function loadUnreadCommentsCount($date){
+        if ($date == NULL) {
+            $date =  date("Y-m-d H:i:s");
+        }
         return $this->getTable('comment')->where('DateOfAdded>',$date)->count();
     }
 }

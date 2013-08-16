@@ -41,6 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {if $delivery}
                         {foreach $delivery as $deliver}
 
                             <tr class="info">
@@ -60,6 +61,7 @@
                                 
                             </tr>                     
                         {/foreach}
+                            {/if}
                         </tbody>
                     </table>
                 </div>
