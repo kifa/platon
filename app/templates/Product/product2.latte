@@ -63,10 +63,13 @@
 <div class="page-header" n:snippet="page-header">
     <h1><span class="prodTitle" n:snippet="prodTitle" n:block="title">{$product->ProductName}</span>
             <small>
-                    {if $product->PiecesAvailable > 5}
+                   {if $product->PiecesAvailable > 5}
             <span class="badge badge-info">{$product->PiecesAvailable}</span>
-                    {else}
+                    {elseif $product->PiecesAvailable > 0}
             <span class="badge badge-warning">{$product->PiecesAvailable} {_'LAST'}</span>
+                    {else}
+            <span class="badge badge-inverse">{_'OUT OF STOCK'}</span>
+                    
                     {/if}
             {if $product->ProductStatusID == 3}
                 <span class="badge badge-inverse"><i class="icon-thumbs-up icon-large"></i> {_'HOT'}</span>
@@ -192,8 +195,8 @@
                     {elseif $product->PiecesAvailable < 1 }
                             <span class="badge badge-inverse span12">
                         {/if}
-                                <span class="span12 text-center">{_"In stock"}</span> <span class="prodAmount span12 text-center" n:snippet="prodAmount">{$product->PiecesAvailable}</span></span>
-                           
+<span class="span12 text-center">{_"In stock"}</span> <span class="prodAmount span12 text-center" n:snippet="prodAmount">{if $product->PiecesAvailable > 0}{$product->PiecesAvailable}{else}0{/if}</span></span>
+                                                      
 
                             </div>
         </div>

@@ -291,7 +291,7 @@ class BlogPresenter extends BasePresenter {
     
     
     
-    public function renderCategory($blogid,$postid) {
+    public function renderCategory($blogid) {
         $this->template->category = $this->blog->loadCategory($blogid);
         if($blogid == NULL) {
         $this->template->posts = $this->blog->loadPosts();

@@ -1,7 +1,7 @@
 
 {block pageheader}
 <div class="page-header">
-        <h1 n:block="title">{$order->OrderID} | {_'Order summary'} <small> {_'Complete summary order'}.</small></h1>
+        <h1 n:block="title">{_'#'}{$order->OrderID} | {_'Order summary'} <small> {_'Complete summary order'}.</small></h1>
 </div>
 
 {/block}
@@ -13,12 +13,12 @@
                 <div class="span12">
                     <p>
                     <i class="icon-spinner progress-striped icon-spin left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
-                {$order->StatusName}
+                {$order->StatusName} - {$order->StatusDescription}
                     </p>
                 </div>
                 <br>
                 <div class="progress progress-striped active span10">
-                    <div class="bar" style="width: 20%"></div>
+                    <div class="bar" style="width: {foreach $statuses as $sid => $status}{if $sid === $order->OrderStatusID}{$status->StatusProgress}0%{/if}{/foreach}"></div>
                 </div>
                 <div class="span12">
                 <ul class="inline">
@@ -35,16 +35,15 @@
     
     <div class="span4">
     <div class="span12">
-<div class="alert alert-block">
+<div class="alert-success alert">
     <p><i class="icon-info-sign"></i><strong> {_'Thank you for your order!'}</strong><br>
-    {_'We are currenty procesing your order. On this page you can see all info about
-    your order, including current progress.'}
+    {_'We are currenty procesing your order.'} {_'Here you can check order status.'} {_'Link to this page has been sent to your email.'}
     </p>
 
 </div>
 <div class="alert alert-block">
     <p><i class="icon-envelope"></i><strong> {_'Questions?'}</strong>
-        <a href="#" class="btn btn-info">{_'Ask anything!'}</a>
+        <a href="#addNote" data-toggel="modal" data-target="#addNote" id="addNoteButton" class="btn btn-primary">{_'Ask anything!'}</a>
     </p>
 </div>
 </div>
@@ -154,13 +153,12 @@
         </div>
         </div>
     <div class="span12">
-        <div class="span3 alert {$order->Note ? 'alert-block' : 'alert-info'}">
+        <div class="span11 alert {$order->Note ? 'alert-block' : 'alert-info'}">
             <div class="span12">
-                <i class="icon-paper-clip left icon-large"></i><strong> {_'Note'}:</strong>
+                <i class="icon-paper-clip left icon-large"></i><strong> {_'Questions & notes'}:</strong>
                     {foreach $notes as $note}
                 <p>{$note->NotesName} - {$note->NotesDescription} - {$note->NotesDate}</p>
                 {/foreach}
-                 <a class="btn" href="#addNote" data-toggel="modal" data-target="#addNote" id="addNoteButton"><i class="icon-large icon-plus-sign"></i> {_"Add note"}</a> 
             </div>
         </div>
     </div>

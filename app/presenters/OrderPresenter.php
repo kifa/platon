@@ -146,7 +146,7 @@ class OrderPresenter extends BasePresenter {
             $ico = HTML::el('i')->class('icon-ok-sign left');
             $message = HTML::el('span', ' ' . $row->ProductName . ' was successfully added to your cart.');
             $message->insert(0, $ico);
-            $this->flashMessage($message, 'alert alert-info');
+            $this->flashMessage($message, 'alert alert-success');
            $this->redirect('Order:cart');
        
         }
@@ -490,7 +490,7 @@ class OrderPresenter extends BasePresenter {
         $ico = HTML::el('i')->class('icon-ok-sign left');
         $message = HTML::el('span', $text);
         $message->insert(0, $ico);
-        $this->flashMessage($message, 'alert alert-info');
+        $this->flashMessage($message, 'alert alert-success');
         
        
             $this->template->track = 1;
