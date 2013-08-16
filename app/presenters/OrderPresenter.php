@@ -509,12 +509,15 @@ class OrderPresenter extends BasePresenter {
         
             $row = $this->orderModel->loadOrder($orderid);
             $adminMail = $this->shopModel->getShopInfo('OrderMail');
+             $shopName = $this->shopModel->getShopInfo('Name');
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrderDone.latte');
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->orderId = $orderid;
             $template->mailOrder = $row->UsersID;
             $template->pass = md5($row->UsersID . $row->OrderID . $row->DateCreated);
+            $template->adminMail = $adminMail;
+            $template->shopName = $shopName;
             
             $mailIT = new mailControl();
             $mailIT->sendSuperMail($row->UsersID, 'Zpráva k Vaší ojednávce', $template, $adminMail);
@@ -524,6 +527,7 @@ class OrderPresenter extends BasePresenter {
         
             $row = $this->orderModel->loadOrder($orderid);
             $adminMail = $this->shopModel->getShopInfo('OrderMail');
+             $shopName = $this->shopModel->getShopInfo('Name');
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/adminOrderDone.latte');
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
@@ -531,6 +535,10 @@ class OrderPresenter extends BasePresenter {
             $template->customer = $row->Name;
             $template->mailOrder = $row->UsersID;
             $template->finalprice = $row->TotalPrice;
+            
+            $template->adminMail = $adminMail;
+            $template->shopName = $shopName;
+            
             if($row->Note !== NULL) {
                 $template->note = $row->Note;
             }

@@ -163,11 +163,15 @@ class HomepagePresenter extends BasePresenter {
     
     protected function sendNoteMail($email, $note) {
 
+            $adminMail = $this->shopModel->getShopInfo('OrderMail');
+            $shopName = $this->shopModel->getShopInfo('Name');
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/contactMail.latte');
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->email = $email;
             $template->note = $note;
+            $template->adminMail = $adminMail;
+            $template->shopName = $shopName;
             
             $orderMail = $this->shopModel->getShopInfo('ContactMail');
             $shopName = $this->shopModel->getShopInfo('Name');

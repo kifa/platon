@@ -220,7 +220,7 @@ class SmartPanelPresenter extends BasePresenter {
         // Tip: In template to make a new page use <pagebreak>
 
         
-        $pdf = new \PdfResponse($template);
+        $pdf = new PdfResponse($template);
         $pdf->multiLanguage;
         
         }
@@ -1310,30 +1310,36 @@ class SmartPanelPresenter extends BasePresenter {
         
             $row = $this->orderModel->loadOrder($orderid);
              $adminMail = $this->shopModel->getShopInfo('OrderMail');
+             $shopName = $this->shopModel->getShopInfo('Name');
+
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrderStatus.latte');
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->orderId = $orderid;
             $template->mailOrder = $row->UsersID;
+            $template->adminMail = $adminMail;
+            $template->shopName = $shopName;
             $template->status = $name;
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($row->UsersID, 'Status objednavky je: ', $template, $adminMail);
+            $mailIT->sendSuperMail($row->UsersID, 'Vaše objednávka má nový status: ', $template, $adminMail);
     }
 
     protected function sendNoteMail($orderid, $note) {
         
             $row = $this->orderModel->loadOrder($orderid);
              $adminMail = $this->shopModel->getShopInfo('OrderMail');
+             $shopName = $this->shopModel->getShopInfo('Name');
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrderNote.latte');
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->orderId = $orderid;
-            //$template->mailOrder = $row->UsersID;
+            $template->adminMail = $adminMail;
+            $template->shopName = $shopName;
             $template->note = $note;
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($row->UserID, 'Zprava k Vaší ojednávce', $template, $adminMail);
+            $mailIT->sendSuperMail($row->UserID, 'Zprava k Vaší objednávce', $template, $adminMail);
     }
 }
 
