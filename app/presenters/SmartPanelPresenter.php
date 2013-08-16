@@ -1320,6 +1320,10 @@ class SmartPanelPresenter extends BasePresenter {
             $template->adminMail = $adminMail;
             $template->shopName = $shopName;
             $template->status = $name;
+            $hash = md5($row->UsersID . $row->OrderID . $row->DateCreated);
+            $args = array($row->OrderID, $hash);
+            $template->link = $this->presenter->link('//Order:orderDone', $args);
+            
             
             $mailIT = new mailControl();
             $mailIT->sendSuperMail($row->UsersID, 'Vaše objednávka má nový status: ', $template, $adminMail);

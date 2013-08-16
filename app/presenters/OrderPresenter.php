@@ -461,7 +461,7 @@ class OrderPresenter extends BasePresenter {
             $ico = HTML::el('i')->class('icon-ok-sign left');
             $message->insert(0, $ico);
             $this->flashMessage($message, 'alert');
-            $this->redirect('this');
+            $this->redirect('Homepage:default');
         }
         else {
        $this->orderid = $orderid;
@@ -524,9 +524,12 @@ class OrderPresenter extends BasePresenter {
             $template->pass = md5($row->UsersID . $row->OrderID . $row->DateCreated);
             $template->adminMail = $adminMail;
             $template->shopName = $shopName;
+            $hash = md5($row->UsersID . $row->OrderID . $row->DateCreated);
+            $args = array($row->OrderID, $hash);
+            $template->link = $this->presenter->link('//Order:orderDone', $args);
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($row->UsersID, 'Zpráva k Vaší ojednávce', $template, $adminMail);
+            $mailIT->sendSuperMail($row->UsersID, 'Zpráva k Vaší objednávce', $template, $adminMail);
     }
     
     protected function sendAdminOrderDoneMail($orderid) {
@@ -550,7 +553,7 @@ class OrderPresenter extends BasePresenter {
             }
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($adminMail, 'Zprava k Vaší ojednávce', $template, $adminMail);
+            $mailIT->sendSuperMail($adminMail, 'Zpráva k Vaší objednávce', $template, $adminMail);
     }
 
 }
