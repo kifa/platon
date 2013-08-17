@@ -148,6 +148,24 @@ class moduleControl extends BaseControl{
        return $document;
    }
    
+   
+   
+   /*****************************************************
+    *           ORDER MODULES
+    */
+   
+   protected function createComponentHeureka() {
+       
+       $heureka = new HeurekaModule();
+       $heureka->setTranslator($this->translator);
+       $heureka->setShop($this->shopModel);
+       $heureka->setOrder($this->orderModel);
+       $heureka->setProduct($this->productModel);
+       $heureka->setCategory($this->categoryModel);
+       return $heureka;
+   }
+   
+   
     /*******************************************************
      * RENDERY
      */
@@ -214,18 +232,25 @@ class moduleControl extends BaseControl{
         $this->template->render();
     }
     
-    public function renderProductModules() {
+    public function renderModules() {
         
         $this->template->setFile(__DIR__ . '/listOfModules.latte');
         
-        try { 
-            foreach ($this->shopModel->loadModules('product') as $id => $component) {
-                $comp = $this->createComponent($component->CompModuleName);
-                $this->addComponent($comp, $component->CompModuleName);
+        $components = $this->shopModel->loadModules('');
+        
+        if ($components !== NULL) {
+            try { 
+                foreach ($components as $id => $component) {
+                    $comp = $this->createComponent($component->CompModuleName);
+                    $this->addComponent($comp, $component->CompModuleName);
+                }
+            }
+            catch (Exception $e) {
+                \Nette\Diagnostics\Debugger::log($e);
             }
         }
-        catch (Exception $e) {
-            \Nette\Diagnostics\Debugger::log($e);
+        else {
+           
         }
         
         $this->template->render();
@@ -246,9 +271,11 @@ class moduleControl extends BaseControl{
              
         }
         else {
-            $text = $this->translator->translate('Module not available: ');
+           $text = $this->translator->translate('Module not available: ');
+           $this->template->comp = NULL;
            $this->presenter->flashMessage($text . $name, 'alert alert-warning');
-           //$this->presenter->redirect('this');
+           
+            //$this->presenter->redirect('this');
         }
         
         $this->template->render();

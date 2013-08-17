@@ -7,7 +7,7 @@
     <PRODUCTNAME>{$product->ProductName}</PRODUCTNAME>
     <PRODUCT>{$product->ProductName}</PRODUCT>
     <DESCRIPTION>{$product->ProductShort}</DESCRIPTION>
-    <URL>{link //Product:product $product->ProductID, $product->ProductName}</URL>
+    <URL>{plink //Product:product $product->ProductID, $product->ProductName}</URL>
     <IMGURL>{$baseUrl}/images/{$product->PhotoAlbumID}/300-{$product->PhotoURL}</IMGURL>
     {if $product->Video}
     <VIDEO_URL>{$product->Video}</VIDEO_URL>

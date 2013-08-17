@@ -1218,29 +1218,7 @@ class SmartPanelPresenter extends BasePresenter {
    
     }
     
-     public function handleXMLFeed() {
-        try {
-            $template = $this->createTemplate();
-            $template->setFile($this->context->parameters['appDir'] . '/templates/components/heureka.latte');
-            $template->registerFilter(new Nette\Latte\Engine);
-            $template->registerHelperLoader('Nette\Templating\Helpers::loader');
 
-            $template->products = $this->productModel->loadCatalog("");
-            $template->category = $this->categoryModel->loadCategory("");
-           
-            $template->save($this->context->parameters['wwwDir'] . '/heureka.xml');
-            $this->flashMessage('Heureka XML feed sucessfully generated.', 'alert alert-success');
-        }
-        catch(Exception $e) {
-            
-                   \Nette\Diagnostics\Debugger::log($e);
-                   $this->flashMessage('XML feed crashed. I´m so sorry.', 'alert alert-danger');
-
-        }
-        $this->redirect('this');
-   
-    }
-    
     public function handleDownloadXML() {
         try {
          $API = $this->shopModel->getShopInfo('API');

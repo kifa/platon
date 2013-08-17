@@ -1,0 +1,12 @@
+{if $status == 1}
+<div class="alert alert-info">
+    <strong><i class="icon-ok-sign"></i> {$name}</strong>
+    <p>{$desc}</p>
+    <a n:href="updateXML!" class="btn btn-primary">{_'Update'} HEUREKA XML</a>
+    <a class="btn btn-warning" n:href="uninstallModule">{_'Deactivate Module'}</a>
+    <hr>
+    <p><strong>{_'Settings'} - {_'current key:'} {$key}</strong></p>
+    {control updateForm}
+    
+</div>
+{/if}

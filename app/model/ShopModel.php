@@ -175,7 +175,12 @@ class ShopModel extends Repository {
     }
     
     public function loadModules($type) {
-        return $this->getTable('module')->where('ModuleType', $type)->fetchPairs('ModuleID');
+        if ($type == '') {
+            $return = $this->getTable('module')->order('ModuleType, StatusID, ModuleName')->fetchPairs('ModuleID');
+        }else {
+            $return = $this->getTable('module')->where('ModuleType', $type)->fetchPairs('ModuleID');
+            }
+        return $return;
     }
 
 

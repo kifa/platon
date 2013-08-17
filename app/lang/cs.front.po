@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-08-16 11:06:04
+# Created: 2013-08-17 11:18:36
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-08-16 11:06+0200\n"
+"PO-Revision-Date: 2013-08-17 11:18+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -21,6 +21,9 @@ msgstr " Komentář "
 msgid " Doc "
 msgstr "Dokumentace"
 
+msgid " Order has been successfully sent."
+msgstr "Objednávka byla úspěšně přijata."
+
 msgid " Photo "
 msgstr " Fotka "
 
@@ -38,6 +41,9 @@ msgstr " byla úspěšně smazána."
 
 msgid " was sucessfully uploaded"
 msgstr " byla úspěšně nahrána"
+
+msgid "-- select shipping --"
+msgstr "-- vyberte dopravu --"
 
 msgid "--No parent--"
 msgstr "-- žádná nadřazená --"
@@ -65,6 +71,9 @@ msgstr "Účet"
 
 msgid "Account Info"
 msgstr "Informace o účtu"
+
+msgid "Activate Module"
+msgstr "Instalovat modul"
 
 msgid "Add Category"
 msgstr "Přidat kategorii"
@@ -321,6 +330,9 @@ msgstr "Smazat"
 msgid "Delete Category"
 msgstr "Smazat kategorii"
 
+msgid "Delete Specs"
+msgstr "Smazat specifikace"
+
 msgid "Delete Text"
 msgstr "Smazat text"
 
@@ -498,6 +510,9 @@ msgstr "Zde"
 msgid "Here is all you need!"
 msgstr "Zde naleznete vše potřebné"
 
+msgid "Here you can check order status."
+msgstr "Zde můžete sledovat stav Vaší objednávky."
+
 msgid "Here you can complete your order. Just fill fields bellow."
 msgstr "Zde můžete dokončit vaši objednávku. Jen vyplňte..."
 
@@ -567,6 +582,9 @@ msgstr "Měla by být méně než cena"
 msgid "Item price"
 msgstr "Cena"
 
+msgid "KEY:"
+msgstr "KLÍČ:"
+
 msgid "Keep me signed in"
 msgstr "Zůstat přihlášen"
 
@@ -576,8 +594,14 @@ msgstr "POSLEDNÍ"
 msgid "Latest Comments"
 msgstr "Nejnovější komentáře"
 
+msgid "Latest Comments & Reviews"
+msgstr "Nejnovější komentáře a recenze"
+
 msgid "Latest Orders"
 msgstr "Nejnovější objednávky"
+
+msgid "Link to this page has been sent to your email."
+msgstr "Odkaz na tuto stránku naleznete v emailu."
 
 msgid "Logout"
 msgstr "Odhlásit se"
@@ -617,6 +641,9 @@ msgstr "Nové funkce"
 
 msgid "News"
 msgstr "Zprávy"
+
+msgid "Next Order"
+msgstr "Další objednávka"
 
 msgid "Next progress"
 msgstr "Další postup"
@@ -693,6 +720,9 @@ msgstr "Prosím zadejte email."
 msgid "Please enter your API key."
 msgstr "Prosím zadejte svůj API klíč."
 
+msgid "Please enter your Heureka Key."
+msgstr "Prosím zadejte Heureka KLÍČ"
+
 msgid "Please enter your password."
 msgstr "Prosím zadejte své heslo"
 
@@ -768,6 +798,9 @@ msgstr "Zveřejnit text"
 msgid "Question:"
 msgstr "Otázka:"
 
+msgid "Questions & notes"
+msgstr "Otázky a poznámky"
+
 msgid "Questions?"
 msgstr "Otázky?"
 
@@ -800,6 +833,9 @@ msgstr "VYPRODÁNO"
 
 msgid "Sale"
 msgstr "Sleva"
+
+msgid "Save Specs"
+msgstr "Uložit specifikace"
 
 msgid "Save description"
 msgstr "Uložit popis"
@@ -930,6 +966,9 @@ msgstr "Titulek:"
 msgid "To add photos, upload them and then \"Click to edit\" and drag photos to editor."
 msgstr "Pro přidání fotky ji nejprve nahrajte. Následně \"Klikněte pro vložení textu\" a fotky přetáhněte do editoru."
 
+msgid "To remove this module visit"
+msgstr "Pro odebrání modulu navštivte "
+
 msgid "Total"
 msgstr "Celkem"
 
@@ -966,6 +1005,9 @@ msgstr "Nahrát logo eshopu"
 msgid "Users"
 msgstr "Uživatelé"
 
+msgid "Value:"
+msgstr "Hodnota:"
+
 msgid "Video"
 msgstr "Video"
 
@@ -977,6 +1019,9 @@ msgstr "Prohlédnout galerii"
 
 msgid "Warehouse"
 msgstr "Sklad"
+
+msgid "We are currenty procesing your order."
+msgstr "Právě připravujeme Vaše zboží."
 
 msgid "We will respond as soon as possible."
 msgstr "Odpovíme tak rychle, jak to jen půjde."
@@ -1053,426 +1098,6 @@ msgstr "ks"
 msgid "personal pick up"
 msgstr "osobní převzetí"
 
-msgid "-- select shipping --"
-msgstr "-- vyberte dopravu --"
-
-msgid "Domů"
-msgstr ""
-
-msgid "Smartphones"
-msgstr ""
-
-msgid "Ta-ble-ty"
-msgstr ""
-
-msgid "Washmashine"
-msgstr ""
-
-msgid "Je podporován pouze soubor JPG, PNG a GIF"
-msgstr ""
-
-msgid "Maximálně 2MB"
-msgstr ""
-
 msgid "Producer"
-msgstr ""
-
-msgid "g"
-msgstr ""
-
-msgid "mAh"
-msgstr ""
-
-msgid "px"
-msgstr ""
-
-msgid "\""
-msgstr ""
-
-msgid "To remove module visit"
-msgstr ""
-
-msgid "SmartPanel"
-msgstr ""
-
-msgid "To remove this module visit"
-msgstr ""
-
-msgid "Představujeme BIRNE SHOP!"
-msgstr ""
-
-msgid "Začněte již dnes"
-msgstr ""
-
-msgid "Nejdou obchody? BIRNE SHOP!"
-msgstr ""
-
-msgid "Zjistit více"
-msgstr ""
-
-msgid "Radost prodávat? BIRNE SHOP!"
-msgstr ""
-
-msgid "Přesvědčete se"
-msgstr ""
-
-msgid "Smart Panel"
-msgstr ""
-
-msgid "Latest Comments & Reviews"
-msgstr ""
-
-msgid "Nové heslo:"
-msgstr ""
-
-msgid "Nové heslo musí mít alespoň %d znaků."
-msgstr ""
-
-msgid "Potvrzení hesla:"
-msgstr ""
-
-msgid "Nové heslo je nutné zadat ještě jednou pro potvrzení."
-msgstr ""
-
-msgid "Zadná hesla se musejí shodovat."
-msgstr ""
-
-msgid "Změnit heslo"
-msgstr ""
-
-msgid "Personal pick up | 0,-"
-msgstr ""
-
-msgid "Czech postal service | 40,-"
-msgstr ""
-
-msgid "DPD | 160,-"
-msgstr ""
-
-msgid "Zásilkovna | 39,-"
-msgstr ""
-
-msgid "cz - Beroun | 39,-"
-msgstr ""
-
-msgid "cz - Brno, Jiráskova | 39,-"
-msgstr ""
-
-msgid "cz - Brno, Komín - Závist | 39,-"
-msgstr ""
-
-msgid "cz - Brno, Královo Pole | 39,-"
-msgstr ""
-
-msgid "cz - Brno, Mendlovo náměstí | 39,-"
-msgstr ""
-
-msgid "cz - Brno, Merhautova | 39,-"
-msgstr ""
-
-msgid "cz - Brno, Nové Sady | 39,-"
-msgstr ""
-
-msgid "cz - České Budějovice, Otakarova | 39,-"
-msgstr ""
-
-msgid "cz - Frýdek-Místek | 39,-"
-msgstr ""
-
-msgid "cz - Havířov, Ostravská | 39,-"
-msgstr ""
-
-msgid "cz - Holešov | 39,-"
-msgstr ""
-
-msgid "cz - Hradec Králové | 39,-"
-msgstr ""
-
-msgid "cz - Chrudim | 39,-"
-msgstr ""
-
-msgid "cz - Jihlava | 39,-"
-msgstr ""
-
-msgid "cz - Karlovy Vary | 39,-"
-msgstr ""
-
-msgid "cz - Kladno | 39,-"
-msgstr ""
-
-msgid "cz - Kolín | 39,-"
-msgstr ""
-
-msgid "cz - Kroměříž | 39,-"
-msgstr ""
-
-msgid "cz - Kutná Hora | 39,-"
-msgstr ""
-
-msgid "cz - Liberec, 5. května | 39,-"
-msgstr ""
-
-msgid "cz - Mladá Boleslav | 39,-"
-msgstr ""
-
-msgid "cz - Most, J. Skupy | 39,-"
-msgstr ""
-
-msgid "cz - Náchod | 39,-"
-msgstr ""
-
-msgid "cz - Olomouc, centrum | 39,-"
-msgstr ""
-
-msgid "cz - Olomouc, Nová Ulice | 39,-"
-msgstr ""
-
-msgid "cz - Ostrava, Mariánské Hory | 39,-"
-msgstr ""
-
-msgid "cz - Ostrava, Nádražní | 39,-"
-msgstr ""
-
-msgid "cz - Ostrava, Poruba | 39,-"
-msgstr ""
-
-msgid "cz - Pardubice | 39,-"
-msgstr ""
-
-msgid "cz - Písek | 39,-"
-msgstr ""
-
-msgid "cz - Plzeň, u centra Plaza | 39,-"
-msgstr ""
-
-msgid "cz - Praha 1, Klimentská | 39,-"
-msgstr ""
-
-msgid "cz - Praha 1, Národní třída | 39,-"
-msgstr ""
-
-msgid "cz - Praha 10, Starostrašnická | 39,-"
-msgstr ""
-
-msgid "cz - Praha 14, Černý Most | 39,-"
-msgstr ""
-
-msgid "cz - Praha 2, Hlavní nádraží | 39,-"
-msgstr ""
-
-msgid "cz - Praha 3, Vinohrady | 39,-"
-msgstr ""
-
-msgid "cz - Praha 3, Želivského | 39,-"
-msgstr ""
-
-msgid "cz - Praha 4, Braník | 39,-"
-msgstr ""
-
-msgid "cz - Praha 4, Pražského Povstání | 39,-"
-msgstr ""
-
-msgid "cz - Praha 4, U Vyšehradu | 39,-"
-msgstr ""
-
-msgid "cz - Praha 5, Smíchovské nádraží | 39,-"
-msgstr ""
-
-msgid "cz - Praha 6, Evropská | 39,-"
-msgstr ""
-
-msgid "cz - Praha 6, Hradčanská | 39,-"
-msgstr ""
-
-msgid "cz - Praha 6, Řepy | 39,-"
-msgstr ""
-
-msgid "cz - Praha 7, Jateční | 39,-"
-msgstr ""
-
-msgid "cz - Praha 8,  Florenc | 39,-"
-msgstr ""
-
-msgid "cz - Praha 8, Ládví | 39,-"
-msgstr ""
-
-msgid "cz - Praha 8, Sokolovská | 39,-"
-msgstr ""
-
-msgid "cz - Praha 9, Hloubětín | 39,-"
-msgstr ""
-
-msgid "cz - Praha 9, Ocelářská (Depo) | 39,-"
-msgstr ""
-
-msgid "cz - Rakovník | 39,-"
-msgstr ""
-
-msgid "cz - Rudná | 39,-"
-msgstr ""
-
-msgid "cz - Teplice, Masarykova | 39,-"
-msgstr ""
-
-msgid "cz - Trutnov | 39,-"
-msgstr ""
-
-msgid "cz - Třebíč | 39,-"
-msgstr ""
-
-msgid "cz - Třinec | 39,-"
-msgstr ""
-
-msgid "cz - Uherské Hradiště | 39,-"
-msgstr ""
-
-msgid "cz - Uherský Brod | 39,-"
-msgstr ""
-
-msgid "cz - Ústí nad Labem, Revoluční | 39,-"
-msgstr ""
-
-msgid "cz - Vyškov | 39,-"
-msgstr ""
-
-msgid "cz - Zlín, T. G. Masaryka | 39,-"
-msgstr ""
-
-msgid "cz - Znojmo | 39,-"
-msgstr ""
-
-msgid "cz - Žatec | 39,-"
-msgstr ""
-
-msgid "de - Zittau (DE) | 39,-"
-msgstr ""
-
-msgid "sk - Banská Bystrica, Švermova | 39,-"
-msgstr ""
-
-msgid "sk - Banská Bystrica, Tajovského | 39,-"
-msgstr ""
-
-msgid "sk - Bratislava, Cyprichová | 39,-"
-msgstr ""
-
-msgid "sk - Bratislava, Petržalka | 39,-"
-msgstr ""
-
-msgid "sk - Bratislava, Podunajské Biskupice | 39,-"
-msgstr ""
-
-msgid "sk - Bratislava, Vajnorská | 39,-"
-msgstr ""
-
-msgid "sk - Dunajská Streda | 39,-"
-msgstr ""
-
-msgid "sk - Galanta | 39,-"
-msgstr ""
-
-msgid "sk - Komárno | 39,-"
-msgstr ""
-
-msgid "sk - Košice, Toryská | 39,-"
-msgstr ""
-
-msgid "sk - Liptovský Mikuláš | 39,-"
-msgstr ""
-
-msgid "sk - Martin | 39,-"
-msgstr ""
-
-msgid "sk - Nitra, Mlynská | 39,-"
-msgstr ""
-
-msgid "sk - Prešov | 39,-"
-msgstr ""
-
-msgid "sk - Ružomberok | 39,-"
-msgstr ""
-
-msgid "sk - Spišská Nová Ves | 39,-"
-msgstr ""
-
-msgid "sk - Trenčín | 39,-"
-msgstr ""
-
-msgid "sk - Trnava | 39,-"
-msgstr ""
-
-msgid "sk - Žilina, Rosinská | 39,-"
-msgstr ""
-
-msgid "Cash | 0,-"
-msgstr ""
-
-msgid "Bankwire | 50,-"
-msgstr ""
-
-msgid "Vypršel časový limit, odešlete formulář znovu"
-msgstr ""
-
-msgid "To continue, you need to be logged in"
-msgstr ""
-
-msgid "Uživatelské jméno:"
-msgstr ""
-
-msgid "You are logged in as admin. You can simply edit this text by clicking on Title, Content or panel bellow etc. More info?"
-msgstr ""
-
-msgid "Rakety"
-msgstr ""
-
-msgid "Míče"
-msgstr ""
-
-msgid "Tašky a batohy"
-msgstr ""
-
-msgid "Here you can edit all Spec assigned to this product. Edit values and then click Save Spec bellow."
-msgstr ""
-
-msgid "Délka"
-msgstr ""
-
-msgid "Value:"
-msgstr ""
-
-msgid "Save Specs"
-msgstr ""
-
-msgid "Check all specification you want to delete and then click Delete specs bellow."
-msgstr ""
-
-msgid "Delete Specs"
-msgstr ""
-
-msgid "mm"
-msgstr ""
-
-msgid "kg"
-msgstr ""
-
-msgid "Váha"
-msgstr ""
-
-msgid "Styl hry"
-msgstr ""
-
-msgid "Úroveň hráče"
-msgstr ""
-
-msgid "Tvar hlavy"
-msgstr ""
-
-msgid "Technologie rámu"
-msgstr ""
-
-msgid "Materiál"
-msgstr ""
-
-msgid "Eshop"
-msgstr ""
+msgstr "Výrobce"
 
