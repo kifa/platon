@@ -1,1 +1,23 @@
-Total view: {$view}
+<table class="table">
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>View</th>
+                </tr>
+              </thead>
+              <tbody>
+{foreach $view as $vi}
+                  <tr>
+{foreach $vi as $id => $v}
+                      <td>
+                       {$v}
+                      </td>
+{/foreach}
+                      </tr>
+{/foreach}                
+              </tbody>
+            </table>
+
+Source: {foreach $view2 as $id => $vi2}
+{dump $vi2}
+{/foreach}

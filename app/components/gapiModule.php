@@ -30,7 +30,6 @@ class gapiModule extends moduleControl {
     private $categoryModel;
     private $productModel;
 
-    private $analytic;
     private $gapisession;
 
     public function setTranslator($translator) {
@@ -65,68 +64,17 @@ class gapiModule extends moduleControl {
 
     return $template;
     }
-    
 
-    
-    protected function createComponentInstallModule() {
-        if ($this->presenter->getUser()->isInRole('admin')) {
-            $installForm = new Nette\Application\UI\Form;
-            $installForm->setTranslator($this->translator);
-            $installForm->addText('api', 'KEY:')
-                    ->setRequired('Please enter your Heureka Key.')
-                    ->setAttribute('class', 'span12');
-            $installForm->addSubmit('install', 'Install module')
-                    ->setAttribute('class', 'btn-primary upl span12')
-                    ->setAttribute('data-loading-text', 'Installing...');
-            $installForm->onSuccess[] = $this->installModuleSubmitted;
-            return $installForm;
-        }
-    }
-    
-    
-    public function installModuleSubmitted($form) {
-        if ($this->presenter->getUser()->isInRole('admin')) {
-            if($this->shopModel->getShopInfo('heurekaKEY') == NULL) {
-            $this->shopModel->insertShopInfo('heurekaKEY', $form->values->api);
-                }
-            try {
-                $this->installModule();
-                $this->shopModel->updateModuleStatus('ulozenka', 1);
-            }catch(Exception $e) {   
-                   \Nette\Diagnostics\Debugger::log($e);
-            }          
-            
-            $this->presenter->redirect('this');
-        }
-    }
-    
     
     /*****************************************************************
     * HANDLE
     */
     
    protected function installModule() {
-      /* if($this->shopModel->isModuleActive('zasilkovna')) {
-           $this->presenter->flashMessage('Module already installed.', 'alert alert-warning');
-           return TRUE;
-       }
-       else {}*/
-       
-       
-      if($this->shopModel->getShopInfo('gapiAPI')) {
-                try {
-                    
-                    
-                    
-                    $this->presenter->flashMessage('Module installation OK!', 'alert alert-success');
-                    
-                } catch(Exception $e) {   
-                   \Nette\Diagnostics\Debugger::log($e);
-                }          
-               }   
-        else {
-            $this->presenter->flashMessage('Module installation OK, please ENTER your API key!', 'alert alert-warning');
-        }        
+      
+                    //$this->getResults($this->analytics, 'UA-42741537-1');
+                   
+                     
    }
    
    public function handleUninstallModule() {
@@ -135,6 +83,7 @@ class gapiModule extends moduleControl {
             $this->shopModel->updateModuleStatus('gapi', 2);
            
             $this->shopModel->deleteShopInfo('gapiAPI');
+            $this->shopModel->deleteShopInfo('gapiTOKEN');
            
        }
        else {
@@ -154,35 +103,50 @@ class gapiModule extends moduleControl {
     
    public function renderAdmin() {
         
-        $this->template->setFile(__DIR__ . '/heurekaAdminModule.latte');
-        $info = $this->shopModel->loadModuleByName('heureka');
+        $this->template->setFile(__DIR__ . '/gapiAdminModule.latte');
+        $info = $this->shopModel->loadModuleByName('gapi');
        
         $this->template->name = $info->ModuleName;
         $this->template->desc = $info->ModuleDescription;
         $this->template->status = $info->StatusID; 
-        $this->template->key = $this->shopModel->getShopInfo('heurekaKEY');
         $this->template->render();
     }
     
     public function renderInstall() {
+
+        $this->template->setFile(__DIR__ . '/gapiInstallModule.latte');
         
-        $this->template->setFile(__DIR__ . '/heurekaInstallModule.latte');
-        
-        $info = $this->shopModel->loadModuleByName('heureka');
+        $info = $this->shopModel->loadModuleByName('gapi');
        
         $this->template->name = $info->ModuleName;
         $this->template->desc = $info->ModuleDescription;
         $this->template->status = $info->StatusID; 
+        
+        $gapi = new Birne\Gapi\Gapi();
+        $gapi->setParent($this);
+        $this->gapisession->token = NULL;
+        $gapi->setGAPI($this->gapisession->token);
+        
+         if($gapi->getAnalytics() !== NULL){
+
+                        $return = $gapi->getGapiParam();
+
+                        $this->shopModel->insertShopInfo('gapiAPI', $return[1]);
+                        $this->shopModel->insertShopInfo('gapiTOKEN', $return[0]);
+                        $this->shopModel->updateModuleStatus('gapi', 1);
+                        $this->gapisession->token = $return[0];
+                        
+                        $this->presenter->redirect('this');
+                    }
+        
+
                 
         $this->template->render();
     }
 
     
     public function renderSmartPanel() {
-        
-        
-        
-        //$this->flflf();
+
         $this->template->setFile(__DIR__ . '/gapiSmartPanel.latte');
         $code = $this->shopModel->getShopInfo('gapiAPI');
         $token = $this->shopModel->getShopInfo('gapiTOKEN');
@@ -190,49 +154,41 @@ class gapiModule extends moduleControl {
         $gapi = new Birne\Gapi\Gapi();
         $gapi->setParent($this);
 
-        if($token == 'null') {
-        $gapi->setGAPI( $this->gapisession->token);
-        }
-        else {
-            $gapi->setGAPI($token, $code);
-        }
+        $gapi->setGAPI($token, $code);
+        $id = '39033320';
+        
+        $optParams = array(
+                'dimensions' => 'ga:source',
+                'max-results' => '10',
+                'sort' => '-ga:visits');
+        $metrics = 'ga:visits';
+        
+        $params = array(
+            'ga:'. $id,
+            '2012-03-03',
+            '2013-03-03',
+            $metrics,
+            $optParams,
+            );
         
         
+        $optParams2 = array(
+                'dimensions' => 'ga:productName',
+                'max-results' => '100');
+        $metrics2 = 'ga:itemsPerPurchase';
+        
+        $params2 = array(
+            'ga:'. $id,
+            '2012-03-03',
+            '2013-03-03',
+            $metrics2,
+            $optParams2);
         
         
-        //$this->getResults($this->analytics, 'UA-42741537-1');
-        if($gapi->getAnalytics() !== NULL){
-        
-/*            $return = $gapi->getGapiParam();
-
-            $this->shopModel->setShopInfo('gapiAPI', $return[1]);
-            $this->shopModel->setShopInfo('gapiTOKEN', $return[0]);
-            $this->gapisession->token = $return[0];
-  */          $id = '39033320';
-            
-            $this->template->view = $gapi->respond($id);
-            
-        }
-
+        $this->template->view = $gapi->respond($params);
+        $this->template->view2 = $gapi->respond($params2);
         $this->template->render();
         
           
     }
-    public function getResults($analytics, $profileId) {
-
-            $optParams = array(
-                'dimensions' => 'ga:source',
-                'max-results' => '100');
-
-
-            $metrics = 'ga:visits';
-
-            return $analytics->data_ga->get(
-               'ga:' . $profileId,
-               '2012-03-03',
-               '2013-03-03',
-               $metrics);
-
-
-        }
 }

@@ -41,7 +41,7 @@ class Gapi extends \Nette\Application\UI\Control {
             // client id, client secret, and to register your redirect uri.
             $client->setClientId('972136424126-sapavicddib7bqhljp04gftm48a36m11.apps.googleusercontent.com');
             $client->setClientSecret('gxkfZbDBM4cIUFPAKqhimZaZ');
-            $client->setRedirectUri('http://localhost/platon/www/smart-panel/stats');
+            $client->setRedirectUri('http://localhost/platon/www/smart-panel/modules');
             $client->setDeveloperKey('AIzaSyAICFV8fFpWser_tTd2P5pSA0lzk_zOrps');
             $client->setScopes(array('https://www.googleapis.com/auth/analytics.readonly'));
 
@@ -65,7 +65,7 @@ class Gapi extends \Nette\Application\UI\Control {
             
             if (!$client->getAccessToken()) {
               $authUrl = $client->createAuthUrl();
-              print "<a class='login' href='$authUrl'>Connect Me!</a>";
+              print "<a class='btn btn-primary' href='$authUrl'>Activate Module</a>";
 
             } 
             
@@ -86,9 +86,9 @@ class Gapi extends \Nette\Application\UI\Control {
             return array($this->token, $this->code);
         }
 
-        public function respond($id) {
+        public function respond($params) {
                 // $id = $this->getFirstprofileId($this->analytics);
-                $result = $this->getResults($this->analytics, $id);
+                $result = $this->getResults($this->analytics, $params);
 
                 return $this->printResults($result);
         }
@@ -126,21 +126,14 @@ class Gapi extends \Nette\Application\UI\Control {
           }
         }
 
-        public function getResults($analytics, $profileId) {
+        public function getResults($analytics, $params) {
 
-            $optParams = array(
-                'dimensions' => 'ga:source',
-                'max-results' => '100');
-
-
-            $metrics = 'ga:visits';
-
-            
-            return $analytics->data_ga->get(
-               'ga:' . $profileId,
-               '2012-03-03',
-               '2013-03-03',
-               $metrics);
+        return $analytics->data_ga->get(
+               $params[0],
+               $params[1],
+               $params[2],
+               $params[3],
+               $params[4]);
 
 
         }
@@ -151,7 +144,7 @@ class Gapi extends \Nette\Application\UI\Control {
             $rows = $results->getRows();
             $visits = $rows[0][0];
 
-            return $profileName . '-' . $visits;
+            return $rows;
 
           } else {
             return '<p>No results found.</p>';
