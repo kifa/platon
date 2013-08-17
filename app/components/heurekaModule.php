@@ -190,6 +190,39 @@ class heurekaModule extends moduleControl {
    }
 
 
+   public function actionOrder($orderid, $statusID) {
+       if($this->shopModel->isModuleActive('heureka')) {
+            $products = $this->orderModel->loadOrderProduct($orderid);
+            $order = $this->orderModel->loadOrder($orderid);
+            
+            
+            $key = $this->shopModel->getShopInfo('heurekaKEY');
+            $heurekaURL = 'http://www.heureka.cz';
+            
+            $url = '/direct/dotaznik/objednavka.php?id=' . $key . '&email=' . $order->UsersID;
+            foreach ($products as $id => $product) {
+                $url .= '&produkt[]=' . $product->ProductName;
+            }
+        
+        
+        $fp = fsockopen('www.heureka.cz', 80, $errno, $errstr, 5);
+        if (!$fp) {
+            \Nette\Diagnostics\Debugger::log($errstr . ' (' . $errno . ')');
+        } else {
+            $return = '';
+            $out = "GET " . $url . " HTTP/1.1\r\n" . 
+                "Host: www.heureka.cz\r\n" . 
+                "Connection: Close\r\n\r\n";
+            fputs($fp, $out);
+            while (!feof($fp)) {
+                $return .= fgets($fp, 128);
+            }
+            fclose($fp);
+            
+            \Nette\Diagnostics\Debugger::log($return);
+            }
+       }
+   }
    /***********************************************************************
      * RENDERY
      */

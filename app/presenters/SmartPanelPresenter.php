@@ -64,12 +64,27 @@ class SmartPanelPresenter extends BasePresenter {
         return $mailControl;
     }
 
-    public function handleSetStatus($orderid, $statusID, $name) {
+    public function handleSetStatus($orderid, $statusID, $name, $progress) {
         
-           
             $this->orderModel->setStatus($orderid, $statusID);
             
-            $message = Html::el('span', ' Order status in now: ' . $name);
+            
+            if($progress == 10) {
+                
+                $module = $this->createComponentModuleControl();
+                $module->actionOrder($orderid, $statusID);
+            }
+            else {
+                try {
+                        $this->sendStatusMail($orderid, $name);
+                    }
+                catch (Exception $e) {
+                       \Nette\Diagnostics\Debugger::log($e);
+                }
+            }
+            
+            $text = $this->translator->translate('Order status in now:');
+            $message = Html::el('span', ' ' . $text . ' ' . $name);
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
              if ($statusID !== 0) {
@@ -88,12 +103,6 @@ class SmartPanelPresenter extends BasePresenter {
                 $this->redirect('this');
             }
             
-            try {
-                    $this->sendStatusMail($orderid, $name);
-                }
-            catch (Exception $e) {
-                   \Nette\Diagnostics\Debugger::log($e);
-            }
     }
 
     protected function createComponentPasswordForm() {
@@ -552,6 +561,7 @@ class SmartPanelPresenter extends BasePresenter {
         if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
         } else {
+                            
             $this->orderModel->updateOrderRead($orderid, 1);
             $this->template->products = $this->orderModel->loadOrderProduct($orderid);
             $this->template->order = $this->orderModel->loadOrder($orderid);
@@ -1218,34 +1228,6 @@ class SmartPanelPresenter extends BasePresenter {
    
     }
     
-
-    public function handleDownloadXML() {
-        try {
-         $API = $this->shopModel->getShopInfo('API');
-         $file = file_get_contents('http://www.zasilkovna.cz/api/v2/' . $API . '/branch.xml');
-         
-        
-        $soubor = fopen($this->context->parameters['appDir'] . "/zasilkovna.xml", "w+");
-        fwrite($soubor, $file);
-        fclose($soubor);
-        
-        $xml = simplexml_load_file($this->context->parameters['appDir'] . "/zasilkovna.xml");
-        
-        foreach ($xml->branches->branch as $branch) {
-            dump($branch->name);
-            dump($branch->nameStreet);
-            
-        }
-        
-        }
-        catch(Exception $e) {   
-                   \Nette\Diagnostics\Debugger::log($e);
-                   $this->flashMessage('XML feed crashed. I´m so sorry.', 'alert alert-danger');
-        }
-        
-        //$this->redirect('this');
-    }
-
     public function renderDefault() {
         if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
@@ -1278,7 +1260,6 @@ class SmartPanelPresenter extends BasePresenter {
         if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
         } else {
-            
                       
         }
     }

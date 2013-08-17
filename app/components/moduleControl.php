@@ -166,9 +166,29 @@ class moduleControl extends BaseControl{
    }
    
    
+   /*********************************************************
+    *                   ACTIONS
+    ********************************************************/
+   
+    public function actionOrder($orderid, $statusID) {
+        $components = $this->shopModel->loadModules('order');
+
+        if($components !== FALSE) {
+             foreach ($components as $id => $component) {
+                $comp = $this->createComponent($component->CompModuleName);
+                try {
+                    $comp->actionOrder($orderid, $statusID);
+                } catch (Exception $e) {
+                         \Nette\Diagnostics\Debugger::log($e);
+                    }
+                }
+            }
+    }
+
+
     /*******************************************************
-     * RENDERY
-     */
+     *                   RENDERY
+     ******************************************************/
     
    
     

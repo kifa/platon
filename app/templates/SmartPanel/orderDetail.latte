@@ -53,7 +53,7 @@
                 <ul class="inline">
                     {foreach $statuses as $sid => $status}
                     {if !($iterator->isFirst())}
-                    <li>{if $sid != $order->OrderStatusID}<a href="{plink setStatus! $order->OrderID, $sid, $status->StatusName}" class="ajax">{/if}{$status->StatusName}
+                    <li>{if $sid != $order->OrderStatusID}<a href="{plink setStatus! $order->OrderID, $sid, $status->StatusName, $status->StatusProgress}" class="ajax">{/if}{$status->StatusName}
                         {if !($iterator->isLast())}<i class="icon-arrow-right"></i>{/if}{if $iterator->isLast()}<i class="icon-ok"></i>{/if}{if $sid != $order->OrderStatusID}</a>{/if}</li>
                     {/if}
                     {/foreach}
