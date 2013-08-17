@@ -116,11 +116,7 @@ class gapiModule extends moduleControl {
 
         $this->template->setFile(__DIR__ . '/gapiInstallModule.latte');
         
-        $info = $this->shopModel->loadModuleByName('gapi');
-       
-        $this->template->name = $info->ModuleName;
-        $this->template->desc = $info->ModuleDescription;
-        $this->template->status = $info->StatusID; 
+        
         
         $gapi = new Birne\Gapi\Gapi();
         $gapi->setParent($this);
@@ -131,16 +127,25 @@ class gapiModule extends moduleControl {
 
                         $return = $gapi->getGapiParam();
 
+                        try {
                         $this->shopModel->insertShopInfo('gapiAPI', $return[1]);
                         $this->shopModel->insertShopInfo('gapiTOKEN', $return[0]);
                         $this->shopModel->updateModuleStatus('gapi', 1);
-                        $this->gapisession->token = $return[0];
+                        $this->gapisession->token = $return[0]; }
+                        catch (Exception $e) {
+                            \Nette\Diagnostics\Debugger::log($e);
+                        }
                         
-                        $this->presenter->redirect('this');
+                        //$this->presenter->redirect('SmartPanel:modules');
                     }
         
 
-                
+                    
+        $info = $this->shopModel->loadModuleByName('gapi');
+       
+        $this->template->name = $info->ModuleName;
+        $this->template->desc = $info->ModuleDescription;
+        $this->template->status = $info->StatusID;         
         $this->template->render();
     }
 
