@@ -54,21 +54,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->cart = $this->getSession('cart'.$salt);
         $salt = md5($this->getUser()->getId());
         $this->usertracking = $this->getSession('user'.$salt);
+        
+        if(!isset($this->gapisession)){
         $this->gapisession = $this->getSession('gapitoken');
+        }
     }
     
     public function injectProductModel(ProductModel $productModel) {
         $this->productModel = $productModel;
     }
     
-
-    private function flflf() {
-
-        $analy = new Birne\Gapi\Gapi($this->gapisession->token);
-       
-        dump($analy);
-        exit();
-    }
 
     public function handleAddToCart($product, $amnt) {
      
@@ -142,8 +137,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     public function beforeRender() {
         parent::beforeRender();
         
-     
-        
         $this->template->shopName = $this->shopModel->getShopInfo('Name');
         $this->template->shopDescription = $this->shopModel->getShopInfo('Description');
         $this->template->shopLogo = $this->shopModel->getShopInfo('Logo');
@@ -166,7 +159,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         
     }
     
-     public function handleSetShopLayout($layout, $value) {
+    
+   public function handleSetShopLayout($layout, $value) {
         if ($this->getUser()->isInRole('admin')) {   
               $this->shopModel->setShopInfo($layout, $value);
                  $this->redirect('this');
@@ -294,6 +288,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $moduleControl->setCategory($this->categoryModel);
         $moduleControl->setShop($this->shopModel);
         $moduleControl->setOrder($this->orderModel);
+        $moduleControl->setGapi($this->gapisession);
         
         return $moduleControl;
     

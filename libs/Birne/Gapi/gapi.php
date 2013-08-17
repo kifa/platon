@@ -1,52 +1,67 @@
 <?php
 
 
+use Nette\InvalidStateException;
+use Nette\Utils\Strings;
+use Nette\Application\UI;
+
 namespace Birne\Gapi;
 
 require_once 'src/Google_Client.php';
 require_once 'src/contrib/Google_AnalyticsService.php';
 
 
-class Gapi {
+class Gapi extends \Nette\Application\UI\Control {
         
     private $token;
+    private $code;
     private $analytics;
+    
+     /** @persistent */
+    public $lang;
 
-    public function __construct($session) {
-            
-            
-            $this->token = $session;
+    /** @var NetteTranslator\Gettext */
+    protected $translator;
 
+    public function setParent(\Nette\ComponentModel\IContainer $parent = NULL, $name = NULL) {
+        parent::setParent($parent, $name);
+    }
+
+    
+
+    public function setGAPI($gapisession, $code = NULL) {
+            
+           // unset($_SESSION['access_token']);
+            $this->token = $gapisession;
 
             $client = new \Google_Client();
-            $client->setApplicationName('Hello Analytics API Sample');
+            $client->setApplicationName('Birnex');
 
             // Visit //code.google.com/apis/console?api=analytics to generate your
             // client id, client secret, and to register your redirect uri.
             $client->setClientId('972136424126-sapavicddib7bqhljp04gftm48a36m11.apps.googleusercontent.com');
             $client->setClientSecret('gxkfZbDBM4cIUFPAKqhimZaZ');
-            $client->setRedirectUri('http://localhost/');
+            $client->setRedirectUri('http://localhost/platon/www/smart-panel/stats');
             $client->setDeveloperKey('AIzaSyAICFV8fFpWser_tTd2P5pSA0lzk_zOrps');
             $client->setScopes(array('https://www.googleapis.com/auth/analytics.readonly'));
 
             // Magic. Returns objects from the Analytics Service instead of associative arrays.
             $client->setUseObjects(true);
-
+            
+            
+            
             if (isset($_GET['code'])) {
+              $this->code = $_GET['code'];
               $client->authenticate();
               $this->token = $client->getAccessToken();
               $redirect = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-              header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
-            }
-
-          
+             // header('Location: ' . filter_var($redirect, FILTER_SANITIZE_URL));
+            } 
             
             if (isset($this->token)) {
               $client->setAccessToken($this->token);
+
             }
-
-
-            
             
             if (!$client->getAccessToken()) {
               $authUrl = $client->createAuthUrl();
@@ -58,53 +73,46 @@ class Gapi {
 
                  
                 $this->analytics = new \Google_AnalyticsService($client);
+                
             }
             
         }
-
-        protected function runMainDemo() {
-          try {
-
-            // Step 2. Get the user's first profile ID.
-            $profileId = getFirstProfileId($this->analytics);
-
-            if (isset($profileId)) {
-
-              // Step 3. Query the Core Reporting API.
-              $results = getResults($this->analytics, $profileId);
-
-              // Step 4. Output the results.
-              printResults($results);
-            }
-
-          } catch (apiServiceException $e) {
-            // Error from the API.
-            print 'There was an API error : ' . $e->getCode() . ' : ' . $e->getMessage();
-
-          } catch (Exception $e) {
-            print 'There wan a general error : ' . $e->getMessage();
-          }
+        
+        public function getAnalytics() {
+            return $this->analytics;
+        }
+        
+        public function getGapiParam() {
+            return array($this->token, $this->code);
         }
 
-        function getFirstprofileId(&$analytics) {
-          $accounts = $this->analytics->management_accounts->listManagementAccounts();
+        public function respond($id) {
+                // $id = $this->getFirstprofileId($this->analytics);
+                $result = $this->getResults($this->analytics, $id);
+
+                return $this->printResults($result);
+        }
+
+        public function getFirstprofileId(&$analytics) {
+          $accounts = $analytics->management_accounts->listManagementAccounts();
 
           if (count($accounts->getItems()) > 0) {
             $items = $accounts->getItems();
-            $firstAccountId = $items[3]->getId();
+            $firstAccountId = $items[1]->getId();
 
-            $webproperties = $this->analytics->management_webproperties
+            $webproperties = $analytics->management_webproperties
                 ->listManagementWebproperties($firstAccountId);
 
             if (count($webproperties->getItems()) > 0) {
               $items = $webproperties->getItems();
               $firstWebpropertyId = $items[0]->getId();
 
-              $profiles = $this->analytics->management_profiles
+              $profiles = $analytics->management_profiles
                   ->listManagementProfiles($firstAccountId, $firstWebpropertyId);
 
               if (count($profiles->getItems()) > 0) {
                 $items = $profiles->getItems();
+                
                 return $items[0]->getId();
 
               } else {
@@ -118,36 +126,35 @@ class Gapi {
           }
         }
 
-        function getResults($analytics, $profileId) {
+        public function getResults($analytics, $profileId) {
 
             $optParams = array(
                 'dimensions' => 'ga:source',
                 'max-results' => '100');
 
 
-            $metrics = "ga:visits";
+            $metrics = 'ga:visits';
 
-            return $this->analytics->data_ga->get(
+            
+            return $analytics->data_ga->get(
                'ga:' . $profileId,
                '2012-03-03',
                '2013-03-03',
-               $metrics,
-                    $optParams);
+               $metrics);
 
 
         }
 
-        function printResults(&$results) {
+        public function printResults(&$results) {
           if (count($results->getRows()) > 0) {
             $profileName = $results->getProfileInfo()->getProfileName();
             $rows = $results->getRows();
             $visits = $rows[0][0];
 
-            print "<p>First profile found: $profileName</p>";
-            print "<p>Total visits: $visits</p>";
+            return $profileName . '-' . $visits;
 
           } else {
-            print '<p>No results found.</p>';
+            return '<p>No results found.</p>';
           }
         }
 

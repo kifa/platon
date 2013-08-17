@@ -23,6 +23,8 @@ class moduleControl extends BaseControl{
     private $blogModel;
     private $shopModel;
     private $orderModel;
+    
+    private $gapisession;
 
     public function setTranslator($translator) {
         $this->translator = $translator;
@@ -47,6 +49,10 @@ class moduleControl extends BaseControl{
         $this->productModel = $pro;
     }
     
+    public function setGapi($gapisession) {
+        $this->gapisession = $gapisession;
+    }
+
     public function setShop($shop) {
         $this->shopModel = $shop;
     }
@@ -152,7 +158,7 @@ class moduleControl extends BaseControl{
    
    /*****************************************************
     *           ORDER MODULES
-    */
+    ****************************************************/
    
    protected function createComponentHeureka() {
        
@@ -166,6 +172,19 @@ class moduleControl extends BaseControl{
    }
    
    
+   
+   protected function createComponentGapi() {
+       
+       $gapi = new gapiModule();
+       $gapi->setTranslator($this->translator);
+       $gapi->setShop($this->shopModel);
+       $gapi->setOrder($this->orderModel);
+       $gapi->setProduct($this->productModel);
+       $gapi->setCategory($this->categoryModel);
+       $gapi->setGapi($this->gapisession);
+       return $gapi;
+   }
+
    /*********************************************************
     *                   ACTIONS
     ********************************************************/
