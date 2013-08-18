@@ -448,7 +448,7 @@ class OrderModel extends Repository {
         }
     }
     
-    public function loadParrrentDelivery($iddelivery){
+    public function loadParentDelivery($iddelivery){
         $row = $this->getTable('delivery')->select('HigherDelivery')->where('DeliveryID',$iddelivery);
         $higher = $row['HigherDelivery'];
         
