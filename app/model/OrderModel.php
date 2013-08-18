@@ -315,17 +315,20 @@ class OrderModel extends Repository {
     /*
      * Insert new order status
      */
-    public function insertStatus($id,$name,$description)
+    public function insertStatus($name,$description, $progress)
     {
         $insert = array(
-            'OrderStatusID' => $id,
             'StatusName' => $name,
-            'StatusDescription' => $description
+            'StatusDescription' => $description,
+            'StatusProgress' => $progress
         );
         
         return $this->getTable('orderstatus')->insert($insert);
     }
 
+    public function deleteStatus ($id) {
+        return $this->getTable('orderstatus')->where('OrderStatusID', $id);
+    }
     /*
      * Load payment  for order
      */

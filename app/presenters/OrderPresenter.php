@@ -428,6 +428,10 @@ class OrderPresenter extends BasePresenter {
 
             unset($this->cart->prd);
             $this->cart->numberItems = 0;
+            
+            $module = $this->createComponentModuleControl();
+            $module->actionOrder($orderid, 1);
+            
             $track = md5($form->values->email . $orderid . $order->DateCreated);
         
             $this->redirect('Order:orderDone', $orderid, $track);

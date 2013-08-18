@@ -190,8 +190,10 @@ class heurekaModule extends moduleControl {
    }
 
 
-   public function actionOrder($orderid, $statusID) {
+   public function actionOrder($orderid, $progress) {
        if($this->shopModel->isModuleActive('heureka')) {
+          
+           if ($progress == 10) {
             $products = $this->orderModel->loadOrderProduct($orderid);
             $order = $this->orderModel->loadOrder($orderid);
             
@@ -221,6 +223,7 @@ class heurekaModule extends moduleControl {
             
             \Nette\Diagnostics\Debugger::log($return);
             }
+         }
        }
    }
    /***********************************************************************

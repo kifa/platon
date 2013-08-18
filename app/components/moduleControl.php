@@ -120,6 +120,14 @@ class moduleControl extends BaseControl{
        return $cod;
    }
    
+     protected function createComponentBankwire() {
+       
+       $bankwire = new BankwireModule();
+       $bankwire->setTranslator($this->translator);
+       $bankwire->setShop($this->shopModel);
+       $bankwire->setOrder($this->orderModel);
+       return $bankwire;
+   }
    
    
 
@@ -189,14 +197,14 @@ class moduleControl extends BaseControl{
     *                   ACTIONS
     ********************************************************/
    
-    public function actionOrder($orderid, $statusID) {
-        $components = $this->shopModel->loadModules('order');
+    public function actionOrder($orderid, $progress) {
+        $components = $this->shopModel->loadModules('');
 
         if($components !== FALSE) {
              foreach ($components as $id => $component) {
                 $comp = $this->createComponent($component->CompModuleName);
                 try {
-                    $comp->actionOrder($orderid, $statusID);
+                    $comp->actionOrder($orderid, $progress);
                 } catch (Exception $e) {
                          \Nette\Diagnostics\Debugger::log($e);
                     }

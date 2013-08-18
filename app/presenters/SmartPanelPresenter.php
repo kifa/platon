@@ -69,12 +69,7 @@ class SmartPanelPresenter extends BasePresenter {
             $this->orderModel->setStatus($orderid, $statusID);
             
             
-            if($progress == 10) {
-                
-                $module = $this->createComponentModuleControl();
-                $module->actionOrder($orderid, $statusID);
-            }
-            else {
+            if($progress !== 10) {
                 try {
                         $this->sendStatusMail($orderid, $name);
                     }
@@ -82,6 +77,9 @@ class SmartPanelPresenter extends BasePresenter {
                        \Nette\Diagnostics\Debugger::log($e);
                 }
             }
+            
+            $module = $this->createComponentModuleControl();
+            $module->actionOrder($orderid, $progress);
             
             $text = $this->translator->translate('Order status in now:');
             $message = Html::el('span', ' ' . $text . ' ' . $name);
@@ -1285,7 +1283,7 @@ class SmartPanelPresenter extends BasePresenter {
             
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($row->UsersID, 'Vaše objednávka má nový status: ', $template, $adminMail);
+            $mailIT->sendSuperMail($row->UsersID, 'Vaše objednávka má nový stav ', $template, $adminMail);
     }
 
     protected function sendNoteMail($orderid, $note) {
@@ -1302,7 +1300,7 @@ class SmartPanelPresenter extends BasePresenter {
             $template->note = $note;
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($row->UserID, 'Zprava k Vaší objednávce', $template, $adminMail);
+            $mailIT->sendSuperMail($row->UserID, 'Zpráva k Vaší objednávce', $template, $adminMail);
     }
 }
 

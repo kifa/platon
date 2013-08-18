@@ -179,8 +179,11 @@ class gapiModule extends moduleControl {
         
         $optParams2 = array(
                 'dimensions' => 'ga:productName',
-                'max-results' => '100');
-        $metrics2 = 'ga:itemsPerPurchase';
+                'max-results' => '10',
+                'filters' => 'ga:productName=~CadoMotus Newspeed 90mm',
+                'sort' => '-ga:itemRevenue');
+        
+        $metrics2 = 'ga:itemRevenue';
         
         $params2 = array(
             'ga:'. $id,
