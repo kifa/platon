@@ -1,0 +1,1 @@
+[2013-08-18 21-01-20] Fatal error: Class 'mailControl' not found in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\app\presenters\SmartPanelPresenter.php:1304  @  http://localhost/platon/www/smart-panel/order-detail?orderid=42&statusID=2&name=Sending&progress=5&lang=cs&do=setStatus  @@  exception-2013-08-18-21-01-20-3320002c2522cf662cc37cba7e6a46ba.html
