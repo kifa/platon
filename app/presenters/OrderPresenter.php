@@ -430,7 +430,15 @@ class OrderPresenter extends BasePresenter {
             $this->cart->numberItems = 0;
             
             $module = $this->createComponentModuleControl();
-            $module->actionOrder($orderid, 1);
+            $orderInfo =  array('Shipping' => $form->values->shipping,
+                                    'Payment' => $form->values->payment,
+                                   'OrderID' => $orderid,
+                                   // 'Total' => $row->TotalPrice,
+                                    'TotalProducts' => $total,
+                                     'Note' => $form->values->note,
+                                    'Progress' => 1);
+            
+            $module->actionOrder($orderInfo);
             
             $track = md5($form->values->email . $orderid . $order->DateCreated);
         
