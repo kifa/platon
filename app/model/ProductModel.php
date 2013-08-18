@@ -579,7 +579,7 @@ class ProductModel extends Repository {
         return $this->getTable('productvariants')->where('ProductID',$id);
     }
 
-    public function insertProductVariant($product, $dataaval, $price){
+    public function insertProductVariant($product, $pieces, $dataaval, $price){
         $today = date('Y-m-d H:i:s');
         
         if($dataaval==''){
@@ -600,7 +600,7 @@ class ProductModel extends Repository {
             'ProductEAN' => $originalProduct['ProductEAN'],
             'ProductQR' => $originalProduct['ProductQR'],
             'ProductWarranty' => $originalProduct['ProductWarranty'],
-            'PiecesAvailable' => $originalProduct['PiecesAvailable'],
+            'PiecesAvailable' => $pieces,
             'CategoryID' => $originalProduct['CategoryID'],            
             'DateOfAvailable' => $dataaval,
             'ProductDateOfAdded' => $today,            
