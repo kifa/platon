@@ -575,8 +575,12 @@ class ProductModel extends Repository {
         return $this->getTable('comment')->where('DateOfAdded>',$date)->count();
     }
     
-    public function loadVariants($id){
+    public function loadVariantParams($id){
         return $this->getTable('productvariants')->where('ProductID',$id);
+    }
+    
+    public function loadProductVariants($id){
+        return $this->getTable('product')->select('product.*,price.*')->where('product.ProductVariants',$id)->fetchPairs('product.ProductID');
     }
 
     public function insertProductVariant($product, $pieces, $dataaval, $price){
