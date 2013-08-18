@@ -38,7 +38,7 @@
                     {elseif $product->PiecesAvailable > 0}
             <span class="badge badge-warning">{$product->PiecesAvailable} {_'LAST'}</span>
                     {else}
-            <span class="badge badge-inverse">{$product->PiecesAvailable} {_'SOLD OUT'}</span>
+            <span class="badge badge-inverse">{_'SOLD OUT'}</span>
                     {/if}
             {if $product->ProductStatusID == 3}
                 <span class="badge badge-inverse"><i class="icon-thumbs-up icon-large"></i> {_'HOT'}</span>
