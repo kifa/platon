@@ -190,12 +190,12 @@ class heurekaModule extends moduleControl {
    }
 
 
-   public function actionOrder($orderid, $progress) {
+   public function actionOrder($orderInfo) {
        if($this->shopModel->isModuleActive('heureka')) {
           
-           if ($progress == 10) {
-            $products = $this->orderModel->loadOrderProduct($orderid);
-            $order = $this->orderModel->loadOrder($orderid);
+           if ($orderInfo['Progress'] == 10) {
+            $products = $this->orderModel->loadOrderProduct($orderInfo['OrderID']);
+            $order = $this->orderModel->loadOrder($orderInfo['OrderID']);
             
             
             $key = $this->shopModel->getShopInfo('heurekaKEY');

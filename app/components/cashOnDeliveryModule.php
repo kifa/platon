@@ -83,7 +83,11 @@ class CashOnDeliveryModule extends moduleControl {
         $this->presenter->redirect('this');
     }
 
-    
+    public function actionOrder($orderInfo) {
+        
+    }
+
+
 
     /*     * *********************************************************************
      * RENDERY
