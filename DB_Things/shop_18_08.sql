@@ -704,6 +704,7 @@ DROP TABLE IF EXISTS `productvariants`;
 CREATE TABLE `productvariants` (
   `VariantID` int(11) NOT NULL AUTO_INCREMENT,
   `ProductID` int(11) NOT NULL,
+  `VariantName` text COLLATE utf8_czech_ci,
   `AttribID` int(11) NOT NULL,
   `Val` int(11) NOT NULL,
   `UnitID` int(11) NOT NULL,
@@ -712,10 +713,10 @@ CREATE TABLE `productvariants` (
   KEY `AttribID` (`AttribID`),
   KEY `Val` (`Val`),
   KEY `UnitID` (`UnitID`),
+  CONSTRAINT `productvariants_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`),
   CONSTRAINT `productvariants_ibfk_2` FOREIGN KEY (`AttribID`) REFERENCES `attrib` (`AttribID`),
   CONSTRAINT `productvariants_ibfk_3` FOREIGN KEY (`Val`) REFERENCES `attrib` (`AttribID`),
-  CONSTRAINT `productvariants_ibfk_4` FOREIGN KEY (`UnitID`) REFERENCES `unit` (`UnitID`),
-  CONSTRAINT `productvariants_ibfk_1` FOREIGN KEY (`ProductID`) REFERENCES `product` (`ProductID`)
+  CONSTRAINT `productvariants_ibfk_4` FOREIGN KEY (`UnitID`) REFERENCES `unit` (`UnitID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 
@@ -869,4 +870,4 @@ INSERT INTO `users` (`UsersID`, `Password`, `Name`, `PhoneNumber`, `CompanyName`
 ('xxx@xxx.xxx',	NULL,	'testx',	21313123,	NULL,	NULL,	'user'),
 ('yetty@himalaja.tib',	NULL,	'Yetty',	0,	NULL,	NULL,	'user');
 
--- 2013-08-18 12:53:21
+-- 2013-08-18 20:40:29
