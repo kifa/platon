@@ -26,7 +26,7 @@ class ProductModel extends Repository {
             return $this->getDB()->query('SELECT * FROM product JOIN price 
                 ON price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE photo.CoverPhoto="1" and product.ProductStatusID="2"');                              
+                WHERE photo.CoverPhoto="1" AND product.ProductStatusID="2" AND product.ProductVariants LIKE product.ProductID');                              
             
             }
         else
@@ -34,9 +34,10 @@ class ProductModel extends Repository {
             return $this->getDB()->query('SELECT * FROM product JOIN price ON 
             price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-            WHERE photo.CoverPhoto="1" and (product.ProductStatusID="2" or product.ProductStatusID="3") and product.CategoryID=?',$catID);
+            WHERE photo.CoverPhoto="1" AND (product.ProductStatusID="2" OR product.ProductStatusID="3") 
+            AND product.ProductVariants LIKE product.ProductID AND product.CategoryID=?',$catID);
             
-
+            
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
               //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
         }
@@ -62,14 +63,14 @@ class ProductModel extends Repository {
             return $this->getDB()->query('SELECT * FROM product JOIN price 
                 ON price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE photo.CoverPhoto="1"');                              
+                WHERE photo.CoverPhoto="1" AND product.ProductVariants LIKE product.ProductID');                              
             
             }
         else
         {  return $this->getDB()->query('SELECT * FROM product JOIN price ON 
             price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-            WHERE photo.CoverPhoto="1" and product.CategoryID=?',$catID);
+            WHERE photo.CoverPhoto="1" AND product.ProductVariants LIKE product.ProductID AND product.CategoryID=?',$catID);
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
               //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
         }
@@ -102,10 +103,10 @@ class ProductModel extends Repository {
             $short,$description,$ean,$qr,$warranty,$pieces,$category,
             $dataaval)
     {
-        $today = date("Y-m-d");
+        $today = date('Y-m-d H:i:s');
         
         if($dataaval==''){
-            $dataaval = '0000-00-00';
+            $dataaval = '0000-00-00 00:00:00';
         };
         
         $insert = array(
@@ -127,9 +128,11 @@ class ProductModel extends Repository {
         $row = $this->getTable('product')->insert($insert);   
         $lastprodid = $row["ProductID"];
         
+        $this->getTable('product')->where('ProductID',$lastprodid)->update('ProductVariants',$lastprodid);
+        
         $albumid = $this->insertPhotoAlbum($name, $description,$lastprodid, null);
         
-        $this->insertPrice($lastprodid, $price);
+        $this->insertPrice($lastprodid, $price);               
         
         return array($lastprodid, $albumid);
         
@@ -524,14 +527,19 @@ class ProductModel extends Repository {
     }           
     
     public function loadCheapestDelivery(){
-        $delivery = $this->getTable('delivery')->select('DeliveryPrice')->where('DeliveryPrice != "0"')->order('DeliveryPrice')->fetchPairs('DeliveryPrice');
+        $delivery = $this->getTable('delivery')
+                ->select('delivery.DeliveryPrice, status.StatusName')
+                ->where('DeliveryPrice != "0"')
+                ->where('status.StatusName','active')  
+                ->order('DeliveryPrice')
+                ->fetchPairs('DeliveryPrice');
         $price = reset($delivery);
         $price = $price->DeliveryPrice;
         return $price;
     }        
 
     public function insertComment($title,$content,$author,$product,$previous=0){
-        $today = date("Y-m-d H:i:s");
+        $today = date('Y-m-d H:i:s');
             
         $insert = array(
             'CommentTitle' => $title,
@@ -563,7 +571,7 @@ class ProductModel extends Repository {
     
     public function loadUnreadCommentsCount($date){
         if ($date == NULL) {
-            $date =  date("Y-m-d H:i:s");
+            $date =  date('Y-m-d H:i:s');
         }
         return $this->getTable('comment')->where('DateOfAdded>',$date)->count();
     }

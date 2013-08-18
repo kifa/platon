@@ -24,3 +24,5 @@ Pragma: no-cache
 Expires: 1 January, 1970 00:00:01 GMT
 
 ok  @  http://localhost/platon/www/smart-panel/order-detail?orderid=35&statusID=3&name=Done&progress=10&lang=cs&do=setStatus
+[2013-08-18 10-29-43] Nette\Utils\AssertionException: The header 'From' expects to be email, string '<aa@aa.com>' given. in C:\xampp\htdocs\platon\libs\Nette\Utils\Validators.php:90  @  http://localhost/platon/www/product/product/16?slug=Thinkpad&lang=cs&do=askForm-submit  @@  exception-2013-08-18-10-29-43-8d2fa1007ec9bca2ef14f0d6014ed702.html
+[2013-08-18 11-38-42] Nette\Utils\AssertionException: The header 'From' expects to be email, string '<ja@ja.co>' given. in C:\xampp\htdocs\platon\libs\Nette\Utils\Validators.php:90  @  http://localhost/platon/www/product/product/4?slug=Nokia+3310+&lang=cs&do=askForm-submit  @@  exception-2013-08-18-11-38-42-fda2918a79b0bee6b1b5c6ca94cc91af.html

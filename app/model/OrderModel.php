@@ -111,7 +111,7 @@ class OrderModel extends Repository {
         
         $insert =  array(
             'OrderID' => $id,
-            'NotesDate' => date("Y-m-d H:i:s"),
+            'NotesDate' => date('Y-m-d H:i:s'),
             'NotesName' => $name,
             'NotesDescription' => $note
         );
@@ -124,8 +124,8 @@ class OrderModel extends Repository {
      * @return string
      */
     public function insertOrder($user, $price, $delivery, $payment, $note)
-    {                 
-            $today = date("Y-m-d H:i:s");
+    {                             
+            $today = date('Y-m-d H:i:s');
             
             $deliveryprice = $this->loadDeliveryPrice($delivery);            
             $paymentprice = $this->loadPaymentPrice($payment);
@@ -164,7 +164,7 @@ class OrderModel extends Repository {
     
     public function updateOrder($orderid, $shipping, $payment=NULL) {
         
-        $today = date("Y-m-d H:i:s");
+        $today = date('Y-m-d H:i:s');
         
         if($payment!=NULL){
             $paymentPrice = $this->loadPaymentPrice($payment);
@@ -196,7 +196,7 @@ class OrderModel extends Repository {
     
     public function updateOrderProducts($orderid, $product, $newProduct, $delivery, $payment, $products) {
        
-        $today = date("Y-m-d H:i:s");
+        $today = date('Y-m-d H:i:s');
         
         //recalculating order
         $deliveryPrice = $this->loadDeliveryPrice($delivery);
@@ -248,7 +248,7 @@ class OrderModel extends Repository {
 
     public function loadUnreadOrdersCount($date){
         if ($date == NULL) {
-            $date =  date("Y-m-d H:i:s");
+            $date =  date('Y-m-d H:i:s');
         }
         return $this->getTable('orders')->where('DateCreated>',$date)->count();
     }
