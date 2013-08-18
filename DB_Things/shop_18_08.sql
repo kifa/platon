@@ -310,11 +310,11 @@ INSERT INTO `module` (`ModuleID`, `ModuleName`, `CompModuleName`, `ModuleDescrip
 (1,	'Zásilkovna',	'zasilkovna',	'Osobní převzetí v síti Zásilkovna.cz',	'shipping',	1),
 (2,	'Uloženka',	'ulozenka',	'Osobní odběr v síti Uloženka.cz',	'shipping',	2),
 (3,	'Cash On Delivery',	'cod',	'Cash on delivery module',	'payment',	2),
-(4,	'Comments',	'comment',	'Enable comments for products.',	'product',	2),
+(4,	'Comments',	'comment',	'Enable comments for products.',	'product',	1),
 (5,	'Documents',	'document',	'Add documents to your products.',	'product',	1),
 (6,	'Heureka',	'heureka',	'Heureka feed',	'order',	1),
-(7,	'Gapi',	'gapi',	'jsuajisjaoi\r\n',	'gapi',	1);
-
+(7,	'Gapi',	'gapi',	'jsuajisjaoi\r\n',	'gapi',	1),
+(8,	'Bankwire',	'bankwire',	'Bankwire payment',	'payment',	1);
 DROP TABLE IF EXISTS `notes`;
 CREATE TABLE `notes` (
   `NotesID` int(11) NOT NULL AUTO_INCREMENT,
@@ -747,8 +747,11 @@ INSERT INTO `settings` (`SettingID`, `SettingName`, `Value`) VALUES
 (15,	'ShopURL',	'http://localhost'),
 (27,	'zasilkovnaAPI',	'66fbbe30bb36aee4'),
 (28,	'zasilkovnaID',	'353'),
-(29,	'Salt',	'Salt');
-
+(29,	'Salt',	'Salt'),
+(30,	'gapiAPI',	'4/BdPpTGmoBcA6YXzCNLQrKDIHfTd6.Qi927urqOpsVOl05ti8ZT3axvvIhgQI'),
+(31,	'gapiTOKEN',	'{\"access_token\":\"ya29.AHES6ZRUGTx_HsylhCX4s5f4W-d2Rn2HS3I2c8kvdTi2y1L1Kglrsobd\",\"token_type\":\"Bearer\",\"expires_in\":3600,\"refresh_token\":\"1\\/gWO9VgJWOC1YngESadNHDhAFsO2YioYyGFcc3mTY6Uw\",\"created\":1376821668}'),
+(32,	'bankwireID',	'7'),
+(33,	'Account',	'');
 DROP TABLE IF EXISTS `statictext`;
 CREATE TABLE `statictext` (
   `StaticTextID` int(11) NOT NULL AUTO_INCREMENT,
