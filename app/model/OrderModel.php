@@ -315,20 +315,17 @@ class OrderModel extends Repository {
     /*
      * Insert new order status
      */
-    public function insertStatus($name,$description, $progress)
+    public function insertStatus($id,$name,$description)
     {
         $insert = array(
+            'OrderStatusID' => $id,
             'StatusName' => $name,
-            'StatusDescription' => $description,
-            'StatusProgress' => $progress
+            'StatusDescription' => $description
         );
         
         return $this->getTable('orderstatus')->insert($insert);
     }
 
-    public function deleteStatus ($id) {
-        return $this->getTable('orderstatus')->where('OrderStatusID', $id);
-    }
     /*
      * Load payment  for order
      */
@@ -451,6 +448,13 @@ class OrderModel extends Repository {
         }
     }
     
+    public function loadParrrentDelivery($iddelivery){
+        $row = $this->getTable('delivery')->select('HigherDelivery')->where('DeliveryID',$iddelivery);
+        $higher = $row['HigherDelivery'];
+        
+        return $this->getTable('delivery')->where('DeliveryID',$higher);
+    }
+
     public function loadDeliveryList(){
         return $this->getTable('delivery')
                 ->where('status.StatusName = ? OR status.StatusName = ?','active', 'non-active')
