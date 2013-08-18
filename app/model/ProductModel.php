@@ -134,8 +134,7 @@ class ProductModel extends Repository {
         
         $this->insertPrice($lastprodid, $price);               
         
-        return array($lastprodid, $albumid);
-        
+        return array($lastprodid, $albumid);        
     }
     /*
      * Update Product
@@ -580,19 +579,52 @@ class ProductModel extends Repository {
         return $this->getTable('productvariants')->where('ProductID',$id);
     }
 
-    public function insertVariant($product,$attribute,$value,$unit){
+    public function insertProductVariant($product, $dataaval, $price){
+        $today = date('Y-m-d H:i:s');
+        
+        if($dataaval==''){
+            $dataaval = '0000-00-00 00:00:00';
+        };
+        
+        $originalProduct = $this->getTable('product')->select('product.*, price.*')->where('product.ProductID',$product);
+        
+        $insert = array(
+            'ProductID' => NULL,
+            'ProductName' => $originalProduct['ProductName'],
+            'ProductVariants' => $product,
+            'ProducerID' => $originalProduct['ProducerID'],            
+            'ProductNumber' => $originalProduct['ProductNumber'],
+            'ProductShort' => $originalProduct['ProductShort'],
+            'ProductDescription' => $originalProduct['ProductDescription'],
+            //'ProductStatusID' => '',            
+            'ProductEAN' => $originalProduct['ProductEAN'],
+            'ProductQR' => $originalProduct['ProductQR'],
+            'ProductWarranty' => $originalProduct['ProductWarranty'],
+            'PiecesAvailable' => $originalProduct['PiecesAvailable'],
+            'CategoryID' => $originalProduct['CategoryID'],            
+            'DateOfAvailable' => $dataaval,
+            'ProductDateOfAdded' => $today,            
+        );
+        
+        $row = $this->getTable('product')->insert($insert);   
+        $lastprodid = $row["ProductID"];        
+        
+        $this->insertPrice($lastprodid, $price);               
+        
+        return $lastprodid;
+    }
+    
+    public function insertVariantParam($product,$name,$attribute,$value,$unit){
         $insert = array(
             'ParameterID' => NULL,
             'ProductID' => $product,
+            'VariantName' => $name,
             'AttribID' => $attribute,
             'Val' => $value,
             'UnitID' => $unit
         );
         
         return $this->getTable('parameters')->insert($insert);
-    }
+    }    
     
-    public function insertProductVariant(){
-        
-    }
 }
