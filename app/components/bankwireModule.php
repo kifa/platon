@@ -87,30 +87,34 @@ class bankwireModule extends moduleControl {
 
     
     
-    public function actionOrder($orderid, $progress) {
-         if($this->shopModel->isModuleActive('heureka')) {
+    public function actionOrder($orderInfo) {
+         if($this->shopModel->isModuleActive('bankwire')) {
           
-           if ($progress == 1) {
-               $this->sendStatusMail($orderid);
+             $bankwireID = $this->shopModel->getShopInfo('bankwireID');
+           if ($orderInfo['Progress'] == 1 & $orderInfo['Payment'] == $bankwireID) {
+               $this->sendStatusMail($orderInfo['OrderID']);
            }
         
         }
     }
     
     protected function sendStatusMail($orderid) {
-        
-            $row = $this->orderModel->loadOrder($orderid);
+       
+        try {
+             $row = $this->orderModel->loadOrder($orderid);
              $adminMail = $this->shopModel->getShopInfo('OrderMail');
              $shopName = $this->shopModel->getShopInfo('Name');
              $account = $this->shopModel->getShopInfo('Account');
              
-            $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/bankwireStatus.latte');
+            
+            $template = new Nette\Templating\FileTemplate($this->presenter->context->parameters['appDir'] . '/templates/Email/bankwireStatus.latte');
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->orderId = $orderid;
             $template->variable = $orderid;
             $template->bankaccount = $account;
             $template->mailOrder = $row->UsersID;
+            $template->total = $row->TotalPrice;
             $template->adminMail = $adminMail;
             $template->shopName = $shopName;
 
@@ -121,6 +125,12 @@ class bankwireModule extends moduleControl {
             
             $mailIT = new mailControl();
             $mailIT->sendSuperMail($row->UsersID, 'Informace k platbě ', $template, $adminMail);
+        }
+            catch (Exception $e) {
+            \Nette\Diagnostics\Debugger::barDump($e);
+            }
+        
+       
     }
 
 

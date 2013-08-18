@@ -211,6 +211,10 @@ class zasilkovnaModule extends moduleControl {
         }
    }
    
+   
+    public function actionOrder($orderInfo) {
+        
+    }
    /***********************************************************************
      * RENDERY
      */

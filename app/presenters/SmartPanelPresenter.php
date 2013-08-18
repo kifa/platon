@@ -78,8 +78,12 @@ class SmartPanelPresenter extends BasePresenter {
                 }
             }
             
+            $this->orderRow['Progress'] = $progress;
+
             $module = $this->createComponentModuleControl();
-            $module->actionOrder($orderid, $progress);
+             $this->addComponent($module, 'module');
+            $module->actionOrder($this->orderRow);
+            
             
             $text = $this->translator->translate('Order status in now:');
             $message = Html::el('span', ' ' . $text . ' ' . $name);
@@ -102,6 +106,21 @@ class SmartPanelPresenter extends BasePresenter {
             }
             
     }
+    
+        
+    protected function createComponentModuleControl() {
+        $moduleControl = new moduleControl;
+        $moduleControl->setTranslator($this->translator);
+        $moduleControl->setProduct($this->productModel);
+        $moduleControl->setCategory($this->categoryModel);
+        $moduleControl->setShop($this->shopModel);
+        $moduleControl->setOrder($this->orderModel);
+        $moduleControl->setGapi($this->gapisession);
+        
+        return $moduleControl;
+    
+    }
+    
 
     protected function createComponentPasswordForm() {
         $form = new Nette\Application\UI\Form;

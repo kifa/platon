@@ -161,6 +161,10 @@ class documentModule extends moduleControl {
         }
     }
     
+     public function actionOrder($orderInfo) {
+         
+     }
+    
     
    public function renderAdmin() {
         

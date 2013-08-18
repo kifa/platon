@@ -93,7 +93,7 @@ class gapiModule extends moduleControl {
    }
 
    
-   public function actionOrder($orderid, $statusID) {
+   public function actionOrder($orderInfo) {
        if($this->shopModel->isModuleActive('gapi')) {
        }
    }

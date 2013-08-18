@@ -146,6 +146,10 @@ class commentModule extends moduleControl {
             $this->presenter->redirect('this');
     }
     
+     public function actionOrder($orderInfo) {
+         
+     }
+    
     
    public function renderAdmin() {
         

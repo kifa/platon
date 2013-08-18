@@ -197,14 +197,21 @@ class moduleControl extends BaseControl{
     *                   ACTIONS
     ********************************************************/
    
-    public function actionOrder($orderid, $progress) {
-        $components = $this->shopModel->loadModules('');
+    public function actionOrder($orderInfo) {
 
+        
+        $components = $this->shopModel->loadModules('');
+        
         if($components !== FALSE) {
              foreach ($components as $id => $component) {
+                
+                 try {
                 $comp = $this->createComponent($component->CompModuleName);
-                try {
-                    $comp->actionOrder($orderid, $progress);
+                 
+                $this->addComponent($comp, $component->CompModuleName);
+               
+                
+                    $comp->actionOrder($orderInfo);
                 } catch (Exception $e) {
                          \Nette\Diagnostics\Debugger::log($e);
                     }
