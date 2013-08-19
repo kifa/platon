@@ -579,23 +579,7 @@ class ProductModel extends Repository {
         return $this->getTable('productvariants')->where('ProductID',$id);
     }
     
-    public function loadProductVariants($id){
-        //return $this->getTable('product')->select('product.ProductID, product.ProductName,
-        //    product.ProductVariantName, product.PiecesAvailable, price.FinalPrice')
-        //        ->where('product.ProductVariants',$id)->fetchPairs('product.ProductID');        
-        /*$row = $this->getDB()->query('
-            SELECT product.ProductID, product.ProductName, product.ProductVariantName, 
-                product.PiecesAvailable, price.FinalPrice, price.SALE
-            FROM product
-            JOIN price ON price.ProductID=product.ProductID
-            WHERE product.ProductVariants=?',$id);
-        
-        if($row == ''){
-            $row = $this->loadProduct($id);
-        };
-        
-        return $row;*/
-        
+    public function loadProductVariants($id){        
         $row = $this->getTable('price')->select('price.*, product.*')
                 ->where('product.ProductVariants', $id)->fetchPairs('ProductID');        
         
@@ -604,7 +588,7 @@ class ProductModel extends Repository {
                     ->where('product.ProductID',$id)->fetch();
         };                
         
-        return $row;        
+        return $row;             
     }
             
 
