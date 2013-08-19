@@ -536,6 +536,7 @@ class ProductModel extends Repository {
         $price = $price->DeliveryPrice;
         return $price;
     }        
+    
 
     public function insertComment($title,$content,$author,$product,$previous=0){
         $today = date('Y-m-d H:i:s');
