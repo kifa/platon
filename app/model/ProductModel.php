@@ -585,12 +585,7 @@ class ProductModel extends Repository {
         return $this->getTable('product')->select('product.*,price.*')->where('product.ProductVariants',$id)->fetchPairs('product.ProductID');
     }
 
-    
-    
-    public function loadProductVariants($id) {
-        
-    }
-            
+      
 
     public function insertProductVariant($product, $name, $pieces, $price, $dataaval = NULL){
         $today = date('Y-m-d H:i:s');
