@@ -238,10 +238,7 @@ class ProductPresenter extends BasePresenter {
                  \Nette\Diagnostics\Debugger::log($e);
                  $this->redirect('this');
             }
-            
-            
-            
-            
+
         }
     }
 
@@ -644,18 +641,20 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('Homepage:');
         } else {
             $this->parameters = $this->productModel->loadParameters($id);
+            $album = $this->productModel->loadPhotoAlbumID($id)->PhotoAlbumID;
 
             if ($this->getUser()->isInRole('admin')) {
                 $this->row = array('ProductID' => $row->ProductID,
                     'ProductName' => $row->ProductName,
                     'ProducerID' => $row->ProducerID,
-                    'PhotoAlbumID' => $row->PhotoAlbumID,
                     'ProductDescription' => $row->ProductDescription,
                     'SellingPrice' => $row->SellingPrice,
                     'SALE' => $row->SALE,
                     'CategoryID' => $row->CategoryID,
                     'PiecesAvailable' => $row->PiecesAvailable);
 
+                $this->row['PhotoAlbumID'] = $album;
+                
                 $editForm = $this['editParamForm'];
                 $addForm = $this['addParamForm'];
               //  $docsForm = $this['addDocumentationForm'];
@@ -700,22 +699,28 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             if ($form->values->image->isOK()) {
 
+                if($this->row['PhotoAlbumID'] == NULL) {
+                    $albumID = $this->insertPhotoAlbum($this->row['ProductName'], $this->row['ProductDescription'], $this->row['ProductID']);
+                } else {
+                    $albumID = $form->values->albumID;
+                }
+                
                 $this->productModel->insertPhoto(
-                        $form->values->name, $form->values->image->name, $form->values->albumID
+                        $form->values->name, $form->values->image->name, $albumID
                 );
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $form->values->albumID . '/' . $form->values->image->name;
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/' . $form->values->image->name;
                 $form->values->image->move($imgUrl);
 
                 $image = Image::fromFile($imgUrl);
                 $image->resize(null, 300, Image::SHRINK_ONLY);
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $form->values->albumID . '/300-' . $form->values->image->name;
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/300-' . $form->values->image->name;
                 $image->save($imgUrl);
 
                 $image = Image::fromFile($imgUrl);
                 $image->resize(null, 50, Image::SHRINK_ONLY);
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $form->values->albumID . '/50-' . $form->values->image->name;
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/50-' . $form->values->image->name;
                 $image->save($imgUrl);
 
                 $message = $this->translator->translate(' was sucessfully uploaded');
