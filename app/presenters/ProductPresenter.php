@@ -1040,11 +1040,15 @@ class ProductPresenter extends BasePresenter {
        }
         
         
+       dump($this->productModel->loadProductVariants($id));
+       exit();
+       
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->photo = $this->productModel->loadCoverPhoto($id);
         $this->template->albumID = $this->productModel->loadPhotoAlbumID($id)->PhotoAlbumID;
         $this->template->album = $this->productModel->loadPhotoAlbum($id);
         $this->template->parameter = $this->productModel->loadParameters($id);
+        $this->template->productVariants = $this->productModel->loadProductVariants($id);
         $this->template->slider = NULL;
         $this->template->shippingPrice = $this->productModel->loadCheapestDelivery();
         $this->template->docs = $this->productModel->loadDocumentation($id)->fetchPairs('DocumentID');
