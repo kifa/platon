@@ -67,12 +67,12 @@
 
 
                     <tr>
-                        <td>{if $product->PhotoAlbumID}
+                        <td>{*if $product->PhotoAlbumID}
                      <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$product->PhotoURL}" class="img-circle" style="width: 38px;"/>
 
                 {else}
                    <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="width: 38px;"/>
-                {/if}
+                {/if*}
                         </td>
                         <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
                         <td>{$product->Quantity}</td>

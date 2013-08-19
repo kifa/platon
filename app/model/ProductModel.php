@@ -128,8 +128,7 @@ class ProductModel extends Repository {
         $row = $this->getTable('product')->insert($insert);   
         $lastprodid = $row["ProductID"];
         
-        $this->getTable('product')->where('ProductID',$lastprodid)->update('ProductVariants',$lastprodid);
-        
+       
         $albumid = $this->insertPhotoAlbum($name, $description,$lastprodid, null);
         
         $this->insertPrice($lastprodid, $price);               
@@ -266,6 +265,9 @@ class ProductModel extends Repository {
         }
     }
     
+    public function loadPhotoAlbumID($id) {
+        return $this->getTable('photoalbum')->select('PhotoAlbumID')->where('ProductID', $id)->fetch();
+    }
     public function insertPhotoAlbum($name, $desc, $product = NULL, $blog = NULL, $static = NULL) {
          $insert = array(             
             'PhotoAlbumName' => $name,
@@ -579,24 +581,30 @@ class ProductModel extends Repository {
         return $this->getTable('productvariants')->where('ProductID',$id);
     }
 
-    public function insertProductVariant($product, $pieces, $dataaval, $price){
+    
+    
+    public function loadProductVariants($id) {
+        
+    }
+            
+
+    public function insertProductVariant($product, $name, $pieces, $price, $dataaval = NULL){
         $today = date('Y-m-d H:i:s');
         
-        if($dataaval==''){
+        if($dataaval== NULL){
             $dataaval = '0000-00-00 00:00:00';
         };
         
         $originalProduct = $this->getTable('product')->select('product.*, price.*')->where('product.ProductID',$product);
         
         $insert = array(
-            'ProductID' => NULL,
-            'ProductName' => $originalProduct['ProductName'],
+            'ProductName' => $originalProduct['ProducerName'],
+            'ProductVariantName' => $name,
             'ProductVariants' => $product,
             'ProducerID' => $originalProduct['ProducerID'],            
             'ProductNumber' => $originalProduct['ProductNumber'],
             'ProductShort' => $originalProduct['ProductShort'],
-            'ProductDescription' => $originalProduct['ProductDescription'],
-            //'ProductStatusID' => '',            
+            'ProductDescription' => $originalProduct['ProductDescription'],          
             'ProductEAN' => $originalProduct['ProductEAN'],
             'ProductQR' => $originalProduct['ProductQR'],
             'ProductWarranty' => $originalProduct['ProductWarranty'],
@@ -616,7 +624,6 @@ class ProductModel extends Repository {
     
     public function insertVariantParam($product,$name,$attribute,$value,$unit){
         $insert = array(
-            'ParameterID' => NULL,
             'ProductID' => $product,
             'VariantName' => $name,
             'AttribID' => $attribute,

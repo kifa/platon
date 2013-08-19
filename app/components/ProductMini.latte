@@ -52,8 +52,8 @@
 
       <a class="span12 imgLiquid" style="height: 150px; width: 150px;" href="{plink Product:product $product->ProductID, $product->ProductName}"> 
             
-                {if $product->PhotoAlbumID}
-                     <img src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$product->PhotoURL}" class="img-circle" />
+                {if $albumID}
+                     <img src="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" class="img-circle" />
 
                 {else}
                    <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="height: 150px; width: auto;"/>

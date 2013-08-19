@@ -630,6 +630,9 @@ class productControl extends BaseControl{
        
         $this->template->setFile(__DIR__ . '/' . $layout . '.latte');    
         $this->template->product = $this->productModel->loadProduct($id);
+        $this->template->albumID = $this->productModel->loadPhotoAlbumID($id)->PhotoAlbumID;
+        $this->template->photo = $this->productModel->loadCoverPhoto($id);
+
         $this->template->render();
     }
     
