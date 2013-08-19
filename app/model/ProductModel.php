@@ -87,8 +87,6 @@ class ProductModel extends Repository {
         return $this->getDB()->query('SELECT * FROM product 
             JOIN price ON product.ProductID=price.ProductID
             JOIN producer ON product.ProducerID=producer.ProducerID
-            JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
-            JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID
             WHERE product.ProductID=?',$id)->fetch();
         //return $this->getTable('product')->select('Product.*,Price.*,PhotoAlbum.*,photo.*')->where('Product.ProductID',$id)->fetch()
     }
@@ -582,13 +580,9 @@ class ProductModel extends Repository {
     }
     
     public function loadProductVariants($id){
-        return $this->getTable('product')->select('product.*,price.*')->where('product.ProductVariants',$id)->fetchPairs('product.ProductID');
-    }
-
-    
-    
-    public function loadProductVariants($id) {
-        
+        return $this->getTable('product')->select('product.ProductID, product.ProductName,
+            product.ProductVariantName, product.PiecesAvailable, price.FinalPrice')
+                ->where('product.ProductVariants',$id)->fetchPairs('product.ProductID');        
     }
             
 
