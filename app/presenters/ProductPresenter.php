@@ -1040,8 +1040,8 @@ class ProductPresenter extends BasePresenter {
        }
         
         
-       dump($this->productModel->loadProductVariants($id));
-       exit();
+       //dump($this->productModel->loadProductVariants($id));
+       //exit();
        
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->photo = $this->productModel->loadCoverPhoto($id);

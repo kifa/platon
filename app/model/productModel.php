@@ -26,7 +26,7 @@ class ProductModel extends Repository {
             return $this->getDB()->query('SELECT * FROM product JOIN price 
                 ON price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE photo.CoverPhoto="1" AND product.ProductStatusID="2" AND product.ProductVariants LIKE product.ProductID');                              
+                WHERE photo.CoverPhoto="1" AND product.ProductStatusID="2" AND product.ProductVariants IS NULL');                              
             
             }
         else
@@ -35,7 +35,7 @@ class ProductModel extends Repository {
             price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
             WHERE photo.CoverPhoto="1" AND (product.ProductStatusID="2" OR product.ProductStatusID="3") 
-            AND product.ProductVariants LIKE product.ProductID AND product.CategoryID=?',$catID);
+            AND product.ProductVariants IS NULL AND product.CategoryID=?',$catID);
             
             
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
@@ -63,7 +63,7 @@ class ProductModel extends Repository {
             return $this->getDB()->query('SELECT * FROM product JOIN price 
                 ON price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
                 JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE photo.CoverPhoto="1" AND product.ProductVariants LIKE product.ProductID');                              
+                WHERE photo.CoverPhoto="1" AND product.ProductVariants IS NULL');                              
             
             }
         else
@@ -580,9 +580,31 @@ class ProductModel extends Repository {
     }
     
     public function loadProductVariants($id){
-        return $this->getTable('product')->select('product.ProductID, product.ProductName,
-            product.ProductVariantName, product.PiecesAvailable, price.FinalPrice')
-                ->where('product.ProductVariants',$id)->fetchPairs('product.ProductID');        
+        //return $this->getTable('product')->select('product.ProductID, product.ProductName,
+        //    product.ProductVariantName, product.PiecesAvailable, price.FinalPrice')
+        //        ->where('product.ProductVariants',$id)->fetchPairs('product.ProductID');        
+        /*$row = $this->getDB()->query('
+            SELECT product.ProductID, product.ProductName, product.ProductVariantName, 
+                product.PiecesAvailable, price.FinalPrice, price.SALE
+            FROM product
+            JOIN price ON price.ProductID=product.ProductID
+            WHERE product.ProductVariants=?',$id);
+        
+        if($row == ''){
+            $row = $this->loadProduct($id);
+        };
+        
+        return $row;*/
+        
+        $row = $this->getTable('price')->select('price.*, product.*')
+                ->where('product.ProductVariants', $id)->fetchPairs('ProductID');        
+        
+        if($row==FALSE){
+            $row = $this->getTable('price')->select('price.*, product.*')
+                    ->where('product.ProductID',$id)->fetch();
+        };                
+        
+        return $row;        
     }
             
 
