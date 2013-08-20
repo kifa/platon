@@ -91,8 +91,10 @@ class bankwireModule extends moduleControl {
          if($this->shopModel->isModuleActive('bankwire')) {
           
              $bankwireID = $this->shopModel->getShopInfo('bankwireID');
+                 
            if ($orderInfo['Progress'] == 1 & $orderInfo['Payment'] == $bankwireID) {
                $this->sendStatusMail($orderInfo['OrderID']);
+               dump('AHOJ');
            }
         
         }
@@ -100,7 +102,7 @@ class bankwireModule extends moduleControl {
     
     protected function sendStatusMail($orderid) {
        
-        try {
+        
              $row = $this->orderModel->loadOrder($orderid);
              $adminMail = $this->shopModel->getShopInfo('OrderMail');
              $shopName = $this->shopModel->getShopInfo('Name');
@@ -108,6 +110,10 @@ class bankwireModule extends moduleControl {
              
             
             $template = new Nette\Templating\FileTemplate($this->presenter->context->parameters['appDir'] . '/templates/Email/bankwireStatus.latte');
+            
+          
+            
+            
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->orderId = $orderid;
@@ -118,12 +124,15 @@ class bankwireModule extends moduleControl {
             $template->adminMail = $adminMail;
             $template->shopName = $shopName;
 
+            
             $hash = md5($row->UsersID . $row->OrderID . $row->DateCreated);
             $args = array($row->OrderID, $hash);
             $template->link = $this->presenter->link('//Order:orderDone', $args);
             
-            
+      try {      
             $mailIT = new mailControl();
+            
+              
             $mailIT->sendSuperMail($row->UsersID, 'Informace k platbě ', $template, $adminMail);
         }
             catch (Exception $e) {

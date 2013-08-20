@@ -70,7 +70,7 @@ class ProductModel extends Repository {
         {  return $this->getDB()->query('SELECT * FROM product JOIN price ON 
             price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
             JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-            WHERE photo.CoverPhoto="1" AND product.ProductVariants LIKE product.ProductID AND product.CategoryID=?',$catID);
+            WHERE photo.CoverPhoto="1" AND product.ProductVariants  IS NULL AND product.CategoryID=?',$catID);
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
               //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
         }
@@ -585,7 +585,7 @@ class ProductModel extends Repository {
         
         if($row==FALSE){
             $row = $this->getTable('price')->select('price.*, product.*')
-                    ->where('product.ProductID',$id)->fetch();
+                    ->where('product.ProductID',$id)->fetchPairs('ProductID');
         };                
         
         return $row;             

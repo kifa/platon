@@ -403,19 +403,7 @@ class ProductPresenter extends BasePresenter {
     }
     
     
-    public function handleSetSale($id, $amount, $type){
-        if ($this->getUser()->isInRole('admin')) {            
-            $this->productModel->updateSale($id, $amount, $type);
-            if($this->isAjax()) {
-                $this->invalidateControl('prodPrice');
-                $this->invalidateControl('page-header');
-
-            }
-            else{
-              $this->redirect('this');  
-            }
-        }
-    }
+    
 
     public function handleEditProdAmount($id) {        
         if($this->getUser()->isInRole('admin')){ 
@@ -658,7 +646,7 @@ class ProductPresenter extends BasePresenter {
                 $editForm = $this['editParamForm'];
                 $addForm = $this['addParamForm'];
               //  $docsForm = $this['addDocumentationForm'];
-                $priceForm = $this['editPriceForm'];
+              //  $priceForm = $this['editPriceForm'];
                 $askForm = $this['askForm'];
                 // $this['editPriceForm']['price'] = $this->row['SellingPrice'];
             }
@@ -788,7 +776,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    protected function createComponentEditPriceForm() {
+  /*  protected function createComponentEditPriceForm() {
         if ($this->getUser()->isInRole('admin')) {
 
             $priceForm = new Nette\Application\UI\Form;
@@ -825,7 +813,7 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('this');
             }
         }
-    }
+    } */
 
     protected function createComponentAskForm() {
       
@@ -1023,7 +1011,15 @@ class ProductPresenter extends BasePresenter {
         return $productControl;
     }
     
-    public function renderProduct($id, $slug) {
+    protected function createComponentVariantControl() {
+        $variant = new variantControl();
+        $variant->setTranslator($this->translator);
+        $variant->setProduct($this->productModel);
+        
+        return $variant;
+    }
+
+        public function renderProduct($id, $slug) {
         $layout = $this->shopModel->getShopInfo('ProductLayout');
         
        $this->template->setFile( $this->context->parameters['appDir'] . '/templates/Product/'  . $layout . '.latte'); 
@@ -1040,8 +1036,7 @@ class ProductPresenter extends BasePresenter {
        }
         
         
-       //dump($this->productModel->loadProductVariants($id));
-       //exit();
+     
        
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->photo = $this->productModel->loadCoverPhoto($id);

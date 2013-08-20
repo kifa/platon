@@ -159,64 +159,65 @@
 
     </div>
            
-  
-    {foreach $productVariants as $id => $prod}
-    <div class="span6 pricetag margin5 ">
+
+    <div class="span6" n:snippet="variants">
+    {foreach $productVariants as  $id => $productVariant}
+    {dump $productVariant->ProductID}
+    {dump $productVariants}
+    <div class="span12 pricetag margin5 ">
             
               {if $user->isInRole('admin')}
             <div class="btn-group span12 margin5">
-              <button class="btn" id="editPriceOff" class="hide" style="display: none;">{_'Finish Editing Price'}</button>
-              <button class="btn" id="editPrice">{_'Edit Price'}</button> 
+              <button class="btn" id="editPriceOff{$productVariant->ProductID}" class="hide" style="display: none;">{_'Finish Editing Price'}</button>
+              <button class="btn" id="editPrice{$productVariant->ProductID}">{_'Edit Price'}</button> 
             </div>
               {/if}
             
             
             
         
-            <div n:snippet="prodPrice" class="span4 text-center">
+            <div n:snippet="prodPrice{$productVariant->ProductID}" class="span4 text-center">
               {if $user->isInRole('admin')}
                 
-               <div id="editProdPrice" class="hide span12">
+               <div id="editProdPrice{$productVariant->ProductID}" class="hide span12">
                 <p>{_'Discount'}:</p>
                      <div class="btn-group">
 
-                     <a href="{plink setSale! $prod->ProductID, 5, 'percent'}" class="ajax btn discountbtn">5%</a>
-                     <a href="{plink setSale! $prod->ProductID, 10, 'percent'}" class="ajax btn discountbtn">10%</a>
-                     <a href="{plink setSale! $prod->ProductID, 15, 'percent'}" class="ajax btn discountbtn">15%</a>
+                     <a href="{plink setSale! $productVariant->ProductID, 5, 'percent'}" class="ajax btn discountbtn">5%</a>
+                     <a href="{plink setSale! $productVariant->ProductID, 10, 'percent'}" class="ajax btn discountbtn">10%</a>
+                     <a href="{plink setSale! $productVariant->ProductID, 15, 'percent'}" class="ajax btn discountbtn">15%</a>
                      <hr>   
                      </div>
                  {control editPriceForm}
                 </div>
               {/if}
-             <div id="prodPrice" class="span12 text-center">
+             <div id="prodPrice{$productVariant->ProductID}" class="span12 text-center">
                  <span class="badge badge-info span12">
                 
 
                                  <span class="span12 text-center">{_"Price"}</span> 
-                                 {if $product->SALE > 1}
-                                 <span n:snippet="prodSale" class="span12">
-                    <span class="badge badge-important">- {$prod->SALE},- / {var $procent = 100 * ($prod->SALE / $prod->SellingPrice)} {$procent|number}%</span>
-                        <span class="span12" style="text-decoration: line-through;">{$prod->SellingPrice},-</span>
+                                 {if $productVariant->SALE > 1}
+                                 <span n:snippet="prodSale{$productVariant->ProductID}" class="span12">
+                    <span class="badge badge-important">- {$productVariant->SALE},- / {var $procent = 100 * ($productVariant->SALE / $productVariant->SellingPrice)} {$procent|number}%</span>
+                        <span class="span12" style="text-decoration: line-through;">{$productVariant->SellingPrice},-</span>
                                  </span>
                 {/if}
-                                 <h2 class="span12 text-center prodPrice">{$prod->FinalPrice},-</h2>
+                                 <h2 class="span12 text-center prodPrice">{$productVariant->FinalPrice},-</h2>
 
                                  </span>
-            </div>
-                            
-
+                </div>
             </div>
                 
                 
             <div class="span3 text-center">
-                    {if $prod->PiecesAvailable >= 5}
+                    {if $productVariant->PiecesAvailable >= 5}
                     <span class="badge badge-success span12">
-                    {elseif $prod->PiecesAvailable < 5 && $prod->PiecesAvailable > 0}
+                    {elseif $productVariant->PiecesAvailable < 5 && $productVariant->PiecesAvailable > 0}
                         <span class="badge badge-warning span12">
-                    {elseif $prod->PiecesAvailable < 1 }
+                    {elseif $productVariant->PiecesAvailable < 1 }
                             <span class="badge badge-inverse span12">
                         {/if}
-<span class="span12 text-center">{_"In stock"}</span> <span class="prodAmount span12 text-center" n:snippet="prodAmount">{if $prod->PiecesAvailable > 0}{$prod->PiecesAvailable}{else}0{/if}</span></span>
+<span class="span12 text-center">{_"In stock"}</span> <span class="prodAmount span12 text-center" n:snippet="prodAmount{$productVariant->ProductID}">{if $productVariant->PiecesAvailable > 0}{$productVariant->PiecesAvailable}{else}0{/if}</span></span>
                                                       
 
                             </div>
@@ -227,11 +228,12 @@
                              <h3 class="span12 text-center">{$shippingPrice|number},-</h3></span>                            
                             </div>
         
-        <a href="{plink addToCart! $prod->ProductID, "1"}" class="span9 btn btn-primary margin5">
+        <a href="{plink addToCart! $productVariant->ProductID, "1"}" class="span9 btn btn-primary margin5">
                 <i class="icon-shopping-cart"></i> {_'Buy'}</a>
         </div>
 
    {/foreach}   
+    </div>
     
     
     

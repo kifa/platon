@@ -81,7 +81,7 @@ class SmartPanelPresenter extends BasePresenter {
             $this->orderRow['Progress'] = $progress;
 
             $module = $this->createComponentModuleControl();
-             $this->addComponent($module, 'module');
+            $this->addComponent($module, 'module');
             $module->actionOrder($this->orderRow);
             
             

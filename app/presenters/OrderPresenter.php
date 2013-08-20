@@ -38,8 +38,6 @@ class OrderPresenter extends BasePresenter {
         $this->userModel = $this->context->userModel;
         $salt = $this->shopModel->getShopInfo('Salt');
         $this->cart = $this->getSession('cart'.$salt);
-        
-       
     }
         
     /*
@@ -566,6 +564,24 @@ class OrderPresenter extends BasePresenter {
             
             $mailIT = new mailControl();
             $mailIT->sendSuperMail($adminMail, 'Zpráva k Vaší objednávce', $template, $adminMail);
+    }
+    
+     protected function sendNoteMail($orderid, $note) {
+        
+            $row = $this->orderModel->loadOrder($orderid);
+             $adminMail = $this->shopModel->getShopInfo('OrderMail');
+             $shopName = $this->shopModel->getShopInfo('Name');
+            $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrderNote.latte');
+            $template->registerFilter(new Nette\Latte\Engine);
+            $template->registerHelperLoader('Nette\Templating\Helpers::loader');
+            $template->orderId = $orderid;
+            $template->adminMail = $adminMail;
+            $template->shopName = $shopName;
+            $template->customer = $row->Name;
+            $template->note = $note;
+            
+            $mailIT = new mailControl();
+            $mailIT->sendSuperMail($adminMail, 'Zpráva k objednávce', $template, $row->UserID);
     }
 
 }

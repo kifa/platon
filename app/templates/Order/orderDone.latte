@@ -74,7 +74,11 @@
                    <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="width: 38px;"/>
                 {/if*}
                         </td>
-                        <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
+                        {if $product->ProductVariantName}
+                    <td><a href="{plink Product:product $product->ProductVariants, $product->ProductName}">{$product->ProductName}</a> - {$product->ProductVariantName}</td>
+                    {else}
+                    <td><a href="{plink Product:product $product->ProductID, $product->ProductName}">{$product->ProductName}   </a></td>
+                    {/if}
                         <td>{$product->Quantity}</td>
                         <td>{$product->UnitPrice},-</td>
                         <td>{$subtotal = $product->Quantity * $product->UnitPrice},-</td>

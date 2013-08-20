@@ -202,20 +202,22 @@ class moduleControl extends BaseControl{
         
         $components = $this->shopModel->loadModules('');
         
+        
+        
         if($components !== FALSE) {
              foreach ($components as $id => $component) {
                 
                  try {
                 $comp = $this->createComponent($component->CompModuleName);
                  
+       
                 $this->addComponent($comp, $component->CompModuleName);
-               
-                
-                    $comp->actionOrder($orderInfo);
+                $comp->actionOrder($orderInfo);
                 } catch (Exception $e) {
                          \Nette\Diagnostics\Debugger::log($e);
                     }
                 }
+                
             }
     }
 

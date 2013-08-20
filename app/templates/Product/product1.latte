@@ -161,69 +161,15 @@
         </div>
 
     </div>
-    <div class="span6 pricetag alert alert-info margin5 ">
-            
-              {if $user->isInRole('admin')}
-            <div class="btn-group span12 margin5">
-              <button class="btn" id="editPriceOff" class="hide" style="display: none;">{_'Finish Editing Price'}</button>
-              <button class="btn" id="editPrice">{_'Edit Price'}</button> 
-            </div>
-              {/if}
-            
-            
-            <div n:snippet="prodPrice" class="span8">
-              {if $user->isInRole('admin')}
-                
-               <div id="editProdPrice" class="hide span12">
-                <p>{_'Discount'}:</p>
-                     <div class="btn-group">
+   {snippet variants}
 
-                     <a href="{plink setSale! $product->ProductID, 5, 'percent'}" class="ajax btn discountbtn">5%</a>
-                     <a href="{plink setSale! $product->ProductID, 10, 'percent'}" class="ajax btn discountbtn">10%</a>
-                     <a href="{plink setSale! $product->ProductID, 15, 'percent'}" class="ajax btn discountbtn">15%</a>
-                     <hr>   
-                     </div>
-                 {control editPriceForm}
-                </div>
-              {/if}
-             <div id="prodPrice" class="span5">
- 
-            {if $product->SALE > 1}
-            <p class="span12 alert alert-warning" n:snippet="prodSale">
-                <i class="icon-money icon-large"></i>
+    {foreach $productVariants as  $id => $productVariant}
+        
+        {control variantControl:variant $productVariant, $shippingPrice}
 
-                <span class="badge badge-important">- {$product->SALE},- / {var $procent = 100 * ($product->SALE / $product->SellingPrice)} {$procent|number}%</span>
-                <span class="muted" style="text-decoration: line-through;">{$product->SellingPrice},-</span>
-            </p>
-            {/if}
+   {/foreach}   
+{/snippet}
 
-            <h2 class="text-info span12"><span class="prodPrice" >{$product->FinalPrice}</span>,- </h2>
-
-            </div>
-                            <a href="{plink Order:cart $product->ProductID, "1"}" class="span8 btn btn-primary">
-                <i class="icon-shopping-cart"></i> {_'Buy'}</a>
-
-            </div>
-                
-                
-            <div class="span3 text-center">
-                    {if $product->PiecesAvailable >= 5}
-                    <span class="badge badge-info span12">
-                    {elseif $product->PiecesAvailable < 5 && $product->PiecesAvailable > 0}
-                        <span class="badge badge-warning span12">
-                    {elseif $product->PiecesAvailable < 1 }
-                            <span class="badge badge-inverse span12">
-                        {/if}
-                                <span class="span12 text-center">{_"In stock"}</span> <span class="prodAmount span12 text-center" n:snippet="prodAmount">{if $product->PiecesAvailable > 0}{$product->PiecesAvailable}{else}0{/if}</span></span>
-                           
-
-                            </div>
-        </div>
-
-               
-    
-    
-    
     
     <div class="span12">
         <h3 class="span12"><i class="icon-info-sign"></i> {_'Information about product'}</h3>
@@ -320,6 +266,32 @@
         $(this).html('<i class="icon-spinner icon-spin"></i>');
     });
     
+    {foreach $productVariants as  $id => $productVariant}
+
+
+              $('#editPrice{$productVariant->ProductID}').toggle(function(){
+                    $('#editProdPrice{$productVariant->ProductID}').show();
+              },
+              function() {
+                  $('#editProdPrice{$productVariant->ProductID}').hide();
+              });
+              
+              $('.prodAmount{$productVariant->ProductID}').editable( {link editProdAmount! $productVariant->ProductID }, {
+                  type      : 'text',
+                  onblur    : 'ignore',
+                  cancel    : {_'Cancel'},
+                  submit    : 'OK', 
+                  colls     : '4',
+                  rows      : '3',
+                  indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+                  tooltip   : {_'Click to edit ...'},
+                  callback : function(value, settings) {
+                     var json = $.parseJSON(value);
+                     $('.prodAmount{$productVariant->ProductID}').text(json.edit);
+                 }
+          });
+               {/foreach}
+               
 </script>
 {/snippet}
                             
@@ -327,6 +299,7 @@
     $(document).ready(function() {
 
             $('.nav-tabs').button();
+
 
             $('#editParamButton').toggle(function(){
                 $('#editParam').modal('show');
@@ -338,6 +311,7 @@
               {if $attr == 1}
                   $('#editParam').modal('show');
                   {/if}
+                      
 
 
               $('.prodTitle').editable( {link editProdTitle! $product->ProductID }, { 
@@ -401,50 +375,9 @@
                  }
           });
 
-          $('.prodAmount').editable( {link editProdAmount! $product->ProductID }, {
-                  type      : 'text',
-                  onblur    : 'ignore',
-                  cancel    : {_'Cancel'},
-                  submit    : 'OK', 
-                  colls     : '4',
-                  rows      : '3',
-                  indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
-                  tooltip   : {_'Click to edit ...'},
-                  callback : function(value, settings) {
-                     var json = $.parseJSON(value);
-                     $('.prodAmount').text(json.edit);
-                 }
-          });
+          
+    
 
-          $('#editPrice').click(function(){
-              $('#prodPrice').fadeOut(function(){
-                $('#editProdPrice').fadeIn(); 
-              $('#editPrice').hide();
-              $('#editPriceOff').show();
-              });
-
-          });
-
-          $('#editPriceOff').click(function(){
-              $('#editProdPrice').fadeOut(function(){
-                  $('#prodPrice').fadeIn();
-                  $('#editPriceOff').hide();
-              $('#editPrice').show();
-              });
-
-          })
-
-          $('#priceSave').click(function(){
-              $(this).attr('class', 'btn btn-primary disabled');
-              $('#editPriceOff').hide();
-              $('#editPrice').show();
-          });
-
-          $('.discountbtn').click(function(){
-              $(this).attr('class', 'btn btn-primary disabled');
-              $('#editPriceOff').hide();
-              $('#editPrice').show();
-          });
 });
 </script>
 
