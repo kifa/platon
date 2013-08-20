@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-08-17 11:18:36
+# Created: 2013-08-19 22:29:17
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-08-17 11:18+0200\n"
+"PO-Revision-Date: 2013-08-19 22:29+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -768,6 +768,9 @@ msgstr "Cena:"
 msgid "Proceed to checkout "
 msgstr "Přejít k objednání "
 
+msgid "Producer"
+msgstr "Výrobce"
+
 msgid "Producer: "
 msgstr "Výrobce:"
 
@@ -1098,6 +1101,681 @@ msgstr "ks"
 msgid "personal pick up"
 msgstr "osobní převzetí"
 
-msgid "Producer"
-msgstr "Výrobce"
+msgid "Set as COVER image"
+msgstr "Nastavit jako titulku"
+
+msgid "Domů"
+msgstr ""
+
+msgid "Smartphones"
+msgstr ""
+
+msgid "Ta-ble-ty"
+msgstr ""
+
+msgid "Washmashine"
+msgstr ""
+
+msgid "Představujeme BIRNE SHOP!"
+msgstr ""
+
+msgid "Začněte již dnes"
+msgstr ""
+
+msgid "Nejdou obchody? BIRNE SHOP!"
+msgstr ""
+
+msgid "Zjistit více"
+msgstr ""
+
+msgid "Radost prodávat? BIRNE SHOP!"
+msgstr ""
+
+msgid "Přesvědčete se"
+msgstr ""
+
+msgid "Smart Panel"
+msgstr ""
+
+msgid "Je podporován pouze soubor JPG, PNG a GIF"
+msgstr ""
+
+msgid "Maximálně 2MB"
+msgstr ""
+
+msgid "Please set new HEUREKA key."
+msgstr ""
+
+msgid "Set new HEUREKA Key"
+msgstr ""
+
+msgid "current key:"
+msgstr ""
+
+msgid "Personal pick up | 0,-"
+msgstr ""
+
+msgid "Czech postal service | 99,-"
+msgstr ""
+
+msgid "Central Warehouse | 0,-"
+msgstr ""
+
+msgid "Cash | 0,-"
+msgstr ""
+
+msgid "Bankwire | 50,-"
+msgstr ""
+
+msgid "Samsung Galaxy Nexus 2 RR"
+msgstr ""
+
+msgid "Samsung Chromebooks"
+msgstr ""
+
+msgid "Samsung Galaxy S4"
+msgstr ""
+
+msgid "Nokia 3310 MM"
+msgstr ""
+
+msgid "Nokia 3310"
+msgstr ""
+
+msgid "Apple iPad"
+msgstr ""
+
+msgid "Lenovo ThinkPad Tablet 2 64GB WiFi 3G 3679-4HG"
+msgstr ""
+
+msgid "Lenovo ThinkPad Edge E130 Arctic Blue 3358-8CG"
+msgstr ""
+
+msgid "Sony Ericsson Xperia Mini"
+msgstr ""
+
+msgid "Spange Bob"
+msgstr ""
+
+msgid "Asus Vivobook"
+msgstr ""
+
+msgid "Thinkpad"
+msgstr ""
+
+msgid "L9"
+msgstr ""
+
+msgid "#"
+msgstr ""
+
+msgid "Order status in now:"
+msgstr ""
+
+msgid "Magical numbers that improve your sales."
+msgstr ""
+
+msgid "Change stock in one place."
+msgstr ""
+
+msgid "Edit by clicking on any value"
+msgstr ""
+
+msgid "Czech postal service | 40,-"
+msgstr ""
+
+msgid "DPD | 160,-"
+msgstr ""
+
+msgid "Zásilkovna | 39,-"
+msgstr ""
+
+msgid "cz - Beroun | 39,-"
+msgstr ""
+
+msgid "cz - Brno, Jiráskova | 39,-"
+msgstr ""
+
+msgid "cz - Brno, Komín - Závist | 39,-"
+msgstr ""
+
+msgid "cz - Brno, Královo Pole | 39,-"
+msgstr ""
+
+msgid "cz - Brno, Mendlovo náměstí | 39,-"
+msgstr ""
+
+msgid "cz - Brno, Merhautova | 39,-"
+msgstr ""
+
+msgid "cz - Brno, Nové Sady | 39,-"
+msgstr ""
+
+msgid "cz - České Budějovice, Otakarova | 39,-"
+msgstr ""
+
+msgid "cz - Frýdek-Místek | 39,-"
+msgstr ""
+
+msgid "cz - Havířov, Ostravská | 39,-"
+msgstr ""
+
+msgid "cz - Holešov | 39,-"
+msgstr ""
+
+msgid "cz - Hradec Králové | 39,-"
+msgstr ""
+
+msgid "cz - Chrudim | 39,-"
+msgstr ""
+
+msgid "cz - Jihlava | 39,-"
+msgstr ""
+
+msgid "cz - Karlovy Vary | 39,-"
+msgstr ""
+
+msgid "cz - Kladno | 39,-"
+msgstr ""
+
+msgid "cz - Kolín | 39,-"
+msgstr ""
+
+msgid "cz - Kroměříž | 39,-"
+msgstr ""
+
+msgid "cz - Kutná Hora | 39,-"
+msgstr ""
+
+msgid "cz - Liberec, 5. května | 39,-"
+msgstr ""
+
+msgid "cz - Mladá Boleslav | 39,-"
+msgstr ""
+
+msgid "cz - Most, J. Skupy | 39,-"
+msgstr ""
+
+msgid "cz - Náchod | 39,-"
+msgstr ""
+
+msgid "cz - Olomouc, centrum | 39,-"
+msgstr ""
+
+msgid "cz - Olomouc, Nová Ulice | 39,-"
+msgstr ""
+
+msgid "cz - Ostrava, Mariánské Hory | 39,-"
+msgstr ""
+
+msgid "cz - Ostrava, Nádražní | 39,-"
+msgstr ""
+
+msgid "cz - Ostrava, Poruba | 39,-"
+msgstr ""
+
+msgid "cz - Pardubice | 39,-"
+msgstr ""
+
+msgid "cz - Písek | 39,-"
+msgstr ""
+
+msgid "cz - Plzeň, u centra Plaza | 39,-"
+msgstr ""
+
+msgid "cz - Praha 1, Klimentská | 39,-"
+msgstr ""
+
+msgid "cz - Praha 1, Národní třída | 39,-"
+msgstr ""
+
+msgid "cz - Praha 10, Starostrašnická | 39,-"
+msgstr ""
+
+msgid "cz - Praha 14, Černý Most | 39,-"
+msgstr ""
+
+msgid "cz - Praha 2, Hlavní nádraží | 39,-"
+msgstr ""
+
+msgid "cz - Praha 3, Vinohrady | 39,-"
+msgstr ""
+
+msgid "cz - Praha 3, Želivského | 39,-"
+msgstr ""
+
+msgid "cz - Praha 4, Braník | 39,-"
+msgstr ""
+
+msgid "cz - Praha 4, Pražského Povstání | 39,-"
+msgstr ""
+
+msgid "cz - Praha 4, U Vyšehradu | 39,-"
+msgstr ""
+
+msgid "cz - Praha 5, Smíchovské nádraží | 39,-"
+msgstr ""
+
+msgid "cz - Praha 6, Evropská | 39,-"
+msgstr ""
+
+msgid "cz - Praha 6, Hradčanská | 39,-"
+msgstr ""
+
+msgid "cz - Praha 6, Řepy | 39,-"
+msgstr ""
+
+msgid "cz - Praha 7, Jateční | 39,-"
+msgstr ""
+
+msgid "cz - Praha 8,  Florenc | 39,-"
+msgstr ""
+
+msgid "cz - Praha 8, Ládví | 39,-"
+msgstr ""
+
+msgid "cz - Praha 8, Sokolovská | 39,-"
+msgstr ""
+
+msgid "cz - Praha 9, Hloubětín | 39,-"
+msgstr ""
+
+msgid "cz - Praha 9, Ocelářská (Depo) | 39,-"
+msgstr ""
+
+msgid "cz - Rakovník | 39,-"
+msgstr ""
+
+msgid "cz - Rudná | 39,-"
+msgstr ""
+
+msgid "cz - Teplice, Masarykova | 39,-"
+msgstr ""
+
+msgid "cz - Trutnov | 39,-"
+msgstr ""
+
+msgid "cz - Třebíč | 39,-"
+msgstr ""
+
+msgid "cz - Třinec | 39,-"
+msgstr ""
+
+msgid "cz - Uherské Hradiště | 39,-"
+msgstr ""
+
+msgid "cz - Uherský Brod | 39,-"
+msgstr ""
+
+msgid "cz - Ústí nad Labem, Revoluční | 39,-"
+msgstr ""
+
+msgid "cz - Vyškov | 39,-"
+msgstr ""
+
+msgid "cz - Zlín, T. G. Masaryka | 39,-"
+msgstr ""
+
+msgid "cz - Znojmo | 39,-"
+msgstr ""
+
+msgid "cz - Žatec | 39,-"
+msgstr ""
+
+msgid "de - Zittau (DE) | 39,-"
+msgstr ""
+
+msgid "sk - Banská Bystrica, Švermova | 39,-"
+msgstr ""
+
+msgid "sk - Banská Bystrica, Tajovského | 39,-"
+msgstr ""
+
+msgid "sk - Bratislava, Cyprichová | 39,-"
+msgstr ""
+
+msgid "sk - Bratislava, Petržalka | 39,-"
+msgstr ""
+
+msgid "sk - Bratislava, Podunajské Biskupice | 39,-"
+msgstr ""
+
+msgid "sk - Bratislava, Vajnorská | 39,-"
+msgstr ""
+
+msgid "sk - Dunajská Streda | 39,-"
+msgstr ""
+
+msgid "sk - Galanta | 39,-"
+msgstr ""
+
+msgid "sk - Komárno | 39,-"
+msgstr ""
+
+msgid "sk - Košice, Toryská | 39,-"
+msgstr ""
+
+msgid "sk - Liptovský Mikuláš | 39,-"
+msgstr ""
+
+msgid "sk - Martin | 39,-"
+msgstr ""
+
+msgid "sk - Nitra, Mlynská | 39,-"
+msgstr ""
+
+msgid "sk - Prešov | 39,-"
+msgstr ""
+
+msgid "sk - Ružomberok | 39,-"
+msgstr ""
+
+msgid "sk - Spišská Nová Ves | 39,-"
+msgstr ""
+
+msgid "sk - Trenčín | 39,-"
+msgstr ""
+
+msgid "sk - Trnava | 39,-"
+msgstr ""
+
+msgid "sk - Žilina, Rosinská | 39,-"
+msgstr ""
+
+msgid "Bankwire | 0,-"
+msgstr ""
+
+msgid "Nové heslo:"
+msgstr ""
+
+msgid "Nové heslo musí mít alespoň %d znaků."
+msgstr ""
+
+msgid "Potvrzení hesla:"
+msgstr ""
+
+msgid "Nové heslo je nutné zadat ještě jednou pro potvrzení."
+msgstr ""
+
+msgid "Zadná hesla se musejí shodovat."
+msgstr ""
+
+msgid "Změnit heslo"
+msgstr ""
+
+msgid "Zásilkovna | 49,-"
+msgstr ""
+
+msgid "cz - Beroun | 49,-"
+msgstr ""
+
+msgid "cz - Brno, Jiráskova | 49,-"
+msgstr ""
+
+msgid "cz - Brno, Komín - Závist | 49,-"
+msgstr ""
+
+msgid "cz - Brno, Královo Pole | 49,-"
+msgstr ""
+
+msgid "cz - Brno, Mendlovo náměstí | 49,-"
+msgstr ""
+
+msgid "cz - Brno, Merhautova | 49,-"
+msgstr ""
+
+msgid "cz - Brno, Nové Sady | 49,-"
+msgstr ""
+
+msgid "cz - České Budějovice, Otakarova | 49,-"
+msgstr ""
+
+msgid "cz - Frýdek-Místek | 49,-"
+msgstr ""
+
+msgid "cz - Havířov, Ostravská | 49,-"
+msgstr ""
+
+msgid "cz - Holešov | 49,-"
+msgstr ""
+
+msgid "cz - Hradec Králové | 49,-"
+msgstr ""
+
+msgid "cz - Chrudim | 49,-"
+msgstr ""
+
+msgid "cz - Jihlava | 49,-"
+msgstr ""
+
+msgid "cz - Karlovy Vary | 49,-"
+msgstr ""
+
+msgid "cz - Kladno | 49,-"
+msgstr ""
+
+msgid "cz - Kolín | 49,-"
+msgstr ""
+
+msgid "cz - Kroměříž | 49,-"
+msgstr ""
+
+msgid "cz - Kutná Hora | 49,-"
+msgstr ""
+
+msgid "cz - Liberec, 5. května | 49,-"
+msgstr ""
+
+msgid "cz - Mladá Boleslav | 49,-"
+msgstr ""
+
+msgid "cz - Most, J. Skupy | 49,-"
+msgstr ""
+
+msgid "cz - Náchod | 49,-"
+msgstr ""
+
+msgid "cz - Olomouc, centrum | 49,-"
+msgstr ""
+
+msgid "cz - Olomouc, Nová Ulice | 49,-"
+msgstr ""
+
+msgid "cz - Ostrava, Mariánské Hory | 49,-"
+msgstr ""
+
+msgid "cz - Ostrava, Nádražní | 49,-"
+msgstr ""
+
+msgid "cz - Ostrava, Poruba | 49,-"
+msgstr ""
+
+msgid "cz - Pardubice | 49,-"
+msgstr ""
+
+msgid "cz - Písek | 49,-"
+msgstr ""
+
+msgid "cz - Plzeň, u centra Plaza | 49,-"
+msgstr ""
+
+msgid "cz - Praha 1, Klimentská | 49,-"
+msgstr ""
+
+msgid "cz - Praha 1, Národní třída | 49,-"
+msgstr ""
+
+msgid "cz - Praha 10, Starostrašnická | 49,-"
+msgstr ""
+
+msgid "cz - Praha 14, Černý Most | 49,-"
+msgstr ""
+
+msgid "cz - Praha 2, Hlavní nádraží | 49,-"
+msgstr ""
+
+msgid "cz - Praha 3, Vinohrady | 49,-"
+msgstr ""
+
+msgid "cz - Praha 3, Želivského | 49,-"
+msgstr ""
+
+msgid "cz - Praha 4, Braník | 49,-"
+msgstr ""
+
+msgid "cz - Praha 4, Pražského Povstání | 49,-"
+msgstr ""
+
+msgid "cz - Praha 4, U Vyšehradu | 49,-"
+msgstr ""
+
+msgid "cz - Praha 5, Smíchovské nádraží | 49,-"
+msgstr ""
+
+msgid "cz - Praha 6, Evropská | 49,-"
+msgstr ""
+
+msgid "cz - Praha 6, Hradčanská | 49,-"
+msgstr ""
+
+msgid "cz - Praha 6, Řepy | 49,-"
+msgstr ""
+
+msgid "cz - Praha 7, Jateční | 49,-"
+msgstr ""
+
+msgid "cz - Praha 8,  Florenc | 49,-"
+msgstr ""
+
+msgid "cz - Praha 8, Ládví | 49,-"
+msgstr ""
+
+msgid "cz - Praha 8, Sokolovská | 49,-"
+msgstr ""
+
+msgid "cz - Praha 9, Hloubětín | 49,-"
+msgstr ""
+
+msgid "cz - Praha 9, Ocelářská (Depo) | 49,-"
+msgstr ""
+
+msgid "cz - Rakovník | 49,-"
+msgstr ""
+
+msgid "cz - Rudná | 49,-"
+msgstr ""
+
+msgid "cz - Teplice, Masarykova | 49,-"
+msgstr ""
+
+msgid "cz - Trutnov | 49,-"
+msgstr ""
+
+msgid "cz - Třebíč | 49,-"
+msgstr ""
+
+msgid "cz - Třinec | 49,-"
+msgstr ""
+
+msgid "cz - Uherské Hradiště | 49,-"
+msgstr ""
+
+msgid "cz - Uherský Brod | 49,-"
+msgstr ""
+
+msgid "cz - Ústí nad Labem, Revoluční | 49,-"
+msgstr ""
+
+msgid "cz - Vyškov | 49,-"
+msgstr ""
+
+msgid "cz - Zlín, T. G. Masaryka | 49,-"
+msgstr ""
+
+msgid "cz - Znojmo | 49,-"
+msgstr ""
+
+msgid "cz - Žatec | 49,-"
+msgstr ""
+
+msgid "de - Zittau (DE) | 49,-"
+msgstr ""
+
+msgid "sk - Banská Bystrica, Švermova | 49,-"
+msgstr ""
+
+msgid "sk - Banská Bystrica, Tajovského | 49,-"
+msgstr ""
+
+msgid "sk - Bratislava, Cyprichová | 49,-"
+msgstr ""
+
+msgid "sk - Bratislava, Petržalka | 49,-"
+msgstr ""
+
+msgid "sk - Bratislava, Podunajské Biskupice | 49,-"
+msgstr ""
+
+msgid "sk - Bratislava, Vajnorská | 49,-"
+msgstr ""
+
+msgid "sk - Dunajská Streda | 49,-"
+msgstr ""
+
+msgid "sk - Galanta | 49,-"
+msgstr ""
+
+msgid "sk - Komárno | 49,-"
+msgstr ""
+
+msgid "sk - Košice, Toryská | 49,-"
+msgstr ""
+
+msgid "sk - Liptovský Mikuláš | 49,-"
+msgstr ""
+
+msgid "sk - Martin | 49,-"
+msgstr ""
+
+msgid "sk - Nitra, Mlynská | 49,-"
+msgstr ""
+
+msgid "sk - Prešov | 49,-"
+msgstr ""
+
+msgid "sk - Ružomberok | 49,-"
+msgstr ""
+
+msgid "sk - Spišská Nová Ves | 49,-"
+msgstr ""
+
+msgid "sk - Trenčín | 49,-"
+msgstr ""
+
+msgid "sk - Trnava | 49,-"
+msgstr ""
+
+msgid "sk - Žilina, Rosinská | 49,-"
+msgstr ""
+
+msgid "Nejlevnější delivery | 19,-"
+msgstr ""
+
+msgid "Nokia 3310 "
+msgstr ""
+
+msgid "SmartPanel"
+msgstr ""
+
+msgid "g"
+msgstr ""
+
+msgid "mAh"
+msgstr ""
+
+msgid "px"
+msgstr ""
+
+msgid "\""
+msgstr ""
 
