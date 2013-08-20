@@ -169,11 +169,12 @@ class variantControl extends BaseControl {
         $this->template->setFile(__DIR__ . '/variantControl.latte');
     
 
-    
+     if ($this->presenter->getUser()->isInRole('admin')) {            
         $this['editPriceForm']->setDefaults(array( 
                             'price' => $variants['SellingPrice'],
                             'sale' => $variants['SALE'],
                             'id' => $variants['ProductID']));
+     }
         
         $this->template->productVariant = $variants;
         $this->template->shippingPrice = $shipping;

@@ -599,10 +599,10 @@ class ProductModel extends Repository {
             $dataaval = '0000-00-00 00:00:00';
         };
         
-        $originalProduct = $this->getTable('product')->select('product.*, price.*')->where('product.ProductID',$product);
+        $originalProduct = $this->getTable('price')->select('price.*, product.*')->where('product.ProductID',$product)->fetch();
         
         $insert = array(
-            'ProductName' => $originalProduct['ProducerName'],
+            'ProductName' => $originalProduct['ProductName'],
             'ProductVariantName' => $name,
             'ProductVariants' => $product,
             'ProducerID' => $originalProduct['ProducerID'],            

@@ -68,7 +68,8 @@
 
             </div>
             <div class="btn-group">
-               <a href="#editParam" class="btn" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Specs"}</a> |
+               <a href="#editParam" class="btn" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Specs"}</a>
+               <a href="#addVariant" class="btn" data-toggel="modal" data-target="#addVariant" id="addVariantButton"><i class="icon-large icon-expand-alt"></i> {_'Add variant'}</a>
             </div>
             <a href="#" class="btn" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
         </div>
@@ -307,6 +308,13 @@
               function() {
                   $('#editParam').modal('hide');
               });
+              
+               $('#addVariantButton').toggle(function(){
+                $('#addVariant').modal('show');
+              },
+              function() {
+                  $('#addVariant').modal('hide');
+              });
 
               {if $attr == 1}
                   $('#editParam').modal('show');
@@ -319,12 +327,30 @@
                   cancel    : {_'Cancel'},
                   submit    : 'OK',
                   indicator : '<i class="icon-spinner icon-spin"></i>',
-                  tooltip   : 'Click to edit ...',
+                  tooltip   : {_'Click to edit ...'},
                   callback : function(value, settings) {
                      var json = $.parseJSON(value);
                      $('.prodTitle').text(json.edit);
                  }
              });
+             
+     {foreach $productVariants as  $id => $productVariant}
+            
+             $('.prodVarTitle{$productVariant->ProductID}').editable( {link editProdVarTitle! $productVariant->ProductID }, { 
+                  type      : 'text',
+                  cancel    : {_'Cancel'},
+                  submit    : 'OK',
+                  indicator : '<i class="icon-spinner icon-spin"></i>',
+                  tooltip   : {_'Click to edit ...'},
+                  callback : function(value, settings) {
+                     var json = $.parseJSON(value);
+                     alert(json.edit);
+                     $('.prodVarTitle{$productVariant->ProductID}').text(json.edit);
+                 }
+             });
+             
+        {/foreach}     
+             
 
              $('.prodDescription').editable( {link editProdDescription! $product->ProductID }, {
                   type      : 'wysiwyg',
@@ -435,6 +461,55 @@
                                 </div>
 
                             </div>
+
+
+                            <div id="addVariant" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3 id="myModalLabel"><i class="icon-list"></i> {_'Manage product variants'}</h3>
+                                </div>
+                                <div class="modal-body">
+                                <div class="tabbable">
+
+                                        <ul class="nav nav-tabs">
+ <li class="active"><a href="#addVariants" data-toggle="tab"></i><i class="icon-plus"></i> {_'Add product variants'}</a></li>
+ <li><a href="#manageVariants" data-toggle="tab"> {_'Delete variants'}</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="addVariants">
+
+                                                <p>{_'Here you can add new product variant.'}</p>
+                                            
+                                                {control addProductVariantForm}
+
+                                            </div>
+
+                                            <div class="tab-pane" id="manageVariants">
+                                                <p>{_'Manage and delete variants.'}</p>
+                                            <ul>
+                                                    {foreach $productVariants as  $id => $productVariant}
+                                                
+                                                    <li><h3>{$productVariant->ProductVariantName}</h3> <a class="btn" href="{plink ArchiveVariantProduct! $productVariant->ProductID}"><i class="icon-trash"></i></li>
+                                               
+                                            {/foreach}
+                                                     </ul>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    
+                                </div>
+                                <div class="modal-footer">
+
+
+
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+                                </div>
+
+                            </div>
+
 
     {/if}
 

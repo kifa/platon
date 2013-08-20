@@ -11,9 +11,9 @@
         
         
          {if $productVariant->ProductVariantName}
-                    <h4>{_'Variant'}: {$productVariant->ProductVariantName}</h4>
-                    {else}
-                    <h4>{$productVarian->ProductName}</h4>
+        
+        <h4>{_'Variant'}: <span class="prodVarTitle{$productVariant->ProductID}" n:snippet=editProdVarTitle{$productVariant->ProductID}">{$productVariant->ProductVariantName}</span></h4>
+
                     {/if}
                     
               

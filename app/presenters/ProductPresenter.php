@@ -242,20 +242,108 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
+    protected function createComponentAddProductVariantForm() {
+
+        if ($this->getUser()->isInRole('admin')) {
+
+            $addProduct = new Nette\Application\UI\Form;
+            $addProduct->setTranslator($this->translator);
+            $addProduct->addText('name', 'Variant Name:')
+                    ->setRequired()
+                    ->setAttribute('placeholder', "Enter variant name… (black color, extra charger, etc.)")
+                    ->setAttribute('class', 'span5');
+            $addProduct->addText('price', 'Price:')
+                    ->setRequired()
+                    ->setType('number')
+                    ->addRule(FORM::FLOAT, 'It has to be a number!')
+                    ->setAttribute('class', 'span5');
+            $addProduct->addText('amount', 'Amount')
+                    ->setDefaultValue('1')
+                    ->addRule(FORM::INTEGER, 'It has to be a number!')
+                    ->setType('number')
+                    ->setRequired()
+                    ->setAttribute('class', 'span5');
+            $addProduct->addHidden('id', '');
+            $addProduct->addUpload('image', 'Image:')
+                    ->addCondition(Form::FILLED)                    
+                    ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
+            $addProduct->addSubmit('add', 'Add Product Variant')
+                    ->setAttribute('class', 'upl btn btn-primary')
+                    ->setAttribute('data-loading-text', 'Adding...');
+            $addProduct->onSuccess[] = $this->addProductVariantFormSubmitted;
+            return $addProduct;
+        }
+    }
+    
+    public function addProductVariantFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+
+          try {
+            $return = $this->productModel->insertProductVariant(
+                    $form->values->id,
+                    $form->values->name,
+                    $form->values->amount,//Name
+                    $form->values->price);
+
+            if ($form->values->image->isOK()) {
+
+                $albumID = $this->insertPhotoAlbum($form->values->name, '', $return, null);
+                
+                $this->productModel->insertPhoto(
+                        $form->values->name, $form->values->image->name, $albumID, 1
+                );
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/' . $form->values->image->name;
+                $form->values->image->move($imgUrl);
+
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 300, Image::SHRINK_ONLY);
+
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/300-' . $form->values->image->name;
+                $image->save($imgUrl);
+
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 50, Image::SHRINK_ONLY);
+
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/50-' . $form->values->image->name;
+                $image->save($imgUrl);
+            }
+            
+
+             }
+            catch (Exception $e) {
+                 \Nette\Diagnostics\Debugger::log($e);
+            }
+            
+                        $this->redirect('this');
+
+
+        }
+    }
+    
+    
 
     public function handleDeleteProduct($catID, $id) {
         if ($this->getUser()->isInRole('admin')) {
-            $this->productModel->deleteProduct($id);
+            $this->productModel->updateProduct($id, 'ProductStatusID', 1);
             $this->redirect('this', $catID);
         }
     }
 
     public function handleArchiveProduct($catID, $id) {
         if ($this->getUser()->isInRole('admin')) {
-            $this->productModel->archiveProduct($id);
+           $this->productModel->updateProduct($id, 'ProductStatusID', 1);
             $this->redirect('this', $catID);
         }
     }
+    
+     public function handleArchiveVariantProduct($varid) {
+        if ($this->getUser()->isInRole('admin')) {
+            $this->productModel->updateProduct($varid, 'ProductStatusID', 1);
+            $this->redirect('this');
+        }
+    }
+    
 
      public function handleHideProduct($catID, $id) {
         if ($this->getUser()->isInRole('admin')) {
@@ -336,6 +424,25 @@ class ProductPresenter extends BasePresenter {
                 $this->payload->edit = $content;
                 $this->sendPayload();
                 $this->invalidateControl('editProdTitle');
+            }
+            else {
+             $this->redirect('this');
+            }
+
+        }
+    }
+    
+    
+    public function handleEditProdVarTitle($id){
+        if($this->getUser()->isInRole('admin')){
+            if($this->isAjax()){            
+                $content = $_POST['value'];
+                $this->productModel->updateProduct($id, 'ProductVariantName', $content);
+            }
+            if(!$this->isControlInvalid('editProdVarTitle'.$id)){
+                $this->payload->edit = $content;
+                $this->sendPayload();
+                $this->invalidateControl('editProdVarTitle'.$id);
             }
             else {
              $this->redirect('this');
@@ -642,9 +749,11 @@ class ProductPresenter extends BasePresenter {
                     'PiecesAvailable' => $row->PiecesAvailable);
 
                 $this->row['PhotoAlbumID'] = $album;
-                
+                                
                 $editForm = $this['editParamForm'];
                 $addForm = $this['addParamForm'];
+                
+                $addVariant = $this['addProductVariantForm'];
               //  $docsForm = $this['addDocumentationForm'];
               //  $priceForm = $this['editPriceForm'];
                 $askForm = $this['askForm'];
@@ -1031,6 +1140,11 @@ class ProductPresenter extends BasePresenter {
                 $this->template->attr = 0;
             }
             
+            
+                $this['addProductVariantForm']->setDefaults(array(
+                    'id' => $this->row['ProductID'],
+                    'price' => $this->row['SellingPrice']
+                                ));
             $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
             $this->template->producers = $this->productModel->loadProducers();
        }
