@@ -84,6 +84,7 @@ class gapiModule extends moduleControl {
            
             $this->shopModel->deleteShopInfo('gapiAPI');
             $this->shopModel->deleteShopInfo('gapiTOKEN');
+            $this->shopModel->deleteShopInfo('gapiTRACKING');
            
        }
        else {
@@ -95,6 +96,8 @@ class gapiModule extends moduleControl {
    
    public function actionOrder($orderInfo) {
        if($this->shopModel->isModuleActive('gapi')) {
+           
+           
        }
    }
    /***********************************************************************
@@ -129,6 +132,7 @@ class gapiModule extends moduleControl {
 
                         try {
                         $this->shopModel->insertShopInfo('gapiAPI', $return[1]);
+                        $this->shopModel->insertShopInfo('gapiTRACKING', '');
                         $this->shopModel->insertShopInfo('gapiTOKEN', $return[0]);
                         $this->shopModel->updateModuleStatus('gapi', 1);
                         $this->gapisession->token = $return[0]; }

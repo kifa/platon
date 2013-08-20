@@ -1,5 +1,6 @@
 
 {block pageheader}
+
 <div class="page-header">
         <h1 n:block="title">{_'#'}{$order->OrderID} | {_'Order summary'} <small> {_'Complete summary order'}.</small></h1>
 </div>
@@ -168,6 +169,8 @@
     </div>
             </div>
 
+
+
 {/block}
 
 {block sidebar}
@@ -191,7 +194,7 @@
 {/block}
 
 {block script}
-<script>
+<script type="text/javascript">
  $('#addNoteButton').toggle(function(){
               $('#addNote').modal('show');
             },
@@ -199,4 +202,51 @@
                 $('#addNote').modal('hide');
             });  
     </script>
+    
+
+
+
+{if $GA}
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-42741537-1']);
+  _gaq.push(['_trackPageview']);
+  _gaq.push(['_addTrans',
+    '{$order->OrderID}',           // transaction ID - required
+    {$shopName},  // affiliation or store name
+    '{$order->TotalPrice}',          // total - required
+    '{$order->TaxPrice}',           // tax
+    '{$order->DeliveryPaymentPrice}',              // shipping
+    '{$address->City}', 
+            '',
+            ''// city
+  ]);
+
+
+ {foreach $products as $id => $product}
+
+  _gaq.push(['_addItem',
+    '{$order->OrderID}',           // transaction ID - required
+    '{$product->ProductID}',     // SKU/code - required
+    {$product->ProductName}, // product name
+    {if $product->ProductVariantName}
+      {$product->ProductVariantName}, // category or variation
+                    {else}
+     '', {/if}  
+    '{$product->UnitPrice}',          // unit price - required
+    '{$product->Quantity}'               // quantity - required
+  ]);
+  
+      {/foreach}
+  _gaq.push(['_trackTrans']); //submits transaction to the Analytics servers
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+{/if}
 {/block}

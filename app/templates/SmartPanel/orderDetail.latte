@@ -1,6 +1,51 @@
 {block pageheader}
 {if $user->isInRole('admin')}
 
+
+{if $pros}
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-42741537-1']);
+  _gaq.push(['_trackPageview']);
+  _gaq.push(['_addTrans',
+    '{$order->OrderID}',           // transaction ID - required
+    {$shopName},  // affiliation or store name
+    '{$order->TotalPrice}',          // total - required
+    '{$order->TaxPrice}',           // tax
+    '{$order->DeliveryPaymentPrice}',              // shipping
+    '{$address->City}', 
+            '',
+            ''// city
+  ]);
+
+
+ {foreach $pros as $id => $product}
+
+  _gaq.push(['_addItem',
+    '{$order->OrderID}',           // transaction ID - required
+    '{$product->ProductID}',     // SKU/code - required
+    {$product->ProductName}, // product name
+     '', 
+    '{$product->UnitPrice}',          // unit price - required
+    '{$product->Quantity}'               // quantity - required
+  ]);
+  
+      {/foreach}
+	  
+
+  _gaq.push(['_trackTrans']); //submits transaction to the Analytics servers
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+{/if}
+
+
 <div class="span12 smartPanelBar">
         <a class="btn" href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_"Back to Orders"}</a> 
         <div class="btn-group">
@@ -210,6 +255,10 @@
 {/block}
 
 {block script}
+
+{if $order->Read == 0} {/if}
+
+
 <script>
 $(document).ready(function() {         
 

@@ -578,10 +578,17 @@ class SmartPanelPresenter extends BasePresenter {
         if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
         } else {
-                            
+            
+            $order = $this->orderModel->loadOrder($orderid);
+                      
+            if($order->Read == 0) { 
+            $this->template->pros = $this->orderModel->loadOrderProduct($orderid);
+            }else {
+            $this->template->pros = FALSE;
+            }
             $this->orderModel->updateOrderRead($orderid, 1);
             $this->template->products = $this->orderModel->loadOrderProduct($orderid);
-            $this->template->order = $this->orderModel->loadOrder($orderid);
+            $this->template->order = $order;
             $this->template->statuses = $this->orderModel->loadStatus('');
             $this->template->address = $this->orderModel->loadOrderAddress($orderid);
             $this->template->notes = $this->orderModel->loadOrderNotes($orderid);
