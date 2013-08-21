@@ -132,6 +132,11 @@ class CategoryModel extends Repository {
         $row = $this->getTable('categorystatus')->where('CategoryStatusID', $categorystatusid)->fetch();
         return $row->CategoryStatusName;
     }
+    
+    public function search($query) {
+        
+    }
+
 }
 
 

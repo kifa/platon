@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-08-20 15:42:41
+# Created: 2013-08-21 15:23:32
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-08-20 15:42+0200\n"
+"PO-Revision-Date: 2013-08-21 15:23+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -147,6 +147,9 @@ msgstr "Přidat varianty produktu"
 msgid "Add products"
 msgstr "Přidat produkty"
 
+msgid "Add variant"
+msgstr "Přidat variantu"
+
 msgid "Address"
 msgstr "Adresa"
 
@@ -209,6 +212,9 @@ msgstr "Zrušit"
 
 msgid "Cancel order"
 msgstr "Zrušit objednávku"
+
+msgid "Cannot find what are you looking for?"
+msgstr "Nemůžete najít co hledáte?"
 
 msgid "Cart"
 msgstr "Košík"
@@ -615,6 +621,9 @@ msgstr "Odkaz na tuto stránku naleznete v emailu."
 msgid "Logout"
 msgstr "Odhlásit se"
 
+msgid "Magical numbers that improve your sales."
+msgstr "Kouzelná čísla, která zvyšují prodeje."
+
 msgid "Menu"
 msgstr "Menu"
 
@@ -793,7 +802,7 @@ msgid "Product layout"
 msgstr "Rozložení produktu"
 
 msgid "Products"
-msgstr "Za produkty"
+msgstr "Produkty"
 
 msgid "Products layout"
 msgstr "Rozvržení produktů"
@@ -857,6 +866,12 @@ msgstr "Uložit příspěvek"
 
 msgid "Save price"
 msgstr "Uložit cenu"
+
+msgid "Search"
+msgstr "Hledat"
+
+msgid "Search and discover our eshop."
+msgstr "Hledejte a objevujte náš eshop."
 
 msgid "Select Category:"
 msgstr "Vyberte kategorii:"
@@ -981,6 +996,9 @@ msgstr "Titulek:"
 msgid "To add photos, upload them and then \"Click to edit\" and drag photos to editor."
 msgstr "Pro přidání fotky ji nejprve nahrajte. Následně \"Klikněte pro vložení textu\" a fotky přetáhněte do editoru."
 
+msgid "To continue, you need to be logged in"
+msgstr "Pro pokračování se prosím přihlaste"
+
 msgid "To remove this module visit"
 msgstr "Pro odebrání modulu navštivte "
 
@@ -1047,6 +1065,9 @@ msgstr "Právě připravujeme Vaše zboží."
 msgid "We will respond as soon as possible."
 msgstr "Odpovíme tak rychle, jak to jen půjde."
 
+msgid "What are you looking for?"
+msgstr "Co si přejete najít?"
+
 msgid "What would you like to know:"
 msgstr "Co byste rádi věděli:"
 
@@ -1067,6 +1088,9 @@ msgstr "Jste přihlášení jako správce. Editujte jednoduše kliknutím na ná
 
 msgid "You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?"
 msgstr "Jste přihlášeni jako správce. Pro editaci stačí kliknout na Název, popis, cenu atd. Více informací?"
+
+msgid "You are looking for"
+msgstr "Hledáte"
 
 msgid "You cannot edit product here!"
 msgstr "Pro úpravu přejděte do kategorie!"
@@ -1119,6 +1143,6 @@ msgstr "ks"
 msgid "personal pick up"
 msgstr "osobní převzetí"
 
-msgid "Add variant"
-msgstr "Přidat variantu"
+msgid "We have found these results:"
+msgstr "Našli jsme pro Vás tyto výsledky:"
 

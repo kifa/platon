@@ -638,4 +638,8 @@ class ProductModel extends Repository {
         return $this->getTable('parameters')->insert($insert);
     }    
     
+    
+    public function search($query) {
+        return $this->getTable('product')->where('ProductName LIKE', $query)->fetchPairs('ProductID');
+    }
 }

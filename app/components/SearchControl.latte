@@ -1,0 +1,14 @@
+{form searchForm class => span12}
+<ul class="errors" n:if="$form->hasErrors()">
+        <li n:foreach="$form->errors as $error">{$error}</li>
+</ul>
+  <fieldset class="span12">
+    {label search /}
+    <div class="input-prepend span6">
+        <span class="add-on"><i class="icon-search"></i></span>
+    {input search}
+    </div>
+    {input srch}
+
+  </fieldset>
+{/form}

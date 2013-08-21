@@ -352,5 +352,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         }
     }
     
+    protected function createComponentSearchControl() {
+        $searchControl = new SearchControl();
+        $searchControl->setTranslator($this->translator);
+        return $searchControl;
+    }
+    
    
 }

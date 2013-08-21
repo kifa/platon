@@ -1,0 +1,111 @@
+{block bread}
+{snippet bread}
+{*control menu:bread*}
+{/snippet}
+{/block}
+
+{block pageheader}
+<div class="page-header">
+    <h1 n:block="title"><i class="icon-search"></i> {_'Search'} <small>{_'Search and discover our eshop.'}</small></h1>
+
+</div>
+
+{/block}
+        
+        
+{block content}
+<div class="span12">
+    {if $query}
+    
+    <div class="span10">
+        <h4>{_'You are looking for'} {$query}? {_'We have found these results:'}</h4>
+    </div>
+    
+    
+
+    {if $categories}
+    <div class="span10">
+        <h4>{_'Categories'}</h4>
+        {foreach $categories as $catid => $category}{/foreach}
+    </div>
+    {/if}
+    
+    
+    {if $products}
+    <div class="span10">
+        <h4>{_'Products'}</h4>
+        <table class="table">
+              <tbody>
+        {foreach $products as $id => $product}
+           
+                <tr> 
+                  <td><a href="{plink Product:product $product->ProductID, $product->ProductName}">{$product->ProductName}</a></td>
+                  <td>{$product->ProductDescription|striptags}</td>
+                  
+                </tr>             
+            
+        {/foreach}
+                </tbody>
+            </table>
+    </div>
+    {/if}
+    
+        
+    {if $posts}
+    <div class="span10">
+        <h4>{_'Posts'}</h4>
+        {foreach $posts as $postid => $post}{/foreach}
+    </div>
+    {/if}
+    
+    {else}
+    
+    {control searchControl}
+    <div class="span12 margin5">
+    {_'Cannot find what are you looking for?'} <a href="{plink Homepage:contact}" class="btn btn-primary"><i class="icon-phone"></i> {_'Contact us'}</a>
+    </div>
+    {/if}
+
+</div>
+
+{/block}
+
+
+{block sidebar}
+<div class="span3">
+    <ul class="nav nav-list">
+        <li class="nav-header"><i class="icon-group icon-large"></i> {_'Company info'}</a></li>
+        <li class="divider"></li>
+        <li><strong>{$companyName}</strong></li>
+        {if $companyPhone}
+        <li><i class="icon-phone"></i> {$companyPhone}</li>
+        {/if}
+        <li><i class="icon-envelope"></i> {$companyMail}</li>
+        <li class="divider"></li>
+        <li><i class="icon-home"></i> <strong>{_'Address'}</strong></li>
+        <li>{$companyAddress}</li>
+    </ul>
+
+
+</div>
+{/block}
+
+
+{block script}
+<div n:snippet="script">
+<script>
+    
+    $('a.ajax').click(function(){
+        $(this).html('<i class="icon-spinner icon-spin"></i>');
+    });
+    
+    $('input[name="srch"]').click(function() { 
+                $('input[name="srch"]').attr('class', 'btn btn-primary disabled');
+                $('input[name="srch"]').attr('value', 'Searching...');
+            });
+    
+    
+</script>
+</div>
+
+{/block}

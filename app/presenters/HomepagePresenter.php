@@ -14,7 +14,9 @@ class HomepagePresenter extends BasePresenter {
     private $productModel;
     private $categoryModel;
     private $shopModel;
-    
+    private $blogModel;
+
+
     protected $translator;
 
     protected function startup() {
@@ -23,6 +25,7 @@ class HomepagePresenter extends BasePresenter {
         $this->productModel = $this->context->productModel;
         $this->categoryModel = $this->context->categoryModel;
         $this->shopModel = $this->context->shopModel;
+        $this->blogModel = $this->context->blogModel;
         /* Kontrola přihlášení
          * 
          * if (!$this->getUser()->isInRole('admin')) {
@@ -58,6 +61,19 @@ class HomepagePresenter extends BasePresenter {
     }
     
     
+    public function renderSearch($query){
+        $this->template->query = $query;
+        if($query != NULL || $query != '') {
+        $this->template->products = $this->productModel->search($query);
+        $this->template->categories = $this->categoryModel->search($query);
+        $this->template->posts = $this->blogModel->search($query);
+        }
+    }
+
+
+    
+
+
     protected function createComponentContactForm() {
             $contactForm = new Nette\Application\UI\Form;
             $contactForm->setTranslator($this->translator);

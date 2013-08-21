@@ -151,4 +151,9 @@ class BlogModel extends Repository {
                 WHERE Blog.BlogID=?',$id);*/           
         }
     }
+    
+    public function search($query) {
+        
+    }
+
 }

@@ -609,7 +609,10 @@ class OrderModel extends Repository {
      */
     
    
-    
+    public function search($query) {
+        
+    }
+
    
 }
 
