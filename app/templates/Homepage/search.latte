@@ -26,7 +26,18 @@
     {if $categories}
     <div class="span10">
         <h4>{_'Categories'}</h4>
-        {foreach $categories as $catid => $category}{/foreach}
+  <table class="table">
+              <tbody>        
+{foreach $categories as $catid => $category}
+
+        <tr> 
+                  <td><a href="{plink Product:products $category->CategoryID, $category->CategoryName}">{$category->CategoryName}</a></td>
+                  <td>{$category->CategoryDescription|striptags|truncate:50, '...'}</td>
+                  
+                </tr> 
+        {/foreach}
+                 </tbody>
+            </table>
     </div>
     {/if}
     
@@ -40,7 +51,7 @@
            
                 <tr> 
                   <td><a href="{plink Product:product $product->ProductID, $product->ProductName}">{$product->ProductName}</a></td>
-                  <td>{$product->ProductDescription|striptags}</td>
+                  <td>{$product->ProductDescription|striptags|truncate:50, '...'}</td>
                   
                 </tr>             
             
@@ -54,7 +65,18 @@
     {if $posts}
     <div class="span10">
         <h4>{_'Posts'}</h4>
-        {foreach $posts as $postid => $post}{/foreach}
+         <table class="table">
+              <tbody>
+        {foreach $posts as $postid => $post}
+ <tr> 
+                  <td><a href="{plink Blog:post $post->BlogID, $post->BlogName}">{$post->BlogName}</a></td>
+                  <td>{$post->BlogContent|striptags|truncate:50, '...'}</td>
+                  
+                </tr>  
+
+{/foreach}
+         </tbody>
+            </table>
     </div>
     {/if}
     

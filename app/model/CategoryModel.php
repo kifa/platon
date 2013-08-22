@@ -134,7 +134,7 @@ class CategoryModel extends Repository {
     }
     
     public function search($query) {
-        
+        return $this->getTable('category')->where('CategoryName LIKE', '%'.$query.'%')->fetchPairs('CategoryID');
     }
 
 }

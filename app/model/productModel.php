@@ -640,6 +640,13 @@ class ProductModel extends Repository {
     
     
     public function search($query) {
-        return $this->getTable('product')->where('ProductName LIKE', $query)->fetchPairs('ProductID');
+         $results = array();
+         
+         $results += $this->getTable('product')->where('ProductName LIKE', '%'.$query.'%')->fetchPairs('ProductID');
+         $results += $this->getTable('product')->where('ProductShort LIKE', '%'.$query.'%')->fetchPairs('ProductID');
+         $results += $this->getTable('product')->where('ProductDescription LIKE', '%'.$query.'%')->fetchPairs('ProductID');
+ 
+         
+         return $results;
     }
 }
