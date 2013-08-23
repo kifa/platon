@@ -24,17 +24,14 @@ class ProductModel extends Repository {
             //return $this->getTable('product')->select('product.ProductID, product.ProductName,
             //    product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*');            
             return $this->getDB()->query('SELECT * FROM product JOIN price 
-                ON price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
-                JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE photo.CoverPhoto="1" AND product.ProductStatusID="2" AND product.ProductVariants IS NULL');                              
+                ON price.ProductID=product.ProductID WHERE product.ProductStatusID="2" AND product.ProductVariants IS NULL');                              
             
             }
         else
         {  
             return $this->getDB()->query('SELECT * FROM product JOIN price ON 
-            price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
-            JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-            WHERE photo.CoverPhoto="1" AND (product.ProductStatusID="2" OR product.ProductStatusID="3") 
+            price.ProductID=product.ProductID 
+            WHERE (product.ProductStatusID="2" OR product.ProductStatusID="3") 
             AND product.ProductVariants IS NULL AND product.CategoryID=?',$catID);
             
             
@@ -46,9 +43,7 @@ class ProductModel extends Repository {
      public function loadCatalogBrand($prodID) {
         
           return $this->getDB()->query('SELECT * FROM product JOIN price ON 
-            price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
-            JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-            WHERE photo.CoverPhoto="1" and product.ProductStatusID="2" and product.ProducerID=?', $prodID);
+            price.ProductID=product.ProductID WHERE product.ProductStatusID="2" and product.ProducerID=?', $prodID);
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
               //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
         
@@ -61,16 +56,14 @@ class ProductModel extends Repository {
             //return $this->getTable('product')->select('product.ProductID, product.ProductName,
             //    product.ProductDescription,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*');            
             return $this->getDB()->query('SELECT * FROM product JOIN price 
-                ON price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
-                JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-                WHERE photo.CoverPhoto="1" AND product.ProductVariants IS NULL');                              
+                ON price.ProductID=product.ProductID 
+                WHERE product.ProductVariants IS NULL');                              
             
             }
         else
         {  return $this->getDB()->query('SELECT * FROM product JOIN price ON 
-            price.ProductID=product.ProductID JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
-            JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-            WHERE photo.CoverPhoto="1" AND product.ProductVariants  IS NULL AND product.CategoryID=?',$catID);
+            price.ProductID=product.ProductID 
+            WHERE product.ProductVariants IS NULL AND product.CategoryID=?',$catID);
             //return $this->getTable('product')->select('product.ProductID, product.ProductName, 
               //  product.ProductDescription,product.CategoryID,product.PhotoAlbumID,product.PiecesAvailable,price.FinalPrice,Photo.*')->where('CategoryID', $id);                    
         }
@@ -642,10 +635,12 @@ class ProductModel extends Repository {
     public function search($query) {
          $results = array();
          
-         $results += $this->getTable('product')->where('ProductName LIKE', '%'.$query.'%')->fetchPairs('ProductID');
+        /* $results += $this->getTable('product')->where('ProductName LIKE', '%'.$query.'%')->fetchPairs('ProductID');
          $results += $this->getTable('product')->where('ProductShort LIKE', '%'.$query.'%')->fetchPairs('ProductID');
          $results += $this->getTable('product')->where('ProductDescription LIKE', '%'.$query.'%')->fetchPairs('ProductID');
- 
+ */
+         $results = $this->getDB()->query('SELECT * FROM product JOIN price 
+                ON price.ProductID=product.ProductID WHERE product.ProductStatusID="2" AND product.ProductVariants IS NULL AND product.ProductShort LIKE ?', '%'.$query.'%'); 
          
          return $results;
     }

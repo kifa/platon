@@ -732,7 +732,8 @@ class ProductPresenter extends BasePresenter {
     public function actionProduct($id, $slug = NULL) {
         $row = $this->productModel->loadProduct($id);
         if (!$row) {
-            $this->flashMessage('Product not available', 'alert');
+            $text = $this->translator->translate('Product not available');
+            $this->flashMessage($text, 'alert');
             $this->redirect('Homepage:');
         } else {
             $this->parameters = $this->productModel->loadParameters($id);

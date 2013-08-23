@@ -48,7 +48,7 @@
         <table class="table">
               <tbody>
         {foreach $products as $id => $product}
-           
+           {control product:productMini $product}
                 <tr> 
                   <td><a href="{plink Product:product $product->ProductID, $product->ProductName}">{$product->ProductName}</a></td>
                   <td>{$product->ProductDescription|striptags|truncate:50, '...'}</td>

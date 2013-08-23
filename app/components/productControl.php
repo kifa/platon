@@ -625,13 +625,13 @@ class productControl extends BaseControl{
      * RENDERY
      */
     
-    public function renderProductMini($id) {
+    public function renderProductMini($product) {
         $layout = $this->shopModel->getShopInfo('ProductMiniLayout');
        
         $this->template->setFile(__DIR__ . '/' . $layout . '.latte');    
-        $this->template->product = $this->productModel->loadProduct($id);
-        $this->template->albumID = $this->productModel->loadPhotoAlbumID($id)->PhotoAlbumID;
-        $this->template->photo = $this->productModel->loadCoverPhoto($id);
+        $this->template->product = $product;
+        $this->template->albumID = $this->productModel->loadPhotoAlbumID($product['ProductID'])->PhotoAlbumID;
+        $this->template->photo = $this->productModel->loadCoverPhoto($product['ProductID']);
 
         $this->template->render();
     }
