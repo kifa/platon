@@ -1,24 +1,46 @@
-{if $results}
-<table class="table">
-              <thead>
-                <tr>
-                  <th>Source</th>
-                  <th>View</th>
-                </tr>
-              </thead>
-              <tbody>
-{foreach $results as $result}
-                  <tr>
+{if $revenue}
+<dl class="span2">
+{foreach $revenue as $result}
+                  <dt>{_'Total revenue'}</dt>
 {foreach $result as $r}
-                      <td>
-                       {$r}
-                      </td>
+                      <dd>{$r}</dd>
 {/foreach}
-                      </tr>
+                      
 {/foreach}                
-              </tbody>
-            </table>
+</dl>
 {else}
 <p>{_'No revenue data, yet.'}</p>
+
+{/if}
+
+{if $purchases}
+<dl>
+{foreach $purchases as $result}
+    <dt>{_'Items per purchase'}</dt>
+    <dd>
+{foreach $result as $r}
+                      {$r|number}
+{/foreach}
+        </dd>
+{/foreach}    
+</dl>
+{else}
+<p>{_'No source data, yet.'}</p>
+
+{/if}
+
+{if $totalsell}
+<dl>
+{foreach $totalsell as $result}
+    <dt>{_'Total sell'}</dt>
+    <dd>
+{foreach $result as $r}
+                      {$r|number}
+{/foreach}
+        </dd>
+{/foreach}    
+</dl>
+{else}
+<p>{_'No source data, yet.'}</p>
 
 {/if}

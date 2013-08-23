@@ -64,6 +64,20 @@ class SmartPanelPresenter extends BasePresenter {
         return $mailControl;
     }
 
+    
+     
+    protected function createComponentGapiModule() {
+       
+       $gapi = new gapiModule();
+       $gapi->setTranslator($this->translator);
+       $gapi->setShop($this->shopModel);
+       $gapi->setOrder($this->orderModel);
+       $gapi->setProduct($this->productModel);
+       $gapi->setCategory($this->categoryModel);
+       $gapi->setGapi($this->gapisession);
+       return $gapi;
+   }
+    
     public function handleSetStatus($orderid, $statusID, $name, $progress) {
         
             $this->orderModel->setStatus($orderid, $statusID);

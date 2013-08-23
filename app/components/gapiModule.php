@@ -204,21 +204,116 @@ class gapiModule extends moduleControl {
           
     }
     
-    public function renderProduct($name) {
-           $this->template->setFile(__DIR__ . '/gapiProduct.latte');
+    public function renderSmartPanelMini() {
+         $this->template->setFile(__DIR__ . '/gapiSmartPanelMini.latte');
         $code = $this->shopModel->getShopInfo('gapiAPI');
         $token = $this->shopModel->getShopInfo('gapiTOKEN');
         
         $gapi = new Birne\Gapi\Gapi();
         $gapi->setParent($this);
 
+        
         $gapi->setGAPI($token, $code);
         $id = '39033320';
-             
+        
+        
+        $today = date('Y-m-d');
+        
         $optParams2 = array(
                 'dimensions' => 'ga:productName',
+                'max-results' => '5',
+                'sort' => '-ga:itemRevenue');
+        
+        $metrics2 = 'ga:itemRevenue';
+        
+        $params2 = array(
+            'ga:'. $id,
+            '2013-01-01',
+            $today,
+            $metrics2,
+            $optParams2);
+        
+        $products = $gapi->respond($params2);
+        $this->template->products = $products;
+      
+        
+        $optParams = array(
+                 'dimensions' => 'ga:productCategory',
+                'max-results' => '5',
+                'sort' => '-ga:itemRevenue');
+        
+        $metrics = 'ga:itemRevenue';
+        
+        $params = array(
+            'ga:'. $id,
+            '2012-03-03',
+            $today,
+            $metrics,
+            $optParams);
+        
+         
+        $category = $gapi->respond($params);
+        $this->template->category = $category;
+        
+        $optParams = array(
+                'dimensions' => '',
+                'max-results' => '5');
+        
+        $metrics = 'ga:itemRevenue';
+        
+        $params = array(
+            'ga:'. $id,
+            '2012-03-03',
+            $today,
+            $metrics,
+            $optParams);
+        
+         
+        $totalRevenue = $gapi->respond($params);
+        $this->template->totalrevenue = $totalRevenue;
+        
+        
+        $optParams = array(
+                'dimensions' => '',
+                'max-results' => '5');
+        
+        $metrics = 'ga:itemQuantity';
+        
+        $params = array(
+            'ga:'. $id,
+            '2012-03-03',
+            $today,
+            $metrics,
+            $optParams);
+        
+         
+        $items = $gapi->respond($params);
+        $this->template->items = $items;
+        
+        
+        $this->template->render();
+    }
+
+
+    public function renderProduct($productid) {
+        $this->template->setFile(__DIR__ . '/gapiProduct.latte');
+        $code = $this->shopModel->getShopInfo('gapiAPI');
+        $token = $this->shopModel->getShopInfo('gapiTOKEN');
+        
+        $gapi = new Birne\Gapi\Gapi();
+        $gapi->setParent($this);
+
+        
+        $gapi->setGAPI($token, $code);
+        $id = '39033320';
+        
+        
+        $today = date('Y-m-d');
+        
+        $optParams2 = array(
+                'dimensions' => '',
                 'max-results' => '10',
-                'filters' => 'ga:productName=~'.$name,
+                'filters' => 'ga:productSku=~191',
                 'sort' => '-ga:itemRevenue');
         
         $metrics2 = 'ga:itemRevenue';
@@ -226,13 +321,51 @@ class gapiModule extends moduleControl {
         $params2 = array(
             'ga:'. $id,
             '2012-03-03',
-            '2013-03-03',
+            $today,
             $metrics2,
             $optParams2);
         
-        $results = $gapi->respond($params2);
-        $this->template->results = $results;
+        $revenue = $gapi->respond($params2);
+        $this->template->revenue = $revenue;
       
+        
+        $optParams = array(
+                'dimensions' => '',
+                'max-results' => '5',
+                'filters' => 'ga:productSku=~191');
+        
+        $metrics = 'ga:itemsPerPurchase';
+        
+        $params = array(
+            'ga:'. $id,
+            '2012-03-03',
+            $today,
+            $metrics,
+            $optParams);
+        
+         
+        $purchases = $gapi->respond($params);
+        $this->template->purchases = $purchases;
+        
+        $optParams = array(
+                'dimensions' => '',
+                'max-results' => '5',
+                'filters' => 'ga:productSku=~191');
+        
+        $metrics = 'ga:itemQuantity';
+        
+        $params = array(
+            'ga:'. $id,
+            '2012-03-03',
+            $today,
+            $metrics,
+            $optParams);
+        
+         
+        $totalSell = $gapi->respond($params);
+        $this->template->totalsell = $totalSell;
+        
+        
         
         $this->template->render();
     }

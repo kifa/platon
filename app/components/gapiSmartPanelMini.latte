@@ -1,0 +1,79 @@
+<div class="alert alert-success span12">
+{if $totalrevenue}
+<dl class="span12">
+{foreach $totalrevenue as $result}
+                  <dt>{_'Total revenue'}</dt>
+{foreach $result as $r}
+                      <dd>{$r}</dd>
+{/foreach}
+                      
+{/foreach}                
+</dl>
+{else}
+<p>{_'No revenue data, yet.'}</p>
+
+{/if}
+
+
+{if $items}
+<dl class="span12">
+{foreach $items as $result}
+                  <dt>{_'Total sell'}</dt>
+{foreach $result as $r}
+                      <dd>{$r}</dd>
+{/foreach}
+                      
+{/foreach}                
+</dl>
+{else}
+<p>{_'No revenue data, yet.'}</p>
+
+{/if}
+</div>
+
+
+{if $products}
+<table class="table">
+              <thead>
+                <tr>
+                  <th>{_'Product'}</th>
+                  <th>{_'Revenue'}</th>
+                </tr>
+              </thead>
+              <tbody>
+{foreach $products as $vi}
+                  <tr>
+{foreach $vi as $id => $v}
+                      <td>
+                       {$v}
+                      </td>
+{/foreach}
+                      </tr>
+{/foreach}                
+              </tbody>
+            </table>
+
+{/if}
+
+{if $category}
+<table class="table">
+              <thead>
+                <tr>
+                  <th>{_'Category'}</th>
+                  <th>{_'Revenue'}</th>
+                </tr>
+              </thead>
+              <tbody>
+{foreach $category as $vi}
+                  <tr>
+{foreach $vi as $id => $v}
+                      <td>
+                       {$v}
+                      </td>
+{/foreach}
+                      </tr>
+{/foreach}                
+              </tbody>
+            </table>
+
+{/if}

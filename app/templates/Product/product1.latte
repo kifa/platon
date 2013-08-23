@@ -266,7 +266,7 @@
     $('a.ajax').click(function(){
         $(this).html('<i class="icon-spinner icon-spin"></i>');
     });
-    
+   {if $user->isInRole('admin')}   
     {foreach $productVariants as  $id => $productVariant}
 
 
@@ -292,6 +292,7 @@
                  }
           });
                {/foreach}
+           {/if}
                
 </script>
 {/snippet}
@@ -507,7 +508,7 @@
         </div>
         <div class="modal-body">
 
-            {control gapiModule:product $product->ProductName}
+            {control gapiModule:product $product->ProductID}
 
         </div>                                    
 
