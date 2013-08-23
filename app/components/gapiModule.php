@@ -313,7 +313,7 @@ class gapiModule extends moduleControl {
         $optParams2 = array(
                 'dimensions' => '',
                 'max-results' => '10',
-                'filters' => 'ga:productSku=~191',
+                'filters' => 'ga:productSku=='.$productid,
                 'sort' => '-ga:itemRevenue');
         
         $metrics2 = 'ga:itemRevenue';
@@ -332,7 +332,7 @@ class gapiModule extends moduleControl {
         $optParams = array(
                 'dimensions' => '',
                 'max-results' => '5',
-                'filters' => 'ga:productSku=~191');
+                'filters' => 'ga:productSku=='.$productid);
         
         $metrics = 'ga:itemsPerPurchase';
         
@@ -350,7 +350,7 @@ class gapiModule extends moduleControl {
         $optParams = array(
                 'dimensions' => '',
                 'max-results' => '5',
-                'filters' => 'ga:productSku=~191');
+                'filters' => 'ga:productSku=='.$productid);
         
         $metrics = 'ga:itemQuantity';
         

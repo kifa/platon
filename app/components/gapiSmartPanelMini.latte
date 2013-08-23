@@ -1,34 +1,34 @@
 <div class="alert alert-success span12">
-{if $totalrevenue}
-<dl class="span12">
-{foreach $totalrevenue as $result}
-                  <dt>{_'Total revenue'}</dt>
-{foreach $result as $r}
-                      <dd>{$r}</dd>
-{/foreach}
-                      
-{/foreach}                
-</dl>
-{else}
-<p>{_'No revenue data, yet.'}</p>
+    {if $totalrevenue}
+    <dl class="span12">
+    {foreach $totalrevenue as $result}
+                      <dt>{_'Total revenue'}</dt>
+    {foreach $result as $r}
+                          <dd>{$r}</dd>
+    {/foreach}
 
-{/if}
+    {/foreach}                
+    </dl>
+    {else}
+    <p>{_'No revenue data, yet.'}</p>
+
+    {/if}
 
 
-{if $items}
-<dl class="span12">
-{foreach $items as $result}
-                  <dt>{_'Total sell'}</dt>
-{foreach $result as $r}
-                      <dd>{$r}</dd>
-{/foreach}
-                      
-{/foreach}                
-</dl>
-{else}
-<p>{_'No revenue data, yet.'}</p>
+    {if $items}
+    <dl class="span12">
+    {foreach $items as $result}
+                      <dt>{_'Total sell'}</dt>
+    {foreach $result as $r}
+                          <dd>{$r}</dd>
+    {/foreach}
 
-{/if}
+    {/foreach}                
+    </dl>
+    {else}
+    <p>{_'No revenue data, yet.'}</p>
+
+    {/if}
 </div>
 
 
