@@ -71,7 +71,7 @@
                <a href="#editParam" class="btn" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Specs"}</a>
                <a href="#addVariant" class="btn" data-toggel="modal" data-target="#addVariant" id="addVariantButton"><i class="icon-large icon-expand-alt"></i> {_'Add variant'}</a>
             </div>
-            <a href="#" class="btn" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+            <a href="#stats" class="btn" data-toggel="modal" data-target="#stats" id="statsButton"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
         </div>
 {/if}
 
@@ -316,6 +316,14 @@
                   $('#addVariant').modal('hide');
               });
 
+
+            $('#statsButton').toggle(function(){
+                $('#stats').modal('show');
+              },
+              function() {
+                  $('#stats').modal('hide');
+              });
+              
               {if $attr == 1}
                   $('#editParam').modal('show');
                   {/if}
@@ -511,7 +519,21 @@
                             </div>
 
 
-    {/if}
+                            <div id="stats" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3 id="myModalLabel"><i class="icon-list"></i> {_'Product stats'}</h3>
+                                </div>
+                                <div class="modal-body">
+                                
+                                    {control gapiModule:product $product->ProductName}
 
+                                </div>                                    
+                                
+                                <div class="modal-footer">
+                                     <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+                                </div>
 
+                            </div>
+{/if}
 {/block}

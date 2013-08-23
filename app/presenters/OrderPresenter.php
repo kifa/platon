@@ -21,14 +21,9 @@ class OrderPresenter extends BasePresenter {
     /* @var UserModel */
     private $userModel;
     
-    /* @var int */
-    private $orderid;
-    
     /* @var Session */
     private $cart;
     
-    /* @var Session */
-    private $c2;
 
     protected function startup() {
         parent::startup();
@@ -165,7 +160,7 @@ class OrderPresenter extends BasePresenter {
                 $amnt = $this->cart->prd[$id];
                 $product2 = $this->productModel->loadProduct($id);
 
-                $this->c2[$id][$amnt] = $product2;
+                $c2[$id][$amnt] = $product2;
             }
 
             $shippers = array();
@@ -183,7 +178,7 @@ class OrderPresenter extends BasePresenter {
             $this->template->terms = $this->shopModel->loadStaticText(1);
             $this->template->shippers = $shippers;
             $this->template->payment = $payment;
-            $this->template->cart = $this->c2;
+            $this->template->cart = $c2;
             $this->template->cartForm = $this->createComponentCartForm();
            
         } else {
@@ -290,7 +285,7 @@ class OrderPresenter extends BasePresenter {
                
         $addNote = new Nette\Application\UI\Form;
         $addNote->setTranslator($this->translator);
-        $addNote->addHidden('orderID', $this->orderid);
+        $addNote->addHidden('orderID', '');
         $addNote->addHidden('userName', '');
         $addNote->addTextArea('note', 'Your Note:')
                 ->setRequired();  
@@ -306,10 +301,10 @@ class OrderPresenter extends BasePresenter {
     public function addNoteFormSubmitted($form) {
          
           
-            $this->orderModel->addNote($form->values->orderID, $form->values->userName, $form->values->note);
+            $this->orderModel->addNote($form->values->orderid, $form->values->userName, $form->values->note);
            
             try {
-                    $this->sendNoteMail($form->values->orderID, $form->values->note);
+                    $this->sendNoteMail($form->values->orderid, $form->values->note);
                 }
             catch (Exception $e) {
                    \Nette\Diagnostics\Debugger::log($e);
@@ -474,7 +469,9 @@ class OrderPresenter extends BasePresenter {
             $this->redirect('Homepage:default');
         }
         else {
-       $this->orderid = $orderid;
+            $noteForm = $this['addNoteForm'];
+            $noteForm->setDefaults(array('orderid' => $orderid));
+                    
         }
     }
     

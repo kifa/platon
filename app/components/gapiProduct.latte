@@ -1,0 +1,24 @@
+{if $results}
+<table class="table">
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>View</th>
+                </tr>
+              </thead>
+              <tbody>
+{foreach $results as $result}
+                  <tr>
+{foreach $result as $r}
+                      <td>
+                       {$r}
+                      </td>
+{/foreach}
+                      </tr>
+{/foreach}                
+              </tbody>
+            </table>
+{else}
+<p>{_'No revenue data, yet.'}</p>
+
+{/if}

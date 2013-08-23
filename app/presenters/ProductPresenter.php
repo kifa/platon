@@ -20,13 +20,10 @@ class ProductPresenter extends BasePresenter {
     private $categoryModel;
     private $shopModel;
     private $blogModel;
-    private $id;
-    private $catId;
     protected $translator;
-    private $row;
+
     private $parameters;
     private $edit;
-    private $categoryParam;
     private $filter;
 
     protected function startup() {
@@ -80,17 +77,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    protected function createComponentEditControl() {
-        if ($this->getUser()->isInRole('admin')) {
-            $editControl = new EditControl();
-            $editControl->setService($this->productModel);
-            $editControl->setTranslator($this->translator);
-            $editControl->setParameters($this->productModel->loadParameters($this->row['ProductID']));
-            $editControl->setProductID($this->row['ProductID']);
-            return $editControl;
-        }
-    }
-    
+   
     
 
     /*     * **********************************************************************
@@ -101,20 +88,26 @@ class ProductPresenter extends BasePresenter {
     public function actionProducts($catID, $slug) {
         $cat = $this->categoryModel->loadCategory($catID);
         if (!isset($cat->CategoryName)) {
-            $this->flashMessage('Category not available', 'alert');
+            $text = $this->translator->translate('Category not available');
+            $this->flashMessage($text, 'alert');
             $this->redirect('Homepage:');
-        } 
+        } else {
         
-        if ($this->getUser()->isInRole('admin')) {
-            // load all products
-            $row = $this->productModel->loadCatalogAdmin($catID);
-            $this->categoryParam = $catID;
-            
-            $addCategoryForm = $this['addCategoryForm'];
-        } 
-        else {
-            // load published products
-            $row = $this->productModel->loadCatalog($catID);
+            if ($this->getUser()->isInRole('admin')) {
+                
+                $productForm = $this['addProductForm'];
+                $productForm->setDefaults(array('catID' => $catID));
+
+                $addCategoryForm = $this['addCategoryForm'];
+                $addCategoryForm->setDefaults(array('catID' => $catID));
+
+                $addCategoryPhoto = $this['addCategoryPhotoForm'];
+                $addCategoryPhoto->setDefaults(array('catID' => $catID));
+
+                $deleteCategoryForm = $this['deleteCategoryForm'];
+                $deleteCategoryForm->setDefaults(array('catID' => $catID));
+            } 
+        
         }
     }
 
@@ -159,6 +152,11 @@ class ProductPresenter extends BasePresenter {
 
         if ($this->getUser()->isInRole('admin')) {
 
+            
+            foreach ($this->categoryModel->loadCategoryListAdmin() as $id => $category) {
+                $categories[$id] = $category->CategoryName;
+            }
+                       
             $addProduct = new Nette\Application\UI\Form;
             $addProduct->setTranslator($this->translator);
             $addProduct->addText('name', 'Name:')
@@ -175,7 +173,7 @@ class ProductPresenter extends BasePresenter {
                     ->setType('number')
                     ->setRequired()
                     ->setAttribute('class', 'span7');
-            $addProduct->addHidden('cat', $this->catId);
+            $addProduct->addHidden('catID', '');
             $addProduct->addUpload('image', 'Image:')
                     ->addCondition(Form::FILLED)                    
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
@@ -205,7 +203,7 @@ class ProductPresenter extends BasePresenter {
                     '122', //QR
                     'rok', //Warranty
                     $form->values->amount, //Pieces
-                    $form->values->cat, //CatID
+                    $form->values->catID, //CatID
                     '' //Date of avail.                
                     //NULL //Comment   
             );
@@ -674,7 +672,7 @@ class ProductPresenter extends BasePresenter {
             }
             $prompt = Html::el('option')->setText("-- No Parent --")->class('prompt');
 
-            $deleteForm->addHidden('id', $this->categoryParam);
+            $deleteForm->addHidden('catID', '');
             $deleteForm->addSelect('parent', 'Move products to category:', $categories)
                     ->setPrompt($prompt)
                     ->setRequired();
@@ -690,18 +688,17 @@ class ProductPresenter extends BasePresenter {
     public function deleteCategoryFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
 
-            foreach ($this->productModel->loadCatalog($form->values->id) as $product) {
+            foreach ($this->productModel->loadCatalog($form->values->catID) as $product) {
                 $this->productModel->updateProduct($product->ProductID, 'CategoryID', $form->values->parent);
             }
 
-            $this->categoryModel->deleteCategory($form->values->id);
+            $this->categoryModel->deleteCategory($form->values->catID);
             $this->redirect('Product:products', $form->values->parent);
         }
     }
 
     public function renderProducts($catID, $slug) {
 
-        $this->catId = $catID;
 
         if ($this->getUser()->isInRole('admin')) {
             // load all products
@@ -736,35 +733,40 @@ class ProductPresenter extends BasePresenter {
             $this->flashMessage($text, 'alert');
             $this->redirect('Homepage:');
         } else {
+ 
             $this->parameters = $this->productModel->loadParameters($id);
-            $album = $this->productModel->loadPhotoAlbumID($id)->PhotoAlbumID;
-
+            $album = $this->productModel->loadPhotoAlbumID($id);
+            
+            if($album){
+                $album = $album->PhotoAlbumID;
+            } else {
+                $album = FALSE;
+            }
+            
             if ($this->getUser()->isInRole('admin')) {
-                $this->row = array('ProductID' => $row->ProductID,
-                    'ProductName' => $row->ProductName,
-                    'ProducerID' => $row->ProducerID,
-                    'ProductDescription' => $row->ProductDescription,
-                    'SellingPrice' => $row->SellingPrice,
-                    'SALE' => $row->SALE,
-                    'CategoryID' => $row->CategoryID,
-                    'PiecesAvailable' => $row->PiecesAvailable);
-
-                $this->row['PhotoAlbumID'] = $album;
-                                
+                                               
                 $editForm = $this['editParamForm'];
                 $addForm = $this['addParamForm'];
+                $addForm->setDefaults(array('productID' => $id));
+               
                 
                 $addVariant = $this['addProductVariantForm'];
-              //  $docsForm = $this['addDocumentationForm'];
-              //  $priceForm = $this['editPriceForm'];
-                $askForm = $this['askForm'];
-                // $this['editPriceForm']['price'] = $this->row['SellingPrice'];
+                $addVariant->setDefaults(array(
+                    'id' => $row['ProductID'],
+                    'price' => $row['SellingPrice'] ));
+                
+                
+                $photoForm = $this['addPhotoForm'];
+                $photoForm->setDefaults(array(
+                    'productName' => $row['ProductName'],
+                    'productDescription' => $row['ProductShort'],
+                    'productID' => $row['ProductID'],
+                    'albumID' => $album));
+                
             }
-            else{
-                $this->row = array('ProductID' => $row->ProductID,
-                    'ProductName' => $row->ProductName);
-                $askForm = $this['askForm'];
-            }
+           
+               $askForm = $this['askForm'];
+               $askForm->setDefaults(array('name' => $row['ProductName']));
         }
     }
 
@@ -776,14 +778,16 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             $addPhoto = new Nette\Application\UI\Form;
             $addPhoto->setTranslator($this->translator);
-            $addPhoto->addHidden('name', 'name');
-            $addPhoto->addHidden('albumID', $this->row['PhotoAlbumID']);
+            $addPhoto->addHidden('productName', '');
+            $addPhoto->addHidden('productDescription', '');
+            $addPhoto->addHidden('albumID', '');
+            $addPhoto->addHidden('productID', '');
             $addPhoto->addUpload('image', 'Photo:')
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024)
-                    ->setAttribute('class', 'span3');
+                    ->setAttribute('class', 'span7');
             $addPhoto->addSubmit('add', 'Add Photo')
-                    ->setAttribute('class', 'btn-primary upl span2')
+                    ->setAttribute('class', 'btn-primary upl span4')
                     ->setAttribute('data-loading-text', 'Uploading...');
             $addPhoto->onSuccess[] = $this->addProductPhotoFormSubmitted;
             return $addPhoto;
@@ -797,15 +801,21 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             if ($form->values->image->isOK()) {
 
-                if($this->row['PhotoAlbumID'] == NULL) {
-                    $albumID = $this->insertPhotoAlbum($this->row['ProductName'], $this->row['ProductDescription'], $this->row['ProductID']);
+                if($form->values->albumID == NULL) {
+                    $albumID = $this->productModel->insertPhotoAlbum($form->values->productName, $form->values->productDescription, $form->values->productID);
+                    $this->productModel->insertPhoto(
+                        $form->values->productName, $form->values->image->name, $albumID, 1
+                    );
+                    
                 } else {
                     $albumID = $form->values->albumID;
+                    $this->productModel->insertPhoto(
+                        $form->values->productName, $form->values->image->name, $albumID
+                    );
                 }
                 
-                $this->productModel->insertPhoto(
-                        $form->values->name, $form->values->image->name, $albumID
-                );
+                
+                
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/' . $form->values->image->name;
                 $form->values->image->move($imgUrl);
 
@@ -837,7 +847,7 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             $addPhoto = new Nette\Application\UI\Form;
             $addPhoto->setTranslator($this->translator);
-            $addPhoto->addHidden('categoryID', $this->categoryParam);
+            $addPhoto->addHidden('catID', '');
             $addPhoto->addUpload('image', 'Photo:')
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
@@ -886,46 +896,7 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-  /*  protected function createComponentEditPriceForm() {
-        if ($this->getUser()->isInRole('admin')) {
-
-            $priceForm = new Nette\Application\UI\Form;
-            $priceForm->setTranslator($this->translator);
-            $priceForm->addText('price', 'Price:')
-                    ->setDefaultValue($this->row['SellingPrice'])
-                    ->setRequired()
-                    ->addRule(FORM::FLOAT, 'This has to be a number.');
-            $priceForm->addText('discount', 'Discount:')
-                    ->setDefaultValue($this->row['SALE'])
-                    ->addRule(FORM::FLOAT, 'This has to be a number.')
-                    ->addRule(FORM::RANGE, 'It should be less then price', array(0, $this->row['SellingPrice']));
-            $priceForm->addHidden('id', $this->row['ProductID']);
-            $priceForm->addSubmit('edit', 'Save price')
-                    ->setAttribute('class', 'btn btn-primary')
-                    ->setHtmlId('priceSave')
-                    ->setAttribute('data-loading-text', 'Saving...');
-            $priceForm->onSuccess[] = $this->editPriceFormSubmitted;
-            return $priceForm;
-        }
-    }
-
-    public function editPriceFormSubmitted($form) {
-        if ($this->getUser()->isInRole('admin')) {
-
-            
-            $this->productModel->updatePrice($form->values->id, $form->values->price, $form->values->discount);
-            if($this->isAjax()){
-                
-                $this->invalidateControl('prodPrice');
-            }
-            else {
-            
-            $this->redirect('this');
-            }
-        }
-    } */
-
-    protected function createComponentAskForm() {
+   protected function createComponentAskForm() {
       
             $askForm = new Nette\Application\UI\Form;
             $askForm->setTranslator($this->translator);
@@ -937,7 +908,7 @@ class ProductPresenter extends BasePresenter {
                     ->addRule(Form::EMAIL, 'Would you fill your email, please?')
                     ->setRequired('Please fill your email.')
                     ->setAttribute('class', 'span11');
-            $askForm->addHidden('name', $this->row['ProductName']);
+            $askForm->addHidden('name', '');
             $askForm->addSubmit('ask', 'Ask')
                     ->setAttribute('class', 'btn btn-primary span5')
                     ->setHtmlId('askButton')
@@ -1047,7 +1018,7 @@ class ProductPresenter extends BasePresenter {
             $addForm->addText('newParam', 'Name of new Spec:');
             $addForm->addSelect('unit2', 'Select unit:', $units)
                     ->setPrompt($prompt);
-            $addForm->addHidden('productID', $this->row['ProductID']);
+            $addForm->addHidden('productID', '');
             $addForm->addSubmit('edit', 'Add Spec')
                     ->setAttribute('class', 'upl-add btn btn-primary')
                     ->setAttribute('data-loading-text', 'Adding...');
@@ -1115,8 +1086,6 @@ class ProductPresenter extends BasePresenter {
         $productControl->setTranslator($this->translator);
         $productControl->setProduct($this->productModel);
         $productControl->setCategory($this->categoryModel);
-        $productControl->setBlog($this->blogModel);
-        $productControl->setRow($this->row);
         $productControl->setShop($this->shopModel);
         return $productControl;
     }
@@ -1124,10 +1093,21 @@ class ProductPresenter extends BasePresenter {
     protected function createComponentVariantControl() {
         $variant = new variantControl();
         $variant->setTranslator($this->translator);
-        $variant->setProduct($this->productModel);
-        
+        $variant->setProduct($this->productModel);        
         return $variant;
     }
+    
+    protected function createComponentGapiModule() {
+       
+       $gapi = new gapiModule();
+       $gapi->setTranslator($this->translator);
+       $gapi->setShop($this->shopModel);
+ //      $gapi->setOrder($this->orderModel);
+       $gapi->setProduct($this->productModel);
+       $gapi->setCategory($this->categoryModel);
+       $gapi->setGapi($this->gapisession);
+       return $gapi;
+   }
 
         public function renderProduct($id, $slug) {
         $layout = $this->shopModel->getShopInfo('ProductLayout');
@@ -1142,20 +1122,21 @@ class ProductPresenter extends BasePresenter {
             }
             
             
-                $this['addProductVariantForm']->setDefaults(array(
-                    'id' => $this->row['ProductID'],
-                    'price' => $this->row['SellingPrice']
-                                ));
+                
             $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
             $this->template->producers = $this->productModel->loadProducers();
-       }
+       
+            }
         
-        
+        $album = $this->productModel->loadPhotoAlbumID($id);
      
+        if($album){
+            $album = $album->PhotoAlbumID;
+        }
        
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->photo = $this->productModel->loadCoverPhoto($id);
-        $this->template->albumID = $this->productModel->loadPhotoAlbumID($id)->PhotoAlbumID;
+        $this->template->albumID = $album;
         $this->template->album = $this->productModel->loadPhotoAlbum($id);
         $this->template->parameter = $this->productModel->loadParameters($id);
         $this->template->productVariants = $this->productModel->loadProductVariants($id);
@@ -1190,7 +1171,7 @@ class ProductPresenter extends BasePresenter {
             $template->product = $name; 
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($contactMail, 'Nový dotaz k produktu' . $this->row['ProductName'], $template, $email);
+            $mailIT->sendSuperMail($contactMail, 'Nový dotaz k produktu ' . $name, $template, $email);
     }
 
 }

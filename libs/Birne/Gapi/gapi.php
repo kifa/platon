@@ -140,14 +140,14 @@ class Gapi extends \Nette\Application\UI\Control {
 
         public function printResults(&$results) {
           if (count($results->getRows()) > 0) {
-            $profileName = $results->getProfileInfo()->getProfileName();
+            //$profileName = $results->getProfileInfo()->getProfileName();
             $rows = $results->getRows();
             $visits = $rows[0][0];
 
             return $rows;
 
           } else {
-            return '<p>No results found.</p>';
+            return NULL;
           }
         }
 

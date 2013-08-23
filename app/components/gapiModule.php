@@ -203,4 +203,37 @@ class gapiModule extends moduleControl {
         
           
     }
+    
+    public function renderProduct($name) {
+           $this->template->setFile(__DIR__ . '/gapiProduct.latte');
+        $code = $this->shopModel->getShopInfo('gapiAPI');
+        $token = $this->shopModel->getShopInfo('gapiTOKEN');
+        
+        $gapi = new Birne\Gapi\Gapi();
+        $gapi->setParent($this);
+
+        $gapi->setGAPI($token, $code);
+        $id = '39033320';
+             
+        $optParams2 = array(
+                'dimensions' => 'ga:productName',
+                'max-results' => '10',
+                'filters' => 'ga:productName=~'.$name,
+                'sort' => '-ga:itemRevenue');
+        
+        $metrics2 = 'ga:itemRevenue';
+        
+        $params2 = array(
+            'ga:'. $id,
+            '2012-03-03',
+            '2013-03-03',
+            $metrics2,
+            $optParams2);
+        
+        $results = $gapi->respond($params2);
+        $this->template->results = $results;
+      
+        
+        $this->template->render();
+    }
 }
