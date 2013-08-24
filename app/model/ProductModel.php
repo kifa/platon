@@ -127,7 +127,7 @@ class ProductModel extends Repository {
                 FROM product
                 JOIN price ON price.ProductID = product.ProductID
                 JOIN category ON category.CategoryID = product.CategoryID
-                WHERE (product.ProductVariants IS NULL
+                WHERE product.ProductVariants IS NULL
                     AND (product.CategoryID=?
                     OR category.HigherCategoryID=?)
                     ', $catID, $catID);                
