@@ -19,13 +19,22 @@ class ProductModel extends Repository {
         
         //load only published products                
         if($catID==''){
-            //return $this->getDB()->query('SELECT * FROM product JOIN price 
-            //    ON price.ProductID=product.ProductID WHERE product.ProductStatusID="2" AND product.ProductVariants IS NULL');                              
-            return $this->getTable('price')
-                    ->select('price.*, product.*')
-                    ->where('(product.ProductStatusID=2
-                        OR product.ProductStatusID=3)
-                        AND product.ProductVariants IS NULL');            
+            //return $this->getTable('price')
+                    //->select('price.*, product.*')
+                    //->where('(product.ProductStatusID=2
+                    //    OR product.ProductStatusID=3)
+                    //    AND product.ProductVariants IS NULL');            
+            return $this->getDB()->query('
+                SELECT *
+                FROM product
+                JOIN price ON price.ProductID = product.ProductID
+                JOIN category ON category.CategoryID = product.CategoryID
+                WHERE (product.ProductStatusID=2
+                    OR product.ProductStatusID=3)
+                    AND product.ProductVariants IS NULL
+                    AND (category.CategoryStatus=1
+                    OR category.CategoryStatus=2)
+                    ');
         }
         else
         {  
@@ -33,27 +42,55 @@ class ProductModel extends Repository {
             //price.ProductID=product.ProductID 
             //WHERE (product.ProductStatusID="2" OR product.ProductStatusID="3") 
             //AND product.ProductVariants IS NULL AND product.CategoryID=?',$catID);
+            $higher = $this->getTable('category')
+                    ->select('CategoryID')
+                    ->where('HigherCategoryID',$catID)
+                    ->fetch();            
             
-            return $this->getTable('price')
+            if($higher == FALSE){
+                return $this->getTable('price')
                     ->select('price.*, product.*')
                     ->where('(product.ProductStatusID=2
                         OR product.ProductStatusID=3)
                         AND product.ProductVariants IS NULL
                         AND product.CategoryID=?', $catID);            
+            }
+            else{
+                return $this->getDB()->query('
+                SELECT *
+                FROM product
+                JOIN price ON price.ProductID = product.ProductID
+                JOIN category ON category.CategoryID = product.CategoryID
+                WHERE (product.ProductStatusID=2
+                    OR product.ProductStatusID=3)
+                    AND product.ProductVariants IS NULL
+                    AND (product.CategoryID=?
+                    OR category.HigherCategoryID=?)
+                    ', $catID, $catID);                
+            }
         }
     }
     
-     public function loadCatalogBrand($prodID) {
-        
-          //return $this->getDB()->query('SELECT * FROM product JOIN price ON 
-            //price.ProductID=product.ProductID WHERE product.ProductStatusID="2" and product.ProducerID=?', $prodID);
-            
-          return $this->getTable('price')
+     public function loadCatalogBrand($prodID) {            
+          /*return $this->getTable('price')
                   ->select('price.*, product.*')
                   ->where('(product.ProductStatusID=2
                         OR product.ProductStatusID=3)
                         AND product.ProductVariants IS NULL
                         AND product.ProducerID=?', $prodID);
+          */
+          return $this->getDB()->query('
+                SELECT *
+                FROM product
+                JOIN price ON price.ProductID = product.ProductID
+                JOIN category ON category.CategoryID = product.CategoryID
+                WHERE (product.ProductStatusID=2
+                    OR product.ProductStatusID=3)
+                    AND product.ProductVariants IS NULL
+                    AND (category.CategoryStatus=1
+                    OR category.CategoryStatus=2)
+                    AND product.ProducerID=?
+                    ', $prodID);
     }
     
     public function loadCatalogAdmin($catID) {
@@ -69,13 +106,32 @@ class ProductModel extends Repository {
             }
         else
         {  
-            //return $this->getDB()->query('SELECT * FROM product JOIN price ON 
-            //price.ProductID=product.ProductID 
-            //WHERE product.ProductVariants IS NULL AND product.CategoryID=?',$catID);
-            return $this->getTable('price')
+            //return $this->getTable('price')
+            //        ->select('price.*, product.*')
+            //        ->where('product.ProductVariants IS NULL
+            //            AND product.CategoryID=?', $catID);
+            $higher = $this->getTable('category')
+                    ->select('CategoryID')
+                    ->where('HigherCategoryID',$catID)
+                    ->fetch();            
+            
+            if($higher == FALSE){
+                return $this->getTable('price')
                     ->select('price.*, product.*')
                     ->where('product.ProductVariants IS NULL
-                        AND product.CategoryID=?', $catID);
+                          AND product.CategoryID=?', $catID);          
+            }
+            else{
+                return $this->getDB()->query('
+                SELECT *
+                FROM product
+                JOIN price ON price.ProductID = product.ProductID
+                JOIN category ON category.CategoryID = product.CategoryID
+                WHERE (product.ProductVariants IS NULL
+                    AND (product.CategoryID=?
+                    OR category.HigherCategoryID=?)
+                    ', $catID, $catID);                
+            }
         }
     }
 
