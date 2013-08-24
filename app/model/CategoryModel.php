@@ -161,5 +161,4 @@ class CategoryModel extends Repository {
                         '%'.$query.'%')
                 ->fetchPairs('CategoryID');
     }
-
 }
