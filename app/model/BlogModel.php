@@ -153,7 +153,11 @@ class BlogModel extends Repository {
     }
     
     public function search($query) {
-        return $this->getTable('blog')->where('BlogName LIKE', '%'.$query.'%')->fetchPairs('BlogID');
+        return $this->getTable('blog')
+                ->where('BlogName LIKE ?
+                    OR BlogContent LIKE ?',
+                        '%'.$query.'%',
+                        '%'.$query.'%')
+                ->fetchPairs('BlogID');            
     }
-
 }
