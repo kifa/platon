@@ -1,6 +1,5 @@
 <?php
 
-
 /*
  * Class CategoryModel
  * CategoryModel is used for manipulating with categories.
@@ -15,23 +14,24 @@ class CategoryModel extends Repository {
      * @return string
      */
     public function loadCategoryList(){
-        return $this->getTable('category')->where('CategoryStatus',1)->fetchPairs('CategoryID');
+        return $this->getTable('category')
+                ->where('CategoryStatus',1)
+                ->fetchPairs('CategoryID');
     }
     
     public function loadCategoryListAdmin(){
-        return $this->getTable('category')->fetchPairs('CategoryID');
+        return $this->getTable('category')
+                ->fetchPairs('CategoryID');
     }
+    
     /*
      * Load Category info
-     */
-    
+     */    
     public function loadCategory($id){
-        return $this->getTable('category')->where('CategoryID', $id)->fetch();
-    }
-    
-    public function loadCategory2($id){
-        return $this->getTable('category')->where('CategoryID', $id);
-    }
+        return $this->getTable('category')
+                ->where('CategoryID', $id)
+                ->fetch();
+    }    
     
     /*
      * Create Category
@@ -48,11 +48,12 @@ class CategoryModel extends Repository {
             'CategoryPhoto' => $photo,
             'CategoryStatus' => 0
         );
-        $row = $this->getTable('category')->insert($insert);
-        return $row->CategoryID;
         
+        $row = $this->getTable('category')
+                ->insert($insert);
+        
+        return $row->CategoryID;        
     }
-
 
     /*
      * Update Category
@@ -63,24 +64,28 @@ class CategoryModel extends Repository {
 
     public function updateCategory($id, $name, $desc=NULL, $higher=NULL, $status=NULL, $photo=NULL){
         
-            $update = array(
-                'CategoryName' => $name,
-                'CategoryDescription' => $desc,
-                'HigherCategoryID' => $higher,
-                'CategoryStatus' => $status,
-                'CategoryPhoto' => $photo
-                );        
-        return $this->getTable('category')->where('CategoryID',$id)->update($update);
-       
+        $update = array(
+            'CategoryName' => $name,
+            'CategoryDescription' => $desc,
+            'HigherCategoryID' => $higher,
+            'CategoryStatus' => $status,
+            'CategoryPhoto' => $photo
+            );        
+        
+        return $this->getTable('category')
+                ->where('CategoryID',$id)
+                ->update($update);       
     }
     
     public function updateCategoryParent($id, $higher){
         
-            $update = array(
-                'HigherCategoryID' => $higher
-                );        
-        return $this->getTable('category')->where('CategoryID',$id)->update($update);
-       
+        $update = array(
+            'HigherCategoryID' => $higher
+            );        
+
+        return $this->getTable('category')
+                ->where('CategoryID',$id)
+                ->update($update);       
     }
     
     /*
@@ -88,55 +93,72 @@ class CategoryModel extends Repository {
      */
     public function updateCategoryDesc($id, $desc){
             
-            $update = array(                
-                'CategoryDescription' => $desc         
-                );        
-        return $this->getTable('category')->where('CategoryID',$id)->update($update);
-       
+        $update = array(                
+            'CategoryDescription' => $desc         
+            );        
+
+        return $this->getTable('category')
+                ->where('CategoryID', $id)
+                ->update($update);       
     }
 
     /*
      * Delete Category
      * @param ?
      * @param ? example: pozice počátečního znaku
-     * @return string */
-    
-    
+     * @return string */    
     public function deleteCategory($id){
         
-        return $this->getTable('category')->where('CategoryID',$id)->delete();
-        
+        return $this->getTable('category')
+                ->where('CategoryID',$id)
+                ->delete();        
     }
     
-      public function setCategoryStatus($id, $status){
-        
-            $update = array(
+    public function setCategoryStatus($id, $status){
 
-                'CategoryStatus' => $status
-                );        
-        return $this->getTable('category')->where('CategoryID',$id)->update($update);
-       
+        $update = array(
+            'CategoryStatus' => $status
+            );        
+        
+        return $this->getTable('category')
+                ->where('CategoryID',$id)
+                ->update($update);
     }
     
     public function addPhoto($id, $name) {
-        $update = array('CategoryPhoto' => $name);
-        return $this->getTable('category')->where('CategoryID', $id)->update($update);
+        $update = array(
+            'CategoryPhoto' => $name
+            );
+        
+        return $this->getTable('category')
+                ->where('CategoryID', $id)
+                ->update($update);
     }
     
     public function deletePhoto($id) {
-        $update = array('CategoryPhoto' => NULL);
-        return $this->getTable('category')->where('CategoryID', $id)->update($update);
+        $update = array(
+            'CategoryPhoto' => NULL
+            );
+        
+        return $this->getTable('category')
+                ->where('CategoryID', $id)
+                ->update($update);
     }
     
     public function getStatusName($categorystatusid) {
-        $row = $this->getTable('categorystatus')->where('CategoryStatusID', $categorystatusid)->fetch();
+        $row = $this->getTable('categorystatus')
+                ->where('CategoryStatusID', $categorystatusid)
+                ->fetch();
+        
         return $row->CategoryStatusName;
     }
     
     public function search($query) {
-        return $this->getTable('category')->where('CategoryName LIKE', '%'.$query.'%')->fetchPairs('CategoryID');
+        return $this->getTable('category')
+                ->where('CategoryName LIKE ?
+                    OR CategoryDescription LIKE ?', 
+                        '%'.$query.'%',
+                        '%'.$query.'%')
+                ->fetchPairs('CategoryID');
     }
-
 }
-
-

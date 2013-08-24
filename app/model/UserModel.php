@@ -6,39 +6,45 @@
  */
 
 class UserModel extends Repository{
-    
-    
+        
     public function findByName($username)
-    {
-       // return $this->findBy('users', array('UsersID' => $username))->fetch(); 
- 
-        return $this->getTable('users')->where('UsersID', $username)->fetch();
+    {       
+        return $this->getTable('users')
+                ->where('UsersID', $username)
+                ->fetch();
     }
     
      
     public function userAdd($name, $username, $password) {
-        // $userId = $this->userPocet();
-
-        $this->getTable('users')->insert(array(
-                                            'UsersID' => $username,
-                                            'Password' => Authenticator::calculateHash($password),                                            
-                                            'Name' => $name));
+        $insert = array(
+            'UsersID' => $username,
+            'Password' => Authenticator::calculateHash($password),                                            
+            'Name' => $name
+        );
+        
+        $this->getTable('users')
+                ->insert($insert);
     } 
     
      public function setPassword($username, $password) {
-       $this->getTable('users')->where('UsersID', $username)->update(array
-            ('Password' => Authenticator::calculateHash($password)));
+        $update = array(
+            'Password' => Authenticator::calculateHash($password)
+        );
+         
+        $this->getTable('users')
+                ->where('UsersID', $username)
+                ->update($update);
     }
     
     public function insertUser($UsersID,$name,$phone){
         $insert = array(
-        //  'UserID' => $id,
                 'UsersID' => $UsersID,
                 'Name' => $name,
                 'PhoneNumber' => $phone,
                 );
         
-        return $this->getTable('users')->insert($insert);
+        return $this->getTable('users')
+                ->insert($insert);
     }
     
     public function updateUser($UsersID,$name,$phone){
@@ -47,7 +53,9 @@ class UserModel extends Repository{
                 'PhoneNumber' => $phone,
                 );
         
-    return $this->getTable('users')->where('UsersID',$UsersID)->update($update);
+        return $this->getTable('users')
+                ->where('UsersID',$UsersID)
+                ->update($update);
     }
     
     
@@ -60,7 +68,8 @@ class UserModel extends Repository{
             'City' => $city
         );
         
-        return $this->getTable('address')->insert($insert);
+        return $this->getTable('address')
+                ->insert($insert);
     }
     
     public function updateAddress($usersID,$street,$city,$zip){
@@ -71,15 +80,21 @@ class UserModel extends Repository{
             'City' => $city
         );
         
-        return $this->getTable('address')->where('UsersID',$usersID)->update($update);
+        return $this->getTable('address')
+                ->where('UsersID',$usersID)
+                ->update($update);
     }
 
     public function countAddress(){
-        return $this->getTable('address')->count();
+        return $this->getTable('address')
+                ->count();
     }
     
     public function isUser($usr){
-        $row = $this->getTable('users')->where('UsersID', $usr)->fetch();
+        $row = $this->getTable('users')
+                ->where('UsersID', $usr)
+                ->fetch();
+        
         if(!$row){
             return FALSE;
         }
