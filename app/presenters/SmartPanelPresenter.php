@@ -1340,7 +1340,7 @@ class SmartPanelPresenter extends BasePresenter {
             $template->note = $note;
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($row->UserID, 'Zpráva k Vaší objednávce', $template, $adminMail);
+            $mailIT->sendSuperMail($row->UsersID, 'Zpráva k Vaší objednávce', $template, $adminMail);
     }
 }
 
