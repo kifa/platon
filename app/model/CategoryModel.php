@@ -33,6 +33,13 @@ class CategoryModel extends Repository {
                 ->fetch();
     }    
     
+    public function loadChildCategoryList($catID){
+        return $this->getTable('category')
+                    ->select('CategoryID, CategoryName')
+                    ->where('HigherCategoryID',$catID)
+                    ->fetch();
+    }
+
     /*
      * Create Category
      * @param ?
