@@ -25,6 +25,8 @@ class ProductPresenter extends BasePresenter {
     private $parameters;
     private $edit;
 
+    private $filter;
+
     protected function startup() {
         parent::startup();
         $this->productModel = $this->context->productModel;
@@ -35,6 +37,10 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             $this->edit = $this->getSession('edit');
         }
+        
+        $salt = $this->shopModel->getShopInfo('Salt');
+        $this->filter = $this->getSession('filter'.$salt);
+        
         /* Kontrola přihlášení
          * 
          * if (!$this->getUser()->isInRole('admin')) {
@@ -687,8 +693,6 @@ class ProductPresenter extends BasePresenter {
 
     public function renderProducts($catID, $slug) {
 
-        
-        
         if ($this->getUser()->isInRole('admin')) {
             // load all products
             $this->template->products = $this->productModel->loadCatalogAdmin($catID, $this->filter->sort);
@@ -700,11 +704,6 @@ class ProductPresenter extends BasePresenter {
             $this->template->categories = $this->categoryModel->loadCategoryList();
         }
 
-        dump($this->filter->sort);
-        foreach ($prod as $pr) {
-        dump($pr->FinalPrice);
-        }
-        
         $this->template->slider = NULL;
         $this->template->category = $this->categoryModel->loadCategory($catID);
     }
