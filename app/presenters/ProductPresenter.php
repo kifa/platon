@@ -687,16 +687,24 @@ class ProductPresenter extends BasePresenter {
 
     public function renderProducts($catID, $slug) {
 
+        
+        
         if ($this->getUser()->isInRole('admin')) {
             // load all products
             $this->template->products = $this->productModel->loadCatalogAdmin($catID, $this->filter->sort);
             $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
         } else {
             // load published products
-            $this->template->products = $this->productModel->loadCatalog($catID, $this->filter->sort);
+            $prod = $this->productModel->loadCatalog($catID, $this->filter->sort);
+            $this->template->products = $prod;
             $this->template->categories = $this->categoryModel->loadCategoryList();
         }
 
+        dump($this->filter->sort);
+        foreach ($prod as $pr) {
+        dump($pr->FinalPrice);
+        }
+        
         $this->template->slider = NULL;
         $this->template->category = $this->categoryModel->loadCategory($catID);
     }
