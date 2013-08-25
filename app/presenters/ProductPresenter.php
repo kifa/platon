@@ -137,9 +137,39 @@ class ProductPresenter extends BasePresenter {
     }
     
     public function handleSetFilter($filter, $sorting) {
-      
-            $this->filter->sort = array($filter, $sorting);
+        if($filter === 'price') {
+            $filter = 'price.FinalPrice';
+        }
+        elseif($filter === 'product') {
+            $filter = 'product.ProductName';
+        }
+        
+        elseif($filter === 'sale') {
+            $filter = 'price.SALE';
+        }
+        elseif($filter === 'pieces') {
+            $filter = 'product.PiecesAvailable';
+        }
+        else {
             $this->redirect('this');
+        }
+        
+        if($sorting === 'ASC' || $sorting === 'DESC') {
+            
+        
+        
+            $this->filter->sort = array($filter, $sorting);
+            if ($this->isAjax()) {
+                $this->invalidateControl('content');
+                $this->invalidateControl('script');
+            }
+            else {
+            $this->redirect('this');
+            }
+        }
+        else{
+            $this->redirect('this');
+        }
     }
 
     public function createComponentAddProductForm() {

@@ -134,28 +134,28 @@
 <div class="span12" n:snippet="products">        
    <div class="span12 alert-block">
     <div class="btn-group">
-        <a n:href="setFilter! 'price.FinalPrice', 'ASC'" class="btn">{_'Price'}</a>
-        <a n:href="setFilter! 'price.FinalPrice', 'ASC'" class="btn"><i class="icon-sort-by-order"></i></a>
-        <a n:href="setFilter! 'price.FinalPrice', 'DESC'" class="btn"><i class="icon-sort-by-order-alt"></i></a>
+        <a n:href="setFilter! 'price', 'ASC'" class="btn ajax">{_'Price'}</a>
+        <a n:href="setFilter! 'price', 'ASC'" class="btn ajax"><i class="icon-sort-by-order"></i></a>
+        <a n:href="setFilter! 'price', 'DESC'" class="btn ajax"><i class="icon-sort-by-order-alt"></i></a>
     </div>
     
     <div class="btn-group">
-        <a n:href="setFilter! 'product.ProductName', 'ASC'" class="btn ajax">{_'Name'}</a>
-        <a n:href="setFilter! 'product.ProductName', 'ASC'" class="btn ajax"><i class="icon-sort-by-alphabet"></i></a>
-        <a n:href="setFilter! 'product.ProductName', 'DESC'" class="btn ajax"><i class="icon-sort-by-alphabet-alt"></i></a>
+        <a n:href="setFilter! 'product', 'ASC'" class="btn ajax">{_'Name'}</a>
+        <a n:href="setFilter! 'product', 'ASC'" class="btn ajax"><i class="icon-sort-by-alphabet"></i></a>
+        <a n:href="setFilter! 'product', 'DESC'" class="btn ajax"><i class="icon-sort-by-alphabet-alt"></i></a>
         
     </div>
     
     <div class="btn-group">
-        <a n:href="setFilter! 'price.SALE', 'DESC'" class="btn ajax">{_'Sale'}</a>
-        <a n:href="setFilter! 'price.SALE', 'ASC'" class="btn ajax"><i class="icon-sort-up"></i></a>
-        <a n:href="setFilter! 'price.SALE', 'DESC'" class="btn ajax"><i class="icon-sort-down"></i></a>
+        <a n:href="setFilter! 'sale', 'DESC'" class="btn ajax">{_'Sale'}</a>
+        <a n:href="setFilter! 'sale', 'ASC'" class="btn ajax"><i class="icon-sort-up"></i></a>
+        <a n:href="setFilter! 'sale', 'DESC'" class="btn ajax"><i class="icon-sort-down"></i></a>
     </div>
     
     <div class="btn-group">
-        <a n:href="setFilter! 'product.PiecesAvailable', 'DESC'" class="btn ajax">{_'In Stock'}</a>
-        <a n:href="setFilter! 'product.PiecesAvailable', 'ASC'" class="btn ajax"><i class="icon-sort-up"></i></a>
-        <a n:href="setFilter! 'product.PiecesAvailable', 'DESC'" class="btn ajax"><i class="icon-sort-down"></i></a>
+        <a n:href="setFilter! 'pieces', 'DESC'" class="btn ajax">{_'In Stock'}</a>
+        <a n:href="setFilter! 'pieces', 'ASC'" class="btn ajax"><i class="icon-sort-up"></i></a>
+        <a n:href="setFilter! 'pieces', 'DESC'" class="btn ajax"><i class="icon-sort-down"></i></a>
     </div>
        </div>
 <ul class="thumbnails span12">
@@ -305,29 +305,6 @@
    });  
 </script>
     {/if}
-
-
-<div n:snippet="script">
-<script>
-        $(document).ready(function() {
-                $(".imgLiquid").imgLiquid({
-                    fill: true,
-                    fadeInTime: 0,
-                    delay: 0,
-                    horizontalAlign: "center",
-                    verticalAlign: "top"});
-            });
-        </script>
-<script>
-    
-    $('a.ajax').click(function(){
-        $(this).html('<i class="icon-spinner icon-spin"></i>');
-    });
-    
-    
-</script>
-</div>
-
 
 {/block}
 
