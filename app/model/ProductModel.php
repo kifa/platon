@@ -92,8 +92,8 @@ class ProductModel extends Repository {
                             OR product.ProductStatusID=3)
                             AND product.ProductVariants IS NULL
                             AND product.CategoryID=?
-                            ORDER BY ? ?
-                            ', $catID, $filter[0], $filter[1]);
+                            ORDER BY ' . $filter[0] .' '. $filter[1] .'
+                            ', $catID);
                 }
                 else{
                     $result = $this->getDB()->query('
@@ -106,8 +106,8 @@ class ProductModel extends Repository {
                             AND product.ProductVariants IS NULL
                             AND (product.CategoryID=?
                             OR category.HigherCategoryID=?)
-                            ORDER BY ? ?
-                            ', $catID, $catID, $filter[0], $filter[1]);
+                            ORDER BY ' . $filter[0] .' '. $filter[1] .'
+                            ', $catID, $catID);
                 }                
                 return $result;
             }
