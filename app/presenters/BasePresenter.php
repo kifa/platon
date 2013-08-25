@@ -29,6 +29,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     private $cart;
     protected $usertracking;
     protected $gapisession;
+    protected $filter;
 
 
     private $orderModel;
@@ -52,8 +53,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->blogModel = $this->context->blogModel;
         $salt = $this->shopModel->getShopInfo('Salt');
         $this->cart = $this->getSession('cart'.$salt);
+        $this->filter = $this->getSession('filter'.$salt);
         $salt = md5($this->getUser()->getId());
         $this->usertracking = $this->getSession('user'.$salt);
+        
         
         if(!isset($this->gapisession)){
         $this->gapisession = $this->getSession('gapitoken');
