@@ -15,8 +15,7 @@ class ProductModel extends Repository {
      * @param ? example: pozice počátečního znaku
      * @return string
      */
-    public function loadCatalog($catID) {
-        
+    public function loadCatalog($catID, $filter=NULL) {     
         //load only published products                
         if($catID==''){
             //return $this->getTable('price')
@@ -42,31 +41,75 @@ class ProductModel extends Repository {
             //price.ProductID=product.ProductID 
             //WHERE (product.ProductStatusID="2" OR product.ProductStatusID="3") 
             //AND product.ProductVariants IS NULL AND product.CategoryID=?',$catID);
-            $higher = $this->getTable('category')
-                    ->select('CategoryID')
-                    ->where('HigherCategoryID',$catID)
-                    ->fetch();            
-            
-            if($higher == FALSE){
-                return $this->getTable('price')
-                    ->select('price.*, product.*')
-                    ->where('(product.ProductStatusID=2
+            if($filter==NULL){
+                $higher = $this->getTable('category')
+                        ->select('CategoryID')
+                        ->where('HigherCategoryID',$catID)
+                        ->fetch();            
+
+                if($higher == FALSE){
+                    return $this->getTable('price')
+                        ->select('price.*, product.*')
+                        ->where('(product.ProductStatusID=2
+                            OR product.ProductStatusID=3)
+                            AND product.ProductVariants IS NULL
+                            AND product.CategoryID=?', $catID);            
+                }
+                else{
+                    return $this->getDB()->query('
+                    SELECT *
+                    FROM product
+                    JOIN price ON price.ProductID = product.ProductID
+                    JOIN category ON category.CategoryID = product.CategoryID
+                    WHERE (product.ProductStatusID=2
                         OR product.ProductStatusID=3)
                         AND product.ProductVariants IS NULL
-                        AND product.CategoryID=?', $catID);            
+                        AND (product.CategoryID=?
+                        OR category.HigherCategoryID=?)
+                        ', $catID, $catID);                
+                }
             }
             else{
-                return $this->getDB()->query('
-                SELECT *
-                FROM product
-                JOIN price ON price.ProductID = product.ProductID
-                JOIN category ON category.CategoryID = product.CategoryID
-                WHERE (product.ProductStatusID=2
-                    OR product.ProductStatusID=3)
-                    AND product.ProductVariants IS NULL
-                    AND (product.CategoryID=?
-                    OR category.HigherCategoryID=?)
-                    ', $catID, $catID);                
+                $higher = $this->getTable('category')
+                        ->select('CategoryID')
+                        ->where('HigherCategoryID',$catID)
+                        ->fetch();            
+                
+                if($higher == FALSE){
+                    /*$result = $this->getTable('price')
+                        ->select('price.*, product.*')
+                        ->where('(product.ProductStatusID=2
+                            OR product.ProductStatusID=3)
+                            AND product.ProductVariants IS NULL
+                            AND product.CategoryID=?
+                            ORDER BY ? ?', $catID, $filter[0], $filter[1]);            */
+                    $result = $this->getDB()->query('
+                        SELECT *
+                        FROM product
+                        JOIN price ON price.ProductID = product.ProductID
+                        JOIN category ON category.CategoryID = product.CategoryID
+                        WHERE (product.ProductStatusID=2
+                            OR product.ProductStatusID=3)
+                            AND product.ProductVariants IS NULL
+                            AND product.CategoryID=?
+                            ORDER BY ? ?
+                            ', $catID, $filter[0], $filter[1]);
+                }
+                else{
+                    $result = $this->getDB()->query('
+                        SELECT *
+                        FROM product
+                        JOIN price ON price.ProductID = product.ProductID
+                        JOIN category ON category.CategoryID = product.CategoryID
+                        WHERE (product.ProductStatusID=2
+                            OR product.ProductStatusID=3)
+                            AND product.ProductVariants IS NULL
+                            AND (product.CategoryID=?
+                            OR category.HigherCategoryID=?)
+                            ORDER BY ? ?
+                            ', $catID, $catID, $filter[0], $filter[1]);
+                }                
+                return $result;
             }
         }
     }
