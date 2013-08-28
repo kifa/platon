@@ -119,7 +119,7 @@ class gapiModule extends moduleControl {
 
         $this->template->setFile(__DIR__ . '/gapiInstallModule.latte');
         
-        
+      if(!$this->shopModel->isModuleActive('gapi')) {  
         
         $gapi = new Birne\Gapi\Gapi();
         $gapi->setParent($this);
@@ -144,9 +144,9 @@ class gapiModule extends moduleControl {
                     }
         
 
-                    
+      }              
         $info = $this->shopModel->loadModuleByName('gapi');
-       
+      
         $this->template->name = $info->ModuleName;
         $this->template->desc = $info->ModuleDescription;
         $this->template->status = $info->StatusID;         
@@ -164,7 +164,7 @@ class gapiModule extends moduleControl {
         $gapi->setParent($this);
 
         $gapi->setGAPI($token, $code);
-        $id = '39033320';
+        $id = '74912256';
         
         $optParams = array(
                 'dimensions' => 'ga:source',
@@ -214,7 +214,7 @@ class gapiModule extends moduleControl {
 
         
         $gapi->setGAPI($token, $code);
-        $id = '39033320';
+        $id = '74912256';
         
         
         $today = date('Y-m-d');
@@ -305,7 +305,7 @@ class gapiModule extends moduleControl {
 
         
         $gapi->setGAPI($token, $code);
-        $id = '39033320';
+        $id = '74912256';
         
         
         $today = date('Y-m-d');

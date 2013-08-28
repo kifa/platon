@@ -1,0 +1,22 @@
+{var $mail->from = $shopName . ' <' . $adminMail . '>' }
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>New order</title>
+    <style>
+    body {
+       
+    }
+    </style>
+</head>
+<body>
+    <p>Hello from BIRNE<sup>shop</sup>!</p>
+
+    <p>Your eshop processed <strong>order {$orderId}</strong> for you.</p>
+    <p>Total price: ${$finalprice}</p>
+    <p>Customer: {$customer}</p>
+    {if $note}
+    <p>Note: {$note}</p>
+    {/if}
+</body>
+</html>

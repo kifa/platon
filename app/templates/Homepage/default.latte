@@ -2,93 +2,66 @@
 {block head}<title>Homepage</title>{/block}
 
 {block slider}
-<div class="container supercontainer">   
- <div class="container-fluid">
+<div class="shopSlider margin5">   
+ <div class="container">
  
-<div id="myCarousel" class="carousel slide visible-desktop">
-    <ol class="carousel-indicators">
-        <li data-target= "#myCarousel"  data-slide-to="0" class="active"></li>
-        <li data-target= "#myCarousel"  data-slide-to="1"></li>
-        <li data-target= "#myCarousel"  data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner jumbotron">
-        <div class="item active">
-            <img class="" src="{$basePath}/images/birne.jpg" alt="">
-            <div class="container">
-                <div class="carousel-caption">
-                    <h2>{_'Představujeme BIRNE SHOP!'}</h2>
-                   <!--  <p class="lead">Jedinečný a dokonalý eshop právě pro Vás!</p>-->
-                    <a class="btn btn-large btn-primary" href="#">{_'Začněte již dnes'}</a>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <img class="" src="{$basePath}/images/slider.jpg" alt="">
-            <div class="container">
-                <div class="carousel-caption">
-                   <h2>{_'Nejdou obchody? BIRNE SHOP!'}</h2>
-                    <!-- <p class="lead">Řešení, které prostě funguje.</p>-->
-                    <a class="btn btn-large btn-primary" href="#">{_'Zjistit více'}</a>
-                </div>
-            </div>
-        </div>
-        <div class="item ">
-            <!--<img src="{$basePath}/images/birne.jpg" alt=""> -->
-            <div class="container">
-                <div class="carousel-caption">
-                    <h2>{_'Radost prodávat? BIRNE SHOP!'}</h2>
-                    <!--<p class="lead">Provozovat eshop na naší platformě je radost!</p>-->
-                    <a class="btn btn-large btn-primary" href="#">{_'Přesvědčete se'}</a>
-                </div>
-            </div>
-        </div>
+<div id="carousel-example-generic" class="carousel slide">
+  <!-- Indicators
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol> -->
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+        
+     
+       <div class="item active">
+        <img src="images/slider/temtex_01.jpg" alt="Protejpy">
+        <div class="carousel-caption">
+       </div>
+    </div>
     </div>
  <!--   <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>-->
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+    
+    <div class="item ">
+            <img src="./images/slider/bebica_slide_03.jpg" alt="Bebica">
+                
+        </div>
+      
+      <div class="item">
+        <img src="./images/slider/bebica_slide_01.jpg" alt="Bebica">
+        <div class="carousel-caption">
+          ...
+        </div>
+    </div>
+       
+    
+    -->
+
 </div>
 </div>
+
 </div>
 
 {/block}
 
 {block contents}
-    <div class="span12" n:snippet="content">
+    <div class="col-md-12" n:snippet="content">
 
-<div class="span12 homepageProductsList" n:snippet="products">
-      <ul class="thumbnails">
+<div class="row homepageProductsList" n:snippet="products">
+      
             {foreach $products as $id => $product}
-    
+               <div class="col-xs-12 col-sm-4 col-md-4">  
                  {control product:productMini $product}
-          
+               </div>
             {/foreach}
-</ul>
-</div> 
 
 </div> 
 
-<div class="span12">
-    <div class="span4">
-        {if $user->isLoggedIn()}
-        {control menu:admin}
-        {/if}
-    </div>
-       
-    <ul class="nav nav-list span4">
-                        <li class="nav-header">{_'Categories'}</li>
-                        
-                        {control menu NULL}
-                        
-                        <li class="divider"></li>
-                    </ul>
-    
-    
-      <ul class="nav nav-list span4">
-                        <li class="nav-header">Menu</li>
-                        
-                        {control menu:side}
-                        <li class="divider"></li>
-                    </ul>
-</div>
+</div> 
 
 {/block}
 
@@ -102,4 +75,29 @@
 $('.carousel').carousel()
 
 </script>
+{/block}
+
+{block modal}
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Featured video</h4>
+      </div>
+      <div class="modal-body">
+
+            {!$video}
+
+          {if $user->isInRole('admin')}
+            {control addVideoForm}
+          {/if}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 {/block}

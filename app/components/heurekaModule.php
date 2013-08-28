@@ -167,14 +167,14 @@ class heurekaModule extends moduleControl {
    }
    
    protected function reloadXML() {
-       
+      
             try {
                  $template = $this->createTemplate();
                  $template->setFile($this->presenter->context->parameters['appDir'] . '/templates/components/heureka.latte');
                  $template->registerFilter(new Nette\Latte\Engine);
                  $template->registerHelperLoader('Nette\Templating\Helpers::loader');
 
-                 $template->products = $this->productModel->loadCatalog("");
+                 $template->products = $this->productModel->loadHeurekaCatalog();
                  $template->category = $this->categoryModel->loadCategory("");
 
                  $template->save($this->presenter->context->parameters['wwwDir'] . '/heureka.xml');

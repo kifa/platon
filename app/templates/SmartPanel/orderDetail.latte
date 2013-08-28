@@ -6,15 +6,15 @@
     <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-42741537-1']);
+  _gaq.push(['_setAccount', '{!$GA}');
   _gaq.push(['_trackPageview']);
   _gaq.push(['_addTrans',
     '{$order->OrderID}',           // transaction ID - required
-    {$shopName},  // affiliation or store name
+    '{!$shopName}',  // affiliation or store name
     '{$order->TotalPrice}',          // total - required
     '{$order->TaxPrice}',           // tax
     '{$order->DeliveryPaymentPrice}',              // shipping
-    '{$address->City}', 
+    '{!$address->City}', 
             '',
             ''// city
   ]);
@@ -25,7 +25,7 @@
   _gaq.push(['_addItem',
     '{$order->OrderID}',           // transaction ID - required
     '{$product->ProductID}',     // SKU/code - required
-    {$product->ProductName}, // product name
+    '{!$product->ProductName}', // product name
      '', 
     '{$product->UnitPrice}',          // unit price - required
     '{$product->Quantity}'               // quantity - required
@@ -46,30 +46,30 @@
 {/if}
 
 
-<div class="span12 smartPanelBar">
-        <a class="btn" href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_"Back to Orders"}</a> 
+<div class="col-md-12 smartPanelBar">
+        <a class="btn btn-default" href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_"Back to Orders"}</a> 
         <div class="btn-group">
         {if $order->OrderID != 1}
-        <a class="btn" href="{plink SmartPanel:orderDetail $order->OrderID - 1 }"><i class="icon-arrow-left"></i> {_"Prev Order"}</a> 
+        <a class="btn btn-default" href="{plink SmartPanel:orderDetail $order->OrderID - 1 }"><i class="icon-arrow-left"></i> {_"Prev Order"}</a> 
         {/if}
         {if $nextOrder}
-        <a class="btn" href="{plink SmartPanel:orderDetail $order->OrderID + 1}"><i class="icon-arrow-right"></i> {_"Next Order"}</a> 
+        <a class="btn btn-default" href="{plink SmartPanel:orderDetail $order->OrderID + 1}"><i class="icon-arrow-right"></i> {_"Next Order"}</a> 
         {/if}
         </div>
         <div class="btn-group">
         {if $order->StatusProgress !== 10}
-        <a class="btn" href="#editOrderInfo" data-toggel="modal" data-target="#editOrderInfo" id="editOrderInfoButton"><i class="icon-large icon-list"></i> {_"Edit Order Info"}</a> 
-        <a class="btn" href="#editProducts" data-toggel="modal" data-target="#editProducts" id="editProductsButton"><i class="icon-large icon-download"></i> {_"Edit Products"}</a> 
+        <a class="btn btn-default" href="#editOrderInfo" data-toggel="modal" data-target="#editOrderInfo" id="editOrderInfoButton"><i class="icon-large icon-list"></i> {_"Edit Order Info"}</a> 
+        <a class="btn btn-default" href="#editProducts" data-toggel="modal" data-target="#editProducts" id="editProductsButton"><i class="icon-large icon-download"></i> {_"Edit Products"}</a> 
         </div>
          {if $order->StatusProgress !== 0}
-        <a class="btn" href="#cancelOrder" data-toggel="modal" data-target="#cancelOrder" id="cancelOrderButton"><i class="icon-large icon-ban-circle"></i> {_"Cancel order"}</a> 
+        <a class="btn btn-default" href="#cancelOrder" data-toggel="modal" data-target="#cancelOrder" id="cancelOrderButton"><i class="icon-large icon-ban-circle"></i> {_"Cancel order"}</a> 
         {/if}
         {/if}
-        <a class="btn" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
-        <a href="{plink generateInvoice! $order->OrderID}" class="btn"><i class="icon-download icon-large"></i> {_'Download INVOICE'}</a>
+        <a class="btn btn-default" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+        <a href="{plink generateInvoice! $order->OrderID}" class="btn btn-default"><i class="icon-download icon-large"></i> {_'Download INVOICE'}</a>
 </div>
 
-<div class="page-header span12">
+<div class="page-header col-md-12">
     <h1 n:block="title">{$order->OrderID} <i class="icon-angle-right"></i> {_'Order summary'} <small> {_'Order administration'}.</small></h1>
 </div>
 
@@ -79,23 +79,23 @@
 {/block}
 
 {block content}
-<div class="span11"> 
+<div class="col-md-11"> 
 {if $user->isInRole('admin')}
 
-    <div class="span12" n:snippet="status">
-        <div class="span6 {if $order->StatusProgress == 0} grey {/if} alert alert-block">
-            <div class="span12">
+    <div class="col-md-12" n:snippet="status">
+        <div class="col-md-6 {if $order->StatusProgress == 0} grey {/if} alert alert-block">
+            <div class="col-md-12">
                 <p>
                     <i class="{if $order->StatusProgress == 10}icon-ok {elseif $order->StatusProgress == 0} icon-ban-circle {else} icon-spinner icon-spin{/if} left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
             {$order->StatusName}
                 </p>
             </div>
             <br>
-            <div class="progress progress-info progress-striped active span11">
-                <div class="bar" style="width: {foreach $statuses as $sid => $status}{if $sid === $order->OrderStatusID}{$status->StatusProgress}0%{/if}{/foreach}"></div>
+            <div class="progress progress-striped active">
+                <div class="progress-bar progress-bar-success" style="width: {$order->StatusProgress}0%"></div>
             </div>
-            <div class="span12">
-                <ul class="inline">
+            <div class="col-md-12">
+                <ul class="list-inline">
                     {foreach $statuses as $sid => $status}
                     {if !($iterator->isFirst())}
                     <li>{if $sid != $order->OrderStatusID}<a href="{plink setStatus! $order->OrderID, $sid, $status->StatusName, $status->StatusProgress}" class="ajax">{/if}{$status->StatusName}
@@ -106,18 +106,18 @@
             </div>
         </div>
 
-        <div class="span6 alert {$order->Note ? 'alert-block' : 'alert-info'}">
-            <div class="span12">
+        <div class="col-md-6 alert {$order->Note ? 'alert-danger' : 'alert-success'}">
+            <div class="col-md-12">
                 <i class="icon-paper-clip left icon-large"></i><strong> {_'Note'}:</strong>
                     {foreach $notes as $note}
                 <p>{$note->NotesName} - {$note->NotesDescription} - {$note->NotesDate}</p>
                 {/foreach}
-                 <a class="btn" href="#addNote" data-toggel="modal" data-target="#addNote" id="addNoteButton"><i class="icon-large icon-plus-sign"></i> {_"Add note"}</a> 
+                 <a class="btn btn-default" href="#addNote" data-toggel="modal" data-target="#addNote" id="addNoteButton"><i class="icon-large icon-plus-sign"></i> {_"Add note"}</a> 
             </div>
         </div>
         
     </div>
-        <table class="table table-hover span12 product-info-box">
+        <table class="table table-hover col-md-12">
             <thead>
                 <tr>
                     <th>#</th>
@@ -138,7 +138,7 @@
                     <td>{*if $product->PhotoAlbumID}
                         <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$product->PhotoURL}" class="img-circle" style="width: 38px;"/>
                                            {else}
-                        <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="width: 38px;"/>
+                        <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="col-md-2" style="width: 38px;"/>
                                            {/if*}
                                              {$product->ProductNumber}</td>
                     <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
@@ -146,15 +146,15 @@
                     <td>{$product->Quantity}
                         {if $order->StatusProgress !== 10 && $productsInOrder !== 1 }
                         <span class="delProduct">
-                        <a href="#delproduct" class="del btn"><i class="icon-trash"></i></a>
+                        <a href="#delproduct" class="del btn btn-default"><i class="icon-trash"></i></a>
                         <span class="ask" style="display: none;">
-                        <a class="btn" href="{plink removeProduct! $order->OrderID, $product->ProductID, $product->Quantity + $product->PiecesAvailable}">Are you sure? <i class="icon-trash"></i></a> 
-                        <a href="#cancel" class="btn cancel">Cancel</a>
+                        <a class="btn btn-default" href="{plink removeProduct! $order->OrderID, $product->ProductID, $product->Quantity + $product->PiecesAvailable}">Are you sure? <i class="icon-trash"></i></a> 
+                        <a href="#cancel" class="btn btn-default cancel">Cancel</a>
                         </span> 
                         </span>{/if}</td>
                     
-                    <td>{$product->UnitPrice},-</td>
-                    <td>{$subtotal = $product->Quantity * $product->UnitPrice},-</td>
+                    <td>$&nbsp;{$product->UnitPrice}</td>
+                    <td>$&nbsp;{$subtotal = $product->Quantity * $product->UnitPrice}</td>
                     <td><i class="{if $product->PiecesAvailable <= 0 } icon-ban-circle {elseif $product->PiecesAvailable < 5} icon-warning-sign {else} icon-ok-sign {/if}" title="{_'In stock'}: {$product->PiecesAvailable}"></i></td>
 
                 </tr>
@@ -166,9 +166,9 @@
             <tfoot>
                 <tr>
                     <td colspan="2"></td>
-                    <td><strong >{_'Products'}:</strong> {$grandtotal},-</td>
-                    <td><strong >{_'Shipping'}:</strong> {$shipping = $order->DeliveryPrice},-</td>
-                    <td><strong >{_'Total'}:</strong> {$grandtotal += $shipping},-</td>
+                    <td><strong >{_'Products'}:</strong> $&nbsp;{$grandtotal}</td>
+                    <td><strong >{_'Shipping'}:</strong> $&nbsp;{$shipping = $order->DeliveryPrice}</td>
+                    <td><strong >{_'Total'}:</strong> $&nbsp;{$grandtotal += $shipping}</td>
                 
                 
                 </tr>
@@ -176,67 +176,68 @@
         </table>
 
     
-    <div class="row-fluid">
-        <div class="span4 alert alert-info" n:snippet="orderInfo">
+    <div class="row">
+            <div class="col-md-4">
+        <div class="panel panel-default" n:snippet="orderInfo">
+               <div class="panel-heading"> {_'Order data'}</div>
+                <div class="panel-body"> 
 
-            <div class="span12">
+            <div class="col-md-12">
                 <p>
                     <i class="icon-calendar icon-large left"></i> {_'Date created'}:&nbsp;
                     <strong>{$order->DateCreated|date:'%d.%m.%Y'}</strong>
                 </p>
             </div>
 
-            <div class="span12">
+            <div class="col-md-12">
                 <p>
                     <i class="icon-truck icon-large left"></i> {_'Shipping'}:&nbsp;
                     <strong class="orderShipping" n:snippet="orderShipping">{$order->DeliveryName}</strong>
                 </p>
             </div>
 
-            <div class="span12">
+            <div class="col-md-12">
                 <p>
                     <i class="icon-money icon-large left"></i> {_'Payment'}:&nbsp;
                     <strong class="orderPayment" n:snippet="orderPayment">{$order->PaymentName}</strong>
                 </p>
             </div>
-              <span class="muted span12"><i class="icon-info-sign"></i> {_'EDIT shipping and payment by Double-clicking.'}</span>
+              <span class="muted col-md-12"><i class="icon-info-sign"></i> {_'EDIT shipping and payment by Double-clicking.'}</span>
         </div>
+</div></div>
+            <div class="col-md-4">
+        <div class="panel panel-default">
+                <div class="panel-heading"><i class="icon-user left icon-large"></i><strong> {_'Contact'}:</strong></div>
+              
+                  <div class="panel-body">
+                <dl>
+                    <dd class="col-md-12"><span class="col-md-3">{_'Name'}:</span><strong class="orderName col-md-8" n:snippet="orderName">{$order->Name}</strong></dd>
+                    <dd class="col-md-12"><span class="col-md-3">{_'Email'}:</span><strong class="col-md-8">{$order->UsersID}</strong></dd>
+                    <dd class="col-md-12"><span class="col-md-3">{_'Phone'}:</span><strong class="orderPhone col-md-8" n:snippet="orderPhone">{if $order->PhoneNumber}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
 
-        <div class="span4 alert alert-info">
-            <div class="span12">
-                <i class="icon-user left icon-large"></i><strong> {_'Contact'}:</strong>
-                <p>
-                <dl>
-                    <dd class="span12"><span class="span3">{_'Name'}:</span><strong class="orderName span8" n:snippet="orderName">{$order->Name}</strong></dd>
-                    <dd class="span12"><span class="span3">{_'Email'}:</span><strong class="span8">{$order->UsersID}</strong></dd>
-                    <dd class="span12"><span class="span3">{_'Phone'}:</span><strong class="orderPhone span8" n:snippet="orderPhone">{if $order->PhoneNumber}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
-                </dl>
-                </p>
         {if $order->CompanyName != ""}
-                <dl>
                     <dt>{_'Company'}:</dt>
                     <dd>{$order->CompanyName}</dd>
-                </dl>
         {/if}
+                </dl>
             </div>
-          <span class="muted span12"><i class="icon-info-sign"></i> {_'EDIT name and phone by Double-clicking.'}</span>
-        </div>
+          <span class="muted col-md-12"><i class="icon-info-sign"></i> {_'EDIT name and phone by Double-clicking.'}</span>
+        </div></div>
 
+    <div class="col-md-4">
+         <div class="panel panel-default">
+             <div class="panel-heading"><i class="icon-home left icon-large"></i><strong> {_'Address'}:</strong></div>
+ <div class="panel-body">
+                <dl class="col-md-12">
 
-        <div class="span4 alert alert-info">
-            <div class="span12">
-                <i class="icon-home left icon-large"></i><strong> {_'Address'}:</strong>
-
-                <dl class="span12">
-
-                    <dd class="span12"><span class="span3">{_'Street'}:</span><strong class="orderStreet span8" n:snippet="orderStreet">{$address->Street}</strong></dd>
-                    <dd class="span12"><span class="span3">{_'City'}:</span><strong class="orderCity span8" n:snippet="orderCity">{$address->City}</strong></dd>
-                    <dd class="span12"><span class="span3">{_'ZIP'}:</span><strong class="orderZIP span8" n:snippet="orderZIP">{$address->ZIPCode}</strong></dd>
+                    <dd class="col-md-12"><span class="col-md-3">{_'Street'}:</span><strong class="orderStreet col-md-8" n:snippet="orderStreet">{$address->Street}</strong></dd>
+                    <dd class="col-md-12"><span class="col-md-3">{_'City'}:</span><strong class="orderCity col-md-8" n:snippet="orderCity">{$address->City}</strong></dd>
+                    <dd class="col-md-12"><span class="col-md-3">{_'ZIP'}:</span><strong class="orderZIP col-md-8" n:snippet="orderZIP">{$address->ZIPCode}</strong></dd>
                 </dl> 
 
             </div>
-        <span class="muted span12"><i class="icon-info-sign"></i> {_'EDIT address by Double-clicking.'}</span>
-        </div>
+        <span class="muted col-md-12"><i class="icon-info-sign"></i> {_'EDIT address by Double-clicking.'}</span>
+        </div></div>
 
         
 
@@ -247,7 +248,7 @@
 {/block}
 
 {block sidebar}
-<div class="span2"> 
+<div class="col-md-2"> 
   {if $user->isInRole('admin')}
         {control menu:admin}
         {/if}
@@ -341,7 +342,7 @@ $(document).ready(function() {
                 type      : 'text',
                 submit    : 'OK',
                 cancel    : {_'Cancel'},
-                event     : 'dblclick',
+                event     : 'click',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
                 tooltip   : 'Click to edit ...',
                 callback : function(value, settings) {
@@ -354,7 +355,7 @@ $(document).ready(function() {
                 type      : 'text',
                 cancel    : {_'Cancel'},
                 submit    : 'OK',
-                event     : 'dblclick',
+                event     : 'click',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
                 tooltip   : 'Click to edit ...',
                 callback : function(value, settings) {
@@ -367,7 +368,7 @@ $(document).ready(function() {
                 type      : 'text',
                 cancel    : {_'Cancel'},
                 submit    : 'OK',
-                event     : 'dblclick',
+                event     : 'click',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
                 tooltip   : 'Click to edit ...',
                 callback : function(value, settings) {
@@ -380,7 +381,7 @@ $(document).ready(function() {
                 type      : 'text',
                 cancel    : {_'Cancel'},
                 submit    : 'OK',
-                event     : 'dblclick',
+                event     : 'click',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
                 tooltip   : 'Click to edit ...',
                 callback : function(value, settings) {
@@ -392,7 +393,7 @@ $(document).ready(function() {
                 type      : 'text',
                 cancel    : {_'Cancel'},
                 submit    : 'OK',
-                event     : 'dblclick',
+                event     : 'click',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
                 tooltip   : 'Click to edit ...',
                 callback : function(value, settings) {
@@ -407,8 +408,10 @@ $(document).ready(function() {
 
 
 {block modal}
-<div id="editOrderInfo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
+<div id="editOrderInfo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editOrderInfo" aria-hidden="true">
+           <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h3 id="myModalLabel"><i class="icon-list"></i> {_'Edit Order Info'}</h3>
             </div>
@@ -417,27 +420,32 @@ $(document).ready(function() {
               <p>{control editOrderInfoForm}</p>
             </div>
             <div class="modal-footer">
-              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+              <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
-    </div>
+    </div></div></div>
 
-    <div id="editProducts" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
+    <div id="editProducts" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editProducts" aria-hidden="true">
+            <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h3 id="myModalLabel"><i class="icon-list"></i> {_'Edit Products'}</h3>
             </div>
             <div class="modal-body">
                 <p>{_'Edit order info and click save'}</p>
+                {control addProductsForm}
             </div>
             <div class="modal-footer">
-                {control addProductsForm}
                 
-              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                
+              <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
-    </div>
+    </div></div></div>
 
-    <div id="cancelOrder" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
+    <div id="cancelOrder" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="cancelOrder" aria-hidden="true">
+           <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h3 id="myModalLabel"><i class="icon-ban-circle"></i> {_'Cancel order'} {$order->OrderID}?</h3>
             </div>
@@ -447,24 +455,27 @@ $(document).ready(function() {
             <div class="modal-footer">
                 
               <a class="btn btn-warning" href="{plink setStatus! $order->OrderID, 0, 'Cancelled'}"><i class="icon-large icon-ban-circle"></i> {_"Cancel order"}</a>
-              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+              <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
-    </div>
+    </div></div></div>
 
-    <div id="addNote" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
+    <div id="addNote" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addNote" aria-hidden="true">
+            <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h3 id="myModalLabel"><i class="icon-ban-circle"></i> {_'Add Note'}</h3>
             </div>
             <div class="modal-body">
                 <p>{_'Add any note to this order'}</p>
+                {control addNoteForm}
             </div>
             <div class="modal-footer">
                 
-              {control addNoteForm}
-              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+              
+              <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
-    </div>
+    </div></div></div>
 
 
 {/block}

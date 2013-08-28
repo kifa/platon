@@ -37,9 +37,11 @@ class SearchControl extends BaseControl {
         $searchForm->setTranslator($this->translator);
         $text = $this->translator->translate('What are you looking for?');
         $searchForm->addText('search', '')
-                ->setAttribute('placeholder', $text);
+                ->setType('search')
+                ->setAttribute('placeholder', $text)
+                ->setAttribute('class', 'form-control');
         $searchForm->addSubmit('srch', 'Search')
-                ->setAttribute('class', 'btn btn-primary btn-small');
+                ->setAttribute('class', 'btn btn-default');
         $searchForm->onSuccess[] = $this->searchFormSubmitted;
         return $searchForm;
     }

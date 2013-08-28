@@ -48,24 +48,15 @@
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:00–16:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:00–11:00&lt;br /&gt;&lt;strong style='color: red;'&gt;&lt;br&gt;Od 1.8. změna!&lt;/strong&gt; &lt;br /&gt;&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:30–16:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:30–11:30&lt;br /&gt;&lt;strong&gt;&amp;nbsp;&lt;/strong&gt; </compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:00–16:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:00–11:00&lt;br /&gt;&lt;strong style='color: red;'&gt;&lt;br&gt;Od 1.8. změna!&lt;/strong&gt; &lt;br /&gt;&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:30–16:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:30–11:30&lt;br /&gt;&lt;strong&gt;&amp;nbsp;&lt;/strong&gt; </compactLong>
-        <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;08:00–16:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;08:00–16:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;08:00–16:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;08:00–16:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;08:00–16:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;08:00–11:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th style='color: red;'&gt;&lt;br&gt;Od 1.8. změna!&lt;/th&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:30–16:30&lt;/td&gt;&lt;/tr&gt;
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:30–16:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:30–11:30</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:30–16:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:30–11:30</compactLong>
+        <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:30–16:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:30–16:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:30–16:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;09:30–16:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;09:30–16:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;09:30–11:30&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;&amp;nbsp;&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -105,16 +96,15 @@
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:00–11:00, 12:00–18:00&lt;br /&gt;&lt;strong style='color: red;'&gt;25.7.–1.8.&lt;/strong&gt; 14:30–18:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:00–11:00, 12:00–18:00&lt;br /&gt;&lt;strong style='color: red;'&gt;25.7.–1.8.&lt;/strong&gt; 14:30–18:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:00–11:00, 12:00–18:00</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:00–11:00, 12:00–18:00</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;08:00–11:00&lt;/td&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;08:00–11:00&lt;/td&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;08:00–11:00&lt;/td&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;08:00–11:00&lt;/td&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;08:00–11:00&lt;/td&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th style='color: red;'&gt;25.7.–1.8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;14:30–18:00&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -289,15 +279,16 @@ autobusy z této stanice: 44, 84, 91&lt;/p&gt;</directionsPublic>
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–11:00, 12:00–17:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–11:00, 12:00–17:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–11:00, 12:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29.8.–30.8.&lt;/strong&gt; zavřeno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–11:00, 12:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29.8.–30.8.&lt;/strong&gt; zavřeno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:00–11:00&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–11:00&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–11:00&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;09:00–11:00&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;09:00–11:00&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29.8.–30.8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -596,16 +587,15 @@ Nakládka a vykládka zboží před vchodem bez problémů.&lt;/p&gt;</direction
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–13:00, 14:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;9. 8.&lt;/strong&gt; zavřeno</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–13:00, 14:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;9. 8.&lt;/strong&gt; zavřeno</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–13:00, 14:00–17:00</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–13:00, 14:00–17:00</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:00–13:00&lt;/td&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–13:00&lt;/td&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–13:00&lt;/td&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;09:00–13:00&lt;/td&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;09:00–13:00&lt;/td&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th style='color: red;'&gt;9. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -618,7 +608,7 @@ Nakládka a vykládka zboží před vchodem bez problémů.&lt;/p&gt;</direction
       <zip>537 01</zip>
       <country>cz</country>
       <currency>CZK</currency>
-      <directions>&lt;p&gt;Pobočka se nachází přímo naproti Divadlu &lt;span&gt;&lt;span&gt;&lt;span id=&quot;place-title&quot; dir=&quot;ltr&quot;&gt;Karla Pippicha.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;</directions>
+      <directions>&lt;p&gt;Pobočka se nachází přímo naproti Divadlu &lt;span&gt;&lt;span&gt;&lt;span dir=&quot;ltr&quot; id=&quot;place-title&quot;&gt;Karla Pippicha.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;</directions>
       <directionsCar>&lt;p&gt;Parkovat je možné na parkovišti před obchodem.&lt;/p&gt;</directionsCar>
       <wheelchairAccessible>no</wheelchairAccessible>
       <latitude>49.95100</latitude>
@@ -635,14 +625,14 @@ Nakládka a vykládka zboží před vchodem bez problémů.&lt;/p&gt;</direction
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–12:00, 13:00–17:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:00–11:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–12:00, 13:00–17:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:00–11:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–12:00, 13:00–17:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:00–11:00</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–12:00, 13:00–17:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:00–11:00</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;08:30–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;08:30–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;08:30–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;08:30–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;08:30–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;08:00–11:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;09:00–11:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
@@ -681,16 +671,55 @@ Nakládka a vykládka zboží před vchodem bez problémů.&lt;/p&gt;</direction
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–17:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:30–12:00&lt;br /&gt;&lt;strong style='color: red;'&gt;17. 8.&lt;/strong&gt; zavřeno</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–17:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:30–12:00&lt;br /&gt;&lt;strong style='color: red;'&gt;17. 8.&lt;/strong&gt; zavřeno</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–17:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:30–12:00</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–17:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:30–12:00</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;08:30–12:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th style='color: red;'&gt;17. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+      </openingHours>
+    </branch>
+    <branch>
+      <id>137</id>
+      <name>Jindřichův Hradec, Vajgar</name>
+      <nameStreet>Jindřichův Hradec, Vajgar 598 </nameStreet>
+      <special>Bývalý sál &quot;Centrum&quot;</special>
+      <place>VISO TRADE s.r.o.</place>
+      <street>Vajgar 598</street>
+      <city>Jindřichův Hradec</city>
+      <zip>377 04</zip>
+      <country>cz</country>
+      <currency>CZK</currency>
+      <directions>&lt;p&gt;Bývalý sál Centrum, vchod od 4. ZŠ.&lt;/p&gt;</directions>
+      <directionsCar>&lt;p&gt;Bezplatné velké parkoviště bezprostředně vedle objektu,  možnost parkování i velkých aut a dodávek.&lt;/p&gt;</directionsCar>
+      <directionsPublic>&lt;p&gt;200 m od zastávky MHD Jáchymova&lt;/p&gt;</directionsPublic>
+      <wheelchairAccessible>yes</wheelchairAccessible>
+      <latitude>49.14000</latitude>
+      <longitude>15.01559</longitude>
+      <url>http://www.zasilkovna.cz/point/jindrichuv-hradec-vajgar</url>
+      <dressingRoom>0</dressingRoom>
+      <claimAssistant>1</claimAssistant>
+      <packetConsignment>1</packetConsignment>
+      <maxWeight>30</maxWeight>
+      <photos>
+        <photo>
+          <thumbnail>http://www.zasilkovna.cz/images/branch/thumb/2013-08-07_15.17.32.jpg</thumbnail>
+          <normal>http://www.zasilkovna.cz/images/branch/normal/2013-08-07_15.17.32.jpg</normal>
+        </photo>
+      </photos>
+      <openingHours>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–11:30, 12:00–17:00</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–11:30, 12:00–17:00</compactLong>
+        <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;08:30–11:30&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;08:30–11:30&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;08:30–11:30&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;08:30–11:30&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;08:30–11:30&lt;/td&gt;&lt;td&gt;12:00–17:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -857,47 +886,39 @@ Po výstupu z autobusu ve Staré Roli na zastávce Školní se dáte doprava a s
       </openingHours>
     </branch>
     <branch>
-      <id>87</id>
-      <name>Kutná Hora</name>
-      <nameStreet>Kutná Hora, Husova 104</nameStreet>
-      <place>iBoom s.r.o.</place>
-      <street>Husova 104</street>
+      <id>145</id>
+      <name>Kutná Hora, Šultysova</name>
+      <nameStreet>Kutná Hora, Šultysova 174</nameStreet>
+      <place>Kutnohorské zástěrkářství</place>
+      <street>Šultysova 174</street>
       <city>Kutná Hora</city>
       <zip>284 01</zip>
       <country>cz</country>
       <currency>CZK</currency>
-      <directions>&lt;p&gt;Výdejní místo se nachází v prodejně suchých plodů, koření a čajů v podloubí domu č.p. 104 v Husově ulici cca 40 m nad Palackého náměstím.&lt;/p&gt;</directions>
+      <directionsCar>&lt;p&gt;U prodejny je parkoviště.&lt;/p&gt;</directionsCar>
       <wheelchairAccessible>no</wheelchairAccessible>
-      <latitude>49.94915</latitude>
-      <longitude>15.26693</longitude>
-      <url>http://www.zasilkovna.cz/point/kutna-hora</url>
+      <latitude>49.94978</latitude>
+      <longitude>15.26638</longitude>
+      <url>http://www.zasilkovna.cz/point/kutna-hora-sultysova</url>
       <dressingRoom>0</dressingRoom>
-      <claimAssistant>0</claimAssistant>
-      <packetConsignment>0</packetConsignment>
-      <maxWeight>10</maxWeight>
+      <claimAssistant>1</claimAssistant>
+      <packetConsignment>1</packetConsignment>
+      <maxWeight>5</maxWeight>
       <photos>
         <photo>
-          <thumbnail>http://www.zasilkovna.cz/images/branch/thumb/P1030064.jpg</thumbnail>
-          <normal>http://www.zasilkovna.cz/images/branch/normal/P1030064.jpg</normal>
-        </photo>
-        <photo>
-          <thumbnail>http://www.zasilkovna.cz/images/branch/thumb/kutna_hora.jpg</thumbnail>
-          <normal>http://www.zasilkovna.cz/images/branch/normal/kutna_hora.jpg</normal>
-        </photo>
-        <photo>
-          <thumbnail>http://www.zasilkovna.cz/images/branch/thumb/kutna_hora_2.jpg</thumbnail>
-          <normal>http://www.zasilkovna.cz/images/branch/normal/kutna_hora_2.jpg</normal>
+          <thumbnail>http://www.zasilkovna.cz/images/branch/thumb/stub.jpg</thumbnail>
+          <normal>http://www.zasilkovna.cz/images/branch/normal/stub.jpg</normal>
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–17:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:30–11:30</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–17:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 08:30–11:30</compactLong>
-        <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;08:30–11:30&lt;/td&gt;&lt;/tr&gt;
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 10:00–16:00</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 10:00–16:00</compactLong>
+        <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;10:00–16:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;10:00–16:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;10:00–16:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;10:00–16:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;10:00–16:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
@@ -973,15 +994,24 @@ Po výstupu z autobusu ve Staré Roli na zastávce Školní se dáte doprava a s
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Čt&lt;/strong&gt; 10:00–17:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Čt&lt;/strong&gt; 10:00–17:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Čt&lt;/strong&gt; 10:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;&lt;br&gt;Od 1.9. změna!&lt;/strong&gt; &lt;br /&gt;&lt;strong&gt;Po–Pá&lt;/strong&gt; 10:00–17:00&lt;br /&gt;&lt;strong&gt;&amp;nbsp;&lt;/strong&gt; </compactShort>
+        <compactLong>&lt;strong&gt;Po–Čt&lt;/strong&gt; 10:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;&lt;br&gt;Od 1.9. změna!&lt;/strong&gt; &lt;br /&gt;&lt;strong&gt;Po–Pá&lt;/strong&gt; 10:00–17:00&lt;br /&gt;&lt;strong&gt;&amp;nbsp;&lt;/strong&gt; </compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;&lt;br&gt;Od 1.9. změna!&lt;/th&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;&amp;nbsp;&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -1155,8 +1185,8 @@ Autobus č. 10, 16, 21, 42, 50, 52, zastávka Hraniční&lt;/p&gt;</directionsPu
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 13:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;2. 8.&lt;/strong&gt; zavřeno</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 13:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;2. 8.&lt;/strong&gt; zavřeno</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 13:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;30. 8.&lt;/strong&gt; zavřeno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 13:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;30. 8.&lt;/strong&gt; zavřeno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
@@ -1164,7 +1194,7 @@ Autobus č. 10, 16, 21, 42, 50, 52, zastávka Hraniční&lt;/p&gt;</directionsPu
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th style='color: red;'&gt;2. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th style='color: red;'&gt;30. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -1472,7 +1502,6 @@ Autobusová linka 20, 27, 28, 34, 41, 56, 71, 101, 103 zastávka Sady Pětatřic
       <zip>110 00</zip>
       <country>cz</country>
       <currency>CZK</currency>
-      <openSince>2013-08-01</openSince>
       <wheelchairAccessible>no</wheelchairAccessible>
       <latitude>50.09203</latitude>
       <longitude>14.43151</longitude>
@@ -1488,15 +1517,15 @@ Autobusová linka 20, 27, 28, 34, 41, 56, 71, 101, 103 zastávka Sady Pětatřic
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 12:00–18:00&lt;br /&gt;&lt;strong&gt;Nové!&lt;/strong&gt; Výdej od  1. srpna.</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 12:00–18:00&lt;br /&gt;&lt;strong&gt;Nové!&lt;/strong&gt; Na pobočku již můžete objednávat, výdej bude možný nejdříve dne  1. srpna, kdy pobočka otevírá.</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 12:00–18:00</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 12:00–18:00</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;12:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;br /&gt;&lt;strong&gt;Nové!&lt;/strong&gt; Na pobočku již můžete objednávat, výdej bude možný nejdříve dne  1. srpna, kdy pobočka otevírá.</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -1574,9 +1603,6 @@ Tramvaj: 7, 19, 26 stanice Metro Strašnická - cca 150 metrů.&lt;br /&gt;
       <claimAssistant>0</claimAssistant>
       <packetConsignment>0</packetConsignment>
       <maxWeight>5</maxWeight>
-      <holidayStart>2013-07-29</holidayStart>
-      <holidayEnd>2013-08-11</holidayEnd>
-      <noticeMessage>Zvolená pobočka je &lt;strong style='color: red'&gt;do 11. srpna uzavřena&lt;/strong&gt; z důvodu dovolené. Do tohoto data není převzetí zásilek na pobočce možné. Za způsobené komplikace se omlouváme.</noticeMessage>
       <photos>
         <photo>
           <thumbnail>http://www.zasilkovna.cz/images/branch/thumb/IMG_9335.jpg</thumbnail>
@@ -1592,16 +1618,15 @@ Tramvaj: 7, 19, 26 stanice Metro Strašnická - cca 150 metrů.&lt;br /&gt;
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–17:30&lt;br /&gt;&lt;strong style='color: red;'&gt;29.7.–11.8.&lt;/strong&gt; zavřeno</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–17:30&lt;br /&gt;&lt;strong style='color: red;'&gt;29.7.–11.8.&lt;/strong&gt; zavřeno</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–17:30</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 08:30–17:30</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;08:30–17:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th style='color: red;'&gt;29.7.–11.8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -1700,6 +1725,42 @@ Tramvaj: 7, 19, 26 stanice Metro Strašnická - cca 150 metrů.&lt;br /&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;08:00–20:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;08:00–20:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;08:00–20:00&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+      </openingHours>
+    </branch>
+    <branch>
+      <id>135</id>
+      <name>Praha 2, I.P. Pavlova</name>
+      <nameStreet>Praha 2, Vocelova 9</nameStreet>
+      <place>Tvořilka</place>
+      <street>Vocelova 9</street>
+      <city>Praha</city>
+      <zip>120 00</zip>
+      <country>cz</country>
+      <currency>CZK</currency>
+      <wheelchairAccessible>no</wheelchairAccessible>
+      <latitude>50.07618</latitude>
+      <longitude>14.43149</longitude>
+      <url>http://www.zasilkovna.cz/point/praha-2-i-p-pavlova</url>
+      <dressingRoom>0</dressingRoom>
+      <claimAssistant>1</claimAssistant>
+      <packetConsignment>1</packetConsignment>
+      <maxWeight>10</maxWeight>
+      <photos>
+        <photo>
+          <thumbnail>http://www.zasilkovna.cz/images/branch/thumb/stub.jpg</thumbnail>
+          <normal>http://www.zasilkovna.cz/images/branch/normal/stub.jpg</normal>
+        </photo>
+      </photos>
+      <openingHours>
+        <compactShort>&lt;strong&gt;Po–Čt&lt;/strong&gt; 09:00–19:00&lt;br /&gt;&lt;strong&gt;Pá&lt;/strong&gt; 08:30–19:00</compactShort>
+        <compactLong>&lt;strong&gt;Po–Čt&lt;/strong&gt; 09:00–19:00&lt;br /&gt;&lt;strong&gt;Pá&lt;/strong&gt; 08:30–19:00</compactLong>
+        <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:00–19:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–19:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–19:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;09:00–19:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;08:30–19:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -1823,15 +1884,16 @@ Tramvaj: 7, 19, 26 stanice Metro Strašnická - cca 150 metrů.&lt;br /&gt;
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:30–13:00, 13:30–18:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:30–13:00, 13:30–18:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:30–13:00, 13:30–18:00&lt;br /&gt;&lt;strong style='color: red;'&gt;30. 8.&lt;/strong&gt; 09:30–13:00, 13:30–16:00</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:30–13:00, 13:30–18:00&lt;br /&gt;&lt;strong style='color: red;'&gt;30. 8.&lt;/strong&gt; 09:30–13:00, 13:30–16:00</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:30–13:00&lt;/td&gt;&lt;td&gt;13:30–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:30–13:00&lt;/td&gt;&lt;td&gt;13:30–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:30–13:00&lt;/td&gt;&lt;td&gt;13:30–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;09:30–13:00&lt;/td&gt;&lt;td&gt;13:30–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;09:30–13:00&lt;/td&gt;&lt;td&gt;13:30–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;30. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;09:30–13:00&lt;/td&gt;&lt;td&gt;13:30–16:00&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -1933,7 +1995,7 @@ Tramvaj: 7, 19, 26 stanice Metro Strašnická - cca 150 metrů.&lt;br /&gt;
       <id>104</id>
       <name>Praha 5, Smíchovské nádraží</name>
       <nameStreet>Praha 5, Nádražní 18</nameStreet>
-      <place>Zlatá Tečka</place>
+      <place>Smíchovíno</place>
       <street>Nádražní 18</street>
       <city>Praha</city>
       <zip>150 00</zip>
@@ -2030,7 +2092,7 @@ Tramvaj: 7, 19, 26 stanice Metro Strašnická - cca 150 metrů.&lt;br /&gt;
       <nameStreet>Praha 6, Hradčanská, Pod kaštany 9</nameStreet>
       <special>blízko metra Hradčanská</special>
       <place>VIDEOTECH.CZ</place>
-      <street>Pod kaštany 9</street>
+      <street>Pod kaštany 185/9</street>
       <city>Praha</city>
       <zip>160 00</zip>
       <country>cz</country>
@@ -2146,15 +2208,16 @@ vejdete po schodišti u pošty, zeleninového stánku vyjdete až úplně nahoru
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Út,Čt&lt;/strong&gt; 10:00–17:00&lt;br /&gt;&lt;strong&gt;St&lt;/strong&gt; 11:00–18:00&lt;br /&gt;&lt;strong&gt;Pá&lt;/strong&gt; 09:00–16:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Út,Čt&lt;/strong&gt; 10:00–17:00&lt;br /&gt;&lt;strong&gt;St&lt;/strong&gt; 11:00–18:00&lt;br /&gt;&lt;strong&gt;Pá&lt;/strong&gt; 09:00–16:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Út,Čt&lt;/strong&gt; 10:00–17:00&lt;br /&gt;&lt;strong&gt;St&lt;/strong&gt; 11:00–18:00&lt;br /&gt;&lt;strong&gt;Pá&lt;/strong&gt; 09:00–16:00&lt;br /&gt;&lt;strong style='color: red;'&gt;12. 9.&lt;/strong&gt; zavřeno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Út,Čt&lt;/strong&gt; 10:00–17:00&lt;br /&gt;&lt;strong&gt;St&lt;/strong&gt; 11:00–18:00&lt;br /&gt;&lt;strong&gt;Pá&lt;/strong&gt; 09:00–16:00&lt;br /&gt;&lt;strong style='color: red;'&gt;12. 9.&lt;/strong&gt; zavřeno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;11:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;09:00–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;12. 9.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -2337,17 +2400,15 @@ vejdete po schodišti u pošty, zeleninového stánku vyjdete až úplně nahoru
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29.7.–2.8.&lt;/strong&gt; zavřeno&lt;br /&gt;&lt;strong style='color: red;'&gt;19.8.–23.8.&lt;/strong&gt; zavřeno</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29.7.–2.8.&lt;/strong&gt; zavřeno&lt;br /&gt;&lt;strong style='color: red;'&gt;19.8.–23.8.&lt;/strong&gt; zavřeno</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th style='color: red;'&gt;29.7.–2.8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th style='color: red;'&gt;19.8.–23.8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -2611,16 +2672,15 @@ vejdete po schodišti u pošty, zeleninového stánku vyjdete až úplně nahoru
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Út,Čt&lt;/strong&gt; 13:00–17:00&lt;br /&gt;&lt;strong&gt;St,Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;9. 8.&lt;/strong&gt; zavřeno</compactShort>
-        <compactLong>&lt;strong&gt;Po–Út,Čt&lt;/strong&gt; 13:00–17:00&lt;br /&gt;&lt;strong&gt;St,Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;9. 8.&lt;/strong&gt; zavřeno</compactLong>
+        <compactShort>&lt;strong&gt;Po–Út,Čt&lt;/strong&gt; 13:00–17:00&lt;br /&gt;&lt;strong&gt;St,Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00</compactShort>
+        <compactLong>&lt;strong&gt;Po–Út,Čt&lt;/strong&gt; 13:00–17:00&lt;br /&gt;&lt;strong&gt;St,Pá&lt;/strong&gt; 09:00–12:00, 13:00–17:00</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th style='color: red;'&gt;9. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -2849,10 +2909,10 @@ Příjezd MHD - buďto na Mírové náměstí nebo zastávka OD Labe.&lt;/p&gt;<
       <zip>760 01</zip>
       <country>cz</country>
       <currency>CZK</currency>
-      <directions>&lt;p&gt;Pobočka se nachází v budově Residence Park-In (bývalý II. dívčí internát). Je to druhá budova nad Obchodní akademií směrem k Policii ČR. Nachází se 1,4km (5min. chůze ) od vlakového a autobusového nádraží,&amp;#160;téměř v centru města, jen pár set metru od univerzity.&lt;/p&gt;
+      <directions>&lt;p&gt;Pobočka se nachází v budově Residence Park-In (bývalý II. dívčí internát). Je to druhá budova po levé straně nad Obchodní akademií směrem k Policii ČR. Nachází se 1,4km (5min. chůze ) od vlakového a autobusového nádraží,&amp;#160;téměř v centru města, jen pár set metru od univerzity.&lt;/p&gt;
 &lt;p&gt;Další informace o lokalitě naleznete zde:&lt;br /&gt;
-- &lt;a target=&quot;_blank&quot; href=&quot;http://www.batovykoleje.cz&quot;&gt;www.batovykoleje.cz&lt;/a&gt;&lt;br /&gt;
-- &lt;a target=&quot;_blank&quot; href=&quot;http://www.park-in.cz/&quot;&gt;www.park-in.cz&lt;/a&gt;&lt;/p&gt;</directions>
+- &lt;a href=&quot;http://www.batovykoleje.cz&quot; target=&quot;_blank&quot;&gt;www.batovykoleje.cz&lt;/a&gt;&lt;br /&gt;
+- &lt;a href=&quot;http://www.park-in.cz/&quot; target=&quot;_blank&quot;&gt;www.park-in.cz&lt;/a&gt;&lt;/p&gt;</directions>
       <directionsCar>&lt;p&gt;Hned&amp;#160;u budovy je parkoviště, je zde možno krátkodobě zaparkovat zdarma.&lt;/p&gt;</directionsCar>
       <directionsPublic>&lt;p&gt;Zastávka trolejbusu je cca 2 min pěšky na hlavní třídě.&lt;/p&gt;</directionsPublic>
       <wheelchairAccessible>no</wheelchairAccessible>
@@ -2929,16 +2989,15 @@ Příjezd MHD - buďto na Mírové náměstí nebo zastávka OD Labe.&lt;/p&gt;<
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po,Čt–Pá&lt;/strong&gt; 10:00–12:30, 14:00–16:00&lt;br /&gt;&lt;strong&gt;St&lt;/strong&gt; 10:00–12:30, 14:00–18:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29.7.–1.8.&lt;/strong&gt; zavřeno</compactShort>
-        <compactLong>&lt;strong&gt;Po,Čt–Pá&lt;/strong&gt; 10:00–12:30, 14:00–16:00&lt;br /&gt;&lt;strong&gt;St&lt;/strong&gt; 10:00–12:30, 14:00–18:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29.7.–1.8.&lt;/strong&gt; zavřeno</compactLong>
+        <compactShort>&lt;strong&gt;Po,Čt–Pá&lt;/strong&gt; 10:00–12:30, 14:00–16:00&lt;br /&gt;&lt;strong&gt;St&lt;/strong&gt; 10:00–12:30, 14:00–18:00</compactShort>
+        <compactLong>&lt;strong&gt;Po,Čt–Pá&lt;/strong&gt; 10:00–12:30, 14:00–16:00&lt;br /&gt;&lt;strong&gt;St&lt;/strong&gt; 10:00–12:30, 14:00–18:00</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;10:00–12:30&lt;/td&gt;&lt;td&gt;14:00–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;10:00–12:30&lt;/td&gt;&lt;td&gt;14:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Čt&lt;/th&gt;&lt;td&gt;10:00–12:30&lt;/td&gt;&lt;td&gt;14:00–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pá&lt;/th&gt;&lt;td&gt;10:00–12:30&lt;/td&gt;&lt;td&gt;14:00–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th style='color: red;'&gt;29.7.–1.8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zavřeno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3032,53 +3091,6 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
       </openingHours>
     </branch>
     <branch>
-      <id>31</id>
-      <name>Banská Bystrica, Švermova</name>
-      <nameStreet>Banská Bystrica, Švermova 49/A</nameStreet>
-      <place>CATUS Slovakia</place>
-      <street>Švermova 49/A</street>
-      <city>Banská Bystrica</city>
-      <zip>974 04</zip>
-      <country>sk</country>
-      <currency>EUR</currency>
-      <directions>&lt;p&gt;&lt;span style=&quot;white-space: pre-wrap; &quot;&gt;Výdajné miesto sa nachádza v polyfunkčnom dome na prízemí. Polyfunkčný &lt;/span&gt;dom sa nachádza asi 100m od objektu Úradu priemyselného vlastníctva SR. Možnosť parkovania na parkovisku pred objektom. Zastávka MHD - &quot;Úrad PV SR&quot; - je vzdialená 200 m od vchodu a zastávka &quot;Úsvit&quot; je&amp;#160;&lt;span style=&quot;white-space: pre-wrap; &quot;&gt; vzdialená od vchodu 400 m.&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&amp;#160;&lt;/p&gt;
-&lt;p&gt;&amp;#160;&lt;/p&gt;</directions>
-      <wheelchairAccessible>yes</wheelchairAccessible>
-      <latitude>48.73213</latitude>
-      <longitude>19.12713</longitude>
-      <url>http://www.zasielkovna.sk/point/banska-bystrica-svermova</url>
-      <dressingRoom>0</dressingRoom>
-      <claimAssistant>0</claimAssistant>
-      <packetConsignment>0</packetConsignment>
-      <maxWeight>5</maxWeight>
-      <photos>
-        <photo>
-          <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/bb1.jpg</thumbnail>
-          <normal>http://www.zasielkovna.sk/images/branch/normal/bb1.jpg</normal>
-        </photo>
-        <photo>
-          <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/bb2.jpg</thumbnail>
-          <normal>http://www.zasielkovna.sk/images/branch/normal/bb2.jpg</normal>
-        </photo>
-        <photo>
-          <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/bb3.jpg</thumbnail>
-          <normal>http://www.zasielkovna.sk/images/branch/normal/bb3.jpg</normal>
-        </photo>
-      </photos>
-      <openingHours>
-        <compactShort>&lt;strong&gt;Po–Št&lt;/strong&gt; 10:00–12:00, 13:00–15:45&lt;br /&gt;&lt;strong&gt;Pi&lt;/strong&gt; 10:00–12:00, 13:00–15:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Št&lt;/strong&gt; 10:00–12:00, 13:00–15:45&lt;br /&gt;&lt;strong&gt;Pi&lt;/strong&gt; 10:00–12:00, 13:00–15:00</compactLong>
-        <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;10:00–12:00&lt;/td&gt;&lt;td&gt;13:00–15:45&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;10:00–12:00&lt;/td&gt;&lt;td&gt;13:00–15:45&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;10:00–12:00&lt;/td&gt;&lt;td&gt;13:00–15:45&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;10:00–12:00&lt;/td&gt;&lt;td&gt;13:00–15:45&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;10:00–12:00&lt;/td&gt;&lt;td&gt;13:00–15:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
-      </openingHours>
-    </branch>
-    <branch>
       <id>94</id>
       <name>Banská Bystrica, Tajovského</name>
       <nameStreet>Banská Bystrica, Tajovského 20</nameStreet>
@@ -3109,15 +3121,16 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Št&lt;/strong&gt; 07:30–16:00&lt;br /&gt;&lt;strong&gt;Pi&lt;/strong&gt; 07:30–15:30</compactShort>
-        <compactLong>&lt;strong&gt;Po–Št&lt;/strong&gt; 07:30–16:00&lt;br /&gt;&lt;strong&gt;Pi&lt;/strong&gt; 07:30–15:30</compactLong>
+        <compactShort>&lt;strong&gt;Po–Št&lt;/strong&gt; 07:30–16:00&lt;br /&gt;&lt;strong&gt;Pi&lt;/strong&gt; 07:30–15:30&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Št&lt;/strong&gt; 07:30–16:00&lt;br /&gt;&lt;strong&gt;Pi&lt;/strong&gt; 07:30–15:30&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;07:30–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;07:30–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;07:30–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;07:30–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;07:30–15:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3147,15 +3160,16 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 12:30–18:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:30–12:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 12:30–18:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:30–12:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 12:30–18:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:30–12:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 12:30–18:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:30–12:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;12:30–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;12:30–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;12:30–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;12:30–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;12:30–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;09:30–12:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3194,15 +3208,16 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 11:00–19:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 11:00–19:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 11:00–19:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 11:00–19:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;11:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;11:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;11:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;11:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;11:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3238,15 +3253,16 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po,St&lt;/strong&gt; 10:00–18:00&lt;br /&gt;&lt;strong&gt;Út,Št–Pi&lt;/strong&gt; 14:00–18:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:00–12:00</compactShort>
-        <compactLong>&lt;strong&gt;Po,St&lt;/strong&gt; 10:00–18:00&lt;br /&gt;&lt;strong&gt;Út,Št–Pi&lt;/strong&gt; 14:00–18:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:00–12:00</compactLong>
+        <compactShort>&lt;strong&gt;Po,St&lt;/strong&gt; 10:00–18:00&lt;br /&gt;&lt;strong&gt;Út,Št–Pi&lt;/strong&gt; 14:00–18:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:00–12:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po,St&lt;/strong&gt; 10:00–18:00&lt;br /&gt;&lt;strong&gt;Út,Št–Pi&lt;/strong&gt; 14:00–18:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:00–12:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;10:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;14:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;10:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;14:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;14:00–18:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3282,15 +3298,16 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 10:00–13:00, 14:00–17:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 10:00–13:00, 14:00–17:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 10:00–13:00, 14:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 10:00–13:00, 14:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;10:00–13:00&lt;/td&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;10:00–13:00&lt;/td&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;10:00–13:00&lt;/td&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;10:00–13:00&lt;/td&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;10:00–13:00&lt;/td&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3323,15 +3340,16 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–11:45, 12:30–16:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–11:45, 12:30–16:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–11:45, 12:30–16:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–11:45, 12:30–16:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:00–11:45&lt;/td&gt;&lt;td&gt;12:30–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–11:45&lt;/td&gt;&lt;td&gt;12:30–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–11:45&lt;/td&gt;&lt;td&gt;12:30–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;09:00–11:45&lt;/td&gt;&lt;td&gt;12:30–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;09:00–11:45&lt;/td&gt;&lt;td&gt;12:30–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3355,24 +3373,37 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
       <maxWeight>10</maxWeight>
       <photos>
         <photo>
-          <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/z-point-galanta-ext-01.jpg</thumbnail>
-          <normal>http://www.zasielkovna.sk/images/branch/normal/z-point-galanta-ext-01.jpg</normal>
+          <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/ext_ok.jpg</thumbnail>
+          <normal>http://www.zasielkovna.sk/images/branch/normal/ext_ok.jpg</normal>
         </photo>
         <photo>
-          <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/z-point-galanta-ext-02.jpg</thumbnail>
-          <normal>http://www.zasielkovna.sk/images/branch/normal/z-point-galanta-ext-02.jpg</normal>
+          <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/007__3_1.jpg</thumbnail>
+          <normal>http://www.zasielkovna.sk/images/branch/normal/007__3_1.jpg</normal>
+        </photo>
+        <photo>
+          <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/0012.jpg</thumbnail>
+          <normal>http://www.zasielkovna.sk/images/branch/normal/0012.jpg</normal>
+        </photo>
+        <photo>
+          <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/002.jpg</thumbnail>
+          <normal>http://www.zasielkovna.sk/images/branch/normal/002.jpg</normal>
+        </photo>
+        <photo>
+          <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/0031.jpg</thumbnail>
+          <normal>http://www.zasielkovna.sk/images/branch/normal/0031.jpg</normal>
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 10:00–17:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 10:00–17:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 10:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 10:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;10:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3408,15 +3439,16 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–17:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 10:00–12:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–17:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 10:00–12:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–17:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 10:00–12:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–17:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 10:00–12:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;10:00–12:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3448,15 +3480,18 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Ne&lt;/strong&gt; 08:00–20:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Ne&lt;/strong&gt; 08:00–20:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Ne&lt;/strong&gt; 08:00–20:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno&lt;br /&gt;&lt;strong style='color: red;'&gt;1. 9.&lt;/strong&gt; zatvoreno&lt;br /&gt;&lt;strong style='color: red;'&gt;15. 9.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Ne&lt;/strong&gt; 08:00–20:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno&lt;br /&gt;&lt;strong style='color: red;'&gt;1. 9.&lt;/strong&gt; zatvoreno&lt;br /&gt;&lt;strong style='color: red;'&gt;15. 9.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;08:00–20:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;08:00–20:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;08:00–20:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;08:00–20:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;08:00–20:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;08:00–20:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;08:00–20:00&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;08:00–20:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;1. 9.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;15. 9.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3488,15 +3523,16 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–16:30</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–16:30</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–16:30&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–16:30&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:00–16:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–16:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–16:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;09:00–16:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;09:00–16:30&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3526,15 +3562,16 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 08:00–11:30, 12:15–15:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 08:00–11:30, 12:15–15:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 08:00–11:30, 12:15–15:00&lt;br /&gt;&lt;strong style='color: red;'&gt;26.8.–30.8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 08:00–11:30, 12:15–15:00&lt;br /&gt;&lt;strong style='color: red;'&gt;26.8.–30.8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;08:00–11:30&lt;/td&gt;&lt;td&gt;12:15–15:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;08:00–11:30&lt;/td&gt;&lt;td&gt;12:15–15:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;08:00–11:30&lt;/td&gt;&lt;td&gt;12:15–15:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;08:00–11:30&lt;/td&gt;&lt;td&gt;12:15–15:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;08:00–11:30&lt;/td&gt;&lt;td&gt;12:15–15:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;26.8.–30.8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3578,15 +3615,97 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 08:00–17:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 08:00–17:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 08:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 08:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;08:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;08:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;08:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;08:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;08:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+      </openingHours>
+    </branch>
+    <branch>
+      <id>143</id>
+      <name>Nové Zámky</name>
+      <nameStreet>Nové Zámky, Janka Kráľa 19</nameStreet>
+      <special>V blízkosti reštaurácie Koruna.</special>
+      <place>P &amp; T Brothers</place>
+      <street>Janka Kráľa 19</street>
+      <city>Nové Zámky</city>
+      <zip>940 01</zip>
+      <country>sk</country>
+      <currency>EUR</currency>
+      <directions>&lt;p&gt;V blízkosti reštaurácie Koruna.&lt;/p&gt;</directions>
+      <directionsCar>&lt;p&gt;Parkovisko zdarma pred predajňou.&lt;/p&gt;</directionsCar>
+      <directionsPublic>&lt;p&gt;Dostupnosť MHD 200 metrov autobusová zástavka na hlavnej ulici S. H. Vajanského.&lt;/p&gt;</directionsPublic>
+      <wheelchairAccessible>yes</wheelchairAccessible>
+      <latitude>47.98015</latitude>
+      <longitude>18.15279</longitude>
+      <url>http://www.zasielkovna.sk/point/nove-zamky</url>
+      <dressingRoom>0</dressingRoom>
+      <claimAssistant>1</claimAssistant>
+      <packetConsignment>1</packetConsignment>
+      <maxWeight>30</maxWeight>
+      <photos>
+        <photo>
+          <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/stub.jpg</thumbnail>
+          <normal>http://www.zasielkovna.sk/images/branch/normal/stub.jpg</normal>
+        </photo>
+      </photos>
+      <openingHours>
+        <compactShort>&lt;strong&gt;Út–Pi&lt;/strong&gt; 09:00–12:00, 13:00–17:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:00–12:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Út–Pi&lt;/strong&gt; 09:00–12:00, 13:00–17:30&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:00–12:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
+        <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:30&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:30&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:30&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;td&gt;13:00–17:30&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;09:00–12:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+      </openingHours>
+    </branch>
+    <branch>
+      <id>139</id>
+      <name>Poprad</name>
+      <nameStreet>Poprad, Námestie sv. Egídia 50/58</nameStreet>
+      <place>UNIJUNIOR-SPORT</place>
+      <street>Námestie sv. Egídia 50/58</street>
+      <city>Poprad</city>
+      <zip>058 01</zip>
+      <country>sk</country>
+      <currency>EUR</currency>
+      <directions>&lt;p&gt;Predajňa sa nachádza na pešej zóne v centre Popradu, v blízkosti evanjelického kostola a kostola sv. Egídia.&lt;/p&gt;</directions>
+      <directionsCar>&lt;p&gt;Parkoviská sú v okolí pešej zóny v centre Popradu.&lt;/p&gt;</directionsCar>
+      <directionsPublic>&lt;p&gt;Autobus MHD 1, 2, 3, 4, 6, 7 na zastávke &quot;Slovenská sporiteľňa&quot;.&lt;/p&gt;</directionsPublic>
+      <wheelchairAccessible>yes</wheelchairAccessible>
+      <latitude>49.05519</latitude>
+      <longitude>20.30239</longitude>
+      <url>http://www.zasielkovna.sk/point/poprad</url>
+      <dressingRoom>0</dressingRoom>
+      <claimAssistant>1</claimAssistant>
+      <packetConsignment>1</packetConsignment>
+      <maxWeight>30</maxWeight>
+      <photos>
+        <photo>
+          <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/stub.jpg</thumbnail>
+          <normal>http://www.zasielkovna.sk/images/branch/normal/stub.jpg</normal>
+        </photo>
+      </photos>
+      <openingHours>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–18:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:00–12:30&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–18:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:00–12:30&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
+        <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;09:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;09:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;09:00–12:30&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3641,15 +3760,16 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 11:00–19:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 11:00–19:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 11:00–19:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 11:00–19:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;11:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;11:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;11:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;11:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;11:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3679,15 +3799,16 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–16:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–16:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–16:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–16:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:00–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;09:00–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;09:00–16:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3718,15 +3839,16 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–17:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–17:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;09:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3757,15 +3879,16 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 14:00–17:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 14:00–17:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 14:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 14:00–17:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;14:00–17:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3779,7 +3902,7 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
       <zip>917 00</zip>
       <country>sk</country>
       <currency>EUR</currency>
-      <directions>&lt;p&gt;Výdajné miesto sa nachádza hlboko v pasáži Hotela Malý Rím - obchodík U chorej vrany, oproti Domu svetla, blízko zastávok na zelenom kríčku.&lt;/p&gt;</directions>
+      <directions>&lt;p&gt;Výdajné miesto sa nachádza hlboko v pasáži Hotela Malý Rím - obchodík U chorej vrany, oproti Domu svetla, blízko zastávok na Zelenom kríčku.&lt;/p&gt;</directions>
       <wheelchairAccessible>yes</wheelchairAccessible>
       <latitude>48.38061</latitude>
       <longitude>17.58436</longitude>
@@ -3803,15 +3926,55 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 10:00–19:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 10:00–13:00</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 10:00–19:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 10:00–13:00</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 10:00–19:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 10:00–13:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 10:00–19:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 10:00–13:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;10:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;10:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;10:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;10:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;10:00–19:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;10:00–13:00&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+      </openingHours>
+    </branch>
+    <branch>
+      <id>141</id>
+      <name>Trnava, Športová</name>
+      <nameStreet>Trnava, Športová 14</nameStreet>
+      <place>Train &amp; Coffee</place>
+      <street>Športová 14</street>
+      <city>Trnava</city>
+      <zip>917 01</zip>
+      <country>sk</country>
+      <currency>EUR</currency>
+      <directions>&lt;p&gt;Do predajne sú dva vstupy. Jeden vchod je od &quot;Rúžového parku&quot; a druhý z druhej strany od futbalového štadiónu.&lt;/p&gt;</directions>
+      <directionsCar>&lt;p&gt;Vstup na parkovisko z ulice Kolárová do oploteného dvora predajne.&lt;/p&gt;</directionsCar>
+      <wheelchairAccessible>yes</wheelchairAccessible>
+      <latitude>48.37292</latitude>
+      <longitude>17.59079</longitude>
+      <url>http://www.zasielkovna.sk/point/trnava-sportova</url>
+      <dressingRoom>0</dressingRoom>
+      <claimAssistant>1</claimAssistant>
+      <packetConsignment>1</packetConsignment>
+      <maxWeight>30</maxWeight>
+      <photos>
+        <photo>
+          <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/stub.jpg</thumbnail>
+          <normal>http://www.zasielkovna.sk/images/branch/normal/stub.jpg</normal>
+        </photo>
+      </photos>
+      <openingHours>
+        <compactShort>&lt;strong&gt;Út–Pi&lt;/strong&gt; 07:00–18:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:00–18:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Út–Pi&lt;/strong&gt; 07:00–18:00&lt;br /&gt;&lt;strong&gt;So&lt;/strong&gt; 09:00–18:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29. 8.&lt;/strong&gt; zatvoreno</compactLong>
+        <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;07:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;07:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Št&lt;/th&gt;&lt;td&gt;07:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;07:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;09:00–18:00&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;th style='color: red;'&gt;29. 8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
     <branch>
@@ -3825,8 +3988,8 @@ Vlastní menší parkoviště uvnitř objektu nebo libovolně v obou směrech na
       <zip>010 08</zip>
       <country>sk</country>
       <currency>EUR</currency>
-      <directions>&lt;p&gt;Výdajné miesto &lt;a target=&quot;_blank&quot; href=&quot;https://maps.google.com/maps?f=q&amp;amp;source=embed&amp;amp;hl=sk&amp;amp;geocode=&amp;amp;q=RUNO-SHOP+s.r.o.+Rosinsk%C3%A1+cesta+8,+010+08+ZILINA,+Slovensk%C3%A1+republika&amp;amp;aq=0&amp;amp;oq=runo&amp;amp;sll=49.20027,18.768597&amp;amp;sspn=0.031126,0.084543&amp;amp;vpsrc=6&amp;amp;ie=UTF8&amp;amp;hq=runo-shop+sro&amp;amp;hnear=Rosinsk%C3%A1+cesta+8,+01008+%C5%BDilina,+Slovensk%C3%A1+republika&amp;amp;t=m&amp;amp;cid=17570015625640958013&amp;amp;ll=49.233068,18.769798&amp;amp;spn=0.081379,0.190544&amp;amp;z=12&amp;amp;iwloc=A&quot; moz-do-not-send=&quot;true&quot;&gt;RUNO spol. s r. o.&lt;/a&gt; se nachádza v       priemyselnej zóne,mimo centra mesta na ulici Rosinská cesta 8,       Žilina 8 v blizkosti sídliska Vlčince, v budove VUVT, 6.poschodie       : pri&amp;#160;&amp;#160; firme STK- MIKO, predajňa automobilov GALIMEX, areál       Martimex, Esmo.&lt;/p&gt;</directions>
-      <directionsCar>&lt;p&gt;Parkovanie pred pobočkou k dispozícii pred objektom- ZADARMO&lt;/p&gt;</directionsCar>
+      <directions>&lt;p&gt;Výdajné miesto &lt;a target=&quot;_blank&quot; href=&quot;https://maps.google.com/maps?f=q&amp;amp;source=embed&amp;amp;hl=sk&amp;amp;geocode=&amp;amp;q=RUNO-SHOP+s.r.o.+Rosinsk%C3%A1+cesta+8,+010+08+ZILINA,+Slovensk%C3%A1+republika&amp;amp;aq=0&amp;amp;oq=runo&amp;amp;sll=49.20027,18.768597&amp;amp;sspn=0.031126,0.084543&amp;amp;vpsrc=6&amp;amp;ie=UTF8&amp;amp;hq=runo-shop+sro&amp;amp;hnear=Rosinsk%C3%A1+cesta+8,+01008+%C5%BDilina,+Slovensk%C3%A1+republika&amp;amp;t=m&amp;amp;cid=17570015625640958013&amp;amp;ll=49.233068,18.769798&amp;amp;spn=0.081379,0.190544&amp;amp;z=12&amp;amp;iwloc=A&quot; moz-do-not-send=&quot;true&quot;&gt;RUNO spol. s r. o.&lt;/a&gt; se nachádza v       priemyselnej zóne,mimo centra mesta na ulici Rosinská cesta 8,       Žilina 8 v blizkosti sídliska Vlčince, v budove VUVT, 6.poschodie       : pri firme STK- MIKO, predajňa automobilov GALIMEX, areál       Martimex, Esmo.&lt;/p&gt;</directions>
+      <directionsCar>&lt;p&gt;Parkovanie pred pobočkou k dispozícii pred objektom - ZADARMO&lt;/p&gt;</directionsCar>
       <directionsPublic>&lt;p&gt;Dostupnosť s MHD: Zastávka &lt;a target=&quot;_blank&quot; href=&quot;http://www.dpmz.sk/cestovny-poriadok/?eyJzZWwiOjMsImxpZCI6MjYsInNtZXIiOjEsInppZCI6NzJ9&quot; moz-do-not-send=&quot;true&quot;&gt;Rosinská,VÚVT&lt;/a&gt; : autobusy č.: &lt;a target=&quot;_blank&quot; href=&quot;http://www.dpmz.sk/cestovny-poriadok/?eyJzZWwiOjEwLCJsaWQiOjI2LCJzbWVyIjoxLCJ6aWQiOjQyfQ==&quot; moz-do-not-send=&quot;true&quot;&gt;26&lt;/a&gt;, odtiaľ smer pokračovať rovno na Rosinu,       do areálu Martimex, Galimex a VUVT, cca 150 m&lt;br /&gt;
 &lt;br /&gt;
 Dostupnosť s prímestským autobusom: &lt;b&gt;Zastávka Rosinská,VÚVT&lt;/b&gt;:       smer na obec Rosina, Višňové&lt;br /&gt;
@@ -3841,9 +4004,6 @@ Trasa od MHD zastávka Fatranská: od zastávky po ulici       Vysokoškolákov 
       <claimAssistant>0</claimAssistant>
       <packetConsignment>0</packetConsignment>
       <maxWeight>5</maxWeight>
-      <holidayStart>2013-07-29</holidayStart>
-      <holidayEnd>2013-08-11</holidayEnd>
-      <noticeMessage>Zvolená pobočka je &lt;strong style='color: red'&gt;do 11. augusta uzavretá&lt;/strong&gt; z dôvodu dovolenky. Do tohto dátumu nie je prevzatia zásielok na pobočke možné. Za spôsobené komplikácie sa ospravedlňujeme.</noticeMessage>
       <photos>
         <photo>
           <thumbnail>http://www.zasielkovna.sk/images/branch/thumb/Vchod_do_budovy_VUVT-Zasielkovna_RUNO.jpg</thumbnail>
@@ -3855,8 +4015,8 @@ Trasa od MHD zastávka Fatranská: od zastávky po ulici       Vysokoškolákov 
         </photo>
       </photos>
       <openingHours>
-        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–15:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29.7.–11.8.&lt;/strong&gt; zatvoreno</compactShort>
-        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–15:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29.7.–11.8.&lt;/strong&gt; zatvoreno</compactLong>
+        <compactShort>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–15:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29.8.–30.8.&lt;/strong&gt; zatvoreno</compactShort>
+        <compactLong>&lt;strong&gt;Po–Pi&lt;/strong&gt; 09:00–15:00&lt;br /&gt;&lt;strong style='color: red;'&gt;29.8.–30.8.&lt;/strong&gt; zatvoreno</compactLong>
         <tableLong>&lt;table class='packetery-hours'&gt;&lt;tr&gt;&lt;th&gt;Po&lt;/th&gt;&lt;td&gt;09:00–15:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Út&lt;/th&gt;&lt;td&gt;09:00–15:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;St&lt;/th&gt;&lt;td&gt;09:00–15:00&lt;/td&gt;&lt;/tr&gt;
@@ -3864,7 +4024,7 @@ Trasa od MHD zastávka Fatranská: od zastávky po ulici       Vysokoškolákov 
 &lt;tr&gt;&lt;th&gt;Pi&lt;/th&gt;&lt;td&gt;09:00–15:00&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;So&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;th&gt;Ne&lt;/th&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;th style='color: red;'&gt;29.7.–11.8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
+&lt;tr&gt;&lt;th style='color: red;'&gt;29.8.–30.8.&lt;/th&gt;&lt;/td&gt;&lt;td&gt;zatvoreno&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</tableLong>
       </openingHours>
     </branch>
   </branches>

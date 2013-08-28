@@ -6,26 +6,27 @@
 
 {block pageheader}
 {if $user->isInRole('admin')}
-<div class="span12" n:snippet="controlPanel">
+<div class="col-md-12" n:snippet="controlPanel">
         
      <div class="alert alert-error"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this category by clicking on Title, Description or panel bellow etc. More info?'}</div>
 
-                <a href="#snippet--products" class="btn" id="addProductButton"><i class="icon-large icon-plus"></i> {_"Add Product"}</a>
+     <button class="btn btn-default" type="button" data-toggle="modal" data-target="#addProduct"><i class="icon-large icon-plus"></i> {_"Add Product"}</button>
                 <div class="btn-group">
-                    <a href="#" class="btn"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+                    <a href="#" class="btn btn-default"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
                         {if $category->CategoryPhoto == NULL}
-                    <a href="#addCategoryPhoto" class="btn" data-toggel="modal" data-target="#addCategoryPhoto" id="addCategoryPhotoButton"><i class="icon-large icon-camera-retro"></i> {_"Add Category Photo"}</a>
+                    
                         {/if}
+						{*<a href="#addCategoryPhoto" class="btn btn-default" data-toggel="modal" data-target="#addCategoryPhoto" id="addCategoryPhotoButton"><i class="icon-large icon-camera-retro"></i> {_"Add Category Photo"}</a>*}
 
                 </div>
 
                 <div class="btn-group" n:snippet="categoryStatus">
                             {if $category->CategoryStatus == 0}
-                    <a class="btn ajax btn-primary" href="{plink setCategoryStatus! $category->CategoryID, 1}" ><i class="icon-large icon-eye-open"></i> {_'Publish category'}</a>
+                    <a class="btn btn-default ajax btn-success" href="{plink setCategoryStatus! $category->CategoryID, 1}" ><i class="icon-large icon-eye-open"></i> {_'Publish category'}</a>
                            {elseif $category->CategoryStatus >= 1}
-                    <a class="btn ajax" href="{plink setCategoryStatus! $category->CategoryID, 0}" ><i class="icon-large icon-eye-close"></i> {_'Unpublish category'}</a>
+                    <a class="btn btn-default ajax" href="{plink setCategoryStatus! $category->CategoryID, 0}" ><i class="icon-large icon-eye-close"></i> {_'Unpublish category'}</a>
                    {/if}
-                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
@@ -42,8 +43,8 @@
                 </div>
                 
                 <div class="btn-group">
-                    <a class="btn"><i class="icon-sitemap"></i> {_'Parent Category'}</a>
-                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    <a class="btn btn-default"><i class="icon-sitemap"></i> {_'Parent Category'}</a>
+                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" n:snippet="parentCategory">
@@ -65,54 +66,30 @@
    </div>
    {/if}
 
-<div class="span12">
-<div class="span3">
+<div class="col-md-12">
+<div class="panel panel-default">
+  <div class="panel-heading">
     <h1 n:block="title" class="CatTitle" n:snippet="CatTitle">{$category->CategoryName}</h1>
+
+</div>
+  <div class="panel-body">
     <small class="shortDesc muted">
     <span n:block="metadesc">
         <span class="CatDescription" n:snippet="CatDescription">{!$category->CategoryDescription}</span>
-        <a href="{plink Blog:category $category->CategoryID}">{_'Check news on blog'} <i class="icon-arrow-right"></i></a>
+       
     </span> 
-    {if $category->CategoryPhoto != NULL }
-    {if $user->isInRole('admin')}
-            <img src="{$basePath}/images/category/20-{$category->CategoryPhoto}" class="img-circle" />
-         <a href="{plink deletePhotoCategory! $category->CategoryID, $category->CategoryPhoto }">{_'Delete photo'}</a> {/if}
-    {/if} </small>
-</div>
-    <div class="span3 subcategories">
-        <h3>{_'Subcategories'}</h3>
-{foreach $categories as $catID => $cat}
-    {if $cat->HigherCategoryID == $category->CategoryID}
-                <div class="span10">
-                    <div class="media">
-                      <a class="pull-left" href="#">
-                        <img class="media-object" data-src="holder.js/64x64">
-                      </a>
-                      <div class="media-body">
-                          <h4 class="media-heading"><a href="{plink product:products $catID, $cat->CategoryName}"><i class="icon-chevron-sign-right"></i>  {$cat->CategoryName}</a></h4>
-                      </div>
-                    </div>
-                </div> 
-    {/if}
- {/foreach}
-    </div>
-<div class="span6">
-    <h3>{_'Best sellers'}</h3>
-    <ul class="thumbnails">       
-        <li class="thumbnail span3"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
-        <li class="thumbnail span3"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
-        <li class="thumbnail span3"><a href="#"><img src="http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg" width="90" height="50" alt=""> Product</a><button>BUY</button></li>
-    </ul>
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">       
-        <li><a tabindex="-1" href="#">{_'Featured'}</a></li>
-        <li class="divider"></li>
-        <li><a tabindex="-1" href="#">Product</a></li>
-        <li><a tabindex="-1" href="#">Product</a></li>
-        <li><a tabindex="-1" href="#">Product</a></li>
-    </ul>
-</div>
+</small>
 
-    
+    {if $subcategories}
+    <div class="col-md-11">
+        <ul class="nav nav-pills">
+        {foreach $subcategories as $catID => $cat}
+            <li><a href="{plink product:products $catID, $cat->CategoryName}"><i class="icon-chevron-sign-right"></i>  {$cat->CategoryName}</a></li>
+        {/foreach}
+      </ul>
+    </div>  
+    {/if}
+      </div> </div>
 </div>
 {/block}
 
@@ -131,81 +108,41 @@
 {/block}
 
 {block content}
-<div class="span12" n:snippet="products">        
-   <div class="span12 alert-block">
+<div class="col-md-12" n:snippet="products">    
+   <div class="col-md-12 btn-toolbar margin5">
     <div class="btn-group">
-        <a n:href="setFilter! 'price', 'ASC'" class="btn ajax">{_'Price'}</a>
-        <a n:href="setFilter! 'price', 'ASC'" class="btn ajax"><i class="icon-sort-by-order"></i></a>
-        <a n:href="setFilter! 'price', 'DESC'" class="btn ajax"><i class="icon-sort-by-order-alt"></i></a>
+        <a n:href="setFilter! 'price', 'ASC'" class="btn btn-default ajax">{_'Price'}</a>
+        <a n:href="setFilter! 'price', 'ASC'" class="btn btn-default ajax"><i class="icon-sort-by-order"></i></a>
+        <a n:href="setFilter! 'price', 'DESC'" class="btn btn-default ajax"><i class="icon-sort-by-order-alt"></i></a>
     </div>
     
     <div class="btn-group">
-        <a n:href="setFilter! 'product', 'ASC'" class="btn ajax">{_'Name'}</a>
-        <a n:href="setFilter! 'product', 'ASC'" class="btn ajax"><i class="icon-sort-by-alphabet"></i></a>
-        <a n:href="setFilter! 'product', 'DESC'" class="btn ajax"><i class="icon-sort-by-alphabet-alt"></i></a>
+        <a n:href="setFilter! 'product', 'ASC'" class="btn btn-default ajax">{_'Name'}</a>
+        <a n:href="setFilter! 'product', 'ASC'" class="btn btn-default ajax"><i class="icon-sort-by-alphabet"></i></a>
+        <a n:href="setFilter! 'product', 'DESC'" class="btn btn-default ajax"><i class="icon-sort-by-alphabet-alt"></i></a>
         
     </div>
     
     <div class="btn-group">
-        <a n:href="setFilter! 'sale', 'DESC'" class="btn ajax">{_'Sale'}</a>
-        <a n:href="setFilter! 'sale', 'ASC'" class="btn ajax"><i class="icon-sort-up"></i></a>
-        <a n:href="setFilter! 'sale', 'DESC'" class="btn ajax"><i class="icon-sort-down"></i></a>
+        <a n:href="setFilter! 'sale', 'DESC'" class="btn btn-default ajax">{_'Sale'}</a>
+        <a n:href="setFilter! 'sale', 'ASC'" class="btn btn-default ajax"><i class="icon-sort-up"></i></a>
+        <a n:href="setFilter! 'sale', 'DESC'" class="btn btn-default ajax"><i class="icon-sort-down"></i></a>
     </div>
     
     <div class="btn-group">
-        <a n:href="setFilter! 'pieces', 'DESC'" class="btn ajax">{_'In Stock'}</a>
-        <a n:href="setFilter! 'pieces', 'ASC'" class="btn ajax"><i class="icon-sort-up"></i></a>
-        <a n:href="setFilter! 'pieces', 'DESC'" class="btn ajax"><i class="icon-sort-down"></i></a>
+        <a n:href="setFilter! 'pieces', 'DESC'" class="btn btn-default ajax">{_'In Stock'}</a>
+        <a n:href="setFilter! 'pieces', 'ASC'" class="btn btn-default ajax"><i class="icon-sort-up"></i></a>
+        <a n:href="setFilter! 'pieces', 'DESC'" class="btn btn-default ajax"><i class="icon-sort-down"></i></a>
     </div>
        </div>
-<ul class="thumbnails span12">
-    
-    {if $user->isInRole('admin')}
-             
-    <li class="span11 miniproduct hide" n:snippet="newproduct" >
-        
-            <div class="span12" style="height: 527px">
-                    
-{form addProductForm}
-<ul class="errors" n:if="$form->hasErrors()">
-        <li n:foreach="$form->errors as $error">{$error}</li>
-</ul>
-  <fieldset class="span12">
-      <legend class="span12 alert">{_'Add new product'}</legend>
-    {label name /}
-    {input name}
-    {label price /}
-    <div class="input-prepend">
-  <span class="add-on">$</span>
-    {input price}
-    </div>
-    {label amount /}
-    <div class="input-prepend input-append">
-
-    {input amount}
-
-    </div>
-    {label image /}
-    {input image}
-    <div class="form-actions">
-    {input add}
-    <button class="btn" id="addProductButtonHide"><i class="icon-large icon-minus-sign"></i> {_'Hide'}</button>
-    </div>
-    <span class="help-block"><i class="icon-info-sign"></i> {_'Enter this basic info. All other can be added later.'}</span>
-  </fieldset>
-{/form}
-
-        
-        </div> <!--primary row -->
-    </li>
-    
-    
-    {/if}
+<div class="row">
+ 
             {foreach $products as $id => $product}
-                  {control product:productMini $product}
+        <div class="col-xs-12 col-sm-4 col-md-4">
+                {control product:ProductMini $product}
+            </div>
             {/foreach}
-</ul>
-
+</div>
 </div>    
 {/block}
 
@@ -296,7 +233,6 @@
         callback : function(value, settings) {
             var json = $.parseJSON(value);
             $('.CatDescription').html(json.edit);
-            $('.shortDesc').html(json.edit);
         }
         });
              
@@ -305,14 +241,13 @@
    });  
 </script>
     {/if}
-
 {/block}
 
     {block modal}
 
     {if $user->isInRole('admin')}
 
-<div id="addCategoryPhoto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="addCategoryPhoto" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel"><i class="icon-plus"></i> {_'Add category photo'}</h3>
@@ -322,12 +257,12 @@
                         {control addCategoryPhotoForm}
     </div>
     <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
     </div>
 </div>
 
 
-<div id="deleteCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="deleteCategory" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Delete'} {$category->CategoryName} {_'Category'}?</h3>
@@ -339,11 +274,11 @@
     </div>
     <div class="modal-footer">
                  {control deleteCategoryForm}
-        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
     </div>
 </div>
 
-<div id="addCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="addCategory" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Category'}</h3>
@@ -353,8 +288,55 @@
     {control addCategoryForm}
     </div>
     <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
     </div>
 </div>
+
+
+
+<div id="addProduct" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addProduct" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Add Product</h4>
+      </div>
+ <div class="modal-body" n:snippet="newproduct">
+
+     {form addProductForm role => 'form'}
+<ul class="errors" n:if="$form->hasErrors()">
+        <li n:foreach="$form->errors as $error">{$error}</li>
+</ul> 
+<div class="form-group">
+    {label name /}
+    {input name}
+</div><div class="form-group">
+    {label price /}
+    <div class="input-group">
+    <span class="input-group-addon">$</span>
+    {input price}
+    </div> 
+    </div><div class="form-group">
+    {label amount /}
+    {input amount}
+    </div><div class="form-group">
+    {label image /}
+    {input image}
+        <p class="help-block"><i class="icon-info-sign"></i> Max size is 2MB ~ 1 Megapixel photos</p>
+    </div><div class="form-group">
+    {input add}
+    </div>
+    
+{/form}
+  <span class="help-block"><i class="icon-info-sign"></i> {_'Enter this basic info. All other can be added later.'}</span>  
+
+</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close without adding</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+    
 {/if}
 {/block}

@@ -1,16 +1,12 @@
-<div class="{if $user->isInRole('admin')}span7{else} span5{/if} pull-right">
-    <div class="{if $user->isInRole('admin')}span6{else} span12{/if}  alert alert-info">
+<div class="alert alert-info">
         {if $user->isInRole('admin')}
-        {_'Hello'} <strong>{$user->id}!</strong> <br><a href="{plink SmartPanel:}"><i class="icon-lightbulb"></i> SmartPanel</a> | 
-        <a href="{plink SmartPanel:default}">{_"News"} <span class="badge {if $news >0 }badge-info{else} badge-inverse{/if}"><i class="icon-envelope"></i> {$news}</span></a> |
+        {_'Hello'} <strong>{$user->id}!</strong> <br><a class="btn btn-danger" href="{plink SmartPanel:}"><i class="icon-lightbulb"></i> SmartPanel</a> | 
+        <a href="{plink SmartPanel:default}">{_"News"} <span class="label {if $news >0 }label-info{else} label-default{/if}"><i class="icon-envelope"></i> {$news}</span></a> |
         <a href="{plink Sign:out}">{_"Logout"} <i class="icon-signout"></i></a>
         
         {else}
-        <a href="{plink Order:cart}"><i class="icon-large icon-shopping-cart"></i> {_"Cart"} {if $cart > 0}<span class="badge badge-info">{$cart}</span>{else}<span class="badge">0</span>{/if}</a> |
-        <a href="#tracking" data-toggel="modal" data-target="#tracking" id="trackingButton"><i class="icon-large icon-search"></i> {_"Track order"}</a> |
+        <a href="{plink Order:cart}"><i class="icon-large icon-shopping-cart"></i> {_"Cart"} {if $cart > 0}<span class="label label-danger">{$cart}</span>{else}<span class="label label-default">0</span>{/if}</a> | 
+        <a href="#tracking" data-toggel="modal" data-target="#tracking" id="trackingButton"><i class="icon-large icon-search"></i> {_"Track order"}</a> | 
         <a href="{plink Sign:in}">{_"Sign In"} <i class="icon-signin"></i></a>
         {/if}
-    </div>
-
-
 </div>

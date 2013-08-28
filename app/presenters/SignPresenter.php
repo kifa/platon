@@ -35,15 +35,19 @@ class SignPresenter extends BasePresenter {
         $form = new UI\Form;
 
         $form->setTranslator($this->translator);
-        $form->addText('username', 'Uživatelské jméno:')
-                ->setRequired('Please enter your username.');
+        $form->addText('username', 'User name:')
+                ->setRequired('Please enter your username.')
+                ->setAttribute('class', 'form-control');
 
         $form->addPassword('password', 'Password:')
-                ->setRequired('Please enter your password.');
+                ->setRequired('Please enter your password.')
+                ->setAttribute('class', 'form-control');
 
-        $form->addCheckbox('remember', 'Keep me signed in');
+        $form->addCheckbox('remember', 'Keep me signed in')
+                ->setAttribute('class', 'form-control');
 
-        $form->addSubmit('send', 'Sign in');
+        $form->addSubmit('send', 'Sign in')
+                ->setAttribute('class', 'form-control btn btn-success');
 
         // call method signInFormSucceeded() on success
         $form->onSuccess[] = $this->signInFormSucceeded;
@@ -67,7 +71,7 @@ class SignPresenter extends BasePresenter {
 		}
 
                 $this->usertracking->date = date("Y-m-d H:i:s");
-		$this->redirect('SmartPanel:default'); 
+		$this->redirect('Homepage:'); 
     }
 
     public function actionOut() {

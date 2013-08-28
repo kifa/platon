@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-08-23 23:17:29
+# Created: 2013-08-28 23:41:58
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-08-23 23:17+0200\n"
+"PO-Revision-Date: 2013-08-28 23:41+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -149,6 +149,12 @@ msgstr "Přidat produkty"
 
 msgid "Add variant"
 msgstr "Přidat variantu"
+
+msgid "Add video"
+msgstr "Přidat video"
+
+msgid "Adding to cart..."
+msgstr "Přidávám do košíku..."
 
 msgid "Address"
 msgstr "Adresa"
@@ -309,6 +315,9 @@ msgstr "Kontakt"
 msgid "Contact us"
 msgstr "Kontaktujte nás"
 
+msgid "Continue checkout"
+msgstr "Objednat"
+
 msgid "Continue your Order"
 msgstr "Objednat zboží"
 
@@ -363,6 +372,9 @@ msgstr "Smazat obrázek"
 msgid "Delete photo"
 msgstr "Smazat fotku"
 
+msgid "Delete variants"
+msgstr "Smazat varianty"
+
 msgid "Description"
 msgstr "Popis"
 
@@ -395,6 +407,9 @@ msgstr "Dokumenty"
 
 msgid "Document:"
 msgstr "Dokument:"
+
+msgid "Don´t worry and start"
+msgstr "To nevadí. Začněte"
 
 msgid "Download"
 msgstr "Stáhnout"
@@ -513,6 +528,9 @@ msgstr "Generovat mapu webu (sitemap)"
 msgid "Generate XML feed"
 msgstr "Generovat XML feed"
 
+msgid "Grand Total"
+msgstr "Celkem"
+
 msgid "HOT"
 msgstr "SUPER"
 
@@ -525,11 +543,14 @@ msgstr "Zde"
 msgid "Here is all you need!"
 msgstr "Zde naleznete vše potřebné"
 
+msgid "Here you can add new product variant."
+msgstr "Zde můžete přidat variantu produktu."
+
 msgid "Here you can check order status."
 msgstr "Zde můžete sledovat stav Vaší objednávky."
 
 msgid "Here you can complete your order. Just fill fields bellow."
-msgstr "Zde můžete dokončit vaši objednávku. Jen vyplňte..."
+msgstr "Zde můžete dokončit vaši objednávku."
 
 msgid "Here you see all payment methods."
 msgstr "Zde jsou všechny Vaše platební metody."
@@ -627,6 +648,15 @@ msgstr "Odhlásit se"
 msgid "Magical numbers that improve your sales."
 msgstr "Kouzelná čísla, která zvyšují prodeje."
 
+msgid "Manage and delete variants."
+msgstr "Spravuje a mažte varianty."
+
+msgid "Manage product variants"
+msgstr "Spravovat varianty produktu"
+
+msgid "Manage variants"
+msgstr "Spravovat varianty"
+
 msgid "Menu"
 msgstr "Menu"
 
@@ -672,6 +702,9 @@ msgstr "Další postup"
 msgid "No revenue data, yet."
 msgstr "Zatím žádné údaje o tržbách."
 
+msgid "No source data, yet."
+msgstr "Zatím žádné údaje o zdrojích návštěv."
+
 msgid "Note"
 msgstr "Poznámka"
 
@@ -683,6 +716,9 @@ msgstr "Notebook"
 
 msgid "Option"
 msgstr "Nastavení"
+
+msgid "Options"
+msgstr "Možnosti"
 
 msgid "Order administration"
 msgstr "Správa objednávky"
@@ -810,6 +846,9 @@ msgstr "Rozložení produktu"
 msgid "Product stats"
 msgstr "Statistiky produktu"
 
+msgid "Product was removed. Isn´t it pitty?!"
+msgstr "Produkt byl odebrán. Není to škoda?"
+
 msgid "Products"
 msgstr "Produkty"
 
@@ -861,6 +900,9 @@ msgstr "Recenze"
 msgid "SALE"
 msgstr "SLEVA"
 
+msgid "SHOPPING NOW"
+msgstr "NAKUPOVAT"
+
 msgid "SOLD OUT"
 msgstr "VYPRODÁNO"
 
@@ -884,6 +926,9 @@ msgstr "Hledat"
 
 msgid "Search and discover our eshop."
 msgstr "Hledejte a objevujte náš eshop."
+
+msgid "Searching..."
+msgstr "Hledám..."
 
 msgid "Select Category:"
 msgstr "Vyberte kategorii:"
@@ -987,6 +1032,9 @@ msgstr "Podkategorie"
 msgid "Subject"
 msgstr "Předmět"
 
+msgid "Subtotal"
+msgstr "Součet"
+
 msgid "Tablets"
 msgstr "Tablet"
 
@@ -1053,6 +1101,9 @@ msgstr "Nahrát"
 msgid "Upload your logo"
 msgstr "Nahrát logo eshopu"
 
+msgid "User name:"
+msgstr "Uživatelské jméno:"
+
 msgid "Users"
 msgstr "Uživatelé"
 
@@ -1062,8 +1113,14 @@ msgstr "Hodnota:"
 msgid "Variant"
 msgstr "Varianta"
 
+msgid "Variant Name"
+msgstr "Název varianty"
+
 msgid "Variant Name:"
 msgstr "Název varianty:"
+
+msgid "Variants"
+msgstr "Varianta"
 
 msgid "Video"
 msgstr "Video"
@@ -1164,6 +1221,6 @@ msgstr "ks"
 msgid "personal pick up"
 msgstr "osobní převzetí"
 
-msgid "No source data, yet."
-msgstr "Zatím žádné údaje o zdrojích návštěv."
+msgid "Take it Back!"
+msgstr "Vrátit zpět!"
 

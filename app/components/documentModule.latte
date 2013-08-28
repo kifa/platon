@@ -1,7 +1,7 @@
 {if $status == 1}
-<div class="span12 product-info-box">
-            <strong><i class="icon-download"></i> {_'Docs'}</strong>
-            <div class="span12">
+<div class="panel panel-default">
+    <div class="panel-heading"><strong><i class="icon-download"></i> {_'Docs'}</strong></div>
+         <div class="panel-body">
             {if $docs}
                 <ul class="nav">
                 {foreach $docs as $id => $doc}
@@ -12,49 +12,40 @@
                               {/foreach}
                 </ul>
                 {/if}
-            </div>
-            <div class="span12">
+           
+            
              {if $user->isInRole('admin')}
-                     {control addDocumentationForm}
-                                {/if}
+             <div>
+                 {form addDocumentationForm }
+        <div class="form-group col-md-12">
+            {label name /}
+            <div class="input-group">
+        {input name}
             </div>
-        
-            
+        </div>
+        <div class="form-group col-md-12">
+            {label doc /}
+            <div class="input-group">
+        {input doc}
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            {label desc /}
+            <div class="input-group">
+        {input desc}
+            </div>
+        </div>
+        {input add}
 
-                             {*if $docs}       
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>{_'Name'}</th>
-                                        <th>{_'Description'}</th>
-                                        <th>{_'Download link'}</th>
-                                     {if $user->isInRole('admin')}
-                                        <th></th>    
-                                    {/if}
-                                    </tr>
-                                </thead>
-                            {foreach $docs as $id => $doc}
-                                <tbody>
-                                    <tr>
-                                        <td>{$id}</td>
-                                        <td>{$doc->DocumentName}</td>
-                                        <td>{$doc->DocumentDescription}</td>
-                                        <td><a href="{$basePath}/docs/{$product}/{$doc->DocumentURL}" title="{_'Download'} {$doc->DocumentName}"><i class="icon-download" ></i> {$doc->DocumentURL}</a></td>
-                                   {if $user->isInRole('admin')}
-                                        <td><a href="{link deleteDocument! $product, $doc->DocumentID}"><i class="icon-trash" ></i> Delete document</a></td>
-                                      {/if}
-                              {/foreach}
-                                    </tr>
-                                </tbody>
-                            </table>
-                            {/if*}
-            
-            
-    {if $user->isInRole('admin')}
+        {/form}
+                 </div>
+            <div class="col-md-12">
             <p class="muted"><i class="icon-info-sign"></i> {_'To remove this module visit'} <a href='{plink smartPanel:modules}' >{_'SmartPanel'}</a>
                 </p>
-    {/if}
+                </div>
+                                {/if}
+            
+         </div>
 </div>
 {elseif $user->isInRole('admin')}
 <a n:href='installModule' class="btn btn-primary">{_'Add Documents module'}</a>

@@ -4,43 +4,47 @@
 {/snippet}
 {/block}
 
-{block pageheader}
-<div class="page-header">
+   
+        
+{block contents}
+<div class="col-md-9 shopInnerContent" n:snippet="content">
+  <div class="page-header">
     <h1 n:block="title"><i class="icon-phone"></i> {_'Contact us'} <small>{_'Do you have any question? Ask us! We will be happy.'}</small></h1>
 
 </div>
 
-{/block}
-        
-        
-{block content}
-<div class="span12">
-    <div class="span6">
+            
+<div class="col-md-12">
+    <div class="col-md-6">
         
  {snippet form}       
          {form contactForm class => ajax}
 <ul class="errors" n:if="$form->hasErrors()">
         <li n:foreach="$form->errors as $error">{$error}</li>
 </ul>
-  <fieldset>
+
       <legend><i class="icon-envelope"></i> {_'Write to us'}</legend>
+      <div class="form-group">
     {label note /}
-    {input note class => span12}
+    {input note}
+      </div>
     
+      <div class="form-group">
     {label email /}
-    <div class="input-prepend input-append">
-        <span class="add-on">@</span>
-    {input email class => span12}
+    <div class="input-group">
+        <span class="input-group-addon">@</span>
+    {input email}
     </div>
+      </div>
+      <div class="form-group">
      {input send}
-    <div class="form-actions">
+      </div>
      <span class="help-block"><i class="icon-info-sign"></i> {_'We will respond as soon as possible.'}</span>
-    </div>
-  </fieldset>
+
 {/form}
 {/snippet}
     </div>
-    <div class="span5" n:snippet="contactBlock">
+    <div class="col-md-5" n:snippet="contactBlock">
     <legend class="contactHeading" n:snippet="contactHeading">{$contactText->StaticTextName}</legend>
         {if $user->isInRole('admin')}
         <span class="muted"><i class="icon-info-sign"></i> {_'Edit this text and heading by clicking'}</span><br>   
@@ -54,16 +58,17 @@
         </div>
     </div>
 </div>
-
+</div>
 {/block}
 
 
 {block sidebars}
-<div class="span2 shopSidebar">
-<div class="span12">
-    <ul class="nav nav-list">
-        <li class="nav-header"><i class="icon-group icon-large"></i> {_'Company info'}</a></li>
-        <li class="divider"></li>
+<div class="col-md-3 shopSidebar">
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><i class="icon-group icon-large"></i> {_'Company info'}</div>
+    <div class="panel-body">
+        <ul class="nav nav-list">
         <li><strong>{$companyName}</strong></li>
         {if $companyPhone}
         <li><i class="icon-phone"></i> {$companyPhone}</li>
@@ -73,9 +78,8 @@
         <li><i class="icon-home"></i> <strong>{_'Address'}</strong></li>
         <li>{$companyAddress}</li>
     </ul>
-
-
-</div>
+    </div>
+    </div>
 </div>
 {/block}
 

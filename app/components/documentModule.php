@@ -120,15 +120,15 @@ class documentModule extends moduleControl {
             $addPhoto->setTranslator($this->translator);
             $addPhoto->addText('name', 'Name:')
                     ->setRequired('Please fill document name')
-                    ->setAttribute('class', 'span10');
+                    ->setAttribute('class', 'col-md-10');
             $addPhoto->addHidden('productid', $this->id);
             $addPhoto->addUpload('doc', 'Document:')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024)
-                    ->setAttribute('class', 'span10');
+                    ->setAttribute('class', 'col-md-10');
             $addPhoto->addText('desc', 'Description', 20, 100)
-                    ->setAttribute('class', 'span10');
+                    ->setAttribute('class', 'col-md-10');
             $addPhoto->addSubmit('add', 'Add Document')
-                    ->setAttribute('class', 'btn-primary upl')
+                    ->setAttribute('class', 'btn btn-primary upl')
                     ->setAttribute('data-loading-text', 'Uploading...');
             $addPhoto->onSuccess[] = $this->addDocumentationFormSubmitted;
             return $addPhoto;

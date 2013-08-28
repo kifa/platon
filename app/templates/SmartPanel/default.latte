@@ -1,17 +1,17 @@
 {block pageheader}
 {if $user->isInRole('admin')}
-       <div class="span12 smartPanelBar">
-                <a class="btn" href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_"Orders"}</a> 
-                <a class="btn" href="{plink SmartPanel:warehouse }"><i class="icon-retweet"></i> {_"Warehouse"}</a> 
-                <a class="btn" href="{plink SmartPanel:shipping }"><i class="icon-truck"></i> {_"Shipping"}</a> 
-                <a class="btn" href="{plink SmartPanel:payment }"><i class="icon-money"></i> {_"Payment"}</a> 
+       <div class="col-md-12 smartPanelBar">
+                <a class="btn btn-default" href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_"Orders"}</a> 
+                <a class="btn btn-default" href="{plink SmartPanel:warehouse }"><i class="icon-retweet"></i> {_"Warehouse"}</a> 
+                <a class="btn btn-default" href="{plink SmartPanel:shipping }"><i class="icon-truck"></i> {_"Shipping"}</a> 
+                <a class="btn btn-default" href="{plink SmartPanel:payment }"><i class="icon-money"></i> {_"Payment"}</a> 
                                 
-                <a class="btn" href="{plink SmartPanel:modules }"><i class="icon-upload-alt"></i> {_"New functions"}</a> 
+                <a class="btn btn-default" href="{plink SmartPanel:modules }"><i class="icon-upload-alt"></i> {_"New functions"}</a> 
 
-                <a class="btn" href="{plink SmartPanel:stats }"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+                <a class="btn btn-default" href="{plink SmartPanel:stats }"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
             </div>
      
-<div class="page-header span12">
+<div class="page-header col-md-12">
         <h1 n:block="title"><i class="icon-lightbulb"></i> {_"Smart Panel"}<small> {_"Here is all you need!"}</small></h1>
 </div>
 
@@ -19,10 +19,10 @@
 {/block}
 
 {block content}
-<div class="span11"> 
+<div class="col-md-11"> 
     {if $user->isInRole('admin')}
 
-   <div class="tabbable span12"> <!-- Only required for left/right tabs -->
+   <div class="tabbable col-md-12"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">
           <li class="active"><a href="#overal"  data-toggle="tab">{_'Overal'}</a></li>
           <li><a href="#account"  data-toggle="tab">{_'Account'}</a></li>
@@ -31,7 +31,7 @@
         </ul>
         <div class="tab-content">
           <div class="tab-pane active" id="overal">
-              <div class="span7"> 
+              <div class="col-md-7"> 
               <h3>{_'Latest Orders'} <small><a n:href="SmartPanel:orders">{_'All orders'} <i class="icon-spinner"></i></a></small></h3>
                 <table class="table">
                     <thead>
@@ -41,6 +41,7 @@
                             <th>{_'Customer'}</th>
                             <th>{_'Total'}</th>
                             <th>{_'Status'}</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,6 +53,7 @@
                             <td><a href="{plink SmartPanel:orderDetail $id}">{$order->Name}</a></td>
                             <td>{$order->TotalPrice},-</td>
                             <td>{$order->StatusName}</td>
+                            <td>{if $order->Read == 0}<i class="icon-flag"></i>{/if}</td>
                         </tr>
 
                         {/foreach}
@@ -59,36 +61,36 @@
                 </table>
               </div>
               
-              <div class="span4">
+              <div class="col-md-4">
                   <h3>{_'Stats'} <small><a n:href="SmartPanel:stats">{_'More stats'} <i class="icon-bar-chart"></i></a></small></h3>
                  {control gapiModule:smartPanelMini}
               </div>
               
-              <div class="span11">
+              <div class="col-md-11">
                   {control moduleControl:smartPanelModule 'comment'}
                 
               </div>
           </div>
           <div class="tab-pane" id="account">
               
-            <div class="span7">
+            <div class="col-md-7">
                 <h3><i class="icon-road"></i> {_'Your subscription'} <button class="btn btn-warning"><i class="icon-upload-alt"></i> {_'Upgrade'}</button></h3>
             
-           <div class="span5">
+           <div class="col-md-5">
                 <span>{_'Products'}:</span>
-                <div class="progress progress-info">
-                    <div class="bar" style="width: {$productNumber}%"></div>
+                <div class="progress progress-success">
+                    <div class="progress-bar" style="width: {$productNumber}%"></div>
                 </div>
                 <span>{_'Users'}:</span>
                 <div class="progress progress-success">
-                    <div class="bar" style="width: 40%"></div>
+                    <div class="progress-bar" style="width: 40%"></div>
                 </div>
                 <span>{_'Storage'}:</span>
                 <div class="progress progress-warning">
-                    <div class="bar" style="width: 60%"></div>
+                    <div class="progress-bar" style="width: 60%"></div>
                 </div>
              </div>
-             <div class="span5 alert alert-info">
+             <div class="col-md-5 alert alert-success">
                  <dl class="">
                      <dt><i class="icon-star"></i> {_'Products'}</dt>
                      <dd>{$productNumber} / 100</dd>
@@ -104,11 +106,11 @@
              </div>
             </div>
               
-            <div class="span5">
+            <div class="col-md-5">
             <h3><i class="icon-user"></i> {_'Account Info'}</h3>
             {_'Name'}: {$usr->FirstName}
               </div>
-            <div class="span5">    
+            <div class="col-md-5">    
                 <h3><i class="icon-lock"></i> {_'Change password'}</h3>
              {*control newUserForm*}
                  {control passwordForm}   
@@ -117,11 +119,11 @@
             
           <div class="tab-pane" id="shopinfo">
               <h3>{_'Edit your shop info'}</h3>
-              <div class="span5">
+              <div class="col-md-5">
                   <table n:snippet="shopinfo" class="table table-bordered">
                       <thead>
                         <th>{_'Option'}</th>
-                        <th><i class="icon-info-sign"></i> {_'Change value by clicking'}</th>
+                        <th><i class="icon-success-sign"></i> {_'Change value by clicking'}</th>
                       </thead>
                       <tbody>
 
@@ -134,7 +136,7 @@
                       </tbody>
                   </table>
               </div>
-              <div class="span5">
+              <div class="col-md-5">
               
                   <strong>{_'Upload your logo'}</strong>
                   {control addLogoForm}
@@ -159,7 +161,7 @@
 {/block}
 
 {block sidebar}
- <div class="span2">   
+ <div class="col-md-2">   
     {if $user->isInRole('admin')}
         {control menu:admin}
     {/if}

@@ -1,92 +1,14 @@
-    <div class="container supercontainer container-fluid shopLanguageBar">
-
-   {if $user->isInRole('admin')}
-
-    <div class="span6 visible-desktop visible-tablet">
-
-<div class="btn-group">
-        <a class="btn btn-small pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-screenshot"></i> {_'Shop layout'}
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a n:href="setShopLayout! 'ShopLayout', ''" >Menu+right</a></li>
-            <li><a n:href="setShopLayout! 'ShopLayout', 2" >Menu+left</a></li>
-            <li><a n:href="setShopLayout! 'ShopLayout', 3" >Text+left</a></li>
-            <li><a n:href="setShopLayout! 'ShopLayout', 4" >Text+right</a></li>
-        </ul>
-    </div>
-    
-
-    {ifCurrent Product:product}
-<div class="btn-group">
-        <a class="btn btn-small pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-screenshot"></i> {_'Product layout'}
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a n:href="setShopLayout! 'ProductLayout', 1" >layout 1</a></li>
-            <li><a n:href="setShopLayout! 'ProductLayout', 2" >layout 2</a></li>
-            <li><a n:href="setShopLayout! 'ProductLayout', 3" >layout 3</a></li>
-            <li><a n:href="setShopLayout! 'ProductLayout', 4" >layout 4</a></li>
-        </ul>
-</div>
-
-{/ifCurrent}
-
-{ifCurrent Product:products}
-<div class="btn-group">
-        <a class="btn btn-small pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-screenshot"></i> {_'Products layout'}
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a n:href="setShopLayout! 'ProductMiniLayout', ''" >{_'4 in line'}</a></li>
-            <li><a n:href="setShopLayout! 'ProductMiniLayout', 2" >{_'2 in line'}</a></li>
-            <li><a n:href="setShopLayout! 'ProductMiniLayout', 3" >{_'Singleton'}</a></li>
-            <li><a n:href="setShopLayout! 'ProductMiniLayout', 4" >{_'Big photo'}</a></li>
-        </ul>
-</div>
-
-{/ifCurrent}
-    
-    
-{ifCurrent Homepage:default}
-<div class="btn-group">
-        <a class="btn btn-small pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-screenshot"></i> {_'Homepage layout'}
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a n:href="setShopLayout! 'HomepageLayout', 'default'" >{_'Small slider'}</a></li>
-            <li><a n:href="setShopLayout! 'HomepageLayout', 'homepage-bigslider'" >{_'Big slider'}</a></li>
-            <li><a n:href="setShopLayout! 'HomepageLayout', 'homepage-sidebar'" >{_'Sidebar'}</a></li>
-            <li><a n:href="setShopLayout! 'HomepageLayout', 4" >{_'Big photo'}</a></li>
-        </ul>
-</div>
-        
-<div class="btn-group">
-        <a class="btn btn-small pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="icon-screenshot"></i> {_'Products layout'}
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a n:href="setShopLayout! 'ProductMiniLayout', ''" >{_'4 in line'}</a></li>
-            <li><a n:href="setShopLayout! 'ProductMiniLayout', 2" >{_'2 in line'}</a></li>
-            <li><a n:href="setShopLayout! 'ProductMiniLayout', 3" >{_'Singleton'}</a></li>
-            <li><a n:href="setShopLayout! 'ProductMiniLayout', 4" >{_'Big photo'}</a></li>
-        </ul>
-</div>
-
-{/ifCurrent}
-
-    
-    </div>
-{/if}
- <ul class="inline pull-right .span7">
+    <div class="container supercontainer shopLanguageBar">
+  {if $user->isInRole('admin')}
+ <ul class="list-inline pull-right .col-md-7">
             <li><a n:href="this, lang => br" ><img src="{$basePath}/img/blank.gif" class="flag flag-br" alt="Brazil" /> Português</a></li>
             <li><a n:href="this, lang => en" ><img src="{$basePath}/img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
             <li><a n:href="this, lang => cs" ><img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" /> Česky</a></li>
             <li><a n:href="this, lang => de" ><img src="{$basePath}/img/blank.gif" class="flag flag-de" alt="Deutsch" /> Deutsch</a></li>
         </ul>
+        
+{/if}
+
+{control menu:top} 
+
     </div>

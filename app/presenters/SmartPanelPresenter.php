@@ -104,10 +104,10 @@ class SmartPanelPresenter extends BasePresenter {
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
              if ($statusID !== 0) {
-            $this->flashMessage($message, 'alert alert-info');
+            $this->flashMessage($message, 'alert alert-success');
                }
             else {
-                 $this->flashMessage($message, 'alert alert-error');
+                 $this->flashMessage($message, 'alert alert-danger');
             }
             
             if($this->isAjax()) {
@@ -160,7 +160,7 @@ class SmartPanelPresenter extends BasePresenter {
             $ico = HTML::el('i')->class('icon-ok-sign left');
             $message = HTML::el('span', ' Your password was successfully changed.');
             $message->insert(0, $ico);
-            $this->flashMessage($message, 'alert alert-info');
+            $this->flashMessage($message, 'alert alert-success');
             $this->redirect('SmartPanel:default');
         } catch (NS\AuthenticationException $e) {
             $form->addError('Zadané heslo není správné.');
@@ -214,7 +214,7 @@ class SmartPanelPresenter extends BasePresenter {
             $message = Html::el('span', ' This order wasnt placed, yet. Sorry.');
             $e = Html::el('i')->class('icon-warning-sign left');
             $message->insert(0, $e);
-            $this->flashMessage($message, 'alert');
+            $this->flashMessage($message, 'alert alert-warning');
             $this->presenter->redirect('SmartPanel:Orders');
          }
             
@@ -291,7 +291,7 @@ class SmartPanelPresenter extends BasePresenter {
         $message = Html::el('span', ' Product was sucessfully removed.');
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
-            $this->flashMessage($message, 'alert');
+            $this->flashMessage($message, 'alert alert-success');
         }
         else {
             $message = Html::el('span', ' Cannot delete last product. Would you like to ');
@@ -299,7 +299,7 @@ class SmartPanelPresenter extends BasePresenter {
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
             $message->insert(2, $cancel);
-            $this->flashMessage($message, 'alert');
+            $this->flashMessage($message, 'alert alert-warning');
         }
         $this->redirect('this'); 
         
@@ -437,11 +437,13 @@ class SmartPanelPresenter extends BasePresenter {
         $editForm->setTranslator($this->translator);
         $editForm->addHidden('orderID', $this->orderRow['OrderID']);
         $editForm->addSelect('shipper', 'Shipping:', $shippers)
-                ->setDefaultValue($this->orderRow['Shipping']);
+                ->setDefaultValue($this->orderRow['Shipping'])
+                ->setAttribute('class', 'form-control');
         $editForm->addSelect('payment', 'Payment:', $payment)
-            ->setDefaultValue($this->orderRow['Payment']);
+            ->setDefaultValue($this->orderRow['Payment'])
+                ->setAttribute('class', 'form-control');
         $editForm->addSubmit('edit', 'Edit info')
-                    ->setAttribute('class', 'btn-primary upl')
+                    ->setAttribute('class', 'btn btn-success upl form-control')
                     ->setAttribute('data-loading-text', 'Editing...');
         $editForm->onSuccess[] = $this->editOrderInfoFormSubmitted;
         return $editForm;
@@ -455,7 +457,7 @@ class SmartPanelPresenter extends BasePresenter {
             $message = Html::el('span', ' Order was sucessfully updated!');
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
-            $this->flashMessage($message, 'alert');
+            $this->flashMessage($message, 'alert alert-success');
             $this->redirect('this');
             
         }
@@ -469,13 +471,16 @@ class SmartPanelPresenter extends BasePresenter {
         $editForm->setTranslator($this->translator);
         $editForm->addHidden('orderID', $this->orderRow['OrderID']);
         $editForm->addText('street', 'Street:')
-                ->setDefaultValue($this->orderAddress['Street']);
+                ->setDefaultValue($this->orderAddress['Street'])
+                ->setAttribute('class', 'form-control');
         $editForm->addText('zipcode', 'ZIP:')
-                ->setDefaultValue($this->orderAddress['ZIPCode']);
+                ->setDefaultValue($this->orderAddress['ZIPCode'])
+                ->setAttribute('class', 'form-control');
         $editForm->addText('city', 'City:')
-                ->setDefaultValue($this->orderAddress['City']);
+                ->setDefaultValue($this->orderAddress['City'])
+                ->setAttribute('class', 'form-control');
         $editForm->addSubmit('edit', 'Edit address')
-                    ->setAttribute('class', 'btn-primary upl')
+                    ->setAttribute('class', 'btn btn-success upl form-control')
                     ->setAttribute('data-loading-text', 'Editing...');
         $editForm->onSuccess[] = $this->editOrderAddressFormSubmitted;
         return $editForm;
@@ -489,7 +494,7 @@ class SmartPanelPresenter extends BasePresenter {
             $message = Html::el('span', ' Order address was sucessfully updated!');
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
-            $this->flashMessage($message, 'alert');
+            $this->flashMessage($message, 'alert alert-success');
             $this->redirect('this');
             
         }
@@ -512,10 +517,11 @@ class SmartPanelPresenter extends BasePresenter {
           //  $editProducts->addHidden($product->ProductID, $product->FinalPrice);
          }
         $editProducts->addSelect('product', 'Select Product to add', $products)
-                ->setRequired();
+                ->setRequired()
+                ->setAttribute('class', 'form-control');
         
         $editProducts->addSubmit('add' , 'Add products')
-                ->setAttribute('class', 'btn-primary upl')
+                ->setAttribute('class', 'btn btn-success upl form-control')
                     ->setAttribute('data-loading-text', 'Adding...');
         $editProducts->onSuccess[] = $this->addProductsFormSubmitted;
         return $editProducts;
@@ -527,8 +533,6 @@ class SmartPanelPresenter extends BasePresenter {
          if ($this->getUser()->isInRole('admin')) {
              $pID = $form->values->product;
           
-             dump($pID);
-             exit();
              $this->orderModel->updateOrderProducts($form->values->orderID, $form->values->product,
                      $form->values->$pID,
                      $this->orderRow['Shipping'], 
@@ -540,7 +544,7 @@ class SmartPanelPresenter extends BasePresenter {
             $message = Html::el('span', ' Product was sucessfully added!');
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
-            $this->flashMessage($message, 'alert');
+            $this->flashMessage($message, 'alert alert-success');
             $this->redirect('this');
          }
     }
@@ -553,10 +557,11 @@ class SmartPanelPresenter extends BasePresenter {
         $editProducts->addHidden('orderID', $this->orderRow['OrderID']);
         $editProducts->addHidden('userName', $this->getUser()->getId());
         $editProducts->addTextArea('note', 'Your Note:')
-                ->setRequired();
+                ->setRequired()
+                ->setAttribute('class', 'form-control');
         
         $editProducts->addSubmit('add' , 'Add note')
-                ->setAttribute('class', 'btn-primary upl')
+                ->setAttribute('class', 'btn-success upl form-control')
                     ->setAttribute('data-loading-text', 'Adding...');
         $editProducts->onSuccess[] = $this->addNoteFormSubmitted;
         return $editProducts;
@@ -579,7 +584,7 @@ class SmartPanelPresenter extends BasePresenter {
             $message = Html::el('span', ' Note was sucessfully added!');
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
-            $this->flashMessage($message, 'alert');
+            $this->flashMessage($message, 'alert alert-success');
             $this->redirect('this');
          }
     }
@@ -595,12 +600,13 @@ class SmartPanelPresenter extends BasePresenter {
             
             $order = $this->orderModel->loadOrder($orderid);
                       
-            if($order->Read == 0) { 
+            if($order->Read == 0 || $order->Read == NULL) { 
             $this->template->pros = $this->orderModel->loadOrderProduct($orderid);
+            $this->orderModel->updateOrderRead($orderid, 1);
             }else {
             $this->template->pros = FALSE;
             }
-            $this->orderModel->updateOrderRead($orderid, 1);
+            
             $this->template->products = $this->orderModel->loadOrderProduct($orderid);
             $this->template->order = $order;
             $this->template->statuses = $this->orderModel->loadStatus('');
@@ -779,10 +785,10 @@ class SmartPanelPresenter extends BasePresenter {
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, ' ');
             $message->insert(0, $e);
-            $this->flashMessage($message, 'alert');
+            $this->flashMessage($message, 'alert alert-success');
             
             if($this->isAjax()) {
-                $this->invalidateControl('shipping');
+                $this->invalidateControl('content');
                 $this->invalidateControl('script');
 
                 
@@ -800,16 +806,20 @@ class SmartPanelPresenter extends BasePresenter {
             
             $addForm->addGroup('Create new shipping:');
             $addForm->addText('newShip', 'Shipping name:')
-                    ->setRequired();
+                    ->setRequired()
+                    ->setAttribute('class', 'form-control');
             $addForm->addText('priceShip', 'Shipping price:')
                     ->setRequired()
-                    ->addRule(FORM::FLOAT, 'This has to be a number');
-            $addForm->addText('descShip', 'Description:');
-            $addForm->addText('freeShip', 'Free from:');
+                    ->addRule(FORM::FLOAT, 'This has to be a number')
+                    ->setAttribute('class', 'form-control');
+            $addForm->addText('descShip', 'Description:')
+                    ->setAttribute('class', 'form-control');
+            $addForm->addText('freeShip', 'Free from:')
+                    ->setAttribute('class', 'form-control');
                     //->setDefaultValue(0)
                     //->addRule(FORM::FLOAT, 'This has to be a number.');
             $addForm->addSubmit('add', 'Add Shipping')
-                    ->setAttribute('class', 'upl-add btn btn-primary')
+                    ->setAttribute('class', 'upl-add btn btn-success form-control')
                     ->setAttribute('data-loading-text', 'Adding...');
             $addForm->onSuccess[] = $this->addShippingFormSubmitted;
 
@@ -830,7 +840,7 @@ class SmartPanelPresenter extends BasePresenter {
             $message = HTML::el('span', ' was added sucessfully to your shipping method.');
             $message->insert(0, ' ' . $form->values->newShip);
             $message->insert(0, $ico);
-            $this->flashMessage($message, 'alert success');
+            $this->flashMessage($message, 'alert alert-success');
             $this->redirect('this');
         }
     }
@@ -842,16 +852,20 @@ class SmartPanelPresenter extends BasePresenter {
         $editShip->setTranslator($this->translator);
         $editShip->addText('name', 'Name:')
                 ->setDefaultValue($deliveryID['DeliveryName'])
-                ->setRequired();
+                ->setRequired()
+                ->setAttribute('class', 'form-control');
         $editShip->addText('desc', 'Description:')
-                ->setDefaultValue($deliveryID['DeliveryDescription']);
+                ->setDefaultValue($deliveryID['DeliveryDescription'])
+                ->setAttribute('class', 'form-control');
         $editShip->addText('price', 'Price:')
-                ->setDefaultValue($deliveryID['DeliveryPrice']);
+                ->setDefaultValue($deliveryID['DeliveryPrice'])
+                ->setAttribute('class', 'form-control');
         $editShip->addText('free', 'Free from:')
-                ->setDefaultValue($deliveryID['FreeFromPrice']);
+                ->setDefaultValue($deliveryID['FreeFromPrice'])
+                ->setAttribute('class', 'form-control');
         $editShip->addHidden('deliveryID', $deliveryID['DeliveryID'] );
         $editShip->addSubmit('edit', 'Edit shipping')
-                ->setAttribute('class', 'btn btn-primary upl')
+                ->setAttribute('class', 'btn btn-success upl form-control')
                         ->setAttribute('data-loading-text', 'Saving...');
         $editShip->onSuccess[] = $this->editShippingSubmitted;
         return $editShip;
@@ -866,7 +880,7 @@ class SmartPanelPresenter extends BasePresenter {
             $message = HTML::el('span', ' was added sucessfully updates.');
             $message->insert(0, ' ' . $form->values->name);
             $message->insert(0, $ico);
-            $this->flashMessage($message, 'alert success');
+            $this->flashMessage($message, 'alert alert-success');
             $this->redirect('this');
           }
     }
@@ -911,12 +925,12 @@ class SmartPanelPresenter extends BasePresenter {
     public function handleRemovePay($id) {
        if ($this->getUser()->isInRole('admin')) {
             
-            $this->orderModel->deletePayment($id);
+            $row = $this->orderModel->deletePayment($id);
             $message = Html::el('span', ' was removed.');
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, ' '. $row->PaymentName);
             $message->insert(0, $e);
-            $this->flashMessage($message, 'alert');
+            $this->flashMessage($message, 'alert alert-success');
             
             if($this->isAjax()) {
                 $this->invalidateControl('paymentName-'.$id);
@@ -938,14 +952,16 @@ class SmartPanelPresenter extends BasePresenter {
 
             $addForm->addGroup('Create new payment:');
             $addForm->addText('newPay', 'Payment name:')
-                    ->setRequired();
+                    ->setRequired()
+                    ->setAttribute('class', 'form-control');
             $addForm->addText('pricePay', 'Payment price:')
                     ->setRequired()
+                    ->setAttribute('class', 'form-control')
                     ->addRule(FORM::FLOAT, 'This has to be a number');
                          //->setDefaultValue(0)
                     //->addRule(FORM::FLOAT, 'This has to be a number.');
             $addForm->addSubmit('add', 'Add Payment')
-                    ->setAttribute('class', 'upl-add btn btn-primary')
+                    ->setAttribute('class', 'upl-add btn btn-success form-control')
                     ->setAttribute('data-loading-text', 'Adding...');
             $addForm->onSuccess[] = $this->addPaymentFormSubmitted;
 
@@ -957,14 +973,15 @@ class SmartPanelPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
 
             $this->orderModel->insertPayment($form->values->newPay,
-                                              $form->values->pricePay
+                                              $form->values->pricePay,
+                                              1
                                               );
             
             $ico = HTML::el('i')->class('icon-ok-sign left');
             $message = HTML::el('span', ' was added sucessfully to your payment method.');
             $message->insert(0, ' ' . $form->values->newPay);
             $message->insert(0, $ico);
-            $this->flashMessage($message, 'alert success');
+            $this->flashMessage($message, 'alert alert-success');
             $this->redirect('this');
         }
     }
@@ -976,12 +993,14 @@ class SmartPanelPresenter extends BasePresenter {
         $editPay->setTranslator($this->translator);
         $editPay->addText('name', 'Name:')
                 ->setDefaultValue($paymentID['PaymentName'])
-                ->setRequired();
+                ->setRequired()
+                ->setAttribute('class', 'form-control');
         $editPay->addText('price', 'Price:')
-                ->setDefaultValue($paymentID['PaymentPrice']);
+                ->setDefaultValue($paymentID['PaymentPrice'])
+                ->setAttribute('class', 'form-control');
         $editPay->addHidden('paymentID', $paymentID['PaymentID'] );
         $editPay->addSubmit('edit', 'Edit payment')
-                ->setAttribute('class', 'btn btn-primary upl')
+                ->setAttribute('class', 'btn btn-success upl form-control')
                         ->setAttribute('data-loading-text', 'Saving...');
         $editPay->onSuccess[] = $this->editPaymentSubmitted;
         return $editPay;
@@ -996,7 +1015,7 @@ class SmartPanelPresenter extends BasePresenter {
             $message = HTML::el('span', ' was added sucessfully updates.');
             $message->insert(0, ' ' . $form->values->name);
             $message->insert(0, $ico);
-            $this->flashMessage($message, 'alert success');
+            $this->flashMessage($message, 'alert alert-success');
             $this->redirect('this');
           }
     }
@@ -1015,7 +1034,7 @@ class SmartPanelPresenter extends BasePresenter {
                $message = HTML::el('span', ' was added sucessfully updates.');
                $message->insert(0, ' ' . $content);
                $message->insert(0, $ico);
-               $this->flashMessage($message, 'alert success');
+               $this->flashMessage($message, 'alert alert-success');
                
            }
            if(!$this->isControlInvalid('paymentName-'.$paymentID)){
@@ -1047,7 +1066,7 @@ class SmartPanelPresenter extends BasePresenter {
                $message = HTML::el('span', ' was added sucessfully updates.');
                $message->insert(0, ' ' . $name);
                $message->insert(0, $ico);
-               $this->flashMessage($message, 'alert success');
+               $this->flashMessage($message, 'alert alert-success');
                
            }
            if(!$this->isControlInvalid('paymentPrice-'.$paymentID)){
@@ -1145,7 +1164,7 @@ class SmartPanelPresenter extends BasePresenter {
      */
     
     public function handleRegenerateThumb() {
-        foreach ($this->productModel->loadCatalog('') as $id => $product) {
+        foreach ($this->productModel->loadPhotoAlbum('') as $id => $product) {
             if ($product->PhotoAlbumID) {
                 foreach ($this->productModel->loadPhotoAlbum($product->ProductID) as $id => $photo) {      
                     $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $product->PhotoAlbumID . '/';
@@ -1155,6 +1174,12 @@ class SmartPanelPresenter extends BasePresenter {
 
                     $imgUrl300 = $imgUrl . '300-' . $photo->PhotoURL;
                     $image->save($imgUrl300);
+                    
+                    $image = Image::fromFile($imgUrl . $photo->PhotoURL);
+                    $image->resize(null, 150, Image::SHRINK_ONLY);
+
+                    $imgUrl150 = $imgUrl . '150-' . $photo->PhotoURL;
+                    $image->save($imgUrl150);
 
                     $image = Image::fromFile($imgUrl . $photo->PhotoURL);
                     $image->resize(null, 50, Image::SHRINK_ONLY);
@@ -1166,7 +1191,7 @@ class SmartPanelPresenter extends BasePresenter {
             }
         }
         
-        $this->flashMessage('Thumbs sucessfully regenerated.', 'alert');
+        $this->flashMessage('Thumbs sucessfully regenerated.', 'alert alert-success');
         $this->presenter->redirect("this");
     }
 
@@ -1198,8 +1223,10 @@ class SmartPanelPresenter extends BasePresenter {
         $addLogo->setTranslator($this->translator);
         $addLogo->addUpload('logo', 'Select your logo')
                  ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
-                 ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
-        $addLogo->addSubmit('upload', 'Upload');
+                 ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024)
+                ->setAttribute('class', 'form-control');
+        $addLogo->addSubmit('upload', 'Upload')
+                ->setAttribute('class', 'form-control');
         $addLogo->onSuccess[] = $this->addLogoFormSubmitted;
         return $addLogo;
     }
@@ -1273,8 +1300,7 @@ class SmartPanelPresenter extends BasePresenter {
             $this->usertracking->date = date("Y-m-d H:i:s");
             
             $this->template->usr = $this->getUser()->getIdentity();
-            $this->template->ord = $this->orderModel->countOrder();
-            $this->template->orders = $this->orderModel->loadUnreadOrders();
+            $this->template->orders = $this->orderModel->loadLatestOrders();
             $this->template->settings = $this->shopModel->getShopInfoPublic();
             $this->template->productNumber = $this->productModel->countProducts();
             $this->template->anyVariable = 'any value';
@@ -1323,7 +1349,7 @@ class SmartPanelPresenter extends BasePresenter {
             
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($row->UsersID, 'Vaše objednávka má nový stav ', $template, $adminMail);
+            $mailIT->sendSuperMail($row->UsersID, 'Your order has new status', $template, $adminMail);
     }
 
     protected function sendNoteMail($orderid, $note) {
@@ -1340,7 +1366,7 @@ class SmartPanelPresenter extends BasePresenter {
             $template->note = $note;
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($row->UsersID, 'Zpráva k Vaší objednávce', $template, $adminMail);
+            $mailIT->sendSuperMail($row->UsersID, 'Message about your order', $template, $adminMail);
     }
 }
 

@@ -24,7 +24,6 @@ class ProductPresenter extends BasePresenter {
 
     private $parameters;
     private $edit;
-
     private $filter;
 
     protected function startup() {
@@ -40,7 +39,6 @@ class ProductPresenter extends BasePresenter {
         
         $salt = $this->shopModel->getShopInfo('Salt');
         $this->filter = $this->getSession('filter'.$salt);
-        
         /* Kontrola přihlášení
          * 
          * if (!$this->getUser()->isInRole('admin')) {
@@ -76,7 +74,7 @@ class ProductPresenter extends BasePresenter {
             $e = $photo . $name . $text;
 
             $this->categoryModel->deletePhoto($id);
-            $this->flashMessage($e, 'alert');
+            $this->flashMessage($e, 'alert alert-success');
 
             $this->redirect('Product:products', $id);
         }
@@ -94,7 +92,7 @@ class ProductPresenter extends BasePresenter {
         $cat = $this->categoryModel->loadCategory($catID);
         if (!isset($cat->CategoryName)) {
             $text = $this->translator->translate('Category not available');
-            $this->flashMessage($text, 'alert');
+            $this->flashMessage($text, 'alert alert-warning');
             $this->redirect('Homepage:');
         } else {
         
@@ -111,7 +109,9 @@ class ProductPresenter extends BasePresenter {
 
                 $deleteCategoryForm = $this['deleteCategoryForm'];
                 $deleteCategoryForm->setDefaults(array('catID' => $catID));
-            } 
+            }
+            
+            $pr = $this['product'];
         
         }
     }
@@ -123,7 +123,7 @@ class ProductPresenter extends BasePresenter {
           //  $status = $categoryStatus;
             $text = $this->translator->translate('Category status is now: ');
             $e = $text . $status;
-            $this->flashMessage($e, 'alert');
+            $this->flashMessage($e, 'alert alert-success');
             
             if($this->isAjax()) {
                 $this->invalidateControl('categoryStatus');
@@ -137,7 +137,7 @@ class ProductPresenter extends BasePresenter {
     }
     
     public function handleSetFilter($filter, $sorting) {
-        if($filter === 'price') {
+      if($filter === 'price') {
             $filter = 'price.FinalPrice';
         }
         elseif($filter === 'product') {
@@ -160,7 +160,7 @@ class ProductPresenter extends BasePresenter {
         
             $this->filter->sort = array($filter, $sorting);
             if ($this->isAjax()) {
-                $this->invalidateControl('content');
+                $this->invalidateControl('products');
                 $this->invalidateControl('script');
             }
             else {
@@ -170,6 +170,7 @@ class ProductPresenter extends BasePresenter {
         else{
             $this->redirect('this');
         }
+    
     }
 
     public function createComponentAddProductForm() {
@@ -186,24 +187,24 @@ class ProductPresenter extends BasePresenter {
             $addProduct->addText('name', 'Name:')
                     ->setRequired()
                     ->setAttribute('placeholder', "Enter product name…")
-                    ->setAttribute('class', 'span10');
+                    ->setAttribute('class', 'form-control');
             $addProduct->addText('price', 'Price:')
                     ->setRequired()
                     ->addRule(FORM::FLOAT, 'It has to be a number!')
-                    ->setAttribute('class', 'span10');
+                    ->setAttribute('class', 'form-control');
             $addProduct->addText('amount', 'Amount')
                     ->setDefaultValue('1')
                     ->addRule(FORM::INTEGER, 'It has to be a number!')
                     ->setType('number')
                     ->setRequired()
-                    ->setAttribute('class', 'span7');
+                    ->setAttribute('class', 'form-control');
             $addProduct->addHidden('catID', '');
             $addProduct->addUpload('image', 'Image:')
                     ->addCondition(Form::FILLED)                    
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
             $addProduct->addSubmit('add', 'Add Product')
-                    ->setAttribute('class', 'upl btn btn-primary')
+                    ->setAttribute('class', 'upl btn btn-success form-control')
                     ->setAttribute('data-loading-text', 'Adding...');
             $addProduct->onSuccess[] = $this->addProductFormSubmitted;
             return $addProduct;
@@ -253,7 +254,7 @@ class ProductPresenter extends BasePresenter {
                 $image->save($imgUrl);
             }
             
-            $this->redirect('Product:product', $return[0]);
+            $this->redirect('Product:product', $return[0], $form->values->name);
 
              }
             catch (Exception $e) {
@@ -273,25 +274,25 @@ class ProductPresenter extends BasePresenter {
             $addProduct->addText('name', 'Variant Name:')
                     ->setRequired()
                     ->setAttribute('placeholder', "Enter variant name… (black color, extra charger, etc.)")
-                    ->setAttribute('class', 'span5');
+                    ->setAttribute('class', 'form-control');
             $addProduct->addText('price', 'Price:')
                     ->setRequired()
                     ->setType('number')
                     ->addRule(FORM::FLOAT, 'It has to be a number!')
-                    ->setAttribute('class', 'span5');
+                    ->setAttribute('class', 'form-control');
             $addProduct->addText('amount', 'Amount')
                     ->setDefaultValue('1')
                     ->addRule(FORM::INTEGER, 'It has to be a number!')
                     ->setType('number')
                     ->setRequired()
-                    ->setAttribute('class', 'span5');
+                    ->setAttribute('class', 'form-control');
             $addProduct->addHidden('id', '');
             $addProduct->addUpload('image', 'Image:')
                     ->addCondition(Form::FILLED)                    
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
             $addProduct->addSubmit('add', 'Add Product Variant')
-                    ->setAttribute('class', 'upl btn btn-primary')
+                    ->setAttribute('class', 'upl btn btn-success form-control')
                     ->setAttribute('data-loading-text', 'Adding...');
             $addProduct->onSuccess[] = $this->addProductVariantFormSubmitted;
             return $addProduct;
@@ -345,55 +346,60 @@ class ProductPresenter extends BasePresenter {
     
     
 
-    public function handleDeleteProduct($catID, $id) {
+    public function handleDeleteProduct($id, $catID) {
         if ($this->getUser()->isInRole('admin')) {
-            $this->productModel->updateProduct($id, 'ProductStatusID', 1);
-            $this->redirect('this', $catID);
+            $this->productModel->updateProduct($id, 'ProductStatusID', 0);
+            $this->redirect('Product:products', $catID);
         }
     }
 
     public function handleArchiveProduct($catID, $id) {
         if ($this->getUser()->isInRole('admin')) {
-           $this->productModel->updateProduct($id, 'ProductStatusID', 1);
+           $this->productModel->updateProduct($id, 'ProductStatusID', 0);
             $this->redirect('this', $catID);
         }
     }
     
      public function handleArchiveVariantProduct($varid) {
         if ($this->getUser()->isInRole('admin')) {
-            $this->productModel->updateProduct($varid, 'ProductStatusID', 1);
+            $this->productModel->updateProduct($varid, 'ProductStatusID', 0);
             $this->redirect('this');
         }
     }
     
 
-     public function handleHideProduct($catID, $id) {
+     public function handleHideProduct($id) {
         if ($this->getUser()->isInRole('admin')) {
             
             $this->productModel->hideProduct($id);
+            $this->flashMessage('Product sucessfully hidden', 'alert alert-success');
             
             if($this->isAjax())
             {            
               $this->invalidateControl('products');
+              $this->invalidateControl('productMenu');
               $this->invalidateControl('script');
             }
             
             else {
-              $this->redirect('this', $catID);
+              $this->redirect('this');
             }
         }
     }
 
-    public function handleShowProduct($catID, $id) {
+    public function handleShowProduct($id) {
         if ($this->getUser()->isInRole('admin')) {
             $this->productModel->showProduct($id);
+            $this->flashMessage('Product sucessfully published', 'alert alert-success');
             
             if($this->presenter->isAjax()) {
                 $this->invalidateControl('products');
+                $this->invalidateControl('productMenu');
                 $this->invalidateControl('script');
+                
             }
             else {
-            $this->redirect('this', $catID);
+            $this->redirect('this');
             }
         }
     }
@@ -561,9 +567,10 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             $row = $this->productModel->loadPhoto($photo);
             if (!$row) {
-                $this->flashMessage('There is no photo to delete', 'alert');
+                $this->flashMessage('There is no photo to delete', 'alert alert-warning');
             } else {
 
+                try{
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/' . $row->PhotoURL;
                 if ($imgUrl) {
                     unlink($imgUrl);
@@ -575,18 +582,29 @@ class ProductPresenter extends BasePresenter {
                     unlink($imgUrl);
                 }
 
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/150-' . $row->PhotoURL;
+                if ($imgUrl) {
+                    unlink($imgUrl);
+                }
 
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/300-' . $row->PhotoURL;
                 if ($imgUrl) {
                     unlink($imgUrl);
                 }
 
+                
+
+                $this->productModel->deletePhoto($photo);
+                }
+                catch (Exception $e) {
+                    \Nette\Diagnostics\Debugger::log($e);
+                }
+                
+                
                 $photo = $this->translator->translate('Photo ');
                 $text = $this->translator->translate(' was sucessfully deleted.');
                 $e = $photo . $row->PhotoName . $text;
-
-                $this->productModel->deletePhoto($photo);
-                $this->flashMessage($e, 'alert');
+                $this->flashMessage($e, 'alert alert-success');
             }
 
             $this->redirect('this');
@@ -650,11 +668,11 @@ class ProductPresenter extends BasePresenter {
                $this->categoryModel->updateCategoryDesc($catid, $content);
 
            }
-           if(!$this->isControlInvalid('editDescription')){           
+           if(!$this->isControlInvalid('CatDescription')){           
                $this->payload->edit = $content; //zaslání nové hodnoty do šablony
-               $this->sendPayload();
-               $this->invalidateControl('menu');       
-               $this->invalidateControl('editDescription'); //invalidace snipetu
+               $this->sendPayload();     
+               $this->invalidateControl('CatDescription');
+               $this->invalidateControl('script'); //invalidace snipetu
            }
            else {
             $this->redirect('this');
@@ -727,11 +745,18 @@ class ProductPresenter extends BasePresenter {
             // load all products
             $this->template->products = $this->productModel->loadCatalogAdmin($catID, $this->filter->sort);
             $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
+            $this->template->subcategories = $this->categoryModel->loadChildCategoryListAdmin($catID);
         } else {
             // load published products
-            $prod = $this->productModel->loadCatalog($catID, $this->filter->sort);
-            $this->template->products = $prod;
-            $this->template->categories = $this->categoryModel->loadCategoryList();
+            $this->template->products = $this->productModel->loadCatalog($catID, $this->filter->sort);
+            $categories = $this->categoryModel->loadChildCategoryList($catID);
+
+            if ($categories){
+            $this->template->subcategories = $categories;
+            }
+            else{
+                $this->template->subcategories = NULL;
+            }
         }
 
         $this->template->slider = NULL;
@@ -754,7 +779,7 @@ class ProductPresenter extends BasePresenter {
         $row = $this->productModel->loadProduct($id);
         if (!$row) {
             $text = $this->translator->translate('Product not available');
-            $this->flashMessage($text, 'alert');
+            $this->flashMessage($text, 'alert alert-warning');
             $this->redirect('Homepage:');
         } else {
  
@@ -795,7 +820,22 @@ class ProductPresenter extends BasePresenter {
     }
 
 
-    
+    public function handleCoverPhoto($id, $photo) {
+        if ($this->presenter->getUser()->isInRole('admin')) {
+            $row = $this->productModel->loadPhoto($photo);
+            if (!$row) {
+                $this->flashMessage('There is no photo to set as cover', 'alert');
+            } else {
+                $this->productModel->updateCoverPhoto($id, $photo);
+                $e = 'Photo ' . $row->PhotoName . ' was sucessfully set as COVER.';
+
+                $this->productModel->coverPhoto($id);
+                $this->flashMessage($e, 'alert');
+            }
+
+            $this->redirect('Product:product', $id);
+        }
+    }
 
 
     public function createComponentAddPhotoForm() {
@@ -807,11 +847,10 @@ class ProductPresenter extends BasePresenter {
             $addPhoto->addHidden('albumID', '');
             $addPhoto->addHidden('productID', '');
             $addPhoto->addUpload('image', 'Photo:')
-                    ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
-                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024)
-                    ->setAttribute('class', 'span7');
+                    ->addRule(FORM::IMAGE, 'You can upload only JPG, PNG a GIF')
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Max 2MB', 6400 * 1024);
             $addPhoto->addSubmit('add', 'Add Photo')
-                    ->setAttribute('class', 'btn-primary upl span4')
+                    ->setAttribute('class', 'btn-primary upl col-md-3')
                     ->setAttribute('data-loading-text', 'Uploading...');
             $addPhoto->onSuccess[] = $this->addProductPhotoFormSubmitted;
             return $addPhoto;
@@ -860,7 +899,7 @@ class ProductPresenter extends BasePresenter {
                 $e = HTML::el('span', $photo . $form->values->image->name . '' . $message);
                 $ico = HTML::el('i')->class('icon-ok-sign left');
                 $e->insert(0, $ico);
-                $this->flashMessage($e, 'alert');
+                $this->flashMessage($e, 'alert alert-success');
             }
 
             $this->redirect('this');
@@ -913,7 +952,7 @@ class ProductPresenter extends BasePresenter {
                 $e = HTML::el('span', $photo . $form->values->image->name . '' . $message);
                 $ico = HTML::el('i')->class('icon-ok-sign left');
                 $e->insert(0, $ico);
-                $this->flashMessage($e, 'alert');
+                $this->flashMessage($e, 'alert alert-success');
             }
 
             $this->redirect('this');
@@ -925,16 +964,16 @@ class ProductPresenter extends BasePresenter {
             $askForm = new Nette\Application\UI\Form;
             $askForm->setTranslator($this->translator);
             $askForm->addTextArea('note', 'Question:', 7, 4)
-                    ->setAttribute('class', 'span11')
+                    ->setAttribute('class', 'form-control')
                     ->setRequired('Please enter your question.');
             $askForm->addText('email', 'Email:')
                     ->setEmptyValue('@')
                     ->addRule(Form::EMAIL, 'Would you fill your email, please?')
                     ->setRequired('Please fill your email.')
-                    ->setAttribute('class', 'span11');
+                    ->setAttribute('class', 'form-control');
             $askForm->addHidden('name', '');
             $askForm->addSubmit('ask', 'Ask')
-                    ->setAttribute('class', 'btn btn-primary span5')
+                    ->setAttribute('class', 'btn btn-primary form-control ')
                     ->setHtmlId('askButton')
                     ->setAttribute('data-loading-text', 'Asking...');
             $askForm->onSuccess[] = $this->askFormSubmitted;
@@ -1096,23 +1135,8 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
+     
    
-
-    /*
-     * Adding product photos
-     */
-
-   
-
-    
-    protected function createComponentProduct() {
-        $productControl = new productControl();
-        $productControl->setTranslator($this->translator);
-        $productControl->setProduct($this->productModel);
-        $productControl->setCategory($this->categoryModel);
-        $productControl->setShop($this->shopModel);
-        return $productControl;
-    }
     
     protected function createComponentVariantControl() {
         $variant = new variantControl();
@@ -1158,6 +1182,7 @@ class ProductPresenter extends BasePresenter {
             $album = $album->PhotoAlbumID;
         }
        
+                $this->template->pieces = $this->productModel->loadTotalPieces($id);
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->photo = $this->productModel->loadCoverPhoto($id);
         $this->template->albumID = $album;
@@ -1195,7 +1220,7 @@ class ProductPresenter extends BasePresenter {
             $template->product = $name; 
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($contactMail, 'Nový dotaz k produktu ' . $name, $template, $email);
+            $mailIT->sendSuperMail($contactMail, 'New question about product ' . $name, $template, $email);
     }
 
 }

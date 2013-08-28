@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-06-18 14:35:18
+# Created: 2013-08-24 20:15:39
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-06-18 14:35+0200\n"
+"PO-Revision-Date: 2013-08-24 20:15+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -53,6 +53,9 @@ msgstr "Back to SmartPanel"
 
 msgid "Buy"
 msgstr "Buy"
+
+msgid "Cancel"
+msgstr "Cancel"
 
 msgid "Cart"
 msgstr "Cart"
@@ -166,7 +169,7 @@ msgid "It has to be a number!"
 msgstr "Zde musí být číslo!"
 
 msgid "Item price"
-msgstr "Cena za ks"
+msgstr "Item price"
 
 msgid "Jak cokoliv"
 msgstr "Other"
@@ -420,103 +423,157 @@ msgstr "Find out more"
 msgid "Změnit heslo"
 msgstr "Změnit heslo"
 
-msgid "Cancel"
-msgstr "Cancel"
+msgid "Shop layout"
+msgstr ""
+
+msgid "Hello"
+msgstr ""
+
+msgid "Menu"
+msgstr ""
 
 msgid "Choose Brand"
+msgstr ""
+
+msgid "Blog and Gallery"
 msgstr ""
 
 msgid "Blog"
 msgstr ""
 
-msgid "Categories"
+msgid "Photo gallery"
 msgstr ""
 
-msgid "Check news on blog"
+msgid "Contact"
 msgstr ""
 
-msgid "Read more"
+msgid "ADD Text"
 msgstr ""
 
-msgid "Nové heslo musí mít alespoň %d znaků."
-msgstr ""
-
-msgid "Nové heslo je nutné zadat ještě jednou pro potvrzení."
-msgstr ""
-
-msgid "Zadná hesla se musejí shodovat."
-msgstr ""
-
-msgid "Unpublish category"
+msgid "Add Post"
 msgstr ""
 
 msgid "Feature category!"
 msgstr ""
 
-msgid "Set Catalog Layout"
+msgid "Read more"
 msgstr ""
 
-msgid "Left!"
-msgstr ""
-
-msgid "Right"
-msgstr ""
-
-msgid "Delete photo"
+msgid "Add Category"
 msgstr ""
 
 msgid "Please fill in these information"
 msgstr ""
 
-msgid "Impress: "
-msgstr ""
-
-msgid "Smartphones-"
-msgstr ""
-
 msgid "Static Text"
+msgstr ""
+
+msgid "Smartphones"
+msgstr ""
+
+msgid "Ta-ble-ty"
 msgstr ""
 
 msgid "Washmashine"
 msgstr ""
 
-msgid "Samsung"
-msgstr ""
-
-msgid "Sony"
-msgstr ""
-
-msgid "Apple"
-msgstr ""
-
-msgid "Lenovo"
-msgstr ""
-
-msgid "Nokia"
-msgstr ""
-
 msgid "Close without adding"
 msgstr ""
 
-msgid "Are you sure to delete this category?"
+msgid "Add Text"
 msgstr ""
 
-msgid "If so, choose where to move products!"
+msgid "Create"
 msgstr ""
 
-msgid "Move products to category:"
+msgid "Homepage layout"
 msgstr ""
 
-msgid "Select photo and click Add photo"
+msgid "Small slider"
 msgstr ""
 
-msgid "Edit your description and click Save desccription."
+msgid "Big slider"
 msgstr ""
 
-msgid "Impress:"
+msgid "Sidebar"
 msgstr ""
 
-msgid "Close without saving"
+msgid "Big photo"
+msgstr ""
+
+msgid "Products layout"
+msgstr ""
+
+msgid "4 in line"
+msgstr ""
+
+msgid "2 in line"
+msgstr ""
+
+msgid "Singleton"
+msgstr ""
+
+msgid "LAST"
+msgstr ""
+
+msgid "HOT"
+msgstr ""
+
+msgid "SALE"
+msgstr ""
+
+msgid "SOLD OUT"
+msgstr ""
+
+msgid "Categories"
+msgstr ""
+
+msgid "Product layout"
+msgstr ""
+
+msgid "You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?"
+msgstr ""
+
+msgid "Choose Category"
+msgstr ""
+
+msgid "Choose Producer"
+msgstr ""
+
+msgid "Info"
+msgstr ""
+
+msgid "Spec"
+msgstr ""
+
+msgid "Ask"
+msgstr ""
+
+msgid "We will respond as soon as possible."
+msgstr ""
+
+msgid "Question:"
+msgstr ""
+
+msgid "Please enter your question."
+msgstr ""
+
+msgid "Email:"
+msgstr ""
+
+msgid "Would you fill your email, please?"
+msgstr ""
+
+msgid "Please fill your email."
+msgstr ""
+
+msgid "@"
+msgstr ""
+
+msgid "Finish Editing Price"
+msgstr ""
+
+msgid "Discount"
 msgstr ""
 
 msgid "This has to be a number."
@@ -525,22 +582,28 @@ msgstr ""
 msgid "It should be less then price"
 msgstr ""
 
+msgid "Gallery"
+msgstr ""
+
+msgid "Video"
+msgstr ""
+
+msgid "Review"
+msgstr ""
+
+msgid "Docs"
+msgstr ""
+
+msgid "Please fill document name"
+msgstr ""
+
+msgid "Edit Specification"
+msgstr ""
+
 msgid "Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow."
 msgstr ""
 
 msgid "Select one of already created:"
-msgstr ""
-
-msgid "Weight"
-msgstr ""
-
-msgid "Display size"
-msgstr ""
-
-msgid "Display resolution"
-msgstr ""
-
-msgid "Battery"
 msgstr ""
 
 msgid "Enter Value:"
@@ -561,54 +624,1024 @@ msgstr ""
 msgid "\""
 msgstr ""
 
+msgid "Close without saving"
+msgstr ""
+
+msgid "Click to edit ..."
+msgstr ""
+
+msgid "Publish product"
+msgstr ""
+
+msgid "Archive product"
+msgstr ""
+
+msgid "Information about product"
+msgstr ""
+
+msgid "Delete image"
+msgstr ""
+
+msgid "Contact us"
+msgstr ""
+
+msgid "Do you have any question? Ask us! We will be happy."
+msgstr ""
+
+msgid "Write to us"
+msgstr ""
+
+msgid "What would you like to know:"
+msgstr ""
+
+msgid "Edit this text and heading by clicking"
+msgstr ""
+
+msgid "Check news on blog"
+msgstr ""
+
+msgid "You are logged in as admin. You can simply edit this category by clicking on Title, Description or panel bellow etc. More info?"
+msgstr ""
+
+msgid "Unpublish category"
+msgstr ""
+
+msgid "Parent Category"
+msgstr ""
+
+msgid "--No parent--"
+msgstr ""
+
+msgid "Delete photo"
+msgstr ""
+
+msgid "Subcategories"
+msgstr ""
+
+msgid "Best sellers"
+msgstr ""
+
+msgid "Featured"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
+msgid "Sale"
+msgstr ""
+
+msgid "In Stock"
+msgstr ""
+
+msgid "Add new product"
+msgstr ""
+
+msgid "Enter product name…"
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Enter this basic info. All other can be added later."
+msgstr ""
+
+msgid "Hide product"
+msgstr ""
+
+msgid "Feature product"
+msgstr ""
+
+msgid "Add category photo"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Are you sure to delete this category?"
+msgstr ""
+
+msgid "If so, choose where to move products!"
+msgstr ""
+
+msgid "Move products to category:"
+msgstr ""
+
+msgid "Click to edit"
+msgstr ""
+
+msgid "Add Category Photo"
+msgstr ""
+
+msgid "Shop info"
+msgstr ""
+
+msgid "Your subscription"
+msgstr ""
+
+msgid "Upgrade"
+msgstr ""
+
+msgid "Users"
+msgstr ""
+
+msgid "Storage"
+msgstr ""
+
+msgid "Account Info"
+msgstr ""
+
+msgid "Change password"
+msgstr ""
+
+msgid "Nové heslo musí mít alespoň %d znaků."
+msgstr ""
+
+msgid "Nové heslo je nutné zadat ještě jednou pro potvrzení."
+msgstr ""
+
+msgid "Zadná hesla se musejí shodovat."
+msgstr ""
+
+msgid "Edit your shop info"
+msgstr ""
+
+msgid "Option"
+msgstr ""
+
+msgid "Change value by clicking"
+msgstr ""
+
+msgid "Upload your logo"
+msgstr ""
+
+msgid "Select your logo"
+msgstr ""
+
+msgid "Upload"
+msgstr ""
+
+msgid "Generate Sitemap"
+msgstr ""
+
+msgid "Click to Generate!"
+msgstr ""
+
+msgid "Generate XML feed"
+msgstr ""
+
+msgid "Download XML feed"
+msgstr ""
+
+msgid "Click to Download!"
+msgstr ""
+
+msgid "Order administration"
+msgstr ""
+
+msgid "Edit Order Info"
+msgstr ""
+
+msgid "Edit Products"
+msgstr ""
+
+msgid "Cancel order"
+msgstr ""
+
+msgid "Download INVOICE"
+msgstr ""
+
+msgid "Note"
+msgstr ""
+
+msgid "Add note"
+msgstr ""
+
+msgid "EDIT shipping and payment by Double-clicking."
+msgstr ""
+
+msgid "EDIT name and phone by Double-clicking."
+msgstr ""
+
+msgid "EDIT address by Double-clicking."
+msgstr ""
+
+msgid "Edit order info and click save"
+msgstr ""
+
+msgid "Shipping:"
+msgstr ""
+
+msgid "Personal pick up | 0,-"
+msgstr ""
+
+msgid "Czech postal service | 99,-"
+msgstr ""
+
+msgid "Central Warehouse | 0,-"
+msgstr ""
+
+msgid "Payment:"
+msgstr ""
+
+msgid "Cash | 0,-"
+msgstr ""
+
+msgid "Bankwire | 50,-"
+msgstr ""
+
+msgid "Edit info"
+msgstr ""
+
+msgid "Select Product to add"
+msgstr ""
+
+msgid "Samsung Galaxy Nexus 2 RR"
+msgstr ""
+
+msgid "Samsung Chromebooks"
+msgstr ""
+
+msgid "Samsung Galaxy S4"
+msgstr ""
+
+msgid "Nokia 3310 MM"
+msgstr ""
+
+msgid "Nokia 3310"
+msgstr ""
+
+msgid "Apple iPad"
+msgstr ""
+
+msgid "Lenovo ThinkPad Tablet 2 64GB WiFi 3G 3679-4HG"
+msgstr ""
+
+msgid "Lenovo ThinkPad Edge E130 Arctic Blue 3358-8CG"
+msgstr ""
+
+msgid "Sony Ericsson Xperia Mini"
+msgstr ""
+
+msgid "Spange Bob"
+msgstr ""
+
+msgid "Asus Vivobook"
+msgstr ""
+
+msgid "Thinkpad"
+msgstr ""
+
+msgid "L9"
+msgstr ""
+
+msgid "Add products"
+msgstr ""
+
+msgid "Do you really want to CANCEL this order?"
+msgstr ""
+
+msgid "Add Note"
+msgstr ""
+
+msgid "Add any note to this order"
+msgstr ""
+
+msgid "Your Note:"
+msgstr ""
+
+msgid "Your cart"
+msgstr ""
+
+msgid "Here you can complete your order. Just fill fields bellow."
+msgstr ""
+
+msgid "Product"
+msgstr ""
+
+msgid "pcs"
+msgstr ""
+
+msgid "Continue your Order"
+msgstr ""
+
+msgid "Choose your delivery option"
+msgstr ""
+
+msgid "by post/delivery service"
+msgstr ""
+
+msgid "personal pick up"
+msgstr ""
+
+msgid "Selected shipping:"
+msgstr ""
+
+msgid "not selected"
+msgstr ""
+
+msgid "Fill contact information"
+msgstr ""
+
+msgid "Would you fill your name, please?"
+msgstr ""
+
+msgid "Phone:"
+msgstr ""
+
+msgid "Street:"
+msgstr ""
+
+msgid "City:"
+msgstr ""
+
+msgid "ZIP:"
+msgstr ""
+
+msgid "Select Payment method"
+msgstr ""
+
+msgid "Please select Payment method"
+msgstr ""
+
+msgid "Finish your order"
+msgstr ""
+
+msgid "Checkout"
+msgstr ""
+
+msgid "Read Terms"
+msgstr ""
+
+msgid "I accept Terms and condition."
+msgstr ""
+
+msgid "Note:"
+msgstr ""
+
+msgid "Vypršel časový limit, odešlete formulář znovu"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Thank you for your order!"
+msgstr ""
+
+msgid "We are currenty procesing your order. On this page you can see all info about
+    your order, including current progress."
+msgstr ""
+
+msgid "Questions?"
+msgstr ""
+
+msgid "Ask anything!"
+msgstr ""
+
+msgid "Your secret code:"
+msgstr ""
+
+msgid "Please enter your secret code from mail"
+msgstr ""
+
+msgid "New functions"
+msgstr ""
+
+msgid "Latest Comments & Reviews"
+msgstr ""
+
+msgid "Total Payment"
+msgstr ""
+
+msgid "Czech postal service | 40,-"
+msgstr ""
+
+msgid "DPD | 160,-"
+msgstr ""
+
+msgid "Zásilkovna | 39,-"
+msgstr ""
+
+msgid "cz - Beroun | 39,-"
+msgstr ""
+
+msgid "cz - Brno, Jiráskova | 39,-"
+msgstr ""
+
+msgid "cz - Brno, Komín - Závist | 39,-"
+msgstr ""
+
+msgid "cz - Brno, Královo Pole | 39,-"
+msgstr ""
+
+msgid "cz - Brno, Mendlovo náměstí | 39,-"
+msgstr ""
+
+msgid "cz - Brno, Merhautova | 39,-"
+msgstr ""
+
+msgid "cz - Brno, Nové Sady | 39,-"
+msgstr ""
+
+msgid "cz - České Budějovice, Otakarova | 39,-"
+msgstr ""
+
+msgid "cz - Frýdek-Místek | 39,-"
+msgstr ""
+
+msgid "cz - Havířov, Ostravská | 39,-"
+msgstr ""
+
+msgid "cz - Holešov | 39,-"
+msgstr ""
+
+msgid "cz - Hradec Králové | 39,-"
+msgstr ""
+
+msgid "cz - Chrudim | 39,-"
+msgstr ""
+
+msgid "cz - Jihlava | 39,-"
+msgstr ""
+
+msgid "cz - Karlovy Vary | 39,-"
+msgstr ""
+
+msgid "cz - Kladno | 39,-"
+msgstr ""
+
+msgid "cz - Kolín | 39,-"
+msgstr ""
+
+msgid "cz - Kroměříž | 39,-"
+msgstr ""
+
+msgid "cz - Kutná Hora | 39,-"
+msgstr ""
+
+msgid "cz - Liberec, 5. května | 39,-"
+msgstr ""
+
+msgid "cz - Mladá Boleslav | 39,-"
+msgstr ""
+
+msgid "cz - Most, J. Skupy | 39,-"
+msgstr ""
+
+msgid "cz - Náchod | 39,-"
+msgstr ""
+
+msgid "cz - Olomouc, centrum | 39,-"
+msgstr ""
+
+msgid "cz - Olomouc, Nová Ulice | 39,-"
+msgstr ""
+
+msgid "cz - Ostrava, Mariánské Hory | 39,-"
+msgstr ""
+
+msgid "cz - Ostrava, Nádražní | 39,-"
+msgstr ""
+
+msgid "cz - Ostrava, Poruba | 39,-"
+msgstr ""
+
+msgid "cz - Pardubice | 39,-"
+msgstr ""
+
+msgid "cz - Písek | 39,-"
+msgstr ""
+
+msgid "cz - Plzeň, u centra Plaza | 39,-"
+msgstr ""
+
+msgid "cz - Praha 1, Klimentská | 39,-"
+msgstr ""
+
+msgid "cz - Praha 1, Národní třída | 39,-"
+msgstr ""
+
+msgid "cz - Praha 10, Starostrašnická | 39,-"
+msgstr ""
+
+msgid "cz - Praha 14, Černý Most | 39,-"
+msgstr ""
+
+msgid "cz - Praha 2, Hlavní nádraží | 39,-"
+msgstr ""
+
+msgid "cz - Praha 3, Vinohrady | 39,-"
+msgstr ""
+
+msgid "cz - Praha 3, Želivského | 39,-"
+msgstr ""
+
+msgid "cz - Praha 4, Braník | 39,-"
+msgstr ""
+
+msgid "cz - Praha 4, Pražského Povstání | 39,-"
+msgstr ""
+
+msgid "cz - Praha 4, U Vyšehradu | 39,-"
+msgstr ""
+
+msgid "cz - Praha 5, Smíchovské nádraží | 39,-"
+msgstr ""
+
+msgid "cz - Praha 6, Evropská | 39,-"
+msgstr ""
+
+msgid "cz - Praha 6, Hradčanská | 39,-"
+msgstr ""
+
+msgid "cz - Praha 6, Řepy | 39,-"
+msgstr ""
+
+msgid "cz - Praha 7, Jateční | 39,-"
+msgstr ""
+
+msgid "cz - Praha 8,  Florenc | 39,-"
+msgstr ""
+
+msgid "cz - Praha 8, Ládví | 39,-"
+msgstr ""
+
+msgid "cz - Praha 8, Sokolovská | 39,-"
+msgstr ""
+
+msgid "cz - Praha 9, Hloubětín | 39,-"
+msgstr ""
+
+msgid "cz - Praha 9, Ocelářská (Depo) | 39,-"
+msgstr ""
+
+msgid "cz - Rakovník | 39,-"
+msgstr ""
+
+msgid "cz - Rudná | 39,-"
+msgstr ""
+
+msgid "cz - Teplice, Masarykova | 39,-"
+msgstr ""
+
+msgid "cz - Trutnov | 39,-"
+msgstr ""
+
+msgid "cz - Třebíč | 39,-"
+msgstr ""
+
+msgid "cz - Třinec | 39,-"
+msgstr ""
+
+msgid "cz - Uherské Hradiště | 39,-"
+msgstr ""
+
+msgid "cz - Uherský Brod | 39,-"
+msgstr ""
+
+msgid "cz - Ústí nad Labem, Revoluční | 39,-"
+msgstr ""
+
+msgid "cz - Vyškov | 39,-"
+msgstr ""
+
+msgid "cz - Zlín, T. G. Masaryka | 39,-"
+msgstr ""
+
+msgid "cz - Znojmo | 39,-"
+msgstr ""
+
+msgid "cz - Žatec | 39,-"
+msgstr ""
+
+msgid "de - Zittau (DE) | 39,-"
+msgstr ""
+
+msgid "sk - Banská Bystrica, Švermova | 39,-"
+msgstr ""
+
+msgid "sk - Banská Bystrica, Tajovského | 39,-"
+msgstr ""
+
+msgid "sk - Bratislava, Cyprichová | 39,-"
+msgstr ""
+
+msgid "sk - Bratislava, Petržalka | 39,-"
+msgstr ""
+
+msgid "sk - Bratislava, Podunajské Biskupice | 39,-"
+msgstr ""
+
+msgid "sk - Bratislava, Vajnorská | 39,-"
+msgstr ""
+
+msgid "sk - Dunajská Streda | 39,-"
+msgstr ""
+
+msgid "sk - Galanta | 39,-"
+msgstr ""
+
+msgid "sk - Komárno | 39,-"
+msgstr ""
+
+msgid "sk - Košice, Toryská | 39,-"
+msgstr ""
+
+msgid "sk - Liptovský Mikuláš | 39,-"
+msgstr ""
+
+msgid "sk - Martin | 39,-"
+msgstr ""
+
+msgid "sk - Nitra, Mlynská | 39,-"
+msgstr ""
+
+msgid "sk - Prešov | 39,-"
+msgstr ""
+
+msgid "sk - Ružomberok | 39,-"
+msgstr ""
+
+msgid "sk - Spišská Nová Ves | 39,-"
+msgstr ""
+
+msgid "sk - Trenčín | 39,-"
+msgstr ""
+
+msgid "sk - Trnava | 39,-"
+msgstr ""
+
+msgid "sk - Žilina, Rosinská | 39,-"
+msgstr ""
+
+msgid "Nokia 3310 "
+msgstr ""
+
+msgid "What are you looking for?"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Add variant"
+msgstr ""
+
+msgid "Variant"
+msgstr ""
+
+msgid "from"
+msgstr ""
+
+msgid "Set as COVER image"
+msgstr ""
+
+msgid "Delete document"
+msgstr ""
+
+msgid "To remove this module visit"
+msgstr ""
+
+msgid "SmartPanel"
+msgstr ""
+
+msgid "Title:"
+msgstr ""
+
+msgid "Your name:"
+msgstr ""
+
+msgid "Add Review"
+msgstr ""
+
+msgid "Manage product variants"
+msgstr ""
+
+msgid "Add product variants"
+msgstr ""
+
+msgid "Delete variants"
+msgstr ""
+
+msgid "Here you can add new product variant."
+msgstr ""
+
+msgid "Variant Name:"
+msgstr ""
+
+msgid "Add Product Variant"
+msgstr ""
+
+msgid "Manage and delete variants."
+msgstr ""
+
+msgid "Product stats"
+msgstr ""
+
+msgid "Total revenue"
+msgstr ""
+
+msgid "Items per purchase"
+msgstr ""
+
+msgid "Total sell"
+msgstr ""
+
 msgid "Publish category"
-msgstr ""
-
-msgid "Here you can edit all Spec assigned to this product. Edit values and then click Save Spec bellow."
-msgstr ""
-
-msgid "Check all specification you want to delete and then click Delete specs bellow."
 msgstr ""
 
 msgid "Cellphones"
 msgstr ""
 
-msgid "Tablet"
+msgid "Category status is now: "
 msgstr ""
 
-msgid "Cellphonesss<small> A mobile phone (also know"
+msgid "Manage variants"
 msgstr ""
 
-msgid "Cellphonesss&lt;small&gt; A mobile phone (als"
+msgid "Variant Name"
 msgstr ""
 
-msgid "Cellphes<small> ahoooj </small>"
+msgid "Options"
 msgstr ""
 
-msgid "Cellphes"
+msgid "We will reply as soon as possible."
 msgstr ""
 
-msgid "Cellph"
+msgid " was successfully added to your cart. "
 msgstr ""
 
-msgid "Cellphone<small> ahoooj </small>"
+msgid "Proceed to checkout "
 msgstr ""
 
-msgid "Cellphon"
+msgid "You can upload only JPG, PNG a GIF"
 msgstr ""
 
-msgid "Cellphoggn<small> ahoooj </small>"
+msgid "Max 2MB"
 msgstr ""
 
-msgid "Cel"
+msgid "-- select shipping --"
 msgstr ""
 
-msgid "Cellll<small> ahoooj </small>"
+msgid "Nejlevnější delivery | 19,-"
 msgstr ""
 
-msgid "Cellphone;small&gt; ahoooj &lt;/small&gt;<sma"
+msgid "Zásilkovna | 49,-"
 msgstr ""
 
-msgid "Cellphonesss<small> ahoooj </small>"
+msgid "cz - Beroun | 49,-"
+msgstr ""
+
+msgid "cz - Brno, Jiráskova | 49,-"
+msgstr ""
+
+msgid "cz - Brno, Komín - Závist | 49,-"
+msgstr ""
+
+msgid "cz - Brno, Královo Pole | 49,-"
+msgstr ""
+
+msgid "cz - Brno, Mendlovo náměstí | 49,-"
+msgstr ""
+
+msgid "cz - Brno, Merhautova | 49,-"
+msgstr ""
+
+msgid "cz - Brno, Nové Sady | 49,-"
+msgstr ""
+
+msgid "cz - České Budějovice, Otakarova | 49,-"
+msgstr ""
+
+msgid "cz - Frýdek-Místek | 49,-"
+msgstr ""
+
+msgid "cz - Havířov, Ostravská | 49,-"
+msgstr ""
+
+msgid "cz - Holešov | 49,-"
+msgstr ""
+
+msgid "cz - Hradec Králové | 49,-"
+msgstr ""
+
+msgid "cz - Chrudim | 49,-"
+msgstr ""
+
+msgid "cz - Jihlava | 49,-"
+msgstr ""
+
+msgid "cz - Karlovy Vary | 49,-"
+msgstr ""
+
+msgid "cz - Kladno | 49,-"
+msgstr ""
+
+msgid "cz - Kolín | 49,-"
+msgstr ""
+
+msgid "cz - Kroměříž | 49,-"
+msgstr ""
+
+msgid "cz - Kutná Hora | 49,-"
+msgstr ""
+
+msgid "cz - Liberec, 5. května | 49,-"
+msgstr ""
+
+msgid "cz - Mladá Boleslav | 49,-"
+msgstr ""
+
+msgid "cz - Most, J. Skupy | 49,-"
+msgstr ""
+
+msgid "cz - Náchod | 49,-"
+msgstr ""
+
+msgid "cz - Olomouc, centrum | 49,-"
+msgstr ""
+
+msgid "cz - Olomouc, Nová Ulice | 49,-"
+msgstr ""
+
+msgid "cz - Ostrava, Mariánské Hory | 49,-"
+msgstr ""
+
+msgid "cz - Ostrava, Nádražní | 49,-"
+msgstr ""
+
+msgid "cz - Ostrava, Poruba | 49,-"
+msgstr ""
+
+msgid "cz - Pardubice | 49,-"
+msgstr ""
+
+msgid "cz - Písek | 49,-"
+msgstr ""
+
+msgid "cz - Plzeň, u centra Plaza | 49,-"
+msgstr ""
+
+msgid "cz - Praha 1, Klimentská | 49,-"
+msgstr ""
+
+msgid "cz - Praha 1, Národní třída | 49,-"
+msgstr ""
+
+msgid "cz - Praha 10, Starostrašnická | 49,-"
+msgstr ""
+
+msgid "cz - Praha 14, Černý Most | 49,-"
+msgstr ""
+
+msgid "cz - Praha 2, Hlavní nádraží | 49,-"
+msgstr ""
+
+msgid "cz - Praha 3, Vinohrady | 49,-"
+msgstr ""
+
+msgid "cz - Praha 3, Želivského | 49,-"
+msgstr ""
+
+msgid "cz - Praha 4, Braník | 49,-"
+msgstr ""
+
+msgid "cz - Praha 4, Pražského Povstání | 49,-"
+msgstr ""
+
+msgid "cz - Praha 4, U Vyšehradu | 49,-"
+msgstr ""
+
+msgid "cz - Praha 5, Smíchovské nádraží | 49,-"
+msgstr ""
+
+msgid "cz - Praha 6, Evropská | 49,-"
+msgstr ""
+
+msgid "cz - Praha 6, Hradčanská | 49,-"
+msgstr ""
+
+msgid "cz - Praha 6, Řepy | 49,-"
+msgstr ""
+
+msgid "cz - Praha 7, Jateční | 49,-"
+msgstr ""
+
+msgid "cz - Praha 8,  Florenc | 49,-"
+msgstr ""
+
+msgid "cz - Praha 8, Ládví | 49,-"
+msgstr ""
+
+msgid "cz - Praha 8, Sokolovská | 49,-"
+msgstr ""
+
+msgid "cz - Praha 9, Hloubětín | 49,-"
+msgstr ""
+
+msgid "cz - Praha 9, Ocelářská (Depo) | 49,-"
+msgstr ""
+
+msgid "cz - Rakovník | 49,-"
+msgstr ""
+
+msgid "cz - Rudná | 49,-"
+msgstr ""
+
+msgid "cz - Teplice, Masarykova | 49,-"
+msgstr ""
+
+msgid "cz - Trutnov | 49,-"
+msgstr ""
+
+msgid "cz - Třebíč | 49,-"
+msgstr ""
+
+msgid "cz - Třinec | 49,-"
+msgstr ""
+
+msgid "cz - Uherské Hradiště | 49,-"
+msgstr ""
+
+msgid "cz - Uherský Brod | 49,-"
+msgstr ""
+
+msgid "cz - Ústí nad Labem, Revoluční | 49,-"
+msgstr ""
+
+msgid "cz - Vyškov | 49,-"
+msgstr ""
+
+msgid "cz - Zlín, T. G. Masaryka | 49,-"
+msgstr ""
+
+msgid "cz - Znojmo | 49,-"
+msgstr ""
+
+msgid "cz - Žatec | 49,-"
+msgstr ""
+
+msgid "de - Zittau (DE) | 49,-"
+msgstr ""
+
+msgid "sk - Banská Bystrica, Švermova | 49,-"
+msgstr ""
+
+msgid "sk - Banská Bystrica, Tajovského | 49,-"
+msgstr ""
+
+msgid "sk - Bratislava, Cyprichová | 49,-"
+msgstr ""
+
+msgid "sk - Bratislava, Petržalka | 49,-"
+msgstr ""
+
+msgid "sk - Bratislava, Podunajské Biskupice | 49,-"
+msgstr ""
+
+msgid "sk - Bratislava, Vajnorská | 49,-"
+msgstr ""
+
+msgid "sk - Dunajská Streda | 49,-"
+msgstr ""
+
+msgid "sk - Galanta | 49,-"
+msgstr ""
+
+msgid "sk - Komárno | 49,-"
+msgstr ""
+
+msgid "sk - Košice, Toryská | 49,-"
+msgstr ""
+
+msgid "sk - Liptovský Mikuláš | 49,-"
+msgstr ""
+
+msgid "sk - Martin | 49,-"
+msgstr ""
+
+msgid "sk - Nitra, Mlynská | 49,-"
+msgstr ""
+
+msgid "sk - Prešov | 49,-"
+msgstr ""
+
+msgid "sk - Ružomberok | 49,-"
+msgstr ""
+
+msgid "sk - Spišská Nová Ves | 49,-"
+msgstr ""
+
+msgid "sk - Trenčín | 49,-"
+msgstr ""
+
+msgid "sk - Trnava | 49,-"
+msgstr ""
+
+msgid "sk - Žilina, Rosinská | 49,-"
+msgstr ""
+
+msgid "Bankwire | 0,-"
+msgstr ""
+
+msgid "OUT OF STOCK"
 msgstr ""
 

@@ -147,11 +147,11 @@ class ShopModel extends Repository {
                 ->where('StaticTextID', $postid)
                 ->fetch();
         
-        if ($album->PhotoAlbumID == NULL){
-            $album->PhotoAlbumID = 1;
+        if ($album){
+            $album = 1;
         }
         
-        return $album->PhotoAlbumID;
+        return $album;
     }
     
     public function insertStaticText($title, $content, $status){

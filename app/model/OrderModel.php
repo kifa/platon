@@ -15,11 +15,14 @@ class OrderModel extends Repository {
      */
     public function loadOrderDetails($id){
         if($id==''){
-            return $this->getTable('orderdetails')->fetch();
+            return $this->getTable('orderdetails')
+				->fetch();
         }
         else
         {
-            return $this->getTable('orderdetails')->where('orderID',$id)->fetch();
+            return $this->getTable('orderdetails')
+				->where('orderID',$id)
+				->fetch();
         }
     }
       
@@ -30,8 +33,10 @@ class OrderModel extends Repository {
      * @return string 
      */  
     public function loadOrders(){     
-        return $this->getTable('orders')->select('orders.*,delivery.*,payment.*,users.*,status.*')
-                ->order('orders.OrderID DESC')->fetchPairs('OrderID');
+        return $this->getTable('orders')
+			->select('orders.*,delivery.*,payment.*,users.*,status.*')
+			->order('orders.OrderID DESC')
+			->fetchPairs('OrderID');
     }
     
     /*
@@ -41,52 +46,78 @@ class OrderModel extends Repository {
      * @return string 
      */
     public function loadOrder($id){
-        return $this->getTable('orders')->select('orders.*,payment.*,delivery.*,users.*,status.*')->where('orders.OrderID',$id)->fetch();
+        return $this->getTable('orders')
+			->select('orders.*,payment.*,delivery.*,users.*,status.*')
+			->where('orders.OrderID',$id)
+			->fetch();
     }
     
     public function loadOrderAddress($id){
-        $user = $this->getTable('orders')->select('orders.UsersID')->where('OrderID',$id);
+        $user = $this->getTable('orders')
+			->select('orders.UsersID')
+			->where('OrderID',$id);
         
-        return $this->getTable('address')->where('UsersID',$user)->fetch();
+        return $this->getTable('address')
+			->where('UsersID',$user)
+			->fetch();
     }
     
      public function updateOrderAddress($id, $street, $zip, $city){
-        $user = $this->getTable('orders')->select('orders.UsersID')->where('OrderID',$id);
+        $user = $this->getTable('orders')
+			->select('orders.UsersID')
+			->where('OrderID',$id);
         
         $update = array('Street' => $street,
                         'ZIPCode' => $zip,
                         'City' => $city);
         
-        return $this->getTable('address')->where('UsersID',$user)->update($update);
+        return $this->getTable('address')
+			->where('UsersID',$user)
+			->update($update);
     }
     
     
     public function updateOrderStreet($id, $street){
-        $user = $this->getTable('orders')->select('orders.UsersID')->where('OrderID',$id)->fetch();                
+        $user = $this->getTable('orders')
+			->select('orders.UsersID')
+			->where('OrderID',$id)
+			->fetch();                
         
         $update = array('Street' => $street);
         
-        return $this->getTable('address')->where('UsersID',$user['UsersID'])->update($update);
+        return $this->getTable('address')
+			->where('UsersID',$user['UsersID'])
+			->update($update);
     }
     
     public function updateOrderCity($id, $city){
-        $user = $this->getTable('orders')->select('orders.UsersID')->where('OrderID',$id)->fetch();
+        $user = $this->getTable('orders')
+			->select('orders.UsersID')
+			->where('OrderID',$id)
+			->fetch();
         
         $update = array(
             'City' => $city
         );
         
-        return $this->getTable('address')->where('UsersID',$user['UsersID'])->update($update);
+        return $this->getTable('address')
+			->where('UsersID',$user['UsersID'])
+			->update($update);
     }
 
     public function updateOrderZIP($id, $zip){
-        $user = $this->getTable('orders')->select('orders.UsersID')->where('OrderID',$id)->fetch();
+        $user = $this->getTable('orders')
+			->select('orders.UsersID')
+			->where('OrderID',$id)
+			->fetch();
         
         $update = array(
             'ZIPCode' => $zip
         );
         
-        return $this->getTable('address')->where('UsersID',$user['UsersID'])->update($update);
+        return $this->getTable('address')
+			->where('UsersID',$user['UsersID'])
+			->update($update);
     }
 
     /*
@@ -95,27 +126,31 @@ class OrderModel extends Repository {
     public function loadOrderProduct($id){
         //return $this->getTable('orderdetails')->select('orderdetails.* ,product.*')
           //      ->where('orderdetails.OrderID',$id);
-          return $this->getDB()->query('SELECT * FROM orderdetails 
-              JOIN product ON orderdetails.ProductID=product.ProductID 
-              JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
-              JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
-              WHERE photo.CoverPhoto="1" and orderdetails.OrderID=?',$id);
+          return $this->getDB()->query('
+			SELECT * 
+			FROM orderdetails 
+			JOIN product ON orderdetails.ProductID=product.ProductID 
+			WHERE orderdetails.OrderID=?',$id);
     }
     
     
-      public function loadOrderNotes($id){
-        return $this->getTable('notes')->where('OrderID',$id)->fetchPairs('NotesID');
+	public function loadOrderNotes($id){
+        return $this->getTable('notes')
+			->where('OrderID',$id)
+			->fetchPairs('NotesID');
     }
     
     public function addNote($id, $name, $note) {
-        
+	$time = date('Y-m-d H:i:s');       
+ 
         $insert =  array(
             'OrderID' => $id,
-            'NotesDate' => date('Y-m-d H:i:s'),
+            'NotesDate' => $time,
             'NotesName' => $name,
             'NotesDescription' => $note
         );
-        return $this->getTable('notes')->insert($insert);
+        return $this->getTable('notes')
+			->insert($insert);
     }
     /*
      * Check and save order
@@ -131,7 +166,11 @@ class OrderModel extends Repository {
             $paymentprice = $this->loadPaymentPrice($payment);
             $deliverypaymentprice = $deliveryprice + $paymentprice;
             
-            $tax1 = $this->getTable('settings')->select('Value')->where('SettingName',"TAX")->fetch();
+            $tax1 = $this->getTable('settings')
+				->select('Value')
+				->where('SettingName',"TAX")
+				->fetch();
+				
             $tax = $tax1['Value'];
             //settype($tax, 'float');
             $finaltax = $price * ($tax / 100);
@@ -153,13 +192,23 @@ class OrderModel extends Repository {
                 'DateOfLastChange' => $today, //pri vytvoreni stejne jako created
                 //'DateFinished' => '', //? spolu s předchozí řešit až v administraci obj.
                 'DeliveryID' => $delivery,
-                'PaymentID' => $payment,
-                'Note' => $note,
+                'PaymentID' => $payment,                
                 'IP' => NULL,
                 'SessionID' => NULL
             );
            
-            return $this->getTable('orders')->insert($insert); /*$lastID =  $lastID['OrderID']; */
+            //return $this->getTable('orders')->insert($insert);
+			
+			$row = $this->getTable('orders')
+				->insert($insert);
+			
+			$lastorderid = $row['OrderID'];
+			
+			if($note != ''){
+				$this->addNote($lastorderid, $user, $note);
+			}
+			
+			return $row;
     }
     
     public function updateOrder($orderid, $shipping, $payment=NULL) {
@@ -170,7 +219,11 @@ class OrderModel extends Repository {
             $paymentPrice = $this->loadPaymentPrice($payment);
         }
         else{
-            $payment = $this->getTable('orders')->select('PaymentID')->where('OrderID',$orderid)->fetch();
+            $payment = $this->getTable('orders')
+				->select('PaymentID')
+				->where('OrderID',$orderid)
+				->fetch();
+				
             $paymentPrice = $this->loadPaymentPrice($payment['PaymentID']);
         }
             
@@ -189,7 +242,9 @@ class OrderModel extends Repository {
                 'DateOfLastChange' => $today
                 );   
         
-        return $this->getTable('orders')->where('OrderID',$orderid)->update($insert);
+        return $this->getTable('orders')
+			->where('OrderID',$orderid)
+			->update($insert);
         
     }
     
@@ -209,7 +264,11 @@ class OrderModel extends Repository {
         //inserting order details - products
         $this->insertOrderDetails($orderid, $product, 1, $newProduct);
                             
-        $tax1 = $this->getTable('settings')->select('Value')->where('SettingName',"TAX")->fetch();
+        $tax1 = $this->getTable('settings')
+			->select('Value')
+			->where('SettingName',"TAX")
+			->fetch();
+			
         $tax = $tax1['Value'];
             //settype($tax, 'float');
         $finaltax = $totalprod * ($tax / 100);
@@ -228,29 +287,45 @@ class OrderModel extends Repository {
                 'PaymentID' => $payment
                 );   
         
-        return $this->getTable('orders')->where('OrderID',$orderid)->update($update);
-        
+        return $this->getTable('orders')
+			->where('OrderID',$orderid)
+			->update($update);        
     }
     
     public function loadUnreadOrders(){
-        return $this->getTable('orders')->select('orders.*,delivery.*,payment.*,users.*,status.*')
-                ->where('orders.Read = 0')
-                ->order('orders.OrderID DESC')->fetchPairs('OrderID');
+        return $this->getTable('orders')
+			->select('orders.*,delivery.*,payment.*,users.*,status.*')
+			->where('orders.Read = 0')
+			->order('orders.OrderID DESC')
+			->fetchPairs('OrderID');
     }
 
+	public function loadLatestOrders(){
+		return $this->getTable('orders')
+			->select('orders.*,delivery.*,payment.*,users.*,status.*')
+			->where('orders.StatusID != 3')
+			->order('orders.OrderID DESC')
+			->limit(10)
+			->fetchPairs('OrderID');
+	}
+	
     public function updateOrderRead($orderid, $value){
         $update = array(
             'Read' => $value
         );
         
-        return $this->getTable('orders')->where('OrderID',$orderid)->update($update);
+        return $this->getTable('orders')
+			->where('OrderID',$orderid)
+			->update($update);
     }
 
     public function loadUnreadOrdersCount($date){
         if ($date == NULL) {
             $date =  date('Y-m-d H:i:s');
         }
-        return $this->getTable('orders')->where('DateCreated>',$date)->count();
+        return $this->getTable('orders')
+			->where('DateCreated>',$date)
+			->count();
     }
 
     public function removeOrderProducts($orderid, $product) {
@@ -266,11 +341,15 @@ class OrderModel extends Repository {
                 'ProductsPrice' => $products + $price
                 );   
         
-        return $this->getTable('orders')->where('OrderID',$orderid)->update($insert);
+        return $this->getTable('orders')
+			->where('OrderID',$orderid)
+			->update($insert);
     }
 
     public function checkRemoveProduct($orderid) {
-        return $this->getTable('orderdetails')->where('OrderID', $orderid)->count();
+        return $this->getTable('orderdetails')
+			->where('OrderID', $orderid)
+			->count();
     }
 
     /*
@@ -291,8 +370,12 @@ class OrderModel extends Repository {
     /* return price of deleted product */
     public function removeOrderDetail($orderid, $product) {
         
-        $detail = $this->getTable('orderdetails')->where('OrderID', $orderid)->where('ProductID', $product)->fetch();
-        $price = $detail->UnitPrice;
+        $detail = $this->getTable('orderdetails')
+			->where('OrderID', $orderid)
+			->where('ProductID', $product)
+			->fetch();
+        
+		$price = $detail->UnitPrice;
         $detail->delete();
         
         return $price;
@@ -304,11 +387,14 @@ class OrderModel extends Repository {
     public function loadStatus($id)
     {
         if($id==''){
-            return $this->getTable('orderstatus')->order('StatusProgress')->fetchPairs('OrderStatusID');
+            return $this->getTable('orderstatus')
+				->order('StatusProgress')
+				->fetchPairs('OrderStatusID');
         }
         else
         {
-            return $this->getTable('orderstatus')->where('OrderStatusID',$id);
+            return $this->getTable('orderstatus')
+				->where('OrderStatusID',$id);
         }
     }
     
@@ -323,7 +409,8 @@ class OrderModel extends Repository {
             'StatusDescription' => $description
         );
         
-        return $this->getTable('orderstatus')->insert($insert);
+        return $this->getTable('orderstatus')
+			->insert($insert);
     }
 
     /*
@@ -332,30 +419,40 @@ class OrderModel extends Repository {
     public function loadPayment($id, $switch=NULL){
         if($switch==NULL){
             if($id==''){
-                return $this->getTable('payment')->select('payment.*, status.*')
-                        ->where('status.StatusName = ? OR status.StatusName = ?','active','non-active')
-                        ->fetchPairs('PaymentID');
+                return $this->getTable('payment')
+					->select('payment.*, status.*')
+					->where('status.StatusName = ? OR status.StatusName = ?','active','non-active')
+					->fetchPairs('PaymentID');
             }
             else
             {
-                return $this->getTable('payment.*, status.*')->where('PaymentID',$id)->fetch();
+                return $this->getTable('payment.*, status.*')
+					->where('PaymentID',$id)
+					->fetch();
             }
         }
         elseif ($switch=='active') {
              if($id==''){
-                return $this->getTable('payment')->select('payment.*, status.*')
-                        ->where('status.StatusName',$switch)->fetchPairs('PaymentID');
+                return $this->getTable('payment')
+					->select('payment.*, status.*')
+					->where('status.StatusName',$switch)
+					->fetchPairs('PaymentID');
             }
             else
             {
-                return $this->getTable('payment.*, status.*')->where('PaymentID',$id)->fetch();
+                return $this->getTable('payment.*, status.*')
+					->where('PaymentID',$id)
+					->fetch();
             }
         }
     }
     
-    public function loadPaymentPrice($id){
-        //return $this->getTable('payment')->select('PaymentPrice')->where('PaymentID',$id)->fetch();        
-        $payment = $this->getTable('payment')->select('PaymentPrice')->where('PaymentID',$id)->fetch();
+    public function loadPaymentPrice($id){      
+        $payment = $this->getTable('payment')
+			->select('PaymentPrice')
+			->where('PaymentID',$id)
+			->fetch();
+			
         return $payment['PaymentPrice'];
     }
 
@@ -370,7 +467,8 @@ class OrderModel extends Repository {
             'StatusID' => $status
         );
                 
-        return $this->getTable('payment')->insert($insert);
+        return $this->getTable('payment')
+			->insert($insert);
     }
     
     public function updatePayment($id,$name,$price,$status=NULL)
@@ -381,7 +479,9 @@ class OrderModel extends Repository {
             'StatusID' => $status
         );
                 
-        return $this->getTable('payment')->where('PaymentID',$id)->update($update);
+        return $this->getTable('payment')
+			->where('PaymentID',$id)
+			->update($update);
     }
     
     public function updatePaymentName($id,$name)
@@ -390,7 +490,9 @@ class OrderModel extends Repository {
             'PaymentName' => $name
         );
                 
-        return $this->getTable('payment')->where('PaymentID',$id)->update($update);
+        return $this->getTable('payment')
+			->where('PaymentID',$id)
+			->update($update);
     }
     
     public function updatePaymentPrice($id,$name)
@@ -399,7 +501,9 @@ class OrderModel extends Repository {
             'PaymentPrice' => $name
         );
                 
-        return $this->getTable('payment')->where('PaymentID',$id)->update($update);
+        return $this->getTable('payment')
+			->where('PaymentID',$id)
+			->update($update);
     }
     
     public function updatePaymentStatus($id,$status){
@@ -407,14 +511,18 @@ class OrderModel extends Repository {
             'StatusID' => $status
         );
         
-        return $this->getTable('payment')->where('PaymentID',$id)->update($update);
+        return $this->getTable('payment')
+			->where('PaymentID',$id)
+			->update($update);
     }
 
         public function deletePayment($id){
             $update = array(
             'StatusID' => 3
         );
-        return $this->getTable('payment')->where('PaymentID',$id)->update($update);
+        return $this->getTable('payment')
+			->where('PaymentID',$id)
+			->update($update);
     }
 
 
@@ -425,34 +533,45 @@ class OrderModel extends Repository {
     {
         if($switch==NULL){
             if($id==''){
-                return $this->getTable('delivery')->select('delivery.*, status.*')
-                        ->where('status.StatusName = ? OR status.StatusName = ?','active', 'non-active')
-                        ->fetchPairs('DeliveryID');
+                return $this->getTable('delivery')
+					->select('delivery.*, status.*')
+					->where('status.StatusName = ? OR status.StatusName = ?','active', 'non-active')
+					->fetchPairs('DeliveryID');
             }
             else
             {
-                return $this->getTable('delivery')->select('delivery.*, status.*')->where('DeliveryID',$id)->fetch();
+                return $this->getTable('delivery')
+					->select('delivery.*, status.*')
+					->where('DeliveryID',$id)
+					->fetch();
             }
         }
         elseif ($switch=='active') {
              if($id==''){
-                return $this->getTable('delivery')->select('delivery.*, status.*')
-                      //  ->where('delivery.HigherDelivery IS NULL')
-                        ->where('status.StatusName',$switch)                        
-                        ->fetchPairs('DeliveryID');
+                return $this->getTable('delivery')
+					->select('delivery.*, status.*')
+				//  ->where('delivery.HigherDelivery IS NULL')
+					->where('status.StatusName',$switch)                        
+					->fetchPairs('DeliveryID');
             }
             else
             {
-                return $this->getTable('delivery.*, status.*')->where('DeliveryID',$id)->fetch();
+                return $this->getTable('delivery.*, status.*')
+					->where('DeliveryID',$id)
+					->fetch();
             }
         }
     }
     
     public function loadParentDelivery($iddelivery){
-        $row = $this->getTable('delivery')->select('HigherDelivery')->where('DeliveryID',$iddelivery);
+        $row = $this->getTable('delivery')
+			->select('HigherDelivery')
+			->where('DeliveryID',$iddelivery);
+			
         $higher = $row['HigherDelivery'];
         
-        return $this->getTable('delivery')->where('DeliveryID',$higher);
+        return $this->getTable('delivery')
+			->where('DeliveryID',$higher);
     }
 
     public function loadDeliveryList(){
@@ -463,16 +582,20 @@ class OrderModel extends Repository {
 
     public function loadSubDelivery($higher)
     {
-        return $this->getTable('delivery')->select('delivery.*, status.*')
-                ->where('delivery.HigherDelivery',$higher)
-                ->where('status.StatusName = "active"')
-                ->fetchPairs('DeliveryID');
+        return $this->getTable('delivery')
+			->select('delivery.*, status.*')
+			->where('delivery.HigherDelivery',$higher)
+			->where('status.StatusName = "active"')
+			->fetchPairs('DeliveryID');
     }
     
     public function loadDeliveryPrice($id){
-        //return $this->getTable('delivery')->select('DeliveryPrice')->where('DeliveryID',$id)->fetch();
-        $delivery = $this->getTable('delivery')->select('DeliveryPrice')->where('DeliveryID',$id)->fetch();
-        return $delivery['DeliveryPrice'];
+        $delivery = $this->getTable('delivery')
+			->select('DeliveryPrice')
+			->where('DeliveryID',$id)
+			->fetch();
+        
+		return $delivery['DeliveryPrice'];
     }
     
     /*
@@ -489,7 +612,8 @@ class OrderModel extends Repository {
             'HigherDelivery' => $higher
         );
         
-        return $this->getTable('delivery')->insert($insert);
+        return $this->getTable('delivery')
+			->insert($insert);
     }
     
     public function updateDeliveryName($id, $name)
@@ -499,7 +623,9 @@ class OrderModel extends Repository {
             'DeliveryName' => $name
         );
         
-        return $this->getTable('delivery')->where('DeliveryID', $id)->update($update);
+        return $this->getTable('delivery')
+			->where('DeliveryID', $id)
+			->update($update);
     }
     
     public function updateDeliveryDescription($id, $description)
@@ -508,7 +634,9 @@ class OrderModel extends Repository {
             'DeliveryDescription' => $description,
         );
         
-        return $this->getTable('delivery')->where('DeliveryID', $id)->update($update);
+        return $this->getTable('delivery')
+			->where('DeliveryID', $id)
+			->update($update);
     }
     
     public function updateDeliveryPrice($id, $price)
@@ -517,7 +645,9 @@ class OrderModel extends Repository {
             'DeliveryPrice' => $price
         );
         
-        return $this->getTable('delivery')->where('DeliveryID', $id)->update($update);
+        return $this->getTable('delivery')
+			->where('DeliveryID', $id)
+			->update($update);
     }
     
     public function updateDeliveryFreefrom($id, $ffprice)
@@ -526,7 +656,9 @@ class OrderModel extends Repository {
             'FreeFromPrice' => $ffprice
         );
         
-        return $this->getTable('delivery')->where('DeliveryID', $id)->update($update);
+        return $this->getTable('delivery')
+			->where('DeliveryID', $id)
+			->update($update);
     }
     
     public function updateDeliveryStatus($id, $statusID){
@@ -534,8 +666,9 @@ class OrderModel extends Repository {
             'StatusID' => $statusID
         );
         
-        return $this->getTable('delivery')->where('DeliveryID', $id)->update($update);
-                
+        return $this->getTable('delivery')
+			->where('DeliveryID', $id)
+			->update($update);
     }
     
     public function updateHigherDelivery($id, $HigherDelID){
@@ -543,7 +676,9 @@ class OrderModel extends Repository {
             'HigherDelivery' => $HigherDelID
         );
         
-        return $this->getTable('delivery')->where('DeliveryID', $id)->update($update);
+        return $this->getTable('delivery')
+			->where('DeliveryID', $id)
+			->update($update);
                 
     }
 
@@ -551,28 +686,35 @@ class OrderModel extends Repository {
         $update = array(
             "StatusID" => 3
         );
-        return $this->getTable('delivery')->where('DeliveryID',$id)->update($update);
+        return $this->getTable('delivery')
+			->where('DeliveryID',$id)
+			->update($update);
     }
     
     public function deleteSubDelivery($higher){
         $update = array(
             "StatusID" => 3
         );
-        return $this->getTable('delivery')->where('HigherDelivery',$higher)->update($update);
+        return $this->getTable('delivery')
+			->where('HigherDelivery',$higher)
+			->update($update);
     }
 
     public function countOrder(){
-        return $this->getTable('orders')->count();
+        return $this->getTable('orders')
+			->count();
     }
     
     public function countOrderDetail()
     {
-        return $this->getTable('orderdetails')->count();
+        return $this->getTable('orderdetails')
+			->count();
     }
     
     public function countDelivery()
     {
-        return $this->getTable('delivery')->count();
+        return $this->getTable('delivery')
+			->count();
     }
     
     public function setStatus($orderid,$statusid){
@@ -580,37 +722,25 @@ class OrderModel extends Repository {
             'StatusID' => $statusid
         );
         
-        return $this->getTable('orders')->where('OrderID',$orderid)->update($update);
+        return $this->getTable('orders')
+			->where('OrderID',$orderid)
+			->update($update);
     }
     
     public function loadStatuses($id){
         if($id==NULL){
-            return $this->getTable('status')->fetchPairs('StatusID');
+            return $this->getTable('status')
+				->fetchPairs('StatusID');
         }
         else{
-            return $this->getTable('status')->where('StatusID',$id);
+            return $this->getTable('status')
+				->where('StatusID',$id);
         }
     }
 
-
-    /*
-     * Change order status
-     * @param ?
-     * @param ? example: pozice počátečního znaku
-     * @return string
-     */
-    
-
-    /*
-     * Generate emails
-     * @param ?
-     * @param ? example: pozice počátečního znaku
-     * @return string
-     */
-    
-   
     public function search($query) {
-        return $this->getTable('orders')->fetchPairs('OrderID');
+        return $this->getTable('orders')
+			->fetchPairs('OrderID');
     }
 
    

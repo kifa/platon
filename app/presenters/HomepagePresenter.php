@@ -38,16 +38,39 @@ class HomepagePresenter extends BasePresenter {
     }
 
     
-  
+    protected function createComponentAddVideoForm() {
+        $videoForm = new Nette\Application\UI\Form;
+        $videoForm->setTranslator($this->translator);
+        $videoForm->addTextArea('video', 'Video embed code')
+                ->setAttribute('class', 'form-control');
+        $videoForm->addSubmit('add','Add video')
+                ->setAttribute('class', 'btn btn-success form-control');
+        $videoForm->onSuccess[] = $this->addVideoFormSubmitted;
+        return $videoForm;   
+    }
     
-    public function renderDefault() {
+    public function addVideoFormSubmitted($form){
+        if($this->getUser()->isInRole('admin')){
+            $this->shopModel->setShopInfo('homepageVideo', $form->values->video);
+            $this->redirect('this');
+        }
+    }
+
+    
+    public function actionDefault() {
+         if($this->getUser()->isInRole('admin')){
+             $this['addVideoForm'];
+         }
+    }
+
+        public function renderDefault() {
 
          if ($this->getUser()->isInRole('admin')) {
             // load all products
-        $this->template->products = $this->productModel->loadCatalogAdmin("");
+        $this->template->products = $this->productModel->loadMainPage();
         } else {
             // load published products
-        $this->template->products = $this->productModel->loadCatalog("");
+        $this->template->products = $this->productModel->loadMainPage();
         }
        
         $layout = $this->shopModel->getShopInfo('HomepageLayout');
@@ -56,6 +79,7 @@ class HomepagePresenter extends BasePresenter {
        
         $this->template->slider = 1;
         $this->template->category = $this->categoryModel->loadCategory("");
+        $this->template->video = $this->shopModel->getShopInfo('homepageVideo');
         $this->template->anyVariable = 'any value';
         
     }
@@ -81,11 +105,13 @@ class HomepagePresenter extends BasePresenter {
            
             $contactForm->addText('email', 'Email:', 40, 100)
                 ->setEmptyValue('@')
-                ->addRule(Form::EMAIL, 'Would you fill your email, please?');
+                ->addRule(Form::EMAIL, 'Would you fill your email, please?')
+                    ->setAttribute('class', 'form-control');
             $contactForm->addTextArea('note', 'What would you like to know:')
-                    ->setRequired();
+                    ->setRequired()
+                    ->setAttribute('class', 'form-control');
             $contactForm->addSubmit('send', 'Ask')
-                    ->setAttribute('class', 'ajax span4 btn btn-primary btn-large')
+                    ->setAttribute('class', 'ajax btn btn-success btn-lg form-control')
                     ->setAttribute('data-loading-text', 'Asking...');
             $contactForm->onSuccess[] = $this->contactFormSubmitted;
 
@@ -193,6 +219,6 @@ class HomepagePresenter extends BasePresenter {
             $shopName = $this->shopModel->getShopInfo('Name');
         
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($orderMail, $shopName . ': Nový dotaz', $template, $email);
+            $mailIT->sendSuperMail($orderMail, $shopName . ': New question', $template, $email);
     }
 }

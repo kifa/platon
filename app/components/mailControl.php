@@ -53,14 +53,14 @@ class mailControl extends BaseControl {
 }
     
 
-public function sendSuperMail($to, $subject, $message, $from='luk.danek@gmail.com') {
+public function sendSuperMail($to, $subject, $message, $from='shop@bebica.it') {
         
         $mail = new Message;
             $mail->setFrom($from)
             ->addTo($to)
             ->setSubject($subject)
             ->setHtmlBody($message);
-           // ->send();
+            //->send();
    
 
            $mailer = new Nette\Mail\SmtpMailer(array(

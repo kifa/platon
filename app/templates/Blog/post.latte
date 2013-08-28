@@ -3,29 +3,29 @@
 {/block}
 {block pageheader}
  {if $user->isInRole('admin')}
-<div class="row-fluid"
-    <div class="span12">
-        <a href="#addPhoto" class="btn" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
+<div class="row"
+    <div class="col-md-12">
+        <a href="#addPhoto" class="btn btn-default" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
          <div class="btn-group">
-        <a href="#editDesc" class="btn" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
+        <a href="#editDesc" class="btn btn-default" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
        
-        <a href="#editDocs" class="btn" data-toggel="modal" data-target="#editDocs" id="editDocsButton"><i class="icon-large icon-download"></i> {_"Edit Documents"}</a> |
+        <a href="#editDocs" class="btn btn-default" data-toggel="modal" data-target="#editDocs" id="editDocsButton"><i class="icon-large icon-download"></i> {_"Edit Documents"}</a> |
          </div>
-        <a href="#" class="btn" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>         
+        <a href="#" class="btn btn-default" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>         
     </div>
 </div>
  {/if}  
-<div class="page-header">
+<div class="page-header col-md-12">
     <h1 n:block="title"><span class="BlogName" n:snippet="BlogName">{$post->BlogName}</span> <small><i class="icon-trophy"></i> <i class="icon-thumbs-up"></i></small></h1>  
 </div>
 {/block}
 
 {block content}
 
-<div class="span12">
+<div class="col-md-12">
 
     {if $post->CategoryID != 100}
-            <div class="tabbable span11">
+            <div class="tabbable col-md-11">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#allinfo" data-toggle="tab"><i class="icon-info-sign"></i> {_'Post'}</a></li>
                     <li><a href="#gal" data-toggle="tab"><i class="icon-camera-retro"></i> {_'Gallery'}</a></li>
@@ -46,7 +46,7 @@
                     <div class="tab-pane" id="gal">
                         <ul class="thumbnails">
                                 {foreach $album as $id => $photo}
-                                            <li class="{if $photo->CoverPhoto}span3 {else} span3 {/if}">
+                                            <li class="{if $photo->CoverPhoto}col-md-3 {else} col-md-3 {/if}">
                                                 <a data-toggle="lightbox" href="#photo{$id}" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
                                                     <img style="" src="{$basePath}/images/blog/{$post->BlogID}/300-{$photo->PhotoURL}" alt="{$post->BlogName}">
                                                 </a>
@@ -73,11 +73,11 @@
         <div class="text-justified BlogContentSt" n:snippet="BlogContentSt">{!$post->BlogContent}</div>            
     {/if}
     
-</div> <!-- class="span10" -->
+</div> <!-- class="col-md-10" -->
 {/block}
 
 {block sidebar}
-            <div class="span3">
+            <div class="col-md-3">
 {if $user->isInRole('admin')}
 {control menu:admin}
 {/if}
@@ -186,7 +186,7 @@ $('#editDocs').modal('hide');
             onblur    : 'ignore',
             cancel    : {_'Cancel'},
             submit    : 'OK',
-            cssclass  : 'span10',
+            cssclass  : 'col-md-10',
             colls     : '15',
             rows      : '15',
             indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
@@ -207,7 +207,7 @@ $('#editDocs').modal('hide');
             onblur    : 'ignore',
             cancel    : {_'Cancel'},
             submit    : 'OK',
-            cssclass  : 'span10',
+            cssclass  : 'col-md-10',
             colls     : '15',
             rows      : '15',
             indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
@@ -244,7 +244,7 @@ $('#editDocs').modal('hide');
 </div>
 <div class="modal-footer">
 {control addPhotoForm}
-<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
 </div>
 </div>
 
@@ -259,7 +259,7 @@ $('#editDocs').modal('hide');
 </div>
 <div class="modal-footer">
 {control editDescForm}
-<button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
 </div>
 </div>
 {*
@@ -274,7 +274,7 @@ $('#editDocs').modal('hide');
 </div>
 <div class="modal-footer">
 {control editPriceForm}
-<button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
 </div>
 </div>
 
@@ -289,7 +289,7 @@ $('#editDocs').modal('hide');
 </div>
 <div class="modal-footer">
 {control editPiecesForm}
-<button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
 </div>
 </div>
 
@@ -333,7 +333,7 @@ $('#editDocs').modal('hide');
 </div>
 
 
-<button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
 </div>
 
 </div>
@@ -378,7 +378,7 @@ $('#editDocs').modal('hide');
 
 </div>
 
-<button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
 </div>
 
 </div>

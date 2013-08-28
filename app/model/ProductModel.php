@@ -190,6 +190,15 @@ class ProductModel extends Repository {
                 OR category.CategoryStatus=2)
                 ');
     }    
+    
+    public function loadHeurekaCatalog() {       
+        return $this->getDB()->query('SELECT * FROM product 
+JOIN price ON price.ProductID=product.ProductID 
+LEFT JOIN photoalbum ON product.ProductID=photoalbum.ProductID 
+LEFT JOIN photo ON photoalbum.PhotoAlbumID=photo.PhotoAlbumID 
+WHERE product.ProductVariants IS NULL
+AND photo.CoverPhoto = 1');
+    }
 
     /*
      * Load 1 Product
@@ -487,7 +496,7 @@ class ProductModel extends Repository {
         $insert = array(
             'ProductID'=>$product,
             //'BuyingPrice'=>
-            //'SellingPrice'=>$selling,
+            'SellingPrice'=>$final,
             'SALE'=>$sale,
             'FinalPrice'=>$final
             //'CurrencyID'=>
@@ -741,7 +750,10 @@ class ProductModel extends Repository {
                 ->fetchPairs('DeliveryPrice');
         
         $price = reset($delivery);
+        
+        if($price) {
         $price = $price->DeliveryPrice;
+    } 
         return $price;
     }        
 
@@ -865,7 +877,29 @@ class ProductModel extends Repository {
         
         return $this->getTable('parameters')
                 ->insert($insert);
-    }        
+    }
+
+    public function loadTotalPieces($id){
+        $variant = $this->getTable('product')
+                ->select('ProductID')
+                ->where('ProductVariants', $id)
+                ->fetch();
+                      
+        if($variant != FALSE){
+            $pieces = $this->getTable('product')                                
+                    ->where('ProductVariants = ?', $id)
+                    ->sum('PiecesAvailable');
+        }
+        else{
+            $pieces = $this->getTable('product')
+                    ->select('PiecesAvailable')
+                    ->where('ProductID', $id)->fetch();            
+            
+            $pieces = $pieces['PiecesAvailable'];
+        }
+        
+        return($pieces);
+    }
     
     public function search($query) {       
         return $this->getTable('price')

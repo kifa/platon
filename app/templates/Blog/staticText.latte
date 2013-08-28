@@ -3,18 +3,18 @@
 {/block*}
 {block pageheader}
 {if $user->isInRole('admin')}
-<div class="row-fluid">
-        <div class="span10" n:snippet="controlPanel">
+<div class="row">
+        <div class="col-md-10" n:snippet="controlPanel">
             <div class="alert alert-error"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this text by clicking on Title, Content or panel bellow etc. More info?'}</div>
 
             <div class="btn-group" n:snippet="textStatus">
                         {if $post->StatusID != 1 }
                     <a href="{plink setStaticTextStatus! $post->StaticTextID, 1}" class="btn-primary btn ajax"><i class="icon-large icon-eye-open"></i> {_"Publish text"}</a>
                     {else}
-                    <a href="{plink setStaticTextStatus! $post->StaticTextID, 2}" class="btn ajax"><i class="icon-large icon-eye-close"></i> {_"Unpublish text"}</a>
+                    <a href="{plink setStaticTextStatus! $post->StaticTextID, 2}" class="btn btn-default ajax"><i class="icon-large icon-eye-close"></i> {_"Unpublish text"}</a>
                     {/if}
 
-                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
                     </button>
                     {if $post->StaticTextID > 3}
@@ -26,13 +26,13 @@
             
           
 
-            <a href="#addPhoto" class="btn" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
+            <a href="#addPhoto" class="btn btn-default" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
              <div class="btn-group">
-            <a href="#editDesc" class="btn" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
+            <a href="#editDesc" class="btn btn-default" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
 
-            <a href="#editDocs" class="btn" data-toggel="modal" data-target="#editDocs" id="editDocsButton"><i class="icon-large icon-download"></i> {_"Edit Documents"}</a> |
+            <a href="#editDocs" class="btn btn-default" data-toggel="modal" data-target="#editDocs" id="editDocsButton"><i class="icon-large icon-download"></i> {_"Edit Documents"}</a> |
              </div>
-            <a href="#" class="btn" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>         
+            <a href="#" class="btn btn-default" ><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>         
         </div>
 </div>
 {/if}    
@@ -45,16 +45,16 @@
 
 {block content}
 
-<div class="span9">
+<div class="col-md-9">
 
 
     <div class="text-justified StaticTextContent" n:snippet="StaticTextContent">{!$post->StaticTextContent}</div>    
  {if $user->isInRole('admin')}   
     <ul class="thumbnails">
-        <li class="thumbnail span8"><strong>{_'To add photos, upload them and then "Click to edit" and drag photos to editor.'}</strong></li>
+        <li class="thumbnail col-md-8"><strong>{_'To add photos, upload them and then "Click to edit" and drag photos to editor.'}</strong></li>
 {foreach $album as $id => $photo}
     
-    <li class="span2">
+    <li class="col-md-2">
         <span style="height: 50px; width: 50px;">
         <img  src="{$basePath}/images/static/{$albumID}/300-{$photo->PhotoURL}" alt="{$post->StaticTextName}">
         </span>
@@ -64,11 +64,11 @@
     </ul>
     {/if}
     
-</div> <!-- class="span10" -->
+</div> <!-- class="col-md-10" -->
 {/block}
 
 {block sidebar}
-            <div class="span3">
+            <div class="col-md-3">
 {if $user->isInRole('admin')}
 {control menu:admin}
 {/if}
@@ -135,7 +135,7 @@ $('#addPhoto').modal('hide');
             onblur    : 'ignore',
             cancel    : {_'Cancel'},
             submit    : 'OK',
-            cssclass  : 'span12',
+            cssclass  : 'col-md-12',
             colls     : '15',
             rows      : '15',
             indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
@@ -163,7 +163,7 @@ $('#addPhoto').modal('hide');
 
 {block modal}
 {if $user->isInRole('admin')}
-<div id="deleteText" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="deleteText" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Delete'} {$post->StaticTextName} ?</h3>
@@ -174,11 +174,11 @@ $('#addPhoto').modal('hide');
     </div>
     <div class="modal-footer">
         <a href="{plink deleteStaticText! $post->StaticTextID}" class="btn btn-danger">{_'Delete'}</a>       
-        <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
     </div>
 </div>
 
-<div id="addPhoto" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="addPhoto" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 <h3 id="myModalLabel"><i class="icon-camera-retro"></i> Add new photo</h3>
@@ -189,7 +189,7 @@ $('#addPhoto').modal('hide');
 </div>
 <div class="modal-footer">
 {control addPhotoStaticForm}
-<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
 </div>
 </div>
 {/if}

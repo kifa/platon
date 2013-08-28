@@ -36,17 +36,18 @@ class CategoryModel extends Repository {
     public function loadChildCategoryList($catID){
         return $this->getTable('category')
                     ->select('CategoryID, CategoryName')
-                    ->where('CategoryStatus',1)
+                     ->where('CategoryStatus',1)
                     ->where('HigherCategoryID',$catID)
                     ->fetchPairs('CategoryID');
     }
-
-     public function loadChildCategoryListAdmin($catID){
+    
+    public function loadChildCategoryListAdmin($catID){
         return $this->getTable('category')
                     ->select('CategoryID, CategoryName')
                     ->where('HigherCategoryID',$catID)
                     ->fetchPairs('CategoryID');
     }
+
     /*
      * Create Category
      * @param ?

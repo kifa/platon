@@ -5,20 +5,18 @@
         <title>{block #title|striptags|trim|strip} {/block} {$shopName}</title>
         <meta name="description" content="{block #metadesc|striptags|strip|trim} {$shopDescription} {/block}">
         <meta name="robots" content="{$robots}" n:ifset="$robots">
-        
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        {control css}
         <link rel="shortcut icon" href="{$basePath}/favicon.ico">
-
-
-        <script type="text/javascript">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
+        {control css}
         
-
-
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
         
-        </script>
+       
         {ifCurrent Order:cart}
                 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
                 {/ifCurrent}
@@ -31,53 +29,60 @@
 
 {include './components/languageBar.latte'}
     
-<div class="shopHead"> 
-<div class="container supercontainer container-fluid">
-    <div class="masterhead">
-        <div class="row-fluid">
-            <a href="{plink Homepage:default}" class="span5"><h1><img src="{$basePath}/images/logo/{$shopLogo}" alt="{$shopName}" title="{$shopName}"></h1></a>
 
+<div class="shopHead margin5"> 
+  <div class="masterhead">
+<div class="container supercontainer">
     
-                    {control menu:top}    
-        </div>
         <div class="row">
-            <div class="span12">
-                <div class="navbar">
-                    <div class="navbar-inner">
-                        <div class="container">
-                            <a class="btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                                <strong class="btn pull-right">{_'Menu'} <i class="icon-reorder"></i></strong>
-                            </a>
-                            <div class="nav-collapse collapse">
-                            <ul class="nav" n:snippet="menu">
+            <a href="{plink Homepage:default}" class="col-md-12"><h1><img src="{$basePath}/images/logo/{$shopLogo}" alt="{$shopName}" title="{$shopName}" class="img-responsive col-sx-12"></h1></a>
+
+            
+            
+            
+            
+        
+        </div>
+       </div>
+    </div> 
+    <div class="navHead">
+  <div class="container">    
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                             <span class="menuButton">{_'Menu'} <i class="icon-reorder icon-large"></i></span>
+                          </button>
+                    </div>
+                        <div class="collapse navbar-collapse navbar-ex1-collapse">
+                             <ul class="nav nav-pills navbar-nav" n:snippet="menu">
                                      {control menu 1}
-                                {control searchControl:menu}
                             </ul>
+                            {control searchControl:menu}
+                            
                             </div>
-                        </div>
+                        </nav>
                     </div>
                 </div>
-            </div>
-        </div>
 
     </div>
-      
-
-{snippet flashMessages}   
+         </div>
+<div class="shopMessages" n:snippet="flashMessages">
             {foreach $flashes as $flash}
-               <div class="{$flash->type} span10">
+               <div class="{$flash->type} text-center">
                    <button type="button" class="close" data-dismiss="alert">&times;</button>
              {$flash->message}</div>
              {/foreach}
-             {/snippet}
-    
-    
+</div>
+
+
 </div> 
-</div> 
+
     {block #slider}
     {if $slider}
 <div class="shopSlider">   
- <div class="container supercontainer container-fluid">
+ <div class="container supercontainer">
 
    
         
@@ -85,15 +90,41 @@
     {/if}
     {/block}
     
-     <div class="shopContent">   
- <div class="container supercontainer container-fluid">
- {block #bread}{/block}   
-    <div id="content" class="row-fluid"> 
-   
+    <div class="shopContent">   
+ <div class="container supercontainer">
+          {block #bread}{/block}
+
+    <div id="content" class="row"> 
+     
+
+        {block #sidebars}
+
+<div class="col-md-2 shopSidebar col-sm-12 col-xs-12">  
+            
+
+        <div class="hidden-xs hidden-sm">        
+
+                {if $user->isInRole('admin')}
+                   {control menu:admin}
+            <hr>
+                {/if}
+            
+                    <ul class="nav nav-pills nav-stacked">
+                                     {control menu:side}
+                            
+                        </ul>
+                            
         
-   
+                    {*block #sidebar}
+                    {/block*}
+               
+                </div>
+    </div>
+        {/block}
+        
+        
         {block contents}
-    <div class="span10 shopInnerContent" n:snippet="content">
+    <div class="col-md-10 shopInnerContent" n:snippet="content">
        
         
         
@@ -105,48 +136,39 @@
                    
             {/block}
 
-    </div>    
+    </div>     
         {/block}
-{block sidebars}
-                <div class="span2 shopSidebar">        
+
             
- {if $user->isInRole('admin')}
-                   {control menu:admin}
-                {/if}
-               
-                    
-                    <ul class="nav nav-list">
-                            <li class="nav-header">{_'Menu'}</li>
-                                     {control menu:side}
-                            
-                        </ul>
-                            
         
-                    {*block #sidebar}
-                    {/block*}
-                </div>
-           {/block}
-       </div>
     </div>
-     </div>
-    
+ </div>
+    </div>
         <div class="shopFooter">   
- <div class="container supercontainer container-fluid">
-             
+ <div class="container">
+
     <div class="footer">         
-        <div class="span10">
-            <hr>
+        <div class="col-md-9 margin5">
+            
            {control menu:footer}
         </div>
-        <div class="span12">     
-            &COPY; Birne shop 2013
+
+        <div class="col-md-3">     
+            <div class="col-md-6 text-left">
+            &COPY; 2013 Protejpy.cz 
+            </div>
+            <div class="col-md-6 text-right">
+                Powered by <a href="http://birnex.com">BIRNE<sup>shop</sup></a>
+            </div>
         </div>
     </div>
                 
 {block modals}
   {if $user->isInRole('admin')}
-                <div id="addCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-header">
+                <div id="addCategory" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                   <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Category'}</h3>
                     </div>
@@ -157,10 +179,12 @@
                     <div class="modal-footer">
                         <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
                     </div>
-                </div>
+                </div> </div> </div>
 
                 <div id="addStaticText" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-header">
+                    <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Text'}</h3>
                     </div>
@@ -171,7 +195,7 @@
                     <div class="modal-footer">
                         <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
                     </div>
-                </div>
+                </div> </div> </div>
 {/if}
    
     {control modalControl:tracking}
@@ -181,10 +205,10 @@
 {/block}  
             </div>
         </div>
-    </div>	
+	
                 
 {block scripts}
-    
+        
         {control js}
 
         {include 'components/GA.latte', GA => $GA}
@@ -231,7 +255,17 @@
             $('a.ajax').click(function(){
                 $(this).html('<i class="icon-spinner icon-spin"></i>');
             });
+            
+             $('input[name="srch"]').click(function() { 
+                $('input[name="srch"]').attr('class', 'btn btn-default disabled');
+                $('input[name="srch"]').attr('value', '{_'Searching...'}');
+            });
 
+            
+            $('.addToCart').click(function() { 
+                $(this).attr('class', 'btn btn-success disabled');
+                $(this).text('{_'Adding to cart...'}');
+            });
         </script>
     {/snippet}
 
@@ -239,5 +273,7 @@
     {/block}
 
 	{/block}   
+        
+        
     </body> 
 </html>

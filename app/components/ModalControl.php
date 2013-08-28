@@ -53,13 +53,16 @@ class ModalControl extends BaseControl {
         $trackingForm->setTranslator($this->translator);
         $trackingForm->addText('user', 'Your email:')
                 ->addRule(FORM::EMAIL)
-                ->setRequired();
+                ->setRequired()
+                ->setAttribute('class', 'form-control');
         $trackingForm->addText('order', 'Your order number:')
-                ->setRequired();
+                ->setRequired()
+                ->setAttribute('class', 'form-control');
         $trackingForm->addText('pass', 'Your secret code:')
-                ->setRequired('Please enter your secret code from mail');
+                ->setRequired('Please enter your secret code from mail')
+                ->setAttribute('class', 'form-control');
         $trackingForm->addSubmit('track', 'Track order')
-                ->setAttribute('class', 'btn btn-primary')
+                ->setAttribute('class', 'btn btn-success form-control')
                 ->setHtmlId('track');
         $trackingForm->onSuccess[] = $this->trackingFormSubmitted;
         return $trackingForm;

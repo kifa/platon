@@ -2,22 +2,23 @@
 {block pageheader}
 
         <div class="page-header">
-        <h1 n:block="title"><i class="icon-shopping-cart"></i> {_'Your cart'} <small>{_'Here you can complete your order. Just fill fields bellow.'}</small></h1>
+            <h1 n:block="title"><i class="icon-shopping-cart"></i> {_'Your cart'} <small class="hidden-xs">{_'Here you can complete your order. Just fill fields bellow.'}</small></h1>
         </div>
 
 {/block}
     
 {block content}
-<div class="span11" n:snippet="cartTable">    
-
-    <table class="table span12 miniproduct">
-    <thead class="table-bordered">
+<div class="col-md-12" n:snippet="cartTable">    
+    <div class="table-responsive">
+    <table class="table">
+    <thead>
                 <tr>
-                    <th colspan="2"></th>
-                    <th class="span4">{_'Product'}</th>
-                    <th>{_'Amount'}</th>
-                    <th>{_'Item price'}</th>
-                    <th>{_'Total price'}</th>
+                    <th ></th>
+                    <th>{_'Product'}</th>
+                    <th >{_'Amount'}</th>
+                    <th >{_'Price'}</th>
+                    <th >{_'Subtotal'}</th>
+                    <th></th>
                     
                 </tr>
             </thead>
@@ -28,12 +29,6 @@
     {foreach $products as $amnt => $product}
         {var $subtotal = $amnt * $product->FinalPrice}
                 <tr>
-                    <td>{*if $product->PhotoAlbumID}
-                             <img src="{$basePath}/images/{$product->PhotoAlbumID}/50-{$product->PhotoURL}" class="img-circle" width="50"/>
-                        {else}
-                             <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="width: 38px;"/>
-                        {/if} 
-                        {*$product->ProductNumber*}</td>
                     <td><a n:href="removeItem! $id" class="ajax"><i class="icon-trash"></i></a></td>
                     
                     {if $product->ProductVariantName}
@@ -45,8 +40,9 @@
                     <td><a href="{plink addAmount! $id}" class="ajax"><i class="icon-plus-sign"></i></a> {$amnt} {_'pcs'}
                         
                         <a href="{plink removeAmount! $id}" class="ajax"><i class="icon-minus-sign"></i></a></td>
-                    <td>{$product->FinalPrice},-</td>
-                    <td>{$subtotal},-</td>
+                    <td><span>{$product->FinalPrice},-</span></td>
+                    <td><span>{$subtotal},-</span></td>
+                    <td></td>
                     
                 </tr>
            {var $grandtotal = $grandtotal + $subtotal}
@@ -54,108 +50,121 @@
 {/foreach}
                
                 <tr>
-                    <td colspan="3"></td>
-                    <td> <strong>{_'Shipping'}:</strong> 
-                         <span class="shipping">0,-</span></td>
-                    <td class="1"> <strong>{_'Total'}:</strong>
-                         <span class="ordertotal">{$grandtotal},-</span></td>
-                    <td><a href="#orderform" class="btn btn-warning"><i class="icon-arrow-down"></i> {_'Continue your Order'}</a></td>
+                    <td></td>
+                    <td><a href="#orderform" class="btn btn-danger btn-sm"><i class="icon-arrow-down"></i> {_'Continue checkout'}</a></td>
+                    <td colspan="1"> <strong>{_'Shipping'}:</strong> <br>
+                         <span class="shipping">{_'not selected'}</span></td>
+                    <td colspan="2" class="text-left"> <strong>{_'Grand Total'}:</strong><br>
+                        <span class="ordertotal">{$grandtotal},-</span></td>
+
                 </tr>
                 
             </tbody>
             
         </table>
-
-<div class="span10 miniproduct thumbnail">
+    </div>
+<div class="col-md-10">
     <div class="">
     
         
-        {form cartForm}
-        <fieldset>
-            
-            <legend id="orderform"><span class="badge badge-info">1</span> {_'Choose your delivery option'}</legend>
-    <div class="controls span12">
-        <div class="span4">
+        {form cartForm role => form}
+ <div class="col-md-11 margin5">           
+<legend id="orderform"><span class="label label-success">1</span> {_'Choose your delivery option'}</legend>
+    <div class="controls col-md-12">
+       <div class="form-group col-md-5">
            {ifset $lowerShippers}
             {label shippers /}
             {/ifset}
-            <div>
+             <div class="input-group">
            
             {input shippers}
             </div>
         </div>
         {ifset $lowerShippers}
-        <div class="span8">
+         <div class="form-group col-md-5">
           {foreach $lowerShippers as $lower}
                 {label lowerShippers$lower /}
-            <div>
+             <div class="input-group">
                 {input lowerShippers$lower}
             </div>
             {/foreach}
         
         </div>
         {/ifset}
-        <div class="span10 margin5"><strong>{_'Selected shipping:'} </strong><span class="shipping">{_'not selected'}</span></div>
+        <div class="col-md-10 margin5"><strong>{_'Selected shipping:'} </strong><span class="shipping">{_'not selected'}</span></div>
     </div>
-            <legend><span class="badge badge-info">2</span> {_'Fill contact information'}</legend>
-            <div class="controls span5">
-                
+    </div>
+ <div class="col-md-11 margin5">
+<legend><span class="label label-success">2</span> {_'Fill contact information'}</legend>
+            <div class="controls col-md-5">
+                <div class="form-group">
                 {label name /}
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-user"></i></span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-user"></i></span>
                 {input name}
-                </div>
+                </div></div>
+                    <div class="form-group">
                 {label phone /}
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-phone"></i></span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-phone"></i></span>
                 {input phone}
-                </div>
+                </div></div>
+                    <div class="form-group">
                 {label email /}
-                <div class="input-prepend">
-                    <span class="add-on">@</span>
+                <div class="input-group">
+                    <span class="input-group-addon">@</span>
                 {input email}
-                </div>
+                </div></div>
             </div>
-            <div class="controls span6">
+            <div class="controls col-md-6">
+                <div class="form-group">
                 {label address /}
                 {input address}
+                </div>
+                <div class="form-group">
                 {label city /}
                 {input city}
+                </div>
+                <div class="form-group">
                 {label zip /}
                 {input zip}
+                </div>
             </div>    
-            
-            <legend><span class="badge badge-info">3</span> {_'Select Payment method'}</legend>
-            <div class="controls span4">
+ </div> 
+ <div class="col-md-11 margin5">
+<legend><span class="label label-success">3</span> {_'Select Payment method'}</legend>
+            <div class="controls col-md-4">
                 {label payment /}
                 {input payment}
             </div>
-            <legend><span class="badge badge-info">4</span> {_'Finish your order'}</legend>
-            <div class="controls span5">
+ </div>
+         <div class="col-md-11 margin5">
+<legend><span class="label label-success">4</span> {_'Finish your order'}</legend>
+            <div class="controls col-md-5">
                 {input send}
                 <hr>
                 {input termButton}
                 {_'I accept Terms and condition.'}
                 
             </div>
-             <div class="controls span6">
+             <div class="controls col-md-6">
                 {label note /}
                 {input note}
                  {input shipping}
             </div>
-            </fieldset>
+         </div>
         {/form}
     </div>
-<div class="span11 alert alert-info">   
-                        <div class="span2">                    
+<div class="col-md-11 alert alert-success">   
+                        <div class="col-md-2">                    
                             <i class="icon-shopping-cart icon-4x"></i></div>
-                        <div class="span10">
-                            <h4 class="span4"><strong class="span12">{_'Products'}:</strong>
-                                <span class="span12">{$grandtotal},-</span></h4>
-                            <h4 class="span4"><strong class="span12">{_'Shipping'}:</strong> 
-                                <span class="shipping span12">0,-</span></h4>
-                            <h4 class="span4"><strong class="span12">{_'Total'}:</strong>
-                                <span class="ordertotal span12">{$grandtotal},-</span></h4>
+                        <div class="col-md-10">
+                            <h4 class="col-md-4"><strong class="col-md-12">{_'Products'}:</strong><br>
+                                    <span class="col-md-12">{$grandtotal},-</span></h4>
+                            <h4 class="col-md-4"><strong class="col-md-12">{_'Shipping'}:</strong> <br>
+                                <span class="shipping col-md-12">{_'not selected'}</span></h4>
+                            <h4 class="col-md-4"><strong class="col-md-12">{_'Total'}:</strong><br>
+                                    <span class="ordertotal col-md-12">{$grandtotal},-</span></h4>
                         </div>
                     </div> 
     

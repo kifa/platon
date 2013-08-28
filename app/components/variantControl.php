@@ -56,13 +56,16 @@ class variantControl extends BaseControl {
         $trackingForm->setTranslator($this->translator);
         $trackingForm->addText('user', 'Your email:')
                 ->addRule(FORM::EMAIL)
-                ->setRequired();
+                ->setRequired()
+                ->setAttribute('class', 'form-control');;
         $trackingForm->addText('order', 'Your order number:')
-                ->setRequired();
+                ->setRequired()
+                ->setAttribute('class', 'form-control');;
         $trackingForm->addText('pass', 'Your secret code:')
-                ->setRequired('Please enter your secret code from mail');
+                ->setRequired('Please enter your secret code from mail')
+                ->setAttribute('class', 'form-control');
         $trackingForm->addSubmit('track', 'Track order')
-                ->setAttribute('class', 'btn btn-primary')
+                ->setAttribute('class', 'btn btn-success form-control')
                 ->setHtmlId('track');
         $trackingForm->onSuccess[] = $this->trackingFormSubmitted;
         return $trackingForm;
@@ -109,14 +112,16 @@ class variantControl extends BaseControl {
                     ->setDefaultValue($this->row['SellingPrice'])
                     ->setRequired()
                     ->setType('number')
-                    ->addRule(FORM::FLOAT, 'This has to be a number.');
+                    ->addRule(FORM::FLOAT, 'This has to be a number.')
+                    ->setAttribute('class', 'form-control');
             $priceForm->addText('sale', 'Discount:')
+                    ->setAttribute('class', 'form-control')
                     ->setDefaultValue($this->row['SALE'])
                     ->addRule(FORM::FLOAT, 'This has to be a number.')
                     ->addRule(FORM::RANGE, 'It should be less then price', array(0, $this->row['SellingPrice']));
             $priceForm->addHidden('id', $this->row['ProductID']);
             $priceForm->addSubmit('edit', 'Save price')
-                    ->setAttribute('class', 'btn btn-primary')
+                    ->setAttribute('class', 'btn btn-success form-control')
                     ->setHtmlId('priceSave')
                     ->setAttribute('data-loading-text', 'Saving...');
             $priceForm->onSuccess[] = $this->editPriceFormSubmitted;

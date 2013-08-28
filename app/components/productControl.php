@@ -18,13 +18,7 @@ class productControl extends BaseControl{
     protected $translator;
     private $categoryModel;
     private $productModel;
-    private $blogModel;
     private $shopModel;
-
-
-    private $parameters;
-
-    private $row;
 
     public function setTranslator($translator) {
         $this->translator = $translator;
@@ -32,7 +26,6 @@ class productControl extends BaseControl{
 
     public function setCategory($cat) {
         $this->categoryModel = $cat;
-
     }
     
     public function setProduct($pro) {
@@ -107,22 +100,7 @@ class productControl extends BaseControl{
     }
     
     
-    public function handleCoverPhoto($id, $photo) {
-        if ($this->presenter->getUser()->isInRole('admin')) {
-            $row = $this->productModel->loadPhoto($photo);
-            if (!$row) {
-                $this->flashMessage('There is no photo to set as cover', 'alert');
-            } else {
-                $this->productModel->updateCoverPhoto($id, $photo);
-                $e = 'Photo ' . $row->PhotoName . ' was sucessfully set as COVER.';
-
-                $this->productModel->coverPhoto($id);
-                $this->flashMessage($e, 'alert');
-            }
-
-            $this->redirect('Product:product', $id);
-        }
-    }
+    
     
    
     /*********************************************************************
@@ -134,13 +112,13 @@ class productControl extends BaseControl{
      */
     
     public function renderProductMini($product) {
-        $layout = $this->shopModel->getShopInfo('ProductMiniLayout');
-       
+        
         $albumID = $this->productModel->loadPhotoAlbumID($product['ProductID']);
         if($albumID){
             $albumID->PhotoAlbumID;
         }
-        $this->template->setFile(__DIR__ . '/' . $layout . '.latte');    
+        $this->template->setFile(__DIR__ . '/ProductMini.latte');   
+        $this->template->pieces = $this->productModel->loadTotalPieces($product['ProductID']);
         $this->template->product = $product;
         $this->template->albumID = $albumID;
         $this->template->photo = $this->productModel->loadCoverPhoto($product['ProductID']);

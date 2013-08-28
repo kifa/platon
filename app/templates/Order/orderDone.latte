@@ -1,4 +1,3 @@
-
 {block pageheader}
 
 <div class="page-header">
@@ -9,20 +8,20 @@
 
 
 {block content}
-<div class="span11 miniproduct thumbnail">
-      <div class="span8 alert alert-block">
-                <div class="span12">
+<div class="col-md-11 shopOrderDone">
+      <div class="col-md-8 alert alert-block">
+                <div class="col-md-12">
                     <p>
-                    <i class="icon-spinner progress-striped icon-spin left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
+                    <i class="icon-spinner icon-spin left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
                 {$order->StatusName} - {$order->StatusDescription}
                     </p>
                 </div>
                 <br>
-                <div class="progress progress-striped active span10">
-                    <div class="bar" style="width: {foreach $statuses as $sid => $status}{if $sid === $order->OrderStatusID}{$status->StatusProgress}0%{/if}{/foreach}"></div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success active" style="width: {$order->StatusProgress}0%"></div>
                 </div>
-                <div class="span12">
-                <ul class="inline">
+                <div class="col-md-12">
+                <ul class="list-inline">
                     <li>{_'Next progress'}:</li>
                     {foreach $statuses as $id => $status}
                     {if !($iterator->isFirst())}
@@ -32,10 +31,33 @@
                     {/foreach}
                   </ul>
                 </div>
+                
+                {if $order->StatusProgress == 1}
+                <div class="alert alert-warning">
+                    <div><strong>{_'Please pay your order by clicking on button Buy Now'}:</strong>
+                    </div>
+    
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="alexmart@hanmail.net">
+<input type="hidden" name="lc" value="KR">
+<input type="hidden" name="item_name" value="FREE PAYMENT">
+<input type="hidden" name="amount" value="{$order->TotalPrice}">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="button_subtype" value="services">
+<input type="hidden" name="no_note" value="0">
+<input type="hidden" name="shipping" value="0.00">
+<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
+<input type="image" src="https://www.paypalobjects.com/en_US/IT/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+                    
+                </div>
+                {/if}
             </div>
     
-    <div class="span4">
-    <div class="span12">
+    <div class="col-md-4">
+    <div class="col-md-12">
 <div class="alert-success alert">
     <p><i class="icon-info-sign"></i><strong> {_'Thank you for your order!'}</strong><br>
     {_'We are currenty procesing your order.'} {_'Here you can check order status.'} {_'Link to this page has been sent to your email.'}
@@ -51,7 +73,7 @@
 
     </div>
            
-            <table class="table table-hover span12">
+            <table class="col-md-12 table table-hover">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -72,7 +94,7 @@
                      <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$product->PhotoURL}" class="img-circle" style="width: 38px;"/>
 
                 {else}
-                   <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="width: 38px;"/>
+                   <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="col-md-2" style="width: 38px;"/>
                 {/if*}
                         </td>
                         {if $product->ProductVariantName}
@@ -81,8 +103,8 @@
                     <td><a href="{plink Product:product $product->ProductID, $product->ProductName}">{$product->ProductName}   </a></td>
                     {/if}
                         <td>{$product->Quantity}</td>
-                        <td>{$product->UnitPrice},-</td>
-                        <td>{$subtotal = $product->Quantity * $product->UnitPrice},-</td>
+                        <td>$&nbsp;{$product->UnitPrice|number:2}</td>
+                        <td>$&nbsp;{$subtotal = $product->Quantity * $product->UnitPrice}</td>
 
                     </tr>
        {var $grandtotal += $subtotal}
@@ -91,75 +113,69 @@
 
                <tr>
                     <td colspan="2"></td>
-                    <td><strong >{_'Products'}:</strong> {$grandtotal},-</td>
-                    <td><strong >{_'Shipping'}:</strong> {$shipping = $order->DeliveryPrice},-</td>
-                    <td><strong >{_'Total'}:</strong> {$grandtotal += $shipping},-</td>
+                    <td><strong >{_'Products'}:</strong>$&nbsp;{$grandtotal|number:2}</td>
+                    <td><strong >{_'Shipping'}:</strong>$&nbsp;{$shipping = $order->DeliveryPrice}</td>
+                    <td><strong >{_'Total'}:</strong>$&nbsp;{$grandtotal += $shipping}</td>
                 </tr>
                 </tbody>
             </table>
     
-    <div class="span12">        
-          <div class="span4 alert alert-info">
-            <div class="span12">
-            <i class="icon-user left icon-large"></i><strong> {_'Your contact'}:</strong>
-            <p>
-                <dl>
-                    <dd>{_'Name'}: <strong>{$order->Name}</strong></dd>
-                    <dd>{_'Email'}: <strong>{$order->UsersID}</strong></dd>
-                    <dd>{_'Phone'}: <strong>{if $order->PhoneNumber != !''}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
-                </dl>
-            </p>
+    <div class="col-md-12">        
+       
+        <div class="col-md-4">
+        <div class="panel panel-default">
+               <div class="panel-heading"><i class="icon-user left icon-large"></i> {_'Your contact'}:</div>
+            <div class="panel-body">
+                <dl class="">
+                    <dt>{_'Name'}:</dt> <dd>{$order->Name}</dd>
+                    <dt>{_'Email'}:</dt> <dd>{$order->UsersID}</dd>
+                    <dt>{_'Phone'}:</dt> <dd>{if $order->PhoneNumber != ''}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
+                
         {if $order->CompanyName != ""}
-            <dl>
                 <dt>{_'Company'}:</dt>
                 <dd>{$order->CompanyName}</dd>
-            </dl>
         {/if}
+                    </dl>
             </div>
-        </div>
+        </div></div>
         
-            <div class="span3 alert alert-info">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+               <div class="panel-heading"> {_'Order data'}</div>
+                <div class="panel-body">
 
-                <div class="span12">
-                    <p>
-                    <i class="icon-calendar icon-large left"></i><strong> {_'Date created'}:</strong>&nbsp;
-                {$order->DateCreated|date:'%d.%m.%Y'}
-                    </p>
+                    <dl class="">
+                        <dt><i class="icon-calendar icon-large left"></i> {_'Date created'}:</dt>
+                        <dd> {$order->DateCreated|date:'%d.%m.%Y'}</dd>
+                    
+                         <dt><i class="icon-truck icon-large left"></i> {_'Shipping'}:</dt>
+                        <dd> {$order->DeliveryName}</dd>
+                        
+                         <dt><i class="icon-money icon-large left"></i> {_'Payment'}:</dt>
+                        <dd> {$order->PaymentName}</dd>
+                    </dl>
                 </div>
-
-                <div class="span12">
-                    <p>
-                    <i class="icon-truck icon-large left"></i><strong> {_'Shipping'}:</strong>&nbsp;
-                {$order->DeliveryName}
-                    </p>
-                </div>
-                <br>
-                <div class="span12">
-                    <p>
-                    <i class="icon-money icon-large left"></i><strong> {_'Payment'}:</strong>&nbsp;
-                {$order->PaymentName}
-                    </p>
-                </div>
-            </div>
+            </div></div>
         
           
-
-        <div class="span4 alert alert-info">
-            <div class="span12">
-                 <i class="icon-home left icon-large"></i><strong> {_'Your address'}:</strong>
-            <dl>
+        <div class="col-md-4">
+        <div class="panel panel-default">
+               <div class="panel-heading"><i class="icon-home left icon-large"></i> {_'Your address'}</div>
+          <div class="panel-body">
+               <dl class="">
               
-                <dd>{_'Street'}: <strong>{$address->Street}</strong></dd>
-                <dd>{_'City'}: <strong>{$address->City}</strong></dd>
-                <dd>{_'ZIP'}: <strong>{$address->ZIPCode}</strong></dd>
+                <dt>{_'Street'}:</dt> <dd>{$address->Street}</dd>
+                <dt>{_'City'}:</dt> <dd>{$address->City}</dd>
+                <dt>{_'ZIP'}:</dt> <dd>{$address->ZIPCode}</dd>
             </dl>     
                  
             </div>
         </div>
-        </div>
-    <div class="span12">
-        <div class="span11 alert {$order->Note ? 'alert-block' : 'alert-info'}">
-            <div class="span12">
+      </div></div>
+    
+    <div class="col-md-12">
+        <div class="col-md-11 alert {$order->Note ? 'alert-danger' : 'alert-success'}">
+            <div class="col-md-12">
                 <i class="icon-paper-clip left icon-large"></i><strong> {_'Questions & notes'}:</strong>
                     {foreach $notes as $note}
                 <p>{$note->NotesName} - {$note->NotesDescription} - {$note->NotesDate}</p>
@@ -177,20 +193,24 @@
 {/block}
 
 {block modal}
-<div id="addNote" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
+<div id="addNote" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-ban-circle"></i> {_'Add Note'}</h3>
+              <h3 id="myModalLabel"><i class="icon-envelope"></i> {_'Add Note'}</h3>
             </div>
             <div class="modal-body">
                 <p>{_'Add any note to this order'}</p>
+                              {control addNoteForm}
+
             </div>
             <div class="modal-footer">
                 
-              {control addNoteForm}
               <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
             </div>
     </div>
+                  </div>
 {/block}
 
 {block script}

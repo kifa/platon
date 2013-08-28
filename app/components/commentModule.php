@@ -109,15 +109,15 @@ class commentModule extends moduleControl {
             $addComment->setTranslator($this->translator);
             $addComment->addText('title', 'Title:')
                     ->setRequired('Please fill document name')
-                    ->setAttribute('class', 'span10');
+                    ->setAttribute('class', 'col-md-10');
             $addComment->addHidden('productid', $this->id);
             $addComment->addTextArea('content', 'Review', 20, 5)
-                    ->setAttribute('class', 'span10');
+                    ->setAttribute('class', 'col-md-10');
             $addComment->addText('author', 'Your name:')
                     ->setRequired('Please fill document name')
-                    ->setAttribute('class', 'span10');
+                    ->setAttribute('class', 'col-md-10');
             $addComment->addSubmit('add', 'Add Review')
-                    ->setAttribute('class', 'btn-primary upl')
+                    ->setAttribute('class', 'btn btn-primary upl')
                     ->setAttribute('data-loading-text', 'Adding...');
             $addComment->onSuccess[] = $this->addCommentFormSubmitted;
             return $addComment;
@@ -198,8 +198,9 @@ class commentModule extends moduleControl {
         $this->template->status = $info->StatusID; 
         
         if($info->StatusID  == 1) {
+            
         $this->template->comments = $this->productModel->loadCommentsByDate();
-        }
+        } 
         $this->template->render();
     }
     

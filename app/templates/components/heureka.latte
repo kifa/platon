@@ -1,7 +1,7 @@
 {contentType application/xml}
 <?xml version="1.0" encoding="utf-8"?>
 <SHOP>
-     {foreach $products as $id => $product}
+     {foreach $products as $product}
   <SHOPITEM>
     <ITEM_ID>{$product->ProductNumber}</ITEM_ID>
     <PRODUCTNAME>{$product->ProductName}</PRODUCTNAME>

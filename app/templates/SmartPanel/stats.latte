@@ -4,8 +4,8 @@
     <h1 n:block="title"><i class="icon-bar-chart"></i> {_'Stats'} <small>{_'Magical numbers that improve your sales.'}</small></h1>
 
 <div class="row">
-            <div class="span10">
-                <a class="btn" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a>
+            <div class="col-md-10 smartPanelBar">
+                <a class="btn btn-default" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a>
             </div>
         </div>
     </div>
@@ -13,7 +13,7 @@
 {/block}
 
 {block content}
-<div class="span10"> 
+<div class="col-md-10"> 
 {if $user->isInRole('admin')}
 
     <div class="tabbable"> <!-- Only required for left/right tabs -->
@@ -23,7 +23,7 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="overal">
-                <div class="span6">
+                <div class="col-md-6">
                     {control moduleControl:smartPanelModule 'gapi'}
                 </div>
             </div> <div class="tab-pane" id="cat">
@@ -41,7 +41,7 @@
 {/block}
 
 {block sidebar}
-<div class="span2"> 
+<div class="col-md-2"> 
   {if $user->isInRole('admin')}
         {control menu:admin}
         {/if}

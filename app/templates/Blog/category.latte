@@ -4,9 +4,9 @@
 
 {block pageheader}
 {if $user->isInRole('admin')}
-<div class="row-fluid">
+<div class="row">
      
-        <div class="span11">
+        <div class="col-md-11">
                 <a href="#addPost" class="btn" data-toggel="modal" data-target="#addPostButton" id="addPostButton"><i class="icon-large icon-plus"></i> {_"Add Post"}</a>
                 <div class="btn-group">
                 <a href="#" class="btn"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
@@ -38,13 +38,13 @@
 {/block}
     
 {block content}
-<div class="span12">    
+<div class="col-md-12">    
     {include ../Blog/posts.latte}
 </div>
 {/block}
 
 {block sidebar}
- <div class="span3">   
+ <div class="col-md-3">   
     {if $user->isInRole('admin')}
         {control menu:admin}
     {/if}

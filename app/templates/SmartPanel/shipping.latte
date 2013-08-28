@@ -1,13 +1,13 @@
 {block pageheader}
 {if $user->isInRole('admin')}
 
-            <div class="span12 smartPanelBar">
-                <a class="btn" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a> |
-                <a class="btn" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+            <div class="col-md-12 smartPanelBar">
+                <a class="btn btn-default" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a> |
+                <a class="btn btn-default" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
             </div>
 
 
-<div class="page-header span12">
+<div class="page-header col-md-12">
     <h1 n:block="title"><i class="icon-truck"></i> {_'Shipping'} <small>{_'Here you see all shipping methods.'}</small></h1>
 
    </div>
@@ -15,18 +15,18 @@
 {/block}
 
 {block content}
-<div class="span10"> 
+<div class="col-md-10"> 
 {if $user->isInRole('admin')}
 
-    <div class="tabbable span12"> <!-- Only required for left/right tabs -->
+    <div class="tabbable col-md-12"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">
             <li class="active"><a href="#overal"  data-toggle="tab">{_'Overal'}</a></li>
             <li><a href="#addShip"  data-toggle="tab">{_'Add Shipping'}</a></li>
         </ul>
-        <div class="tab-content span12">
+        <div class="tab-content col-md-12">
             <div class="tab-pane active" id="overal">
                 
-                <div class="span10">
+                <div class="col-md-10">
                     <table class="table" n:snippet="shipping">
                         <thead>
                             <tr>
@@ -37,7 +37,7 @@
                                 <th>{_'Free from'}</th>
                                 <th>{_'Status'}</th>
                                 <th>{_'Higher Shipping'}</th>
-                                <th class="span2"></th>
+                                <th class="col-md-2"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,10 +68,10 @@
             
             </div> 
             <div class="tab-pane" id="addShip">
-                <div class="span5">
+                <div class="col-md-5">
                     {control addShippingForm}
                 </div>
-                <div class="span6">
+                <div class="col-md-6">
                      {control moduleControl:shippingModules}
                 </div>
 
@@ -84,7 +84,7 @@
 {/block}
 
 {block sidebar}
-<div class="span2"> 
+<div class="col-md-2"> 
   {if $user->isInRole('admin')}
         {control menu:admin}
         {/if}

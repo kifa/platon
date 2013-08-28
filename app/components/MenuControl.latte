@@ -1,47 +1,20 @@
-<li class="{ifCurrent Homepage:default}active{/ifCurrent}"><a href="{plink Homepage:default}">{_"Home"}</a></li>
                 {foreach $category as $catID => $cat}
                 {if !$cat->HigherCategoryID}
                 {if $cat->CategoryStatus != 4}
 <li class="{ifCurrent Product:products $catID, $cat->CategoryName}active{/ifCurrent}"><a href="{plink product:products $catID, $cat->CategoryName}">
-                        {if $img !== NULL}
-                            {if $cat->CategoryPhoto != NULL}
-        <img src="{$basePath}/images/category/20-{$cat->CategoryPhoto}" class="img-circle" alt="{$cat->CategoryName}"/>
-                            {/if}
-                        {/if}
-
                     {if $cat->CategoryStatus == 0} <i class="icon-eye-close"></i> {/if}
                     {$cat->CategoryName}</a></li> 
                 {/if}{/if}
                 {/foreach}
-<li class="dropdown {ifCurrent product:productsBrand}active{/ifCurrent}}">
-   
-        <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-    {_'Choose Brand'}
-            <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-      {foreach $producers as $prodID => $producer}
-            <li class="{*ifCurrent Product:products $catID}active{/ifCurrent*}"><a href="{plink product:productsBrand $prodID}"><i class="icon-spinner"></i>{$producer->ProducerName}</a></li> 
-        {/foreach}
-        </ul>
-</li>
 
-                {if $user->isInRole('admin')}
+    {foreach $menu as $postID => $post}
+    <li class="{ifCurrent Blog:staticText $postID}active{/ifCurrent}"><a href="{plink Blog:staticText $postID}">{$post->StaticTextName}</a></li> 
+    {/foreach}
 
+    <li class="{ifCurrent Blog:category}active{/ifCurrent}"><a href="{plink Blog:category}">{_"Blog"}</a></li>
+    {if $user->isInRole('admin')}
+
+<li><a href="#addStaticText" data-toggel="modal" data-target="#addStaticText" id="addStaticTextButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Text"}</a></li>
 <li><a href="#addCategory" data-toggel="modal" data-target="#addCategory" id="addCategoryButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Category"}</a></li>
 
                 {/if}
-
-<li class="dropdown{ifCurrent Blog:category} active{/ifCurrent}{ifCurrent Homepage:photos} active{/ifCurrent}">
-<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="icon-large icon-instagram"></i> 
-    {_'Blog and Gallery'}
-            <b class="caret"></b>
-        </a>
-        <ul class="dropdown-menu">
-<li class="{ifCurrent Blog:category}active{/ifCurrent}"><a href="{plink Blog:category}"><i class="icon-large icon-star-empty"></i> {_"Blog"}</a></li>
-<li class="{ifCurrent Homepage:photos}active{/ifCurrent}"><a href="{plink Homepage:photos}"><i class="icon-large icon-instagram"></i> {_"Photo gallery"}</a></li>
-        </ul>
-
-</li>
-
-<li class="{ifCurrent Homepage:contact}active{/ifCurrent}"><a href="{plink Homepage:contact}"><i class="icon-large icon-phone"></i> {_"Contact"}</a></li>

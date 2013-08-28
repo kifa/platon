@@ -29,20 +29,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     private $cart;
     protected $usertracking;
     protected $gapisession;
-    
     private $filter;
 
-
     private $orderModel;
-    
-
-
     public $backlink;
     
     /** @persistent */
     public $lang;
-    
-    
 
     /** @var NetteTranslator\Gettext */
     protected $translator;
@@ -57,21 +50,19 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $salt = $this->shopModel->getShopInfo('Salt');
         $this->cart = $this->getSession('cart'.$salt);
         
-        if(!isset($this->gapisession)){
-        $this->gapisession = $this->getSession('gapitoken');
-        }
-        
         
         if(!isset($this->filter)){
         $this->filter = $this->getSession('filter'.$salt);
+        $this->filter->sort = NULL;
         }
-
+        
         
         $salt = md5($this->getUser()->getId());
         $this->usertracking = $this->getSession('user'.$salt);
         
-        
-        
+        if(!isset($this->gapisession)){
+        $this->gapisession = $this->getSession('gapitoken');
+        }
     }
     
     public function injectProductModel(ProductModel $productModel) {
@@ -107,7 +98,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
             $ico = HTML::el('i')->class('icon-ok-sign left');
             $message = HTML::el('span', ' ' . $row->ProductName . '' . $mess);
             
-            $link = HTML::el('a', $mess2)->href($this->link('Order:cart'))->class('btn btn-primary btn-small');
+            $link = HTML::el('a', $mess2)->href($this->link('Order:cart'))->class('btn btn-danger btn-small');
             $ico2 = HTML::el('i')->class('icon-arrow-right right');
             $message->insert(0, $ico);
             $message->insert(2, $link);
@@ -193,10 +184,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $wwwDir = $this->context->parameters['wwwDir'];
     $files = new \WebLoader\FileCollection($wwwDir . '/css');
     $files->addFiles(array(
-        'screen.css',
-        'print.css',
         'bootstrap.min.css',
-        'bootstrap-responsive.min.css',
+   //     'bootstrap-theme.min.css',
         'jquery.wysiwyg.css',
         'flag.css',
         'font-awesome-ie7.min.css',

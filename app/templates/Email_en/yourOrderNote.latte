@@ -1,0 +1,18 @@
+{var $mail->from = $shopName . ' <' . $adminMail . '>' }
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>New message about your order</title>
+    <style>
+    body {
+       
+    }
+    </style>
+</head>
+<body>
+    <p>Dear Sir,</p>
+
+    <p>You have a new message about your order #{$orderId}:</p>
+    <p>{$note}</p>
+</body>
+</html>

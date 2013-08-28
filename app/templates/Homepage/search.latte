@@ -14,17 +14,17 @@
         
         
 {block content}
-<div class="span12">
+<div class="col-md-12">
     {if $query}
     
-    <div class="span10">
-        <h4>{_'You are looking for'} {$query}? {_'We have found these results:'}</h4>
+    <div class="col-md-10">
+        <h4>{_'You are looking for'} <i>{$query}</i>? {_'We have found these results:'}</h4>
     </div>
     
     
 
     {if $categories}
-    <div class="span10">
+    <div class="col-md-10">
         <h4>{_'Categories'}</h4>
   <table class="table">
               <tbody>        
@@ -43,27 +43,23 @@
     
     
     {if $products}
-    <div class="span10">
+    <div class="col-md-10">
         <h4>{_'Products'}</h4>
-        <table class="table">
-              <tbody>
-        {foreach $products as $id => $product}
-           {control product:productMini $product}
-                <tr> 
-                  <td><a href="{plink Product:product $product->ProductID, $product->ProductName}">{$product->ProductName}</a></td>
-                  <td>{$product->ProductDescription|striptags|truncate:50, '...'}</td>
-                  
-                </tr>             
-            
-        {/foreach}
-                </tbody>
-            </table>
+        <div class="row homepageProductsList" n:snippet="products">
+      
+            {foreach $products as $id => $product}
+               <div class="col-xs-12 col-sm-6 col-md-4">  
+                 {control product:productMini $product}
+               </div>
+            {/foreach}
+
+</div> 
     </div>
     {/if}
     
         
     {if $posts}
-    <div class="span10">
+    <div class="col-md-10">
         <h4>{_'Posts'}</h4>
          <table class="table">
               <tbody>
@@ -83,7 +79,7 @@
     {else}
     
     {control searchControl}
-    <div class="span12 margin5">
+    <div class="col-md-12 margin5">
     {_'Cannot find what are you looking for?'} <a href="{plink Homepage:contact}" class="btn btn-primary"><i class="icon-phone"></i> {_'Contact us'}</a>
     </div>
     {/if}
@@ -94,7 +90,7 @@
 
 
 {block sidebar}
-<div class="span3">
+<div class="col-md-3">
     <ul class="nav nav-list">
         <li class="nav-header"><i class="icon-group icon-large"></i> {_'Company info'}</a></li>
         <li class="divider"></li>
@@ -114,20 +110,5 @@
 
 
 {block script}
-<div n:snippet="script">
-<script>
-    
-    $('a.ajax').click(function(){
-        $(this).html('<i class="icon-spinner icon-spin"></i>');
-    });
-    
-    $('input[name="srch"]').click(function() { 
-                $('input[name="srch"]').attr('class', 'btn btn-primary disabled');
-                $('input[name="srch"]').attr('value', 'Searching...');
-            });
-    
-    
-</script>
-</div>
 
 {/block}

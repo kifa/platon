@@ -6,12 +6,12 @@
 {block pageheader}
 {if $user->isInRole('admin')}
 
-    <div class="span12">
-             <div class="alert alert-error span12"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?'}</div>
+    <div class="col-md-12" n:snippet="productMenu">
+             <div class="alert alert-error col-md-12"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?'}</div>
 
             <div class="btn-group">
-                <a class="btn"><i class="icon-sitemap"></i> {_'Choose Category'}</a>
-                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                <a class="btn btn-default"><i class="icon-sitemap"></i> {_'Choose Category'}</a>
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" n:snippet="productCategory">
@@ -27,8 +27,8 @@
             </div>
 
             <div class="btn-group">
-                <a class="btn">{_'Choose Producer'}</a>
-                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                <a class="btn btn-default">{_'Choose Brand'}</a>
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" n:snippet="productProducer">
@@ -45,52 +45,52 @@
             <div class="btn-group" n:snippet="productStatus">
     
               {if $product->ProductStatusID == 3} 
-                <a href="{plink setProductStatus! $product->ProductID, 2}" class="btn ajax active"><i class="icon-thumbs-up"></i></a>
+                <a href="{plink setProductStatus! $product->ProductID, 2}" class="btn btn-default ajax active"><i class="icon-thumbs-up"></i></a>
                    {else}
-                <a href="{plink setProductStatus! $product->ProductID, 3}" class="btn ajax"><i class="icon-thumbs-up"></i></a>
+                <a href="{plink setProductStatus! $product->ProductID, 3}" class="btn btn-default ajax"><i class="icon-thumbs-up"></i></a>
                    {/if}
                   
                 {if $product->ProductStatusID == 1}
-<a href="{plink showProduct! $product->CategoryID, $product->ProductID}" title="{_'Publish product'}" class="ajax btn"><i id="showProduct" class="icon-large icon-eye-open"></i></a>
+<a href="{plink showProduct! $product->ProductID}" title="{_'Publish product'}" class="ajax btn btn-danger"><i id="showProduct" class="icon-large icon-eye-open"></i> Publish product</a>
 
-<a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" title="{_'Archive product'}" class="ajax btn"><i id="deleteProduct" class="icon-large icon-inbox"></i></a>
+<a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" title="{_'Archive product'}" class="ajax btn btn-default"><i id="deleteProduct" class="icon-large icon-inbox"></i> Archive</a>
 
     {elseif $product->ProductStatusID == 2}
-<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" title="{_'Hide product'}" class="ajax btn"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
+<a href="{plink hideProduct! $product->ProductID}" title="{_'Hide product'}" class="ajax btn btn-default"><i id="hideProduct" class="icon-large icon-eye-close"></i> Hide</a>
 
     
     {elseif $product->ProductStatusID == 3} 
-<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" title="{_'Hide product'}" class="ajax btn"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
+<a href="{plink hideProduct! $product->ProductID}" title="{_'Hide product'}" class="ajax btn btn-default"><i id="hideProduct" class="icon-large icon-eye-close"></i> Hide</a>
                    
     {else}
-<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" class="btn ajax"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
+<a href="{plink hideProduct! $product->ProductID}" class="btn btn-default ajax"><i id="hideProduct" class="icon-large icon-eye-close"></i> Hide</a>
     {/if}
 
             </div>
             <div class="btn-group">
-               <a href="#editParam" class="btn" data-toggel="modal" data-target="#editParam" id="editParamButton"><i class="icon-large icon-list"></i> {_"Edit Specs"}</a>
-               <a href="#addVariant" class="btn" data-toggel="modal" data-target="#addVariant" id="addVariantButton"><i class="icon-large icon-expand-alt"></i> {_'Add variant'}</a>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editParam" id="editParamButton"><i class="icon-list"></i> {_"Edit Specs"}</button>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addVariant" id="addVariantButton"><i class="icon-expand-alt"></i> {_'Manage variants'}</button>
             </div>
-            <a href="#stats" class="btn" data-toggel="modal" data-target="#stats" id="statsButton"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#stats" id="statsButton"><i class="icon-bar-chart"></i> {_"Stats"}</button>
         </div>
 {/if}
 
 <div class="page-header" n:snippet="page-header">
     <h1><span class="prodTitle" n:snippet="prodTitle" n:block="title">{$product->ProductName}</span>
             <small>
-                    {if $product->PiecesAvailable > 5}
-            <span class="badge badge-info">{$product->PiecesAvailable}</span>
-                    {elseif $product->PiecesAvailable > 0}
-            <span class="badge badge-warning">{$product->PiecesAvailable} {_'LAST'}</span>
+                    {if $pieces > 5}
+            <span class="label label-success">{$pieces}</span>
+                    {elseif $pieces > 0}
+            <span class="label label-warning">{$pieces} {_'LAST'}</span>
                     {else}
-            <span class="badge badge-inverse">{_'OUT OF STOCK'}</span>
+            <span class="label label-default">{_'OUT OF STOCK'}</span>
                     
                     {/if}
             {if $product->ProductStatusID == 3}
-                <span class="badge badge-inverse"><i class="icon-thumbs-up icon-large"></i> {_'HOT'}</span>
+                <span class="label label-danger"><i class="icon-thumbs-up "></i> {_'HOT'}</span>
             {/if}
             {if $product->SALE > 1}
-                <span class="badge badge-important"><i class="icon-money icon-large"></i> {_'SALE'}</span>
+                <span class="label label-important"><i class="icon-money"></i> {_'SALE'}</span>
             {/if}
            
             </small></h1>
@@ -98,22 +98,21 @@
 {/block}
 
 {block content}
-<div class="span12">
-    <div class="span5">
+<div class="col-md-12">
+    <div class="col-md-5">
         {if $photo}
-                     <img src="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" class="img-polaroid margin5" />
+                     <img src="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" class="col-md-12 col-xs-12 col-sm-12 margin5 img-responsible" />
 
                 {else}
-                   <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="height: 150px; width: auto;"/>
+                   <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="col-md-2" style="height: 150px; width: auto;"/>
                 {/if} 
     </div>
     
-    <div class="span6">
-        <div class="tabbable span12 pull-right">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="tabbable col-md-12 ">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#info" data-toggle="tab"><i class="icon-info-sign"></i> {_'Info'}</a></li>
                 <li><a href="#spec" data-toggle="tab"><i class="icon-list"></i> {_'Spec'}</a></li>
-                <li><a href="#other" data-toggle="tab">{_'Other'}</a></li>
                 <li><a href="#ask" data-toggle="tab"><i class="icon-comment"></i> {_'Ask'}</a></li>
             </ul>
             <div class="tab-content">
@@ -127,116 +126,112 @@
                         {foreach $parameter as $parameter}
                         <dt>{$parameter->AttribName}:</dt>
                         <dd>{$parameter->Val}{$parameter->UnitShort}</dd>
-                        {/foreach}                        
+                        {/foreach}   
+                        <dt>Brand:</dt>
+                        <dd><a href="{plink product:productsBrand $product->ProducerID}">{$product->ProducerName}</a></dd>
                     </dl>
                 </div>
-                <div class="tab-pane" id="other">
-                    <p>Other infos</p>
-                    Producer: {$product->ProducerName}
-                </div>
+               
                 <div class="tab-pane" id="ask">
 
                   {snippet contact}       
-                                {form askForm class => ajax}
+                                {form askForm class => ajax, role => form}
                        <ul class="errors" n:if="$form->hasErrors()">
                                <li n:foreach="$form->errors as $error">{$error}</li>
                        </ul>
-                    <span class="help-block"><i class="icon-info-sign"></i> {_'We will respond as soon as possible.'}</span>
-                    <fieldset class="span12">
+                    
+                   <div class="form-group">
                            {label note /}
+                       <div class="input-group col-md-12 col-xs-12">
                            {input note}
-
+                       </div>
+                   </div>
+                    <div class="form-group">
                            {label email /}
-                           <div class="input-prepend input-append">
-                               <span class="add-on">@</span>
+                           <div class="input-group">
+                               <span class="input-group-addon">@</span>
                            {input email}
                            </div>
-                           {input ask}
-                           
-                         </fieldset>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group col-md-12 col-xs-12">
+                        {input ask}
+                        </div>
+                        </div>   
                        {/form}
                   {/snippet}
-                    
+                    <span class="help-block"><i class="icon-info-sign"></i> {_'We will reply as soon as possible.'}</span>
                 </div>
             </div>
         </div>
 
     </div>
-   {snippet variants}
 
+    <div class="row shopProductVariant" n:snippet="variants">
+        <ul class="list-group">
+            <li class="list-group-item col-md-11">{_'Variants'}:</li>
     {foreach $productVariants as  $id => $productVariant}
         
         {control variantControl:variant $productVariant, $shippingPrice}
 
    {/foreach}   
-{/snippet}
+        </ul>
+    </div>
+
 
     
-    <div class="span12">
-        <h3 class="span12"><i class="icon-info-sign"></i> {_'Information about product'}</h3>
-        <div class="span8">
-         <div class="prodDescription span12 text-justified" n:snippet="prodDescription">{!$product->ProductDescription}</div>
+    <div class="col-md-12">
+        <h3 class="col-md-12"><i class="icon-info-sign"></i> {_'Information about product'}</h3>
+        <div class="col-md-8">
+         <div class="prodDescription col-md-12 text-justified" n:snippet="prodDescription">{!$product->ProductDescription}</div>
+         <hr>
          
-         <div class="span12 product-gallery">
+         <div class="col-md-11 product-gallery">
            
-    <div class="span12">
+   
             {if $user->isInRole('admin')}
+ <div class="col-md-12">{_'Photo:'}
+        {form addPhotoForm class => 'form-inline col-md-12'}
+        <div class="form-group col-md-12">
+            <div class="input-group col-md-5">
+        {input image}
+             <p class="help-block"><i class="icon-info-sign"></i> Max size is 2MB ~ 1 Megapixel photos</p>   
+            </div>
+        {input add}
+        </div>
+        {/form}
+     </div>
+ {/if}
+         
+    <div class="thumbnails col-md-12">
+     {foreach $album as $id => $photo}
+                    <div class="col-md-12">
+                        <img src="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}" class="col-md-12 img-rounded img-responsive">
+                        {if $user->isInRole('admin')}
+                           {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> {_'Set as COVER image'}</a> {/if}
+                        <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> {_'Delete image'}</a>
+                          {/if}
+                    </div>
 
-                                {form addPhotoForm class => 'span9'}
-                                {label image /}
-                                {input image}
-
-                                {input add}
-
-                                {/form}
-                                {/if}
-         </div>
-                <ul class="thumbnails span12">
-                 {foreach $album as $id => $photo}
-                                <li class="span10 thumbnail imgLiquid" style="height: 250px; width: 250px;">
-                                        <img style="" src="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}">
-                                    {if $user->isInRole('admin')}
-                                       {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> {_'Set as COVER image'}</a> {/if}
-                                    <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> {_'Delete image'}</a>
-                                      {/if}
-                                </li>
-
-                         {/foreach}
-                
-                    {*foreach $album as $id => $photo}
-                                <li class="span3">
-                                    <a data-toggle="lightbox" href="#photo{$id}" class="thumbnail imgLiquid" style="height: 90px; width: 90px;">
-                                        <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}">
-                                    </a>
-                                    {if $user->isInRole('admin')}
-                                       {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> Set as COVER image</a> {/if}
-                                    <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> {_'Delete image'}</a>
-                                      {/if}
-                                </li>
-
-                                {var $src = $basePath . '/images/' . $product->PhotoAlbumID .'/'.$photo->PhotoURL}
-                                {control modalControl:gallery $id, $product->ProductName, $src }
-
-                         {/foreach*}
+             {/foreach}
+              
                    </ul>
-                        <div class="span12">
-                            <iframe class="span10 " src="http://www.youtube.com/embed/qN3EXAFRxKQ?rel=0" frameborder="0" allowfullscreen></iframe>
+                        <div class="col-md-12">
+                           
                         </div>
                         </div>
 
         </div>
-        
-        <div class="span3">
-            
-        
-        
+           </div>
+
+        <div class="col-md-3">
+   
             {control moduleControl:productModule 'document', $product->ProductID}
             
             {control moduleControl:productModule 'comment', $product->ProductID}
            
-        
         </div>
-                    </div>
+     </div>
     
 
     </div> <!-- class="span10" -->
@@ -244,7 +239,7 @@
 
 {block sidebar}
       
-<div class="span2">
+<div class="col-md-2">
 {if $user->isInRole('admin')}
     {control menu:admin}
 {/if}
@@ -259,44 +254,8 @@
 
 {block script}
 
-         {if $user->isInRole('admin')}           
-      {snippet script}
-<script>
-    
-    $('a.ajax').click(function(){
-        $(this).html('<i class="icon-spinner icon-spin"></i>');
-    });
-   {if $user->isInRole('admin')}   
-    {foreach $productVariants as  $id => $productVariant}
-
-
-              $('#editPrice{$productVariant->ProductID}').toggle(function(){
-                    $('#editProdPrice{$productVariant->ProductID}').show();
-              },
-              function() {
-                  $('#editProdPrice{$productVariant->ProductID}').hide();
-              });
-              
-              $('.prodAmount{$productVariant->ProductID}').editable( {link editProdAmount! $productVariant->ProductID }, {
-                  type      : 'text',
-                  onblur    : 'ignore',
-                  cancel    : {_'Cancel'},
-                  submit    : 'OK', 
-                  colls     : '4',
-                  rows      : '3',
-                  indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
-                  tooltip   : {_'Click to edit ...'},
-                  callback : function(value, settings) {
-                     var json = $.parseJSON(value);
-                     $('.prodAmount{$productVariant->ProductID}').text(json.edit);
-                 }
-          });
-               {/foreach}
-           {/if}
-               
-</script>
-{/snippet}
-                            
+{if $user->isInRole('admin')}           
+                         
 <script>
     $(document).ready(function() {
 
@@ -329,7 +288,43 @@
                   $('#editParam').modal('show');
                   {/if}
                       
+          {foreach $productVariants as  $id => $productVariant}
 
+
+              $('#editPrice{$productVariant->ProductID}').toggle(function(){
+                    $('#editProdPrice{$productVariant->ProductID}').show();
+              },
+              function() {
+                  $('#editProdPrice{$productVariant->ProductID}').hide();
+              });
+              
+              $('.prodAmount{$productVariant->ProductID}').editable( {link editProdAmount! $productVariant->ProductID }, {
+                  type      : 'text',
+                  onblur    : 'ignore',
+                  cancel    : {_'Cancel'},
+                  submit    : 'OK', 
+                  cssclass  : 'editForm col-md-12',
+                  indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+                  tooltip   : {_'Click to edit ...'},
+                  callback : function(value, settings) {
+                     var json = $.parseJSON(value);
+                     $('.prodAmount{$productVariant->ProductID}').text(json.edit);
+                 }
+          });
+          
+          $('.prodVarTitle{$productVariant->ProductID}').editable( {link editProdVarTitle! $productVariant->ProductID }, { 
+                  type      : 'text',
+                  cancel    : {_'Cancel'},
+                  submit    : 'OK',
+                  cssclass  : 'editForm col-md-5',
+                  indicator : '<i class="icon-spinner icon-spin"></i>',
+                  tooltip   : {_'Click to edit ...'},
+                  callback : function(value, settings) {
+                     var json = $.parseJSON(value);
+                     $('.prodVarTitle{$productVariant->ProductID}').text(json.edit);
+                 }
+             });
+               {/foreach}
 
               $('.prodTitle').editable( {link editProdTitle! $product->ProductID }, { 
                   type      : 'text',
@@ -341,24 +336,7 @@
                      var json = $.parseJSON(value);
                      $('.prodTitle').text(json.edit);
                  }
-             });
-             
-     {foreach $productVariants as  $id => $productVariant}
-            
-             $('.prodVarTitle{$productVariant->ProductID}').editable( {link editProdVarTitle! $productVariant->ProductID }, { 
-                  type      : 'text',
-                  cancel    : {_'Cancel'},
-                  submit    : 'OK',
-                  indicator : '<i class="icon-spinner icon-spin"></i>',
-                  tooltip   : {_'Click to edit ...'},
-                  callback : function(value, settings) {
-                     var json = $.parseJSON(value);
-                     alert(json.edit);
-                     $('.prodVarTitle{$productVariant->ProductID}').text(json.edit);
-                 }
-             });
-             
-        {/foreach}     
+             });    
              
 
              $('.prodDescription').editable( {link editProdDescription! $product->ProductID }, {
@@ -366,7 +344,7 @@
                   onblur    : 'ignore',
                   cancel    : {_'Cancel'},
                   submit    : 'OK',
-                  cssclass  : 'span10',
+                  cssclass  : 'col-md-10',
                   colls     : '15',
                   rows      : '15',
                   indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
@@ -396,80 +374,66 @@
                      $('.prodShort').text(json.edit);
                  }
           });
-
-          $('.prodPrice').editable( {link editProdPrice! $product->ProductID, $product->SellingPrice, $product->SALE }, {
-                  type      : 'text',
-                  onblur    : 'ignore',
-                  cancel    : {_'Cancel'},
-                  submit    : 'OK', 
-                  indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
-                  tooltip   : {_'Click to edit ...'},
-                  callback : function(value, settings) {
-                     var json = $.parseJSON(value);
-                     $('.prodPrice').text(json.edit);
-                 }
-          });
-
-          
-    
-
 });
 </script>
-
     {/if}
 {/block}
 
     {block modal}
 {if $user->isInRole('admin')}
 
-                          
-
-    {*control editControl:parameters $product->ProductID*}
-<div id="editParam" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                      <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                          <h3 id="myModalLabel"><i class="icon-list"></i> {_'Edit Specification'}</h3>
-                      </div>
-                      <div class="modal-body">
-                          <div class="tabbable">
-                              <ul class="nav nav-tabs">
-                                  {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> {_'Edit Specs'}</a></li> {/if}
-                                  <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> {_'Add Spec'}</a>
-                                  {if $parameter} <li><a href="#deleteParams" data-toggle="tab"><i class="icon-trash"></i> {_'Delete Spec'}</a></li> {/if}
-                              </ul>
-                              <div class="tab-content">
-                                  <div class="tab-pane {if $parameter}active{/if}" id="editParams">
-                                          {if $parameter} 
-                                      <p>{_'Here you can edit all Spec assigned to this product. Edit values and then click Save Spec bellow.'}</p>
-                                          {control editParamForm} {/if}
-                                  </div>
-                                  <div class="tab-pane {if !$parameter}active{/if}" id="addParam">
-                                      <p>{_'Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow.'}</p>
-                                          {control addParamForm}
-                                  </div>
-                          {if $parameter}
-                                  <div class="tab-pane" id="deleteParams">
-                                      <p>{_'Check all specification you want to delete and then click Delete specs bellow.'}</p>
-                                    {control deleteParamForm}
-                                  </div>
-                              {/if}
-                              </div>
-
-                          </div>
-                      </div>
-                      <div class="modal-footer">
-                          <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
-                      </div>
-                  </div>
-
-
-    <div id="addVariant" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="editParam" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editParam" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel"><i class="icon-list"></i> {_'Manage product variants'}</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title"><i class="icon-list"></i> {_'Edit Specification'}</h4>
         </div>
         <div class="modal-body">
-        <div class="tabbable">
+          <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> {_'Edit Specs'}</a></li> {/if}
+                    <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> {_'Add Spec'}</a>
+                    {if $parameter} <li><a href="#deleteParams" data-toggle="tab"><i class="icon-trash"></i> {_'Delete Spec'}</a></li> {/if}
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane {if $parameter}active{/if}" id="editParams">
+                            {if $parameter} 
+                        <p>{_'Here you can edit all Spec assigned to this product. Edit values and then click Save Spec bellow.'}</p>
+                            {control editParamForm} {/if}
+                    </div>
+                    <div class="tab-pane {if !$parameter}active{/if}" id="addParam">
+                        <p>{_'Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow.'}</p>
+                            {control addParamForm}
+                    </div>
+            {if $parameter}
+                    <div class="tab-pane" id="deleteParams">
+                        <p>{_'Check all specification you want to delete and then click Delete specs bellow.'}</p>
+                      {control deleteParamForm}
+                    </div>
+                {/if}
+                </div>
+            </div>
+        </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">{_'Close without saving'}</button>
+    </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div>    
+    
+ 
+
+
+    <div id="addVariant" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addVariant" aria-hidden="true">
+      <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title"><i class="icon-list"></i> {_'Manage product variants'}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="tabbable">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#addVariants" data-toggle="tab"></i><i class="icon-plus"></i> {_'Add product variants'}</a></li>
                     <li><a href="#manageVariants" data-toggle="tab"> {_'Delete variants'}</a></li>
@@ -481,41 +445,54 @@
                         {control addProductVariantForm}
                     </div>
                     <div class="tab-pane" id="manageVariants">
+                        <div>
                      <p>{_'Manage and delete variants.'}</p>
-                        <ul>
-                            {foreach $productVariants as  $id => $productVariant}                                                
-                            <li><h3>{$productVariant->ProductVariantName}</h3> <a class="btn" href="{plink ArchiveVariantProduct! $productVariant->ProductID}"><i class="icon-trash"></i></li>
+                     <table>
+                         <thead>
+                             <tr>
+                                 <td class="col-md-5">{_'Variant Name'}</td>
+                                 <td>{_'Options'}</td>
+                             </tr>
+                         </thead>
+                         <tbody>
+                         {foreach $productVariants as  $id => $productVariant}
+                             {if $productVariant->ProductVariantName !== NULL}
+                             <tr>
+                                 <td><strong>{$productVariant->ProductVariantName}</strong></td>
+                                 <td><a class="btn btn-default ajax" href="{plink ArchiveVariantProduct! $productVariant->ProductID}"><i class="icon-trash"></i></a></td>
+                             </tr>
+                             {/if}
                             {/foreach}
-                        </ul>
+                         </tbody>
+                     </table>
+                        </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
         <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
         </div>
-
     </div>
-
-
-    <div id="stats" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel"><i class="icon-list"></i> {_'Product stats'}</h3>
+</div>
         </div>
-        <div class="modal-body">
 
+    <div id="stats" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="stats" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title"><i class="icon-list"></i> {_'Product stats'}</h4>
+          </div>
+          <div class="modal-body">
             {control gapiModule:product 141}
-
         </div>                                    
-
         <div class="modal-footer">
-             <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+             <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
         </div>
 
     </div>
+            </div>
+        </div>
 {/if}
 {/block}

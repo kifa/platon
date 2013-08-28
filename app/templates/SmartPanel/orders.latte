@@ -2,8 +2,8 @@
 {if $user->isInRole('admin')}
 
        <div class="span12 smartPanelBar">
-                <a class="btn" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a> |
-                <a class="btn" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+                <a class="btn btn-default" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a> |
+                <a class="btn btn-default" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
             </div>
 <div class="page-header span12">
 <h1 n:block="title"><i class="icon-spinner"></i> Orders <small>Here you see all orders placed in your shop.</small></h1>
@@ -28,12 +28,12 @@
             <tbody>
                 {foreach $orders as $id => $order}
                 
-                <tr class="{if $order->StatusProgress == 10} success {elseif $order->StatusProgress >= 5} info {elseif $order->StatusProgress == 0} grey {else} warning {/if}">
+                <tr class="{if $order->StatusProgress == 10} success {elseif $order->StatusProgress >= 5} warning {elseif $order->StatusProgress == 0} danger {else} danger {/if}">
                     <td>{$id}</td>
                     <td>{$order->DateCreated|date:'%d.%m.%Y'}</td>
                     <td><a href="{plink SmartPanel:orderDetail $id}">{$order->Name}</a></td>
-                    <td>{$order->TotalPrice},-</td>
-                    <td><i class="{if $order->StatusProgress == 10}icon-ok {elseif $order->StatusProgress == 0} icon-ban-circle {else} icon-spinner icon-spin{/if} left"></i> {$order->StatusName}</td>
+                    <td>$&nbsp;{$order->TotalPrice}</td>
+                    <td><i class="{if $order->StatusProgress == 10}icon-ok {elseif $order->StatusProgress == 5} icon-truck {elseif $order->StatusProgress == 0} icon-ban-circle {else} icon-spinner icon-spin{/if} left"></i> {$order->StatusName}</td>
                     <td>{if $order->Read == 0}<i class="icon-flag"></i>{/if}</td>
                 </tr>
                 

@@ -46,10 +46,12 @@ class OrderPresenter extends BasePresenter {
 
         if ($this->cart->numberItems > 0) {
 
-            $el1 = Html::el('span', 'Product was removed. Isn´t it pitty?! ');
-            $el2 = Html::el('a', 'Take it Back!')->href($this->link('graveItem!'));
+            $text = $this->translator->translate('Product was removed. Isn´t it pitty?!');
+            $text2 = $this->translator->translate('Take it Back!');
+            $el1 = Html::el('span', $text.' ');
+            $el2 = Html::el('a', $text2)->href($this->link('graveItem!'));
             $el1->add($el2);
-            $this->flashMessage($el1, 'alert');
+            $this->flashMessage($el1, 'alert alert-warning');
             
                 if($this->isAjax()){
                     $this->invalidateControl('cartTable');   
@@ -202,7 +204,7 @@ class OrderPresenter extends BasePresenter {
         foreach ($this->orderModel->loadDelivery('','active') as $key => $value) {
           //  $t = HTML::el('span', $value->DeliveryPrice)->class('text-info');
             if($value->HigherDelivery === NULL) {
-            $shippers[$key] = $value->DeliveryName . ' | ' . $value->DeliveryPrice .',-';
+            $shippers[$key] = $value->DeliveryName . ' | ' . $value->DeliveryPrice . ',-';
             
             if($defaultShipping == NULL) {
                 $defaultShipping = $key;
@@ -215,7 +217,7 @@ class OrderPresenter extends BasePresenter {
         }
         
         foreach ($this->orderModel->loadPayment('','active') as $key => $value) {
-            $payment[$key] = $value->PaymentName . ' | ' . $value->PaymentPrice.',-';
+            $payment[$key] = $value->PaymentName . ' | ' . $value->PaymentPrice .',-';
         }
         
         $cartForm = new Nette\Application\UI\Form;
@@ -224,22 +226,29 @@ class OrderPresenter extends BasePresenter {
         $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
         $cartForm->addGroup('Delivery info');
         $cartForm->addText('name', 'Name:', 40, 100)
-                ->addRule(Form::FILLED, 'Would you fill your name, please?');
-        $cartForm->addText('phone', 'Phone:', 40, 100);
+                ->addRule(Form::FILLED, 'Would you fill your name, please?')
+                ->setAttribute('class', 'form-control');
+        $cartForm->addText('phone', 'Phone:', 40, 100)
+                ->setAttribute('class', 'form-control');
         $cartForm->addText('email', 'Email:', 40, 100)
                 ->setEmptyValue('@')
                 ->addRule(Form::EMAIL, 'Would you fill your email, please?')
-                ->addRule(Form::FILLED, 'Would you fill your name, please?');
+                ->addRule(Form::FILLED, 'Would you fill your name, please?')
+                ->setAttribute('class', 'form-control');
         $cartForm->addGroup('Address');
         $cartForm->addText('address', 'Street:', 60, 100)
-                ->addRule(Form::FILLED);
+                ->addRule(Form::FILLED)
+                ->setAttribute('class', 'form-control');
         $cartForm->addText('city', 'City:', 40, 100)
-                ->addRule(Form::FILLED);
+                ->addRule(Form::FILLED)
+                ->setAttribute('class', 'form-control');
         $cartForm->addText('zip', 'ZIP:', 40, 100)
-                ->addRule(Form::FILLED);
+                ->addRule(Form::FILLED)
+                ->setAttribute('class', 'form-control');
         $cartForm->addGroup('Shipping');
         $cartForm->addSelect('shippers', 'by post/delivery service', $shippers)
-                ->setPrompt('-- select shipping --');
+                ->setPrompt('-- select shipping --')
+                ->setAttribute('class', 'form-control');
                 //->setAttribute('class', ' radio')
               //  ->setRequired('Please select Shipping method');
         if(isset($lowerShippers)) {
@@ -248,12 +257,12 @@ class OrderPresenter extends BasePresenter {
             foreach($lowerShippers as $lower) {
                 $lowerShippers2 = array();
                 foreach($this->orderModel->loadSubDelivery($lower) as $key2 => $value2){
-                   $lowerShippers2[$key2] = $value2->DeliveryName . ' | ' . $value2->DeliveryPrice .',-';
+                   $lowerShippers2[$key2] = $value2->DeliveryName . ' | ' . $value2->DeliveryPrice . ',-';
                 }   
             
         
         $cartForm->addSelect('lowerShippers'.$lower, 'personal pick up', $lowerShippers2)
-                      ->setAttribute('class', 'span10');
+                      ->setAttribute('class', 'form-control');
               //  ->setAttribute('class', '.span1 radio')
               }
         $this->template->lowerShippers = $lowerShippers;
@@ -262,18 +271,22 @@ class OrderPresenter extends BasePresenter {
         $cartForm->addGroup('Payment');
         $cartForm->addSelect('payment', '', $payment)
               //  ->setAttribute('class', '.span1 radio')
-                ->setRequired('Please select Payment method');
+                ->setRequired('Please select Payment method')
+                ->setAttribute('class', 'form-control');
         $cartForm->addGroup('Terms');
         $cartForm->addButton('termButton', 'Read Terms')
                 ->setHtmlId('termsButton')
-                ->setAttribute('class', 'btn btn-small btn-primary');
+                ->setAttribute('class', 'btn btn-sm btn-success')
+                ->setAttribute('data-toggle', 'modal')
+                ->setAttribute('data-target', "#terms");
          $cartForm->addGroup('Notes');
-        $cartForm->addTextArea('note', 'Note:', 50, 4);
+        $cartForm->addTextArea('note', 'Note:', 50, 4)
+                ->setAttribute('class', 'form-control');
         $cartForm->addHidden('shipping','shipping')
                 ->setDefaultValue($defaultShipping);
         $cartForm->addGroup('Checkout');
         $cartForm->addSubmit('send', 'Checkout')
-                ->setAttribute('class', 'btn btn-warning btn-large');
+                ->setAttribute('class', 'btn btn-danger btn-lg');
         
         $cartForm->onSuccess[] = $this->cartFormSubmitted;
         return $cartForm;
@@ -288,10 +301,11 @@ class OrderPresenter extends BasePresenter {
         $addNote->addHidden('orderID', '');
         $addNote->addHidden('userName', '');
         $addNote->addTextArea('note', 'Your Note:')
-                ->setRequired();  
+                ->setRequired()
+                ->setAttribute('class', 'form-control');  
         $addNote->addSubmit('add' , 'Add note')
                 ->setAttribute('class', 'btn-primary upl')
-                    ->setAttribute('data-loading-text', 'Adding...');
+                ->setAttribute('data-loading-text', 'Adding...');
         $addNote->onSuccess[] = $this->addNoteFormSubmitted;
         return $addNote;
                 
@@ -301,7 +315,7 @@ class OrderPresenter extends BasePresenter {
     public function addNoteFormSubmitted($form) {
          
           
-            $this->orderModel->addNote($form->values->orderid, $form->values->userName, $form->values->note);
+            $this->orderModel->addNote($form->values->orderID, $form->values->userName, $form->values->note);
            
             try {
                     $this->sendNoteMail($form->values->orderid, $form->values->note);
@@ -314,7 +328,7 @@ class OrderPresenter extends BasePresenter {
             $message = Html::el('span', $text);
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
-            $this->flashMessage($message, 'alert');
+            $this->flashMessage($message, 'alert alert-success');
             $this->redirect('this');
          
     }
@@ -465,12 +479,13 @@ class OrderPresenter extends BasePresenter {
             $message = HTML::el('span', $text);
             $ico = HTML::el('i')->class('icon-ok-sign left');
             $message->insert(0, $ico);
-            $this->flashMessage($message, 'alert');
+            $this->flashMessage($message, 'alert alert-warning');
             $this->redirect('Homepage:default');
         }
         else {
             $noteForm = $this['addNoteForm'];
-            $noteForm->setDefaults(array('orderid' => $orderid));
+            $noteForm->setDefaults(array('orderID' => $orderid,
+                                        'userName' => $row->UsersID));
                     
         }
     }
@@ -537,7 +552,7 @@ class OrderPresenter extends BasePresenter {
             $template->link = $this->presenter->link('//Order:orderDone', $args);
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($row->UsersID, 'Zpráva k Vaší objednávce', $template, $adminMail);
+            $mailIT->sendSuperMail($row->UsersID, 'Message about your order', $template, $adminMail);
     }
     
     protected function sendAdminOrderDoneMail($orderid) {
@@ -561,7 +576,7 @@ class OrderPresenter extends BasePresenter {
             }
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($adminMail, 'Zpráva k Vaší objednávce', $template, $adminMail);
+            $mailIT->sendSuperMail($adminMail, 'New Order '.$orderid, $template, $adminMail);
     }
     
      protected function sendNoteMail($orderid, $note) {
@@ -579,7 +594,7 @@ class OrderPresenter extends BasePresenter {
             $template->note = $note;
             
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($adminMail, 'Zpráva k objednávce', $template, $row->UserID);
+            $mailIT->sendSuperMail($adminMail, 'Message about order', $template, $row->UserID);
     }
 
 }
