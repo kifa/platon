@@ -200,18 +200,48 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
     }
     
+    public function createComponentCssAdmin() {
+    // připravíme seznam souborů
+    // FileCollection v konstruktoru může dostat výchozí adresář, pak není potřeba psát absolutní cesty
+        $wwwDir = $this->context->parameters['wwwDir'];
+    $files = new \WebLoader\FileCollection($wwwDir . '/css');
+    $files->addFiles(array(
+        'jquery.wysiwyg.css',
+        'flag.css'
+    ));
+
+    // kompilátoru seznam předáme a určíme adresář, kam má kompilovat
+    $compiler = \WebLoader\Compiler::createCssCompiler($files, $wwwDir . '/webtemp');
+
+    // nette komponenta pro výpis <link>ů přijímá kompilátor a cestu k adresáři na webu
+    return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
+    }
+    
     public function createComponentJs() {
     $wwwDir = $this->context->parameters['wwwDir'];
     $files = new \WebLoader\FileCollection($wwwDir . '/js');
     // můžeme načíst i externí js
-    $files->addRemoteFile('http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js');
+   // $files->addRemoteFile('http://code.jquery.com/jquery-1.10.1.min.js');
+    //$files->addRemoteFile('http://code.jquery.com/jquery-migrate-1.2.1.min.js');
     $files->addFiles(array(
+        'jquery.min.js',
+        'jquery-migrate.min.js',
         'netteForms.js',
         'bootstrap.min.js',
         'live-form-validation.js',
         'nette.ajax.js',
-        'main.js',
-        'imgLiquid-min.js',
+        'main.js'));
+
+    $compiler = \WebLoader\Compiler::createJsCompiler($files, $wwwDir . '/webtemp');
+
+    return new \WebLoader\Nette\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
+    }
+    
+    public function createComponentJsAdmin() {
+    $wwwDir = $this->context->parameters['wwwDir'];
+    $files = new \WebLoader\FileCollection($wwwDir . '/js');
+    // můžeme načíst i externí js
+    $files->addFiles(array(
         'jquery.wysiwyg.js',
         'jquery.jeditable.mini.js',
         'jquery.jeditable.wysiwyg.js'));
