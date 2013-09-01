@@ -18,8 +18,18 @@
         
      
        <div class="item active">
-        <img src="images/slider/temtex_01.jpg" alt="Protejpy">
+           {if $slide}
+        <img src="images/slider/{$slide}" alt="Protejpy">
+            {else}
+        <img src="{$basePath}/images/no_image.jpg" style="height: 150px"/>
+                {/if}
         <div class="carousel-caption">
+            
+          {if $user->isInRole('admin')}
+            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#sliderModal">{_'Change slider'}</button>
+            {/if}
+            <button class="btn btn-danger btn-lg" type="button" data-toggle="modal" data-target="#videoModal"><i class="icon-play-sign"></i> {_'WATCH VIDEO'}</button>
+
        </div>
     </div>
     </div>
@@ -83,7 +93,7 @@ $('.carousel').carousel()
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Featured video</h4>
+        <h4 class="modal-title">{_'Featured video'}</h4>
       </div>
       <div class="modal-body">
 
@@ -94,10 +104,32 @@ $('.carousel').carousel()
           {/if}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{_'Close'}</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+
+          {if $user->isInRole('admin')}
+
+<div class="modal fade" id="sliderModal" tabindex="-1" role="dialog" aria-labelledby="sliderModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Upload slider photo</h4>
+      </div>
+      <div class="modal-body">
+            {control addSliderForm}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{_'Close'}</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+          {/if}
+
 
 {/block}

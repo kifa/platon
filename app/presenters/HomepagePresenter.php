@@ -55,6 +55,57 @@ class HomepagePresenter extends BasePresenter {
             $this->redirect('this');
         }
     }
+    
+        public function createComponentAddSliderForm() {
+        if ($this->getUser()->isInRole('admin')) {
+            $addPhoto = new Nette\Application\UI\Form;
+            $addPhoto->setTranslator($this->translator);
+            $addPhoto->addUpload('image', 'Photo:')
+                    ->addRule(FORM::IMAGE, 'You can upload only JPG, PNG a GIF')
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Max 2MB', 6400 * 1024);
+            $addPhoto->addSubmit('add', 'Add Photo')
+                    ->setAttribute('class', 'form-control btn btn-primary upl col-md-6')
+                    ->setAttribute('data-loading-text', 'Uploading...');
+            $addPhoto->onSuccess[] = $this->addSliderFormSubmitted;
+            return $addPhoto;
+        }
+    }
+
+  
+
+
+    public function addSliderFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            if ($form->values->image->isOK()) {
+
+                if($this->shopModel->getShopInfo('slider')) {
+                    $this->shopModel->setShopInfo('slider', $form->values->image->name);
+                } else {
+                    $this->shopModel->insertShopInfo('slider', $form->values->image->name);
+                }
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/slider/' . $form->values->image->name;
+                $form->values->image->move($imgUrl);
+
+                $image = Image::fromFile($imgUrl);
+                
+                if($image->width > 1140) {
+
+                    $image->resize(1140, null, Image::SHRINK_ONLY);
+                    $imgUrl = $this->context->parameters['wwwDir'] . '/images/slider/' . $form->values->image->name;
+                    $image->save($imgUrl);
+                }
+
+                $message = $this->translator->translate(' was sucessfully uploaded');
+                $photo = $this->translator->translate(' Photo ');
+                $e = HTML::el('span', $photo . $form->values->image->name . '' . $message);
+                $ico = HTML::el('i')->class('icon-ok-sign left');
+                $e->insert(0, $ico);
+                $this->flashMessage($e, 'alert alert-success');
+            }
+
+            $this->redirect('this');
+        }
+    }
 
     
     public function actionDefault() {
@@ -78,6 +129,8 @@ class HomepagePresenter extends BasePresenter {
         $this->template->setFile( $this->context->parameters['appDir'] . '/templates/Homepage/'  . $layout . '.latte'); 
        
         $this->template->slider = 1;
+        
+        $this->template->slide = $this->shopModel->getShopInfo('slider');
         $this->template->category = $this->categoryModel->loadCategory("");
         $this->template->video = $this->shopModel->getShopInfo('homepageVideo');
         $this->template->anyVariable = 'any value';
