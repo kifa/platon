@@ -19,7 +19,7 @@
      
        <div class="item active">
            {if $slide}
-        <img src="images/slider/{$slide}" alt="Protejpy">
+        <img src="{$basePath}/images/slider/{$slide}" alt="Protejpy">
             {else}
         <img src="{$basePath}/images/no_image.jpg" style="height: 150px"/>
                 {/if}
@@ -27,9 +27,9 @@
             
           {if $user->isInRole('admin')}
             <button class="btn btn-default" type="button" data-toggle="modal" data-target="#sliderModal">{_'Change slider'}</button>
-            {/if}
+         
             <button class="btn btn-danger btn-lg" type="button" data-toggle="modal" data-target="#videoModal"><i class="icon-play-sign"></i> {_'WATCH VIDEO'}</button>
-
+   {/if}
        </div>
     </div>
     </div>
@@ -118,7 +118,7 @@ $('.carousel').carousel()
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Upload slider photo</h4>
+        <h4 class="modal-title">{_'Upload slider photo'}</h4>
       </div>
       <div class="modal-body">
             {control addSliderForm}

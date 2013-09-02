@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-08-28 23:41:58
+# Created: 2013-09-01 10:55:35
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-08-28 23:41+0200\n"
+"PO-Revision-Date: 2013-09-01 10:55+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -321,6 +321,9 @@ msgstr "Objednat"
 msgid "Continue your Order"
 msgstr "Objednat zboží"
 
+msgid "Cookies help us deliver our services. By using our services, you agree to our use of cookies."
+msgstr "Při poskytování služeb nám pomáhají soubory cookie. Používáním našich služeb vyjadřujete souhlas s naším používáním souborů cookie."
+
 msgid "Create"
 msgstr "Vytvořit"
 
@@ -503,6 +506,9 @@ msgstr "Zvýraznit produkt"
 
 msgid "Featured"
 msgstr "Doporučené"
+
+msgid "Featured video"
+msgstr "Úvodní video"
 
 msgid "Fill contact information"
 msgstr "Vložte své kontaktní údaje"
@@ -1038,6 +1044,9 @@ msgstr "Součet"
 msgid "Tablets"
 msgstr "Tablet"
 
+msgid "Take it Back!"
+msgstr "Vrátit zpět!"
+
 msgid "Thank you for your order!"
 msgstr "Děkujeme za Vaši objednávku!"
 
@@ -1098,6 +1107,9 @@ msgstr "Upgrade"
 msgid "Upload"
 msgstr "Nahrát"
 
+msgid "Upload slider photo"
+msgstr "Nahrát úvodní fotku"
+
 msgid "Upload your logo"
 msgstr "Nahrát logo eshopu"
 
@@ -1130,6 +1142,9 @@ msgstr "Info"
 
 msgid "View gallery"
 msgstr "Prohlédnout galerii"
+
+msgid "WATCH VIDEO"
+msgstr "SLEDUJTE VIDEO"
 
 msgid "Warehouse"
 msgstr "Sklad"
@@ -1221,6 +1236,6 @@ msgstr "ks"
 msgid "personal pick up"
 msgstr "osobní převzetí"
 
-msgid "Take it Back!"
-msgstr "Vrátit zpět!"
+msgid "Change slider"
+msgstr "Změnit fotku"
 

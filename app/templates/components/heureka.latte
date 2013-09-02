@@ -3,7 +3,7 @@
 <SHOP>
      {foreach $products as $product}
   <SHOPITEM>
-    <ITEM_ID>{$product->ProductNumber}</ITEM_ID>
+    <ITEM_ID>{$product->ProductID}</ITEM_ID>
     <PRODUCTNAME>{$product->ProductName}</PRODUCTNAME>
     <PRODUCT>{$product->ProductName}</PRODUCT>
     <DESCRIPTION>{$product->ProductShort}</DESCRIPTION>
@@ -17,7 +17,7 @@
     <MANUFACTURER>{*$product->ProducerName*}</MANUFACTURER>
     <CATEGORYTEXT>{*$product->CategoryName*}</CATEGORYTEXT>
     <EAN>{$product->ProductEAN}</EAN>
-    <PRODUCTNO>{$product->ProductNumber}</PRODUCTNO>
+    <PRODUCTNO>{$product->ProductID}</PRODUCTNO>
     {*foreach $parameter as $parameter}
       <PARAM>
         <PARAM_NAME>{$parameter->AttribName}</PARAM_NAME>

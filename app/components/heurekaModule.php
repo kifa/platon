@@ -82,7 +82,7 @@ class heurekaModule extends moduleControl {
                 }
             try {
                 $this->installModule();
-                $this->shopModel->updateModuleStatus('ulozenka', 1);
+                $this->shopModel->updateModuleStatus('heureka', 1);
             }catch(Exception $e) {   
                    \Nette\Diagnostics\Debugger::log($e);
             }          
@@ -159,7 +159,9 @@ class heurekaModule extends moduleControl {
 
    public function handleUpdateXML() {
        if($this->shopModel->isModuleActive('heureka') && $this->shopModel->getShopInfo('heurekaKEY')) {
+           
            $this->reloadXML();
+           $this->presenter->redirect('this');
            }
        else {
            return FALSE;
@@ -176,7 +178,7 @@ class heurekaModule extends moduleControl {
 
                  $template->products = $this->productModel->loadHeurekaCatalog();
                  $template->category = $this->categoryModel->loadCategory("");
-
+                 
                  $template->save($this->presenter->context->parameters['wwwDir'] . '/heureka.xml');
                  $this->presenter->flashMessage('Heureka XML feed sucessfully generated.', 'alert alert-success');
              }
