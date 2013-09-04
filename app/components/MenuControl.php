@@ -110,7 +110,7 @@ class MenuControl extends BaseControl {
     
     
 
-    public function render($img) {
+    public function render($img, $ct = NULL) {
         $this->template->setFile(__DIR__ . '/MenuControl.latte');
         $this->template->cart = $this->cart->numberItems;
        
@@ -123,6 +123,7 @@ class MenuControl extends BaseControl {
         $this->template->producers = $this->productModel->loadProducers();
       //  $this->template->menuItems = $this->ShopModel->getMenu();
         $this->template->img = $img;
+        $this->template->ct = $ct;
         $this->template->menu = $this->loadStaticMenu();
         $this->template->lang = $this->lang;
         $this->template->render();
