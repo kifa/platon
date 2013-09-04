@@ -305,7 +305,7 @@ class gapiModule extends moduleControl {
 
         
         $gapi->setGAPI($token, $code);
-        $id = '74912256';
+        $id = '39033320';
         
         
         $today = date('Y-m-d');
@@ -313,7 +313,7 @@ class gapiModule extends moduleControl {
         $optParams2 = array(
                 'dimensions' => '',
                 'max-results' => '10',
-                'filters' => 'ga:productSku=='.$productid,
+                'filters' => 'ga:productSku==140',
                 'sort' => '-ga:itemRevenue');
         
         $metrics2 = 'ga:itemRevenue';
@@ -332,7 +332,7 @@ class gapiModule extends moduleControl {
         $optParams = array(
                 'dimensions' => '',
                 'max-results' => '5',
-                'filters' => 'ga:productSku=='.$productid);
+                'filters' => 'ga:productSku==140');
         
         $metrics = 'ga:itemsPerPurchase';
         
@@ -350,7 +350,7 @@ class gapiModule extends moduleControl {
         $optParams = array(
                 'dimensions' => '',
                 'max-results' => '5',
-                'filters' => 'ga:productSku=='.$productid);
+                'filters' => 'ga:productSku==140');
         
         $metrics = 'ga:itemQuantity';
         
