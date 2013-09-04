@@ -274,18 +274,23 @@
                 visible : true,
                 exec    : function()
                 {
-                    if ( $.browser.msie )
-                    {
-                        this.focus();
-                        this.editorDoc.execCommand('insertImage', true, null);
-                    }
-                    else
-                    {
-                        var szURL = prompt('Upload picture and than paste the URL here!', 'http://');
+                    
+                     $('#addTextPicture').modal('show');
+                     
+                     $('.addTextPicture').click(function() {
+                              var szURL = $(this).attr('rel');
+                               ins(szURL);
+                               $('.addTextPicture').unbind();
 
-                        if ( szURL && szURL.length > 0 )
-                            this.editorDoc.execCommand('insertImage', false, szURL);
-                    }
+                        });
+                        
+                     function ins(szURL) {   
+                            szURL = '<img src="' +  szURL  + '" >';
+                            $('.wysiwyg iframe').contents().find("body").append(szURL);
+                            $('.wysiwyg iframe').contents().find("body").attr('style', 'display: block;');
+                            $('#addTextPicture').modal('hide');
+                        }
+                    
                 },
 
                 tags : ['img'],

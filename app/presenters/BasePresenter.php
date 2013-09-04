@@ -185,12 +185,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     $files = new \WebLoader\FileCollection($wwwDir . '/css');
     $files->addFiles(array(
         'bootstrap.min.css',
-   //     'bootstrap-theme.min.css',
-        'jquery.wysiwyg.css',
-        'flag.css',
         'font-awesome-ie7.min.css',
         'font-awesome.min.css',
-        '/user/theme.css'
+        '/user/theme.css',
+        'jquery.wysiwyg.css',
+        'flag.css'
     ));
 
     // kompilátoru seznam předáme a určíme adresář, kam má kompilovat
@@ -206,8 +205,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $wwwDir = $this->context->parameters['wwwDir'];
     $files = new \WebLoader\FileCollection($wwwDir . '/css');
     $files->addFiles(array(
-        'jquery.wysiwyg.css',
-        'flag.css'
+        
     ));
 
     // kompilátoru seznam předáme a určíme adresář, kam má kompilovat
@@ -230,7 +228,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         'bootstrap.min.js',
         'live-form-validation.js',
         'nette.ajax.js',
-        'main.js'));
+        'main.js',
+        'imgLiquid-min.js',
+        'jquery.wysiwyg.js',
+        'jquery.jeditable.mini.js',
+        'jquery.jeditable.wysiwyg.js'));
 
     $compiler = \WebLoader\Compiler::createJsCompiler($files, $wwwDir . '/webtemp');
 
@@ -242,9 +244,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     $files = new \WebLoader\FileCollection($wwwDir . '/js');
     // můžeme načíst i externí js
     $files->addFiles(array(
-        'jquery.wysiwyg.js',
-        'jquery.jeditable.mini.js',
-        'jquery.jeditable.wysiwyg.js'));
+        ));
 
     $compiler = \WebLoader\Compiler::createJsCompiler($files, $wwwDir . '/webtemp');
 

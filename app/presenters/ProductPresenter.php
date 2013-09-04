@@ -887,6 +887,12 @@ class ProductPresenter extends BasePresenter {
 
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/300-' . $form->values->image->name;
                 $image->save($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, 150, Image::SHRINK_ONLY);
+
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/150-' . $form->values->image->name;
+                $image->save($imgUrl);
 
                 $image = Image::fromFile($imgUrl);
                 $image->resize(null, 50, Image::SHRINK_ONLY);
@@ -902,7 +908,12 @@ class ProductPresenter extends BasePresenter {
                 $this->flashMessage($e, 'alert alert-success');
             }
 
+            if($this->isAjax()) {
+                $this->invalidateControl('textPhoto');
+                
+            } else {
             $this->redirect('this');
+            }
         }
     }
 
@@ -1173,6 +1184,7 @@ class ProductPresenter extends BasePresenter {
                 
             $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
             $this->template->producers = $this->productModel->loadProducers();
+             $this->template->adminAlbum = $this->productModel->loadPhotoAlbum($id);
        
             }
         
@@ -1182,11 +1194,12 @@ class ProductPresenter extends BasePresenter {
             $album = $album->PhotoAlbumID;
         }
        
-                $this->template->pieces = $this->productModel->loadTotalPieces($id);
+        $this->template->pieces = $this->productModel->loadTotalPieces($id);
         $this->template->product = $this->productModel->loadProduct($id);
         $this->template->photo = $this->productModel->loadCoverPhoto($id);
         $this->template->albumID = $album;
         $this->template->album = $this->productModel->loadPhotoAlbum($id);
+       
         $this->template->parameter = $this->productModel->loadParameters($id);
         $this->template->productVariants = $this->productModel->loadProductVariants($id);
         $this->template->slider = NULL;

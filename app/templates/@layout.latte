@@ -9,8 +9,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         {if $user->isInRole('admin')}
-        {control cssAdmin}
         {control css}
+
         {else}
         {control css}
         {/if}
@@ -217,8 +217,8 @@
 {block scripts}
         
      {if $user->isInRole('admin')}
-        {control jsAdmin}
         {control js}
+  
     {else}
         {control js}
     {/if}

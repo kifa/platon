@@ -2,40 +2,43 @@
 # Created: 2013-04-03 10:39:45
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-04-03 10:39+0200\n"
+"PO-Revision-Date: 2013-09-03 11:19-0300\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));\n"
-
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"Last-Translator: Aneta <aneta.chaloupka@gmail.com>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.5.7\n"
 
 msgid "Home"
-msgstr "Casa"
+msgstr "Casa (Home)"
 
 msgid "Choose language:"
-msgstr ""
+msgstr "Escolha o idioma:"
 
 msgid "Sign In"
-msgstr ""
+msgstr "Faça Login"
 
 msgid "Cart"
-msgstr ""
+msgstr "Carrinho"
 
 msgid "You"
-msgstr ""
+msgstr "Você"
 
 msgid "Are"
-msgstr ""
+msgstr "Esta"
 
 msgid "Here"
-msgstr ""
+msgstr "Aqui"
 
 msgid "View as List"
-msgstr ""
+msgstr "Ver a lista"
 
 msgid "Buy"
-msgstr ""
+msgstr "Comprar"
 
 msgid "View"
-msgstr ""
-
+msgstr "Ver"
