@@ -192,6 +192,18 @@ class moduleControl extends BaseControl{
        $gapi->setGapi($this->gapisession);
        return $gapi;
    }
+   
+   
+   protected function createComponentXmlfeed() {
+       
+       $xmlfeed = new xmlFeedModule();
+       $xmlfeed->setTranslator($this->translator);
+       $xmlfeed->setShop($this->shopModel);
+       $xmlfeed->setOrder($this->orderModel);
+       $xmlfeed->setProduct($this->productModel);
+       $xmlfeed->setCategory($this->categoryModel);
+       return $xmlfeed;
+   }
 
    /*********************************************************
     *                   ACTIONS

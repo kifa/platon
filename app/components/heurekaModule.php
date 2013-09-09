@@ -131,7 +131,7 @@ class heurekaModule extends moduleControl {
        
       if($this->shopModel->getShopInfo('heurekaKEY')) {
                 try {
-                    $this->reloadXML();
+
                     $this->presenter->flashMessage('Module installation OK!', 'alert alert-success');
                     
                 } catch(Exception $e) {   
@@ -157,39 +157,8 @@ class heurekaModule extends moduleControl {
        $this->presenter->redirect('this');
    }
 
-   public function handleUpdateXML() {
-       if($this->shopModel->isModuleActive('heureka') && $this->shopModel->getShopInfo('heurekaKEY')) {
-           
-           $this->reloadXML();
-           $this->presenter->redirect('this');
-           }
-       else {
-           return FALSE;
-       }
-   }
    
-   protected function reloadXML() {
-      
-            try {
-                 $template = $this->createTemplate();
-                 $template->setFile($this->presenter->context->parameters['appDir'] . '/templates/components/heureka.latte');
-                 $template->registerFilter(new Nette\Latte\Engine);
-                 $template->registerHelperLoader('Nette\Templating\Helpers::loader');
-
-                 $template->products = $this->productModel->loadHeurekaCatalog();
-                 $template->category = $this->categoryModel->loadCategory("");
-                 
-                 $template->save($this->presenter->context->parameters['wwwDir'] . '/heureka.xml');
-                 $this->presenter->flashMessage('Heureka XML feed sucessfully generated.', 'alert alert-success');
-             }
-             catch(Exception $e) {
-
-                        \Nette\Diagnostics\Debugger::log($e);
-                        $this->presenter->flashMessage('XML feed crashed. I´m so sorry.', 'alert alert-danger');
-
-                 }       
-   
-   }
+ 
 
 
    public function actionOrder($orderInfo) {

@@ -1,0 +1,26 @@
+{contentType application/xml}
+<rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+<channel>
+<title>Inlinebus</title>
+<description>
+Eshop s vybavením pro in-line bruslení - kolečka, keramická ložiska, příslušenství.
+</description>
+<link>http://www.inlinebus.cz/</link>
+     {foreach $products as $product}
+<item>
+<title>{$product->ProductName}</title>
+<link>
+{plink //Product:product $product->ProductID, $product->ProductName}
+</link>
+<description>{$product->ProductShort}</description>
+<g:id>{$product->ProductID}</g:id>
+<g:condition>new</g:condition>
+<g:product_type>{*$product->CategoryName*}</g:product_type>
+<g:price>{$product->SellingPrice}</g:price>
+<g:image_link>{$baseUrl}/images/{$product->PhotoAlbumID}/300-{$product->PhotoURL}</g:image_link>
+<g:brand>{*$product->ProducerName*}</g:brand>
+<g:availability>in stock</g:availability>
+</item>
+    {/foreach}
+</channel>
+</rss>

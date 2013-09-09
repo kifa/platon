@@ -1,0 +1,150 @@
+<rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+<channel>
+<title>Inlinebus</title>
+<description>
+Eshop s vybavením pro in-line bruslení - kolečka, keramická ložiska, příslušenství.
+</description>
+<link>http://www.inlinebus.cz/</link>
+<item>
+<title>Samsung Galaxy Nexus 2 RR</title>
+<link>
+http://localhost/platon/www/product/product/1?slug=Samsung+Galaxy+Nexus+2+RR&amp;lang=cs
+</link>
+<description>Smartphone ze serie NexusSmartphone ze serie NexusSmartphone ze serie NexusSmartphone ze serie NexusSmartphone ze serie NexusSmartphone ze serie NexusSmartphone ze serie NexusSmartphone ze serie Nexus</description>
+<g:id>1</g:id>
+<g:condition>new</g:condition>
+<g:product_type></g:product_type>
+<g:price>10998</g:price>
+<g:image_link>http://localhost/platon/www/images/1/300-main.png</g:image_link>
+<g:brand></g:brand>
+<g:availability>in stock</g:availability>
+</item>
+<item>
+<title>Samsung Chromebooks</title>
+<link>
+http://localhost/platon/www/product/product/2?slug=Samsung+Chromebooks&amp;lang=cs
+</link>
+<description>An ultraportable, sleek laptop for everyday adventures. It weighs 2.4 pounds and has over 6.5 hours of battery life, so you can bring it anywhere and use it everywheres</description>
+<g:id>2</g:id>
+<g:condition>new</g:condition>
+<g:product_type></g:product_type>
+<g:price>59992</g:price>
+<g:image_link>http://localhost/platon/www/images/2/300-main.jpg</g:image_link>
+<g:brand></g:brand>
+<g:availability>in stock</g:availability>
+</item>
+<item>
+<title>Samsung Galaxy S4</title>
+<link>
+http://localhost/platon/www/product/product/3?slug=Samsung+Galaxy+S4&amp;lang=cs
+</link>
+<description></description>
+<g:id>3</g:id>
+<g:condition>new</g:condition>
+<g:product_type></g:product_type>
+<g:price>7999</g:price>
+<g:image_link>http://localhost/platon/www/images/3/300-sony.jpg</g:image_link>
+<g:brand></g:brand>
+<g:availability>in stock</g:availability>
+</item>
+<item>
+<title>Nokia 3310 </title>
+<link>
+http://localhost/platon/www/product/product/4?slug=Nokia+3310+&amp;lang=cs
+</link>
+<description></description>
+<g:id>4</g:id>
+<g:condition>new</g:condition>
+<g:product_type></g:product_type>
+<g:price>15000</g:price>
+<g:image_link>http://localhost/platon/www/images/4/300-6658.jpg</g:image_link>
+<g:brand></g:brand>
+<g:availability>in stock</g:availability>
+</item>
+<item>
+<title>Nokia 3310</title>
+<link>
+http://localhost/platon/www/product/product/6?slug=Nokia+3310&amp;lang=cs
+</link>
+<description></description>
+<g:id>6</g:id>
+<g:condition>new</g:condition>
+<g:product_type></g:product_type>
+<g:price>10000</g:price>
+<g:image_link>http://localhost/platon/www/images/6/300-ipad-mini-scaled-1.jpg</g:image_link>
+<g:brand></g:brand>
+<g:availability>in stock</g:availability>
+</item>
+<item>
+<title>Lenovo ThinkPad Tablet 2 64GB WiFi 3G 3679-4HG</title>
+<link>
+http://localhost/platon/www/product/product/10?slug=Lenovo+ThinkPad+Tablet+2+64GB+WiFi+3G+3679-4HG&amp;lang=cs
+</link>
+<description></description>
+<g:id>10</g:id>
+<g:condition>new</g:condition>
+<g:product_type></g:product_type>
+<g:price>20</g:price>
+<g:image_link>http://localhost/platon/www/images/8/300-ImgW (1).jpg</g:image_link>
+<g:brand></g:brand>
+<g:availability>in stock</g:availability>
+</item>
+<item>
+<title>Sony Ericsson Xperia Mini</title>
+<link>
+http://localhost/platon/www/product/product/13?slug=Sony+Ericsson+Xperia+Mini&amp;lang=cs
+</link>
+<description>Skvělý malý telefon vhodný do každé malé kapsy. QWERTY klávesnice!
+</description>
+<g:id>13</g:id>
+<g:condition>new</g:condition>
+<g:product_type></g:product_type>
+<g:price>3999</g:price>
+<g:image_link>http://localhost/platon/www/images/11/300-mini.jpg</g:image_link>
+<g:brand></g:brand>
+<g:availability>in stock</g:availability>
+</item>
+<item>
+<title>MPC Blackwidow</title>
+<link>
+http://localhost/platon/www/product/product/14?slug=MPC+Blackwidow&amp;lang=cs
+</link>
+<description>Spange Bob je jediný chodící a mluvící keksík na celém širém světě.</description>
+<g:id>14</g:id>
+<g:condition>new</g:condition>
+<g:product_type></g:product_type>
+<g:price>9999</g:price>
+<g:image_link>http://localhost/platon/www/images/17/300-images.jpg</g:image_link>
+<g:brand></g:brand>
+<g:availability>in stock</g:availability>
+</item>
+<item>
+<title>Asus Vivobook</title>
+<link>
+http://localhost/platon/www/product/product/15?slug=Asus+Vivobook&amp;lang=cs
+</link>
+<description></description>
+<g:id>15</g:id>
+<g:condition>new</g:condition>
+<g:product_type></g:product_type>
+<g:price>19999</g:price>
+<g:image_link>http://localhost/platon/www/images/18/300-ImgW.jpg</g:image_link>
+<g:brand></g:brand>
+<g:availability>in stock</g:availability>
+</item>
+<item>
+<title>L9</title>
+<link>
+http://localhost/platon/www/product/product/17?slug=L9&amp;lang=cs
+</link>
+<description></description>
+<g:id>17</g:id>
+<g:condition>new</g:condition>
+<g:product_type></g:product_type>
+<g:price>0</g:price>
+<g:image_link>http://localhost/platon/www/images/20/300-lg_optimus_l9-575x500.jpg</g:image_link>
+<g:brand></g:brand>
+<g:availability>in stock</g:availability>
+</item>
+</channel>
+</rss>
