@@ -827,10 +827,12 @@ class ProductPresenter extends BasePresenter {
                 $this->flashMessage('There is no photo to set as cover', 'alert');
             } else {
                 $this->productModel->updateCoverPhoto($id, $photo);
-                $e = 'Photo ' . $row->PhotoName . ' was sucessfully set as COVER.';
+                $text = $this->translator->translate(' was sucessfully set as COVER.');
+                $text2 = $this->translator->translate('Photo ');
+                $e = $text2 . $row->PhotoName . $text;
 
                 $this->productModel->coverPhoto($id);
-                $this->flashMessage($e, 'alert');
+                $this->flashMessage($e, 'alert alert-success');
             }
 
             $this->redirect('Product:product', $id);
