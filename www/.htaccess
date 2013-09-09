@@ -27,7 +27,6 @@ Header set Cache-Control "private, no-cache, no-store, proxy-revalidate, no-tran
 Header set Pragma "no-cache"
 </FilesMatch>
 
-
 # disable directory listing
 Options -Indexes
 
