@@ -146,8 +146,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->template->shopDescription = $this->shopModel->getShopInfo('Description');
         $this->template->shopLogo = $this->shopModel->getShopInfo('Logo');
         $this->template->GA = $this->shopModel->getShopInfo('GA');
+       
         // set theme layout
         $this->setLayout($this->shopModel->getShopInfo('ShopLayout'));
+        
         if($this->shopModel->getShopInfo('HomepageLayout') == 'homepage-bigslider') {
             
         $this->template->bigSlider = 1;
@@ -199,22 +201,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
     }
     
-    public function createComponentCssAdmin() {
-    // připravíme seznam souborů
-    // FileCollection v konstruktoru může dostat výchozí adresář, pak není potřeba psát absolutní cesty
-        $wwwDir = $this->context->parameters['wwwDir'];
-    $files = new \WebLoader\FileCollection($wwwDir . '/css');
-    $files->addFiles(array(
-        
-    ));
-
-    // kompilátoru seznam předáme a určíme adresář, kam má kompilovat
-    $compiler = \WebLoader\Compiler::createCssCompiler($files, $wwwDir . '/webtemp');
-
-    // nette komponenta pro výpis <link>ů přijímá kompilátor a cestu k adresáři na webu
-    return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
-    }
-    
     public function createComponentJs() {
     $wwwDir = $this->context->parameters['wwwDir'];
     $files = new \WebLoader\FileCollection($wwwDir . '/js');
@@ -233,18 +219,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         'jquery.wysiwyg.js',
         'jquery.jeditable.mini.js',
         'jquery.jeditable.wysiwyg.js'));
-
-    $compiler = \WebLoader\Compiler::createJsCompiler($files, $wwwDir . '/webtemp');
-
-    return new \WebLoader\Nette\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
-    }
-    
-    public function createComponentJsAdmin() {
-    $wwwDir = $this->context->parameters['wwwDir'];
-    $files = new \WebLoader\FileCollection($wwwDir . '/js');
-    // můžeme načíst i externí js
-    $files->addFiles(array(
-        ));
 
     $compiler = \WebLoader\Compiler::createJsCompiler($files, $wwwDir . '/webtemp');
 
