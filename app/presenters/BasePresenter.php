@@ -210,6 +210,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     $files->addFiles(array(
         'jquery.min.js',
         'jquery-migrate.min.js',
+
         'netteForms.js',
         'bootstrap.min.js',
         'live-form-validation.js',

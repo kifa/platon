@@ -1,10 +1,27 @@
 <div class="alert alert-info">
         {if $user->isInRole('admin')}
-        {_'Hello'} <strong>{$user->id}!</strong> <br><a class="btn btn-danger" href="{plink SmartPanel:}"><i class="icon-lightbulb"></i> SmartPanel</a> | 
-        <a href="{plink SmartPanel:default}">{_"News"} <span class="label {if $news >0 }label-info{else} label-default{/if}"><i class="icon-envelope"></i> {$news}</span></a> |
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editDesign" id="editDesignButton"><i class="icon-tint"></i> {_"ReDesign"}</button> |
+        {_'Hello'} <strong>{$user->id}!</strong> <br>
+        
+                        
+<div class="btn-group">
+        <a class="btn btn-danger btn-sm pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+             <i class="icon-lightbulb"></i> SmartPanel
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li class="{ifCurrent SmartPanel:}active{/ifCurrent}"><a href="{plink SmartPanel:}"><i class="icon-lightbulb"></i> SP {_'Dashboard'}</a></li>
+            <li class="{ifCurrent SmartPanel:orders}active{/ifCurrent}"><a href="{plink SmartPanel:orders}"><i class="icon-spinner"></i> {_"Orders"}</a></li>
+            <li class="{ifCurrent SmartPanel:shipping}active{/ifCurrent}"><a href="{plink SmartPanel:shipping}"><i class="icon-truck"></i> {_"Shipping"}</a></li>
+            <li class="{ifCurrent SmartPanel:payment}active{/ifCurrent}"><a href="{plink SmartPanel:payment}"><i class="icon-money"></i> {_"Payment"}</a></li>
+            <li class="{ifCurrent SmartPanel:warehouse}active{/ifCurrent}"><a href="{plink SmartPanel:warehouse}"><i class="icon-retweet"></i> {_"Warehouse"}</a></li>
+            <li class="{ifCurrent SmartPanel:modules}active{/ifCurrent}"><a href="{plink SmartPanel:modules}"><i class="icon-upload-alt"></i> {_"New functions"}</a></li>
+            <li class="{ifCurrent SmartPanel:stats}active{/ifCurrent}"><a href="{plink SmartPanel:stats}"><i class="icon-bar-chart"></i> {_"Stats"}</a></li>
+        </ul>
+</div> 
+        <a href="{plink SmartPanel:default}" class="btn btn-default btn-sm"><i class="icon-envelope"></i> {_"News"} <span class="label {if $news >0 }label-info{else} label-default{/if}">{$news}</span></a> 
+        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editDesign" id="editDesignButton"><i class="icon-tint"></i> {_"ReDesign"}</button> 
 
-        <a href="{plink Sign:out}">{_"Logout"} <i class="icon-signout"></i></a>
+        <a href="{plink Sign:out}" class="btn btn-default btn-sm">{_"Logout"} <i class="icon-signout"></i></a>
         
         {else}
         <a href="{plink Order:cart}"><i class="icon-large icon-shopping-cart"></i> {_"Cart"} {if $cart > 0}<span class="label label-danger">{$cart}</span>{else}<span class="label label-default">0</span>{/if}</a> | 
