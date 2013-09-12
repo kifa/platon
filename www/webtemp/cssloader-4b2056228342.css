@@ -1487,6 +1487,10 @@ h1.CatTitle {
 white-space: normal;
 }}
 
+.dropdown-menu {
+    z-index: 1999;
+}
+
 div.wysiwyg { border: 1px solid #cccccc; padding: 5px; background-color: #ffffff; }
 div.wysiwyg * { margin: 0; padding: 0; }
 
