@@ -1,0 +1,96 @@
+{if $user->isInRole('admin')}
+<div id="addCategory" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Category'}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Please fill in these information'}</p>
+                       {control addCategoryForm}
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+            </div>
+        </div> </div> </div>
+
+<div id="addStaticText" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Text'}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Please fill in these information'}</p>
+                      {control addStaticTextForm}
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+            </div>
+        </div> </div> </div>
+
+<div id="editDesign" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editDesign" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><i class="icon-tint"></i> {_'Redesign your eshop'}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#editLayout" data-toggle="tab"><i class=""></i> {_'Layout'}</a></li>
+                        <li><a href="#editMenu" data-toggle="tab"><i class=""></i> {_'Menu'}</a>
+                        <li><a href="#editProducts" data-toggle="tab"><i class=""></i> {_'Products'}</a></li>
+                        <li><a href="#editProduct" data-toggle="tab"><i class=""></i> {_'Product'}</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="editLayout">
+                            <ul class="list-unstyled">
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'default'" >Default</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'sidemenu'" >Side menu</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'topbar'" >Top bar</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'nosidebar'" >No sidebar</a></li>
+                            </ul>
+                        </div>
+
+
+                        <div class="tab-pane" id="editMenu">
+                            <p>{_'Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow.'}</p>
+
+                        </div>
+
+                        <div class="tab-pane" id="editProducts">
+                            <ul class="list-unstyled">
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', ''" >{_'4 in line'}</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', 2" >{_'2 in line'}</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', 3" >{_'Singleton'}</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', 4" >{_'Big photo'}</a></li>
+                            </ul>
+
+                        </div>
+
+                        <div class="tab-pane" id="editProduct">
+                            <ul class="list-unstyled">
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 1" >layout 1</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 2" >layout 2</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 3" >layout 3</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 4" >layout 4</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{_'Close without saving'}</button>
+            </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div>  
+
+{/if}
+
+    {control modalControl:tracking}

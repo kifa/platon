@@ -1,0 +1,60 @@
+{control js}
+
+{include './GA.latte', GA => $GA}
+    
+<script>
+$(document).ready(function() {
+
+        $('#trackingButton').toggle(function(){
+            $('#tracking').modal('show');
+          },
+          function() {
+              $('#tracking').modal('hide');
+          });
+
+     {if $user->isInRole('admin')}   
+            $('#addCategoryButton').toggle(function(){
+           $('#addCategory').modal('show');
+         },
+         function() {
+             $('#addCategory').modal('hide');
+         });
+
+         $('#addStaticTextButton').toggle(function(){
+           $('#addStaticText').modal('show');
+         },
+         function() {
+             $('#addStaticText').modal('hide');
+         });
+
+         $('#editDesignButton').toggle(function(){
+            $('#editDesign').modal('show');
+         },
+         function() {
+              $('#editDesign').modal('hide');
+          });
+
+    {/if}
+});
+</script>
+
+
+{snippet script}
+        <script>
+
+            $('a.ajax').click(function(){
+                $(this).html('<i class="icon-spinner icon-spin"></i>');
+            });
+            
+             $('input[name="srch"]').click(function() { 
+                $('input[name="srch"]').attr('class', 'btn btn-default disabled');
+                $('input[name="srch"]').attr('value', '{_'Searching...'}');
+            });
+
+            
+            $('.addToCart').click(function() { 
+                $(this).attr('class', 'btn btn-success disabled');
+                $(this).text('{_'Adding to cart...'}');
+            });
+        </script>
+{/snippet}

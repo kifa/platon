@@ -1,0 +1,14 @@
+{foreach $category as $catID => $cat}
+ {if !$cat->HigherCategoryID}
+  {if $cat->CategoryStatus != 4}
+   <li class="{ifCurrent Product:products $catID, $cat->CategoryName}active{/ifCurrent}{if $catID == $ct} active{/if}"><a href="{plink product:products $catID, $cat->CategoryName}">
+     {if $cat->CategoryStatus == 0} <i class="icon-eye-close"></i> {/if}
+          {$cat->CategoryName}</a>
+   </li>
+   {/if}
+  {/if}
+{/foreach}
+
+{if $user->isInRole('admin')}
+    <li><a href="#addCategory" data-toggel="modal" data-target="#addCategory" id="addCategoryButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Category"}</a></li>
+{/if}

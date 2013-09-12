@@ -1,14 +1,30 @@
-    <div class="container supercontainer shopLanguageBar">
-  {if $user->isInRole('admin')}
- <ul class="list-inline pull-right .col-md-7">
-            <li><a n:href="this, lang => br" ><img src="{$basePath}/img/blank.gif" class="flag flag-br" alt="Brazil" /> Português</a></li>
+<div class="container supercontainer shopLanguageBar margin5">
+
+{if $user->isInRole('admin')}
+    <div class="col-md-5 col-sm-12">
+{control menu:SmartPanel}
+    </div>
+        {/if}
+   <div class="col-md-5 col-sm-12">  
+{control menu:cart}
+   </div>
+     <div class="col-md-1">
+        <div class="btn-group">
+        <a class="btn btn-default pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-globe"></i> <i class="icon-flag-alt"></i> 
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+             <li><a n:href="this, lang => br" ><img src="{$basePath}/img/blank.gif" class="flag flag-br" alt="Brazil" /> Português</a></li>
             <li><a n:href="this, lang => en" ><img src="{$basePath}/img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
             <li><a n:href="this, lang => cs" ><img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" /> Česky</a></li>
             <li><a n:href="this, lang => de" ><img src="{$basePath}/img/blank.gif" class="flag flag-de" alt="Deutsch" /> Deutsch</a></li>
         </ul>
-        
-{/if}
+    </div> 
+{if $user->isInRole('admin')}
+ {/if}
 
-{control menu:top} 
+     </div>
 
-    </div>
+ 
+</div>

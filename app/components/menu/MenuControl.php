@@ -90,30 +90,14 @@ class MenuControl extends BaseControl {
          else {
              return $this->shopModel->loadActiveStaticText(''); 
          }
-       
     }
     
-    public function handleSetShopInfo($layout, $id) {
-        if ($this->parent->getUser()->isInRole('admin')) {   
-              $this->shopModel->setShopInfo($layout, $id);
-                 $this->redirect('this');
-          }
+    public function renderAll($img = NULL, $ct = NULL) {
+        $this->render($img, $ct);
     }
-    
-    public function renderAdmin() {
-        if($this->parent->getUser()->isInRole('admin')){
-        $this->template->setFile(__DIR__.'/MenuAdminControl.latte');
-        $this->template->category = $this->categoryModel->loadCategoryListAdmin(); 
-        $this->template->render();
-        }
-    }
-    
-    
 
-    public function render($img, $ct = NULL) {
-        $this->template->setFile(__DIR__ . '/MenuControl.latte');
-        $this->template->cart = $this->cart->numberItems;
-       
+    public function render($img = NULL, $ct = NULL) {
+        $this->template->setFile(__DIR__ . '/MenuAllControl.latte');
         if($this->parent->getUser()->isInRole('admin')){
             $this->template->category = $this->categoryModel->loadCategoryListAdmin(); 
         }
@@ -121,11 +105,29 @@ class MenuControl extends BaseControl {
             $this->template->category = $this->categoryModel->loadCategoryList();  
         }
         $this->template->producers = $this->productModel->loadProducers();
-      //  $this->template->menuItems = $this->ShopModel->getMenu();
+        $this->template->menu = $this->loadStaticMenu();
         $this->template->img = $img;
         $this->template->ct = $ct;
-        $this->template->menu = $this->loadStaticMenu();
-        $this->template->lang = $this->lang;
+        $this->template->render();
+    }
+    
+    
+    public function renderCategory($img = NULL, $ct = NULL) {
+        $this->template->setFile(__DIR__ . '/MenuCategoryControl.latte');
+        if($this->parent->getUser()->isInRole('admin')){
+            $this->template->category = $this->categoryModel->loadCategoryListAdmin(); 
+        }
+        else {
+            $this->template->category = $this->categoryModel->loadCategoryList();  
+        }
+        $this->template->img = $img;
+        $this->template->ct = $ct;
+        $this->template->render();
+    }
+    
+    public function renderProducer() {
+        $this->template->setFile(__DIR__ . '/MenuProducerControl.latte');
+        $this->template->producers = $this->productModel->loadProducers();
         $this->template->render();
     }
     
@@ -154,25 +156,24 @@ class MenuControl extends BaseControl {
     }
     
     
-    public function renderTop() {
-        $this->template->setFile(__DIR__ . '/MenuTopControl.latte');
+    public function renderCart() {
+        $this->template->setFile(__DIR__ . '/MenuCartControl.latte');
         $this->template->cart = $this->cart->numberItems;
-        if($this->presenter->getUser()->isInRole('admin')){
-        $news = $this->orderModel->loadUnreadOrdersCount($this->usertracking->date);
-        $comments = $this->productModel->loadUnreadCommentsCount($this->usertracking->date);
-        $this->template->news = $news + $comments;
-        }
         $this->template->render();
     }
     
-    public function renderFooter() {
-        $this->template->setFile(__DIR__ . '/MenuFooterControl.latte');
-        $this->template->menu = $this->loadStaticMenu();
-        $this->template->render();
+    public function renderSmartPanel() {
+         if($this->presenter->getUser()->isInRole('admin')){
+            $this->template->setFile(__DIR__ . '/MenuSmartPanelControl.latte');
+            $news = $this->orderModel->loadUnreadOrdersCount($this->usertracking->date);
+            $comments = $this->productModel->loadUnreadCommentsCount($this->usertracking->date);
+            $this->template->news = $news + $comments;
+            $this->template->render();
+          }
     }
-
-    public function renderSide() {
-        $this->template->setFile(__DIR__ . '/MenuSideControl.latte');
+    
+    public function renderInfo() {
+        $this->template->setFile(__DIR__ . '/MenuInfoControl.latte');
         $this->template->menu = $this->loadStaticMenu();
         $this->template->render();
     }

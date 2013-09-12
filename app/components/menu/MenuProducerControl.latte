@@ -1,0 +1,12 @@
+<li class="dropdown {ifCurrent product:productsBrand}active{/ifCurrent}}">
+   
+        <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+    {_'Choose Brand'}
+            <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+      {foreach $producers as $prodID => $producer}
+            <li class=""><a href="{plink product:productsBrand $prodID}">{$producer->ProducerName}</a></li> 
+        {/foreach}
+        </ul>
+</li>

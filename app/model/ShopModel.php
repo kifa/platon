@@ -48,6 +48,13 @@ class ShopModel extends Repository {
         }
     }
     
+     public function getShopSettings()
+    {
+            return $this->getTable('settings')->select('SettingName, Value')
+                    ->fetchPairs('SettingName');
+      
+    }
+    
      public function getShopInfoPublic() {
         $param = array('Name', 'Description', 'CompanyAddress', 'TAX', 'OrderMail', 'ContactMail', 'ContactPhone', 'InvoicePrefix', 'GA');
         
@@ -58,27 +65,9 @@ class ShopModel extends Repository {
     
     public function setShopInfo($name, $value)
     {
-        if ($name == 'ShopLayout') {
-            $update = array(
-                'Value' => "layout" . $value
-              );            
-        }        
-        elseif ($name == 'ProductLayout') {
-            $update = array(
-                'Value' => "product" . $value
-              );            
-        }
-        elseif ($name == 'ProductMiniLayout') {
-            $update = array(
-                'Value' => "ProductMini" . $value
-              );
-            
-        }        
-        else {
-            $update = array(
+        $update = array(
               'Value' => $value  
             );
-        }
         
         return $this->getTable('settings')
                 ->where('SettingName', $name)

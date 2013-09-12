@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-09-01 10:55:35
+# Created: 2013-09-11 16:49:07
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-09-01 10:55+0200\n"
+"PO-Revision-Date: 2013-09-11 16:49+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -132,6 +132,9 @@ msgstr "Přidejte jakoukoliv poznámku k této objednávce"
 msgid "Add category photo"
 msgstr "Přidat kategorii fotku"
 
+msgid "Add description photo"
+msgstr "Přidejte fotografii k popisu."
+
 msgid "Add new product"
 msgstr "Přidat produkt"
 
@@ -242,6 +245,9 @@ msgstr "Mobilní telefon"
 
 msgid "Change password"
 msgstr "Změnit heslo"
+
+msgid "Change slider"
+msgstr "Změnit fotku"
 
 msgid "Change value by clicking"
 msgstr "Hodnotu upravte kliknutím na ni"
@@ -356,6 +362,9 @@ msgstr "Smazat"
 
 msgid "Delete Category"
 msgstr "Smazat kategorii"
+
+msgid "Delete Spec"
+msgstr "Smazat specifikaci"
 
 msgid "Delete Specs"
 msgstr "Smazat specifikace"
@@ -636,6 +645,9 @@ msgstr "Zůstat přihlášen"
 msgid "LAST"
 msgstr "POSLEDNÍ"
 
+msgid "Large"
+msgstr "Velký"
+
 msgid "Latest Comments"
 msgstr "Nejnovější komentáře"
 
@@ -662,6 +674,12 @@ msgstr "Spravovat varianty produktu"
 
 msgid "Manage variants"
 msgstr "Spravovat varianty"
+
+msgid "Max size is 2MB ~ 1 Megapixel photos"
+msgstr "Max velikost 2MB ~ 1 megapixel"
+
+msgid "Medium"
+msgstr "Střední"
 
 msgid "Menu"
 msgstr "Menu"
@@ -816,6 +834,9 @@ msgstr "Vyberte způsob platby"
 msgid "Please select Shipping method"
 msgstr "Vyberte způsob dopravy"
 
+msgid "Please set new HEUREKA key."
+msgstr "Prosím zadejte nový Heureka klíč."
+
 msgid "Please set new price."
 msgstr "Prosím zadejte novou cenu."
 
@@ -969,6 +990,12 @@ msgstr "Rozvržení katalogu"
 msgid "Set as COVER image"
 msgstr "Nastavit jako titulku"
 
+msgid "Set new HEUREKA Key"
+msgstr "Nastavte nový HEUREKA klíč"
+
+msgid "Set new Ulozenka price"
+msgstr "Nastavte novou ceně Uložence"
+
 msgid "Set new Zasilkovna price"
 msgstr "Nastavit cenu Zásilkovně"
 
@@ -1005,8 +1032,14 @@ msgstr "Přihlásit"
 msgid "Singleton"
 msgstr "Solitér"
 
+msgid "Small"
+msgstr "Malý"
+
 msgid "Small slider"
 msgstr "Malý slider"
+
+msgid "SmartPanel"
+msgstr "SmartPanel"
 
 msgid "Smartphone"
 msgstr "Smartphone"
@@ -1155,6 +1188,9 @@ msgstr "Právě připravujeme Vaše zboží."
 msgid "We have found these results:"
 msgstr "Našli jsme pro Vás tyto výsledky:"
 
+msgid "We will reply as soon as possible."
+msgstr "Odpovíme vám tak rychle jak to jen půjde."
+
 msgid "We will respond as soon as possible."
 msgstr "Odpovíme tak rychle, jak to jen půjde."
 
@@ -1224,6 +1260,9 @@ msgstr "PSČ:"
 msgid "by post/delivery service"
 msgstr "poštou/doručovací službou"
 
+msgid "current key:"
+msgstr "současný klíč:"
+
 msgid "from"
 msgstr "od"
 
@@ -1236,6 +1275,6 @@ msgstr "ks"
 msgid "personal pick up"
 msgstr "osobní převzetí"
 
-msgid "Change slider"
-msgstr "Změnit fotku"
+msgid "Redesign your eshop"
+msgstr "ReDesign obchodu"
 

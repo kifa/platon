@@ -142,15 +142,17 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     public function beforeRender() {
         parent::beforeRender();
         
-        $this->template->shopName = $this->shopModel->getShopInfo('Name');
-        $this->template->shopDescription = $this->shopModel->getShopInfo('Description');
-        $this->template->shopLogo = $this->shopModel->getShopInfo('Logo');
-        $this->template->GA = $this->shopModel->getShopInfo('GA');
+        $shopInfo = $this->shopModel->getShopSettings();
+        
+        $this->template->shopName = $shopInfo['Name']->Value;
+        $this->template->shopDescription = $shopInfo['Description']->Value;
+        $this->template->shopLogo = $shopInfo['Logo']->Value;
+        $this->template->GA = $shopInfo['GA']->Value;
        
         // set theme layout
-        $this->setLayout($this->shopModel->getShopInfo('ShopLayout'));
+        $this->setLayout($shopInfo['ShopLayout']->Value);
         
-        if($this->shopModel->getShopInfo('HomepageLayout') == 'homepage-bigslider') {
+        if($shopInfo['HomepageLayout']->Value == 'homepage-bigslider') {
             
         $this->template->bigSlider = 1;
         }
@@ -159,6 +161,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
    
         }
         $this->template->slider = NULL;
+        
+        $this->template->menuTop = $shopInfo['TopMenu']->Value;
+        $this->template->menuSide = $shopInfo['SideMenu']->Value;
+        $this->template->menuFooter = $shopInfo['FooterMenu']->Value;
 
         if ($this->isAjax()) {
         $this->invalidateControl('flashMessages');
@@ -210,7 +216,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     $files->addFiles(array(
         'jquery.min.js',
         'jquery-migrate.min.js',
-
         'netteForms.js',
         'bootstrap.min.js',
         'live-form-validation.js',
