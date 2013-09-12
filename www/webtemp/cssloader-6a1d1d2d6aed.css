@@ -1491,6 +1491,13 @@ white-space: normal;
     z-index: 1999;
 }
 
+.shopMessages {
+    position: fixed;
+top: 0;
+width: 100%;
+z-index: 1500;
+}
+
 div.wysiwyg { border: 1px solid #cccccc; padding: 5px; background-color: #ffffff; }
 div.wysiwyg * { margin: 0; padding: 0; }
 

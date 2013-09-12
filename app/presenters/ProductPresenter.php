@@ -368,44 +368,6 @@ class ProductPresenter extends BasePresenter {
     }
     
 
-     public function handleHideProduct($id) {
-        if ($this->getUser()->isInRole('admin')) {
-            
-            $this->productModel->hideProduct($id);
-            $this->flashMessage('Product sucessfully hidden', 'alert alert-success');
-            
-            if($this->isAjax())
-            {            
-              $this->invalidateControl('products');
-              $this->invalidateControl('productMenu');
-              $this->invalidateControl('script');
-            }
-            
-            else {
-              $this->redirect('this');
-            }
-        }
-    }
-
-    public function handleShowProduct($id) {
-        if ($this->getUser()->isInRole('admin')) {
-            $this->productModel->showProduct($id);
-            $this->flashMessage('Product sucessfully published', 'alert alert-success');
-            
-            if($this->presenter->isAjax()) {
-                $this->invalidateControl('products');
-                $this->invalidateControl('productMenu');
-                $this->invalidateControl('script');
-                
-            }
-            else {
-            $this->redirect('this');
-            }
-        }
-    }
-    
-
-
     
     public function handleSetCatalogLayout($catID, $layoutID) {
         if ($this->getUser()->isInRole('admin')) {
@@ -611,55 +573,6 @@ class ProductPresenter extends BasePresenter {
         }
     }
     
-    public function handleSetProductCategory($id, $catid) {
-        if($this->getUser()->isInRole('admin')){ 
-            if($this->isAjax())
-            {            
-                $this->productModel->updateProduct($id, 'CategoryID', $catid);
-                $this->invalidateControl('productCategory');
-                $this->invalidateControl('bread');
-                $this->invalidateControl('script');
-
-            }
-            else {
-             $this->redirect('this');
-            }
-        }
-    }
-
-    public function handleSetProductProducer($id, $producerid) {
-        if($this->getUser()->isInRole('admin')){ 
-            if($this->isAjax())
-            {            
-                $this->productModel->updateProduct($id, 'ProducerID', $producerid);
-                $this->invalidateControl('productProducer');
-                $this->invalidateControl('script');
-
-            }
-            else {
-             $this->redirect('this');
-            }
-        }
-    }
- 
-
-    
-    public function handleSetProductStatus($id, $statusid) {
-        if($this->getUser()->isInRole('admin')){ 
-            if($this->isAjax())
-            {            
-                $this->productModel->updateProduct($id, 'ProductStatusID', $statusid);
-                $this->invalidateControl('page-header');
-                $this->invalidateControl('productStatus');
-                $this->invalidateControl('products');
-                $this->invalidateControl('script');
-            }
-            else {
-             $this->redirect('this');
-            }
-        }
-    }
-
 
     public function handleEditCatDescription($catid) {
         if($this->getUser()->isInRole('admin')){
@@ -811,6 +724,8 @@ class ProductPresenter extends BasePresenter {
                     'productDescription' => $row['ProductShort'],
                     'productID' => $row['ProductID'],
                     'albumID' => $album));
+                
+                
                 
             }
            
@@ -1173,7 +1088,7 @@ class ProductPresenter extends BasePresenter {
     public function renderProduct($id, $slug) {
         $layout = $this->shopModel->getShopInfo('ProductLayout');
         
-       $this->template->setFile( $this->context->parameters['appDir'] . '/templates/Product/'  . $layout . '.latte'); 
+       $this->template->setFile( $this->context->parameters['appDir'] . '/templates/Product/' . $layout . '.latte'); 
        if ($this->presenter->getUser()->isInRole('admin')) { 
             if ($this->edit->param != NULL) {
                 $this->template->attr = 1;

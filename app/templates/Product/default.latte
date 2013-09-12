@@ -6,73 +6,8 @@
 {block pageheader}
 {if $user->isInRole('admin')}
 
-    <div class="col-md-12" n:snippet="productMenu">
-             <div class="alert alert-error col-md-12"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?'}</div>
-
-            <div class="btn-group">
-                <a class="btn btn-default"><i class="icon-sitemap"></i> {_'Choose Category'}</a>
-                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" n:snippet="productCategory">
-                    {foreach $categories as $catID => $cat}
-                     {if $cat->CategoryStatus != 4}
-                    <li class="productcat"><a href="{plink setProductCategory!  $product->ProductID, $catID }" class="ajax">
-                    {if $product->CategoryID == $catID}<i class="icon-ok-sign"></i>{/if}
-                    {$cat->CategoryName}</a></li>
-                    {/if}
-                    {/foreach}
-
-                </ul>
-            </div>
-
-            <div class="btn-group">
-                <a class="btn btn-default">{_'Choose Brand'}</a>
-                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" n:snippet="productProducer">
-                    {foreach $producers as $producerID => $prod}
-
-                    <li class="productproducer"><a href="{plink setProductProducer!  $product->ProductID, $producerID }" class="ajax">
-                    {if $product->ProducerID == $producerID}<i class="icon-ok-sign"></i>{/if}
-                    {$prod->ProducerName}</a></li> 
-                    {/foreach}
-
-                </ul>
-            </div>
-            
-            <div class="btn-group" n:snippet="productStatus">
+{control adminPanelControl:Product $product->ProductID, $product->ProductStatusID, $product->CategoryID, $product->ProducerID}
     
-              {if $product->ProductStatusID == 3} 
-                <a href="{plink setProductStatus! $product->ProductID, 2}" class="btn btn-default ajax active"><i class="icon-thumbs-up"></i></a>
-                   {else}
-                <a href="{plink setProductStatus! $product->ProductID, 3}" class="btn btn-default ajax"><i class="icon-thumbs-up"></i></a>
-                   {/if}
-                  
-                {if $product->ProductStatusID == 1}
-<a href="{plink showProduct! $product->ProductID}" title="{_'Publish product'}" class="ajax btn btn-danger"><i id="showProduct" class="icon-large icon-eye-open"></i> Publish product</a>
-
-<a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" title="{_'Archive product'}" class="ajax btn btn-default"><i id="deleteProduct" class="icon-large icon-inbox"></i> Archive</a>
-
-    {elseif $product->ProductStatusID == 2}
-<a href="{plink hideProduct! $product->ProductID}" title="{_'Hide product'}" class="ajax btn btn-default"><i id="hideProduct" class="icon-large icon-eye-close"></i> Hide</a>
-
-    
-    {elseif $product->ProductStatusID == 3} 
-<a href="{plink hideProduct! $product->ProductID}" title="{_'Hide product'}" class="ajax btn btn-default"><i id="hideProduct" class="icon-large icon-eye-close"></i> Hide</a>
-                   
-    {else}
-<a href="{plink hideProduct! $product->ProductID}" class="btn btn-default ajax"><i id="hideProduct" class="icon-large icon-eye-close"></i> Hide</a>
-    {/if}
-
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editParam" id="editParamButton"><i class="icon-list"></i> {_"Edit Specs"}</button>
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addVariant" id="addVariantButton"><i class="icon-expand-alt"></i> {_'Manage variants'}</button>
-            </div>
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#stats" id="statsButton"><i class="icon-bar-chart"></i> {_"Stats"}</button>
-        </div>
 {/if}
 
 <div class="page-header" n:snippet="page-header">

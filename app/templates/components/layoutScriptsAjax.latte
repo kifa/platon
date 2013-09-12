@@ -1,0 +1,17 @@
+        <script>
+
+            $('a.ajax').click(function(){
+                $(this).html('<i class="icon-spinner icon-spin"></i>');
+            });
+            
+             $('input[name="srch"]').click(function() { 
+                $('input[name="srch"]').attr('class', 'btn btn-default disabled');
+                $('input[name="srch"]').attr('value', '{_'Searching...'}');
+            });
+
+            
+            $('.addToCart').click(function() { 
+                $(this).attr('class', 'btn btn-success disabled');
+                $(this).text('{_'Adding to cart...'}');
+            });
+        </script>

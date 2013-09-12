@@ -124,3 +124,10 @@ white-space: normal;
 .dropdown-menu {
     z-index: 1999;
 }
+
+.shopMessages {
+    position: fixed;
+top: 0;
+width: 100%;
+z-index: 1500;
+}

@@ -1,0 +1,65 @@
+<div class="col-md-12" n:snippet="productMenu">
+<div class="btn-group">
+                <a class="btn btn-default btn-sm"><i class="icon-sitemap"></i> {_'Choose Category'}</a>
+                <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" n:snippet="productCategory">
+                    {foreach $categories as $catID => $cat}
+                     {if $cat->CategoryStatus != 4}
+                    <li class="productcat"><a href="{link setProductCategory!  $id, $catID }" class="ajax">
+                    {if $categor == $catID}<i class="icon-ok-sign"></i>{/if}
+                    {$cat->CategoryName}</a></li>
+                    {/if}
+                    {/foreach}
+
+                </ul>
+            </div>
+
+            <div class="btn-group">
+                <a class="btn btn-default btn-sm">{_'Choose Brand'}</a>
+                <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" n:snippet="productProducer">
+                    {foreach $producers as $producerID => $prod}
+
+                    <li class="productproducer"><a href="{link setProductProducer!  $id, $producerID }" class="ajax">
+                    {if $producer == $producerID}<i class="icon-ok-sign"></i>{/if}
+                    {$prod->ProducerName}</a></li> 
+                    {/foreach}
+
+                </ul>
+            </div>
+            
+            <div class="btn-group" n:snippet="productStatus">
+    
+              {if $stat == 3} 
+                <a href="{link setProductStatus! $id, 2}" class="btn btn-default btn-sm ajax active"><i class="icon-thumbs-up"></i></a>
+                   {else}
+                <a href="{link setProductStatus! $id, 3}" class="btn btn-default btn-sm ajax"><i class="icon-thumbs-up"></i></a>
+                   {/if}
+                  
+                {if $stat == 1}
+<a href="{link showProduct! $id}" title="{_'Publish product'}" class="ajax btn btn-danger btn-sm"><i id="showProduct" class="icon-large icon-eye-open"></i> Publish product</a>
+
+<a href="{link deleteProduct! $id, $categor}" title="{_'Archive product'}" class="ajax btn btn-default btn-sm "><i id="deleteProduct" class="icon-large icon-inbox"></i> Archive</a>
+
+    {elseif $stat == 2}
+<a href="{link hideProduct! $id}" title="{_'Hide product'}" class="ajax btn btn-default btn-sm"><i id="hideProduct" class="icon-large icon-eye-close"></i> Hide</a>
+
+    
+    {elseif $stat == 3} 
+<a href="{link hideProduct! $id}" title="{_'Hide product'}" class="ajax btn btn-default btn-sm"><i id="hideProduct" class="icon-large icon-eye-close"></i> Hide</a>
+                   
+    {else}
+<a href="{link hideProduct! $id}" class="btn btn-default btn-sm ajax"><i id="hideProduct" class="icon-large icon-eye-close"></i> Hide</a>
+    {/if}
+
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editParam" id="editParamButton"><i class="icon-list"></i> {_"Edit Specs"}</button>
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addVariant" id="addVariantButton"><i class="icon-expand-alt"></i> {_'Manage variants'}</button>
+            </div>
+            <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#stats" id="statsButton"><i class="icon-bar-chart"></i> {_"Stats"}</button>
+</div>

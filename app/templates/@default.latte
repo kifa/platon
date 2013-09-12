@@ -75,6 +75,9 @@
          {$flash->message}</div>
          {/foreach}
     </div>
+{if $user->isInRole('admin')}
+    {include './components/layoutAdminInfo.latte'}
+{/if}
 </div> 
 
     {block #slider}
@@ -127,9 +130,9 @@
 
     <div class="footer">         
         <div class="col-md-9 margin5">
-            
+           <ul class="nav nav-pills"> 
            {control menu:$menuFooter}
-            
+           </ul>
             <p>{_'Cookies help us deliver our services. By using our services, you agree to our use of cookies.'}</p>
         </div>
 
@@ -157,6 +160,9 @@
                 
 {block scripts}
     {include './components/layoutScripts.latte'}
+    {snippet script}
+     {include './components/layoutScriptsAjax.latte'}
+    {/snippet}
     
     {block #script}
     {/block}
