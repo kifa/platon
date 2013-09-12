@@ -49,10 +49,10 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="editLayout">
                             <ul class="list-unstyled">
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'default'" >Default</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'sidemenu'" >Side menu</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'topbar'" >Top bar</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'nosidebar'" >No sidebar</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'default'" >{_'Default'}</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'sidemenu'" >{_'Side menu'}</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'topbar'" >{_'Top bar'}</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'nosidebar'" >{_'No sidebar'}</a></li>
                             </ul>
                         </div>
 
@@ -60,24 +60,25 @@
                         <div class="tab-pane" id="editMenu">
                             <p>{_'Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow.'}</p>
 
+                            {control menuSwitcherForm}
                         </div>
 
                         <div class="tab-pane" id="editProducts">
                             <ul class="list-unstyled">
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', ''" >{_'4 in line'}</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', 2" >{_'2 in line'}</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', 3" >{_'Singleton'}</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', 4" >{_'Big photo'}</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', 'fourinline'" >{_'4 in line'}</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', 'twoinline'" >{_'2 in line'}</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', 'singleton'" >{_'Singleton'}</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', 'bigphoto'" >{_'Big photo'}</a></li>
                             </ul>
 
                         </div>
 
                         <div class="tab-pane" id="editProduct">
                             <ul class="list-unstyled">
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 1" >layout 1</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 2" >layout 2</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 3" >layout 3</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 4" >layout 4</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'default'" >{_'Default'}</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'phototime'" >{_'Photo time'}</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'contentfocus'" >{_'Content Focus'}</a></li>
+                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'buymore'" >{_'Buy more'}</a></li>
                             </ul>
 
                         </div>

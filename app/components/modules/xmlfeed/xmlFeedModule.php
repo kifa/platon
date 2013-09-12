@@ -182,7 +182,7 @@ class xmlFeedModule extends moduleControl {
     
     public function renderInstall() {
         
-        $this->template->setFile(__DIR__ . '/simpleInstallModule.latte');
+        $this->template->setFile(__DIR__ . '/../simpleInstallModule.latte');
         
         $info = $this->shopModel->loadModuleByName('xmlfeed');
        

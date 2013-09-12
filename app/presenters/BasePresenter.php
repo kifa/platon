@@ -165,11 +165,19 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->template->menuTop = $shopInfo['TopMenu']->Value;
         $this->template->menuSide = $shopInfo['SideMenu']->Value;
         $this->template->menuFooter = $shopInfo['FooterMenu']->Value;
-
+        $this->template->productMiniLayout = $shopInfo['ProductMiniLayout']->Value;
+        
+        
         if ($this->isAjax()) {
         $this->invalidateControl('flashMessages');
         }
         
+          if ($this->getUser()->isInRole('admin')) {   
+        $menuSwitcher = $this['menuSwitcherForm'];
+        $menuSwitcher->setDefaults(array('topMenu' => $shopInfo['TopMenu']->Value,
+                                         'sideMenu' =>$shopInfo['SideMenu']->Value,
+                                         'footerMenu' =>  $shopInfo['FooterMenu']->Value));
+          }
     }
     
     
@@ -306,6 +314,35 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     
     }
     
+    protected function createComponentMenuSwitcherForm() {
+        if ($this->getUser()->isInRole('admin')) {
+
+            $menus = array('Category' => 'Category', 'Info' =>'Info',
+                            'All' => 'All','Cart'=> 'Cart', 'Producer' => 'Producer');
+            
+            $menuSwitcherForm = new Nette\Application\UI\Form;
+            $menuSwitcherForm->setTranslator($this->translator);
+            $menuSwitcherForm->addSelect('topMenu', 'Top Main Menu', $menus);
+            $menuSwitcherForm->addSelect('sideMenu', 'Side Menu', $menus);
+            $menuSwitcherForm->addSelect('footerMenu', 'Footer Menu', $menus);
+            $menuSwitcherForm->addSubmit('save', 'Set menus')
+                    ->setAttribute('class', 'form-control upl btn btn-primary')
+                    ->setAttribute('data-loading-text', 'Setting...');;
+            $menuSwitcherForm->onSuccess[] = $this->menuSwitcherFormSubmitted;
+            return $menuSwitcherForm;
+        }
+    }
+
+
+    public function menuSwitcherFormSubmitted($form) {
+         if ($this->getUser()->isInRole('admin')) {
+             $this->shopModel->setShopInfo('TopMenu', $form->values->topMenu);
+             $this->shopModel->setShopInfo('SideMenu', $form->values->sideMenu);
+             $this->shopModel->setShopInfo('FooterMenu', $form->values->footerMenu);
+             
+             $this->redirect('this');
+         }
+    }
 
     protected function createComponentAddCategoryForm() {
         if ($this->getUser()->isInRole('admin')) {

@@ -95,7 +95,7 @@ class CashOnDeliveryModule extends moduleControl {
 
     public function renderAdmin() {
 
-        $this->template->setFile(__DIR__ . '/simpleAdminModule.latte');
+        $this->template->setFile(__DIR__ . '/../simpleAdminModule.latte');
         $info = $this->shopModel->loadModuleByName('cod');
 
         $this->template->name = $info->ModuleName;
@@ -106,7 +106,7 @@ class CashOnDeliveryModule extends moduleControl {
 
     public function renderInstall() {
 
-        $this->template->setFile(__DIR__ . '/simpleInstallModule.latte');
+        $this->template->setFile(__DIR__ . '/../simpleInstallModule.latte');
 
         $info = $this->shopModel->loadModuleByName('cod');
 

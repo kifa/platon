@@ -111,13 +111,13 @@ class productControl extends BaseControl{
      * RENDERY
      */
     
-    public function renderProductMini($product) {
+    public function renderFourinline($product) {
         
         $albumID = $this->productModel->loadPhotoAlbumID($product['ProductID']);
         if($albumID){
             $albumID->PhotoAlbumID;
         }
-        $this->template->setFile(__DIR__ . '/ProductMini.latte');   
+        $this->template->setFile(__DIR__ . '/fourinline.latte');   
         $this->template->pieces = $this->productModel->loadTotalPieces($product['ProductID']);
         $this->template->product = $product;
         $this->template->albumID = $albumID;
@@ -126,4 +126,48 @@ class productControl extends BaseControl{
         $this->template->render();
     }
     
+    public function renderTwoinline($product) {
+        
+        $albumID = $this->productModel->loadPhotoAlbumID($product['ProductID']);
+        if($albumID){
+            $albumID->PhotoAlbumID;
+        }
+        $this->template->setFile(__DIR__ . '/twoinline.latte');   
+        $this->template->pieces = $this->productModel->loadTotalPieces($product['ProductID']);
+        $this->template->product = $product;
+        $this->template->albumID = $albumID;
+        $this->template->photo = $this->productModel->loadCoverPhoto($product['ProductID']);
+
+        $this->template->render();
+    }
+    
+    public function renderSingleton($product) {
+        
+        $albumID = $this->productModel->loadPhotoAlbumID($product['ProductID']);
+        if($albumID){
+            $albumID->PhotoAlbumID;
+        }
+        $this->template->setFile(__DIR__ . '/singleton.latte');   
+        $this->template->pieces = $this->productModel->loadTotalPieces($product['ProductID']);
+        $this->template->product = $product;
+        $this->template->albumID = $albumID;
+        $this->template->photo = $this->productModel->loadCoverPhoto($product['ProductID']);
+
+        $this->template->render();
+    }
+    
+    public function renderBigphoto($product) {
+        
+        $albumID = $this->productModel->loadPhotoAlbumID($product['ProductID']);
+        if($albumID){
+            $albumID->PhotoAlbumID;
+        }
+        $this->template->setFile(__DIR__ . '/bigphoto.latte');   
+        $this->template->pieces = $this->productModel->loadTotalPieces($product['ProductID']);
+        $this->template->product = $product;
+        $this->template->albumID = $albumID;
+        $this->template->photo = $this->productModel->loadCoverPhoto($product['ProductID']);
+
+        $this->template->render();
+    }
 }

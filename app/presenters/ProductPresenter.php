@@ -1170,7 +1170,7 @@ class ProductPresenter extends BasePresenter {
        return $gapi;
    }
 
-        public function renderProduct($id, $slug) {
+    public function renderProduct($id, $slug) {
         $layout = $this->shopModel->getShopInfo('ProductLayout');
         
        $this->template->setFile( $this->context->parameters['appDir'] . '/templates/Product/'  . $layout . '.latte'); 

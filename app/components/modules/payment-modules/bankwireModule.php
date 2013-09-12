@@ -149,7 +149,7 @@ class bankwireModule extends moduleControl {
 
     public function renderAdmin() {
 
-        $this->template->setFile(__DIR__ . '/simpleAdminModule.latte');
+        $this->template->setFile(__DIR__ . '/../simpleAdminModule.latte');
         $info = $this->shopModel->loadModuleByName('bankwire');
 
         $this->template->name = $info->ModuleName;
@@ -160,7 +160,7 @@ class bankwireModule extends moduleControl {
 
     public function renderInstall() {
 
-        $this->template->setFile(__DIR__ . '/simpleInstallModule.latte');
+        $this->template->setFile(__DIR__ . '/../simpleInstallModule.latte');
 
         $info = $this->shopModel->loadModuleByName('bankwire');
 
