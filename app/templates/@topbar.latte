@@ -27,47 +27,30 @@
 <body>
     <script> document.body.className+=' js' </script>
 
-{include './components/languageBar.latte'}
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+           <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="menuButton">{_'Menu'} <i class="icon-reorder icon-large"></i></span>
+                 </button>
+                    <a href="{plink Homepage:default}" class="nav-brand"><img src="{$basePath}/images/logo/{$shopLogo}" alt="{$shopName}" title="{$shopName}" class=""></a>
+           </div>
+               <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav nav-pills navbar-nav" n:snippet="menu">
+                        {ifCurrent Product:products}
+                            {control menu:$menuTop 1, $category->HigherCategoryID}
+                        {else}
+                           {ifCurrent Product:product}
+                            {control menu:$menuTop 1, $product->CategoryID}
+                           {else}
+                               {control menu:$menuTop 1}
+                            {/ifCurrent}
+                        {/ifCurrent}
+                   </ul>
+                   {control searchControl:menu}
+
+                   </div>
+               </nav>
     
-
-<div class="shopHead margin5"> 
-  <div class="masterhead">
-<div class="container supercontainer">   
-        <div class="row">
-            <a href="{plink Homepage:default}" class="col-md-12"><h1><img src="{$basePath}/images/logo/{$shopLogo}" alt="{$shopName}" title="{$shopName}" class="img-responsive col-sx-12"></h1></a>
-        </div>
-       </div>
-    </div> 
-    <div class="navHead">
-  <div class="container">    
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar navbar-default" role="navigation">
-                    <div class="navbar-header">
-                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                             <span class="menuButton">{_'Menu'} <i class="icon-reorder icon-large"></i></span>
-                          </button>
-                    </div>
-                        <div class="collapse navbar-collapse navbar-ex1-collapse">
-                             <ul class="nav nav-pills navbar-nav" n:snippet="menu">
-                                 {ifCurrent Product:products}
-                                     {control menu:$menuTop 1, $category->HigherCategoryID}
-                                 {else}
-                                    {ifCurrent Product:product}
-                                     {control menu:$menuTop 1, $product->CategoryID}
-                                    {else}
-                                        {control menu:$menuTop 1}
-                                     {/ifCurrent}
-                                 {/ifCurrent}
-                            </ul>
-                            {control searchControl:menu}
-
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-        </div>
-  </div>
     <div class="shopMessages" n:snippet="flashMessages">
         {foreach $flashes as $flash}
            <div class="{$flash->type} text-center">
@@ -75,8 +58,18 @@
          {$flash->message}</div>
          {/foreach}
     </div>
-</div> 
 
+    <div class="shopHead">
+    <div class="container supercontainer shopLanguageBar margin5">
+{include './components/languageBar.latte'}
+    </div>
+
+{if $user->isInRole('admin')}
+    <div class="container supercontainer margin5">
+    {include './components/layoutAdminInfo.latte'}
+    </div>
+{/if}
+    </div>
     {block #slider}
     {if $slider}
 <div class="shopSlider">   
@@ -100,8 +93,8 @@
                     <ul class="nav nav-pills nav-stacked">
                          {control menu:$menuSide}
                     </ul>
-            {block #sidebar}
-            {/block}
+            {*block #sidebar}
+            {/block*}
        </div>
     </div>
   {/block}
@@ -127,9 +120,9 @@
 
     <div class="footer">         
         <div class="col-md-9 margin5">
-            
+           <ul class="nav nav-pills"> 
            {control menu:$menuFooter}
-            
+           </ul>
             <p>{_'Cookies help us deliver our services. By using our services, you agree to our use of cookies.'}</p>
         </div>
 
@@ -157,6 +150,9 @@
                 
 {block scripts}
     {include './components/layoutScripts.latte'}
+    {snippet script}
+     {include './components/layoutScriptsAjax.latte'}
+    {/snippet}
     
     {block #script}
     {/block}

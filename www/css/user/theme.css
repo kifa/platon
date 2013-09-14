@@ -1,9 +1,26 @@
 body {
     background: url('../img/bg.png') repeat top left grey;
 }
-.miniproduct img {
-    height: 220px;
+
+.miniproduct img, .product img {
+    margin: 0 auto;
 }
+.miniproduct img .medium {
+    height: 150px;
+    margin: 0 auto;
+
+}
+
+.miniproduct img .big {
+    height: 300px;
+    margin: 0 auto;
+}
+
+.miniproduct .productCaption {
+    min-height: 67px;
+text-align: center;
+}
+
 
 .miniproduct .productButtons {
     margin-top: 5px;

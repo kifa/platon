@@ -1,0 +1,55 @@
+<div class="col-md-12" n:snippet="controlPanel">
+     <button class="btn btn-default" type="button" data-toggle="modal" data-target="#addProduct"><i class="icon-large icon-plus"></i> {_"Add Product"}</button>
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+                        {if $photo == NULL}
+                    
+                        {/if}
+						{*<a href="#addCategoryPhoto" class="btn btn-default" data-toggel="modal" data-target="#addCategoryPhoto" id="addCategoryPhotoButton"><i class="icon-large icon-camera-retro"></i> {_"Add Category Photo"}</a>*}
+
+                </div>
+
+                <div class="btn-group" n:snippet="categoryStatus">
+                            {if $stat == 0}
+                    <a class="btn btn-default ajax btn-success" href="{link setCategoryStatus! $categor, 1}" ><i class="icon-large icon-eye-open"></i> {_'Publish category'}</a>
+                           {elseif $stat >= 1}
+                    <a class="btn btn-default ajax" href="{link setCategoryStatus! $categor, 0}" ><i class="icon-large icon-eye-close"></i> {_'Unpublish category'}</a>
+                   {/if}
+                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        {if $stat == 2}
+                        <li><a href="{link setCategoryStatus! $categor, 1}" class="ajax">
+                        <i class="icon-ok-sign"></i>{_'Feature category!'}</a></li>
+                        {else}
+                        <li><a href="{link setCategoryStatus! $categor, 2}" class="ajax">
+                        {_'Feature category!'}</a></li>
+                        {/if}
+                        <li><a href="#deleteCategory" data-toggel="modal" data-target="#deleteCategory" id="deleteCategoryButton"><i class="icon-large icon-trash"></i> {_"Delete Category"}</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="btn-group">
+                    <a class="btn btn-default"><i class="icon-sitemap"></i> {_'Parent Category'}</a>
+                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" n:snippet="parentCategory">
+                        <li class="parentcat"><a href="{link setParentCategory!  $categor, NULL }" class="ajax">
+                        {if $higher == NULL}<i class="icon-ok-sign"></i>{/if}
+                        {_'--No parent--'}</a></li> 
+                        
+                        {foreach $categories as $catID => $cat}
+                        {if $categor != $catID & $cat->CategoryStatus != 3}
+                        <li class="parentcat"><a href="{link setParentCategory!  $categor, $catID }" class="ajax">
+                        {if $higher == $catID}<i class="icon-ok-sign"></i>{/if}
+                        {$cat->CategoryName}</a></li> 
+                        {/if}
+                        {/foreach}
+                   
+                    </ul>
+                </div>
+                                
+   </div>

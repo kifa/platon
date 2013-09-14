@@ -1,6 +1,7 @@
 <?php
 
-use Nette\Utils\Html;
+use Nette\Forms\Form,
+    Nette\Utils\Html;
 
 /**
  * Base presenter for eshop.
@@ -105,7 +106,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
             $link->insert(2, $ico2);
             
             $this->flashMessage($message, 'alert alert-success');
-           $this->redirect('this');
+            
+            if($this->isAjax()) {
+                $this->invalidateControl('cart');
+                $this->invalidateControl('products');  
+                $this->invalidateControl('variants'); 
+                $this->invalidateControl('script');
+            }
+            else {
+                $this->redirect('this');
+            }
        
         }
     }
@@ -148,6 +158,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->template->shopDescription = $shopInfo['Description']->Value;
         $this->template->shopLogo = $shopInfo['Logo']->Value;
         $this->template->GA = $shopInfo['GA']->Value;
+        
+
        
         // set theme layout
         $this->setLayout($shopInfo['ShopLayout']->Value);
@@ -177,6 +189,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $menuSwitcher->setDefaults(array('topMenu' => $shopInfo['TopMenu']->Value,
                                          'sideMenu' =>$shopInfo['SideMenu']->Value,
                                          'footerMenu' =>  $shopInfo['FooterMenu']->Value));
+        $this->template->style = $shopInfo['Style']->Value;
+
           }
     }
     
@@ -197,13 +211,18 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     public function createComponentCss() {
     // připravíme seznam souborů
     // FileCollection v konstruktoru může dostat výchozí adresář, pak není potřeba psát absolutní cesty
-        $wwwDir = $this->context->parameters['wwwDir'];
+    $style = $this->shopModel->getShopInfo('Style');
+    if($style == NULL) {
+        $style='no.css';
+    }
+    $wwwDir = $this->context->parameters['wwwDir'];
     $files = new \WebLoader\FileCollection($wwwDir . '/css');
     $files->addFiles(array(
         'bootstrap.min.css',
         'font-awesome-ie7.min.css',
         'font-awesome.min.css',
         '/user/theme.css',
+        '/themes/'.$style,
         'jquery.wysiwyg.css',
         'flag.css'
     ));
@@ -344,7 +363,45 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
          }
     }
 
-    protected function createComponentAddCategoryForm() {
+     protected function createComponentUploadStyleForm() {
+        if ($this->getUser()->isInRole('admin')) {
+            
+            $addStyle = new Nette\Application\UI\Form;
+            $addStyle->setTranslator($this->translator);
+            $addStyle->addUpload('style', 'Select your style.css');
+            $addStyle->addSubmit('upload', 'Upload')
+                    ->setAttribute('class', 'upl btn btn-primary form-control')
+                    ->setAttribute('data-loading-text', 'Uploading...');
+            $addStyle->onSuccess[] = $this->uploadStyleFormSubmitted;
+            return $addStyle;
+        }
+     }
+     
+     public function uploadStyleFormSubmitted($form) {
+          if ($this->getUser()->isInRole('admin')) {
+           if($form->values->style->isOK()) {
+               
+               $this->shopModel->setShopInfo('Style', $form->values->style->name);
+               $styleUrl = $this->context->parameters['wwwDir'] . '/css/themes/' . $form->values->style->name;
+               $form->values->style->move($styleUrl);
+           }
+           $this->redirect('this');
+          }
+     }
+     
+     public function handleDeleteStyle($name) {
+         if ($this->getUser()->isInRole('admin')) {
+             $styleUrl = $this->context->parameters['wwwDir'] . '/css/themes/' . $name;
+             $this->shopModel->setShopInfo('Style', '');
+            if ($styleUrl) {
+                unlink($styleUrl);
+            }
+            
+            $this->redirect('this');
+         }
+     }
+
+     protected function createComponentAddCategoryForm() {
         if ($this->getUser()->isInRole('admin')) {
 
             $addForm = new Nette\Application\UI\Form;

@@ -36,25 +36,16 @@
     
               {if $stat == 3} 
                 <a href="{link setProductStatus! $id, 2}" class="btn btn-default btn-sm ajax active"><i class="icon-thumbs-up"></i></a>
-                   {else}
-                <a href="{link setProductStatus! $id, 3}" class="btn btn-default btn-sm ajax"><i class="icon-thumbs-up"></i></a>
-                   {/if}
-                  
-                {if $stat == 1}
-<a href="{link showProduct! $id}" title="{_'Publish product'}" class="ajax btn btn-danger btn-sm"><i id="showProduct" class="icon-large icon-eye-open"></i> Publish product</a>
-
-<a href="{link deleteProduct! $id, $categor}" title="{_'Archive product'}" class="ajax btn btn-default btn-sm "><i id="deleteProduct" class="icon-large icon-inbox"></i> Archive</a>
-
-    {elseif $stat == 2}
-<a href="{link hideProduct! $id}" title="{_'Hide product'}" class="ajax btn btn-default btn-sm"><i id="hideProduct" class="icon-large icon-eye-close"></i> Hide</a>
-
-    
-    {elseif $stat == 3} 
-<a href="{link hideProduct! $id}" title="{_'Hide product'}" class="ajax btn btn-default btn-sm"><i id="hideProduct" class="icon-large icon-eye-close"></i> Hide</a>
-                   
-    {else}
-<a href="{link hideProduct! $id}" class="btn btn-default btn-sm ajax"><i id="hideProduct" class="icon-large icon-eye-close"></i> Hide</a>
-    {/if}
+                <a href="{link hideProduct! $id}" title="{_'Hide product'}" class="ajax btn btn-default btn-sm"><i id="hideProduct" class="icon-large icon-eye-close"></i> {_'Hide'}</a>
+              {else}
+                    <a href="{link setProductStatus! $id, 3}" class="btn btn-default btn-sm ajax"><i class="icon-thumbs-up"></i></a> 
+                  {if $stat == 1}
+                    <a href="{link showProduct! $id}" title="{_'Publish product'}" class="ajax btn btn-danger btn-sm"><i id="showProduct" class="icon-large icon-eye-open"></i> {_'Publish'}</a>
+                    <a href="{link deleteProduct! $id, $categor}" title="{_'Archive product'}" class="ajax btn btn-default btn-sm "><i id="deleteProduct" class="icon-large icon-inbox"></i> {_'Archive'}</a>
+                  {elseif $stat == 2}
+                    <a href="{link hideProduct! $id}" title="{_'Hide product'}" class="ajax btn btn-default btn-sm"><i id="hideProduct" class="icon-large icon-eye-close"></i> {_'Hide'}</a>
+                  {/if}
+               {/if}
 
             </div>
             <div class="btn-group">

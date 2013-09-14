@@ -116,25 +116,6 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
-    public function handleSetCategoryStatus($catID, $categoryStatus) {
-        if ($this->getUser()->isInRole('admin')) {
-            $this->categoryModel->setCategoryStatus($catID, $categoryStatus);
-            $status = $this->categoryModel->getStatusName($categoryStatus);
-          //  $status = $categoryStatus;
-            $text = $this->translator->translate('Category status is now: ');
-            $e = $text . $status;
-            $this->flashMessage($e, 'alert alert-success');
-            
-            if($this->isAjax()) {
-                $this->invalidateControl('categoryStatus');
-                $this->invalidateControl('script');
-
-            }
-            else {
-            $this->redirect('this', $catID);
-            }
-        }
-    }
     
     public function handleSetFilter($filter, $sorting) {
       if($filter === 'price') {
@@ -158,7 +139,7 @@ class ProductPresenter extends BasePresenter {
             
         
         
-            $this->filter->sort = array($filter, $sorting);
+        $this->filter->sort = array($filter, $sorting);
             if ($this->isAjax()) {
                 $this->invalidateControl('products');
                 $this->invalidateControl('script');
@@ -594,26 +575,7 @@ class ProductPresenter extends BasePresenter {
        }
     }
     
-    public function handleSetParentCategory($catid, $parentid) {
-        if($this->getUser()->isInRole('admin')){
-        
-            $this->categoryModel->updateCategoryParent($catid, $parentid);
-                
-            if($this->isAjax())
-           {            
-                $this->invalidateControl('parentCategory');
-                $this->invalidateControl('bread');
-                $this->invalidateControl('menu');
-                $this->invalidateControl('script');
-
-           }
-           else {
-            $this->redirect('this');
-           }
-
-       }
-    }
-
+    
     
 
     protected function createComponentDeleteCategoryForm() {

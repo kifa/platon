@@ -68,7 +68,9 @@ class AdminPanelControl extends BaseControl {
             
             if($this->presenter->isAjax())
             {            
-              $this->presenter->invalidateControl();
+              $this->parent->invalidateControl();
+                $this->presenter->invalidateControl('products');
+                $this->presenter->invalidateControl('script');
             }
             
             else {
@@ -83,7 +85,9 @@ class AdminPanelControl extends BaseControl {
             $this->presenter->flashMessage('Product sucessfully published', 'alert alert-success');
             
             if($this->presenter->isAjax()) {
-                $this->presenter->invalidateControl();
+               $this->parent->invalidateControl();
+                $this->presenter->invalidateControl('products');
+                $this->presenter->invalidateControl('script');
                 
             }
             else {
@@ -97,7 +101,9 @@ class AdminPanelControl extends BaseControl {
             if($this->presenter->isAjax())
             {            
                 $this->productModel->updateProduct($id, 'ProductStatusID', $statusid);
-                $this->presenter->invalidateControl();
+                $this->parent->invalidateControl();
+                $this->presenter->invalidateControl('products');
+                $this->presenter->invalidateControl('script');
             }
             else {
              $this->presenter->redirect('this');
@@ -110,7 +116,11 @@ class AdminPanelControl extends BaseControl {
             if($this->presenter->isAjax())
             {            
                 $this->productModel->updateProduct($id, 'CategoryID', $catid);
-                $this->presenter->invalidateControl();
+                $this->parent->invalidateControl();
+                $this->presenter->invalidateControl('products');
+                $this->presenter->invalidateControl('bread');
+                $this->presenter->invalidateControl('script');
+                
 
             }
             else {
@@ -124,7 +134,9 @@ class AdminPanelControl extends BaseControl {
             if($this->presenter->isAjax())
             {            
                 $this->productModel->updateProduct($id, 'ProducerID', $producerid);
-                $this->presenter->invalidateControl();
+                $this->parent->invalidateControl();
+                $this->presenter->invalidateControl('products');
+                $this->presenter->invalidateControl('script');
 
             }
             else {
@@ -133,6 +145,48 @@ class AdminPanelControl extends BaseControl {
         }
     }
   
+    
+    public function handleSetCategoryStatus($catID, $categoryStatus) {
+        if ($this->presenter->getUser()->isInRole('admin')) {
+            $this->categoryModel->setCategoryStatus($catID, $categoryStatus);
+            $status = $this->categoryModel->getStatusName($categoryStatus);
+          //  $status = $categoryStatus;
+            $text = $this->translator->translate('Category status is now: ');
+            $e = $text . $status;
+            $this->presenter->flashMessage($e, 'alert alert-success');
+            
+            if($this->presenter->isAjax()) {
+                $this->parent->invalidateControl();
+                $this->presenter->invalidateControl('script');
+
+            }
+            else {
+            $this->presenter->redirect('this', $catID);
+            }
+        }
+    }
+    
+    public function handleSetParentCategory($catid, $parentid) {
+        if($this->presenter->getUser()->isInRole('admin')){
+        
+            $this->categoryModel->updateCategoryParent($catid, $parentid);
+                
+            if($this->presenter->isAjax())
+           {            
+                $this->parent->invalidateControl();
+                $this->presenter->invalidateControl('bread');
+                $this->presenter->invalidateControl('menu');
+                $this->presenter->invalidateControl('script');
+
+           }
+           else {
+            $this->presenter->redirect('this');
+           }
+
+       }
+    }
+
+    
     public function renderProduct($id, $status, $cat, $prod) {
 
         $this->template->id = $id;
@@ -141,10 +195,34 @@ class AdminPanelControl extends BaseControl {
         $this->template->producer = $prod;
         $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
         $this->template->producers = $this->productModel->loadProducers();
-        $this->template->setFile( __DIR__ . '/AdminPanelControl.latte');
+        $this->template->setFile( __DIR__ . '/AdminPanelProduct.latte');
         
         $this->template->render();
     }
     
+    
+    
+    public function renderProductMini($id, $status, $cat) {
+
+        $this->template->id = $id;
+        $this->template->categor = $cat;
+        $this->template->stat = $status;
+        $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
+        $this->template->setFile( __DIR__ . '/AdminPanelProductMini.latte');
+        
+        $this->template->render();
+    }
+    
+    public function renderCategory($catid, $higher, $status, $photo) {
+
+        $this->template->categor = $catid;
+        $this->template->stat = $status;
+        $this->template->higher = $higher;
+        $this->template->photo = $photo;
+        $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
+        $this->template->setFile( __DIR__ . '/AdminPanelCategory.latte');
+        
+        $this->template->render();
+    }
     
 }

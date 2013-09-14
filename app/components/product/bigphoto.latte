@@ -1,81 +1,55 @@
-
-<li class="span6 miniproduct" n:snippet="product">
+<div class="col-xs-12 col-sm-4 col-md-4">
+<div class="thumbnail miniproduct" n:snippet="product">
             
            {if $user->isInRole('admin')}
 
-            {ifCurrent Homepage:}
-            <div class="span12">
-                {_"You cannot edit product here!"}
-            </div>
-            {else}
-            <div class="span12 alert">
-                {*control productEdit $product->ProductID*}              
-                {_"Admin"}: 
-                {if $product->ProductStatusID == 1}
-<a href="{plink showProduct! $product->CategoryID, $product->ProductID}" title="{_'Publish product'}" class="ajax btn"><i id="showProduct" class="icon-large icon-eye-open"></i></a>
-
-<a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" title="{_'Archive product'}" class="ajax btn"><i id="deleteProduct" class="icon-large icon-inbox"></i></a>
-
-    {elseif $product->ProductStatusID == 2}
-<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" title="{_'Hide product'}" class="ajax btn"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
-<a href="{plink setProductStatus! $product->ProductID, 3}" class="btn ajax"><i class="icon-thumbs-up"></i></a>
+ 
+{control adminPanelControl:ProductMini $product->ProductID, $product->ProductStatusID, $product->CategoryID}
     
-    {elseif $product->ProductStatusID == 3} 
-<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" title="{_'Hide product'}" class="ajax btn"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
-<a href="{plink setProductStatus! $product->ProductID, 2}" title="{_'Feature product'}" class="btn ajax active"><i class="icon-thumbs-up"></i></a>
-                   
-    {else}
-<a href="{plink hideProduct! $product->CategoryID, $product->ProductID}" class="btn ajax"><i id="hideProduct" class="icon-large icon-eye-close"></i></a>
-    {/if}
-
-            </div>
-            {/ifCurrent}    
         {/if}
             
-            <div class="span12 pull-left">
-                    {if $product->PiecesAvailable > 5}
-            <span class="badge badge-info">{$product->PiecesAvailable}</span>
-                    {elseif $product->PiecesAvailable > 0}
-            <span class="badge badge-warning">{$product->PiecesAvailable} {_'LAST'}</span>
+            <div class="col-md-12 col-xs-12 pull-left row">
+                    {if $pieces > 5}
+            <span class="label label-info">{$pieces}</span>
+                    {elseif $pieces > 0}
+            <span class="label label-warning">{$pieces} {_'LAST'}</span>
                     {else}
-            <span class="badge badge-inverse">{_'SOLD OUT'}</span>
+            <span class="label label-default"> {_'SOLD OUT'}</span>
                     {/if}
             {if $product->ProductStatusID == 3}
-                <span class="badge badge-inverse"><i class="icon-thumbs-up icon-large"></i> {_'HOT'}</span>
+                <span class="label label-danger"><i class="icon-thumbs-up icon-large"></i> {_'HOT'}</span>
             {/if}
             {if $product->SALE > 1}
-                <span class="badge badge-important"><i class="icon-money icon-large"></i> {_'SALE'}</span>
+                <span class="label label-warning"><i class="icon-money icon-large"></i> {_'SALE'}</span>
             {/if}
             </div>
+    
             
-            <a class="span12 imgLiquid" style="height: 250px; max-width: 400px;" href="{plink Product:product $product->ProductID, $product->ProductName}"> 
-            
-                
-                {if $photo}
-                     <img src="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" class="img-circle" />
-
-                {else}
-                   <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="height: 150px; width: auto;"/>
-                {/if}  
-     
-         </a>          
-
-        
-
-   
-    <div class="span12 text-center">
-
-            <h4><a href="{plink Product:product $product->ProductID, $product->ProductName}">{$product->ProductName|truncate:30}</a></h4>
+    <div class="row">
+            <a class="col-md-11 col-xs-11" href="{plink Product:product $product->ProductID, $product->ProductName}"> 
+                      {if $photo}
+                           <img src="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" class="img-responsive big" alt="{$product->ProductName}"/>
+                      {else}
+                           <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="img-circle img-responsive medium" alt="no image"/>
+                      {/if}
+               </a>          
+                   
+            <div class="col-md-11 col-xs-11 productCaption">
+              <h4><a class="text-success" href="{plink Product:product $product->ProductID, $product->ProductName}">{$product->ProductName|truncate:70}</a></h4>
             </div>
-          
-           
-            <div class="span12">
+    </div>
+     <div class="row productButtons">
+            <div class="col-md-12 btn-group btn-group-justified">
                 
-                        <p class="text-success text-center lead">{if $product->SALE > 1}<span class="muted span1" style="text-decoration: line-through; font-size: 50%;">{$product->SellingPrice},-</span>{/if} {$product->FinalPrice},-  </p>
-               
+                        <a href="{plink addToCart! $product->ProductID, "1"}" class="ajax btn btn-success col-md-6 addToCart"><i class="icon-shopping-cart icon-large"></i> {_"Buy"}</a>
+                         <a href="{plink Product:product $product->ProductID}" class="btn btn-primary col-md-5"><i class="icon-info-sign icon-large"></i> {_"View"}</a>         
             </div> 
-
-           
-
-      <!--primary row -->
-    </li>
+            
+            <div class="col-md-12">
+                
+                <p class="text-success text-center lead">{if $product->SALE > 1}<span class="muted col-md-1" style="text-decoration: line-through; font-size: 50%;">{$product->SellingPrice},-</span>{/if} {$product->FinalPrice},-</p>
+               
+            </div>
+          </div>
+</div>
+</div>

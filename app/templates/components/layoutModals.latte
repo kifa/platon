@@ -45,6 +45,7 @@
                         <li><a href="#editMenu" data-toggle="tab"><i class=""></i> {_'Menu'}</a>
                         <li><a href="#editProducts" data-toggle="tab"><i class=""></i> {_'Products'}</a></li>
                         <li><a href="#editProduct" data-toggle="tab"><i class=""></i> {_'Product'}</a></li>
+                        <li><a href="#addStyle" data-toggle="tab"><i class=""></i> {_'Add your style.css'}</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="editLayout">
@@ -81,6 +82,13 @@
                                 <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'buymore'" >{_'Buy more'}</a></li>
                             </ul>
 
+                        </div>
+                        
+                        <div class="tab-pane" id="addStyle">
+                        {control uploadStyleForm}
+                            {if $style}
+                            {_'Current style'}: {$style} <a href="{plink deleteStyle! $style}"><i class="icon-trash"></i></a>
+                            {/if}
                         </div>
                     </div>
                 </div>

@@ -6,61 +6,8 @@
 
 {block pageheader}
 {if $user->isInRole('admin')}
-<div class="col-md-12" n:snippet="controlPanel">
-     <button class="btn btn-default" type="button" data-toggle="modal" data-target="#addProduct"><i class="icon-large icon-plus"></i> {_"Add Product"}</button>
-                <div class="btn-group">
-                    <a href="#" class="btn btn-default"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
-                        {if $category->CategoryPhoto == NULL}
-                    
-                        {/if}
-						{*<a href="#addCategoryPhoto" class="btn btn-default" data-toggel="modal" data-target="#addCategoryPhoto" id="addCategoryPhotoButton"><i class="icon-large icon-camera-retro"></i> {_"Add Category Photo"}</a>*}
+{control adminPanelControl:Category $category->CategoryID, $category->HigherCategoryID, $category->CategoryStatus, $category->CategoryPhoto}
 
-                </div>
-
-                <div class="btn-group" n:snippet="categoryStatus">
-                            {if $category->CategoryStatus == 0}
-                    <a class="btn btn-default ajax btn-success" href="{plink setCategoryStatus! $category->CategoryID, 1}" ><i class="icon-large icon-eye-open"></i> {_'Publish category'}</a>
-                           {elseif $category->CategoryStatus >= 1}
-                    <a class="btn btn-default ajax" href="{plink setCategoryStatus! $category->CategoryID, 0}" ><i class="icon-large icon-eye-close"></i> {_'Unpublish category'}</a>
-                   {/if}
-                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        {if $category->CategoryStatus == 2}
-                        <li><a href="{plink setCategoryStatus! $category->CategoryID, 1}" class="ajax">
-                        <i class="icon-ok-sign"></i>{_'Feature category!'}</a></li>
-                        {else}
-                        <li><a href="{plink setCategoryStatus! $category->CategoryID, 2}" class="ajax">
-                        {_'Feature category!'}</a></li>
-                        {/if}
-                        <li><a href="#deleteCategory" data-toggel="modal" data-target="#deleteCategory" id="deleteCategoryButton"><i class="icon-large icon-trash"></i> {_"Delete Category"}</a>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="btn-group">
-                    <a class="btn btn-default"><i class="icon-sitemap"></i> {_'Parent Category'}</a>
-                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" n:snippet="parentCategory">
-                        <li class="parentcat"><a href="{plink setParentCategory!  $category->CategoryID, NULL }" class="ajax">
-                        {if $category->HigherCategoryID == NULL}<i class="icon-ok-sign"></i>{/if}
-                        {_'--No parent--'}</a></li> 
-                        
-                        {foreach $categories as $catID => $cat}
-                        {if $category->CategoryID != $catID & $cat->CategoryStatus != 3}
-                        <li class="parentcat"><a href="{plink setParentCategory!  $category->CategoryID, $catID }" class="ajax">
-                        {if $category->HigherCategoryID == $catID}<i class="icon-ok-sign"></i>{/if}
-                        {$cat->CategoryName}</a></li> 
-                        {/if}
-                        {/foreach}
-                   
-                    </ul>
-                </div>
-                                
-   </div>
    {/if}
 
 <div class="col-md-12">
@@ -135,9 +82,9 @@
 <div class="row">
  
             {foreach $products as $id => $product}
-        <div class="col-xs-12 col-sm-4 col-md-4">
+
                 {control product:$productMiniLayout $product}
-            </div>
+
             {/foreach}
 </div>
 </div>    

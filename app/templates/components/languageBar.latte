@@ -1,14 +1,12 @@
-<div class="container supercontainer shopLanguageBar margin5">
-
 {if $user->isInRole('admin')}
     <div class="col-md-5 col-sm-12">
 {control menu:SmartPanel}
     </div>
         {/if}
-   <div class="col-md-5 col-sm-12">  
+   <div class="col-md-6 col-sm-12">  
 {control menu:cart}
    </div>
-     <div class="col-md-1">
+     <div class="col-md-1 pull-right">
         <div class="btn-group">
         <a class="btn btn-default pull-right dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="icon-globe"></i> <i class="icon-flag-alt"></i> 
@@ -25,6 +23,3 @@
  {/if}
 
      </div>
-
- 
-</div>

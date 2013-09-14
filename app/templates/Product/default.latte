@@ -4,13 +4,14 @@
 {/snippet}
 {/block}
 {block pageheader}
-{if $user->isInRole('admin')}
 
-{control adminPanelControl:Product $product->ProductID, $product->ProductStatusID, $product->CategoryID, $product->ProducerID}
+
+
+<div class="page-header" n:snippet="pageheader">
     
+    {if $user->isInRole('admin')}
+{control adminPanelControl:Product $product->ProductID, $product->ProductStatusID, $product->CategoryID, $product->ProducerID}
 {/if}
-
-<div class="page-header" n:snippet="page-header">
     <h1><span class="prodTitle" n:snippet="prodTitle" n:block="title">{$product->ProductName}</span>
             <small>
                     {if $pieces > 5}
@@ -33,10 +34,10 @@
 {/block}
 
 {block content}
-<div class="col-md-12">
+<div class="col-md-12 product">
     <div class="col-md-5">
         {if $photo}
-                     <img src="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" class="col-md-12 col-xs-12 col-sm-12 margin5 img-responsible" />
+                     <img src="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" class="img-responsible" />
 
                 {else}
                    <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="col-md-2" style="height: 150px; width: auto;"/>

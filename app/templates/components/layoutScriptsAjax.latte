@@ -12,6 +12,10 @@
             
             $('.addToCart').click(function() { 
                 $(this).attr('class', 'btn btn-success disabled');
-                $(this).text('{_'Adding to cart...'}');
+                $(this).text({_'Adding to cart...'});
             });
+            
+              {if $user->isInRole('admin')}  
+              $('.shopMessages').fadeIn().delay(2000).fadeOut(1600);     
+              {/if}
         </script>

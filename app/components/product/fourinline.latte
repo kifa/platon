@@ -1,37 +1,11 @@
+<div class="col-xs-12 col-sm-3 col-md-3">
 <div class="thumbnail miniproduct" n:snippet="product">
             
            {if $user->isInRole('admin')}
 
-            {ifCurrent Homepage:}
-            <div class="col-md-12">
-                {_"You cannot edit product here!"}
-            </div>
-            {else}
-            <div class="col-md-12">
-                {*control productEdit $product->ProductID*}              
-                {_"Admin"}: 
-                <div class="btn-group">
-                {if $product->ProductStatusID == 1}
-<a href="{plink showProduct! $product->ProductID}" title="{_'Publish product'}" class="ajax btn  btn-default"><i id="showProduct" class="icon-large icon-eye-open"></i> Publish</a>
-
-<a href="{plink deleteProduct! $product->ProductID, $product->CategoryID}" title="{_'Archive product'}" class="ajax btn  btn-default"><i id="deleteProduct" class="icon-large icon-inbox"></i></a>
-
-    {elseif $product->ProductStatusID == 2}
-<a href="{plink hideProduct! $product->ProductID}" title="{_'Hide product'}" class="ajax btn btn-default"><i id="hideProduct" class="icon-large icon-eye-close"></i> {_'Hide'}</a>
-<a href="{plink setProductStatus! $product->ProductID, 3}" class="btn btn-default ajax"><i class="icon-thumbs-up"></i></a>
+ 
+{control adminPanelControl:ProductMini $product->ProductID, $product->ProductStatusID, $product->CategoryID}
     
-    {elseif $product->ProductStatusID == 3} 
-<a href="{plink hideProduct! $product->ProductID}" title="{_'Hide product'}" class="ajax btn btn-default"><i id="hideProduct" class="icon-large icon-eye-close"></i> {_'Hide'}</a>
-<a href="{plink setProductStatus! $product->ProductID, 2}" title="{_'Feature product'}" class="btn  btn-default ajax active"><i class="icon-thumbs-up"></i></a>
-                   
-    {else}
-<a href="{plink hideProduct! $product->ProductID}" class="btn btn-default ajax"><i id="hideProduct" class="icon-large icon-eye-close"></i> {_'Hide'}</a>
-    {/if}
-
-            </div>
-                <hr>
-            </div>
-            {/ifCurrent}    
         {/if}
             
             <div class="col-md-12 col-xs-12 pull-left row">
@@ -54,9 +28,9 @@
     <div class="row">
             <a class="col-md-11 col-xs-11" href="{plink Product:product $product->ProductID, $product->ProductName}"> 
                       {if $photo}
-                           <img src="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" class="img-circle img-responsive" alt="{$product->ProductName}"/>
+                           <img src="{$basePath}/images/{$albumID}/150-{$photo->PhotoURL}" class="img-circle img-responsive medium" alt="{$product->ProductName}"/>
                       {else}
-                           <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="img-circle img-responsive" alt="no image"/>
+                           <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="img-circle img-responsive medium" alt="no image"/>
                       {/if}
                </a>          
                    
@@ -67,7 +41,7 @@
      <div class="row productButtons">
             <div class="col-md-12 btn-group btn-group-justified">
                 
-                        <a href="{plink addToCart! $product->ProductID, "1"}" class="btn btn-success col-md-6 addToCart"><i class="icon-shopping-cart icon-large"></i> {_"Buy"}</a>
+                        <a href="{plink addToCart! $product->ProductID, "1"}" class="ajax btn btn-success col-md-6 addToCart"><i class="icon-shopping-cart icon-large"></i> {_"Buy"}</a>
                          <a href="{plink Product:product $product->ProductID}" class="btn btn-primary col-md-5"><i class="icon-info-sign icon-large"></i> {_"View"}</a>         
             </div> 
             
@@ -77,4 +51,5 @@
                
             </div>
           </div>
+</div>
 </div>

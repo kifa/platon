@@ -47,6 +47,14 @@ class productControl extends BaseControl{
     }
     
      
+    
+       protected function createComponentAdminPanelControl() {
+        $EditControl = new AdminPanelControl();
+        $EditControl->setTranslator($this->translator);
+        $EditControl->setProduct($this->productModel);
+        $EditControl->setCategory($this->categoryModel);
+        return $EditControl;
+       }
 
    /*****************************************************************
     * HANDLE

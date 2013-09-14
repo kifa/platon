@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{block #title|striptags|trim|strip} {/block} {$shopName}</title>
+        <meta name="description" content="{block #metadesc|striptags|strip|trim} {$shopDescription} {/block}">
+        <meta name="robots" content="{$robots}" n:ifset="$robots">
+        <link rel="shortcut icon" href="{$basePath}/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        {control css}
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+        
+       
+        {ifCurrent Order:cart}
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+        {/ifCurrent}
+
+	{block head}{/block}
+    </head>
+   
+<body>
+    <script> document.body.className+=' js' </script>
+
+    <div class="container supercontainer shopLanguageBar margin5">
+{include './components/languageBar.latte'}
+    </div>
+
+<div class="shopHead margin5"> 
+  <div class="masterhead">
+<div class="container supercontainer">   
+        <div class="row">
+            <a href="{plink Homepage:default}" class="col-md-3 col-sm-4 col-xs-12"><h1><img src="{$basePath}/images/logo/{$shopLogo}" alt="{$shopName}" title="{$shopName}" class="img-responsive col-sx-12"></h1></a>
+        </div>
+       </div>
+    </div> 
+    <div class="navHead">
+  <div class="container">    
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                             <span class="menuButton">{_'Menu'} <i class="icon-reorder icon-large"></i></span>
+                          </button>
+                    </div>
+                        <div class="collapse navbar-collapse navbar-ex1-collapse">
+                             <ul class="nav nav-pills navbar-nav" n:snippet="menu">
+                                 {ifCurrent Product:products}
+                                     {control menu:$menuTop 1, $category->HigherCategoryID}
+                                 {else}
+                                    {ifCurrent Product:product}
+                                     {control menu:$menuTop 1, $product->CategoryID}
+                                    {else}
+                                        {control menu:$menuTop 1}
+                                     {/ifCurrent}
+                                 {/ifCurrent}
+                            </ul>
+                            {control searchControl:menu}
+
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+        </div>
+  </div>
+    <div class="shopMessages" n:snippet="flashMessages">
+        {foreach $flashes as $flash}
+           <div class="{$flash->type} text-center">
+               <button type="button" class="close" data-dismiss="alert">&times;</button>
+         {$flash->message}</div>
+         {/foreach}
+    </div>
+{if $user->isInRole('admin')}
+    {include './components/layoutAdminInfo.latte'}
+{/if}
+</div> 
+
+    {block #slider}
+    {if $slider}
+<div class="shopSlider">   
+ <div class="container supercontainer">
+     {include './components/layoutSlider.latte'}
+ </div></div>
+    {/if}
+    {/block}
+    
+<div class="shopContent">   
+<div class="container supercontainer">
+   {block #bread}{/block}
+
+ <div id="content" class="row"> 
+     
+
+  {block #sidebars}
+  {/block}
+        
+        
+  {block contents}
+    <div class="col-md-12 shopInnerContent" n:snippet="content">
+
+    {block #pageheader}
+    {/block}
+            
+    {block #content}
+    {/block}
+
+    </div>     
+  {/block}
+      
+    </div>
+  </div>
+</div>
+        <div class="shopFooter">   
+ <div class="container">
+
+    <div class="footer">         
+        <div class="col-md-9 margin5">
+           <ul class="nav nav-pills"> 
+           {control menu:$menuFooter}
+           </ul>
+            <p>{_'Cookies help us deliver our services. By using our services, you agree to our use of cookies.'}</p>
+        </div>
+
+        <div class="col-md-3">     
+            <div class="col-md-6 text-left">
+            &COPY; 2013 {$shopName} 
+            </div>
+            <div class="col-md-6 text-right">
+                Powered by <a href="http://birnex.com">BIRNE<sup>shop</sup></a>
+            </div>
+        </div>
+    </div>
+                
+{block modals}
+  
+    {include './components/layoutModals.latte'}
+                
+    {block #modal}
+    {/block}
+
+{/block}  
+   </div>
+</div>
+	
+                
+{block scripts}
+    {include './components/layoutScripts.latte'}
+    {snippet script}
+     {include './components/layoutScriptsAjax.latte'}
+    {/snippet}
+    
+    {block #script}
+    {/block}
+
+{/block}   
+        
+        
+    </body> 
+</html>
