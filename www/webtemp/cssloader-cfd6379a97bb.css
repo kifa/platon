@@ -1371,13 +1371,13 @@ body {
 .miniproduct img, .product img {
     margin: 0 auto;
 }
-.miniproduct img .medium {
+.miniproduct .medium {
     height: 150px;
     margin: 0 auto;
 
 }
 
-.miniproduct img .big {
+.miniproduct .big {
     height: 300px;
     margin: 0 auto;
 }

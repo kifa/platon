@@ -4,6 +4,7 @@
 {/snippet}
 {/block}
 
+{define title}{$category->CategorySeoName}{/define}
 {block pageheader}
 {if $user->isInRole('admin')}
 {control adminPanelControl:Category $category->CategoryID, $category->HigherCategoryID, $category->CategoryStatus, $category->CategoryPhoto}
@@ -13,7 +14,7 @@
 <div class="col-md-12">
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h1 n:block="title" class="CatTitle" n:snippet="CatTitle">{$category->CategoryName}</h1>
+    <h1 class="CatTitle" n:snippet="CatTitle">{$category->CategoryName}</h1>
 
 </div>
   <div class="panel-body">
