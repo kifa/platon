@@ -5,14 +5,14 @@
 {/block}
 {block pageheader}
 
-
+{define title}{$product->ProductSeoName}{/define}
 
 <div class="page-header" n:snippet="pageheader">
     
     {if $user->isInRole('admin')}
 {control adminPanelControl:Product $product->ProductID, $product->ProductStatusID, $product->CategoryID, $product->ProducerID}
 {/if}
-    <h1><span class="prodTitle" n:snippet="prodTitle" n:block="title">{$product->ProductName}</span>
+    <h1><span class="prodTitle" n:snippet="prodTitle">{$product->ProductName}</span>
             <small>
                     {if $pieces > 5}
             <span class="label label-success">{$pieces}</span>
@@ -26,7 +26,7 @@
                 <span class="label label-danger"><i class="icon-thumbs-up "></i> {_'HOT'}</span>
             {/if}
             {if $product->SALE > 1}
-                <span class="label label-important"><i class="icon-money"></i> {_'SALE'}</span>
+                <span class="label label-warning"><i class="icon-money"></i> {_'SALE'}</span>
             {/if}
            
             </small></h1>
@@ -205,7 +205,8 @@
                   $('#editParam').modal('hide');
               });
               
-               $('#addVariantButton').toggle(function(){
+                  
+              $('#addVariantButton').toggle(function(){
                 $('#addVariant').modal('show');
               },
               function() {
@@ -315,163 +316,5 @@
     {/if}
 {/block}
 
-    {block modal}
-{if $user->isInRole('admin')}
-
-<div id="editParam" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editParam" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title"><i class="icon-list"></i> {_'Edit Specification'}</h4>
-        </div>
-        <div class="modal-body">
-          <div class="tabbable">
-                <ul class="nav nav-tabs">
-                    {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> {_'Edit Specs'}</a></li> {/if}
-                    <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> {_'Add Spec'}</a>
-                    {if $parameter} <li><a href="#deleteParams" data-toggle="tab"><i class="icon-trash"></i> {_'Delete Spec'}</a></li> {/if}
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane {if $parameter}active{/if}" id="editParams">
-                            {if $parameter} 
-                        <p>{_'Here you can edit all Spec assigned to this product. Edit values and then click Save Spec bellow.'}</p>
-                            {control editParamForm} {/if}
-                    </div>
-                    <div class="tab-pane {if !$parameter}active{/if}" id="addParam">
-                        <p>{_'Add one of previously added Spec, or enter a new one bellow. Then click Add spec bellow.'}</p>
-                            {control addParamForm}
-                    </div>
-            {if $parameter}
-                    <div class="tab-pane" id="deleteParams">
-                        <p>{_'Check all specification you want to delete and then click Delete specs bellow.'}</p>
-                      {control deleteParamForm}
-                    </div>
-                {/if}
-                </div>
-            </div>
-        </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">{_'Close without saving'}</button>
-    </div>
-    </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
-</div>    
-    
- 
-
-
-    <div id="addVariant" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addVariant" aria-hidden="true">
-      <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title"><i class="icon-list"></i> {_'Manage product variants'}</h4>
-        </div>
-        <div class="modal-body">
-          <div class="tabbable">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#addVariants" data-toggle="tab"></i><i class="icon-plus"></i> {_'Add product variants'}</a></li>
-                    <li><a href="#manageVariants" data-toggle="tab"> {_'Delete variants'}</a></li>
-                   </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="addVariants">
-
-                        <p>{_'Here you can add new product variant.'}</p>
-                        {control addProductVariantForm}
-                    </div>
-                    <div class="tab-pane" id="manageVariants">
-                        <div>
-                     <p>{_'Manage and delete variants.'}</p>
-                     <table>
-                         <thead>
-                             <tr>
-                                 <td class="col-md-5">{_'Variant Name'}</td>
-                                 <td>{_'Options'}</td>
-                             </tr>
-                         </thead>
-                         <tbody>
-                         {foreach $productVariants as  $id => $productVariant}
-                             {if $productVariant->ProductVariantName !== NULL}
-                             <tr>
-                                 <td><strong>{$productVariant->ProductVariantName}</strong></td>
-                                 <td><a class="btn btn-default ajax" href="{plink ArchiveVariantProduct! $productVariant->ProductID}"><i class="icon-trash"></i></a></td>
-                             </tr>
-                             {/if}
-                            {/foreach}
-                         </tbody>
-                     </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
-        </div>
-    </div>
-</div>
-        </div>
-
-    <div id="stats" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="stats" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title"><i class="icon-list"></i> {_'Product stats'}</h4>
-          </div>
-          <div class="modal-body">
-            {control gapiModule:product 141}
-        </div>                                    
-        <div class="modal-footer">
-             <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
-        </div>
-
-    </div>
-            </div>
-        </div>
-
-<div id="addTextPicture" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addTextPicture" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title"><i class="icon-list"></i> {_'Add description photo'}</h4>
-        </div>
-        <div class="modal-body" n:snippet="textPhoto">
-           {foreach $adminAlbum as $id => $photo}
-                    <div class="clearfix">
-                        <div class="col-md-2">
-                        <img src="{$basePath}/images/{$albumID}/50-{$photo->PhotoURL}" alt="{$product->ProductName}" class="">
-                        </div>
-                        <div class="btn-group">
-      <a href="#wysiwyg" rel="{$basePath}/images/{$albumID}/50-{$photo->PhotoURL}" class="addTextPicture btn btn-default">{_'Small'}</a>
-      <a href="#wysiwyg" rel="{$basePath}/images/{$albumID}/150-{$photo->PhotoURL}" class="addTextPicture btn btn-default">{_'Medium'}</a>
-      <a href="#wysiwyg" rel="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" class="addTextPicture btn btn-default">{_'Large'}</a>
-  </div>
-                        <hr>
-                    </div>
-
-             {/foreach}
-        </div>
-    <div class="modal-footer">
-        <div class="col-md-12 pull-left">
-        {form addPhotoForm class => 'form-inline col-md-12'}
-        <div class="form-group col-md-12">
-            <div class="input-group col-md-5">
-        {input image}
-             <p class="help-block"><i class="icon-info-sign"></i> {_'Max size is 2MB ~ 1 Megapixel photos'}</p>   
-            </div>
-        {input add}
-        </div>
-        {/form}
-     </div>
-      <button type="button" class="btn btn-default" data-dismiss="modal">{_'Close without adding'}</button>
-    </div>
-    </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
-</div>    
-
-
-{/if}
+{block modal}
 {/block}

@@ -237,6 +237,7 @@ AND photo.CoverPhoto = 1');
         $insert = array(
             'ProductID' => NULL,
             'ProductName' => $name,
+            'ProductSeoName' => $name,
             'ProducerID' => $producer,            
             'ProductNumber' => $prodnumber,
             'ProductShort' => $short,
@@ -841,6 +842,7 @@ AND photo.CoverPhoto = 1');
         
         $insert = array(
             'ProductName' => $originalProduct['ProductName'],
+            'ProductSeoName' => $originalProduct['ProductSeoName'],
             'ProductVariantName' => $name,
             'ProductVariants' => $product,
             'ProducerID' => $originalProduct['ProducerID'],            

@@ -58,6 +58,7 @@ class CategoryModel extends Repository {
        
         $insert = array(
             'CategoryName' => $name,
+            'CategorySeoName' => $name,
             'CategoryDescription' => $description,
             'HigherCategoryID' => $higher,
             'CategoryPhoto' => $photo,
@@ -92,7 +93,17 @@ class CategoryModel extends Repository {
                 ->update($update);       
     }
     
-    public function updateCategoryParent($id, $higher){
+    public function updateCat($id, $name, $value) {
+        $update = array(
+            $name => $value
+            );        
+        
+        return $this->getTable('category')
+                ->where('CategoryID',$id)
+                ->update($update);       
+    }
+
+        public function updateCategoryParent($id, $higher){
         
         $update = array(
             'HigherCategoryID' => $higher

@@ -101,6 +101,10 @@ class ProductPresenter extends BasePresenter {
                 $productForm = $this['addProductForm'];
                 $productForm->setDefaults(array('catID' => $catID));
 
+                $seo = $this['categorySeoForm'];
+                $seo->setDefaults(array('catid' => $catID, 'name' => $cat['CategorySeoName']));
+               
+                
                 $addCategoryForm = $this['addCategoryForm'];
                 $addCategoryForm->setDefaults(array('catID' => $catID));
 
@@ -670,6 +674,8 @@ class ProductPresenter extends BasePresenter {
             if ($this->getUser()->isInRole('admin')) {
                                                
                 $editForm = $this['editParamForm'];
+                $seo = $this['productSeoForm'];
+                $seo->setDefaults(array('id' => $id, 'name' => $row['ProductSeoName']));
                 $addForm = $this['addParamForm'];
                 $addForm->setDefaults(array('productID' => $id));
                
@@ -796,6 +802,55 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
+    
+    protected function createComponentProductSeoForm() {
+        if ($this->getUser()->isInRole('admin')) {
+            $seo = new Nette\Application\UI\Form;
+            $seo->setTranslator($this->translator);
+            $seo->addHidden('id', '');
+            $seo->addText('name', 'SEO Title')
+                    ->setAttribute('class', 'form-control')
+                    ->setRequired();
+            $seo->addSubmit('set', 'Save SEO text')
+                    ->setAttribute('class', 'btn btn-primary form-control upl')
+                    ->setAttribute('data-loading-text', 'Setting...');
+            $seo->onSuccess[] = $this->productSeoFormSubmitted;
+            return $seo;
+        }
+    }
+    
+    public function productSeoFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            $this->productModel->updateProduct($form->values->id, 'ProductSeoName', $form->values->name);
+            
+            $this->redirect('this');
+        }
+    }
+
+    protected function createComponentCategorySeoForm() {
+        if ($this->getUser()->isInRole('admin')) {
+            $seo = new Nette\Application\UI\Form;
+            $seo->setTranslator($this->translator);
+            $seo->addHidden('catid', '');
+            $seo->addText('name', 'SEO Title')
+                    ->setAttribute('class', 'form-control')
+                    ->setRequired();
+            $seo->addSubmit('set', 'Save SEO text')
+                    ->setAttribute('class', 'btn btn-primary form-control upl')
+                    ->setAttribute('data-loading-text', 'Setting...');
+            $seo->onSuccess[] = $this->categorySeoFormSubmitted;
+            return $seo;
+        }
+    }
+    
+    public function categorySeoFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            $this->categoryModel->updateCat($form->values->catid, 'CategorySeoName', $form->values->name);
+            
+            $this->redirect('this');
+        }
+    }
+    
     public function createComponentAddCategoryPhotoForm() {
         if ($this->getUser()->isInRole('admin')) {
             $addPhoto = new Nette\Application\UI\Form;

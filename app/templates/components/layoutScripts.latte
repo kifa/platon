@@ -20,6 +20,13 @@ $(document).ready(function() {
              $('#addCategory').modal('hide');
          });
 
+          $('#editSeoButton').toggle(function(){
+                $('#editSeo').modal('show');
+              },
+              function() {
+                  $('#editSeo').modal('hide');
+              });
+              
          $('#addStaticTextButton').toggle(function(){
            $('#addStaticText').modal('show');
          },
