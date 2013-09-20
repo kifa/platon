@@ -903,6 +903,48 @@ AND photo.CoverPhoto = 1');
         return($pieces);
     }
     
+    public function insertVideo($product, $blog, $statictext, $name, $link){
+        $insert = array(
+            'ProductID' => $product,
+            'BlogID' => $blog,
+            'StaticTextID' => $statictext,
+            'VideoName' => $name,
+            'VideoLink' => $link
+        );
+        
+        return $this->getTable('video')
+                ->insert($insert);
+    }
+    
+    public function loadVideos(){
+        return $this->getTable('video')
+                ->fetchPairs('VideoID');
+    }
+
+    public function loadVideo($id){
+        return $this->getTable('video')
+                ->where('VideoID', $id)
+                ->fetch();
+    }
+    
+    public function loadProductVideo($id){
+        return $this->getTable('video')
+                ->where('ProductID', $id)
+                ->fetchPairs('VideoID');
+    }
+    
+    public function loadBlogVideo($id){
+        return $this->getTable('video')
+                ->where('BlogID', $id)
+                ->fetchPairs('VideoID');
+    }
+    
+    public function loadStaticTextVideo($id){
+        return $this->getTable('video')
+                ->where('StaticTextID', $id)
+                ->fetchPairs('VideoID');
+    }
+
     public function search($query) {       
         return $this->getTable('price')
                 ->select('price.FinalPrice, price.SALE, price.SellingPrice, 
