@@ -776,12 +776,13 @@ INSERT INTO `settings` (`SettingID`, `SettingName`, `Value`) VALUES
 (40,	'Medium',	'150'),
 (41,	'Large',	'300'),
 (42,	'sliderone',	'aaaa.PNG'),
-(43,	'slider1',	'aaaa.PNG'),
-(44,	'slider2',	'1267446_10201092249402403_784706740_o.jpg'),
-(45,	'banner1',	'logo_protejpy.png'),
-(46,	'banner2',	'logo_protejpy.png'),
-(47,	'banner3',	'logo_protejpy.png'),
-(48,	'banner4',	'logo_protejpy.png');
+(43,	'slider1',	'slide2.jpg'),
+(44,	'slider2',	'slide3.jpg'),
+(45,	'banner1',	'cofee.PNG'),
+(46,	'banner2',	'875da8b3ea8f49cf4ba26fa9af39befb.jpg'),
+(47,	'banner3',	'c8fc6c5f3c9647d5f83c44a8b4c92dd5.jpg'),
+(48,	'banner4',	'875da8b3ea8f49cf4ba26fa9af39befb.jpg'),
+(49,	'slider3',	'slide4.jpg');
 
 DROP TABLE IF EXISTS `statictext`;
 CREATE TABLE `statictext` (
@@ -862,4 +863,4 @@ CREATE TABLE `video` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_czech_ci;
 
 
--- 2013-09-21 22:15:14
+-- 2013-09-21 22:34:29
