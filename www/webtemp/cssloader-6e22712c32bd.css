@@ -1468,6 +1468,10 @@ top: 0;
 width: 100%;
 z-index: 1500;
 }
+
+.marginTop {
+    margin-top: 15px;
+}
 .navbar-default {
     background-color: #000;
 }
