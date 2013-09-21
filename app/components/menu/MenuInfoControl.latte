@@ -1,3 +1,4 @@
+<h3 class="menuHeader">{_'Info'}</h3>
 {foreach $menu as $postID => $post}
 <li class="{ifCurrent Blog:staticText $postID}active{/ifCurrent}"><a href="{plink Blog:staticText $postID}">{$post->StaticTextName}</a></li> 
 {/foreach}

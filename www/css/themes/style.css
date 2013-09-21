@@ -1,0 +1,86 @@
+.navbar-default {
+    background-color: #000;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white;
+    font-weight: bold;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:active {
+    color: #fc7951;
+}
+
+
+body a {
+    color: #fc7951;
+}
+
+.masterhead .container, .navHead .container, .shopSlider .container, .shopContent .container {
+    background: white;
+}
+
+.homepageProductsList .miniproduct, .shopProducts .miniproduct {
+border: 0;
+border-bottom: 1px solid #dddddd;
+}
+
+.shopFooter {
+    background: none repeat scroll 0 0 #F8F6F4;
+}
+
+.shopFooter a {
+    color: #fc7951; 
+}
+
+.addToCart {
+    background: #fc7951;
+    border-color: #fc7951;
+}
+.viewProduct {
+    background-color: black;
+    border-color: black;
+}
+.text-success {
+    color: #fc7951;
+}
+
+.productButtons .text-success, .prodPrice {
+    color: black;
+    font-size: 2em;
+}
+
+.navHead .menuHeader {
+    display: none;
+}
+
+.sortingMenu {
+    margin: 5px;
+}
+
+.alert-success {
+background-color: #fc7951;
+border-color: #fc7951;
+color: #000;
+}
+
+.label-success{
+  background-color: #fc7951;  
+}
+
+.cartPart {
+    margin: 25px;
+}
+
+.cart a{
+    font-size: 1.3em;
+}
+
+.btn-success {
+    background-color: #fc7951;  
+}
+
+.btn-primary, .alert-info {
+    background-color: black;
+    color: white;
+}

@@ -1,3 +1,4 @@
+<h3 class="menuHeader">{_'Categories'}</h3>
 {foreach $category as $catID => $cat}
  {if !$cat->HigherCategoryID}
   {if $cat->CategoryStatus != 4}
@@ -8,6 +9,7 @@
    {/if}
   {/if}
 {/foreach}
+
 
    <li class="dropdown {ifCurrent product:productsBrand}active{/ifCurrent}}">
    
@@ -21,6 +23,8 @@
         {/foreach}
         </ul>
     </li>
+    
+<h3 class="menuHeader">{_'Info'}</h3>    
 {foreach $menu as $postID => $post}
 <li class="{ifCurrent Blog:staticText $postID}active{/ifCurrent}"><a href="{plink Blog:staticText $postID}">{$post->StaticTextName}</a></li> 
 {/foreach}
@@ -36,6 +40,7 @@
     </li>
     <li class="{ifCurrent Homepage:contact}active{/ifCurrent}"><a href="{plink Homepage:contact}"><i class="icon-large icon-phone"></i> {_"Contact"}</a></li>
 {if $user->isInRole('admin')}
+<h3 class="menuHeader">{_'Admin'}</h3>
     <li><a href="#addStaticText" data-toggel="modal" data-target="#addStaticText" id="addStaticTextButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Text"}</a></li>
     <li><a href="#addCategory" data-toggel="modal" data-target="#addCategory" id="addCategoryButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Category"}</a></li>
 {/if}

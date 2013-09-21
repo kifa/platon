@@ -10,7 +10,7 @@
 {block content}
 <div class="col-md-12" n:snippet="cartTable">    
     <div class="table-responsive">
-    <table class="table">
+    <table class="table cart">
     <thead>
                 <tr>
                     <th ></th>
@@ -68,7 +68,7 @@
     
         
         {form cartForm role => form}
- <div class="col-md-11 margin5">           
+ <div class="col-md-11 cartPart">           
 <legend id="orderform"><span class="label label-success">1</span> {_'Choose your delivery option'}</legend>
     <div class="controls col-md-12">
        <div class="form-group col-md-5">
@@ -94,7 +94,7 @@
         <div class="col-md-10 margin5"><strong>{_'Selected shipping:'} </strong><span class="shipping">{_'not selected'}</span></div>
     </div>
     </div>
- <div class="col-md-11 margin5">
+ <div class="col-md-11 cartPart">
 <legend><span class="label label-success">2</span> {_'Fill contact information'}</legend>
             <div class="controls col-md-5">
                 <div class="form-group">
@@ -131,14 +131,14 @@
                 </div>
             </div>    
  </div> 
- <div class="col-md-11 margin5">
+ <div class="col-md-11 cartPart">
 <legend><span class="label label-success">3</span> {_'Select Payment method'}</legend>
             <div class="controls col-md-4">
                 {label payment /}
                 {input payment}
             </div>
  </div>
-         <div class="col-md-11 margin5">
+         <div class="col-md-11 cartPart">
 <legend><span class="label label-success">4</span> {_'Finish your order'}</legend>
             <div class="controls col-md-5">
                 {input send}

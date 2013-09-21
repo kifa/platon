@@ -1161,7 +1161,7 @@ class ProductPresenter extends BasePresenter {
             $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
             $this->template->producers = $this->productModel->loadProducers();
              $this->template->adminAlbum = $this->productModel->loadPhotoAlbum($id);
-             $this->template->videos = $this->productModel->loadProductVideo($id);
+            
        
             }
         
@@ -1176,7 +1176,7 @@ class ProductPresenter extends BasePresenter {
         $this->template->photo = $this->productModel->loadCoverPhoto($id);
         $this->template->albumID = $album;
         $this->template->album = $this->productModel->loadPhotoAlbum($id);
-       
+         $this->template->videos = $this->productModel->loadProductVideo($id);
         $this->template->parameter = $this->productModel->loadParameters($id);
         $this->template->productVariants = $this->productModel->loadProductVariants($id);
         $this->template->slider = NULL;

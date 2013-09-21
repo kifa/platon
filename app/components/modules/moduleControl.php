@@ -239,8 +239,7 @@ class moduleControl extends BaseControl{
      ******************************************************/
     
    public function render($arrgs) {
-       dump($arrgs);
-       exit();
+
        
        if($arrgs == 'shipping') {
            $type = 'shipping';       
