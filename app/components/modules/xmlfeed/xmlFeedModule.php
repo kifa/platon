@@ -26,6 +26,12 @@ class xmlFeedModule extends moduleControl {
     private $orderModel;
     private $categoryModel;
     private $productModel;
+    
+    private $view;
+    public function setView($view)
+    {
+        $this->view = $view;
+    }
 
 
     public function setTranslator($translator) {
@@ -194,7 +200,15 @@ class xmlFeedModule extends moduleControl {
     }
 
     
-    public function renderSmartPanel() {
-          
+   final public function render($arrgs) {
+        
+        if($arrgs == 'admin') {
+            $this->renderAdmin();
+        }
+        
+        if($arrgs == 'install') {
+            $this->renderInstall();
+        }
+        
     }
 }

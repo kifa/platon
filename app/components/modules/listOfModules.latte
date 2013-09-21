@@ -1,8 +1,8 @@
-<div class="span12 miniproduct">
+<div class="col-md-12 miniproduct">
 {foreach $control->components as $component}
 
-{control $component:install}
-{control $component:admin}
+{control $component, 'install'}
+{control $component, 'admin'}
     <hr>
 {/foreach}
     

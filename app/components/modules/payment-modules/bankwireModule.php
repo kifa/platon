@@ -23,6 +23,13 @@ class bankwireModule extends moduleControl {
     protected $translator;
     private $shopModel;
     private $orderModel;
+    
+    private $view;
+   
+    public function setView($view)
+    {
+        $this->view = $view;
+    }
 
     public function setTranslator($translator) {
         $this->translator = $translator;
@@ -94,7 +101,7 @@ class bankwireModule extends moduleControl {
                  
            if ($orderInfo['Progress'] == 1 & $orderInfo['Payment'] == $bankwireID) {
                $this->sendStatusMail($orderInfo['OrderID']);
-               dump('AHOJ');
+               
            }
         
         }
@@ -169,5 +176,34 @@ class bankwireModule extends moduleControl {
         $this->template->status = $info->StatusID;
         $this->template->render();
     }
+    
+    public function renderOrderAdmin() {
 
+        $this->template->setFile(__DIR__ . '/../simpleAdminModule.latte');
+
+        $info = $this->shopModel->loadModuleByName('bankwire');
+
+        $this->template->name = $info->ModuleName;
+        $this->template->desc = $info->ModuleDescription;
+        $this->template->status = $info->StatusID;
+        $this->template->render();
+    }
+    
+    
+    final public function render($arrgs) {
+        
+        if($arrgs == 'admin') {
+            $this->renderAdmin();
+        }
+        
+        if($arrgs == 'install') {
+            $this->renderInstall();
+        }
+        
+        if($arrgs == 'orderAdmin') {
+            $this->renderOrderAdmin();
+        }
+        
+    }
+    
 }

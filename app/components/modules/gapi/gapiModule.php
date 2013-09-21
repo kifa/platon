@@ -31,6 +31,7 @@ class gapiModule extends moduleControl {
     private $productModel;
 
     private $gapisession;
+    private $view;
 
     public function setTranslator($translator) {
         $this->translator = $translator;
@@ -63,6 +64,11 @@ class gapiModule extends moduleControl {
     // případně $this->translator přes konstrukt/inject
 
     return $template;
+    }
+
+    public function setView($view)
+    {
+        $this->view = $view;
     }
 
     
@@ -368,5 +374,26 @@ class gapiModule extends moduleControl {
         
         
         $this->template->render();
+    }
+    
+    final public function render($arrgs) {
+        
+        if($arrgs == 'admin') {
+            $this->renderAdmin();
+        }
+        
+        if($arrgs == 'install') {
+            $this->renderInstall();
+        }
+        
+     
+        
+        if($arrgs == 'smartPanelMini') {
+            $this->renderSmartPanelMini();
+        }
+        
+        if($arrgs == 'product') {
+            $this->renderSmartPanel();
+        }
     }
 }

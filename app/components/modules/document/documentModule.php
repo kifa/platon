@@ -24,7 +24,13 @@ class documentModule extends moduleControl {
     private $id;
 
 
-
+    
+    private $view;
+    
+    public function setView($view)
+    {
+        $this->view = $view;
+    }
 
     public function setTranslator($translator) {
         $this->translator = $translator;
@@ -191,7 +197,7 @@ class documentModule extends moduleControl {
     }
     
     
-   public function render($id) {
+   public function renderProduct($id) {
         $this->id = $id;
         $this->template->setFile(__DIR__ . '/documentModule.latte');
         $info = $this->shopModel->loadModuleByName('document');
@@ -204,6 +210,21 @@ class documentModule extends moduleControl {
         $this->template->product = $id;
         }
         $this->template->render();
+    }
+    
+  final public function render($arrgs) {
+        
+        if($arrgs == 'admin') {
+            $this->renderAdmin();
+        }
+        
+        if($arrgs == 'install') {
+            $this->renderInstall();
+        }
+        
+        if($arrgs == 'product') {
+            $this->renderSmartPanel();
+        }
     }
     
 }

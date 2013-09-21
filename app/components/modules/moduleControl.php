@@ -238,44 +238,47 @@ class moduleControl extends BaseControl{
      *                   RENDERY
      ******************************************************/
     
-   
-    
-    public function renderShippingModules() {
+   public function render($arrgs) {
+       dump($arrgs);
+       exit();
+       
+       if($arrgs == 'shipping') {
+           $type = 'shipping';       
+           $this->template->setFile(__DIR__ . '/listOfModules.latte');
+       }
+       
+       if($arrgs == 'payment') {
+           $type = 'payment';
+           $this->template->setFile(__DIR__ . '/listOfModules.latte');
+       }
+       
+       if($arrgs == 'modules') {
+           $type = '';
+           $this->template->setFile(__DIR__ . '/listOfModules.latte');
+       }
+       
+       if($arrgs == 'orderAdmin') {
+            $type = '';
+            $this->template->setFile(__DIR__ . '/orderModules.latte');
+       }
+       
+       if($arrgs == 'smartPanel') {
+           $type = '';
+            $this->template->setFile(__DIR__ . '/smartPanelModule.latte');
+       }
         
-        $this->template->setFile(__DIR__ . '/listOfModules.latte');
-        
-        try { 
-            foreach ($this->shopModel->loadModules('shipping') as $id => $component) {
+       try { 
+            foreach ($this->shopModel->loadModules($type) as $id => $component) {
                 $comp = $this->createComponent($component->CompModuleName);
-                
-                $this->addComponent($comp, $component->CompModuleName);
-                
+                $this->addComponent($comp, $component->CompModuleName);         
             }
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             \Nette\Diagnostics\Debugger::log($e);
         }
         
         $this->template->render();
-    }
-    
-    public function renderPaymentModules() {
-        
-        $this->template->setFile(__DIR__ . '/listOfModules.latte');
-        
-        try { 
-            foreach ($this->shopModel->loadModules('payment') as $id => $component) {
-                $comp = $this->createComponent($component->CompModuleName);
-                $this->addComponent($comp, $component->CompModuleName);
-            }
-        }
-        catch (Exception $e) {
-            \Nette\Diagnostics\Debugger::log($e);
-        }
-        
-        $this->template->render();
-    }
-    
+   }
+ 
     public function renderProductModule($name, $id) {
         
         $this->template->setFile(__DIR__ . '/renderModule.latte');
@@ -285,6 +288,7 @@ class moduleControl extends BaseControl{
         if($component !== FALSE) {
              $comp = $this->createComponent($component->CompModuleName);
              $this->addComponent($comp, $component->CompModuleName);
+             $comp->setView('product');
              $this->template->comp = $comp;
                       
              
@@ -299,53 +303,5 @@ class moduleControl extends BaseControl{
         $this->template->id = $id;
         $this->template->render();
     }
-    
-    public function renderModules() {
-        
-        $this->template->setFile(__DIR__ . '/listOfModules.latte');
-        
-        $components = $this->shopModel->loadModules('');
-        
-        if ($components !== NULL) {
-            try { 
-                foreach ($components as $id => $component) {
-                    $comp = $this->createComponent($component->CompModuleName);
-                    $this->addComponent($comp, $component->CompModuleName);
-                }
-            }
-            catch (Exception $e) {
-                \Nette\Diagnostics\Debugger::log($e);
-            }
-        }
-        else {
-           
-        }
-        
-        $this->template->render();
-    }
-    
-    public function renderSmartPanelModule($name){
-        
-     
-        $this->template->setFile(__DIR__ . '/renderSmartPanelModule.latte');
-        
-        $component = $this->shopModel->loadModuleByName($name);
-
-        if($component !== FALSE) {
-             $comp = $this->createComponent($component->CompModuleName);
-             $this->addComponent($comp, $component->CompModuleName);
-             $this->template->comp = $comp;
-                      
-             
-        }
-        else {
-           $text = $this->translator->translate('Module not available: ');
-           $this->template->comp = NULL;
-           $this->presenter->flashMessage($text . $name, 'alert alert-warning');
-           
-            //$this->presenter->redirect('this');
-        }
-        
-        $this->template->render();
-    }
+       
 }

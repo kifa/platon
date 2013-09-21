@@ -24,6 +24,13 @@ class CashOnDeliveryModule extends moduleControl {
     private $shopModel;
     private $orderModel;
 
+    private $view;
+    
+    public function setView($view)
+    {
+        $this->view = $view;
+    }
+    
     public function setTranslator($translator) {
         $this->translator = $translator;
     }
@@ -116,4 +123,15 @@ class CashOnDeliveryModule extends moduleControl {
         $this->template->render();
     }
 
+    final public function render($arrgs) {
+        
+        if($arrgs == 'admin') {
+            $this->renderAdmin();
+        }
+        
+        if($arrgs == 'install') {
+            $this->renderInstall();
+        }
+        
+    }
 }

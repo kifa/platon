@@ -27,6 +27,12 @@ class heurekaModule extends moduleControl {
     private $categoryModel;
     private $productModel;
 
+    private $view;
+    
+    public function setView($view)
+    {
+        $this->view = $view;
+    }
 
     public function setTranslator($translator) {
         $this->translator = $translator;
@@ -227,7 +233,16 @@ class heurekaModule extends moduleControl {
     }
 
     
-    public function renderSmartPanel() {
-          
+    final public function render($arrgs) {
+    
+        if($arrgs == 'admin') {
+            $this->renderAdmin();
+        }
+        
+        if($arrgs == 'install') {
+            $this->renderInstall();
+        }
     }
+    
+    
 }
