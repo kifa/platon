@@ -177,17 +177,6 @@ class bankwireModule extends moduleControl {
         $this->template->render();
     }
     
-    public function renderOrderAdmin() {
-
-        $this->template->setFile(__DIR__ . '/../simpleAdminModule.latte');
-
-        $info = $this->shopModel->loadModuleByName('bankwire');
-
-        $this->template->name = $info->ModuleName;
-        $this->template->desc = $info->ModuleDescription;
-        $this->template->status = $info->StatusID;
-        $this->template->render();
-    }
     
     
     final public function render($arrgs) {
@@ -198,12 +187,7 @@ class bankwireModule extends moduleControl {
         
         if($arrgs == 'install') {
             $this->renderInstall();
-        }
-        
-        if($arrgs == 'orderAdmin') {
-            $this->renderOrderAdmin();
-        }
-        
+        }        
     }
     
 }
