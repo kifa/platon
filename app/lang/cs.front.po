@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-09-21 15:34:59
+# Created: 2013-09-21 16:02:09
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-09-21 15:34+0200\n"
+"PO-Revision-Date: 2013-09-21 16:02+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -80,6 +80,9 @@ msgstr "Informace o účtu"
 
 msgid "Activate Module"
 msgstr "Instalovat modul"
+
+msgid "Add Brand"
+msgstr "Přidat Značku"
 
 msgid "Add Category"
 msgstr "Přidat kategorii"
@@ -228,6 +231,12 @@ msgstr "Blog"
 msgid "Blog and Gallery"
 msgstr "Blog a fotky"
 
+msgid "Brand description"
+msgstr "Popis značky"
+
+msgid "Brand name"
+msgstr "Název Značky"
+
 msgid "Brands"
 msgstr "Značky"
 
@@ -275,6 +284,9 @@ msgstr "Změnit heslo"
 
 msgid "Change slider"
 msgstr "Změnit fotku"
+
+msgid "Change stock in one place."
+msgstr "Přehled o produktech na jednom místě."
 
 msgid "Change value by clicking"
 msgstr "Hodnotu upravte kliknutím na ni"
@@ -522,6 +534,9 @@ msgstr "Upravit specifikace"
 msgid "Edit Specs"
 msgstr "Upravit specifikace"
 
+msgid "Edit by clicking on any value"
+msgstr "Upravte kliknutím na jakoukoliv hodnotu (název)"
+
 msgid "Edit info"
 msgstr "Upravit informace"
 
@@ -614,6 +629,9 @@ msgstr "Zde"
 
 msgid "Here is all you need!"
 msgstr "Zde naleznete vše potřebné"
+
+msgid "Here you can add and edit brands and producers."
+msgstr "Zde můžete přidávat a upravovat značky a výrobce."
 
 msgid "Here you can add new product variant."
 msgstr "Zde můžete přidat variantu produktu."
@@ -734,6 +752,9 @@ msgstr "Spravovat varianty produktu"
 
 msgid "Manage variants"
 msgstr "Spravovat varianty"
+
+msgid "Max 2MB"
+msgstr "Max 2MB"
 
 msgid "Max size is 2MB ~ 1 Megapixel photos"
 msgstr "Max velikost 2MB ~ 1 megapixel"
@@ -1146,6 +1167,9 @@ msgstr "Přihlásit"
 msgid "Singleton"
 msgstr "Solitér"
 
+msgid "Sitemap sucessfully generated."
+msgstr "Sitemap byla úspěšně vygenerována."
+
 msgid "Small"
 msgstr "Malý"
 
@@ -1170,6 +1194,9 @@ msgstr "Statistiky"
 msgid "Status"
 msgstr "Stav"
 
+msgid "Stock"
+msgstr "Skladem"
+
 msgid "Storage"
 msgstr "Úložiště"
 
@@ -1187,6 +1214,9 @@ msgstr "Předmět"
 
 msgid "Subtotal"
 msgstr "Součet"
+
+msgid "Supported files are JPG, PNG a GIF"
+msgstr "Podporované soubory jsou JPG, PNG a GIF"
 
 msgid "Tablets"
 msgstr "Tablet"
@@ -1229,6 +1259,12 @@ msgstr "Celkem"
 
 msgid "Total Payment"
 msgstr "Celkem"
+
+msgid "Total Value"
+msgstr "Celková hodnota"
+
+msgid "Total Warehouse Value"
+msgstr "Celková hodnota skladu"
 
 msgid "Total price"
 msgstr "Za produkt"
@@ -1455,6 +1491,6 @@ msgstr "osobní převzetí"
 msgid "was successfully placed!"
 msgstr "byla úspěšně přijata."
 
-msgid "Supported files are JPG, PNG a GIF"
-msgstr "Podporované soubory jsou JPG, PNG a GIF"
+msgid "Smart Panel"
+msgstr "SmartPanel"
 
