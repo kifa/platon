@@ -2,60 +2,17 @@
 {block head}<title>Homepage</title>{/block}
 
 {block slider}
-<div class="shopSlider margin5">   
- <div class="container">
- 
-<div id="carousel-example-generic" class="carousel slide">
-  <!-- Indicators
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol> -->
+<div class="shopSlider">   
+ <div class="container supercontainer">
+    {include $home}
 
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner">
-        
-     
-       <div class="item active">
-           {if $slide}
-        <img src="{$basePath}/images/slider/{$slide}" alt="Protejpy">
-            {else}
-        <img src="{$basePath}/images/no_image.jpg" style="height: 150px"/>
-                {/if}
-        <div class="carousel-caption">
-            
-          {if $user->isInRole('admin')}
+{if $user->isInRole('admin')}
+<div class="col-md-11 text-center">
             <button class="btn btn-default" type="button" data-toggle="modal" data-target="#sliderModal">{_'Change slider'}</button>
-         
             <button class="btn btn-danger btn-lg" type="button" data-toggle="modal" data-target="#videoModal"><i class="icon-play-sign"></i> {_'WATCH VIDEO'}</button>
+</div>
          {/if}
-       </div>
-    </div>
-    </div>
- <!--   <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
-    
-    <div class="item ">
-            <img src="./images/slider/bebica_slide_03.jpg" alt="Bebica">
-                
-        </div>
-      
-      <div class="item">
-        <img src="./images/slider/bebica_slide_01.jpg" alt="Bebica">
-        <div class="carousel-caption">
-          ...
-        </div>
-    </div>
-       
-    
-    -->
-
-</div>
-</div>
-
-</div>
-
+     </div></div>
 {/block}
 
 {block contents}
@@ -121,7 +78,24 @@ $('.carousel').carousel()
         <h4 class="modal-title">{_'Upload slider photo'}</h4>
       </div>
       <div class="modal-body">
-            {control addSliderForm}
+                          <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#editSlider" data-toggle="tab"><i class=""></i> {_'Slider'}</a></li>
+                        <li><a href="#editBanner" data-toggle="tab"><i class=""></i> {_'Banners'}</a>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="editSlider">
+                            <p>{_'Upload your slider photos'}</p>
+                                       {control addSliderForm}
+                        </div>
+
+                        <div class="tab-pane" id="editBanner">
+                            <p>{_'Upload your banner photos'}</p>
+                                    {control addBannerForm}
+                        </div>
+                    </div>
+                </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">{_'Close'}</button>

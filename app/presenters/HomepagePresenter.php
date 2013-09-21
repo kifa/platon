@@ -56,13 +56,68 @@ class HomepagePresenter extends BasePresenter {
         }
     }
     
-        public function createComponentAddSliderForm() {
+    public function createComponentAddBannerForm() {
         if ($this->getUser()->isInRole('admin')) {
             $addPhoto = new Nette\Application\UI\Form;
             $addPhoto->setTranslator($this->translator);
-            $addPhoto->addUpload('image', 'Photo:')
+            $addPhoto->addUpload('bannerone', 'Photo:')
                     ->addRule(FORM::IMAGE, 'You can upload only JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Max 2MB', 6400 * 1024);
+            $items = array(1 => 'first banner', 2 => 'second banner', 3 => 'third banner', 4 => 'four banner');
+            $addPhoto->addSelect('banner', 'Slider list', $items)
+                    ->setDefaultValue(1);
+            $addPhoto->addSubmit('add', 'Add Banner')
+                    ->setAttribute('class', 'form-control btn btn-primary upl col-md-6')
+                    ->setAttribute('data-loading-text', 'Uploading...');
+            $addPhoto->onSuccess[] = $this->addBannerFormSubmitted;
+            return $addPhoto;
+        }
+    }
+    
+     public function addBannerFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            if ($form->values->bannerone->isOK()) {
+
+                if($this->shopModel->getShopInfo('banner'.$form->values->banner)) {
+                    $this->shopModel->setShopInfo('banner'.$form->values->banner, $form->values->bannerone->name);
+                } else {
+                    $this->shopModel->insertShopInfo('banner'.$form->values->banner, $form->values->bannerone->name);
+                }
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/banner/' . $form->values->bannerone->name;
+                $form->values->bannerone->move($imgUrl);
+
+                $image = Image::fromFile($imgUrl);
+                
+                if($image->width > 380) {
+
+                    $image->resize(380, null, Image::SHRINK_ONLY);
+                    $imgUrl = $this->context->parameters['wwwDir'] . '/images/banner/' . $form->values->bannerone->name;
+                    $image->save($imgUrl);
+                }
+  
+                    
+                $message = $this->translator->translate(' was sucessfully uploaded');
+                $photo = $this->translator->translate(' Photo ');
+                $e = HTML::el('span', $photo . $form->values->bannerone->name . '' . $message);
+                $ico = HTML::el('i')->class('icon-ok-sign left');
+                $e->insert(0, $ico);
+                $this->flashMessage($e, 'alert alert-success');
+            }
+            
+            $this->redirect('this');
+        }
+    }
+    
+   public function createComponentAddSliderForm() {
+        if ($this->getUser()->isInRole('admin')) {
+            $addPhoto = new Nette\Application\UI\Form;
+            $addPhoto->setTranslator($this->translator);
+            $addPhoto->addUpload('slideone', 'Photo:')
+                    ->addRule(FORM::IMAGE, 'You can upload only JPG, PNG a GIF')
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Max 2MB', 6400 * 1024);
+            $items = array(1 => 'first slide', 2 => 'second slide', 3 => 'third slide');
+            $addPhoto->addSelect('slide', 'Slider list', $items)
+                    ->setDefaultValue(1);
             $addPhoto->addSubmit('add', 'Add Photo')
                     ->setAttribute('class', 'form-control btn btn-primary upl col-md-6')
                     ->setAttribute('data-loading-text', 'Uploading...');
@@ -76,33 +131,34 @@ class HomepagePresenter extends BasePresenter {
 
     public function addSliderFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
-            if ($form->values->image->isOK()) {
+            if ($form->values->slideone->isOK()) {
 
-                if($this->shopModel->getShopInfo('slider')) {
-                    $this->shopModel->setShopInfo('slider', $form->values->image->name);
+                if($this->shopModel->getShopInfo('slider'.$form->values->slide)) {
+                    $this->shopModel->setShopInfo('slider'.$form->values->slide, $form->values->slideone->name);
                 } else {
-                    $this->shopModel->insertShopInfo('slider', $form->values->image->name);
+                    $this->shopModel->insertShopInfo('slider'.$form->values->slide, $form->values->slideone->name);
                 }
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/slider/' . $form->values->image->name;
-                $form->values->image->move($imgUrl);
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/slider/' . $form->values->slideone->name;
+                $form->values->slideone->move($imgUrl);
 
                 $image = Image::fromFile($imgUrl);
                 
                 if($image->width > 1140) {
 
                     $image->resize(1140, null, Image::SHRINK_ONLY);
-                    $imgUrl = $this->context->parameters['wwwDir'] . '/images/slider/' . $form->values->image->name;
+                    $imgUrl = $this->context->parameters['wwwDir'] . '/images/slider/' . $form->values->slideone->name;
                     $image->save($imgUrl);
                 }
 
+            
                 $message = $this->translator->translate(' was sucessfully uploaded');
                 $photo = $this->translator->translate(' Photo ');
-                $e = HTML::el('span', $photo . $form->values->image->name . '' . $message);
+                $e = HTML::el('span', $photo . $form->values->slideone->name . '' . $message);
                 $ico = HTML::el('i')->class('icon-ok-sign left');
                 $e->insert(0, $ico);
                 $this->flashMessage($e, 'alert alert-success');
             }
-
+            
             $this->redirect('this');
         }
     }
@@ -116,21 +172,22 @@ class HomepagePresenter extends BasePresenter {
 
         public function renderDefault() {
 
-         if ($this->getUser()->isInRole('admin')) {
-            // load all products
         $this->template->products = $this->productModel->loadMainPage();
-        } else {
-            // load published products
-        $this->template->products = $this->productModel->loadMainPage();
-        }
-       
-        $layout = $this->shopModel->getShopInfo('HomepageLayout');
-        
-        $this->template->setFile( $this->context->parameters['appDir'] . '/templates/Homepage/'  . $layout . '.latte'); 
        
         $this->template->slider = 1;
         
-        $this->template->slide = $this->shopModel->getShopInfo('slider');
+        $this->template->sliderone = $this->shopModel->getShopInfo('slider1');
+        $this->template->slidertwo = $this->shopModel->getShopInfo('slider2');
+        $this->template->sliderthree = $this->shopModel->getShopInfo('slider3');
+        
+        $this->template->bannerone = $this->shopModel->getShopInfo('banner1');
+        
+        $this->template->bannertwo = $this->shopModel->getShopInfo('banner2');
+        $this->template->bannerthree = $this->shopModel->getShopInfo('banner3');
+        $this->template->bannerfour = $this->shopModel->getShopInfo('banner4');
+        
+        $home = $this->shopModel->getShopInfo('HomepageLayout');
+        $this->template->home = $home.'.latte';
         $this->template->category = $this->categoryModel->loadCategory("");
         $this->template->video = $this->shopModel->getShopInfo('homepageVideo');
         $this->template->anyVariable = 'any value';
