@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-09-21 14:40:25
+# Created: 2013-09-21 14:54:52
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-09-21 14:40+0200\n"
+"PO-Revision-Date: 2013-09-21 14:54+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -591,6 +591,9 @@ msgstr "Generovat mapu webu (sitemap)"
 msgid "Generate XML feed"
 msgstr "Generovat XML feed"
 
+msgid "Go to order detail now"
+msgstr "Přejít na správu objednávky"
+
 msgid "Grand Total"
 msgstr "Celkem"
 
@@ -807,6 +810,9 @@ msgstr "Možnosti"
 msgid "Order administration"
 msgstr "Správa objednávky"
 
+msgid "Order data"
+msgstr "Info o objednávce"
+
 msgid "Order status"
 msgstr "Stav objednávky"
 
@@ -905,6 +911,9 @@ msgstr "Prosím zadejte nový Heureka klíč."
 
 msgid "Please set new price."
 msgstr "Prosím zadejte novou cenu."
+
+msgid "Please, pay via PayPal"
+msgstr "Prosíme, zaplaťte přes PayPal"
 
 msgid "Post"
 msgstr "Příspěvek"
@@ -1398,6 +1407,9 @@ msgstr "PSČ:"
 msgid "by post/delivery service"
 msgstr "poštou/doručovací službou"
 
+msgid "clicking on Buy Now button"
+msgstr "kliknutím na tlačítko Buy Now"
+
 msgid "current key:"
 msgstr "současný klíč:"
 
@@ -1425,6 +1437,6 @@ msgstr "osobní převzetí"
 msgid "was successfully placed!"
 msgstr "byla úspěšně přijata."
 
-msgid "Order data"
-msgstr "Info o objednávce"
+msgid "Please pay your order by clicking on button Buy Now"
+msgstr "Prosím zaplaťte svou objednávku kliknutím na tlačítko Buy Now."
 

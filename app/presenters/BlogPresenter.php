@@ -127,7 +127,8 @@ class BlogPresenter extends BasePresenter {
                     }
                 }
 
-                $e = 'Photo ' . $row->PhotoName . ' was sucessfully deleted.';
+                $text = $this->translator->translate('was sucessfully deleted.');
+                $e = 'Photo ' . $row->PhotoName . ' '.$text;
 
                 $this->productModel->deletePhoto($id);
                 $this->flashMessage($e, 'alert');
@@ -279,7 +280,8 @@ class BlogPresenter extends BasePresenter {
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/blog/' . $form->values->blogID . '/50-' . $form->values->image->name;
                 $image->save($imgUrl);
 
-                $e = HTML::el('span', ' Photo ' . $form->values->image->name . ' was sucessfully uploaded');
+                $text = $this->translator->translate('was sucessfully uploaded');
+                $e = HTML::el('span', ' Photo ' . $form->values->image->name . ' '.$text);
                 $ico = HTML::el('i')->class('icon-ok-sign left');
                 $e->insert(0, $ico);
                 $this->flashMessage($e, 'alert');
@@ -421,7 +423,8 @@ class BlogPresenter extends BasePresenter {
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/static/' . $form->values->textalbumid . '/50-' . $form->values->image->name;
                 $image->save($imgUrl);
 
-                $e = HTML::el('span', ' Photo ' . $form->values->image->name . ' was sucessfully uploaded');
+                $text = $this->translator->translate('was sucessfully uploaded');
+                $e = HTML::el('span', ' Photo ' . $form->values->image->name . ' '.$text);
                 $ico = HTML::el('i')->class('icon-ok-sign left');
                 $e->insert(0, $ico);
                 $this->flashMessage($e, 'alert');

@@ -176,8 +176,8 @@ class HomepagePresenter extends BasePresenter {
         $note = $form->values->note;
         
         if($this->isAjax()){
-            
-            $this->flashMessage('Great! We have received your question.', 'alert alert-info');
+            $text = $this->translator->translate('Great! We have received your question.');
+            $this->flashMessage($text, 'alert alert-info');
             $form->setValues(array(), TRUE);
             $this->invalidateControl('contact');  
             $this->invalidateControl('form'); 

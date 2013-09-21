@@ -139,7 +139,8 @@ class OrderPresenter extends BasePresenter {
             $this->cart->numberItems = Count($this->cart->prd);
 
             $ico = HTML::el('i')->class('icon-ok-sign left');
-            $message = HTML::el('span', ' ' . $row->ProductName . ' was successfully added to your cart.');
+            $text = $this->translator->translate('was successfully added to your cart.');
+            $message = HTML::el('span', ' ' . $row->ProductName . ' '.$text);
             $message->insert(0, $ico);
             $this->flashMessage($message, 'alert alert-success');
            $this->redirect('Order:cart');
@@ -569,6 +570,8 @@ class OrderPresenter extends BasePresenter {
             $template->customer = $row->Name;
             $template->mailOrder = $row->UsersID;
             $template->finalprice = $row->TotalPrice;
+            
+            $template->link = $this->presenter->link('//SmartPanel:orderDetail', $orderid);
             
             $template->adminMail = $adminMail;
             $template->shopName = $shopName;
