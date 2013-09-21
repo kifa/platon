@@ -2,50 +2,92 @@
 <urlset xmlns="http://www.google.com/schemas/sitemap/0.84"> 
 
 <url> 
-    <loc>http://localhost/platon/www/koupit/3-samsung-galaxy-s4/cs</loc> 
+    <loc>http://localhost/platon/www/koupit/4-costa-rica-la-perla-del-cafe-red-honey/cs</loc> 
 <lastmod>1905-05-05.</lastmod> 
 <changefreq>daily</changefreq> 
 <priority>0.8</priority> 
 </url> 
 <url> 
-    <loc>http://localhost/platon/www/koupit/9-apple-ipad/cs</loc> 
+    <loc>http://localhost/platon/www/koupit/3-ethiopia-yirgacheffe-kochere-gr-1/cs</loc> 
 <lastmod>1905-05-05.</lastmod> 
 <changefreq>daily</changefreq> 
 <priority>0.8</priority> 
 </url> 
 <url> 
-    <loc>http://localhost/platon/www/koupit/10-lenovo-thinkpad-tablet-2-64gb-wifi-3g-3679-4hg/cs</loc> 
+    <loc>http://localhost/platon/www/koupit/13-ardi-ethiopia/cs</loc> 
 <lastmod>1905-05-05.</lastmod> 
 <changefreq>daily</changefreq> 
 <priority>0.8</priority> 
 </url> 
 <url> 
-    <loc>http://localhost/platon/www/koupit/11-lenovo-thinkpad-edge-e130-arctic-blue-3358-8cg/cs</loc> 
-<lastmod>1905-05-05.</lastmod> 
+    <loc>http://localhost/platon/www/koupit/14-jackie-oh-organic-decaf/cs</loc> 
+<lastmod>2013-09-12.</lastmod> 
 <changefreq>daily</changefreq> 
 <priority>0.8</priority> 
 </url> 
 <url> 
-    <loc>http://localhost/platon/www/koupit/13-sony-ericsson-xperia-mini/cs</loc> 
-<lastmod>1905-05-05.</lastmod> 
+    <loc>http://localhost/platon/www/koupit/15-klatch-coffee/cs</loc> 
+<lastmod>2013-09-12.</lastmod> 
 <changefreq>daily</changefreq> 
 <priority>0.8</priority> 
 </url> 
 <url> 
-    <loc>http://localhost/platon/www/koupit/14-spange-bob/cs</loc> 
-<lastmod>1905-05-05.</lastmod> 
+    <loc>http://localhost/platon/www/koupit/16-1000faces-coffee-bell-s-blend/cs</loc> 
+<lastmod>2013-09-12.</lastmod> 
 <changefreq>daily</changefreq> 
 <priority>0.8</priority> 
 </url> 
 <url> 
-    <loc>http://localhost/platon/www/koupit/15-asus-vivobook/cs</loc> 
-<lastmod>1905-05-05.</lastmod> 
+    <loc>http://localhost/platon/www/koupit/17-1000faces-coffee-espresso-neruda/cs</loc> 
+<lastmod>2013-09-12.</lastmod> 
 <changefreq>daily</changefreq> 
 <priority>0.8</priority> 
 </url> 
 <url> 
-    <loc>http://localhost/platon/www/koupit/16-thinkpad/cs</loc> 
-<lastmod>1905-05-05.</lastmod> 
+    <loc>http://localhost/platon/www/koupit/19-atomic-cafe-black-velvet/cs</loc> 
+<lastmod>2013-09-12.</lastmod> 
+<changefreq>daily</changefreq> 
+<priority>0.8</priority> 
+</url> 
+<url> 
+    <loc>http://localhost/platon/www/koupit/20-johnson-brothers-black-earth-blend/cs</loc> 
+<lastmod>2013-09-12.</lastmod> 
+<changefreq>daily</changefreq> 
+<priority>0.8</priority> 
+</url> 
+<url> 
+    <loc>http://localhost/platon/www/koupit/21-pt-s-coffee-gizmo-blend/cs</loc> 
+<lastmod>2013-09-12.</lastmod> 
+<changefreq>daily</changefreq> 
+<priority>0.8</priority> 
+</url> 
+<url> 
+    <loc>http://localhost/platon/www/koupit/25-novo-coffee-espresso-del-fuego/cs</loc> 
+<lastmod>2013-09-12.</lastmod> 
+<changefreq>daily</changefreq> 
+<priority>0.8</priority> 
+</url> 
+<url> 
+    <loc>http://localhost/platon/www/koupit/26-doma-coffee-bella-luna-decaf/cs</loc> 
+<lastmod>2013-09-12.</lastmod> 
+<changefreq>daily</changefreq> 
+<priority>0.8</priority> 
+</url> 
+<url> 
+    <loc>http://localhost/platon/www/koupit/30-klatch-coffee-belle-espresso/cs</loc> 
+<lastmod>2013-09-12.</lastmod> 
+<changefreq>daily</changefreq> 
+<priority>0.8</priority> 
+</url> 
+<url> 
+    <loc>http://localhost/platon/www/koupit/27-assam-mangalam-ftgfop1-cl-spl-10-g/cs</loc> 
+<lastmod>2013-09-12.</lastmod> 
+<changefreq>daily</changefreq> 
+<priority>0.8</priority> 
+</url> 
+<url> 
+    <loc>http://localhost/platon/www/koupit/28-assam-black-tea/cs</loc> 
+<lastmod>2013-09-12.</lastmod> 
 <changefreq>daily</changefreq> 
 <priority>0.8</priority> 
 </url> 

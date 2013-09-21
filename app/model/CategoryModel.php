@@ -20,7 +20,8 @@ class CategoryModel extends Repository {
     }
     
     public function loadCategoryListAdmin(){
-        return $this->getTable('category')
+  
+        return $this->getTable('category')->order('CategoryName ASC')->where('CategoryStatus!=', 4)
                 ->fetchPairs('CategoryID');
     }
     

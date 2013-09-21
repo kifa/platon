@@ -1,74 +1,97 @@
 {block pageheader}
 {if $user->isInRole('admin')}
+
+       <div class="col-md-12 smartPanelBar">
+                       <div class="col-md-10">
+                <a class="btn btn-default" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a> |
+                <a class="btn btn-default" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+            </div>
+        </div>
 <div class="page-header">
     <h1 n:block="title"><i class="icon-retweet"></i> {_'Warehouse'} <small>{_'Change stock in one place.'}</small></h1>
 
-<div class="row">
-            <div class="span10">
-                <a class="btn" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a> |
-                <a class="btn" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
-            </div>
-        </div>
     </div>
 {/if}
 {/block}
 
 {block content}
-<div class="span10"> 
+<div class="col-md-10"> 
 {if $user->isInRole('admin')}
 
     <div class="tabbable"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#overal"  data-toggle="tab">{_'Overal'}</a></li>
-            <li><a href="#addShip"  data-toggle="tab">{_'Category'}</a></li>
+            <li class="active"><a href="#prod"  data-toggle="tab">{_'Products'}</a></li>
+            <li><a href="#cat"  data-toggle="tab">{_'Category'}</a></li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane active" id="overal">
-                
-                
-                {control grid}
-                
-                
-                
-                <div class="span6">
+            <div class="tab-pane active" id="prod">
+                  
+                <div class="col-md-12">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th></th>
                                 <th>{_'Name'}</th>
-                                <th>{_'Price'}</th>
-                                <th>{_'Stock'}</th>
+                                <th class="text-right">{_'Price'}</th>
+                                <th class="text-right">{_'Stock'}</th>
+                                 <th class="text-right">{_'Total Value'}</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                            {var $supertotal = 0}
                         {foreach $products as $id => $product}
 
                             <tr class="info">
                                 <td>{$iterator->counter}</td>
                                 <td>
-                                {if $product->PhotoAlbumID}
-                     <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$product->PhotoURL}" class="img-circle" style="height: 30px; width: auto;"/>
-
-                {else}
-                   <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="height: 30px; width: auto;"/>
-                {/if} 
+                              
                                 </td>
                                 <td><a href="{plink Product:product $product->ProductID}">{$product->ProductName}</a></td>
-                                <td>{$product->FinalPrice},-</td>
-                                <td>{$product->PiecesAvailable}</td>
+                                <td class="text-right">{$product->FinalPrice},-</td>
+                                <td class="text-right">{$product->PiecesAvailable}</td>
+                                <td class="text-right">{$total = $product->PiecesAvailable * $product->FinalPrice|number},-</td>
+                                {var $supertotal = $supertotal + $total}
+                            </tr>
+
+                        {/foreach}
+                            <tr class="success">
+                                <td colspan="5" class="text-right"><strong>{_'Total Warehouse Value'}:</strong></td>
+                                <td class="text-right">{$supertotal|number},-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> <div class="tab-pane" id="cat">
+                 <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th></th>
+                                <th>{_'Name'}</th>
+                                <th>{_'Products'}</th>
+                                <th>{_'Total Value'}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $categories as $catid => $category}
+
+                            <tr class="info">
+                                <td>{$iterator->counter}</td>
+                                <td>
+                              
+                                </td>
+                                <td><a href="{plink Product:products $category->CategoryID}">{$category->CategoryName}</a></td>
+                                <td>N/A</td>
+                                <td>N/A</td>
                                 
                             </tr>
 
                         {/foreach}
                         </tbody>
                     </table>
-                </div>
-            </div> <div class="tab-pane" id="cat">
-                
-
-
             </div>
         </div>
     </div>
@@ -80,7 +103,7 @@
 {/block}
 
 {block sidebar}
-<div class="span2"> 
+<div class="col-md-2"> 
 
 </div>
 {/block}

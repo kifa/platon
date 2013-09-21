@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-09-21 14:54:52
+# Created: 2013-09-21 15:34:59
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-09-21 14:54+0200\n"
+"PO-Revision-Date: 2013-09-21 15:34+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -570,6 +570,9 @@ msgstr "Úvodní video"
 msgid "Fill contact information"
 msgstr "Vložte své kontaktní údaje"
 
+msgid "Filled passwords has to match."
+msgstr "Vyplněná hesla se musí shodovat."
+
 msgid "Finish Editing Price"
 msgstr "Ukončit editaci"
 
@@ -768,11 +771,20 @@ msgstr "Název nové specifikace:"
 msgid "Name:"
 msgstr "Jméno:"
 
+msgid "New Password again:"
+msgstr "Nové heslo znovu:"
+
 msgid "New functions"
 msgstr "Nové funkce"
 
 msgid "New order"
 msgstr "Nová objednávka"
+
+msgid "New password has to have %d letters."
+msgstr "Nové heslo musí mít více než %d znaků."
+
+msgid "New password:"
+msgstr "Nové heslo:"
 
 msgid "News"
 msgstr "Zprávy"
@@ -899,6 +911,9 @@ msgstr "Prosím vyplňte"
 
 msgid "Please fill your email."
 msgstr "Prosím vložte svůj email."
+
+msgid "Please pay your order by clicking on button Buy Now"
+msgstr "Prosím zaplaťte svou objednávku kliknutím na tlačítko Buy Now."
 
 msgid "Please select Payment method"
 msgstr "Vyberte způsob platby"
@@ -1347,6 +1362,9 @@ msgstr "Můžete nahrát pouze JPG, PNG a GIF obrázky."
 msgid "You cannot edit product here!"
 msgstr "Pro úpravu přejděte do kategorie!"
 
+msgid "You have to add you password twice.."
+msgstr "Je nutné zadat nové heslo dvakrát."
+
 msgid "You have to upload .css valid file."
 msgstr "Je nutné nahrát správný .css soubor."
 
@@ -1437,6 +1455,6 @@ msgstr "osobní převzetí"
 msgid "was successfully placed!"
 msgstr "byla úspěšně přijata."
 
-msgid "Please pay your order by clicking on button Buy Now"
-msgstr "Prosím zaplaťte svou objednávku kliknutím na tlačítko Buy Now."
+msgid "Supported files are JPG, PNG a GIF"
+msgstr "Podporované soubory jsou JPG, PNG a GIF"
 

@@ -1274,6 +1274,7 @@ class SmartPanelPresenter extends BasePresenter {
         } else {
            
             $this->template->products = $this->productModel->loadCatalog('');
+            $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
             
         }
     }
