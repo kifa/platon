@@ -541,6 +541,7 @@ class OrderPresenter extends BasePresenter {
              $shopName = $this->shopModel->getShopInfo('Name');
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrderDone.latte');
             $template->registerFilter(new Nette\Latte\Engine);
+            $template->setTranslator($this->translator);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->orderId = $orderid;
             $template->mailOrder = $row->UsersID;
@@ -562,6 +563,7 @@ class OrderPresenter extends BasePresenter {
              $shopName = $this->shopModel->getShopInfo('Name');
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/adminOrderDone.latte');
             $template->registerFilter(new Nette\Latte\Engine);
+            $template->setTranslator($this->translator);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->orderId = $orderid;
             $template->customer = $row->Name;
@@ -573,6 +575,9 @@ class OrderPresenter extends BasePresenter {
             
             if($row->Note !== NULL) {
                 $template->note = $row->Note;
+            }
+            else {
+                $template->note = NULL;
             }
             
             $mailIT = new mailControl();
@@ -586,6 +591,7 @@ class OrderPresenter extends BasePresenter {
              $shopName = $this->shopModel->getShopInfo('Name');
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrderNote.latte');
             $template->registerFilter(new Nette\Latte\Engine);
+            $template->setTranslator($this->translator);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->orderId = $orderid;
             $template->adminMail = $adminMail;

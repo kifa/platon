@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Nová objednávka</title>
+    <title>{_'New order'}</title>
     <style>
     body {
        
@@ -10,13 +10,13 @@
     </style>
 </head>
 <body>
-    <p>Birne zdraví!</p>
+    <p>{_'Hello from'} BIRNE<sup>shop</sup>!</p>
 
-    <p>Váš eshop pro Vás zpracoval {$orderId} objednávku.</p>
-    <p>Celková cena: {$finalprice}</p>
-    <p>Zákazník: {$customer}</p>
+    <p>{_'Your eshop processed'} <strong>{_'order'} {_'#'}{$orderId}</strong> {_'for you'}.</p>
+    <p>{_'Total price:'} ${$finalprice}</p>
+    <p>{_'Customer:'} {$customer}</p>
     {if $note}
-    <p>Poznámka: {$note}</p>
+    <p>{_'Note:'} {$note}</p>
     {/if}
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Děkujeme za Vaši objednávku</title>
+    <title>{_'Thank you for your order'}</title>
     <style>
     body {
        
@@ -10,13 +10,16 @@
     </style>
 </head>
 <body>
-    <p>Dobrý den,</p>
+    <p>{_'Dear Sir'},</p>
 
-    <p>Vaše objednávka číslo <strong>{$orderId}</strong> byla úspěšně přijata!</p>
-    <p>Děkujeme! Vážíme si Vaší důvěry.</p>
+    <p>{_'Your order'} <strong>{_'#'}{$orderId}</strong> {_'was successfully placed!'}</p>
+    <p>{_'Thank you!'}</p>
     
-    <p>Stav Vaší objednávky můžete sledovat zde: <a href="{$link}">Sledování objednávky</a></p>
-    <p>Vaš tajný kód pro sledování objednávky: {$pass}</p>
+    <p>{_'Please, pay via PayPal'} <a href="{$link}">{_'clicking on Buy Now button'}</a>.</p>
+    <p>{_'Once we accepted your payment, you will receive confirmation mail.'}</p>
+    
+    <p>{_'Your order status can be followed:'} <a href="{$link}">{_'Tracking order'}</a></p>
+    <p>{_'Your secret code for tracking via web site:'} {$pass}</p>
 
 </body>
 </html>

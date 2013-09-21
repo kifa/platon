@@ -1,0 +1,23 @@
+{var $mail->from = $shopName . ' <' . $adminMail . '>' }
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Údaje k platbě</title>
+    <style>
+    body {
+       
+    }
+    </style>
+</head>
+<body>
+    <p>Dobrý den,</p>
+
+    <p>Vaše objednávka číslo <strong>{$orderId}</strong> je připravována k odeslání.</p>
+    <p>Protože jste vybrali platbu <strong>převodem</strong>, zasíláme Vám informace k platbě:</p>
+    <p>Číslo účtu: {$bankaccount}</p>
+    <p>Variabilní symbol: {$variable}</p>
+    <p>Částka: {$total|number},-</p>
+
+    <p>Stav Vaší objednávky můžete sledovat zde: <a href="{$link}">Sledování objednávky</a></p>
+</body>
+</html>

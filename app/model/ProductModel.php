@@ -373,6 +373,12 @@ AND photo.CoverPhoto = 1');
                 ->delete();
     }
     
+    public function deleteProducer($prodID){
+        return $this->getTable('producer')
+                ->where('ProducerID',$prodID)
+                ->delete();
+    }
+    
     public function hideProduct($id){
         $insert = array(
             'ProductStatusID' => 1
@@ -693,18 +699,19 @@ AND photo.CoverPhoto = 1');
                 ->fetchPairs('ProducerID');
     }
     
-    public function insertProducer($name){
+    public function insertProducer($name, $desc = NULL){
         $insert = array(
-            'ProducerName' => $name
+            'ProducerName' => $name,
+            'ProducerDescription' => $desc
         );
                 
         return $this->getTable('producer')
                 ->insert($insert);
     }
     
-    public function updateProducer($id,$name){
+    public function updateProducer($id, $value, $name){
         $update = array(
-            'ProducerName' => $name
+            $value => $name
         );
         
         return $this->getTable('producer')
@@ -903,7 +910,7 @@ AND photo.CoverPhoto = 1');
         return($pieces);
     }
     
-    public function insertVideo($product, $blog, $statictext, $name, $link){
+    public function insertVideo($product=NULL, $blog=NULL, $statictext=NULL, $name, $link){
         $insert = array(
             'ProductID' => $product,
             'BlogID' => $blog,
@@ -916,6 +923,12 @@ AND photo.CoverPhoto = 1');
                 ->insert($insert);
     }
     
+    public function deleteVideo($videoID) {
+        return $this->getTable('video')
+                ->where('VideoID', $videoID)
+                ->delete();
+    }
+
     public function loadVideos(){
         return $this->getTable('video')
                 ->fetchPairs('VideoID');

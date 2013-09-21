@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Stav objednávky</title>
+    <title>{_'Order status'}</title>
     <style>
     body {
        
@@ -10,10 +10,10 @@
     </style>
 </head>
 <body>
-    <p>Dobrý den,</p>
+    <p>{_'Dear Sir'},</p>
 
-    <p>Vaše objednávka číslo {$orderId} má nový stav!</p>
-    <p>Stav objednávky: {$status}</p>
-    <p>Celý postup můžete sledovat zde: <a href="{$link}">Sledování objednávky</a></p>
+    <p>{_'Your order'} #{$orderId} {_'moved to new status!'}</p>
+    <p>{_'Current status:'} {$status}</p>
+    <p>{_'Your order status can be followed:'} <a href="{$link}">{_'Tracking order'}</a></p>
 </body>
 </html>

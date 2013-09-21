@@ -86,7 +86,7 @@
 <div class="span12">
     <div class="span5">
           {if $photo}
-                     <img src="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" class="img-polaroid margin5" />
+                     <img src="{$basePath}/images/{$albumID}/l-{$photo->PhotoURL}" class="img-polaroid margin5" />
 
                 {else}
                    <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="height: 150px; width: auto;"/>
@@ -246,7 +246,7 @@
                     {foreach $album as $id => $photo}
                                 <li class="{if $photo->CoverPhoto}span4 {else} span4 {/if}">
                                     <a data-toggle="lightbox" href="#photo{$id}" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
-                                        <img style="" src="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}">
+                                        <img style="" src="{$basePath}/images/{$albumID}/l-{$photo->PhotoURL}" alt="{$product->ProductName}">
                                     </a>
                                     {if $user->isInRole('admin')}
                                        {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> {_'Set as COVER image'}</a> {/if}
@@ -262,7 +262,17 @@
 
                         </div>
                         <div class="tab-pane" id="vid">
-                            <iframe width="853" height="480" src="http://www.youtube.com/embed/qN3EXAFRxKQ?rel=0" frameborder="0" allowfullscreen></iframe>
+                           {if $user->isInRole('admin')}
+                                {control productVideoForm}
+                              {/if}
+                           {foreach $videos as $video}
+                            <div>
+                            {!$video->VideoLink}
+                            {if $user->isInRole('admin')}
+                            <a href="{plink deleteVideo! $video->VideoID}"><i class="icon-trash">{_'Delete Video'}</i></a>
+                            {/if}
+                            </div>
+                            {/foreach}
                         </div>
 
                         <div class="tab-pane" id="rew">

@@ -1,0 +1,22 @@
+{var $mail->from = $shopName . ' <' . $adminMail . '>' }
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Děkujeme za Vaši objednávku</title>
+    <style>
+    body {
+       
+    }
+    </style>
+</head>
+<body>
+    <p>Dobrý den,</p>
+
+    <p>Vaše objednávka číslo <strong>{$orderId}</strong> byla úspěšně přijata!</p>
+    <p>Děkujeme! Vážíme si Vaší důvěry.</p>
+    
+    <p>Stav Vaší objednávky můžete sledovat zde: <a href="{$link}">Sledování objednávky</a></p>
+    <p>Vaš tajný kód pro sledování objednávky: {$pass}</p>
+
+</body>
+</html>

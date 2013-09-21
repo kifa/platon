@@ -59,7 +59,7 @@ class ProductPresenter extends BasePresenter {
                 unlink($imgUrl);
             }
 
-            $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/150-' . $name;
+            $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/m-' . $name;
             if ($imgUrl) {
                 unlink($imgUrl);
             }
@@ -90,6 +90,7 @@ class ProductPresenter extends BasePresenter {
 
     public function actionProducts($catID, $slug) {
         $cat = $this->categoryModel->loadCategory($catID);
+
         if (!isset($cat->CategoryName)) {
             $text = $this->translator->translate('Category not available');
             $this->flashMessage($text, 'alert alert-warning');
@@ -225,17 +226,19 @@ class ProductPresenter extends BasePresenter {
                 );
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $return[1] . '/' . $form->values->image->name;
                 $form->values->image->move($imgUrl);
+                
+                 $sizes = $this->shopModel->loadPhotoSize();
 
                 $image = Image::fromFile($imgUrl);
-                $image->resize(null, 300, Image::SHRINK_ONLY);
+                $image->resize(null, $sizes['Large']->Value, Image::SHRINK_ONLY);
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $return[1] . '/300-' . $form->values->image->name;
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $return[1] . '/l-' . $form->values->image->name;
                 $image->save($imgUrl);
 
                 $image = Image::fromFile($imgUrl);
-                $image->resize(null, 50, Image::SHRINK_ONLY);
+                $image->resize(null, $sizes['Small']->Value, Image::SHRINK_ONLY);
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $return[1] . '/50-' . $form->values->image->name;
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $return[1] . '/s-' . $form->values->image->name;
                 $image->save($imgUrl);
             }
             
@@ -295,6 +298,8 @@ class ProductPresenter extends BasePresenter {
                     $form->values->price);
 
             if ($form->values->image->isOK()) {
+                
+                $sizes = $this->shopModel->loadPhotoSize();
 
                 $albumID = $this->insertPhotoAlbum($form->values->name, '', $return, null);
                 
@@ -305,15 +310,15 @@ class ProductPresenter extends BasePresenter {
                 $form->values->image->move($imgUrl);
 
                 $image = Image::fromFile($imgUrl);
-                $image->resize(null, 300, Image::SHRINK_ONLY);
+                $image->resize(null, $sizes['Large']->Value, Image::SHRINK_ONLY);
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/300-' . $form->values->image->name;
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/l-' . $form->values->image->name;
                 $image->save($imgUrl);
 
                 $image = Image::fromFile($imgUrl);
-                $image->resize(null, 50, Image::SHRINK_ONLY);
+                $image->resize(null, $sizes['Small']->Value, Image::SHRINK_ONLY);
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/50-' . $form->values->image->name;
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/s-' . $form->values->image->name;
                 $image->save($imgUrl);
             }
             
@@ -353,8 +358,14 @@ class ProductPresenter extends BasePresenter {
     }
     
 
-    
-    public function handleSetCatalogLayout($catID, $layoutID) {
+    public function handleDeleteVideo($videoID) {
+         if ($this->getUser()->isInRole('admin')) {
+            $this->productModel->deleteVideo($videoID);
+            $this->redirect('this');
+        }
+    }
+
+        public function handleSetCatalogLayout($catID, $layoutID) {
         if ($this->getUser()->isInRole('admin')) {
             $this->shopModel->setShopInfo('CatalogLayout', $layoutID);
             $this->redirect('this', $catID);
@@ -518,40 +529,40 @@ class ProductPresenter extends BasePresenter {
             } else {
 
                 try{
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/' . $row->PhotoURL;
-                if ($imgUrl) {
-                    unlink($imgUrl);
-                }
+                    $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/' . $row->PhotoURL;
+                    if (file_exists($imgUrl)) {
+                        unlink($imgUrl); 
+                    }
 
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/50-' . $row->PhotoURL;
-                if ($imgUrl) {
-                    unlink($imgUrl);
-                }
+                    $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/s-' . $row->PhotoURL;
+                    if (file_exists($imgUrl)) {
+                        unlink($imgUrl); 
+                    }
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/150-' . $row->PhotoURL;
-                if ($imgUrl) {
-                    unlink($imgUrl);
-                }
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/300-' . $row->PhotoURL;
-                if ($imgUrl) {
-                    unlink($imgUrl);
-                }
+                    $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/m-' . $row->PhotoURL;
+                    if (file_exists($imgUrl)) {
+                        unlink($imgUrl); 
+                    }
 
-                
 
-                $this->productModel->deletePhoto($photo);
+                    $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $row->PhotoAlbumID . '/l-' . $row->PhotoURL;
+                    if (file_exists($imgUrl)) {
+                        unlink($imgUrl); 
+                    }
+
                 }
                 catch (Exception $e) {
                     \Nette\Diagnostics\Debugger::log($e);
                 }
                 
+                $this->productModel->deletePhoto($photo);
                 
-                $photo = $this->translator->translate('Photo ');
+                $pht = $this->translator->translate('Photo ');
                 $text = $this->translator->translate(' was sucessfully deleted.');
-                $e = $photo . $row->PhotoName . $text;
-                $this->flashMessage($e, 'alert alert-success');
+                $message = $pht . $row->PhotoName . $text;
+                $this->flashMessage($message, 'alert alert-success');
             }
 
             $this->redirect('this');
@@ -639,6 +650,7 @@ class ProductPresenter extends BasePresenter {
         }
 
         $this->template->slider = NULL;
+        
         $this->template->category = $this->categoryModel->loadCategory($catID);
     }
 
@@ -678,6 +690,9 @@ class ProductPresenter extends BasePresenter {
                 $seo->setDefaults(array('id' => $id, 'name' => $row['ProductSeoName']));
                 $addForm = $this['addParamForm'];
                 $addForm->setDefaults(array('productID' => $id));
+                
+                $videoForm = $this['productVideoForm'];
+                $videoForm->setDefaults(array('id' => $id, 'name' => $row['ProductSeoName']));
                
                 
                 $addVariant = $this['addProductVariantForm'];
@@ -762,27 +777,27 @@ class ProductPresenter extends BasePresenter {
                     );
                 }
                 
-                
+                $sizes = $this->shopModel->loadPhotoSize();
                 
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/' . $form->values->image->name;
                 $form->values->image->move($imgUrl);
 
                 $image = Image::fromFile($imgUrl);
-                $image->resize(null, 300, Image::SHRINK_ONLY);
+                $image->resize(null, $sizes['Large']->Value, Image::SHRINK_ONLY);
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/300-' . $form->values->image->name;
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/l-' . $form->values->image->name;
                 $image->save($imgUrl);
                 
                 $image = Image::fromFile($imgUrl);
-                $image->resize(null, 150, Image::SHRINK_ONLY);
+                $image->resize(null, $sizes['Medium']->Value, Image::SHRINK_ONLY);
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/150-' . $form->values->image->name;
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/m-' . $form->values->image->name;
                 $image->save($imgUrl);
 
                 $image = Image::fromFile($imgUrl);
-                $image->resize(null, 50, Image::SHRINK_ONLY);
+                $image->resize(null, $sizes['Small']->Value, Image::SHRINK_ONLY);
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/50-' . $form->values->image->name;
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/s-' . $form->values->image->name;
                 $image->save($imgUrl);
 
                 $message = $this->translator->translate(' was sucessfully uploaded');
@@ -802,6 +817,31 @@ class ProductPresenter extends BasePresenter {
         }
     }
 
+    protected function createComponentProductVideoForm() {
+        if ($this->getUser()->isInRole('admin')) {
+            $video = new Nette\Application\UI\Form;
+            $video->setTranslator($this->translator);
+            $video->addHidden('id');
+            $video->addHidden('name');
+            $video->addTextArea('videocode', 'Video Code')
+                    ->setRequired()
+                    ->setAttribute('class', 'form-control');
+            $video->addSubmit('save', 'Add Product Video')
+                    ->setAttribute('class', 'btn btn-primary form-control upl')
+                    ->setAttribute('data-loading-text', 'Saving...');
+            $video->onSuccess[] = $this->productVideoFormSubmitted;
+            return $video;
+        }
+    }
+    
+    public function productVideoFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            $this->productModel->insertVideo($form->values->id, NULL, NULL, $form->values->name, $form->values->videocode);
+            
+            $this->redirect('this');
+        }
+    }
+    
     
     protected function createComponentProductSeoForm() {
         if ($this->getUser()->isInRole('admin')) {
@@ -875,13 +915,15 @@ class ProductPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             if ($form->values->image->isOK()) {
 
+                 $sizes = $this->shopModel->loadPhotoSize();
+                 
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/' . $form->values->image->name;
                 $form->values->image->move($imgUrl);
 
                 $image = Image::fromFile($imgUrl);
-                $image->resize(null, 150, Image::SHRINK_ONLY);
+                $image->resize(null, $sizes['Medium']->Value, Image::SHRINK_ONLY);
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/150-' . $form->values->image->name;
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/m-' . $form->values->image->name;
                 $image->save($imgUrl);
 
                 $image = Image::fromFile($imgUrl);
@@ -1119,6 +1161,7 @@ class ProductPresenter extends BasePresenter {
             $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
             $this->template->producers = $this->productModel->loadProducers();
              $this->template->adminAlbum = $this->productModel->loadPhotoAlbum($id);
+             $this->template->videos = $this->productModel->loadProductVideo($id);
        
             }
         

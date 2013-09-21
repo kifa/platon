@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Údaje k platbě</title>
+    <title>{_'Payment info'}</title>
     <style>
     body {
        
@@ -10,14 +10,14 @@
     </style>
 </head>
 <body>
-    <p>Dobrý den,</p>
+    <p>{_'Dear Sir'},</p>
 
-    <p>Vaše objednávka číslo <strong>{$orderId}</strong> je připravována k odeslání.</p>
-    <p>Protože jste vybrali platbu <strong>převodem</strong>, zasíláme Vám informace k platbě:</p>
-    <p>Číslo účtu: {$bankaccount}</p>
-    <p>Variabilní symbol: {$variable}</p>
-    <p>Částka: {$total|number},-</p>
+    <p>{_'Your order'} <strong>{_'#'} {$orderId}</strong> {_'is ready to be sent'}.</p>
+    <p>{_'Because you have choosen to pay via'} <strong>{_'bankwire'}</strong>{_', you will find payment info bellow:'}</p>
+    <p>{_'Bank account:'} {$bankaccount}</p>
+    <p>{_'Variable symbol:'} {$variable}</p>
+    <p>{_'Grand Total:'} {$total|number},-</p>
 
-    <p>Stav Vaší objednávky můžete sledovat zde: <a href="{$link}">Sledování objednávky</a></p>
+    <p>{_'Your order status can be followed:'} <a href="{$link}">{_'Tracking order'}</a></p>
 </body>
 </html>

@@ -48,7 +48,14 @@ class ShopModel extends Repository {
         }
     }
     
-     public function getShopSettings()
+    public function loadPhotoSize() {
+        $param = array('Small', 'Medium', 'Large');
+         return $this->getTable('settings')->select('SettingName, Value')->where('SettingName', $param)
+                    ->fetchPairs('SettingName');
+    }
+
+
+    public function getShopSettings()
     {
             return $this->getTable('settings')->select('SettingName, Value')
                     ->fetchPairs('SettingName');

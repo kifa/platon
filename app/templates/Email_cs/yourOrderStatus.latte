@@ -1,0 +1,19 @@
+{var $mail->from = $shopName . ' <' . $adminMail . '>' }
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Stav objednávky</title>
+    <style>
+    body {
+       
+    }
+    </style>
+</head>
+<body>
+    <p>Dobrý den,</p>
+
+    <p>Vaše objednávka číslo {$orderId} má nový stav!</p>
+    <p>Stav objednávky: {$status}</p>
+    <p>Celý postup můžete sledovat zde: <a href="{$link}">Sledování objednávky</a></p>
+</body>
+</html>

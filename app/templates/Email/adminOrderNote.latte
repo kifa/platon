@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Zpráva k objednávce {$orderId}</title>
+    <title>{_'New note to order'} {$orderId}</title>
     <style>
     body {
        
@@ -10,9 +10,9 @@
     </style>
 </head>
 <body>
-    <p>Dobrý den,</p>
+    <p>{_'Hello from'} BIRNE<sup>shop</sup>,</p>
 
-    <p>Máme pro Vás zprávu k objednávce číslo {$orderId} od zákazníka {$customer}:</p>
+    <p>{_'You have new message to'} <strong>{_'order'} {_'#'}{$orderId}</strong> {_'from customer'} {$customer}:</p>
     <p>{$note}</p>
 </body>
 </html>

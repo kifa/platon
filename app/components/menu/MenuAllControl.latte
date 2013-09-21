@@ -1,7 +1,7 @@
 {foreach $category as $catID => $cat}
  {if !$cat->HigherCategoryID}
   {if $cat->CategoryStatus != 4}
-   <li class="{ifCurrent Product:products $catID, $cat->CategoryName}active{/ifCurrent}{if $catID == $ct} active{/if}"><a href="{plink product:products $catID, $cat->CategoryName}">
+   <li class="{ifCurrent Product:products $catID, $cat->CategorySeoName}active{/ifCurrent}{if $catID == $ct} active{/if}"><a href="{plink product:products $catID, $cat->CategorySeoName}">
      {if $cat->CategoryStatus == 0} <i class="icon-eye-close"></i> {/if}
           {$cat->CategoryName}</a>
    </li>

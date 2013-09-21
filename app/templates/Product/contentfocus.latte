@@ -100,7 +100,7 @@
 <div class="span12">
     <div class="span5">
          {if $photo}
-                     <img src="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" class="img-polaroid margin5" />
+                     <img src="{$basePath}/images/{$albumID}/l-{$photo->PhotoURL}" class="img-polaroid margin5" />
 
                 {else}
                    <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="span2" style="height: 150px; width: auto;"/>
@@ -259,7 +259,7 @@
                 <ul class="thumbnails span12">
                  {foreach $album as $id => $photo}
                                 <li class="span10 thumbnail">
-                                        <img style="" src="{$basePath}/images/{$albumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}">
+                                        <img style="" src="{$basePath}/images/{$albumID}/l-{$photo->PhotoURL}" alt="{$product->ProductName}">
                                     {if $user->isInRole('admin')}
                                        {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> {_'Set as COVER image'}</a> {/if}
                                     <a href="{link deletePhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-trash" ></i> {_'Delete image'}</a>
@@ -271,7 +271,7 @@
                     {*foreach $album as $id => $photo}
                                 <li class="span3">
                                     <a data-toggle="lightbox" href="#photo{$id}" class="thumbnail imgLiquid" style="height: 90px; width: 90px;">
-                                        <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/300-{$photo->PhotoURL}" alt="{$product->ProductName}">
+                                        <img style="" src="{$basePath}/images/{$product->PhotoAlbumID}/l-{$photo->PhotoURL}" alt="{$product->ProductName}">
                                     </a>
                                     {if $user->isInRole('admin')}
                                        {if !$photo->CoverPhoto} <a href="{link coverPhoto! $product->ProductID, $photo->PhotoID}"><i class="icon-star" ></i> Set as COVER image</a> {/if}

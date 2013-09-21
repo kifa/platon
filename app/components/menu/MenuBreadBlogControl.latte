@@ -1,15 +1,15 @@
 
 <ul class="breadcrumb">
-  <li><a href="{$basePath}">{_"Home"}</a> <span class="divider">/</span></li>
+  <li><a href="{$basePath}">{_"Home"}</a> <span class="divider"></span></li>
   {foreach $category as $catID => $cat}
   
   
-  <li><a href="{plink Blog:category NULL}">{_'Blog'}</a> <span class="divider">/</span></li>
+  <li><a href="{plink Blog:category NULL}">{_'Blog'}</a> <span class="divider"></span></li>
 
   {ifCurrent Blog:category $catID} 
   <li class="active">{$cat}</a></li>
   {else}
-  <li><a href="{plink Blog:category $catID}">{$cat}</a> <span class="divider">/</span></li>
+  <li><a href="{plink Blog:category $catID}">{$cat}</a> <span class="divider"></span></li>
   {/ifCurrent}
   {/foreach}
   {if $blog}

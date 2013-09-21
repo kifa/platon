@@ -135,17 +135,37 @@ class SmartPanelPresenter extends BasePresenter {
     
     }
     
+    protected function createComponentAddProducerForm() {
+        $prod = new Nette\Application\UI\Form;
+        $prod->setTranslator($this->translator);
+        $prod->addText('name', 'Brand name')
+                ->setRequired()
+                ->setAttribute('class', 'form-control');
+        $prod->addTextArea('desc', 'Brand description')
+                ->setAttribute('class', 'form-control');
+        $prod->addSubmit('save', 'Add Brand')
+                ->setAttribute('class', 'upl form-control btn btn-primary')
+                ->setAttribute('data-loading-text', 'Adding...');
+        $prod->onSuccess[] = $this->addProducerFormSubmitted;
+        return $prod;
+    }
 
-    protected function createComponentPasswordForm() {
+    public function addProducerFormSubmitted($form) {
+        
+        $this->productModel->insertProducer($form->values->name, $form->values->desc);
+        $this->redirect('this');
+    }
+
+        protected function createComponentPasswordForm() {
         $form = new Nette\Application\UI\Form;
         $form->setTranslator($this->translator);
         $form->addHidden('login', $this->getUser()->getIdentity()->id);
-        $form->addPassword('newPassword', 'Nové heslo:', 30)
-                ->addRule(Form::MIN_LENGTH, 'Nové heslo musí mít alespoň %d znaků.', 6);
-        $form->addPassword('confirmPassword', 'Potvrzení hesla:', 30)
-                ->addRule(Form::FILLED, 'Nové heslo je nutné zadat ještě jednou pro potvrzení.')
-                ->addRule(Form::EQUAL, 'Zadná hesla se musejí shodovat.', $form['newPassword']);
-        $form->addSubmit('set', 'Změnit heslo');
+        $form->addPassword('newPassword', 'New password:', 30)
+                ->addRule(Form::MIN_LENGTH, 'New password has to have %d letters.', 6);
+        $form->addPassword('confirmPassword', 'New Password again:', 30)
+                ->addRule(Form::FILLED, 'You have to add you password twice..')
+                ->addRule(Form::EQUAL, 'Filled passwords has to match.', $form['newPassword']);
+        $form->addSubmit('set', 'Change password');
         $form->onSuccess[] = $this->passwordFormSubmitted;
         return $form;
     }
@@ -158,26 +178,27 @@ class SmartPanelPresenter extends BasePresenter {
             // $this->authenticator->authenticate(array($user->getIdentity()->username, $values->oldPassword));
             $this->userModel->setPassword($values->login, $values->newPassword);
             $ico = HTML::el('i')->class('icon-ok-sign left');
-            $message = HTML::el('span', ' Your password was successfully changed.');
+            $text = $this->translator->translate('Your password was sucessfully changed.');
+            $message = HTML::el('span', ' '.$text);
             $message->insert(0, $ico);
             $this->flashMessage($message, 'alert alert-success');
             $this->redirect('SmartPanel:default');
         } catch (NS\AuthenticationException $e) {
-            $form->addError('Zadané heslo není správné.');
+            $form->addError('Entered password is invalid.');
         }
     }
 
     protected function createComponentNewUserForm() {
         $form = new Form();
         $form->setTranslator($this->translator);
-        $form->addText('username', 'Uživatelské jméno:', 10);
-        $form->addText('name', 'Vaše jméno', 30);
-        $form->addPassword('password', 'Heslo:', 30)
+        $form->addText('username', 'User name:', 10);
+        $form->addText('name', 'Your name', 30);
+        $form->addPassword('password', 'Password:', 30)
                 ->addRule(Form::MIN_LENGTH, 'Nové heslo musí mí alespoň %d znaků', 6);
         $form->addPassword('confirmPassword', 'Heslo pro kontrolu', 30)
                 ->addRule(Form::FILLED, 'Je nutné vyplnit!')
                 ->addRule(Form::EQUAL, 'Zadaná hesla se musí shodovat', $form['password']);
-        $form->addSubmit('add', 'Zaregistrovat');
+        $form->addSubmit('add', 'Register');
         $form->onSuccess[] = $this->newUserFormSubmitted;
         return $form;
     }
@@ -192,10 +213,10 @@ class SmartPanelPresenter extends BasePresenter {
         $value = $form->getValues();
         try {
             $this->users->userAdd($value->name, $value->username, $value->password);
-            $this->flashMessage('Jste zaregistrováni. Můžete se přihlásit', 'success');
+            $this->flashMessage('You are registered. Now you can login.', 'alert alert-success');
             $this->redirect('Sign:in');
         } catch (NS\AuthenticationException $e) {
-            $form->addError('Prostě nám to nejde');
+            $form->addError('Something is wrong. We apologise.');
         }
     }
 
@@ -211,7 +232,8 @@ class SmartPanelPresenter extends BasePresenter {
         
         $row = $this->orderModel->loadOrder($orderid);
         if (!$row) {
-            $message = Html::el('span', ' This order wasnt placed, yet. Sorry.');
+            $text = $this->translator->translate('This order wasnt placed, yet. We are sorry.');
+            $message = Html::el('span', ' '.$text);
             $e = Html::el('i')->class('icon-warning-sign left');
             $message->insert(0, $e);
             $this->flashMessage($message, 'alert alert-warning');
@@ -247,7 +269,8 @@ class SmartPanelPresenter extends BasePresenter {
         $template->order = $this->orderModel->loadOrder($orderid);
         $template->address = $this->orderModel->loadOrderAddress($orderid);
         $template->productsInOrder = $this->productInOrder;
-        $template->companyName = $this->shopModel->getShopInfo('Name');
+        $name = $this->shopModel->getShopInfo('Name');
+        $template->companyName = $name;
         $template->shopLogo = $this->shopModel->getShopInfo('Logo');
         $template->companyPhone = $this->shopModel->getShopInfo('ContactPhone');
         $template->companyMail = $this->shopModel->getShopInfo('ContactMail');
@@ -270,7 +293,7 @@ class SmartPanelPresenter extends BasePresenter {
         // optional
         $pdf->documentTitle = 'invoice-' . $prefix . '' . $orderid; // creates filename 2012-06-30-my-super-title.pdf
         $pdf->pageFormat = "A4"; // wide format
-        $pdf->getMPDF()->setFooter("|© www.mysite.com|"); // footer
+        $pdf->getMPDF()->setFooter("|© ". $name . " |"); // footer
         
         //$pdf->save($this->context->parameters['wwwDir'] . "/generated/"); // as a filename $this->documentTitle will be used
         
@@ -288,7 +311,8 @@ class SmartPanelPresenter extends BasePresenter {
         $this->orderModel->removeOrderProducts($orderid, $product);
         $this->productModel->updateProduct($product, 'PiecesAvailable', $amount);
         
-        $message = Html::el('span', ' Product was sucessfully removed.');
+        $text = $this->translator->translate('Product was sucessfully removed.');
+        $message = Html::el('span', ' '.$text);
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
             $this->flashMessage($message, 'alert alert-success');
@@ -454,7 +478,8 @@ class SmartPanelPresenter extends BasePresenter {
             
             $this->orderModel->updateOrder($form->values->orderID, $form->values->shipper, $form->values->payment);
             
-            $message = Html::el('span', ' Order was sucessfully updated!');
+            $text = $this->translator->translate('Order was sucessfully updated!');
+            $message = Html::el('span', ' '.$text);
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
             $this->flashMessage($message, 'alert alert-success');
@@ -491,7 +516,8 @@ class SmartPanelPresenter extends BasePresenter {
             
             $this->orderModel->updateOrderAddress($form->values->orderID, $form->values->street, $form->values->zipcode, $form->values->city);
             
-            $message = Html::el('span', ' Order address was sucessfully updated!');
+            $text = $this->translator->translate('Order was sucessfully updated!');
+            $message = Html::el('span', ' '.$text);
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
             $this->flashMessage($message, 'alert alert-success');
@@ -540,8 +566,9 @@ class SmartPanelPresenter extends BasePresenter {
                      $this->orderRow['TotalProducts']);
              
             $this->productModel->decreaseProduct($form->values->product, 1); 
-             
-            $message = Html::el('span', ' Product was sucessfully added!');
+            
+             $text = $this->translator->translate('Product was sucessfully added!');
+            $message = Html::el('span', ' '.$text);
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
             $this->flashMessage($message, 'alert alert-success');
@@ -581,7 +608,8 @@ class SmartPanelPresenter extends BasePresenter {
                    \Nette\Diagnostics\Debugger::log($e);
             }
              
-            $message = Html::el('span', ' Note was sucessfully added!');
+            $text = $this->translator->translate('Note was sucessfully added!');
+            $message = Html::el('span', ' '.$text);
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
             $this->flashMessage($message, 'alert alert-success');
@@ -781,7 +809,9 @@ class SmartPanelPresenter extends BasePresenter {
          
             //$this->orderModel->deleteDelivery($shipid);
            $this->orderModel->updateDeliveryStatus($shipid, 3);
-            $message = Html::el('span', ' Shipping was archived.');
+           
+           $text = $this->translator->translate('Shipping was archived.');
+            $message = Html::el('span', ' '.$text);
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, ' ');
             $message->insert(0, $e);
@@ -837,7 +867,8 @@ class SmartPanelPresenter extends BasePresenter {
                                                 1);
             
             $ico = HTML::el('i')->class('icon-ok-sign left');
-            $message = HTML::el('span', ' was added sucessfully to your shipping method.');
+            $text = $this->translator->translate('was added sucessfully to your shipping method.');
+            $message = HTML::el('span', ' '.$text);
             $message->insert(0, ' ' . $form->values->newShip);
             $message->insert(0, $ico);
             $this->flashMessage($message, 'alert alert-success');
@@ -877,7 +908,8 @@ class SmartPanelPresenter extends BasePresenter {
         $this->orderModel->updateDelivery($form->values->deliveryID, $form->values->name, $form->values->desc, $form->values->price, $form->values->free);
           
         $ico = HTML::el('i')->class('icon-ok-sign left');
-            $message = HTML::el('span', ' was added sucessfully updates.');
+        $text = $this->translator->translate('was sucessfully updated.');
+            $message = HTML::el('span', ' '.$text);
             $message->insert(0, ' ' . $form->values->name);
             $message->insert(0, $ico);
             $this->flashMessage($message, 'alert alert-success');
@@ -926,7 +958,8 @@ class SmartPanelPresenter extends BasePresenter {
        if ($this->getUser()->isInRole('admin')) {
             
             $row = $this->orderModel->deletePayment($id);
-            $message = Html::el('span', ' was removed.');
+            $text = $this->translator->translate('was removed.');
+            $message = Html::el('span', ' '.$text);
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, ' '. $row->PaymentName);
             $message->insert(0, $e);
@@ -937,6 +970,29 @@ class SmartPanelPresenter extends BasePresenter {
                 $this->invalidateControl('payment');
                 $this->invalidateControl('content');
                 
+            }
+            else {
+            $this->redirect("this");
+            }
+       
+        }
+    }
+    
+    public function handleRemoveProd($prodID) {
+       if ($this->getUser()->isInRole('admin')) {
+            
+            $row = $this->productModel->deleteProducer($prodID);
+            $text = $this->translator->translate('was removed.');
+            $message = Html::el('span', ' ' . $text . '.');
+            $e = Html::el('i')->class('icon-ok-sign left');
+            $message->insert(0, ' '. $row['ProducerName']);
+            $message->insert(0, $e);
+            $this->flashMessage($message, 'alert alert-success');
+            
+            if($this->isAjax()) {
+                $this->invalidateControl('prod');
+                $this->invalidateControl('content');
+                $this->invalidateControl('script');
             }
             else {
             $this->redirect("this");
@@ -977,8 +1033,9 @@ class SmartPanelPresenter extends BasePresenter {
                                               1
                                               );
             
+            $text = $this->translator->translate('was added sucessfully to your payment method.');
             $ico = HTML::el('i')->class('icon-ok-sign left');
-            $message = HTML::el('span', ' was added sucessfully to your payment method.');
+            $message = HTML::el('span', ' '.$text);
             $message->insert(0, ' ' . $form->values->newPay);
             $message->insert(0, $ico);
             $this->flashMessage($message, 'alert alert-success');
@@ -1012,7 +1069,8 @@ class SmartPanelPresenter extends BasePresenter {
         $this->orderModel->updatePayment($form->values->paymentID, $form->values->name, $form->values->price);
           
         $ico = HTML::el('i')->class('icon-ok-sign left');
-            $message = HTML::el('span', ' was added sucessfully updates.');
+       $text = $this->translator->translate('was sucessfully updated.');
+            $message = HTML::el('span', ' ' . $text);
             $message->insert(0, ' ' . $form->values->name);
             $message->insert(0, $ico);
             $this->flashMessage($message, 'alert alert-success');
@@ -1030,8 +1088,9 @@ class SmartPanelPresenter extends BasePresenter {
                $content = $_POST['value'];
                $this->orderModel->updatePaymentName($paymentID, $content);
                
+               $text = $this->translator->translate('was sucessfully updated.');
                $ico = HTML::el('i')->class('icon-ok-sign left');
-               $message = HTML::el('span', ' was added sucessfully updates.');
+               $message = HTML::el('span', ' '.$text);
                $message->insert(0, ' ' . $content);
                $message->insert(0, $ico);
                $this->flashMessage($message, 'alert alert-success');
@@ -1061,9 +1120,9 @@ class SmartPanelPresenter extends BasePresenter {
                $content = $_POST['value'];
                
                $this->orderModel->updatePaymentPrice($paymentID, $content);
-               
+               $text = $this->translator->translate('was sucessfully updated.');
                 $ico = HTML::el('i')->class('icon-ok-sign left');
-               $message = HTML::el('span', ' was added sucessfully updates.');
+               $message = HTML::el('span', ' '.$text);
                $message->insert(0, ' ' . $name);
                $message->insert(0, $ico);
                $this->flashMessage($message, 'alert alert-success');
@@ -1100,6 +1159,62 @@ class SmartPanelPresenter extends BasePresenter {
            }
         }
     }
+    
+    public function handleEditProducerName($prodID) {
+         if ($this->getUser()->isInRole('admin')) {
+    
+            if($this->isAjax()){
+               //$name = $_POST['id'];
+               $content = $_POST['value'];
+               $this->productModel->updateProducer($prodID,'ProducerName', $content);
+               $text = $this->translator->translate('was sucessfully updated.');
+               $ico = HTML::el('i')->class('icon-ok-sign left');
+               $message = HTML::el('span', ' '.$text);
+               $message->insert(0, ' ' . $content);
+               $message->insert(0, $ico);
+               $this->flashMessage($message, 'alert alert-success');
+               
+           }
+           if(!$this->isControlInvalid('prodName-'.$prodID)){
+               $this->payload->edit = $content;
+               $this->sendPayload();
+               $this->invalidateControl('prodName-'.$prodID);
+   
+           }
+            else {
+                 $this->redirect('this');
+            }
+          }
+    }
+    
+    public function handleEditProducerDescription($prodID) {
+         if ($this->getUser()->isInRole('admin')) {
+    
+            if($this->isAjax()){
+               //$name = $_POST['id'];
+               $content = $_POST['value'];
+               $this->productModel->updateProducer($prodID,'ProducerDescription', $content);
+               $text = $this->translator->translate('was sucessfully updated.');
+               $ico = HTML::el('i')->class('icon-ok-sign left');
+               $message = HTML::el('span', ' '.$text);
+               $message->insert(0, ' ' . $content);
+               $message->insert(0, $ico);
+               $this->flashMessage($message, 'alert alert-success');
+               
+           }
+           if(!$this->isControlInvalid('prodDesc-'.$prodID)){
+               $this->payload->edit = $content;
+               $this->sendPayload();
+               $this->invalidateControl('prodDesc-'.$prodID);
+   
+           }
+            else {
+                 $this->redirect('this');
+            }
+          }
+    }
+    
+    
     /*
      * Render Payment
      */
@@ -1115,6 +1230,11 @@ class SmartPanelPresenter extends BasePresenter {
             };
             
         $this->template->status = $status;
+    }
+    
+    public function renderProducers() {
+        
+        $this->template->prods = $this->productModel->loadProducers();
     }
 
     /*
@@ -1165,33 +1285,36 @@ class SmartPanelPresenter extends BasePresenter {
     
     public function handleRegenerateThumb() {
         foreach ($this->productModel->loadPhotoAlbum('') as $id => $product) {
+            $sizes = $this->shopModel->loadPhotoSize();
+            
             if ($product->PhotoAlbumID) {
                 foreach ($this->productModel->loadPhotoAlbum($product->ProductID) as $id => $photo) {      
                     $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $product->PhotoAlbumID . '/';
 
+                     
                     $image = Image::fromFile($imgUrl . $photo->PhotoURL);
-                    $image->resize(null, 300, Image::SHRINK_ONLY);
+                    $image->resize(null, $sizes['Large']->Value, Image::SHRINK_ONLY);
 
-                    $imgUrl300 = $imgUrl . '300-' . $photo->PhotoURL;
+                    $imgUrl300 = $imgUrl . 'l-' . $photo->PhotoURL;
                     $image->save($imgUrl300);
                     
                     $image = Image::fromFile($imgUrl . $photo->PhotoURL);
-                    $image->resize(null, 150, Image::SHRINK_ONLY);
+                    $image->resize(null, $sizes['Medium']->Value, Image::SHRINK_ONLY);
 
-                    $imgUrl150 = $imgUrl . '150-' . $photo->PhotoURL;
+                    $imgUrl150 = $imgUrl . 'm-' . $photo->PhotoURL;
                     $image->save($imgUrl150);
 
                     $image = Image::fromFile($imgUrl . $photo->PhotoURL);
-                    $image->resize(null, 50, Image::SHRINK_ONLY);
+                    $image->resize(null, $sizes['Small']->Value, Image::SHRINK_ONLY);
 
-                    $imgUrl50 = $imgUrl . '50-' . $photo->PhotoURL;
+                    $imgUrl50 = $imgUrl . 's-' . $photo->PhotoURL;
                     $image->save($imgUrl50);
              
                 }
             }
         }
-        
-        $this->flashMessage('Thumbs sucessfully regenerated.', 'alert alert-success');
+        $text = $this->translator->translate('Thumbs sucessfully regenerated.');
+        $this->flashMessage($text, 'alert alert-success');
         $this->presenter->redirect("this");
     }
 
@@ -1222,7 +1345,7 @@ class SmartPanelPresenter extends BasePresenter {
         $addLogo = new Nette\Application\UI\Form;
         $addLogo->setTranslator($this->translator);
         $addLogo->addUpload('logo', 'Select your logo')
-                 ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
+                 ->addRule(FORM::IMAGE, 'Supported files are JPG, PNG a GIF')
                  ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024)
                 ->setAttribute('class', 'form-control');
         $addLogo->addSubmit('upload', 'Upload')
@@ -1280,13 +1403,15 @@ class SmartPanelPresenter extends BasePresenter {
             $template->category = $this->categoryModel->loadCategory("");
 
 
+            $text = $this->translator->translate('Sitemap sucessfully generated.');
             $template->save($this->context->parameters['wwwDir'] . '/sitemap.xml');
-            $this->flashMessage('Sitemap sucessfully generated.', 'alert alert-success');
+            $this->flashMessage($text, 'alert alert-success');
         }
         catch(Exception $e) {
             
                    \Nette\Diagnostics\Debugger::log($e);
-                   $this->flashMessage('Sitemap crashed. I´m so sorry.', 'alert alert-danger');
+                   $text = $this->translator->translate('Sitemap crashed. I´m so sorry.');
+                   $this->flashMessage($text, 'alert alert-danger');
 
         }
         $this->redirect('this');
@@ -1337,6 +1462,7 @@ class SmartPanelPresenter extends BasePresenter {
 
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrderStatus.latte');
             $template->registerFilter(new Nette\Latte\Engine);
+            $template->setTranslator($this->translator);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->orderId = $orderid;
             $template->mailOrder = $row->UsersID;
@@ -1347,9 +1473,9 @@ class SmartPanelPresenter extends BasePresenter {
             $args = array($row->OrderID, $hash);
             $template->link = $this->presenter->link('//Order:orderDone', $args);
             
-            
+            $sub = $this->translator->translate('Your order has new status');
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($row->UsersID, 'Your order has new status', $template, $adminMail);
+            $mailIT->sendSuperMail($row->UsersID, $sub, $template, $adminMail);
     }
 
     protected function sendNoteMail($orderid, $note) {
@@ -1359,14 +1485,16 @@ class SmartPanelPresenter extends BasePresenter {
              $shopName = $this->shopModel->getShopInfo('Name');
             $template = new Nette\Templating\FileTemplate($this->context->parameters['appDir'] . '/templates/Email/yourOrderNote.latte');
             $template->registerFilter(new Nette\Latte\Engine);
+            $template->setTranslator($this->translator);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->orderId = $orderid;
             $template->adminMail = $adminMail;
             $template->shopName = $shopName;
             $template->note = $note;
             
+            $sub = $this->translator->translate('Message about your order');
             $mailIT = new mailControl();
-            $mailIT->sendSuperMail($row->UsersID, 'Message about your order', $template, $adminMail);
+            $mailIT->sendSuperMail($row->UsersID, $sub, $template, $adminMail);
     }
 }
 
