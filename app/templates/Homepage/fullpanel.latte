@@ -69,14 +69,19 @@
 </div>
 
 <div class="col-md-4">    
-    {if $bannerone->BannerLink == NULL}
-        <img src="{$basePath}/images/banner/{$bannerone->BannerValue}" alt="{$shopName}" class="img-responsive">
-        {else}
-            <a href="{$bannerone->BannerLink}">
-                <img src="{$basePath}/images/banner/{$bannerone->BannerValue}" alt="{$shopName}" class="img-responsive">
-            </a>
-    {/if}
 
+    {if $bannerone->BannerValue == ""}
+        {if $bannerone->BannerLink == NULL}
+            <img src="{$basePath}/images/banner/{$bannerone->BannerValue}" alt="{$shopName}" class="img-responsive">
+            {else}
+                <a href="{$bannerone->BannerLink}">
+                    <img src="{$basePath}/images/banner/{$bannerone->BannerValue}" alt="{$shopName}" class="img-responsive">
+                </a>
+        {/if}
+    {else}
+            <div class="bannerbox"><h1>{_'Banner Position 1'}</h1></div>    
+            
+    {/if}
 </div>
     
 

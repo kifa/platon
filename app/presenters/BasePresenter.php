@@ -341,9 +341,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
             
             $menuSwitcherForm = new Nette\Application\UI\Form;
             $menuSwitcherForm->setTranslator($this->translator);
-            $menuSwitcherForm->addSelect('topMenu', 'Top Main Menu', $menus);
-            $menuSwitcherForm->addSelect('sideMenu', 'Side Menu', $menus);
-            $menuSwitcherForm->addSelect('footerMenu', 'Footer Menu', $menus);
+            $menuSwitcherForm->addSelect('topMenu', 'Top Main Menu', $menus)
+                    ->setAttribute('class', 'form-control');
+            $menuSwitcherForm->addSelect('sideMenu', 'Side Menu', $menus)
+                    ->setAttribute('class', 'form-control');
+            $menuSwitcherForm->addSelect('footerMenu', 'Footer Menu', $menus)
+                    ->setAttribute('class', 'form-control');
             $menuSwitcherForm->addSubmit('save', 'Set menus')
                     ->setAttribute('class', 'form-control upl btn btn-primary')
                     ->setAttribute('data-loading-text', 'Setting...');;
@@ -463,6 +466,129 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $searchControl->setTranslator($this->translator);
         return $searchControl;
     }
+    
+    
+    
+    public function createComponentAddBannerForm() {
+        if ($this->getUser()->isInRole('admin')) {
+            $addPhoto = new Nette\Application\UI\Form;
+            $addPhoto->setTranslator($this->translator);
+            $addPhoto->addUpload('bannerone', 'Photo:')
+                     ->addCondition(Form::FILLED)     
+                    ->addRule(FORM::IMAGE, 'You can upload only JPG, PNG a GIF')
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Max 2MB', 6400 * 1024);
+            $items = array(1 => 'first banner', 2 => 'second banner', 3 => 'third banner', 4 => 'four banner');
+            $addPhoto->addSelect('banner', 'Banner pos.', $items)
+                    ->setDefaultValue(1)
+                    ->setAttribute('class', 'form-control');
+            $addPhoto->addText('link', 'Insert link')
+                    ->setAttribute('placeholder', 'http://')
+                    ->setAttribute('class', 'form-control');
+            $addPhoto->addSubmit('add', 'Add Banner')
+                    ->setAttribute('class', 'form-control btn btn-primary upl col-md-6')
+                    ->setAttribute('data-loading-text', 'Uploading...');
+            $addPhoto->onSuccess[] = $this->addBannerFormSubmitted;
+            return $addPhoto;
+        }
+    }
+    
+     public function addBannerFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            if ($form->values->bannerone->isOK()) {
+
+                if($this->shopModel->loadBannerByType('banner'.$form->values->banner)) {
+                    $this->shopModel->updateBannerByType('banner'.$form->values->banner, $form->values->bannerone->name, $form->values->link);
+                } else {
+                    $this->shopModel->insertBanner('banner'.$form->values->banner, $form->values->bannerone->name, $form->values->link);
+                }
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/banner/' . $form->values->bannerone->name;
+                $form->values->bannerone->move($imgUrl);
+
+                $image = Image::fromFile($imgUrl);
+                
+                if($image->width > 380) {
+
+                    $image->resize(380, null, Image::SHRINK_ONLY);
+                    $imgUrl = $this->context->parameters['wwwDir'] . '/images/banner/' . $form->values->bannerone->name;
+                    $image->save($imgUrl);
+                }
+  
+                    
+                $message = $this->translator->translate(' was sucessfully uploaded');
+                $photo = $this->translator->translate(' Photo ');
+                $e = HTML::el('span', $photo . $form->values->bannerone->name . '' . $message);
+                $ico = HTML::el('i')->class('icon-ok-sign left');
+                $e->insert(0, $ico);
+                $this->flashMessage($e, 'alert alert-success');
+            }
+            
+            else {
+               if($this->shopModel->loadBannerByType('banner'.$form->values->banner)) {
+                    $this->shopModel->updateBannerByType('banner'.$form->values->banner, NULL, $form->values->link);
+                }
+            }
+            
+            $this->redirect('this');
+        }
+    }
+    
+   public function createComponentAddSliderForm() {
+        if ($this->getUser()->isInRole('admin')) {
+            $addPhoto = new Nette\Application\UI\Form;
+            $addPhoto->setTranslator($this->translator);
+            $addPhoto->addUpload('slideone', 'Photo:')
+                     ->addCondition(Form::FILLED)     
+                    ->addRule(FORM::IMAGE, 'You can upload only JPG, PNG a GIF')
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Max 2MB', 6400 * 1024);
+            $items = array(1 => 'first slide', 2 => 'second slide', 3 => 'third slide');
+            $addPhoto->addSelect('slide', 'Slider list', $items)
+                    ->setDefaultValue(1)
+                    ->setAttribute('class', 'form-control');
+            $addPhoto->addText('link', 'Insert link')
+                    ->setAttribute('placeholder', 'http://')
+                    ->setAttribute('class', 'form-control');
+            $addPhoto->addSubmit('add', 'Add Photo')
+                    ->setAttribute('class', 'form-control btn btn-primary upl col-md-6')
+                    ->setAttribute('data-loading-text', 'Uploading...');            
+            $addPhoto->onSuccess[] = $this->addSliderFormSubmitted;
+            return $addPhoto;
+        }
+    }
+
+    public function addSliderFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            if ($form->values->slideone->isOK()) {
+
+                if($this->shopModel->loadBannerByType('slider'.$form->values->slide)) {
+                    $this->shopModel->updateBannerByType('slider'.$form->values->slide, $form->values->slideone->name, $form->values->link);
+                } else {
+                    $this->shopModel->insertBanner('slider'.$form->values->slide, $form->values->slideone->name, $form->values->link);
+                }
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/slider/' . $form->values->slideone->name;
+                $form->values->slideone->move($imgUrl);
+
+                $image = Image::fromFile($imgUrl);
+                
+                if($image->width > 1140) {
+
+                    $image->resize(1140, null, Image::SHRINK_ONLY);
+                    $imgUrl = $this->context->parameters['wwwDir'] . '/images/slider/' . $form->values->slideone->name;
+                    $image->save($imgUrl);
+                }
+
+            
+                $message = $this->translator->translate(' was sucessfully uploaded');
+                $photo = $this->translator->translate(' Photo ');
+                $e = HTML::el('span', $photo . $form->values->slideone->name . '' . $message);
+                $ico = HTML::el('i')->class('icon-ok-sign left');
+                $e->insert(0, $ico);
+                $this->flashMessage($e, 'alert alert-success');
+            }
+            
+            $this->redirect('this');
+        }
+    }
+    
     
    
 }

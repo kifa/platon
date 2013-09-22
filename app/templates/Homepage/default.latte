@@ -8,7 +8,7 @@
 
 {if $user->isInRole('admin')}
 <div class="col-md-11 text-center">
-            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#sliderModal">{_'Change slider'}</button>
+    <p><i class="icon-info-sign"></i> {_'Quick tip'}: {_'To changehomepage apparance, click on'} <button class="btn btn-default" type="button" data-toggle="modal" data-target="#editDesign">ReDesign</button></p>
             <button class="btn btn-danger btn-lg" type="button" data-toggle="modal" data-target="#videoModal"><i class="icon-play-sign"></i> {_'WATCH VIDEO'}</button>
 </div>
          {/if}
@@ -66,44 +66,5 @@ $('.carousel').carousel()
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-
-          {if $user->isInRole('admin')}
-
-<div class="modal fade" id="sliderModal" tabindex="-1" role="dialog" aria-labelledby="sliderModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">{_'Upload slider photo'}</h4>
-      </div>
-      <div class="modal-body">
-                          <div class="tabbable">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#editSlider" data-toggle="tab"><i class=""></i> {_'Slider'}</a></li>
-                        <li><a href="#editBanner" data-toggle="tab"><i class=""></i> {_'Banners'}</a>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="editSlider">
-                            <p>{_'Upload your slider photos'}</p>
-                                       {control addSliderForm}
-                        </div>
-
-                        <div class="tab-pane" id="editBanner">
-                            <p>{_'Upload your banner photos'}</p>
-                                    {control addBannerForm}
-                        </div>
-                    </div>
-                </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{_'Close'}</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-          {/if}
-
 
 {/block}

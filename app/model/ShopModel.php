@@ -357,14 +357,19 @@ class ShopModel extends Repository {
                 ->where('BannerID', $id);
     }
 
-    public function updateByBanner($type, $value, $link){
-        $update = array(
-            'BannerValue' => $value,
-            'BannerLink' => $link
-        );
+    public function updateBannerByType($type, $value, $link){
         
-        return $this->getTable('banner')
-                ->update($update)
-                ->where('BannerType', $type);
+        if ($value == NULL) {
+            $update = array(
+                'BannerLink' => $link
+             );
+       
+        } else {
+            $update = array(
+                'BannerValue' => $value,
+                'BannerLink' => $link
+             );
+        }
+        return $this->getTable('banner')->where('BannerType', $type)->update($update);
     }       
 }
