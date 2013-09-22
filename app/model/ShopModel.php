@@ -50,14 +50,17 @@ class ShopModel extends Repository {
     
     public function loadPhotoSize() {
         $param = array('Small', 'Medium', 'Large');
-         return $this->getTable('settings')->select('SettingName, Value')->where('SettingName', $param)
-                    ->fetchPairs('SettingName');
+         return $this->getTable('settings')
+                 ->select('SettingName, Value')
+                 ->where('SettingName', $param)
+                 ->fetchPairs('SettingName');
     }
 
 
     public function getShopSettings()
     {
-            return $this->getTable('settings')->select('SettingName, Value')
+            return $this->getTable('settings')
+                    ->select('SettingName, Value')
                     ->fetchPairs('SettingName');
       
     }
@@ -280,4 +283,88 @@ class ShopModel extends Repository {
             return TRUE;
         }           
     }
+  /*  
+    public function insertBannerType($code, $name, $description = NULL){
+        $insert = array(
+            'BannerTypeCode' => $code,
+            'BannerTypeName' => $name,
+            'BannerTypeDescription' => $description
+        );
+                      
+        return $this->getTable('bannertype')
+                ->insert($insert);
+    }
+
+    public function loadBannerTypes(){
+        return $this->getTable('bannertype')
+                ->fetchPairs('BannerTypeID');
+    }
+    
+    public function loadBannerType($id){
+        return $this->getTable('bannertype')
+                ->where('BannerTypeID',$id)
+                ->fetch();
+    }
+    
+    public function updateBannerType($id, $code, $name, $description = NULL){
+        $update = array(
+            'BannerTypeCode' => $code,
+            'BannerTypeName' => $name,
+            'BannerTypeDescription' => $description
+        );
+        
+        return $this->getTable('bannertype')
+                ->update($update)
+                ->where('BannerTypeID', $id);
+    }
+    */
+    public function insertBanner($type, $value, $link = NULL){
+        $insert = array(
+            'BannerType' => $type,
+            'BannerValue' => $value,
+            'BannerLink' => $link
+        );
+        
+        return $this->getTable('banner')
+                ->insert($insert);
+    }
+    
+    public function loadBanners(){
+        return $this->getTable('banner')
+                ->fetchPairs('BannerID');
+    }
+    
+    public function loadBannerByID($id){
+        return $this->getTable('banner')
+                ->where('BannerID', $id)
+                ->fetch();
+    }
+    
+    public function loadBannerByType($type){
+        return $this->getTable('banner')
+                ->where('BannerType', $type)
+                ->fetch();
+    }
+
+    public function updateBanner($id, $value, $link){
+        $update = array(            
+            'BannerValue' => $value,
+            'BannerLink' => $link
+        );
+        
+        return $this->getTable('banner')
+                ->update($update)
+                ->where('BannerID', $id);
+    }
+
+    public function updateByBanner($type, $value, $link){
+        $update = array(
+            'BannerValue' => $value,
+            'BannerLink' => $link
+        );
+        
+        return $this->getTable('banner')
+                ->update($update)
+                ->where('BannerType', $type);
+    }       
 }

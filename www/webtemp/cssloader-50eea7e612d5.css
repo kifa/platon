@@ -1392,53 +1392,7 @@ text-align: center;
     margin-top: 5px;
 }
 
-.shopHead {
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzdkYjllOCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjU0JSIgc3RvcC1jb2xvcj0iIzdkYjllOCIgc3RvcC1vcGFjaXR5PSIwLjU0Ii8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxZTU3OTkiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-background: -moz-linear-gradient(top,  rgba(125,185,232,0) 0%, rgba(125,185,232,0.54) 54%, rgba(30,87,153,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,185,232,0)), color-stop(54%,rgba(125,185,232,0.54)), color-stop(100%,rgba(30,87,153,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(125,185,232,0) 0%,rgba(125,185,232,0.54) 54%,rgba(30,87,153,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(125,185,232,0) 0%,rgba(125,185,232,0.54) 54%,rgba(30,87,153,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(125,185,232,0) 0%,rgba(125,185,232,0.54) 54%,rgba(30,87,153,1) 100%); /* IE10+ */
-background: linear-gradient(to bottom,  rgba(125,185,232,0) 0%,rgba(125,185,232,0.54) 54%,rgba(30,87,153,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8', endColorstr='#1e5799',GradientType=0 ); /* IE6-8 */
-}
-.navHead {
-    background-color: #0f75bc;
-}
 
-.navHead .navbar {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    margin-bottom: 0;
-    
-}
-.navbar a {
-    color: white;
-}
-.navHead .navbar-default .navbar-nav>li>a {
-color: #FFF;
-text-transform: uppercase;
-font-weight: bold;
-text-shadow: none;
-}
-
-.navHead .navbar .navbar-nav>.active>a {
-    color: #777;
-}
-
-.shopSlider {
-    background-color: #ffffff;
-}
-
-.margin5 {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.shopContent {
-   /* background: url("../img/bckg_suite.jpg") repeat fixed top left transparent; */
-}
 
 .shopProductVariant h3 h4 {
     margin: 0;
@@ -1513,6 +1467,10 @@ white-space: normal;
 top: 0;
 width: 100%;
 z-index: 1500;
+}
+
+.marginTop {
+    margin-top: 15px;
 }
 
 

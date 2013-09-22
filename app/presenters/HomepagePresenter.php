@@ -66,6 +66,7 @@ class HomepagePresenter extends BasePresenter {
             $items = array(1 => 'first banner', 2 => 'second banner', 3 => 'third banner', 4 => 'four banner');
             $addPhoto->addSelect('banner', 'Slider list', $items)
                     ->setDefaultValue(1);
+            $addPhoto->addText('link', 'Insert Hyperlink');
             $addPhoto->addSubmit('add', 'Add Banner')
                     ->setAttribute('class', 'form-control btn btn-primary upl col-md-6')
                     ->setAttribute('data-loading-text', 'Uploading...');
@@ -78,10 +79,10 @@ class HomepagePresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             if ($form->values->bannerone->isOK()) {
 
-                if($this->shopModel->getShopInfo('banner'.$form->values->banner)) {
-                    $this->shopModel->setShopInfo('banner'.$form->values->banner, $form->values->bannerone->name);
+                if($this->shopModel->loadBannerByType('banner'.$form->values->banner)) {
+                    $this->shopModel->updateBannerByType('banner'.$form->values->banner, $form->values->bannerone->name, $form->values->bannerone->link);
                 } else {
-                    $this->shopModel->insertShopInfo('banner'.$form->values->banner, $form->values->bannerone->name);
+                    $this->shopModel->insertBanner('banner'.$form->values->banner, $form->values->bannerone->name, $form->values->bannerone->link);
                 }
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/banner/' . $form->values->bannerone->name;
                 $form->values->bannerone->move($imgUrl);
@@ -116,27 +117,25 @@ class HomepagePresenter extends BasePresenter {
                     ->addRule(FORM::IMAGE, 'You can upload only JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Max 2MB', 6400 * 1024);
             $items = array(1 => 'first slide', 2 => 'second slide', 3 => 'third slide');
-            $addPhoto->addSelect('slide', 'Slider list', $items)
+            $addPhoto->addSelect('slide', 'Slider List', $items)
                     ->setDefaultValue(1);
+            $addPhoto->addText('link', 'Insert Hyperlink');
             $addPhoto->addSubmit('add', 'Add Photo')
                     ->setAttribute('class', 'form-control btn btn-primary upl col-md-6')
-                    ->setAttribute('data-loading-text', 'Uploading...');
+                    ->setAttribute('data-loading-text', 'Uploading...');            
             $addPhoto->onSuccess[] = $this->addSliderFormSubmitted;
             return $addPhoto;
         }
     }
 
-  
-
-
     public function addSliderFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
             if ($form->values->slideone->isOK()) {
 
-                if($this->shopModel->getShopInfo('slider'.$form->values->slide)) {
-                    $this->shopModel->setShopInfo('slider'.$form->values->slide, $form->values->slideone->name);
+                if($this->shopModel->loadBannerByType('slider'.$form->values->slide)) {
+                    $this->shopModel->updateBannerByType('slider'.$form->values->slide, $form->values->slideone->name, $form->values->slideone->link);
                 } else {
-                    $this->shopModel->insertShopInfo('slider'.$form->values->slide, $form->values->slideone->name);
+                    $this->shopModel->insertBanner('slider'.$form->values->slide, $form->values->slideone->name, $form->values->sliderone->link);
                 }
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/slider/' . $form->values->slideone->name;
                 $form->values->slideone->move($imgUrl);
@@ -176,15 +175,15 @@ class HomepagePresenter extends BasePresenter {
        
         $this->template->slider = 1;
         
-        $this->template->sliderone = $this->shopModel->getShopInfo('slider1');
-        $this->template->slidertwo = $this->shopModel->getShopInfo('slider2');
-        $this->template->sliderthree = $this->shopModel->getShopInfo('slider3');
+        $this->template->sliderone = $this->shopModel->loadBannerByType('slider1');
+        $this->template->slidertwo = $this->shopModel->loadBannerByType('slider2');
+        $this->template->sliderthree = $this->shopModel->loadBannerByType('slider3');
         
-        $this->template->bannerone = $this->shopModel->getShopInfo('banner1');
+        $this->template->bannerone = $this->shopModel->loadBannerByType('banner1');
         
-        $this->template->bannertwo = $this->shopModel->getShopInfo('banner2');
-        $this->template->bannerthree = $this->shopModel->getShopInfo('banner3');
-        $this->template->bannerfour = $this->shopModel->getShopInfo('banner4');
+        $this->template->bannertwo = $this->shopModel->loadBannerByType('banner2');
+        $this->template->bannerthree = $this->shopModel->loadBannerByType('banner3');
+        $this->template->bannerfour = $this->shopModel->loadBannerByType('banner4');
         
         $home = $this->shopModel->getShopInfo('HomepageLayout');
         $this->template->home = $home.'.latte';
