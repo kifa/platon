@@ -16,19 +16,31 @@
      
        <div class="item active">
            {if $sliderone}
-        <img src="{$basePath}/images/slider/{$sliderone}" alt="{$shopName}">
+            {if $sliderone->BannerLink == NULL}
+                 <img src="{$basePath}/images/slider/{$sliderone->BannerValue}" alt="{$shopName}">            
+             {else}
+                 <a href="{$sliderone->BannerLink}">
+                     <img src="{$basePath}/images/slider/{$sliderone->BannerValue}" alt="{$shopName}">
+                 </a>            
+             {/if}
             {else}
-        <img src="{$basePath}/images/no_image.jpg" style="height: 150px"/>
-                {/if}
-        <div class="carousel-caption">
+            <img src="{$basePath}/images/no_image.jpg" style="height: 150px"/>
+            {/if}
+            <div class="carousel-caption">
             
-       </div>
+            </div>
     </div>
       
       {if $slidertwo}
       <div class="item">
         
-        <img src="{$basePath}/images/slider/{$slidertwo}" alt="{$shopName}">
+        {if $slidertwo->BannerLink == NULL}
+          <img src="{$basePath}/images/slider/{$slidertwo->BannerValue}" alt="{$shopName}">
+          {else}
+            <a href="{$slidertwo->BannerLink}">
+                <img src="{$basePath}/images/slider/{$slidertwo->BannerValue}" alt="{$shopName}">
+            </a>
+        {/if}
            
         <div class="carousel-caption">
             
@@ -40,7 +52,13 @@
       {if $sliderthree}
       <div class="item">
            
-        <img src="{$basePath}/images/slider/{$sliderthree}" alt="{$shopName}">
+        {if $sliderthree->BannerLink == NULL}
+          <img src="{$basePath}/images/slider/{$sliderthree->BannerValue}" alt="{$shopName}">
+          {else}
+            <a href="{$sliderthree->BannerLink}">
+                <img src="{$basePath}/images/slider/{$sliderthree->BannerValue}" alt="{$shopName}">
+            </a>
+        {/if} 
                       
         <div class="carousel-caption">
         
