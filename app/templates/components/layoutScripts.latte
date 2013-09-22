@@ -11,6 +11,13 @@ $(document).ready(function() {
           function() {
               $('#tracking').modal('hide');
           });
+          
+          $('#lookAroundButton').toggle(function(){
+            $('#lookAround').modal('show');
+          },
+          function() {
+              $('#lookAround').modal('hide');
+          });
 
      {if $user->isInRole('admin')}   
             $('#addCategoryButton').toggle(function(){
