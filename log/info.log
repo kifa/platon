@@ -106,3 +106,33 @@ Chybi email nebo API klic  @  http://localhost/bebica.it/www/smart-panel/order-d
 [2013-09-21 17-56-44] Nette\MemberAccessException: Call to undefined method heurekaModule::setView(). in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:70  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=3&_fid=sqaz  @@  exception-2013-09-21-17-51-10-2f5260ec111920908b6efa5dbf70388c.html
 [2013-09-21 17-57-11] Nette\MemberAccessException: Call to undefined method heurekaModule::setView(). in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:70  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=3&_fid=sqaz  @@  exception-2013-09-21-17-51-10-2f5260ec111920908b6efa5dbf70388c.html
 [2013-09-21 17-58-03] Nette\MemberAccessException: Call to undefined method bankwireModule::setView(). in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:70  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=3&_fid=sqaz  @@  exception-2013-09-21-17-58-03-acdb14ffa8716add689e79e044e40281.html
+[2013-09-22 21-26-54] HTTP/1.1 406 Not Acceptable
+Server: nginx
+Date: Sun, 22 Sep 2013 19:26:53 GMT
+Content-Type: text/html
+Content-Length: 25
+Connection: close
+X-Generated-in: 0.0037
+X-HGenerator: vrana.hdc1.cz
+
+Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=1&statusID=3&name=Done&progress=10&do=setStatus
+[2013-09-22 21-27-08] HTTP/1.1 406 Not Acceptable
+Server: nginx
+Date: Sun, 22 Sep 2013 19:27:07 GMT
+Content-Type: text/html
+Content-Length: 25
+Connection: close
+X-Generated-in: 0.004
+X-HGenerator: hurvinek.hdc1.cz
+
+Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=2&statusID=3&name=Done&progress=10&do=setStatus
+[2013-09-22 21-27-16] HTTP/1.1 406 Not Acceptable
+Server: nginx
+Date: Sun, 22 Sep 2013 19:27:16 GMT
+Content-Type: text/html
+Content-Length: 25
+Connection: close
+X-Generated-in: 0.0034
+X-HGenerator: vrana.hdc1.cz
+
+Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=3&statusID=3&name=Done&progress=10&do=setStatus
