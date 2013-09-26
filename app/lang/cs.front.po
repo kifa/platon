@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-09-22 20:20:58
+# Created: 2013-09-22 20:52:24
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-09-22 20:20+0200\n"
+"PO-Revision-Date: 2013-09-22 20:52+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -80,6 +80,9 @@ msgstr "Informace o účtu"
 
 msgid "Activate Module"
 msgstr "Instalovat modul"
+
+msgid "Add Banner"
+msgstr "Přidat banner"
 
 msgid "Add Brand"
 msgstr "Přidat Značku"
@@ -207,6 +210,9 @@ msgstr "Zeptejte se"
 msgid "Ask anything!"
 msgstr "Zeptejte se!"
 
+msgid "Assign different menus to position you like it."
+msgstr "Přiřaďte různá menu na místo, které se Vám líbí."
+
 msgid "Back to Orders"
 msgstr "Zpět na objednávky"
 
@@ -215,6 +221,12 @@ msgstr "Zpět na Smart Panel"
 
 msgid "Banner Position 1"
 msgstr "Pozice Banner 1"
+
+msgid "Banner pos."
+msgstr "Pozice banneru"
+
+msgid "Banners"
+msgstr "Bannery"
 
 msgid "Best sellers"
 msgstr "Nejprodávanější"
@@ -243,8 +255,11 @@ msgstr "Název Značky"
 msgid "Brands"
 msgstr "Značky"
 
+msgid "But you cannot really order and coffee or tea. Sorry for that"
+msgstr "Ale kávu ani čaj si zde bohužel nezakoupíte. Omlouváme se."
+
 msgid "But you cannot really order any coffee or tea. Sorry for that"
-msgstr "Ale není možné uskutečnit opravdovou objednávku. Omlouváme se."
+msgstr "Ale kávu ani čaj si zde bohužel nekoupíte. Omlouváme se."
 
 msgid "Buy"
 msgstr "Koupit"
@@ -307,7 +322,7 @@ msgid "Check our latest"
 msgstr "Prohlédněte si nejnovější"
 
 msgid "Check our main features"
-msgstr "Prohlédněte si naše hlavní vychytávky"
+msgstr "Naše hlavní vychytávky"
 
 msgid "Checkout"
 msgstr "Objednat"
@@ -350,6 +365,9 @@ msgstr "Renegerovat"
 
 msgid "Close"
 msgstr "Zavřít"
+
+msgid "Close and test"
+msgstr "Zavřít a testovat"
 
 msgid "Close without adding"
 msgstr "Zavřít bez přidání"
@@ -675,6 +693,9 @@ msgstr "Nadřazené poštovné"
 msgid "Home"
 msgstr "Domů"
 
+msgid "Homepage"
+msgstr "Úvodka"
+
 msgid "Homepage layout"
 msgstr "Design úvodky"
 
@@ -702,6 +723,9 @@ msgstr "Info"
 msgid "Information about product"
 msgstr "Informace o produktu"
 
+msgid "Insert link"
+msgstr "Vložte odkaz"
+
 msgid "Install module"
 msgstr "Instalovat modul"
 
@@ -725,6 +749,9 @@ msgstr "Cena"
 
 msgid "Items per purchase"
 msgstr "Kusů na 1 objednávku"
+
+msgid "Just select banner position and enter link"
+msgstr "Jen vyberte pozici banneru a vložte odkaz."
 
 msgid "KEY:"
 msgstr "KLÍČ:"
@@ -912,6 +939,15 @@ msgstr " Fotka "
 msgid "Photo gallery"
 msgstr "Fotky"
 
+msgid "Photo slide one:"
+msgstr "Slide jedna"
+
+msgid "Photo slide three:"
+msgstr "Slide tři:"
+
+msgid "Photo slide two:"
+msgstr "Slide dva"
+
 msgid "Photo:"
 msgstr "Foto:"
 
@@ -1031,6 +1067,9 @@ msgstr "Otázky a poznámky"
 
 msgid "Questions?"
 msgstr "Otázky?"
+
+msgid "Quick Tip"
+msgstr "Rychlý tip"
 
 msgid "Quick tip:"
 msgstr "Rychlý tip:"
@@ -1185,6 +1224,12 @@ msgstr "Solitér"
 msgid "Sitemap sucessfully generated."
 msgstr "Sitemap byla úspěšně vygenerována."
 
+msgid "Slider"
+msgstr "Slider"
+
+msgid "Slider list"
+msgstr "Pozice slideru"
+
 msgid "Small"
 msgstr "Malý"
 
@@ -1258,10 +1303,13 @@ msgid "This has to be a number."
 msgstr "Zde musí být číslo. (Zkuste vložit nulu)"
 
 msgid "This is only demo of"
-msgstr "Tento web je pouze demo systému"
+msgstr "Tento web je pouze demo platformy"
 
 msgid "This month"
 msgstr "Tento měsíc"
+
+msgid "Thumbs sucessfully regenerated."
+msgstr "Miniatury byly úspěšně vytvořeny."
 
 msgid "Title:"
 msgstr "Titulek:"
@@ -1326,8 +1374,17 @@ msgstr "Nahrát"
 msgid "Upload slider photo"
 msgstr "Nahrát úvodní fotku"
 
+msgid "Upload sliders and banners"
+msgstr "Nahrajte slider a bannery"
+
+msgid "Upload your banner photos"
+msgstr "Nahrajte bannery"
+
 msgid "Upload your logo"
 msgstr "Nahrát logo eshopu"
+
+msgid "Upload your slider photos"
+msgstr "Nahrajte fotografii pro slider"
 
 msgid "User name:"
 msgstr "Uživatelské jméno:"
@@ -1410,17 +1467,32 @@ msgstr "Jste přihlášení jako správce. Editujte jednoduše kliknutím na ná
 msgid "You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?"
 msgstr "Jste přihlášeni jako správce. Pro editaci stačí kliknout na Název, popis, cenu atd. Více informací?"
 
+msgid "You are logged in as admin. You can simply edit this text by clicking on Title, Content or panel bellow etc. More info?"
+msgstr "Jste přihlášen jako administrátor. Celý eshop můžete editovat jednoduše kliknutím na Název,  Popis, atd."
+
 msgid "You are looking for"
 msgstr "Hledáte"
 
 msgid "You can look around"
-msgstr "Můžete si jej prohlédnout"
+msgstr "Porozhlédněte se"
+
+msgid "You can look around and"
+msgstr "Porozhlédněte se kolem a"
+
+msgid "You can look around and test our"
+msgstr "Porozhlédněte se"
+
+msgid "You can set new link without uploading new banner."
+msgstr "Můžete nastavit nový odkaz banneru bez nového nahrání."
 
 msgid "You can upload only JPG, PNG a GIF"
 msgstr "Můžete nahrát pouze JPG, PNG a GIF obrázky."
 
 msgid "You cannot edit product here!"
 msgstr "Pro úpravu přejděte do kategorie!"
+
+msgid "You have been signed out."
+msgstr "Byly jste úspěšně odhlášeni"
 
 msgid "You have to add you password twice.."
 msgstr "Je nutné zadat nové heslo dvakrát."
@@ -1482,6 +1554,9 @@ msgstr "PSČ"
 msgid "ZIP:"
 msgstr "PSČ:"
 
+msgid "administration"
+msgstr "administrace"
+
 msgid "and"
 msgstr "a"
 
@@ -1494,8 +1569,17 @@ msgstr "kliknutím na tlačítko Buy Now"
 msgid "current key:"
 msgstr "současný klíč:"
 
+msgid "first banner"
+msgstr "první banner"
+
+msgid "first slide"
+msgstr "první slide"
+
 msgid "for you"
 msgstr " "
+
+msgid "four banner"
+msgstr "čtvrtý banner"
 
 msgid "from"
 msgstr "od"
@@ -1515,12 +1599,24 @@ msgstr "ks"
 msgid "personal pick up"
 msgstr "osobní převzetí"
 
+msgid "second banner"
+msgstr "druhý banner"
+
+msgid "second slide"
+msgstr "druhý slide"
+
 msgid "test our administration"
-msgstr "vyzkoušet naši administraci"
+msgstr "vyzkoušejte naši administraci"
+
+msgid "third banner"
+msgstr "třetí banner"
+
+msgid "third slide"
+msgstr "třetí slide"
 
 msgid "was successfully placed!"
 msgstr "byla úspěšně přijata."
 
-msgid "Close and test"
-msgstr "Zavřít a testovat"
+msgid "Quick tip"
+msgstr "Rychlý tip"
 
