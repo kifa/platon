@@ -251,7 +251,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         'imgLiquid-min.js',
         'jquery.wysiwyg.js',
         'jquery.jeditable.mini.js',
-        'jquery.jeditable.wysiwyg.js'));
+        'jquery.jeditable.wysiwyg.js',
+        'tooltip.js'));
 
     $compiler = \WebLoader\Compiler::createJsCompiler($files, $wwwDir . '/webtemp');
 

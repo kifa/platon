@@ -10,14 +10,14 @@
             
             <div class="col-md-12 col-xs-12 pull-left row">
                     {if $pieces > 5}
-            <span class="label label-info">{$pieces}</span>
+            <span class="label label-info" title="{_'In Stock'}">{$pieces}</span>
                     {elseif $pieces > 0}
             <span class="label label-warning">{$pieces} {_'LAST'}</span>
                     {else}
             <span class="label label-default"> {_'SOLD OUT'}</span>
                     {/if}
             {if $product->ProductStatusID == 3}
-                <span class="label label-danger"><i class="icon-thumbs-up icon-large"></i> {_'HOT'}</span>
+                <span class="label label-danger" title="{_'Popular product'}"><i class="icon-thumbs-up icon-large"></i> {_'HOT'}</span>
             {/if}
             {if $product->SALE > 1}
                 <span class="label label-warning"><i class="icon-money icon-large"></i> {_'SALE'}</span>
