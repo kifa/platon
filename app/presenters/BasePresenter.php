@@ -1,7 +1,8 @@
 <?php
 
 use Nette\Forms\Form,
-    Nette\Utils\Html;
+    Nette\Utils\Html,
+    Nette\Image;
 
 /**
  * Base presenter for eshop.
@@ -158,6 +159,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->template->shopDescription = $shopInfo['Description']->Value;
         $this->template->shopLogo = $shopInfo['Logo']->Value;
         $this->template->GA = $shopInfo['GA']->Value;
+        $this->template->lang = $this->lang;
         
 
        

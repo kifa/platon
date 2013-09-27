@@ -777,7 +777,7 @@ class ProductPresenter extends BasePresenter {
                     );
                 }
                 
-                $sizes = $this->shopModel->loadPhotoSize();
+                    $sizes = $this->shopModel->loadPhotoSize();
                 
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $albumID . '/' . $form->values->image->name;
                 $form->values->image->move($imgUrl);

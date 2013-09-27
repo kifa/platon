@@ -124,3 +124,10 @@ border-radius: 4px;
     color: white;
     background-color: #fc7951;
 }
+
+.textImg {
+    float: left;
+    padding: 5px;
+    margin: 10px 10px 10px 0;
+    border: 1px solid #cccccc;
+}

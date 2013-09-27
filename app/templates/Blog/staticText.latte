@@ -5,8 +5,6 @@
 {if $user->isInRole('admin')}
 <div class="row">
         <div class="col-md-10" n:snippet="controlPanel">
-            <div class="alert alert-error"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this text by clicking on Title, Content or panel bellow etc. More info?'}</div>
-
             <div class="btn-group" n:snippet="textStatus">
                         {if $post->StatusID != 1 }
                     <a href="{plink setStaticTextStatus! $post->StaticTextID, 1}" class="btn-primary btn ajax"><i class="icon-large icon-eye-open"></i> {_"Publish text"}</a>
@@ -23,12 +21,7 @@
                     </ul>
                     {/if}
                 </div>
-            
-          
-
-            <a href="#addPhoto" class="btn btn-default" data-toggel="modal" data-target="#addPhoto" id="addPhotoButton" ><i class="icon-large icon-camera-retro"></i> {_"Add Photo"}</a>
-             <div class="btn-group">
-            <a href="#editDesc" class="btn btn-default" data-toggel="modal" data-target="#editDesc" id="editDescButton" ><i class="icon-large icon-pencil"></i> {_"Edit Description"}</a> |
+           <div class="btn-group">
 
             <a href="#editDocs" class="btn btn-default" data-toggel="modal" data-target="#editDocs" id="editDocsButton"><i class="icon-large icon-download"></i> {_"Edit Documents"}</a> |
              </div>
@@ -45,19 +38,16 @@
 
 {block content}
 
-<div class="col-md-9">
+<div class="col-md-12">
 
 
     <div class="text-justified StaticTextContent" n:snippet="StaticTextContent">{!$post->StaticTextContent}</div>    
  {if $user->isInRole('admin')}   
     <ul class="thumbnails">
-        <li class="thumbnail col-md-8"><strong>{_'To add photos, upload them and then "Click to edit" and drag photos to editor.'}</strong></li>
+
 {foreach $album as $id => $photo}
-    
-    <li class="col-md-2">
-        <span style="height: 50px; width: 50px;">
-        <img  src="{$basePath}/images/static/{$albumID}/300-{$photo->PhotoURL}" alt="{$post->StaticTextName}">
-        </span>
+    <li class="col-md-11 thumbnail">
+        <img  src="{$basePath}/images/static/{$photo->PhotoAlbumID}/l-{$photo->PhotoURL}" class="img-responsive" alt="{$post->StaticTextName}">
     </li>
 
 {/foreach}
@@ -68,35 +58,10 @@
 {/block}
 
 {block sidebar}
-            <div class="col-md-3">
-{if $user->isInRole('admin')}
-{control menu:admin}
-{/if}
 
-
-                <ul class="nav nav-list">
-                    <li class="nav-header">Menu</li>
-                    {control menu:side}
-                    <li class="divider"></li>
-                </ul>
-
-               
-            </div>
 {/block}
 
 {block script}
-<script src="{$basePath}/js/bootstrap-lightbox.min.js"></script>
-
-<script>
-$(document).ready(function() {
-$(".imgLiquid").imgLiquid({
-    fill: true,
-    fadeInTime: 0,
-    delay: 0,
-    horizontalAlign: "left",
-    verticalAlign: "top"});
-});
-</script>
 
 {if $user->isInRole('admin')}
     <script src="{$basePath}/js/droparea.js"></script>
@@ -137,7 +102,7 @@ $('#addPhoto').modal('hide');
             submit    : 'OK',
             cssclass  : 'col-md-12',
             colls     : '15',
-            rows      : '15',
+            rows      : '25',
             indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
             tooltip   : {_'Click to edit ...'},
             wysiwyg   : { controls : { separator04         : { visible : true },
@@ -164,7 +129,9 @@ $('#addPhoto').modal('hide');
 {block modal}
 {if $user->isInRole('admin')}
 <div id="deleteText" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Delete'} {$post->StaticTextName} ?</h3>
     </div>
@@ -176,10 +143,14 @@ $('#addPhoto').modal('hide');
         <a href="{plink deleteStaticText! $post->StaticTextID}" class="btn btn-danger">{_'Delete'}</a>       
         <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
     </div>
-</div>
+ </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <div id="addPhoto" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-header">
+ <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 <h3 id="myModalLabel"><i class="icon-camera-retro"></i> Add new photo</h3>
 </div>
@@ -191,6 +162,8 @@ $('#addPhoto').modal('hide');
 {control addPhotoStaticForm}
 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
 </div>
-</div>
+ </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 {/if}
 {/block}

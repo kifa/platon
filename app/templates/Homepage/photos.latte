@@ -15,13 +15,14 @@
         
 {block content}
 
-<div class="span10">
+<div class="col-md-11">
 <ul class="thumbnails">
     {foreach $Albums as $album}
-  <li class="span3">
-    <div class="thumbnail">
-         <a data-toggle="lightbox" href="{plink Homepage:photo $album->ProductID}" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
-      <img src="{$basePath}/images/{$album->PhotoAlbumID}/300-{$album->PhotoName}" alt="{$album->PhotoAlbumName}" width="150">
+    {dump $album}
+  <li class="col-md-4 thumbnail">
+    <div class="">
+         <a data-toggle="lightbox" href="{plink Homepage:photo $album->ProductID}" class="thumbnail">
+      <img src="{$basePath}/images/{$album->PhotoAlbumID}/l-{$album->PhotoURL}" alt="{$album->PhotoAlbumName}" width="150">
          </a>
       <h3>{$album->PhotoAlbumName}</h3>
       <a href="{plink Homepage:photo $album->ProductID}" class="btn"><i class="icon-arrow-right"></i> {_'View gallery'}</a>
@@ -35,14 +36,4 @@
 {/block}
 
 {block script}
-<div n:snippet="script">
-<script>
-    
-    $('a.ajax').click(function(){
-        $(this).html('<i class="icon-spinner icon-spin"></i>');
-    });
-    
-</script>
-</div>
-
 {/block}

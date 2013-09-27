@@ -10,8 +10,8 @@
 {/block}
     
 {block content}
-<div class="col-md-12" n:snippet="products">    
-   <div class="col-md-12 btn-toolbar margin5">
+<div class="col-md-11" n:snippet="products">    
+   <div class="btn-toolbar sortingMenu">
     <div class="btn-group">
         <a n:href="setFilter! 'price', 'ASC'" class="btn btn-default ajax">{_'Price'}</a>
         <a n:href="setFilter! 'price', 'ASC'" class="btn btn-default ajax"><i class="icon-sort-by-order"></i></a>
@@ -39,159 +39,20 @@
        </div>
 <div class="row">
  
-            {foreach $products as $id => $product}
-        <div class="col-xs-6 col-sm-4 col-md-4">
+           {foreach $products as $id => $product}
+
                 {control product:$productMiniLayout $product}
-            </div>
+
             {/foreach}
 </div>
 </div>
 {/block}
 
 {block sidebar}
- <div class="col-md-3">   
-    {if $user->isInRole('admin')}
-        {control menu:admin}
-    {/if}
-    <ul class="nav nav-list">
-                        <li class="nav-header">Menu</li>
-                       
-                        {control menu:side}
-                        <li class="divider"></li>
-                    </ul>
-
-            <i class="icon-camera-retro icon-2x"></i><strong>Google Nexus</strong>
-            <p>See source code of <a href="#template">this page template</a>, <a href="#layout">layout template</a> and
-                <a href="#presenter">corresponding presenter</a>. And feel free to modify them!</p>
- </div>
 {/block}
             
 {block script}
-    {if $user->isInRole('admin')}
-    <script>
-        $(document).ready(function() {
-            var amount = 1;
-
-        $('input[name=plusItem]').click(function() {
-                var i = $('input[name=amount]').val();
-                amount = parseInt(i) + 1;
-            $('#frmaddProductForm-amount').val(amount);
-
-            });
-
-         $('input[name=minusItem]').click(function() {
-                var i = $('input[name=amount]').val();
-
-                amount = parseInt(i);
-
-                if(amount <= 0) {
-                    $('#frmaddProductForm-amount').val(0);
-                }
-                else {
-                    amount = amount -1;
-                    $('#frmaddProductForm-amount').val(amount);
-                }
-            });   
-
-          $('.upl').click(function() { 
-                $('.upl').button('toggle');
-                $('.upl').button('loading') });
-            
-           $('#editCategoryButton').toggle(function(){
-              $('#editCategory').modal('show');
-            },
-            function() {
-                $('#editCategory').modal('hide');
-            });
-           
-            $('#addProductButton').toggle(function(){
-              $('#addProduct').modal('show');
-            },
-            function() {
-                $('#addProduct').modal('hide');
-            });
-            
-            
-            
-            $('#deleteCategoryButton').toggle(function(){
-              $('#deleteCategory').modal('show');
-            },
-            function() {
-                $('#deleteCategory').modal('hide');
-            });
-    });
-    
-
-    </script>
-    {/if}
-
 {/block}
     
     {block modal}
-    
-    {*if $user->isInRole('admin')}
-     
-    <div id="addProduct" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-plus"></i> Add new product</h3>
-            </div>
-            <div class="modal-body">
-                <p>{_'Please fill in these information'}</p>
-                
-              
-            </div>
-            <div class="modal-footer">
-                {control addProductForm}
-              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-            </div>
-    </div>
-    
-    <div id="editCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-pencil"></i> Edit Category</h3>
-            </div>
-            <div class="modal-body">
-                <p>{_'Please fill in these information'}</p>
-              
-            </div>
-            <div class="modal-footer">
-                {control editCategoryForm}
-              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-            </div>
-    </div>
-    
-    
-    
-    <div id="deleteCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-pencil"></i> Delete {$category->CategoryName} Category?</h3>
-            </div>
-            <div class="modal-body">
-                <p>{_'Are you sure to delete this category?'}</p>
-                <p>{_'If so, choose where to move products!'}</p>
-             
-            </div>
-            <div class="modal-footer">
-                 {control deleteCategoryForm}
-              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-            </div>
-    </div>
-    
-<div id="addCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-pencil"></i> Add Category</h3>
-            </div>
-            <div class="modal-body"></div>
-            <div class="modal-footer">
-                <p>{_'Please fill in these information'}</p>
-              {control addCategoryForm}
-            
-              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-            </div>
-            </div>
-{/if*}
 {/block}

@@ -205,20 +205,20 @@
         TOOLBAR : {
             bold          : { visible : true, tags : ['b', 'strong'], css : { fontWeight : 'bold' }, tooltip : "Bold" },
             italic        : { visible : true, tags : ['i', 'em'], css : { fontStyle : 'italic' }, tooltip : "Italic" },
-            strikeThrough : { visible : true, tags : ['s', 'strike'], css : { textDecoration : 'line-through' }, tooltip : "Strike-through" },
+            strikeThrough : { visible : true, tags : ['s', 'strike'], css : { textDecoration : 'line-through' }, tooltip : "Strike-through", icon: "strikethrough" },
             underline     : { visible : true, tags : ['u'], css : { textDecoration : 'underline' }, tooltip : "Underline" },
 
             separator00 : { visible : true, separator : true },
 
-            justifyLeft   : { visible : true, css : { textAlign : 'left' }, tooltip : "Justify Left" },
-            justifyCenter : { visible : true, tags : ['center'], css : { textAlign : 'center' }, tooltip : "Justify Center" },
-            justifyRight  : { visible : true, css : { textAlign : 'right' }, tooltip : "Justify Right" },
-            justifyFull   : { visible : true, css : { textAlign : 'justify' }, tooltip : "Justify Full" },
+            justifyLeft   : { visible : true, css : { textAlign : 'left' }, tooltip : "Justify Left", icon: "align-left" },
+            justifyCenter : { visible : true, tags : ['center'], css : { textAlign : 'center' }, tooltip : "Justify Center", icon: "align-center" },
+            justifyRight  : { visible : true, css : { textAlign : 'right' }, tooltip : "Justify Right", icon: "align-right" },
+            justifyFull   : { visible : true, css : { textAlign : 'justify' }, tooltip : "Justify Full", icon: "align-justify" },
 
             separator01 : { visible : true, separator : true },
 
-            indent  : { visible : true, tooltip : "Indent" },
-            outdent : { visible : true, tooltip : "Outdent" },
+            indent  : { visible : true, tooltip : "Indent", icon: "indent-right" },
+            outdent : { visible : true, tooltip : "Outdent", icon: "indent-left" },
 
             separator02 : { visible : false, separator : true },
 
@@ -227,14 +227,14 @@
 
             separator03 : { visible : true, separator : true },
 
-            undo : { visible : true, tooltip : "Undo" },
-            redo : { visible : true, tooltip : "Redo" },
+            undo : { visible : true, tooltip : "Undo", icon: "rotate-left" },
+            redo : { visible : true, tooltip : "Redo", icon: "rotate-right" },
 
             separator04 : { visible : true, separator : true },
 
-            insertOrderedList    : { visible : true, tags : ['ol'], tooltip : "Insert Ordered List" },
-            insertUnorderedList  : { visible : true, tags : ['ul'], tooltip : "Insert Unordered List" },
-            insertHorizontalRule : { visible : true, tags : ['hr'], tooltip : "Insert Horizontal Rule" },
+                insertOrderedList    : { visible : true, tags : ['ol'], tooltip : "Insert Ordered List", icon: "list-ol" },
+            insertUnorderedList  : { visible : true, tags : ['ul'], tooltip : "Insert Unordered List", icon: "list-ul" },
+            insertHorizontalRule : { visible : true, tags : ['hr'], tooltip : "Insert Horizontal Rule", icon: "minus" },
 
             separator05 : { separator : true },
 
@@ -267,7 +267,8 @@
                 },
 
                 tags : ['a'],
-                tooltip : "Create link"
+                tooltip : "Create link",
+                icon: "link"
             },
 
             insertImage : {
@@ -285,7 +286,7 @@
                         });
                         
                      function ins(szURL) {   
-                            szURL = '<img src="' +  szURL  + '" >';
+                            szURL = '<img class="textImg" src="' +  szURL  + '" >';
                             $('.wysiwyg iframe').contents().find("body").append(szURL);
                             $('.wysiwyg iframe').contents().find("body").attr('style', 'display: block;');
                             $('#addTextPicture').modal('hide');
@@ -294,18 +295,19 @@
                 },
 
                 tags : ['img'],
-                tooltip : "Insert image"
+                tooltip : "Insert image",
+                icon: "picture"
             },
 
             separator06 : { separator : true },
 
-            h1mozilla : { visible : true && $.browser.mozilla, className : 'h1', command : 'heading', arguments : ['h1'], tags : ['h1'], tooltip : "Header 1" },
-            h2mozilla : { visible : true && $.browser.mozilla, className : 'h2', command : 'heading', arguments : ['h2'], tags : ['h2'], tooltip : "Header 2" },
-            h3mozilla : { visible : true && $.browser.mozilla, className : 'h3', command : 'heading', arguments : ['h3'], tags : ['h3'], tooltip : "Header 3" },
+            h1mozilla : { visible : true && $.browser.mozilla, className : 'h1', command : 'heading', arguments : ['h1'], tags : ['h1'], tooltip : "Header 1", icon: "h1" },
+            h2mozilla : { visible : true && $.browser.mozilla, className : 'h2', command : 'heading', arguments : ['h2'], tags : ['h2'], tooltip : "Header 2", icon: "h2" },
+            h3mozilla : { visible : true && $.browser.mozilla, className : 'h3', command : 'heading', arguments : ['h3'], tags : ['h3'], tooltip : "Header 3", icon: "h3" },
 
-            h1 : { visible : true && !( $.browser.mozilla ), className : 'h1', command : 'formatBlock', arguments : ['<H1>'], tags : ['h1'], tooltip : "Header 1" },
-            h2 : { visible : true && !( $.browser.mozilla ), className : 'h2', command : 'formatBlock', arguments : ['<H2>'], tags : ['h2'], tooltip : "Header 2" },
-            h3 : { visible : true && !( $.browser.mozilla ), className : 'h3', command : 'formatBlock', arguments : ['<H3>'], tags : ['h3'], tooltip : "Header 3" },
+            h1 : { visible : true && !( $.browser.mozilla ), className : 'h1', command : 'formatBlock', arguments : ['<H1>'], tags : ['h1'], tooltip : "Header 1", icon: "h1" },
+            h2 : { visible : true && !( $.browser.mozilla ), className : 'h2', command : 'formatBlock', arguments : ['<H2>'], tags : ['h2'], tooltip : "Header 2", icon: "h2" },
+            h3 : { visible : true && !( $.browser.mozilla ), className : 'h3', command : 'formatBlock', arguments : ['<H3>'], tags : ['h3'], tooltip : "Header 3", icon: "h3"},
 
             separator07 : { visible : false, separator : true },
 
@@ -337,7 +339,8 @@
 
                     this.viewHTML = !( this.viewHTML );
                 },
-                tooltip : "View source code"
+                tooltip : "View source code",
+                icon: "list-alt"
             },
 
             removeFormat : {
@@ -348,7 +351,8 @@
                     this.editorDoc.execCommand('removeFormat', false, []);
                     this.editorDoc.execCommand('unlink', false, []);
                 },
-                tooltip : "Remove formatting"
+                tooltip : "Remove formatting",
+                icon: "remove"
             }
         }
     });
@@ -643,13 +647,13 @@
             }
         },
 
-        appendMenu : function( cmd, args, className, fn, tooltip )
+        appendMenu : function( cmd, args, className, fn, tooltip, icon )
         {
             var self = this;
             args = args || [];
 
             $('<li></li>').append(
-                $('<a role="menuitem" tabindex="-1" href="javascript:;">' + (className || cmd) + '</a>')
+                $('<a role="menuitem" tabindex="-1" href="javascript:;"><i class="icon-' + (icon) + '"></i></a>')
                     .addClass(className || cmd)
                     .attr('title', tooltip)
             ).click(function() {
@@ -683,8 +687,9 @@
                     this.appendMenu(
                         control.command || name, control.arguments || [],
                         control.className || control.command || name || 'empty', control.exec,
-                        control.tooltip || control.command || name || ''
-                    );
+                        control.tooltip || control.command || name || '',
+                        control.icon || control.command || name || ''
+                        );
                 }
             }
         },

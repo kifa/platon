@@ -8,7 +8,7 @@
 <div class="page-header">
     <h1 n:block="title"><i class="icon-instagram"></i> {$product->ProductName} <small>{_'Check our product image gallery.'}</small></h1>
     <a href="{plink Homepage:photos}" class="btn"><i class="icon-arrow-left"></i> {_'Back to gallery'}</a>
-    <a href="{plink Product:product $product->ProductID}" class="btn btn-primary"><i class="icon-arrow-right"></i> {_'Shop it NOW'}</a>
+    <a href="{plink Product:product $product->ProductID, $product->ProductSeoName}" class="btn btn-primary"><i class="icon-arrow-right"></i> {_'Shop it NOW'}</a>
 </div>
 
 {/block}
@@ -16,13 +16,11 @@
         
 {block content}
 
-<div class="span10">
+<div class="col-md-11">
 <ul class="thumbnails">
     {foreach $Albums as $id => $photo}
-<li class="span2">
-        <a data-toggle="lightbox" href="#photo{$id}" class="thumbnail imgLiquid" style="height: 250px; width: 250px;">
-            <img style="" src="{$basePath}/images/{$photo->PhotoAlbumID}/300-{$photo->PhotoURL}" alt="{$photo->PhotoAlbumName}">
-        </a>
+<li class="col-md-5 thumbnail">
+    <img class="img-responsible" src="{$basePath}/images/{$photo->PhotoAlbumID}/l-{$photo->PhotoURL}" alt="{$photo->PhotoAlbumName}">
     </li>
 
  {/foreach}

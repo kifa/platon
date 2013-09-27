@@ -309,6 +309,10 @@ class BlogPresenter extends BasePresenter {
         $this->template->album = $this->blog->loadPhotoAlbum($postid);
         $this->template->post = $this->blog->loadPost($postid);
         
+         if($this->getUser()->isInRole('admin')){
+             $this->template->adminAlbum = $this->blog->loadPhotoAlbum($postid);
+         }
+        
     }
     
     
@@ -385,13 +389,13 @@ class BlogPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
             $addPhoto = new Nette\Application\UI\Form;
             $addPhoto->setTranslator($this->translator);
-            $addPhoto->addHidden('name', 'name');
-            $addPhoto->addHidden('textalbumid', $this->row2);
+            $addPhoto->addHidden('name');
+            $addPhoto->addHidden('textalbumid');
             $addPhoto->addUpload('image', 'Photo:')
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
             $addPhoto->addSubmit('addPhoto', 'Add Photo')
-                    ->setAttribute('class', 'btn-primary upl');
+                    ->setAttribute('class', 'form-control btn btn-primary upl');
             $addPhoto->onSuccess[] = $this->addPhotoStaticFormSubmitted;
             return $addPhoto;
         }
@@ -408,19 +412,28 @@ class BlogPresenter extends BasePresenter {
                 $this->productModel->insertPhoto(
                         $form->values->name, $form->values->image->name, $form->values->textalbumid
                 );
+                
+                 $sizes = $this->shopModel->loadPhotoSize();
+                 
                 $imgUrl = $this->context->parameters['wwwDir'] . '/images/static/' . $form->values->textalbumid . '/' . $form->values->image->name;
                 $form->values->image->move($imgUrl);
                 
                 $image = Image::fromFile($imgUrl);
-                $image->resize(null, 300, Image::SHRINK_ONLY);
+                $image->resize(null, $sizes['Large']->Value, Image::SHRINK_ONLY);
                 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/static/' . $form->values->textalbumid . '/300-' . $form->values->image->name;
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/static/' . $form->values->textalbumid . '/l-' . $form->values->image->name;
                 $image->save($imgUrl);
                 
                 $image = Image::fromFile($imgUrl);
-                $image->resize(null, 50, Image::SHRINK_ONLY);
+                $image->resize(null, $sizes['Medium']->Value, Image::SHRINK_ONLY);
                 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/static/' . $form->values->textalbumid . '/50-' . $form->values->image->name;
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/static/' . $form->values->textalbumid . '/m-' . $form->values->image->name;
+                $image->save($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, $sizes['Small']->Value, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/static/' . $form->values->textalbumid . '/s-' . $form->values->image->name;
                 $image->save($imgUrl);
 
                 $text = $this->translator->translate('was sucessfully uploaded');
@@ -437,17 +450,24 @@ class BlogPresenter extends BasePresenter {
     public function actionStaticText($spostid) {
 
          if ($this->getUser()->isInRole('admin')) {
-                $this->row2 = $this->shopModel->loadPhotoAlbumStatic($spostid);
-
+             
+             $albumid = $this->blog->loadPhotoAlbumStatic($spostid);
+             if($albumid == FALSE) {
+                 $row = $this->shopModel->loadStaticText($spostid);
+                 $albumid = $this->productModel->insertPhotoAlbum($row->StaticTextName, '', NULL, NULL, $spostid);
+             }            
                 $addPhotoStaticForm = $this['addPhotoStaticForm'];
+                $addPhotoStaticForm->setDefaults(array('name' => 'photoalbum', 'textalbumid' => $albumid ));
             }
     }
     
     public function renderStaticText($spostid) {
         if ($this->getUser()->isInRole('admin')) {
             $this->template->album = $this->blog->loadPhotoAlbumStatic($spostid);
+             $this->template->adminAlbum = $this->blog->loadPhotoAlbumStatic($spostid);
+         
         }     
-        $this->template->albumID = $this->row2;
+
         $this->template->post = $this->shopModel->loadStaticText($spostid);
     }
         

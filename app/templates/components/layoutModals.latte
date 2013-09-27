@@ -49,6 +49,7 @@
                            <li><a href="#editSlider" data-toggle="tab"><i class="icon-chevron-right"></i>  {_'Slider'}</a></li>
                            <li><a href="#editBanner" data-toggle="tab"><i class="icon-chevron-right"></i> {_'Banners'}</a>
                            <li><a href="#addStyle" data-toggle="tab"><i class=""></i> {_'Add your style.css'}</a></li>
+                        <li><a href="#premium" data-toggle="tab"><i class="icon-star icon-small"></i> {_'Premium design'}</a></li>
                     </ul>
                     <div class="tab-content col-md-8">
                         <div class="tab-pane active" id="editLayout">
@@ -112,21 +113,27 @@
                         <div class="tab-pane" id="editProduct">
                             <h3>{_'Your product page can look like this.'}</h3>
                             <dl>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'default'" >{_'Default'}</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'phototime'" >{_'Photo time'}</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'contentfocus'" >{_'Content Focus'}</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'buymore'" >{_'Buy more'}</a></li>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'default'" >{_'Default'}</a></dt>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'phototime'" >{_'Photo time'}</a></dt>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'contentfocus'" >{_'Content Focus'}</a></dt>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'buymore'" >{_'Buy more'}</a></dt>
                             </dl>
 
                         </div>
                         
                         <div class="tab-pane" id="editHomepage">
-                            <ul class="list-unstyled">
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'HomepageLayout', 'noslider'" >{_'No slider'}</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'HomepageLayout', 'slider'" >{_'Slider'}</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'HomepageLayout', 'twopanels'" >{_'Two panels'}</a></li>
-                                <li><a class="btn btn-default" n:href="setShopLayout! 'HomepageLayout', 'fullpanel'" >{_'Full Panel'}</a></li>
-                            </ul>
+                            <dl class="list-unstyled">
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'HomepageLayout', 'noslider'" >{_'No slider'}</a></dt>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'HomepageLayout', 'slider'" >{_'Slider'}</a></dt>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'HomepageLayout', 'twopanels'" >{_'Two panels'}</a></dt>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'HomepageLayout', 'fullpanel'" >{_'Full Panel'}</a></dt>
+                            </dl>
 
                         </div>
                         
@@ -149,6 +156,11 @@
                             {if $style}
                             {_'Current style'}: {$style} <a href="{plink deleteStyle! $style}"><i class="icon-trash"></i></a>
                             {/if}
+                        </div>
+                        
+                        <div class="tab-pane" id="premium">
+                            <p>{_'Premium design from our design specialist.'}</p>
+                            <button class="btn btn-danger">Order your design now</button>
                         </div>
                     </div>
                 </div>
@@ -480,7 +492,52 @@
         </div>
 
 {/ifCurrent}
+
+{ifCurrent Blog:staticText}
+<div id="addTextPicture" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addTextPicture" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title"><i class="icon-list"></i> {_'Add description photo'}</h4>
+        </div>
+        <div class="modal-body">
+           {foreach $adminAlbum as $id => $photo}
+                    <div class="clearfix">
+                        <div class="col-md-2">
+                        <img src="{$basePath}/images/static/{$photo->PhotoAlbumID}/s-{$photo->PhotoURL}" alt="{$post->StaticTextName}" class="img-responsive">
+                        </div>
+                        <div class="btn-group">
+      <a href="#wysiwyg" rel="{$basePath}/images/static/{$photo->PhotoAlbumID}/s-{$photo->PhotoURL}" class="addTextPicture btn btn-default">{_'Small'}</a>
+      <a href="#wysiwyg" rel="{$basePath}/images/static/{$photo->PhotoAlbumID}/m-{$photo->PhotoURL}" class="addTextPicture btn btn-default">{_'Medium'}</a>
+      <a href="#wysiwyg" rel="{$basePath}/images/static/{$photo->PhotoAlbumID}/l-{$photo->PhotoURL}" class="addTextPicture btn btn-default">{_'Large'}</a>
+  </div>
+                        <hr>
+                    </div>
+
+             {/foreach}
+        </div>
+    <div class="modal-footer">
+        <div class="col-md-12 pull-left">
+        {form addPhotoStaticForm}
+        <div class="form-group col-md-12">
+            <div class="input-group col-md-5">
+        {input image}
+             <p class="help-block"><i class="icon-info-sign"></i> {_'Max size is 2MB ~ 1 Megapixel photos'}</p>   
+            </div>
+        {input addPhoto}
+        </div>
+        {/form}
+     </div>
+      <button type="button" class="btn btn-default" data-dismiss="modal">{_'Close without adding'}</button>
+    </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div>    
+{/ifCurrent}
+
 {/if}
+
 
 <div id="lookAround" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="lookAround" aria-hidden="true">
     <div class="modal-dialog">
