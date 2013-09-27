@@ -7,7 +7,7 @@
         <meta name="robots" content="{$robots}" n:ifset="$robots">
         <link rel="shortcut icon" href="{$basePath}/favicon.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <script type="text/javascript" src="/platon/www/js/pace.min.js"></script>
         {control css}
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -16,7 +16,6 @@
       <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
         
-       {dump $lang}
         {ifCurrent Order:cart}
                 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
         {/ifCurrent}
@@ -83,12 +82,12 @@
 </div> 
 
     {block #slider}
-    {if $slider}
+    {*if $slider}{/if*}
 <div class="shopSlider">   
  <div class="container supercontainer">
      {include './components/layoutSlider.latte'}
  </div></div>
-    {/if}
+    
     {/block}
     
 <div class="shopContent">   
@@ -105,6 +104,16 @@
                     <ul class="nav nav-pills nav-stacked">
                          {control menu:$menuSide}
                     </ul>
+            <div>
+        {if $bannerone->BannerLink == NULL}
+            <img src="{$basePath}/images/banner/{$bannerone->BannerValue}" alt="{$shopName}" class="img-responsive">
+            {else}
+                <a href="{$bannerone->BannerLink}">
+                    <img src="{$basePath}/images/banner/{$bannerone->BannerValue}" alt="{$shopName}" class="img-responsive">
+                </a>
+        {/if}
+
+            </div>
             {*block #sidebar}
             {/block*}
        </div>

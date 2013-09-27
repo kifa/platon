@@ -161,20 +161,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->template->GA = $shopInfo['GA']->Value;
         $this->template->lang = $this->lang;
         
+         $this->template->bannerone = $this->shopModel->loadBannerByType('banner1');
+         
+        
 
        
         // set theme layout
         $this->setLayout($shopInfo['ShopLayout']->Value);
-        
-        if($shopInfo['HomepageLayout']->Value == 'homepage-bigslider') {
-            
-        $this->template->bigSlider = 1;
-        }
-        else {
-                 $this->template->bigSlider = NULL;
-   
-        }
-        $this->template->slider = NULL;
         
         $this->template->menuTop = $shopInfo['TopMenu']->Value;
         $this->template->menuSide = $shopInfo['SideMenu']->Value;
@@ -253,8 +246,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         'imgLiquid-min.js',
         'jquery.wysiwyg.js',
         'jquery.jeditable.mini.js',
-        'jquery.jeditable.wysiwyg.js',
-        'tooltip.js'));
+        'jquery.jeditable.wysiwyg.js'));
 
     $compiler = \WebLoader\Compiler::createJsCompiler($files, $wwwDir . '/webtemp');
 
