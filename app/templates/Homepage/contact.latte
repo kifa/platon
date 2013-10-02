@@ -45,7 +45,7 @@
 {/snippet}
     </div>
     <div class="col-md-5" n:snippet="contactBlock">
-    <legend class="contactHeading" n:snippet="contactHeading">{$contactText->StaticTextName}</legend>
+    <legend class="contactHeading" n:snippet="contactHeading">{$post->StaticTextName}</legend>
         {if $user->isInRole('admin')}
         <span class="muted"><i class="icon-info-sign"></i> {_'Edit this text and heading by clicking'}</span><br>   
         {/if}
@@ -54,7 +54,7 @@
         <button class="btn"><i class="icon-youtube"></i></button>
         <hr>
         <div class="contactText" n:snippet="contactText">
-        {!$contactText->StaticTextContent}
+        {!$post->StaticTextContent}
         </div>
     </div>
 </div>
@@ -103,7 +103,7 @@
 
 {if $user->isInRole('admin')}
 <script>
-  $('.contactText').editable( {link editContactText! $contactText->StaticTextID }, {
+  $('.contactText').editable( {link editContactText! $post->StaticTextID }, {
                                         type      : 'wysiwyg',
                                         onblur    : 'ignore',
                                         cancel    : {_'Cancel'},
@@ -121,7 +121,7 @@
                                        }
                                 });
                                 
-   $('.contactHeading').editable( {link editContactTextHeading! $contactText->StaticTextID }, {
+   $('.contactHeading').editable( {link editContactTextHeading! $post->StaticTextID }, {
                                         type      : 'text',
                                         onblur    : 'ignore',
                                         cancel    : {_'Cancel'},

@@ -150,6 +150,16 @@ class HomepagePresenter extends BasePresenter {
    
 
     public function actionContact(){
+        if ($this->getUser()->isInRole('admin')) {
+             
+             $albumid = $this->blogModel->loadPhotoAlbumStatic(3);
+             if($albumid == FALSE) {
+                 $row = $this->shopModel->loadStaticText(3);
+                 $albumid = $this->productModel->insertPhotoAlbum($row->StaticTextName, '', NULL, NULL, 3);
+             }            
+                $addPhotoStaticForm = $this['addPhotoStaticForm'];
+                $addPhotoStaticForm->setDefaults(array('name' => 'photoalbum', 'textalbumid' => $albumid ));
+            }
     
     }
     
@@ -188,10 +198,76 @@ class HomepagePresenter extends BasePresenter {
         }
            
     }
+    
+    public function createComponentAddPhotoStaticForm() {
+        if ($this->getUser()->isInRole('admin')) {
+            $addPhoto = new Nette\Application\UI\Form;
+            $addPhoto->setTranslator($this->translator);
+            $addPhoto->addHidden('name');
+            $addPhoto->addHidden('textalbumid');
+            $addPhoto->addUpload('image', 'Photo:')
+                    ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
+                    ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
+            $addPhoto->addSubmit('addPhoto', 'Add Photo')
+                    ->setAttribute('class', 'form-control btn btn-primary upl');
+            $addPhoto->onSuccess[] = $this->addPhotoStaticFormSubmitted;
+            return $addPhoto;
+        }
+    }
+
+    /*
+     * Adding submit form for adding photos
+     */
+
+    public function addPhotoStaticFormSubmitted($form) {
+        if ($this->getUser()->isInRole('admin')) {
+            if ($form->values->image->isOK()) {
+
+                $this->productModel->insertPhoto(
+                        $form->values->name, $form->values->image->name, $form->values->textalbumid
+                );
+                
+                 $sizes = $this->shopModel->loadPhotoSize();
+                 
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/static/' . $form->values->textalbumid . '/' . $form->values->image->name;
+                $form->values->image->move($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, $sizes['Large']->Value, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/static/' . $form->values->textalbumid . '/l-' . $form->values->image->name;
+                $image->save($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, $sizes['Medium']->Value, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/static/' . $form->values->textalbumid . '/m-' . $form->values->image->name;
+                $image->save($imgUrl);
+                
+                $image = Image::fromFile($imgUrl);
+                $image->resize(null, $sizes['Small']->Value, Image::SHRINK_ONLY);
+                
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/static/' . $form->values->textalbumid . '/s-' . $form->values->image->name;
+                $image->save($imgUrl);
+
+                $text = $this->translator->translate('was sucessfully uploaded');
+                $e = HTML::el('span', ' Photo ' . $form->values->image->name . ' '.$text);
+                $ico = HTML::el('i')->class('icon-ok-sign left');
+                $e->insert(0, $ico);
+                $this->flashMessage($e, 'alert');
+            }
+
+            $this->redirect('this');
+        }
+    }
 
     public function renderContact() {
-        $this->template->anyVariable = 'any value';
-        $this->template->contactText = $this->shopModel->loadStaticText(3);
+        if ($this->getUser()->isInRole('admin')) {
+            $this->template->album = $this->blogModel->loadPhotoAlbumStatic(3);
+             $this->template->adminAlbum = $this->blogModel->loadPhotoAlbumStatic(3);
+         
+        }
+        $this->template->post = $this->shopModel->loadStaticText(3);
         $this->template->companyName = $this->shopModel->getShopInfo('Name');
         $this->template->companyPhone = $this->shopModel->getShopInfo('ContactPhone');
         $this->template->companyMail = $this->shopModel->getShopInfo('ContactMail');

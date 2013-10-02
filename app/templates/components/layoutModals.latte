@@ -246,60 +246,6 @@
 </div><!-- /.modal-dialog -->
 </div>    
     
- 
-
-
-    <div id="addVariant" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addVariant" aria-hidden="true">
-      <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title"><i class="icon-list"></i> {_'Manage product variants'}</h4>
-        </div>
-        <div class="modal-body">
-          <div class="tabbable">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#addVariants" data-toggle="tab"></i><i class="icon-plus"></i> {_'Add product variants'}</a></li>
-                    <li><a href="#manageVariants" data-toggle="tab"> {_'Delete variants'}</a></li>
-                   </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="addVariants">
-
-                        <p>{_'Here you can add new product variant.'}</p>
-                        {control addProductVariantForm}
-                    </div>
-                    <div class="tab-pane" id="manageVariants">
-                        <div>
-                     <p>{_'Manage and delete variants.'}</p>
-                     <table>
-                         <thead>
-                             <tr>
-                                 <td class="col-md-5">{_'Variant Name'}</td>
-                                 <td>{_'Options'}</td>
-                             </tr>
-                         </thead>
-                         <tbody>
-                         {foreach $productVariants as  $id => $productVariant}
-                             {if $productVariant->ProductVariantName !== NULL}
-                             <tr>
-                                 <td><strong>{$productVariant->ProductVariantName}</strong></td>
-                                 <td><a class="btn btn-default ajax" href="{plink ArchiveVariantProduct! $productVariant->ProductID}"><i class="icon-trash"></i></a></td>
-                             </tr>
-                             {/if}
-                            {/foreach}
-                         </tbody>
-                     </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
-        </div>
-    </div>
-</div>
-        </div>
 
     <div id="stats" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="stats" aria-hidden="true">
         <div class="modal-dialog">
@@ -534,6 +480,71 @@
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 </div>    
+{/ifCurrent}
+
+{ifCurrent Homepage:contact}
+<div id="addTextPicture" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addTextPicture" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title"><i class="icon-list"></i> {_'Add description photo'}</h4>
+        </div>
+        <div class="modal-body">
+           {foreach $adminAlbum as $id => $photo}
+                    <div class="clearfix">
+                        <div class="col-md-2">
+                        <img src="{$basePath}/images/static/{$photo->PhotoAlbumID}/s-{$photo->PhotoURL}" alt="{$post->StaticTextName}" class="img-responsive">
+                        </div>
+                        <div class="btn-group">
+      <a href="#wysiwyg" rel="{$basePath}/images/static/{$photo->PhotoAlbumID}/s-{$photo->PhotoURL}" class="addTextPicture btn btn-default">{_'Small'}</a>
+      <a href="#wysiwyg" rel="{$basePath}/images/static/{$photo->PhotoAlbumID}/m-{$photo->PhotoURL}" class="addTextPicture btn btn-default">{_'Medium'}</a>
+      <a href="#wysiwyg" rel="{$basePath}/images/static/{$photo->PhotoAlbumID}/l-{$photo->PhotoURL}" class="addTextPicture btn btn-default">{_'Large'}</a>
+  </div>
+                        <hr>
+                    </div>
+
+             {/foreach}
+        </div>
+    <div class="modal-footer">
+        <div class="col-md-12 pull-left">
+        {form addPhotoStaticForm}
+        <div class="form-group col-md-12">
+            <div class="input-group col-md-5">
+        {input image}
+             <p class="help-block"><i class="icon-info-sign"></i> {_'Max size is 2MB ~ 1 Megapixel photos'}</p>   
+            </div>
+        {input addPhoto}
+        </div>
+        {/form}
+     </div>
+      <button type="button" class="btn btn-default" data-dismiss="modal">{_'Close without adding'}</button>
+    </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div>    
+{/ifCurrent}
+
+{ifCurrent Blog:category}
+
+<div id="addPost" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3 id="myModalLabel"><i class="icon-plus"></i> Add new post</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Please fill in these information'}</p>
+                 {control addPostForm}
+              
+            </div>
+            <div class="modal-footer">
+               
+              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+            </div> </div> </div>
+    </div>
+
 {/ifCurrent}
 
 {/if}

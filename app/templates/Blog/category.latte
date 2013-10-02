@@ -7,17 +7,16 @@
 <div class="row">
      
         <div class="col-md-11">
-                <a href="#addPost" class="btn" data-toggel="modal" data-target="#addPostButton" id="addPostButton"><i class="icon-large icon-plus"></i> {_"Add Post"}</a>
+                <a href="#addPost" class="btn btn-default" data-toggel="modal" data-target="#addPostButton" id="addPostButton"><i class="icon-large icon-plus"></i> {_"Add Post"}</a>
                 <div class="btn-group">
-                <a href="#" class="btn"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
-                <a href="#editCategory" class="btn" data-toggel="modal" data-target="#editCategory" id="editCategoryButton"><i class="icon-large icon-pencil"></i> {_"Edit Category"}</a>
+                <a href="#" class="btn btn-default"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
                 </div>
                 
                 <div class="btn-group">
                     {if $category->CategoryStatus == 0}
-  <a class="btn" href="{plink setCategoryStatus! $category->CategoryID, 1}"><i class="icon-large icon-eye-open"></i> {_'Publish category'}</a>
+  <a class="btn btn-default" href="{plink setCategoryStatus! $category->CategoryID, 1}"><i class="icon-large icon-eye-open"></i> {_'Publish category'}</a>
   {elseif $category->CategoryStatus == 1}
-    <a class="btn" href="{plink setCategoryStatus! $category->CategoryID, 0}"><i class="icon-large icon-eye-close"></i> {_'Unpublish category'}</a></button>
+    <a class="btn btn-default" href="{plink setCategoryStatus! $category->CategoryID, 0}"><i class="icon-large icon-eye-close"></i> {_'Unpublish category'}</a></button>
      {/if}
   <button class="btn dropdown-toggle" data-toggle="dropdown">
     <span class="caret"></span>
@@ -81,69 +80,4 @@
     
     {block modal}
     
-    {if $user->isInRole('admin')}
-     
-    <div id="addPost" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-plus"></i> Add new post</h3>
-            </div>
-            <div class="modal-body">
-                <p>{_'Please fill in these information'}</p>
-                 {control addPostForm}
-              
-            </div>
-            <div class="modal-footer">
-               
-              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-            </div>
-    </div>
-    
-    <div id="editCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-pencil"></i> Edit Category</h3>
-            </div>
-            <div class="modal-body">
-                <p>{_'Please fill in these information'}</p>
-              
-            </div>
-            <div class="modal-footer">
-                {*control editCategoryForm}
-              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-            </div>
-    </div>
-    
-    
-    
-    <div id="deleteCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-pencil"></i> Delete {$category->CategoryName} Category?</h3>
-            </div>
-            <div class="modal-body">
-                <p>{_'Are you sure to delete this category?'}</p>
-                <p>{_'If so, choose where to move products!'}</p>
-             
-            </div>
-            <div class="modal-footer">
-                 {control deleteCategoryForm}
-              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-            </div>
-    </div>
-    
-<div id="addCategory" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-pencil"></i> Add Category</h3>
-            </div>
-            <div class="modal-body"></div>
-            <div class="modal-footer">
-                <p>{_'Please fill in these information'}</p>
-              {control addCategoryForm*}
-            
-              <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-            </div>
-            </div>
-{/if}
 {/block}

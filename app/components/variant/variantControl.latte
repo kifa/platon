@@ -5,6 +5,7 @@
     <li class="col-md-3">
     
     {if $productVariant->ProductVariantName}
+
  <h4 class="col-md-12 prodVarTitle{$productVariant->ProductID} col-md-12" n:snippet=editProdVarTitle{$productVariant->ProductID}">{$productVariant->ProductVariantName}</h4>
     {else}
   <h4 class="col-md-12 col-md-12">{$productVariant->ProductName}</h4>
@@ -36,7 +37,7 @@
     </div>
 </li>
    
-<li class="col-md-2 text-center">
+<li class="col-md-3 text-center">
 
                     {if $productVariant->PiecesAvailable >= 5}
                     <span class="label label-success col-md-12">
@@ -46,26 +47,28 @@
                             <span class="label label-default col-md-12">
                         {/if}
 <span class="col-md-12 text-center">{_"In stock"}</span> <span class="prodAmount{$productVariant->ProductID} col-md-12 text-center" n:snippet="prodAmount{$productVariant->ProductID}">{if $productVariant->PiecesAvailable > 0}{$productVariant->PiecesAvailable}{else}0{/if}</span></span>
-
-</li>
-
-<li class="col-md-2 text-center">
+                            <br>
     <span class="label label-default col-md-12">
                              <span class="">{_"Shipping"} {_'from'}</span> 
                              <span class="">{$shippingPrice|number},-</span></span>                            
 
 </li>
 
-<li class="col-md-2 col-xs-12 text-center">
-  <a href="{plink addToCart! $productVariant->ProductID, "1"}" class="col-md-9 col-xs-11 margin5 btn btn-success ajax addToCart">
-                <i class="icon-shopping-cart"></i> {_'Buy'}</a>
+<li class="col-md-3 col-xs-12 text-center">
+     {if $user->isInRole('admin')}
+    
+ 
                 
-                {if $user->isInRole('admin')}
-            <div class="btn-group col-md-12 margin5">
-              <button class="btn btn-default" id="editPriceOff{$productVariant->ProductID}" class="hide" style="display: none;">{_'Finish Editing Price'}</button>
-              <button class="btn btn-default" id="editPrice{$productVariant->ProductID}">{_'Edit Price'}</button> 
-            </div>
-              {/if}  
+    <div class="btn-group"> 
+            <button class="btn btn-default" id="editPrice{$productVariant->ProductID}">{_'Edit Price'}</button>
+            {if $productVariant->ProductVariantName}
+<a class="btn btn-default ajax pull-left" href="{plink archiveVariantProduct! $productVariant->ProductID}"><i class="icon-trash"></i></a>
+            {/if}
+    </div>
+        {else}
+             <a href="{plink addToCart! $productVariant->ProductID, "1"}" class="btn btn-success ajax addToCart">
+                <i class="icon-shopping-cart"></i> {_'Buy'}</a>
+        {/if}  
     
 </li>
         </ul>              

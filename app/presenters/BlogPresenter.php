@@ -75,10 +75,12 @@ class BlogPresenter extends BasePresenter {
             $addPost = new Nette\Application\UI\Form;
             $addPost->setTranslator($this->translator);
             $addPost->addText('name', 'Name:')
+                    ->setAttribute('class', 'form-control ')
                     ->setRequired();
-            $addPost->addSelect('cat', 'Category: ', $category);
+            $addPost->addSelect('cat', 'Category: ', $category)
+                    ->setAttribute('class', 'form-control');
             $addPost->addSubmit('add', 'Add Post')
-                    ->setAttribute('class', 'upl btn btn-primary')
+                    ->setAttribute('class', 'form-control upl btn btn-primary')
                     ->setAttribute('data-loading-text', 'Adding...');
             $addPost->onSuccess[] = $this->addPostFormSubmitted;
             return $addPost;
