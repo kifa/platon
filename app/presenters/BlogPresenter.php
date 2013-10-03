@@ -80,7 +80,7 @@ class BlogPresenter extends BasePresenter {
             $addPost->addSelect('cat', 'Category: ', $category)
                     ->setAttribute('class', 'form-control');
             $addPost->addSubmit('add', 'Add Post')
-                    ->setAttribute('class', 'form-control upl btn btn-primary')
+                    ->setAttribute('class', 'upl btn btn-primary')
                     ->setAttribute('data-loading-text', 'Adding...');
             $addPost->onSuccess[] = $this->addPostFormSubmitted;
             return $addPost;

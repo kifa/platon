@@ -6,14 +6,24 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Category'}</h3>
             </div>
-            <div class="modal-body">
+            {form addCategoryForm}
+    <div class="modal-body">
                 <p>{_'Please fill in these information'}</p>
-                       {control addCategoryForm}
-            </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-            </div>
+    <div class="form-group">
+    {label name /}
+    {input name} </div>
+                <div class="form-group">
+                {label parent /}
+     {input parent}
+                </div>
+    </div>
+    <div class="modal-footer">
+        {input add}
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+    </div>
+        {/form}
         </div> </div> </div>
+
 
 <div id="addStaticText" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -180,6 +190,9 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title"><i class="icon-star"></i> {_'Product SEO'}</h4>
           </div>
+             
+    {form productSeoForm}
+
           <div class="modal-body">
               <p class="muted">{_'Why is important to edit this field?'}
               <ul>
@@ -189,18 +202,18 @@
               </ul>
               
               </p>
-            {form productSeoForm}
               {label name /}
               {input name}
               
-              {input set}
               
               
-            {/form}
         </div>                                    
         <div class="modal-footer">
+                          {input set}
+
              <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
         </div>
+            {/form}
 
     </div>
             </div>
@@ -258,7 +271,7 @@
             {control gapiModule:product 141}
         </div>                                    
         <div class="modal-footer">
-             <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+             <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close'}</button>
         </div>
 
     </div>
@@ -313,17 +326,27 @@
 
 {ifCurrent Product:products}
 <div id="addCategoryPhoto" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel"><i class="icon-plus"></i> {_'Add category photo'}</h3>
-    </div>
+    </div> {form addCategoryPhotoForm}
     <div class="modal-body">
-        <p>{_'Please fill in these information'}</p>
-                        {control addCategoryPhotoForm}
+        <p>{_'Select image you would like to assigne to category'} {$category->CategoryName}</p>
+        <div class="form-group">   
+         {label image /}
+            {input image}
+        </div>
     </div>
     <div class="modal-footer">
+        <div class="form-group">
+        {input add}
         <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-    </div>
+        </div>
+    </div> {/form}
+</div>
+</div>
 </div>
 
 
@@ -341,40 +364,23 @@
     </div>
     <div class="modal-footer">
                  {control deleteCategoryForm}
-        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without delete'}</button>
     </div>
 </div>
 </div>
 </div>
-    <div id="addCategory" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Category'}</h3>
-    </div>
-    <div class="modal-body">
-                <p>{_'Please fill in these information'}</p>
-    {control addCategoryForm}
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-    </div>
-</div>
-
 
 
 <div id="addProduct" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addProduct" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog" n:snippet="newproduct">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Add Product</h4>
       </div>
- <div class="modal-body" n:snippet="newproduct">
+            {form addProductForm}
+ <div class="modal-body" >
 
-     {form addProductForm role => 'form'}
-<ul class="errors" n:if="$form->hasErrors()">
-        <li n:foreach="$form->errors as $error">{$error}</li>
-</ul> 
 <div class="form-group">
     {label name /}
     {input name}
@@ -391,18 +397,20 @@
     {label image /}
     {input image}
         <p class="help-block"><i class="icon-info-sign"></i> Max size is 2MB ~ 1 Megapixel photos</p>
-    </div><div class="form-group">
-    {input add}
     </div>
     
-{/form}
+
   <span class="help-block"><i class="icon-info-sign"></i> {_'Enter this basic info. All other can be added later.'}</span>  
 
 </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close without adding</button>
+          <div class="form-group">
+          {input add}
+          <button type="button" class="btn btn-default" data-dismiss="modal">{_'Close without adding'}</button>
+          </div>
       </div>
-    </div><!-- /.modal-content -->
+{/form}
+          </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
@@ -414,6 +422,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h4 class="modal-title"><i class="icon-star"></i> {_'Category SEO'}</h4>
           </div>
+            {form categorySeoForm}
           <div class="modal-body">
               <p class="muted">{_'Why is important to edit this field?'}
               <ul>
@@ -423,15 +432,17 @@
               </ul>
               {_'Quick tip:'} {_'Change category name like this - Glasses => Sport Sunglasses from USA'}.
               </p>
-            {form categorySeoForm}
+            
               {label name /}
               {input name}
-              {input set}
-            {/form}
+              
+           
         </div>                                    
         <div class="modal-footer">
+            {input set}
              <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
         </div>
+             {/form}
 
     </div>
             </div>
@@ -533,16 +544,23 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
               <h3 id="myModalLabel"><i class="icon-plus"></i> Add new post</h3>
-            </div>
+            </div> {form addPostForm}
             <div class="modal-body">
                 <p>{_'Please fill in these information'}</p>
-                 {control addPostForm}
+               {label name /}
+                {input name}
+                
+                {label cat /}
+                {input cat}
+                
               
             </div>
             <div class="modal-footer">
-               
+               {input add}
               <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
-            </div> </div> </div>
+            </div> {/form}
+        </div>
+       </div>
     </div>
 
 {/ifCurrent}

@@ -190,7 +190,7 @@ class ProductPresenter extends BasePresenter {
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
             $addProduct->addSubmit('add', 'Add Product')
-                    ->setAttribute('class', 'upl btn btn-success form-control')
+                    ->setAttribute('class', 'upl btn btn-success')
                     ->setAttribute('data-loading-text', 'Adding...');
             $addProduct->onSuccess[] = $this->addProductFormSubmitted;
             return $addProduct;
@@ -280,7 +280,8 @@ class ProductPresenter extends BasePresenter {
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
             $addProduct->addSubmit('add', 'Add Product Variant')
-                    ->setAttribute('class', 'upl btn btn-success form-control')
+                    ->setAttribute('class', 'upl btn btn-success
+                        ')
                     ->setAttribute('data-loading-text', 'Adding...');
             $addProduct->onSuccess[] = $this->addProductVariantFormSubmitted;
             return $addProduct;
@@ -827,7 +828,7 @@ class ProductPresenter extends BasePresenter {
                     ->setRequired()
                     ->setAttribute('class', 'form-control');
             $video->addSubmit('save', 'Add Product Video')
-                    ->setAttribute('class', 'btn btn-primary form-control upl')
+                    ->setAttribute('class', 'btn btn-primary upl')
                     ->setAttribute('data-loading-text', 'Saving...');
             $video->onSuccess[] = $this->productVideoFormSubmitted;
             return $video;
@@ -852,7 +853,7 @@ class ProductPresenter extends BasePresenter {
                     ->setAttribute('class', 'form-control')
                     ->setRequired();
             $seo->addSubmit('set', 'Save SEO text')
-                    ->setAttribute('class', 'btn btn-primary form-control upl')
+                    ->setAttribute('class', 'btn btn-primary upl')
                     ->setAttribute('data-loading-text', 'Setting...');
             $seo->onSuccess[] = $this->productSeoFormSubmitted;
             return $seo;
@@ -876,7 +877,7 @@ class ProductPresenter extends BasePresenter {
                     ->setAttribute('class', 'form-control')
                     ->setRequired();
             $seo->addSubmit('set', 'Save SEO text')
-                    ->setAttribute('class', 'btn btn-primary form-control upl')
+                    ->setAttribute('class', 'btn btn-primary upl')
                     ->setAttribute('data-loading-text', 'Setting...');
             $seo->onSuccess[] = $this->categorySeoFormSubmitted;
             return $seo;
@@ -900,7 +901,7 @@ class ProductPresenter extends BasePresenter {
                     ->addRule(FORM::IMAGE, 'Je podporován pouze soubor JPG, PNG a GIF')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024);
             $addPhoto->addSubmit('add', 'Add Photo')
-                    ->setAttribute('class', 'btn-primary upl')
+                    ->setAttribute('class', 'btn btn-primary upl')
                     ->setAttribute('data-loading-text', 'Uploading...');
             $addPhoto->onSuccess[] = $this->addCategoryPhotoFormSubmitted;
             return $addPhoto;
@@ -927,12 +928,12 @@ class ProductPresenter extends BasePresenter {
                 $image->save($imgUrl);
 
                 $image = Image::fromFile($imgUrl);
-                $image->resize(null, 20, Image::SHRINK_ONLY);
+                $image->resize(50, 50, Image::EXACT);
 
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/20-' . $form->values->image->name;
+                $imgUrl = $this->context->parameters['wwwDir'] . '/images/category/s-' . $form->values->image->name;
                 $image->save($imgUrl);
 
-                $this->categoryModel->addPhoto($form->values->categoryID, $form->values->image->name);
+                $this->categoryModel->addPhoto($form->values->catID, $form->values->image->name);
 
                 $message = $this->translator->translate(' was sucessfully uploaded');
                 $photo = $this->translator->translate(' Photo ');
