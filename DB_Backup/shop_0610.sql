@@ -787,6 +787,7 @@ CREATE TABLE `productstatus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `productstatus` (`ProductStatusID`, `ProductStatusName`, `ProductStatusDescription`) VALUES
+(0,	'Archived',	'Archived product'),
 (1,	'Concept',	'This product is in stae: Concept'),
 (2,	'Visible',	'This product is visible'),
 (3,	'Featured',	'Featured product');
@@ -940,4 +941,4 @@ CREATE TABLE `video` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
 
--- 2013-09-22 21:42:00
+-- 2013-10-06 13:10:29
