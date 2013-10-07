@@ -59,7 +59,7 @@ $router[] = new Route('koupit/<id>[/<lang [a-z]{2}>]', 'Product:product');
 $router[] = new Route('novinky/<blogid>-<slug>[/<lang [a-z]{2}>]', 'Blog:posts');
 $router[] = new Route('novinky/clanek/<postid>[-<slug>][/<lang [a-z]{2}>]', 'Blog:post');
 
-$router[] = new Route('informace/<spostid>-<slug>[/<lang [a-z]{2}>]', 'Blog:staticText');
+$router[] = new Route('informace/<spostid>[-<slug>][/<lang [a-z]{2}>]', 'Blog:staticText');
 
 //$router[] = new Route('[<lang [a-z]{2}>]/', 'Homepage:default');
 $router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);

@@ -5,7 +5,7 @@
   <SHOPITEM>
     <ITEM_ID>{$product->ProductID}</ITEM_ID>
     <PRODUCTNAME>{$product->ProductName}</PRODUCTNAME>
-    <PRODUCT>{$product->ProductName}</PRODUCT>
+    <PRODUCT>{$product->ProductSeoName}</PRODUCT>
     <DESCRIPTION>{$product->ProductShort}</DESCRIPTION>
     <URL>{plink //Product:product $product->ProductID, $product->ProductName}</URL>
     <IMGURL>{$baseUrl}/images/{$product->PhotoAlbumID}/300-{$product->PhotoURL}</IMGURL>
