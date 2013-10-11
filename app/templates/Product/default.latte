@@ -37,7 +37,7 @@
 <div class="col-md-12 product">
     <div class="col-md-5 text-center">
         {if $photo}
-                     <img src="{$basePath}/images/{$albumID}/l-{$photo->PhotoURL}" class="img-responsible" />
+                     <img src="{$basePath}/images/{$albumID}/l-{$photo->PhotoURL}" class="img-responsive" />
 
                 {else}
                    <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="col-md-2" style="height: 150px; width: auto;"/>
@@ -63,8 +63,11 @@
                         <dt>{$parameter->AttribName}:</dt>
                         <dd>{$parameter->Val}{$parameter->UnitShort}</dd>
                         {/foreach}   
+                        
+                        {if $product->ProducerName !== 'N/A'}
                         <dt>Brand:</dt>
-                        <dd><a href="{plink product:productsBrand $product->ProducerID}">{$product->ProducerName}</a></dd>
+                        <dd><a href="{plink product:productsBrand $product->ProducerID, $product->ProducerName}">{$product->ProducerName} - {_'more products'}...</a></dd>
+                        {/if}
                     </dl>
                 </div>
                
@@ -187,6 +190,11 @@
               
                    </ul>
                         <div class="col-md-12">
+                           {if $videos} 
+                            <br>
+                            <h3>{_'Product Video'}</h3>
+                            
+                            {/if}
                            {if $user->isInRole('admin')}
                                 {control productVideoForm}
                            {/if}

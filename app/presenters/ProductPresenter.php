@@ -655,7 +655,7 @@ class ProductPresenter extends BasePresenter {
         $this->template->category = $this->categoryModel->loadCategory($catID);
     }
 
-    public function renderProductsBrand($prodID) {
+    public function renderProductsBrand($prodID, $slug) {
 
         $this->template->products = $this->productModel->loadCatalogBrand($prodID);
 

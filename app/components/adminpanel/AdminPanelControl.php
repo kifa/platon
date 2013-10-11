@@ -78,6 +78,23 @@ class AdminPanelControl extends BaseControl {
             }
         }
     }
+    
+    public function handleDeleteProduct($id, $catID) {
+        if ($this->presenter->getUser()->isInRole('admin')) {
+            $this->productModel->updateProduct($id, 'ProductStatusID', 0);
+            if($this->presenter->isAjax()) {
+               $this->parent->invalidateControl();
+                $this->presenter->invalidateControl('products');
+                $this->presenter->invalidateControl('script');
+                
+            }
+            else {
+            
+            $this->redirect('Product:products', $catID);
+            
+            }
+        }
+    }
 
     public function handleShowProduct($id) {
         if ($this->presenter->getUser()->isInRole('admin')) {

@@ -185,6 +185,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
                                          'sideMenu' =>$shopInfo['SideMenu']->Value,
                                          'footerMenu' =>  $shopInfo['FooterMenu']->Value));
         $this->template->style = $shopInfo['Style']->Value;
+        $this->template->slider = NULL;
 
           }
     }

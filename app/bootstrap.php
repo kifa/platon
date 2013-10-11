@@ -54,6 +54,8 @@ Route::setStyleProperty('slug', Route::FILTER_IN, function($url) {
 
 $router[] = new Route('<catID>[-<slug>][/<lang [a-z]{2}>]', 'Product:products');
 
+$router[] = new Route('znacka/<prodID>[-<slug>][/<lang [a-z]{2}>]', 'Product:productsBrand');
+
 $router[] = new Route('koupit/<id>[-<slug>][/<lang [a-z]{2}>]', 'Product:product');
 $router[] = new Route('koupit/<id>[/<lang [a-z]{2}>]', 'Product:product');
 $router[] = new Route('novinky/<blogid>-<slug>[/<lang [a-z]{2}>]', 'Blog:posts');
