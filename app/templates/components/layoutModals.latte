@@ -58,6 +58,8 @@
                            <li><a href="#editHomepage" data-toggle="tab"><i class=""></i> {_'Homepage'}</a></li>
                            <li><a href="#editSlider" data-toggle="tab"><i class="icon-chevron-right"></i>  {_'Slider'}</a></li>
                            <li><a href="#editBanner" data-toggle="tab"><i class="icon-chevron-right"></i> {_'Banners'}</a>
+                            <li><a href="#addLogo" data-toggle="tab"><i class=""></i> {_'Upload your logo'}</a></li>
+
                            <li><a href="#addStyle" data-toggle="tab"><i class=""></i> {_'Add your style.css'}</a></li>
                         <li><a href="#premium" data-toggle="tab"><i class="icon-star icon-small"></i> {_'Premium design'}</a></li>
                     </ul>
@@ -159,6 +161,12 @@
                                     {control addBannerForm}
                              <p><i class="icon-info-sign"></i> {_'Quick Tip'}: {_'You can set new link without uploading new banner.'} {_'Just select banner position and enter link'}.</p>
                         </div>
+                        
+                        
+                        <div class="tab-pane" id="addLogo">
+                        <strong>{_'Upload your logo'}</strong>
+                         {control addLogoForm}
+                         </div>
                         
                         <div class="tab-pane" id="addStyle">
                         {control uploadStyleForm}
@@ -268,7 +276,7 @@
             <h4 class="modal-title"><i class="icon-list"></i> {_'Product stats'}</h4>
           </div>
           <div class="modal-body">
-            {control gapiModule:product 141}
+            {*control gapiModule:product 141*}
         </div>                                    
         <div class="modal-footer">
              <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close'}</button>

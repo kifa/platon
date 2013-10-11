@@ -237,33 +237,8 @@
 
 {if $user->isInRole('admin')}           
                          
-<script>
-    $(document).ready(function() {
-
-            $('.nav-tabs').button();
-
-
-            $('#editParamButton').toggle(function(){
-                $('#editParam').modal('show');
-              },
-              function() {
-                  $('#editParam').modal('hide');
-              });
-              
-
-
-            $('#statsButton').toggle(function(){
-                $('#stats').modal('show');
-              },
-              function() {
-                  $('#stats').modal('hide');
-              });
-              
-              {if $attr == 1}
-                  $('#editParam').modal('show');
-                  {/if}
-                      
-          {foreach $productVariants as  $id => $productVariant}
+<script n:snippet="variantscript">
+{foreach $productVariants as  $id => $productVariant}
 
 
               $('#editPrice{$productVariant->ProductID}').toggle(function(){
@@ -347,8 +322,35 @@
                      var json = $.parseJSON(value);
                      $('.prodShort').text(json.edit);
                  }
-          });
-          
+          }); 
+
+
+</script>   
+    <script>
+    $(document).ready(function() {
+
+            $('.nav-tabs').button();
+
+
+            $('#editParamButton').toggle(function(){
+                $('#editParam').modal('show');
+              },
+              function() {
+                  $('#editParam').modal('hide');
+              });
+              
+
+
+            $('#statsButton').toggle(function(){
+                $('#stats').modal('show');
+              },
+              function() {
+                  $('#stats').modal('hide');
+              });
+              
+              {if $attr == 1}
+                  $('#editParam').modal('show');
+                  {/if}
 });
 </script>
     {/if}

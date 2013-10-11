@@ -49,58 +49,6 @@ class variantControl extends BaseControl {
     return $template;
     }
 
-
-    protected function createComponentTrackingForm(){
-       
-        $trackingForm = new Nette\Application\UI\Form;
-        $trackingForm->setTranslator($this->translator);
-        $trackingForm->addText('user', 'Your email:')
-                ->addRule(FORM::EMAIL)
-                ->setRequired()
-                ->setAttribute('class', 'form-control');;
-        $trackingForm->addText('order', 'Your order number:')
-                ->setRequired()
-                ->setAttribute('class', 'form-control');;
-        $trackingForm->addText('pass', 'Your secret code:')
-                ->setRequired('Please enter your secret code from mail')
-                ->setAttribute('class', 'form-control');
-        $trackingForm->addSubmit('track', 'Track order')
-                ->setAttribute('class', 'btn btn-success form-control')
-                ->setHtmlId('track');
-        $trackingForm->onSuccess[] = $this->trackingFormSubmitted;
-        return $trackingForm;
-    }
-    
-    public function trackingFormSubmitted($form) {
-        $row = $this->service->loadOrder($form->values->order);
-        $e = Html::el('i')->class('icon-warning-sign');
-        
-        if (!$row) {
-            $text = $this->translator->translate(' Order not found. Please try again!');
-            $message = HTML::el('span', $text);
-            $message->insert(0, $e);
-            $this->presenter->flashMessage($message, 'alert');
-            $this->presenter->redirect('this');
-        }
-        elseif ($row->UsersID !== $form->values->user) {
-            $text = $this->translator->translate(' Email not found. Please try again!');
-            $message = HTML::el('span', $text);
-            $message->insert(0, $e);
-            $this->presenter->flashMessage($message, 'alert');
-            $this->presenter->redirect('this');
-        }
-        elseif (md5($row->UsersID . $row->OrderID . $row->DateCreated ) !== $form->values->pass) {
-            $text = $this->translator->translate(' Your password is incorrect. Please try again.');
-            $message = HTML::el('span', $text);
-            $message->insert(0, $e);
-            $this->presenter->flashMessage($message, 'alert');
-            $this->presenter->redirect('this');
-        }
-        else  {
-            $this->presenter->redirect('Order:orderDone', $row->OrderID, $form->values->pass);
-        }        
-    }
-    
     
     protected function createComponentEditPriceForm() {
         if ($this->presenter->getUser()->isInRole('admin')) {
@@ -137,7 +85,9 @@ class variantControl extends BaseControl {
             if($this->presenter->isAjax()){
                 
                 $this->presenter->invalidateControl('variants');
+               
                 $this->presenter->invalidateControl('script');
+                 $this->presenter->invalidateControl('variantscript');
             }
             else {
             

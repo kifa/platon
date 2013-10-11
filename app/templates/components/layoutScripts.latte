@@ -20,7 +20,7 @@ $(document).ready(function() {
           });
 
      {if $user->isInRole('admin')}   
-            $('#addCategoryButton').toggle(function(){
+            $('.addCategoryButton').toggle(function(){
            $('#addCategory').modal('show');
          },
          function() {
@@ -34,7 +34,7 @@ $(document).ready(function() {
                   $('#editSeo').modal('hide');
               });
               
-         $('#addStaticTextButton').toggle(function(){
+         $('.addStaticTextButton').toggle(function(){
            $('#addStaticText').modal('show');
          },
          function() {

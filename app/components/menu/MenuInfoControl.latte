@@ -14,5 +14,5 @@
     </li>
     <li class="{ifCurrent Homepage:contact}active{/ifCurrent}"><a href="{plink Homepage:contact}"><i class="icon-large icon-phone"></i> {_"Contact"}</a></li>
 {if $user->isInRole('admin')}
-    <li><a href="#addStaticText" data-toggel="modal" data-target="#addStaticText" id="addStaticTextButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Text"}</a></li>
+    <li><a href="#addStaticText" data-toggel="modal" data-target="#addStaticText" class="addStaticTextButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Text"}</a></li>
 {/if}
