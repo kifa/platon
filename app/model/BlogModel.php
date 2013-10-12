@@ -123,14 +123,33 @@ class BlogModel extends Repository {
         return $photoalbum;
     }
     
-    public function loadPhotoAlbumStatic($postid){
-        if($postid==''){
+    public function loadPhotoAlbumStaticID($spostid){
+        if($spostid==''){
+            return NULL;
+        }
+        else{            
+            $photoalbum = $this->getTable('photoalbum')
+                    ->where('photoalbum.StaticTextID',$spostid)
+                    ->fetch();            
+        }
+        
+        if($photoalbum == FALSE){
+            $photoalbum = array(
+                'PhotoAlbumID' => 0
+            );
+        }
+        
+        return $photoalbum;
+    }
+    
+    public function loadPhotoAlbumStatic($spostid){
+        if($spostid==''){
             return $this->getTable('photoalbum');
         }
         else{
             return $this->getTable('photo')
                     ->select('photo.*,photoalbum.*')
-                    ->where('photoalbum.StaticTextID', $postid)
+                    ->where('photoalbum.StaticTextID', $spostid)
                     ->fetchPairs('PhotoID');            
         }
     }

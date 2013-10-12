@@ -457,10 +457,13 @@ class BlogPresenter extends BasePresenter {
              if($albumid == FALSE) {
                  $row = $this->shopModel->loadStaticText($spostid);
                  $albumid = $this->productModel->insertPhotoAlbum($row->StaticTextName, '', NULL, NULL, $spostid);
-             }            
+             } else {
+                 $albumid = $this->blog->loadPhotoAlbumStaticID($spostid);
+             }           
                 $addPhotoStaticForm = $this['addPhotoStaticForm'];
-                $addPhotoStaticForm->setDefaults(array('name' => 'photoalbum', 'textalbumid' => $albumid ));
+                $addPhotoStaticForm->setDefaults(array('name' => 'photoalbum', 'textalbumid' => $albumid->PhotoAlbumID ));
             }
+          
     }
     
     public function renderStaticText($spostid) {
