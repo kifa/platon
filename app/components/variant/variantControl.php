@@ -87,8 +87,7 @@ class variantControl extends BaseControl {
                 $this->presenter->invalidateControl('variants');
                
                 $this->presenter->invalidateControl('script');
-                 $this->presenter->invalidateControl('variantscript');
-            }
+                 }
             else {
             
             $this->redirect('this');
@@ -101,7 +100,10 @@ class variantControl extends BaseControl {
             $this->productModel->updateSale($id, $amount, $type);
             if($this->presenter->isAjax()) {
                 $this->presenter->invalidateControl('variants');
+                
+            
                 $this->presenter->invalidateControl('script');
+                $this->presenter->invalidateControl('variantscript');
             }
             else{
               $this->presenter->redirect('this');  

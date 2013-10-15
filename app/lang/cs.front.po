@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-10-11 15:05:39
+# Created: 2013-10-15 10:18:07
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-10-11 15:05+0200\n"
+"PO-Revision-Date: 2013-10-15 10:18+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -177,6 +177,9 @@ msgstr "Adresa"
 msgid "Admin"
 msgstr "Správa"
 
+msgid "All"
+msgstr "Vše"
+
 msgid "All orders"
 msgstr "Všechny objednávky"
 
@@ -215,6 +218,9 @@ msgstr "Zpět na Smart Panel"
 
 msgid "Banner Position 1"
 msgstr "Pozice Banner 1"
+
+msgid "Banners"
+msgstr "Bannery"
 
 msgid "Best sellers"
 msgstr "Nejprodávanější"
@@ -357,6 +363,9 @@ msgstr "Zavřít a testovat"
 msgid "Close without adding"
 msgstr "Zavřít bez přidání"
 
+msgid "Close without delete"
+msgstr "Zavřít bez smazání"
+
 msgid "Close without saving"
 msgstr "Zavřít bez uložení"
 
@@ -380,6 +389,9 @@ msgstr "Objednat zboží"
 
 msgid "Cookies help us deliver our services. By using our services, you agree to our use of cookies."
 msgstr "Při poskytování služeb nám pomáhají soubory cookie. Používáním našich služeb vyjadřujete souhlas s naším používáním souborů cookie."
+
+msgid "Copy"
+msgstr "Kopie"
 
 msgid "Create"
 msgstr "Vytvořit"
@@ -422,6 +434,9 @@ msgstr "Deaktivovat modul"
 
 msgid "Dear Sir"
 msgstr "Vážený zákazníku"
+
+msgid "Default"
+msgstr "Základní"
 
 msgid "Delete"
 msgstr "Smazat"
@@ -503,6 +518,9 @@ msgstr "Stáhnout XML feed"
 
 msgid "Download link"
 msgstr "Odkaz na stažení"
+
+msgid "Duplicate product"
+msgstr "Duplikovat produkt"
 
 msgid "EDIT address by Double-clicking."
 msgstr "Upravte adresu dvojitým poklepáním na údaj."
@@ -591,6 +609,9 @@ msgstr "Zvýraznit produkt"
 msgid "Featured"
 msgstr "Doporučené"
 
+msgid "Featured categories"
+msgstr "Doporučené kategorie"
+
 msgid "Featured products"
 msgstr "Doporučené produkty"
 
@@ -608,6 +629,9 @@ msgstr "Ukončit editaci"
 
 msgid "Finish your order"
 msgstr "Dokončete objednávku"
+
+msgid "Footer Menu"
+msgstr "Menu v patičce"
 
 msgid "Free from"
 msgstr "Zdarma od"
@@ -677,6 +701,9 @@ msgstr "Nadřazené poštovné"
 
 msgid "Home"
 msgstr "Domů"
+
+msgid "Homepage"
+msgstr "Úvodka"
 
 msgid "Homepage layout"
 msgstr "Design úvodky"
@@ -749,6 +776,9 @@ msgstr "Nejnovější komentáře a recenze"
 
 msgid "Latest Orders"
 msgstr "Nejnovější objednávky"
+
+msgid "Layout"
+msgstr "Rozložení"
 
 msgid "Link to this page has been sent to your email."
 msgstr "Odkaz na tuto stránku naleznete v emailu."
@@ -833,6 +863,9 @@ msgstr "Další postup"
 
 msgid "No revenue data, yet."
 msgstr "Zatím žádné údaje o tržbách."
+
+msgid "No sidebar"
+msgstr "Bez postranního panelu"
 
 msgid "No source data, yet."
 msgstr "Zatím žádné údaje o zdrojích návštěv."
@@ -972,6 +1005,9 @@ msgstr "Prosíme, zaplaťte přes PayPal"
 msgid "Post"
 msgstr "Příspěvek"
 
+msgid "Premium design"
+msgstr "Premium vzhled"
+
 msgid "Prev Order"
 msgstr "Předchozí obj."
 
@@ -998,6 +1034,9 @@ msgstr "Název produktu"
 
 msgid "Product SEO"
 msgstr "SEO Produktu"
+
+msgid "Product Video"
+msgstr "Video produktu"
 
 msgid "Product layout"
 msgstr "Rozložení produktu"
@@ -1035,8 +1074,14 @@ msgstr "Otázky a poznámky"
 msgid "Questions?"
 msgstr "Otázky?"
 
+msgid "Quick tip"
+msgstr "Rychlý tip"
+
 msgid "Quick tip:"
 msgstr "Rychlý tip:"
+
+msgid "ReDesign"
+msgstr "ReDesign"
 
 msgid "Read Terms"
 msgstr "Přečíst podmínky"
@@ -1128,6 +1173,9 @@ msgstr "Vyberte specifikaci:"
 msgid "Select unit:"
 msgstr "Zvolte jednotku:"
 
+msgid "Select your eshop layout"
+msgstr "Prosím vyberte rozložení vašeho obchodu"
+
 msgid "Select your logo"
 msgstr "Vyberte logo"
 
@@ -1142,6 +1190,9 @@ msgstr "Rozvržení katalogu"
 
 msgid "Set as COVER image"
 msgstr "Nastavit jako titulku"
+
+msgid "Set menus"
+msgstr "Nastavit menu"
 
 msgid "Set new HEUREKA Key"
 msgstr "Nastavte nový HEUREKA klíč"
@@ -1172,6 +1223,12 @@ msgstr "Informace o eshopu"
 
 msgid "Shop layout"
 msgstr "Rozvržení shopu"
+
+msgid "Side Menu"
+msgstr "Boční menu"
+
+msgid "Side menu"
+msgstr "Boční menu"
 
 msgid "Sidebar"
 msgstr "Boční panel"
@@ -1277,6 +1334,12 @@ msgstr "Pro pokračování se prosím přihlaste"
 
 msgid "To remove this module visit"
 msgstr "Pro odebrání modulu navštivte "
+
+msgid "Top Main Menu"
+msgstr "Horní menu"
+
+msgid "Top bar"
+msgstr "Horní panel"
 
 msgid "Total"
 msgstr "Celkem"
@@ -1503,6 +1566,9 @@ msgstr " "
 msgid "from"
 msgstr "od"
 
+msgid "more products"
+msgstr "více produktů"
+
 msgid "moved to new status!"
 msgstr "má nový stav!"
 
@@ -1524,285 +1590,6 @@ msgstr "vyzkoušet naši administraci"
 msgid "was successfully placed!"
 msgstr "byla úspěšně přijata."
 
-msgid "Product Video"
-msgstr "Video produktu"
-
-msgid "WYSIWYG - the simplest way to manage your shop."
-msgstr ""
-
-msgid "Forget to learn and search throw diffucult administration."
-msgstr ""
-
-msgid "Everything in your shop is editable right on place."
-msgstr ""
-
 msgid "Just click on Names, Descriptions, Photos... and edit them. You will love it."
-msgstr ""
-
-msgid "Are you ready to see how this all work?"
-msgstr ""
-
-msgid "Mobile by default, including administration."
-msgstr ""
-
-msgid "Yes, everyone has smartphone and browsing internet on tablet."
-msgstr ""
-
-msgid "Be ready for mobile customers and surprise them!"
-msgstr ""
-
-msgid "And we know, you like smart devices too."
-msgstr ""
-
-msgid "So you can manage the whole store right from your iOS/Android device without having special app."
-msgstr ""
-
-msgid "ReDesign"
-msgstr ""
-
-msgid "Quick tip"
-msgstr ""
-
-msgid "To changehomepage apparance, click on"
-msgstr ""
-
-msgid "Africa"
-msgstr ""
-
-msgid "Central America"
-msgstr ""
-
-msgid "Coffee by region"
-msgstr ""
-
-msgid "Coffee by Roast"
-msgstr ""
-
-msgid "Dark"
-msgstr ""
-
-msgid "Indonesia"
-msgstr ""
-
-msgid "Light"
-msgstr ""
-
-msgid "South America"
-msgstr ""
-
-msgid "Tea"
-msgstr ""
-
-msgid "Tékané"
-msgstr ""
-
-msgid "Layout"
-msgstr ""
-
-msgid "Homepage"
-msgstr ""
-
-msgid "Slider"
-msgstr ""
-
-msgid "Banners"
-msgstr ""
-
-msgid "Premium design"
-msgstr ""
-
-msgid "Select your eshop layout"
-msgstr ""
-
-msgid "Default"
-msgstr ""
-
-msgid "Default \"traditional\" layout. Logo, big top menu, sidebar."
-msgstr ""
-
-msgid "Side menu"
-msgstr ""
-
-msgid "Layout with side menu."
-msgstr ""
-
-msgid "Top bar"
-msgstr ""
-
-msgid "Application-like layout. Fixed top navigation, sidebar."
-msgstr ""
-
-msgid "No sidebar"
-msgstr ""
-
-msgid "Wide layout without sidebar."
-msgstr ""
-
-msgid "Assign different menus to position you like it."
-msgstr ""
-
-msgid "Top Main Menu"
-msgstr ""
-
-msgid "All"
-msgstr ""
-
-msgid "Side Menu"
-msgstr ""
-
-msgid "Footer Menu"
-msgstr ""
-
-msgid "Set menus"
-msgstr ""
-
-msgid "Display all categories in your eshop"
-msgstr ""
-
-msgid "Display Info pages (like About us, etc.)"
-msgstr ""
-
-msgid "Display cart and tracking menu"
-msgstr ""
-
-msgid "Display all defined Brands in your eshop"
-msgstr ""
-
-msgid "Display all info abowe. Suitable for small eshops"
-msgstr ""
-
-msgid "Choose one of four products layout."
-msgstr ""
-
-msgid "Your product page can look like this."
-msgstr ""
-
-msgid "Photo time"
-msgstr ""
-
-msgid "Content Focus"
-msgstr ""
-
-msgid "Buy more"
-msgstr ""
-
-msgid "No slider"
-msgstr ""
-
-msgid "Two panels"
-msgstr ""
-
-msgid "Full Panel"
-msgstr ""
-
-msgid "Upload your slider photos"
-msgstr ""
-
-msgid "Slider list"
-msgstr ""
-
-msgid "first slide"
-msgstr ""
-
-msgid "second slide"
-msgstr ""
-
-msgid "third slide"
-msgstr ""
-
-msgid "Insert link"
-msgstr ""
-
-msgid "Quick Tip"
-msgstr ""
-
-msgid "You can set new link without uploading new slider."
-msgstr ""
-
-msgid "Just select slider position and enter link"
-msgstr ""
-
-msgid "Upload your banner photos"
-msgstr ""
-
-msgid "Banner pos."
-msgstr ""
-
-msgid "first banner"
-msgstr ""
-
-msgid "second banner"
-msgstr ""
-
-msgid "third banner"
-msgstr ""
-
-msgid "four banner"
-msgstr ""
-
-msgid "Add Banner"
-msgstr ""
-
-msgid "You can set new link without uploading new banner."
-msgstr ""
-
-msgid "Just select banner position and enter link"
-msgstr ""
-
-msgid "Maximálně 2MB"
-msgstr ""
-
-msgid "Premium design from our design specialist."
-msgstr ""
-
-msgid "Select image you would like to assigne to category"
-msgstr ""
-
-msgid "Je podporován pouze soubor JPG, PNG a GIF"
-msgstr ""
-
-msgid "Close without delete"
-msgstr ""
-
-msgid "Here you can edit all Spec assigned to this product. Edit values and then click Save Spec bellow."
-msgstr ""
-
-msgid "Roast"
-msgstr ""
-
-msgid "g"
-msgstr ""
-
-msgid "mAh"
-msgstr ""
-
-msgid "px"
-msgstr ""
-
-msgid "\""
-msgstr ""
-
-msgid "Body"
-msgstr ""
-
-msgid "Acidity"
-msgstr ""
-
-msgid "Notes"
-msgstr ""
-
-msgid "Taste"
-msgstr ""
-
-msgid "Package"
-msgstr ""
-
-msgid "Country"
-msgstr ""
-
-msgid "Check all specification you want to delete and then click Delete specs bellow."
-msgstr ""
-
-msgid "You have been signed out."
-msgstr ""
+msgstr "Jen klikněte na Název, Popis,... a upravte je. Tento způsob si zamilujete."
 

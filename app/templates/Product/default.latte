@@ -244,8 +244,9 @@
 {block script}
 
 {if $user->isInRole('admin')}           
-                         
-<script n:snippet="variantscript">
+<div n:snippet="variantscript" >                  
+<script>
+    $(document).ready(function() {
 {foreach $productVariants as  $id => $productVariant}
 
 
@@ -331,9 +332,12 @@
                      $('.prodShort').text(json.edit);
                  }
           }); 
-
-
+          $('.nav-tabs').button();
+          
+   
+});
 </script>   
+</div>
     <script>
     $(document).ready(function() {
 

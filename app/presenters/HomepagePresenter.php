@@ -83,7 +83,7 @@ class HomepagePresenter extends BasePresenter {
         
         $home = $this->shopModel->getShopInfo('HomepageLayout');
         $this->template->home = $home.'.latte';
-        $this->template->category = $this->categoryModel->loadCategory("");
+        $this->template->categories = $this->categoryModel->loadFeaturedCategories();
         $this->template->video = $this->shopModel->getShopInfo('homepageVideo');
         $this->template->anyVariable = 'any value';
         

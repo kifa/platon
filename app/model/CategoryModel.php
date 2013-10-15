@@ -48,6 +48,14 @@ class CategoryModel extends Repository {
                     ->where('HigherCategoryID',$catID)
                     ->fetchPairs('CategoryID');
     }
+    
+    public function loadFeaturedCategories() {
+        $row = $this->getTable('category')
+                ->where('CategoryStatus',2)
+                ->fetchPairs('CategoryID');
+        if(!$row) return NULL;
+        return $row;
+    }
 
     /*
      * Create Category

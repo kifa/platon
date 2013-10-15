@@ -592,6 +592,58 @@ class ProductPresenter extends BasePresenter {
     }
     
     
+    public function handleDuplicateProduct($id) {
+         if ($this->getUser()->isInRole('admin')) {
+             
+         $product = $this->productModel->loadProduct($id);
+         $duplicate = $this->translator->translate('Copy');
+         
+         try {
+            $new_id = $this->productModel->insertProduct(
+                    $duplicate. ' - ' . $product['ProductName'], //Name
+                    $product['SellingPrice'], 
+                    $product['ProducerID'], //Producer                
+                    '11111', //Product Number
+                    $product['ProductShort'], $product['ProductDescription'], //Description
+                    $product['ProductEAN'], //Ean
+                    $product['ProductQR'], //QR
+                    'rok', //Warranty
+                    $product['PiecesAvailable'], //Pieces
+                    $product['CategoryID'], //CatID
+                    '' //Date of avail.                
+                    //NULL //Comment   
+            );
+
+            }
+            catch (Exception $e) {
+                 \Nette\Diagnostics\Debugger::log($e);
+                 $this->redirect('this');
+            }
+            
+            
+            
+            try {
+                $variants = $this->productModel->loadProductVariants($id);
+                
+                foreach($variants as $vid => $variant) {
+                    $return = $this->productModel->insertProductVariant(
+                            $new_id[0],
+                            $variant['ProductVariantName'],
+                            $variant['PiecesAvailable'],//Name
+                            $variant['SellingPrice']);
+                }
+            }
+            catch (Exception $e) {
+                 \Nette\Diagnostics\Debugger::log($e);
+                 $this->redirect('this');
+            }
+            
+                     
+             
+             $this->redirect('Product:product', $new_id[0], $product['ProductSeoName']);
+         }
+    }
+    
     
 
     protected function createComponentDeleteCategoryForm() {
