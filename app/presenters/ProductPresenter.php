@@ -673,8 +673,14 @@ class ProductPresenter extends BasePresenter {
     public function deleteCategoryFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
 
-            foreach ($this->productModel->loadCatalog($form->values->catID) as $product) {
+            foreach ($this->productModel->loadCatalogAdmin($form->values->catID) as $product) {
+                foreach($this->productModel->loadProductVariants($product->ProductID) as $productVariant) {
+                        $this->productModel->updateProduct($productVariant->ProductID, 'CategoryID', $form->values->parent);
+                        
+                    }
                 $this->productModel->updateProduct($product->ProductID, 'CategoryID', $form->values->parent);
+                
+                    
             }
 
             $this->categoryModel->deleteCategory($form->values->catID);

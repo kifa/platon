@@ -142,10 +142,10 @@ class CategoryModel extends Repository {
      * @param ?
      * @param ? example: pozice počátečního znaku
      * @return string */    
-    public function deleteCategory($id){
+    public function deleteCategory($catID){
         
         return $this->getTable('category')
-                ->where('CategoryID',$id)
+                ->where('CategoryID',$catID)
                 ->delete();        
     }
     

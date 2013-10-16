@@ -461,7 +461,7 @@ class BlogPresenter extends BasePresenter {
                  $albumid = $this->blog->loadPhotoAlbumStaticID($spostid);
              }           
                 $addPhotoStaticForm = $this['addPhotoStaticForm'];
-                $addPhotoStaticForm->setDefaults(array('name' => 'photoalbum', 'textalbumid' => $albumid->PhotoAlbumID ));
+                $addPhotoStaticForm->setDefaults(array('name' => 'photoalbum', 'textalbumid' => $albumid['PhotoAlbumID'] ));
             }
           
     }
