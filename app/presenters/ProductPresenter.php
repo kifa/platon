@@ -721,6 +721,12 @@ class ProductPresenter extends BasePresenter {
         $this->template->producer = $this->productModel->loadProducer($prodID);
     }
 
+    public function renderArchivedProducts(){
+        if ($this->getUser()->isInRole('admin')) {
+            $this->template->products = $this->productModel->loadArchivedCatalog();
+        }
+    }
+    
     /*     * *******************************************************************
      *                      RENDER PRODUCT
      * rendering Product with full info

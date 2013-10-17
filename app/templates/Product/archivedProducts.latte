@@ -1,0 +1,30 @@
+{block pageheader}
+<div class="col-md-12">
+<div class="panel panel-default">
+  <div class="panel-heading">
+        <h1>Archived products list</h1>
+  </div> <div class="panel-body"></div></div>
+{/block}
+{block content}
+    <table>
+        <tr>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Product Price
+            </th>
+        </tr>
+    {foreach $products as $id => $product}        
+            <tr>
+                <td>
+                    <a href="{plink Product:product $product->ProductID, $product->ProductSeoName}">
+                        {$product -> ProductName}
+                    </a>
+                </td>
+                <td>
+                    {$product -> FinalPrice}
+                </td>
+            </tr>
+    {/foreach}
+    </table>

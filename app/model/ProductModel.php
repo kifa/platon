@@ -145,7 +145,9 @@ class ProductModel extends Repository {
                 //WHERE product.ProductVariants IS NULL');                              
             return $this->getTable('price')
                     ->select('price.*, product.*')
-                    ->where('product.ProductVariants IS NULL');
+                    ->where('(product.ProductStatusID = 2
+                        OR product.ProductStatusID = 3) 
+                        AND product.ProductVariants IS NULL');
             }
         else
         {  
@@ -161,8 +163,10 @@ class ProductModel extends Repository {
             if($higher == FALSE){
                 return $this->getTable('price')
                     ->select('price.*, product.*')
-                    ->where('product.ProductVariants IS NULL
-                          AND product.CategoryID=?', $catID);          
+                    ->where('(product.ProductStatusID = 2
+                        OR product.ProductStatusID = 3)
+                        AND product.ProductVariants IS NULL
+                        AND product.CategoryID=?', $catID);          
             }
             else{
                 return $this->getDB()->query('
@@ -170,7 +174,9 @@ class ProductModel extends Repository {
                 FROM product
                 JOIN price ON price.ProductID = product.ProductID
                 JOIN category ON category.CategoryID = product.CategoryID
-                WHERE product.ProductVariants IS NULL
+                WHERE (product.ProductStatusID = 2
+                    OR product.ProductStatusID = 3)
+                    AND product.ProductVariants IS NULL
                     AND (product.CategoryID=?
                     OR category.HigherCategoryID=?)
                     ', $catID, $catID);                
@@ -190,6 +196,12 @@ class ProductModel extends Repository {
                 OR category.CategoryStatus=2)
                 ');
     }    
+    
+    public function loadArchivedCatalog(){
+        return $this->getTable('price')
+                ->select('price.*, product.*')
+                ->where('product.ProductStatusID = 0');
+    }
     
     public function loadHeurekaCatalog() {       
         return $this->getDB()->query('SELECT * FROM product 

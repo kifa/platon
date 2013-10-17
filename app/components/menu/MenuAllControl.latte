@@ -6,10 +6,9 @@
      {if $cat->CategoryStatus == 0} <i class="icon-eye-close"></i> {/if}
           {$cat->CategoryName}</a>
    </li>
-   {/if}
+   {/if}   
   {/if}
-{/foreach}
-
+{/foreach}   
 
    <li class="dropdown {ifCurrent product:productsBrand}active{/ifCurrent}}">
    
@@ -41,6 +40,6 @@
     <li class="{ifCurrent Homepage:contact}active{/ifCurrent}"><a href="{plink Homepage:contact}"><i class="icon-large icon-phone"></i> {_"Contact"}</a></li>
 {if $user->isInRole('admin')}
 <h3 class="menuHeader">{_'Admin'}</h3>
-    <li><a href="#addStaticText" data-toggel="modal" data-target="#addStaticText" class="addStaticTextButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Text"}</a></li>
-    <li><a href="#addCategory" data-toggel="modal" data-target="#addCategory" class="addCategoryButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Category"}</a></li>
+<li><a href="#addStaticText" data-toggel="modal" data-target="#addStaticText" class="addStaticTextButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Text"}</a></li>  
+<li><a href="#addCategory" data-toggel="modal" data-target="#addCategory" class="addCategoryButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Category"}</a></li>
 {/if}
