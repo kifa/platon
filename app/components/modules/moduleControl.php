@@ -221,8 +221,7 @@ class moduleControl extends BaseControl{
                 
                  try {
                 $comp = $this->createComponent($component->CompModuleName);
-                 
-       
+                      
                 $this->addComponent($comp, $component->CompModuleName);
                 $comp->actionOrder($orderInfo);
                 } catch (Exception $e) {

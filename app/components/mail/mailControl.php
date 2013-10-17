@@ -61,14 +61,15 @@ public function sendSuperMail($to, $subject, $message, $from='shop@bebica.it') {
             ->setSubject($subject)
             ->setHtmlBody($message);
             //->send();
-   
-
+              
            $mailer = new Nette\Mail\SmtpMailer(array(
                 'host' => 'smtp.gmail.com',
                 'username' => 'obchod@inlinebus.cz',
                 'password' => 'cerven31',
                 'secure' => 'ssl',
                 )); 
-            $mailer->send($mail);   
+           
+           $mailer->send($mail);   
+           
     }
 }

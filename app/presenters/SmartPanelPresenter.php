@@ -83,7 +83,7 @@ class SmartPanelPresenter extends BasePresenter {
             $this->orderModel->setStatus($orderid, $statusID);
             
             
-            if($progress !== 10) {
+            if($progress != 10) {
                 try {
                         $this->sendStatusMail($orderid, $name);
                     }
@@ -94,9 +94,14 @@ class SmartPanelPresenter extends BasePresenter {
             
             $this->orderRow['Progress'] = $progress;
 
+             try {
             $module = $this->createComponentModuleControl();
             $this->addComponent($module, 'module');
             $module->actionOrder($this->orderRow);
+              }
+                catch (Exception $e) {
+                       \Nette\Diagnostics\Debugger::log($e);
+                }
             
             
             $text = $this->translator->translate('Order status in now:');
@@ -110,6 +115,11 @@ class SmartPanelPresenter extends BasePresenter {
                  $this->flashMessage($message, 'alert alert-danger');
             }
             
+          
+            
+                $this->redirect('this');
+            /*
+            
             if($this->isAjax()) {
                 $this->invalidateControl('content');
                 $this->invalidateControl('script');
@@ -118,7 +128,7 @@ class SmartPanelPresenter extends BasePresenter {
             else {  
                 $this->redirect('this');
             }
-            
+            */
     }
     
         

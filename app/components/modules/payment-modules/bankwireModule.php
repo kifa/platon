@@ -95,6 +95,7 @@ class bankwireModule extends moduleControl {
     
     
     public function actionOrder($orderInfo) {
+             
          if($this->shopModel->isModuleActive('bankwire')) {
           
              $bankwireID = $this->shopModel->getShopInfo('bankwireID');
@@ -105,6 +106,7 @@ class bankwireModule extends moduleControl {
            }
         
         }
+
     }
     
     protected function sendStatusMail($orderid) {
@@ -117,11 +119,9 @@ class bankwireModule extends moduleControl {
              
             
             $template = new Nette\Templating\FileTemplate($this->presenter->context->parameters['appDir'] . '/templates/Email/bankwireStatus.latte');
-            
-          
-            
-            
+                        
             $template->registerFilter(new Nette\Latte\Engine);
+            $template->setTranslator($this->translator);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
             $template->orderId = $orderid;
             $template->variable = $orderid;
@@ -135,18 +135,17 @@ class bankwireModule extends moduleControl {
             $hash = md5($row->UsersID . $row->OrderID . $row->DateCreated);
             $args = array($row->OrderID, $hash);
             $template->link = $this->presenter->link('//Order:orderDone', $args);
-            
-      try {      
+
+            $info = $this->translator->translate('Payment Information');
+        try {  
             $mailIT = new mailControl();
+            $this->addComponent($mailIT, 'mail');
             
-              
-            $mailIT->sendSuperMail($row->UsersID, 'Informace k platbě ', $template, $adminMail);
-        }
-            catch (Exception $e) {
-            \Nette\Diagnostics\Debugger::barDump($e);
+            $mailIT->sendSuperMail($row->UsersID, $info, $template, $adminMail);           
+           
+          }  catch (Exception $e) {
+            \Nette\Diagnostics\Debugger::log($e);
             }
-        
-       
     }
 
 

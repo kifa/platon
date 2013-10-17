@@ -319,7 +319,7 @@ class OrderPresenter extends BasePresenter {
             $this->orderModel->addNote($form->values->orderID, $form->values->userName, $form->values->note);
            
             try {
-                    $this->sendNoteMail($form->values->orderid, $form->values->note);
+                    $this->sendNoteMail($form->values->orderID, $form->values->note);
                 }
             catch (Exception $e) {
                    \Nette\Diagnostics\Debugger::log($e);
@@ -438,6 +438,7 @@ class OrderPresenter extends BasePresenter {
             $this->cart->numberItems = 0;
             
             $module = $this->createComponentModuleControl();
+            $module->setParent($this);
             $orderInfo =  array('Shipping' => $form->values->shipping,
                                     'Payment' => $form->values->payment,
                                    'OrderID' => $orderid,

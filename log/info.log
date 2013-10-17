@@ -1,138 +1,82 @@
-[2013-08-17 15-08-16] HTTP/1.1 200 OK
+[2013-10-17 12-00-30] HTTP/1.1 406 Not Acceptable
 Server: nginx
-Date: Sat, 17 Aug 2013 13:08:26 GMT
-Content-Type: text/html
-Content-Length: 2
-Connection: close
-X-Generated-in: 0.0072
-X-HGenerator: hurvinek.hdc1.cz
-Cache-Control: no-cache, no-store, must-revalidate
-Pragma: no-cache
-Expires: 1 January, 1970 00:00:01 GMT
-
-ok  @  http://localhost/platon/www/smart-panel/order-detail?orderid=35&statusID=3&name=Done&progress=10&lang=cs&do=setStatus
-[2013-08-17 15-09-10] HTTP/1.1 200 OK
-Server: nginx
-Date: Sat, 17 Aug 2013 13:09:20 GMT
-Content-Type: text/html
-Content-Length: 2
-Connection: close
-X-Generated-in: 0.0088
-X-HGenerator: hurvinek.hdc1.cz
-Cache-Control: no-cache, no-store, must-revalidate
-Pragma: no-cache
-Expires: 1 January, 1970 00:00:01 GMT
-
-ok  @  http://localhost/platon/www/smart-panel/order-detail?orderid=35&statusID=3&name=Done&progress=10&lang=cs&do=setStatus
-[2013-08-18 10-29-43] Nette\Utils\AssertionException: The header 'From' expects to be email, string '<aa@aa.com>' given. in C:\xampp\htdocs\platon\libs\Nette\Utils\Validators.php:90  @  http://localhost/platon/www/product/product/16?slug=Thinkpad&lang=cs&do=askForm-submit  @@  exception-2013-08-18-10-29-43-8d2fa1007ec9bca2ef14f0d6014ed702.html
-[2013-08-18 11-38-42] Nette\Utils\AssertionException: The header 'From' expects to be email, string '<ja@ja.co>' given. in C:\xampp\htdocs\platon\libs\Nette\Utils\Validators.php:90  @  http://localhost/platon/www/product/product/4?slug=Nokia+3310+&lang=cs&do=askForm-submit  @@  exception-2013-08-18-11-38-42-fda2918a79b0bee6b1b5c6ca94cc91af.html
-[2013-08-18 16-27-10] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=1&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-16-27-10-90226b09187ce142cc659d4b9d396793.html
-[2013-08-18 16-35-30] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=1&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-16-35-30-5c8fd683bfb0a2ed839162d8807f6fdd.html
-[2013-08-18 16-36-06] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-16-36-06-18ee1ff3bdb656e9669cb08872d24fbf.html
-[2013-08-18 16-45-56] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-16-45-56-2dd856e042b3086b1d576a5486aea7f5.html
-[2013-08-18 16-47-20] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-16-47-20-b91eb831445901a55e55fb2fef6592ab.html
-[2013-08-18 16-49-14] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-16-49-14-39a132104ea083967eecb34215035edc.html
-[2013-08-18 16-50-05] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-16-47-20-b91eb831445901a55e55fb2fef6592ab.html
-[2013-08-18 16-51-19] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-16-47-20-b91eb831445901a55e55fb2fef6592ab.html
-[2013-08-18 17-02-05] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-17-02-05-786396359bd12cb667e891b28c3e9ec6.html
-[2013-08-18 17-04-07] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-17-04-07-aa504be8310a61ffb4e890f5805a7c7f.html
-[2013-08-18 17-14-29] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-17-04-07-aa504be8310a61ffb4e890f5805a7c7f.html
-[2013-08-18 17-17-22] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-16-36-06-18ee1ff3bdb656e9669cb08872d24fbf.html
-[2013-08-18 17-19-31] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-16-45-56-2dd856e042b3086b1d576a5486aea7f5.html
-[2013-08-18 17-21-14] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-16-47-20-b91eb831445901a55e55fb2fef6592ab.html
-[2013-08-18 17-22-00] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-16-49-14-39a132104ea083967eecb34215035edc.html
-[2013-08-18 17-22-53] Nette\MemberAccessException: Cannot read an undeclared property bankwireModule::$context. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:147  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-17-22-53-64d66a971670843004de38b029292b31.html
-[2013-08-18 17-24-48] Nette\InvalidStateException: Component 'bankwire' is not attached to 'Nette\Application\UI\Presenter'. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\ComponentModel\Component.php:83  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-17-24-48-22eff1022af696697ed6e6afd191451d.html
-[2013-08-18 17-25-58] Nette\InvalidStateException: Component '' is not attached to 'Nette\Application\UI\Presenter'. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\ComponentModel\Component.php:83  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-17-25-58-8d5170a52e241cc7c80de185d07c1fb4.html
-[2013-08-18 17-31-46] Nette\InvalidStateException: Component '' is not attached to 'Nette\Application\UI\Presenter'. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\ComponentModel\Component.php:83  @  http://localhost/platon/www/smart-panel/order-detail?orderid=37&statusID=2&name=Pending&progress=1&lang=cs&do=setStatus  @@  exception-2013-08-18-17-25-58-8d5170a52e241cc7c80de185d07c1fb4.html
-[2013-08-20 11-06-32] Nette\MemberAccessException: Call to undefined method OrderPresenter::sendNoteMail(). in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:70  @  http://localhost/platon/www/order/order-done?orderid=44&track=0332a4e78da54fba42245e4bf7e6c509&lang=cs&do=addNoteForm-submit  @@  exception-2013-08-20-11-06-32-7e0b2681fb6036808ad1e5c23961d417.html
-[2013-08-20 11-13-15] Nette\InvalidStateException: Component 'bankwire' is not attached to 'Nette\Application\UI\Presenter'. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\ComponentModel\Component.php:83  @  http://localhost/platon/www/order/cart?lang=cs&do=cartForm-submit  @@  exception-2013-08-20-11-13-15-9799e7ddeb6319deb9cf6d1ffa971abb.html
-[2013-08-20 15-43-16] Nette\Database\Reflection\MissingReferenceException: No reference found for $product->price. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\Database\Reflection\DiscoveredReflection.php:154  @  http://localhost/platon/www/product/product/4?slug=Nokia+3310+&lang=cs&do=addProductVariantForm-submit  @@  exception-2013-08-20-15-43-16-e0cc2d3fd89e342388b6a274086b12bc.html
-[2013-08-20 15-45-21] Nette\Database\Reflection\MissingReferenceException: No reference found for $product->price. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\Database\Reflection\DiscoveredReflection.php:154  @  http://localhost/platon/www/product/product/4?slug=Nokia+3310+&lang=cs&do=addProductVariantForm-submit  @@  exception-2013-08-20-15-45-21-1bfe92ce7292bdc73db54eb9ad521d34.html
-[2013-08-20 15-46-50] Nette\Database\Reflection\MissingReferenceException: No reference found for $product->price. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\Database\Reflection\DiscoveredReflection.php:154  @  http://localhost/platon/www/product/product/4?slug=Nokia+3310+&lang=cs&do=addProductVariantForm-submit  @@  exception-2013-08-20-15-46-50-f39a612d78cb9fd8baec55bc99a949ab.html
-[2013-08-20 15-48-02] Nette\Database\Reflection\MissingReferenceException: No reference found for $product->price. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\Database\Reflection\DiscoveredReflection.php:154  @  http://localhost/platon/www/product/product/4?slug=Nokia+3310+&lang=cs&do=addProductVariantForm-submit  @@  exception-2013-08-20-15-48-02-bef357bf278bec8147a9dfa15e8e47d8.html
-[2013-08-23 11-44-23] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/product/products?catID=1001&slug=Cellphone&lang=cs&do=addProductForm-submit  @@  exception-2013-08-23-11-44-23-bb80605c12c397066f51e2826ad1fbeb.html
-[2013-08-24 23-57-53] HTTP/1.1 406 Not Acceptable
-Server: nginx
-Date: Sat, 24 Aug 2013 21:58:11 GMT
+Date: Thu, 17 Oct 2013 10:00:57 GMT
 Content-Type: text/html
 Content-Length: 25
 Connection: close
-X-Generated-in: 0.0054
+X-Generated-in: 0.0039
 X-HGenerator: hurvinek.hdc1.cz
 
-Chybi email nebo API klic  @  http://localhost/bebica.it/www/smart-panel/order-detail?orderid=45&statusID=3&name=Done&progress=10&lang=en&do=setStatus
-[2013-08-25 14-58-02] Nette\Utils\AssertionException: The header 'From' expects to be email, string '<luk.danek@gmail.com>' given. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\bebica.it\libs\Nette\Utils\Validators.php:90  @  http://10.0.0.11/bebica.it/www/product/product/10?lang=en&do=askForm-submit  @@  exception-2013-08-25-14-58-02-a9604bceccdffd9644d1d96f69f11f6f.html
-[2013-08-25 16-50-55] Nette\Utils\AssertionException: The header 'From' expects to be email, string '<dasadankova@gmail.com>' given. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\bebica.it\libs\Nette\Utils\Validators.php:90  @  http://10.0.0.11/bebica.it/www/homepage/contact?lang=en&do=contactForm-submit  @@  exception-2013-08-25-16-50-55-295b72b8d8b00014bf5f3745b663836e.html
-[2013-08-25 17-25-57] Nette\Utils\AssertionException: The header 'From' expects to be email, string '<danek.oag@gmail.com>' given. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\bebica.it\libs\Nette\Utils\Validators.php:90  @  http://10.0.0.11/bebica.it/www/product/product/13?slug=Sony+Ericsson+Xperia+Mini&lang=en&do=askForm-submit  @@  exception-2013-08-25-17-25-57-563eaca533eede71c2c3a054d9f6bd52.html
-[2013-08-25 17-38-58] Nette\MemberAccessException: Cannot read an undeclared column "UserID". in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\bebica.it\libs\Nette\Database\Table\ActiveRow.php:289  @  http://localhost/bebica.it/www/smart-panel/order-detail?orderid=49&lang=en&do=addNoteForm-submit  @@  exception-2013-08-25-17-38-58-630f536bcbe4a6c1b04833478395b160.html
-[2013-08-25 18-04-16] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\bebica.it\libs\Nette\Application\UI\Presenter.php:604  @  http://10.0.0.11/bebica.it/www/product/products?catID=1014&slug=Accessories&lang=en&do=addProductForm-submit  @@  exception-2013-08-25-18-04-16-2c40d8bce89d8c4bb3dd18f5c1955d6b.html
-[2013-08-26 09-51-00] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\bebica.it\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/bebica.it/www/product/products?catID=1001&slug=Bearings&lang=en&do=addProductForm-submit  @@  exception-2013-08-26-09-51-00-01cabbc89850ac57bcc07130e6d949fc.html
-[2013-08-27 09-39-21] Nette\Utils\AssertionException: The header 'From' expects to be email, string '<luk.danek@gmail.com>' given. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\bebica.it\libs\Nette\Utils\Validators.php:90  @  http://localhost/bebica.it/www/homepage/contact?lang=en&do=contactForm-submit  @@  exception-2013-08-27-09-39-21-70e0022a29f6f9213ee0bf7f049b489c.html
-[2013-08-27 09-42-42] Nette\Utils\AssertionException: The header 'From' expects to be email, string '<luk.danek@gmail.com>' given. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\bebica.it\libs\Nette\Utils\Validators.php:90  @  http://localhost/bebica.it/www/homepage/contact?lang=en&do=contactForm-submit  @@  exception-2013-08-27-09-42-42-a44d24e60604d3431d9a065452410cdc.html
-[2013-08-28 11-17-21] Nette\InvalidStateException: Component with name 'heureka' already exists. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\protejpy.cz\libs\Nette\ComponentModel\Container.php:61  @  http://localhost/protejpy.cz/www/smart-panel/modules?lang=cs&do=moduleControl-heureka-updateXML  @@  exception-2013-08-28-11-17-21-2ebca22c8fd7869b931cabc07eb59484.html
-[2013-08-28 13-39-58] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\protejpy.cz\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/protejpy.cz/www/product/products?catID=1001&slug=Bearings&lang=cs&do=addProductForm-submit  @@  exception-2013-08-28-13-39-58-f32ddebdcf5cb68a1f7dc5ce762efe70.html
-[2013-08-28 13-41-21] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\protejpy.cz\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/protejpy.cz/www/product/products?catID=1001&slug=Bearings&lang=cs&do=addProductForm-submit  @@  exception-2013-08-28-13-41-21-98932d6f41a62ca90b83945e2a67ca99.html
-[2013-08-28 13-42-09] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\protejpy.cz\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/protejpy.cz/www/product/products?catID=1001&slug=Bearings&lang=cs&do=addProductForm-submit  @@  exception-2013-08-28-13-42-09-387052be4dc47bcb8468736786f834c9.html
-[2013-08-28 13-47-09] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\protejpy.cz\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/protejpy.cz/www/product/products?catID=1001&slug=Bearings&lang=cs&do=addProductForm-submit  @@  exception-2013-08-28-13-47-09-053f007808fd8d95aafd49068c2cda19.html
-[2013-08-28 13-48-36] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\protejpy.cz\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/protejpy.cz/www/product/products?catID=1001&slug=Bearings&lang=cs&do=addProductForm-submit  @@  exception-2013-08-28-13-48-36-8152ef8337aacd6a393dcc777316361c.html
-[2013-08-28 13-49-15] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\protejpy.cz\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/protejpy.cz/www/product/products?catID=1001&slug=Bearings&lang=cs&do=addProductForm-submit  @@  exception-2013-08-28-13-49-15-edbe974d9f7bef582f08042b6699cba0.html
-[2013-08-28 13-50-04] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\protejpy.cz\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/protejpy.cz/www/product/products?catID=1001&slug=Bearings&lang=cs&do=addProductForm-submit  @@  exception-2013-08-28-13-50-04-e284c0a7b5dfb44c806fa54244d4cf57.html
-[2013-08-28 13-50-50] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\protejpy.cz\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/protejpy.cz/www/product/products?catID=1001&slug=Bearings&lang=cs&do=addProductForm-submit  @@  exception-2013-08-28-13-50-50-204f6240a6803c2fcd271604e024f64a.html
-[2013-08-28 23-03-13] Nette\InvalidStateException: Component with name 'heureka' already exists. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\protejpy.cz\libs\Nette\ComponentModel\Container.php:61  @  http://localhost/protejpy.cz/www/smart-panel/modules?lang=cs&do=moduleControl-heureka-updateXML  @@  exception-2013-08-28-23-03-13-06465ea0e8772c064d723ade9a99deed.html
-[2013-08-28 23-05-15] Nette\InvalidStateException: Component with name 'heureka' already exists. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\protejpy.cz\libs\Nette\ComponentModel\Container.php:61  @  http://localhost/protejpy.cz/www/smart-panel/modules?lang=cs&do=moduleControl-heureka-updateXML  @@  exception-2013-08-28-23-03-13-06465ea0e8772c064d723ade9a99deed.html
-[2013-08-28 23-08-20] Nette\InvalidStateException: Component with name 'heureka' already exists. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\protejpy.cz\libs\Nette\ComponentModel\Container.php:61  @  http://localhost/protejpy.cz/www/smart-panel/modules?lang=cs&do=moduleControl-heureka-updateXML  @@  exception-2013-08-28-23-03-13-06465ea0e8772c064d723ade9a99deed.html
-[2013-08-28 23-08-51] Nette\InvalidStateException: Component with name 'heureka' already exists. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\protejpy.cz\libs\Nette\ComponentModel\Container.php:61  @  http://localhost/protejpy.cz/www/smart-panel/modules?lang=cs&do=moduleControl-heureka-updateXML  @@  exception-2013-08-28-23-03-13-06465ea0e8772c064d723ade9a99deed.html
-[2013-08-28 23-11-00] Nette\InvalidStateException: Component with name 'heureka' already exists. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\protejpy.cz\libs\Nette\ComponentModel\Container.php:61  @  http://localhost/protejpy.cz/www/smart-panel/modules?lang=cs&do=moduleControl-heureka-updateXML  @@  exception-2013-08-28-23-03-13-06465ea0e8772c064d723ade9a99deed.html
-[2013-09-02 08-15-14] Nette\InvalidStateException: Component with name 'heureka' already exists. in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\ComponentModel\Container.php:61  @  http://localhost/platon/www/smart-panel/modules?lang=cs&do=moduleControl-heureka-updateXML  @@  exception-2013-09-02-08-15-14-1d57218382d92b83f6533458179cff9b.html
-[2013-09-09 15-04-39] Fatal error: Argument 1 passed to Nette\ComponentModel\Container::addComponent() must implement interface Nette\ComponentModel\IComponent, null given, called in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\app\components\moduleControl.php on line 313 and defined in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\ComponentModel\Container.php:44  @  http://localhost/platon/www/smart-panel/modules?lang=cs  @@  exception-2013-09-09-15-04-39-2fa7228149b45b1d0a6b806ca395278d.html
-[2013-09-09 15-20-25] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/smart-panel/modules?lang=cs&do=moduleControl-xmlfeed-installModule  @@  exception-2013-09-09-15-20-25-37f5ab8310dedfa2730c4a21424795ea.html
-[2013-09-09 15-21-18] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/smart-panel/modules?lang=cs&do=moduleControl-xmlfeed-installModule  @@  exception-2013-09-09-15-20-25-37f5ab8310dedfa2730c4a21424795ea.html
-[2013-09-10 15-26-45] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/product/products?catID=1004&slug=Medium&lang=cs&do=addProductForm-submit  @@  exception-2013-09-10-15-26-45-80770cb9adef6b537f1a5409925d05d3.html
-[2013-09-10 15-29-53] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/product/products?catID=1004&slug=Medium&lang=cs&do=addProductForm-submit  @@  exception-2013-09-10-15-29-53-d385e1e2dfbc856a66c60ae87ce80218.html
-[2013-09-10 15-32-10] Nette\Application\AbortException:  in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/product/products?catID=1006&slug=Dark&lang=cs&do=addProductForm-submit  @@  exception-2013-09-10-15-32-10-3b482f5a327228314314c9ee865a0e4e.html
-[2013-09-12 22-00-46] Nette\Application\AbortException:  in C:\xampp\htdocs\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/product/products?catID=1007&slug=Africa&lang=cs&do=addProductForm-submit  @@  exception-2013-09-12-22-00-46-bfbb253bddd16bdae9a6d2f38e011c5f.html
-[2013-09-12 22-05-47] Nette\Application\AbortException:  in C:\xampp\htdocs\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/product/products?catID=1008&slug=Indonesia&lang=cs&do=addProductForm-submit  @@  exception-2013-09-12-22-05-47-c6603836f53adb7d83a8c597d6f113ad.html
-[2013-09-12 22-11-59] Nette\Application\AbortException:  in C:\xampp\htdocs\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/product/products?catID=1011&slug=Tea&lang=cs&do=addProductForm-submit  @@  exception-2013-09-12-22-11-59-373ae621d00a431281a1598bc984bb6e.html
-[2013-09-12 22-17-05] Nette\Application\AbortException:  in C:\xampp\htdocs\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/product/products?catID=1011&slug=Tea&lang=cs&do=addProductForm-submit  @@  exception-2013-09-12-22-17-05-20a129304f028d771d94d9b473fdbdbc.html
-[2013-09-12 22-19-52] Nette\Application\AbortException:  in C:\xampp\htdocs\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/product/products?catID=1011&slug=Tea&lang=cs&do=addProductForm-submit  @@  exception-2013-09-12-22-19-52-8c8e57dd85e51be41ece2d91a5f622d9.html
-[2013-09-12 22-26-58] Nette\Application\AbortException:  in C:\xampp\htdocs\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/product/products?catID=1009&slug=Central+America&lang=cs&do=addProductForm-submit  @@  exception-2013-09-12-22-26-58-2018c1bee0b9337b88e6def1913f64a3.html
-[2013-09-12 22-30-46] Nette\Application\AbortException:  in C:\xampp\htdocs\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/product/products?catID=1009&slug=Central+America&lang=cs&do=addProductForm-submit  @@  exception-2013-09-12-22-30-46-efbc316da585c690a9d97a9b40d2140d.html
-[2013-09-12 22-43-36] Nette\Application\AbortException:  in C:\xampp\htdocs\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/product/products?catID=1010&slug=South+America&lang=cs&do=addProductForm-submit  @@  exception-2013-09-12-22-43-36-ce5685ff4b49e4e79d0c973772de6c1c.html
-[2013-09-12 22-50-56] Nette\Application\AbortException:  in C:\xampp\htdocs\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/product/products?catID=1010&slug=South+America&lang=cs&do=addProductForm-submit  @@  exception-2013-09-12-22-50-56-0d642c6a5387852572d89466e6569887.html
-[2013-09-12 22-58-47] Nette\Application\AbortException:  in C:\xampp\htdocs\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/product/products?catID=1010&slug=South+America&lang=cs&do=addProductForm-submit  @@  exception-2013-09-12-22-58-47-22064f88b6ed330f95299b6eb94e92c2.html
-[2013-09-21 14-17-43] Nette\MemberAccessException: Call to undefined method Nette\Templating\FileTemplate::translate(). in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:70  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=1&statusID=2&name=Sending&progress=5&do=setStatus  @@  exception-2013-09-21-14-17-43-5f864fa915d7a44a7de5df76ff7b86fa.html
-[2013-09-21 17-51-10] Nette\MemberAccessException: Call to undefined method heurekaModule::setView(). in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:70  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=3&_fid=sqaz  @@  exception-2013-09-21-17-51-10-2f5260ec111920908b6efa5dbf70388c.html
-[2013-09-21 17-56-44] Nette\MemberAccessException: Call to undefined method heurekaModule::setView(). in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:70  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=3&_fid=sqaz  @@  exception-2013-09-21-17-51-10-2f5260ec111920908b6efa5dbf70388c.html
-[2013-09-21 17-57-11] Nette\MemberAccessException: Call to undefined method heurekaModule::setView(). in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:70  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=3&_fid=sqaz  @@  exception-2013-09-21-17-51-10-2f5260ec111920908b6efa5dbf70388c.html
-[2013-09-21 17-58-03] Nette\MemberAccessException: Call to undefined method bankwireModule::setView(). in C:\Program Files (x86)\EasyPHP-DevServer-13.1VC9\data\localweb\platon\libs\Nette\common\ObjectMixin.php:70  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=3&_fid=sqaz  @@  exception-2013-09-21-17-58-03-acdb14ffa8716add689e79e044e40281.html
-[2013-09-22 21-26-54] HTTP/1.1 406 Not Acceptable
+Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=5&statusID=3&name=Done&progress=10&do=setStatus
+[2013-10-17 12-02-50] HTTP/1.1 406 Not Acceptable
 Server: nginx
-Date: Sun, 22 Sep 2013 19:26:53 GMT
+Date: Thu, 17 Oct 2013 10:03:17 GMT
+Content-Type: text/html
+Content-Length: 25
+Connection: close
+X-Generated-in: 0.0034
+X-HGenerator: hurvinek.hdc1.cz
+
+Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=5&statusID=3&name=Done&progress=10&do=setStatus
+[2013-10-17 12-25-37] HTTP/1.1 406 Not Acceptable
+Server: nginx
+Date: Thu, 17 Oct 2013 10:26:04 GMT
+Content-Type: text/html
+Content-Length: 25
+Connection: close
+X-Generated-in: 0.0053
+X-HGenerator: vrana.hdc1.cz
+
+Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=5&statusID=3&name=Done&progress=10&do=setStatus
+[2013-10-17 12-28-27] HTTP/1.1 406 Not Acceptable
+Server: nginx
+Date: Thu, 17 Oct 2013 10:28:54 GMT
 Content-Type: text/html
 Content-Length: 25
 Connection: close
 X-Generated-in: 0.0037
 X-HGenerator: vrana.hdc1.cz
 
-Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=1&statusID=3&name=Done&progress=10&do=setStatus
-[2013-09-22 21-27-08] HTTP/1.1 406 Not Acceptable
+Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=5&statusID=3&name=Done&progress=10&do=setStatus
+[2013-10-17 12-34-00] HTTP/1.1 406 Not Acceptable
 Server: nginx
-Date: Sun, 22 Sep 2013 19:27:07 GMT
+Date: Thu, 17 Oct 2013 10:34:26 GMT
+Content-Type: text/html
+Content-Length: 25
+Connection: close
+X-Generated-in: 0.0046
+X-HGenerator: vrana.hdc1.cz
+
+Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=5&statusID=3&name=Done&progress=10&do=setStatus
+[2013-10-17 12-35-14] HTTP/1.1 406 Not Acceptable
+Server: nginx
+Date: Thu, 17 Oct 2013 10:35:41 GMT
 Content-Type: text/html
 Content-Length: 25
 Connection: close
 X-Generated-in: 0.004
-X-HGenerator: hurvinek.hdc1.cz
+X-HGenerator: vrana.hdc1.cz
 
-Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=2&statusID=3&name=Done&progress=10&do=setStatus
-[2013-09-22 21-27-16] HTTP/1.1 406 Not Acceptable
+Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=5&statusID=3&name=Done&progress=10&do=setStatus
+[2013-10-17 12-42-52] Nette\MemberAccessException: Call to undefined method Nette\Templating\FileTemplate::translate(). in C:\wamp\www\platon\libs\Nette\common\ObjectMixin.php:70  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=5&statusID=2&name=Sending&progress=5&do=setStatus  @@  exception-2013-10-17-12-42-52-820b6c19bd976626b6921a4da61eb855.html
+[2013-10-17 12-43-38] HTTP/1.1 406 Not Acceptable
 Server: nginx
-Date: Sun, 22 Sep 2013 19:27:16 GMT
+Date: Thu, 17 Oct 2013 10:44:05 GMT
 Content-Type: text/html
 Content-Length: 25
 Connection: close
-X-Generated-in: 0.0034
-X-HGenerator: vrana.hdc1.cz
+X-Generated-in: 0.0051
+X-HGenerator: hurvinek.hdc1.cz
 
-Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=3&statusID=3&name=Done&progress=10&do=setStatus
+Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=5&statusID=3&name=Done&progress=10&do=setStatus
+[2013-10-17 12-43-50] Nette\MemberAccessException: Call to undefined method Nette\Templating\FileTemplate::translate(). in C:\wamp\www\platon\libs\Nette\common\ObjectMixin.php:70  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=5&statusID=2&name=Sending&progress=5&do=setStatus  @@  exception-2013-10-17-12-42-52-820b6c19bd976626b6921a4da61eb855.html
+[2013-10-17 12-47-18] HTTP/1.1 406 Not Acceptable
+Server: nginx
+Date: Thu, 17 Oct 2013 10:47:44 GMT
+Content-Type: text/html
+Content-Length: 25
+Connection: close
+X-Generated-in: 0.0039
+X-HGenerator: hurvinek.hdc1.cz
+
+Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=5&statusID=3&name=Done&progress=10&do=setStatus

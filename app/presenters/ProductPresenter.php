@@ -511,6 +511,7 @@ class ProductPresenter extends BasePresenter {
             if(!$this->isControlInvalid('editProdAmount'))
             {
                 $this->invalidateControl('editProdAmount');
+                $this->invalidateControl('pageheader');
                 $this->payload->edit = $content;
                 $this->sendPayload();
             }

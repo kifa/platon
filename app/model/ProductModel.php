@@ -822,6 +822,7 @@ AND photo.CoverPhoto = 1');
         $row = $this->getTable('price')
                 ->select('price.*, product.*')
                 ->where('product.ProductVariants', $id)
+                ->where('product.ProductStatusID!=', 0)
                 ->fetchPairs('ProductID');        
         
         if($row==FALSE){
@@ -892,6 +893,7 @@ AND photo.CoverPhoto = 1');
         $variant = $this->getTable('product')
                 ->select('ProductID')
                 ->where('ProductVariants', $id)
+                ->where('ProductStatusID!=', 0)
                 ->fetch();
                       
         if($variant != FALSE){

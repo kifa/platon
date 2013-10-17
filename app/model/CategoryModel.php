@@ -14,8 +14,9 @@ class CategoryModel extends Repository {
      * @return string
      */
     public function loadCategoryList(){
+        $status = array('1', '2');
         return $this->getTable('category')
-                ->where('CategoryStatus',1)
+                ->where('CategoryStatus', $status)
                 ->fetchPairs('CategoryID');
     }
     

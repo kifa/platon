@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-10-15 10:18:07
+# Created: 2013-10-17 12:53:48
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-10-15 10:18+0200\n"
+"PO-Revision-Date: 2013-10-17 12:53+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -47,6 +47,9 @@ msgstr " byla úspěšně nahrána"
 
 msgid "#"
 msgstr "č. "
+
+msgid ", you will find payment info bellow:"
+msgstr ", níže naleznete informace k platbe:"
 
 msgid "-- select shipping --"
 msgstr "-- vyberte dopravu --"
@@ -216,11 +219,17 @@ msgstr "Zpět na objednávky"
 msgid "Back to SmartPanel"
 msgstr "Zpět na Smart Panel"
 
+msgid "Bank account:"
+msgstr "Číslo účtu:"
+
 msgid "Banner Position 1"
 msgstr "Pozice Banner 1"
 
 msgid "Banners"
 msgstr "Bannery"
+
+msgid "Because you have choosen to pay via"
+msgstr "Protože jste zvolili platbu"
 
 msgid "Best sellers"
 msgstr "Nejprodávanější"
@@ -654,6 +663,9 @@ msgstr "Přejít na správu objednávky"
 msgid "Grand Total"
 msgstr "Celkem"
 
+msgid "Grand Total:"
+msgstr "Celková částka:"
+
 msgid "HOT"
 msgstr "SUPER"
 
@@ -756,6 +768,9 @@ msgstr "Cena"
 msgid "Items per purchase"
 msgstr "Kusů na 1 objednávku"
 
+msgid "Just click on Names, Descriptions, Photos... and edit them. You will love it."
+msgstr "Jen klikněte na Název, Popis,... a upravte je. Tento způsob si zamilujete."
+
 msgid "KEY:"
 msgstr "KLÍČ:"
 
@@ -810,6 +825,9 @@ msgstr "Střední"
 msgid "Menu"
 msgstr "Menu"
 
+msgid "Message about your order"
+msgstr "Zpráva k Vaší objednávce"
+
 msgid "Module installed"
 msgstr "Modul instalován"
 
@@ -843,6 +861,9 @@ msgstr "Nové heslo znovu:"
 msgid "New functions"
 msgstr "Nové funkce"
 
+msgid "New message about your order"
+msgstr "Nová zpráva k Vaší objednávce"
+
 msgid "New order"
 msgstr "Nová objednávka"
 
@@ -872,6 +893,9 @@ msgstr "Zatím žádné údaje o zdrojích návštěv."
 
 msgid "Note"
 msgstr "Poznámka"
+
+msgid "Note was sucessfully added!"
+msgstr "Poznámka byla úspěšně přidána!"
 
 msgid "Note:"
 msgstr "Poznámka:"
@@ -926,6 +950,9 @@ msgstr "Heslo:"
 
 msgid "Payment"
 msgstr "Platby a slevy"
+
+msgid "Payment info"
+msgstr "Informace k platbě"
 
 msgid "Payment name:"
 msgstr "Název platby"
@@ -1404,6 +1431,9 @@ msgstr "Uživatelé"
 msgid "Value:"
 msgstr "Hodnota:"
 
+msgid "Variable symbol:"
+msgstr "Variabilní symbol:"
+
 msgid "Variant"
 msgstr "Varianta"
 
@@ -1551,6 +1581,9 @@ msgstr "PSČ:"
 msgid "and"
 msgstr "a"
 
+msgid "bankwire"
+msgstr "převodem"
+
 msgid "by post/delivery service"
 msgstr "poštou/doručovací službou"
 
@@ -1565,6 +1598,9 @@ msgstr " "
 
 msgid "from"
 msgstr "od"
+
+msgid "is ready to be sent"
+msgstr "je připravena k odeslání"
 
 msgid "more products"
 msgstr "více produktů"
@@ -1590,6 +1626,6 @@ msgstr "vyzkoušet naši administraci"
 msgid "was successfully placed!"
 msgstr "byla úspěšně přijata."
 
-msgid "Just click on Names, Descriptions, Photos... and edit them. You will love it."
-msgstr "Jen klikněte na Název, Popis,... a upravte je. Tento způsob si zamilujete."
+msgid "You have a new message about your order"
+msgstr "Zasíláme Vám novou zprávu k Vaší objednávce"
 
