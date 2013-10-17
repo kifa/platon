@@ -105,7 +105,7 @@
         </div>
 
     </div>
-
+{if $product->ProductStatusID != 0}
     <div class="row shopProductVariant" n:snippet="variants">
         <ul class="list-group">
             <li class="list-group-item col-md-11">{_'Variants'}:</li>
@@ -150,10 +150,19 @@
    {/foreach}   
         </ul>
     </div>
-
+{else}
+    <div class="alert alert-info col-md-11 text-center">
+    
+        <h3>{_'Dear customer'}, {_'this product is no longer available to buy'}. {_'We are sorry'}. {_'But you can try any other product from category'} {*$category->CategoryName*} </h3>
+        <br>
+        <a href="#" class="btn btn-primary btn-lg">{*$category->CategoryName*} TABLETY</a>
+    </div> 
+    
+    
+    {/if}
 
     
-    <div class="col-md-12">
+    <div class="col-md-11">
         <h3 class="col-md-12"><i class="icon-info-sign"></i> {_'Information about product'}</h3>
         <div class="col-md-8">
          <div class="prodDescription col-md-12 text-justified" n:snippet="prodDescription">{!$product->ProductDescription}</div>
