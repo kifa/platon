@@ -1,0 +1,37 @@
+<table class="table" n:snippet="shipping">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{_'Name'}</th>
+                                <th>{_'Description'}</th>
+                                <th>{_'Price'}</th>
+                                <th>{_'Free from'}</th>
+                                <th>{_'Status'}</th>
+                                <th>{_'Higher Shipping'}</th>
+                                <th class="col-md-2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {if $delivery}
+                        {foreach $delivery as $deliver}
+
+                            <tr class="info">
+                                <td>{$iterator->counter}</td>
+                                <td class="DelName-{$deliver->DeliveryID}">{$deliver->DeliveryName}</td>
+                                <td class="DelDescription-{$deliver->DeliveryID}">{$deliver->DeliveryDescription}</td>
+                                <td class="DelPrice-{$deliver->DeliveryID}">{$deliver->DeliveryPrice},-</td>
+                                <td class="DelFF-{$deliver->DeliveryID}">{$deliver->FreeFromPrice ? $deliver->FreeFromPrice : '-'},-</td>
+                                <td class="DelStatus-{$deliver->DeliveryID}">{$deliver->StatusName}</td>
+                                <td class="DelHigher-{$deliver->HigherDelivery}">{$deliver->HigherDelivery}</td>
+                                <td>
+                                                                
+                                    <a href="{link removeShipping! $deliver->DeliveryID}" class="ajax"><i class="icon-trash icon-large"></i></a>
+                                
+                                </td>
+                                
+                                
+                            </tr>                     
+                        {/foreach}
+                            {/if}
+                        </tbody>
+                    </table>

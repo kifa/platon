@@ -1,0 +1,28 @@
+<script>
+    
+    $('.prodName-{$prod->ProducerID}').editable( {link editProducerName! $prod->ProducerID}, { 
+         type      : 'text',
+         cancel    : {_'Cancel'},
+         submit    : 'OK',
+         indicator : '<i class="icon-spinner icon-spin"></i>',
+         tooltip   : 'Click to edit ...',
+         callback : function(value, settings) {
+            var json = $.parseJSON(value);
+            $('.prodName-{$prod->ProducerID}').text(json.edit);
+        }
+        });                              
+                                   
+        
+    $('.prodDesc-{$prod->ProducerID}').editable( {link editProducerDescription! $prod->ProducerID }, { 
+            type      : 'textarea',
+            cancel    : {_'Cancel'},
+            submit    : 'OK',
+            indicator : '<i class="icon-spinner icon-spin"></i>',
+            tooltip   : 'Click to edit ...',
+            callback : function(value, settings) {
+               var json = $.parseJSON(value);
+               $('.prodDesc-{$prod->ProducerID}').text(json.edit);
+           }
+       }); 
+
+</script>

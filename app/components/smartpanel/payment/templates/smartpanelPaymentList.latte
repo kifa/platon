@@ -1,0 +1,30 @@
+<table class="table" n:snippet="payment">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{_'Name'}</th>
+                                <th>{_'Price'}</th>
+                                <th>{_'Status'}</th>
+                                <th class="col-md-2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $payments as $payment}
+
+                            <tr class="info">
+                                <td>{$iterator->counter}</td>
+                                <td class="paymentName-{$payment->PaymentID} edit">{$payment->PaymentName}</td>
+                                <td class="paymentPrice-{$payment->PaymentID} edit">{$payment->PaymentPrice},-</td>
+                                <td class="paymentStatus-{$payment->PaymentID} edit">{$payment->StatusName}</td>
+                                <td>
+                                                                 
+                                    <a n:href="removePay! $payment->PaymentID" class="ajax"><i class="icon-trash icon-large"></i></a>
+                                
+                                </td>
+                                
+                                
+                            </tr>                     
+                        {/foreach}
+                            <tr><td colspan="4"><span class="muted"><i class="icon-large icon-info-sign"></i> {_"Edit by clicking on any value"}</td></tr>
+                        </tbody>
+                    </table>

@@ -1368,6 +1368,11 @@ body {
     background: url('../img/bg.png') repeat top left grey;
 }
 
+.carousel-inner>.item {
+    max-height: 300px;
+    overflow: hidden;
+}
+
 .miniproduct img, .product img {
     margin: 0 auto;
 }

@@ -1,0 +1,27 @@
+<table class="table" n:snippet="producer">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{_'Name'}</th>
+                                <th>{_'Description'}</th>
+                                <th class="col-md-2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {foreach $prods as $prod}
+
+                            <tr class="info">
+                                <td>{$iterator->counter}</td>
+                                <td class="prodName-{$prod->ProducerID} edit">{$prod->ProducerName}</td>
+                                <td class="prodDesc-{$prod->ProducerID} edit">{$prod->ProducerDescription}</td>
+                                <td>   
+                                    {if $prod->ProducerID != 1}
+                                    <a href="{link removeProd! $prod->ProducerID}" class=""><i class="icon-trash icon-large"></i></a>
+                                    {/if}
+                                </td>
+                            </tr>                     
+                        {/foreach}
+                           
+                            <tr><td colspan="4"><span class="muted"><i class="icon-large icon-info-sign"></i> {_"Edit by clicking on any value"}</td></tr>
+                        </tbody>
+                    </table>

@@ -145,26 +145,7 @@ class SmartPanelPresenter extends BasePresenter {
     
     }
     
-    protected function createComponentAddProducerForm() {
-        $prod = new Nette\Application\UI\Form;
-        $prod->setTranslator($this->translator);
-        $prod->addText('name', 'Brand name')
-                ->setRequired()
-                ->setAttribute('class', 'form-control');
-        $prod->addTextArea('desc', 'Brand description')
-                ->setAttribute('class', 'form-control');
-        $prod->addSubmit('save', 'Add Brand')
-                ->setAttribute('class', 'upl form-control btn btn-primary')
-                ->setAttribute('data-loading-text', 'Adding...');
-        $prod->onSuccess[] = $this->addProducerFormSubmitted;
-        return $prod;
-    }
-
-    public function addProducerFormSubmitted($form) {
-        
-        $this->productModel->insertProducer($form->values->name, $form->values->desc);
-        $this->redirect('this');
-    }
+    
 
         protected function createComponentPasswordForm() {
         $form = new Nette\Application\UI\Form;
@@ -674,260 +655,19 @@ class SmartPanelPresenter extends BasePresenter {
     /**********************************************************************/
 
     public function actionShipping(){
-          if ($this->getUser()->isInRole('admin')) {
-        foreach ($this->orderModel->loadDelivery('') as $id => $deliver){
-            $deliveryInfo = array(
-                'DeliveryID' => $deliver->DeliveryID,
-                'DeliveryName' => $deliver->DeliveryName,
-                'DeliveryPrice' => $deliver->DeliveryPrice,
-                'DeliveryDescription' => $deliver->DeliveryDescription,
-                'FreeFromPrice' => $deliver->FreeFromPrice
-            );
-            $this['editShipping'.$deliver->DeliveryID] = $this->createComponentEditShippingForm($deliveryInfo);
-        
-            }
-        }
+          if (!$this->getUser()->isInRole('admin')) {
+              $this->redirect('Homepage');
+              }
         
     }
     
-    public function handleDelName($delid) {
-       if($this->getUser()->isInRole('admin')){
-            if($this->isAjax()){            
-               $content = $_POST['value']; //odesílaná nová hodnota
-
-               $this->orderModel->updateDeliveryName($delid, $content);
-
-           }
-           if(!$this->isControlInvalid('DelName'.$delid)){           
-               $this->payload->edit = $content; //zaslání nové hodnoty do šablony
-               $this->sendPayload();
-               $this->invalidateControl('menu');       
-               $this->invalidateControl('DelTitle'.$delid); //invalidace snipetu
-
-           }
-           else {
-            $this->redirect('this');
-           }
-       }
-    }
-    
-    public function handleDelDescription($delid) {
-        if($this->getUser()->isInRole('admin')){
-            if($this->isAjax())
-           {            
-               $content = $_POST['value']; //odesílaná nová hodnota
-
-               $this->orderModel->updateDeliveryDescription($delid, $content);
-
-           }
-           if(!$this->isControlInvalid('DelDescription'))
-           {           
-               $this->payload->edit = $content; //zaslání nové hodnoty do šablony
-               $this->sendPayload();
-               $this->invalidateControl('menu');       
-               $this->invalidateControl('DelDescription'); //invalidace snipetu
-
-           }
-           else {
-            $this->redirect('this');
-           }
-       }
-    }
-    
-    public function handleDelPrice($delid) {
-        if($this->getUser()->isInRole('admin')){
-            if($this->isAjax()){            
-               $content = $_POST['value']; //odesílaná nová hodnota
-
-               $this->orderModel->updateDeliveryPrice($delid, $content);
-
-           }
-           if(!$this->isControlInvalid('DelPrice')){           
-               $this->payload->edit = $content; //zaslání nové hodnoty do šablony
-               $this->sendPayload();
-               $this->invalidateControl('menu');       
-               $this->invalidateControl('DelPrice'); //invalidace snipetu
-           }
-           else {
-            $this->redirect('this');
-           }
-       }
-    }
-    
-    public function handleDelStatus($delid) {
-        if($this->getUser()->isInRole('admin')){
-            if($this->isAjax()){
-                $content = $_POST['value']; //odesílaná nová hodnota
-
-                $this->orderModel->updateDeliveryStatus($delid, $content);
-            }
-            
-            if(!$this->isControlInvalid('DelStatus')){           
-               $this->payload->edit = $content; //zaslání nové hodnoty do šablony
-               $this->sendPayload();
-               $this->invalidateControl('DelStatus'); //invalidace snipetu
-           }
-           else {
-            $this->redirect('this');
-           }
-        }
+    public function createComponentShippingControl() {
+        $shipping = new shippingControl($this->orderModel, $this->translator);
+        $this->addComponent($shipping, 'shippingControl');
+        return $shipping;
     }
 
-        public function handleDelHigher($delid) {
-        if($this->getUser()->isInRole('admin')){
-            if($this->isAjax()){
-                $content = $_POST['value']; //odesílaná nová hodnota
-
-                $this->orderModel->updateHigherDelivery($delid, $content);
-            }
-            
-            if(!$this->isControlInvalid('DelHigher')){           
-               $this->payload->edit = $content; //zaslání nové hodnoty do šablony
-               $this->sendPayload();
-               $this->invalidateControl('DelHigher'); //invalidace snipetu
-           }
-           else {
-            $this->redirect('this');
-           }
-        }
-    }
-
-    public function handleDelFF($delid) {
-        if($this->getUser()->isInRole('admin')){
-            if($this->isAjax())
-           {            
-               $content = $_POST['value']; //odesílaná nová hodnota
-
-               $this->orderModel->updateDeliveryFreefrom($delid, $content);
-
-           }
-           if(!$this->isControlInvalid('DelFF'))
-           {           
-               $this->payload->edit = $content; //zaslání nové hodnoty do šablony
-               $this->sendPayload();       
-               $this->invalidateControl('DelFF'); //invalidace snipetu
-
-           }
-           else {
-            $this->redirect('this');
-           }
-       }
-    }
-
-    public function handleRemoveShipping($shipid) {
-       if ($this->getUser()->isInRole('admin')) {
-         
-            //$this->orderModel->deleteDelivery($shipid);
-           $this->orderModel->updateDeliveryStatus($shipid, 3);
-           
-           $text = $this->translator->translate('Shipping was archived.');
-            $message = Html::el('span', ' '.$text);
-            $e = Html::el('i')->class('icon-ok-sign left');
-            $message->insert(0, ' ');
-            $message->insert(0, $e);
-            $this->flashMessage($message, 'alert alert-success');
-            
-            if($this->isAjax()) {
-                $this->invalidateControl('content');
-                $this->invalidateControl('script');
-
-                
-            }
-            else{
-                $this->presenter->redirect("this");
-            }
-     }
-    }
-    
-    protected function createComponentAddShippingForm() {
-        if ($this->getUser()->isInRole('admin')) {
-            $addForm = new Nette\Application\UI\Form;
-            $addForm->setTranslator($this->translator);
-            
-            $addForm->addGroup('Create new shipping:');
-            $addForm->addText('newShip', 'Shipping name:')
-                    ->setRequired()
-                    ->setAttribute('class', 'form-control');
-            $addForm->addText('priceShip', 'Shipping price:')
-                    ->setRequired()
-                    ->addRule(FORM::FLOAT, 'This has to be a number')
-                    ->setAttribute('class', 'form-control');
-            $addForm->addText('descShip', 'Description:')
-                    ->setAttribute('class', 'form-control');
-            $addForm->addText('freeShip', 'Free from:')
-                    ->setAttribute('class', 'form-control');
-                    //->setDefaultValue(0)
-                    //->addRule(FORM::FLOAT, 'This has to be a number.');
-            $addForm->addSubmit('add', 'Add Shipping')
-                    ->setAttribute('class', 'upl-add btn btn-success form-control')
-                    ->setAttribute('data-loading-text', 'Adding...');
-            $addForm->onSuccess[] = $this->addShippingFormSubmitted;
-
-            return $addForm;
-        }
-    }
-
-    public function addShippingFormSubmitted($form) {
-        if ($this->getUser()->isInRole('admin')) {
-
-            $this->orderModel->insertDelivery($form->values->newShip,
-                                              $form->values->priceShip,
-                                              $form->values->descShip,
-                                              $form->values->freeShip,
-                                                1);
-            
-            $ico = HTML::el('i')->class('icon-ok-sign left');
-            $text = $this->translator->translate('was added sucessfully to your shipping method.');
-            $message = HTML::el('span', ' '.$text);
-            $message->insert(0, ' ' . $form->values->newShip);
-            $message->insert(0, $ico);
-            $this->flashMessage($message, 'alert alert-success');
-            $this->redirect('this');
-        }
-    }
-
-    protected function createComponentEditShippingForm($deliveryID){
-         if ($this->getUser()->isInRole('admin')) { 
-        $editShip = new Nette\Application\UI\Form;
-        
-        $editShip->setTranslator($this->translator);
-        $editShip->addText('name', 'Name:')
-                ->setDefaultValue($deliveryID['DeliveryName'])
-                ->setRequired()
-                ->setAttribute('class', 'form-control');
-        $editShip->addText('desc', 'Description:')
-                ->setDefaultValue($deliveryID['DeliveryDescription'])
-                ->setAttribute('class', 'form-control');
-        $editShip->addText('price', 'Price:')
-                ->setDefaultValue($deliveryID['DeliveryPrice'])
-                ->setAttribute('class', 'form-control');
-        $editShip->addText('free', 'Free from:')
-                ->setDefaultValue($deliveryID['FreeFromPrice'])
-                ->setAttribute('class', 'form-control');
-        $editShip->addHidden('deliveryID', $deliveryID['DeliveryID'] );
-        $editShip->addSubmit('edit', 'Edit shipping')
-                ->setAttribute('class', 'btn btn-success upl form-control')
-                        ->setAttribute('data-loading-text', 'Saving...');
-        $editShip->onSuccess[] = $this->editShippingSubmitted;
-        return $editShip;
-         }     
-    }
-    
-    public function editShippingSubmitted($form) {
-          if ($this->getUser()->isInRole('admin')) {
-        $this->orderModel->updateDelivery($form->values->deliveryID, $form->values->name, $form->values->desc, $form->values->price, $form->values->free);
-          
-        $ico = HTML::el('i')->class('icon-ok-sign left');
-        $text = $this->translator->translate('was sucessfully updated.');
-            $message = HTML::el('span', ' '.$text);
-            $message->insert(0, ' ' . $form->values->name);
-            $message->insert(0, $ico);
-            $this->flashMessage($message, 'alert alert-success');
-            $this->redirect('this');
-          }
-    }
-
-    public function renderShipping() {
+        public function renderShipping() {
         
         $this->template->delivery = $this->orderModel->loadDelivery('');
         $status = array();
@@ -951,283 +691,16 @@ class SmartPanelPresenter extends BasePresenter {
     /*        Render payment method and settings           */
     /**********************************************************************/
     public function actionPayment(){
-          if ($this->getUser()->isInRole('admin')) {
-        foreach ($this->orderModel->loadPayment('') as $id => $payment){
-            $paymentInfo = array(
-                'PaymentID' => $payment->PaymentID,
-                'PaymentName' => $payment->PaymentName,
-                'PaymentPrice' => $payment->PaymentPrice
-            );
-            $this['editPayment'.$payment->PaymentID] = $this->createComponentEditPaymentForm($paymentInfo);
-        }
-          }
+          if (!$this->getUser()->isInRole('admin')) {
+              $this->redirect('Homepage');
+          }        
+    }
         
+    protected function createComponentPaymentControl() {
+        $payment = new paymentControl($this->orderModel, $this->translator);
+        $this->addComponent($payment, 'paymentControl');
+        return $payment;
     }
-    
-    public function handleRemovePay($id) {
-       if ($this->getUser()->isInRole('admin')) {
-            
-            $row = $this->orderModel->deletePayment($id);
-            $text = $this->translator->translate('was removed.');
-            $message = Html::el('span', ' '.$text);
-            $e = Html::el('i')->class('icon-ok-sign left');
-            $message->insert(0, ' '. $row->PaymentName);
-            $message->insert(0, $e);
-            $this->flashMessage($message, 'alert alert-success');
-            
-            if($this->isAjax()) {
-                $this->invalidateControl('paymentName-'.$id);
-                $this->invalidateControl('payment');
-                $this->invalidateControl('content');
-                
-            }
-            else {
-            $this->redirect("this");
-            }
-       
-        }
-    }
-    
-    public function handleRemoveProd($prodID) {
-       if ($this->getUser()->isInRole('admin')) {
-            
-            $row = $this->productModel->deleteProducer($prodID);
-            $text = $this->translator->translate('was removed.');
-            $message = Html::el('span', ' ' . $text . '.');
-            $e = Html::el('i')->class('icon-ok-sign left');
-            $message->insert(0, ' '. $row['ProducerName']);
-            $message->insert(0, $e);
-            $this->flashMessage($message, 'alert alert-success');
-            
-            if($this->isAjax()) {
-                $this->invalidateControl('prod');
-                $this->invalidateControl('content');
-                $this->invalidateControl('script');
-            }
-            else {
-            $this->redirect("this");
-            }
-       
-        }
-    }
-    
-    protected function createComponentAddPaymentForm() {
-        if ($this->getUser()->isInRole('admin')) {
-            $addForm = new Nette\Application\UI\Form;
-            $addForm->setTranslator($this->translator);
-
-            $addForm->addGroup('Create new payment:');
-            $addForm->addText('newPay', 'Payment name:')
-                    ->setRequired()
-                    ->setAttribute('class', 'form-control');
-            $addForm->addText('pricePay', 'Payment price:')
-                    ->setRequired()
-                    ->setAttribute('class', 'form-control')
-                    ->addRule(FORM::FLOAT, 'This has to be a number');
-                         //->setDefaultValue(0)
-                    //->addRule(FORM::FLOAT, 'This has to be a number.');
-            $addForm->addSubmit('add', 'Add Payment')
-                    ->setAttribute('class', 'upl-add btn btn-success form-control')
-                    ->setAttribute('data-loading-text', 'Adding...');
-            $addForm->onSuccess[] = $this->addPaymentFormSubmitted;
-
-            return $addForm;
-        }
-    }
-
-    public function addPaymentFormSubmitted($form) {
-        if ($this->getUser()->isInRole('admin')) {
-
-            $this->orderModel->insertPayment($form->values->newPay,
-                                              $form->values->pricePay,
-                                              1
-                                              );
-            
-            $text = $this->translator->translate('was added sucessfully to your payment method.');
-            $ico = HTML::el('i')->class('icon-ok-sign left');
-            $message = HTML::el('span', ' '.$text);
-            $message->insert(0, ' ' . $form->values->newPay);
-            $message->insert(0, $ico);
-            $this->flashMessage($message, 'alert alert-success');
-            $this->redirect('this');
-        }
-    }
-
-    protected function createComponentEditPaymentForm($paymentID){
-         if ($this->getUser()->isInRole('admin')) { 
-        $editPay = new Nette\Application\UI\Form;
-        
-        $editPay->setTranslator($this->translator);
-        $editPay->addText('name', 'Name:')
-                ->setDefaultValue($paymentID['PaymentName'])
-                ->setRequired()
-                ->setAttribute('class', 'form-control');
-        $editPay->addText('price', 'Price:')
-                ->setDefaultValue($paymentID['PaymentPrice'])
-                ->setAttribute('class', 'form-control');
-        $editPay->addHidden('paymentID', $paymentID['PaymentID'] );
-        $editPay->addSubmit('edit', 'Edit payment')
-                ->setAttribute('class', 'btn btn-success upl form-control')
-                        ->setAttribute('data-loading-text', 'Saving...');
-        $editPay->onSuccess[] = $this->editPaymentSubmitted;
-        return $editPay;
-         }     
-    }
-    
-    public function editPaymentSubmitted($form) {
-          if ($this->getUser()->isInRole('admin')) {
-        $this->orderModel->updatePayment($form->values->paymentID, $form->values->name, $form->values->price);
-          
-        $ico = HTML::el('i')->class('icon-ok-sign left');
-       $text = $this->translator->translate('was sucessfully updated.');
-            $message = HTML::el('span', ' ' . $text);
-            $message->insert(0, ' ' . $form->values->name);
-            $message->insert(0, $ico);
-            $this->flashMessage($message, 'alert alert-success');
-            $this->redirect('this');
-          }
-    }
-
-    public function handleEditPaymentName($paymentID, $price) {
-         if ($this->getUser()->isInRole('admin')) {
-         
-            
-               
-            if($this->isAjax()){
-               //$name = $_POST['id'];
-               $content = $_POST['value'];
-               $this->orderModel->updatePaymentName($paymentID, $content);
-               
-               $text = $this->translator->translate('was sucessfully updated.');
-               $ico = HTML::el('i')->class('icon-ok-sign left');
-               $message = HTML::el('span', ' '.$text);
-               $message->insert(0, ' ' . $content);
-               $message->insert(0, $ico);
-               $this->flashMessage($message, 'alert alert-success');
-               
-           }
-           if(!$this->isControlInvalid('paymentName-'.$paymentID)){
-               $this->payload->edit = $content;
-               $this->sendPayload();
-               $this->invalidateControl('paymentName-'.$paymentID);
-               //$this->invalidateControl('flashMessages');
-
-           }
-            else {
-                 $this->redirect('this');
-
-            }
-          }
-    }
-    
-    public function handleEditPaymentPrice($paymentID, $name) {
-         if ($this->getUser()->isInRole('admin')) {
-         
-           
-               
-            if($this->isAjax()){
-               //$name = $_POST['id'];
-               $content = $_POST['value'];
-               
-               $this->orderModel->updatePaymentPrice($paymentID, $content);
-               $text = $this->translator->translate('was sucessfully updated.');
-                $ico = HTML::el('i')->class('icon-ok-sign left');
-               $message = HTML::el('span', ' '.$text);
-               $message->insert(0, ' ' . $name);
-               $message->insert(0, $ico);
-               $this->flashMessage($message, 'alert alert-success');
-               
-           }
-           if(!$this->isControlInvalid('paymentPrice-'.$paymentID)){
-               $this->payload->edit = $content;
-               $this->sendPayload();
-               $this->invalidateControl('paymentPrice-'.$paymentID);
-              // $this->invalidateControl('flashMessages');
-
-           }
-            else {
-                 $this->redirect('this');
-
-            }
-          }
-    }
-    
-    public function handleEditPaymentStatus($payid) {
-        if($this->getUser()->isInRole('admin')){
-            if($this->isAjax()){
-                $content = $_POST['value']; //odesílaná nová hodnota
-                $this->orderModel->updatePaymentStatus($payid, $content);
-            }
-            
-            if(!$this->isControlInvalid('PayStatus')){        
-                $this->payload->edit = $content; //zaslání nové hodnoty do šablony
-                $this->sendPayload();     
-                $this->invalidateControl('PayStatus'); //invalidace snipetu
-           }
-           else {
-            $this->redirect('this');
-           }
-        }
-    }
-    
-    public function handleEditProducerName($prodID) {
-         if ($this->getUser()->isInRole('admin')) {
-    
-            if($this->isAjax()){
-               //$name = $_POST['id'];
-               $content = $_POST['value'];
-               $this->productModel->updateProducer($prodID,'ProducerName', $content);
-               $text = $this->translator->translate('was sucessfully updated.');
-               $ico = HTML::el('i')->class('icon-ok-sign left');
-               $message = HTML::el('span', ' '.$text);
-               $message->insert(0, ' ' . $content);
-               $message->insert(0, $ico);
-               $this->flashMessage($message, 'alert alert-success');
-               
-           }
-           if(!$this->isControlInvalid('prodName-'.$prodID)){
-               $this->payload->edit = $content;
-               $this->sendPayload();
-               $this->invalidateControl('prodName-'.$prodID);
-   
-           }
-            else {
-                 $this->redirect('this');
-            }
-          }
-    }
-    
-    public function handleEditProducerDescription($prodID) {
-         if ($this->getUser()->isInRole('admin')) {
-    
-            if($this->isAjax()){
-               //$name = $_POST['id'];
-               $content = $_POST['value'];
-               $this->productModel->updateProducer($prodID,'ProducerDescription', $content);
-               $text = $this->translator->translate('was sucessfully updated.');
-               $ico = HTML::el('i')->class('icon-ok-sign left');
-               $message = HTML::el('span', ' '.$text);
-               $message->insert(0, ' ' . $content);
-               $message->insert(0, $ico);
-               $this->flashMessage($message, 'alert alert-success');
-               
-           }
-           if(!$this->isControlInvalid('prodDesc-'.$prodID)){
-               $this->payload->edit = $content;
-               $this->sendPayload();
-               $this->invalidateControl('prodDesc-'.$prodID);
-   
-           }
-            else {
-                 $this->redirect('this');
-            }
-          }
-    }
-    
-    
-    /*
-     * Render Payment
-     */
 
     public function renderPayment() {
 
@@ -1242,11 +715,27 @@ class SmartPanelPresenter extends BasePresenter {
         $this->template->status = $status;
     }
     
+    
+    
+    
+    /*
+     * RENDER PRODUCERS
+     */
+    
+     protected function createComponentProducerControl() {
+        $producer = new producerControl($this->productModel, $this->translator);
+        $this->addComponent($producer, 'producerControl');
+        return $producer;
+    }
+    
     public function renderProducers() {
         
         $this->template->prods = $this->productModel->loadProducers();
     }
 
+    
+    
+    
     /*
      * Render Orders
      *

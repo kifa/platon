@@ -13,13 +13,16 @@
 
 <div class="col-md-12">
 <div class="panel panel-default">
-  <div class="panel-heading">
+  <div class="panel-heading">{if $category->CategoryPhoto}
+     <img src="{$basePath}/images/category/s-{$category->CategoryPhoto}" class="img-responsible img-circle pull-left" alt="{$category->CategorySeoName}" >
+        {/if}
     <h1 class="CatTitle" n:snippet="CatTitle">{$category->CategoryName}</h1>
 
 </div>
   <div class="panel-body">
     <small class="shortDesc muted">
     <span n:block="metadesc">
+         
         <span class="CatDescription" n:snippet="CatDescription">{!$category->CategoryDescription}</span>
        
     </span> 

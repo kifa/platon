@@ -1,0 +1,76 @@
+<script>
+    
+     $('.DelName-{$deliver->DeliveryID}').editable( {link DelName! $deliver->DeliveryID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelName-{$deliver->DeliveryID}').text(json.edit);
+               }
+           });
+
+           $('.DelDescription-{$deliver->DeliveryID}').editable( {link DelDescription! $deliver->DeliveryID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelDescription-{$deliver->DeliveryID}').text(json.edit);
+               }
+           });
+
+           $('.DelPrice-{$deliver->DeliveryID}').editable( {link DelPrice! $deliver->DeliveryID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelPrice-{$deliver->DeliveryID}').text(json.edit);
+               }
+           });
+
+           $('.DelFF-{$deliver->DeliveryID}').editable( {link DelFF! $deliver->DeliveryID }, { 
+                type      : 'text',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelFF-{$deliver->DeliveryID}').text(json.edit);
+               }
+           });    
+           
+           $('.DelStatus-{$deliver->DeliveryID}').editable( {link DelStatus! $deliver->DeliveryID }, { 
+                data      :'{$status}',
+                type      : 'select',
+                cancel    : {_'Cancel'},
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelStatus-{$deliver->DeliveryID}').text(json.edit);
+               }
+           });    
+           
+            $('.DelHigher-{$deliver->HigherDelivery}').editable( {link DelHigher! $deliver->DeliveryID }, { 
+                data      :'{$deliveryList}',
+                type      : 'select',
+                submit    : 'OK',
+                indicator : '<i class="icon-spinner icon-spin"></i>',
+                tooltip   : 'Click to edit ...',
+                callback : function(value, settings) {
+                   var json = $.parseJSON(value);
+                   $('.DelHigher-{$deliver->DeliveryID}').text(json.edit);
+               }
+           });  
+           
+    </script>

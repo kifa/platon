@@ -1,0 +1,45 @@
+<script> 
+   
+    $(document).ready(function() {
+$('.paymentName-{$payment->PaymentID}').editable( {link editPaymentName! $payment->PaymentID, $payment->PaymentPrice }, { 
+         type      : 'text',
+         cancel    : {_'Cancel'},
+         submit    : 'OK',
+         indicator : '<i class="icon-spinner icon-spin"></i>',
+         tooltip   : 'Click to edit ...',
+         callback : function(value, settings) {
+            var json = $.parseJSON(value);
+            $('.paymentName-{$payment->PaymentID}').text(json.edit);
+        }
+        });     
+        
+                                   
+     $('.paymentPrice-{$payment->PaymentID}').editable( {link editPaymentPrice! $payment->PaymentID, $payment->PaymentName }, { 
+         type      : 'text',
+         cancel    : {_'Cancel'},
+         submit    : 'OK',
+         indicator : '<i class="icon-spinner icon-spin"></i>',
+         tooltip   : 'Click to edit ...',
+         callback : function(value, settings) {
+            var json = $.parseJSON(value);
+            $('.paymentPrice-{$payment->PaymentID}').text(json.edit);
+        }
+        });    
+        
+    $('.paymentStatus-{$payment->PaymentID}').editable( {link editPaymentStatus! $payment->PaymentID }, { 
+            data      :'{$status}',
+            type      : 'select',
+            cancel    : {_'Cancel'},
+            submit    : 'OK',
+            indicator : '<i class="icon-spinner icon-spin"></i>',
+            tooltip   : 'Click to edit ...',
+            callback : function(value, settings) {
+               var json = $.parseJSON(value);
+               $('.paymentStatus-{$payment->PaymentID}').text(json.edit);
+           }
+       }); 
+
+
+
+}); 
+      </script> 
