@@ -1,0 +1,44 @@
+    public function updateProductName($id,$value){
+        $update = array(
+            'ProductName' => $value
+        );
+        return $this->getTable('product')
+                ->where('ProductID',$id)
+                ->update($update);
+    }
+
+	public function countPhotoAlbum() {
+        return $this->getTable('photoalbum')
+                ->count();
+    }
+	
+	    
+    public function getData() {
+        return $this->getTable('producer');
+    }
+	
+    public function getCount() {
+        return $this->getTable('producer')
+                ->count();
+    }
+	
+    public function sort(array $sorting) {
+        return $this->getTable('producer')
+                ->where($sorting);
+    }
+	
+	public function suggest($column, array $conditions) {
+       return $this->getTable('producer')
+               ->select($columns)
+               ->where($condition);
+    }   
+	    
+    public function limit($offset, $limit) {
+        return $this->getTable('producer')
+                ->limit($limit, $offset);
+    }   
+	
+	public function filter(array $condition) {
+        return $this->getTable('producer')
+                ->where($condition);
+    }  
