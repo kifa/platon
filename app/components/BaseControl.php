@@ -13,20 +13,5 @@ class BaseControl extends UI\Control {
     /** @var NetteTranslator\Gettext */
     protected $translator;
 
-
-/*
-    public function setTranslator($translator) {
-        $this->translator = $translator;
-    }
-
-    public function createTemplate($class = NULL)
-{
-    $template = parent::createTemplate($class);
-    $template->setTranslator($this->translator);
-    // případně $this->translator přes konstrukt/inject
-
-    return $template;
-}
-    */
     
 }

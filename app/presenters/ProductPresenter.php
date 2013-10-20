@@ -106,8 +106,7 @@ class ProductPresenter extends BasePresenter {
                 $seo->setDefaults(array('catid' => $catID, 'name' => $cat['CategorySeoName']));
                
                 
-                $addCategoryForm = $this['addCategoryForm'];
-                $addCategoryForm->setDefaults(array('catID' => $catID));
+              
 
                 $addCategoryPhoto = $this['addCategoryPhotoForm'];
                 $addCategoryPhoto->setDefaults(array('catID' => $catID));
@@ -420,23 +419,7 @@ class ProductPresenter extends BasePresenter {
     }
     
     
-    public function handleEditProdVarTitle($id){
-        if($this->getUser()->isInRole('admin')){
-            if($this->isAjax()){            
-                $content = $_POST['value'];
-                $this->productModel->updateProduct($id, 'ProductVariantName', $content);
-            }
-            if(!$this->isControlInvalid('editProdVarTitle'.$id)){
-                $this->payload->edit = $content;
-                $this->sendPayload();
-                $this->invalidateControl('editProdVarTitle'.$id);
-            }
-            else {
-             $this->redirect('this');
-            }
-
-        }
-    }
+    
 
     public function handleEditProdDescription($id) {
         if($this->getUser()->isInRole('admin')){
@@ -499,27 +482,7 @@ class ProductPresenter extends BasePresenter {
     
     
 
-    public function handleEditProdAmount($id) {        
-        if($this->getUser()->isInRole('admin')){ 
-            if($this->isAjax())
-            {            
-                $content = $_POST['value'];
-
-                $this->productModel->updateProduct($id, 'PiecesAvailable', $content);
-                $this->invalidateControl('page-header');
-            }
-            if(!$this->isControlInvalid('editProdAmount'))
-            {
-                $this->invalidateControl('editProdAmount');
-                $this->invalidateControl('pageheader');
-                $this->payload->edit = $content;
-                $this->sendPayload();
-            }
-            else {
-             $this->redirect('this');
-            }
-        }
-    }
+    
     
     
     
@@ -1192,9 +1155,8 @@ class ProductPresenter extends BasePresenter {
    
     
     protected function createComponentVariantControl() {
-        $variant = new variantControl();
-        $variant->setTranslator($this->translator);
-        $variant->setProduct($this->productModel);        
+        $variant = new variantControl($this->productModel, $this->translator);
+        $this->addComponent($variant, 'variantControl');      
         return $variant;
     }
     
@@ -1274,8 +1236,8 @@ class ProductPresenter extends BasePresenter {
             //$template->mailOrder = $row->UsersID;
             $template->note = $note;
             $template->product = $name; 
-            
-            $mailIT = new mailControl();
+
+            $mailIT = new mailControl($this->translator);
             $mailIT->sendSuperMail($contactMail, 'New question about product ' . $name, $template, $email);
     }
 

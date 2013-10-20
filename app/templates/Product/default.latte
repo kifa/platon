@@ -253,46 +253,18 @@
 {block script}
 
 {if $user->isInRole('admin')}           
-<div n:snippet="variantscript" >                  
+<div n:snippet="variantscript" > 
+    
+    {foreach $productVariants as  $id => $productVariant}
+
+
+    {control variantControl:js $productVariant}
+        
+               {/foreach}
+    
 <script>
     $(document).ready(function() {
-{foreach $productVariants as  $id => $productVariant}
 
-
-              $('#editPrice{$productVariant->ProductID}').toggle(function(){
-                    $('#editProdPrice{$productVariant->ProductID}').show();
-              },
-              function() {
-                  $('#editProdPrice{$productVariant->ProductID}').hide();
-              });
-              
-              $('.prodAmount{$productVariant->ProductID}').editable( {link editProdAmount! $productVariant->ProductID }, {
-                  type      : 'text',
-                  onblur    : 'ignore',
-                  cancel    : {_'Cancel'},
-                  submit    : 'OK', 
-                  cssclass  : 'editForm col-md-12',
-                  indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
-                  tooltip   : {_'Click to edit ...'},
-                  callback : function(value, settings) {
-                     var json = $.parseJSON(value);
-                     $('.prodAmount{$productVariant->ProductID}').text(json.edit);
-                 }
-          });
-          
-          $('.prodVarTitle{$productVariant->ProductID}').editable( {link editProdVarTitle! $productVariant->ProductID }, { 
-                  type      : 'text',
-                  cancel    : {_'Cancel'},
-                  submit    : 'OK',
-                  cssclass  : 'editForm col-md-5',
-                  indicator : '<i class="icon-spinner icon-spin"></i>',
-                  tooltip   : {_'Click to edit ...'},
-                  callback : function(value, settings) {
-                     var json = $.parseJSON(value);
-                     $('.prodVarTitle{$productVariant->ProductID}').text(json.edit);
-                 }
-             });
-               {/foreach}
 
               $('.prodTitle').editable( {link editProdTitle! $product->ProductID }, { 
                   type      : 'text',

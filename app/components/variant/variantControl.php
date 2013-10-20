@@ -17,23 +17,10 @@ class variantControl extends BaseControl {
     private $row;
     
     
-    
-    /* 
-     *Settin Translator to implement localization
-     * 
-     * @param Nette\Gettext\translator
-     * @return void
-     */
-
-    
-   public function setTranslator($translator) {
+    public function __construct(\ProductModel $productModel, \NetteTranslator\Gettext $translator) {
+        $this->productModel = $productModel;
         $this->translator = $translator;
     }
-    
-    public function setProduct($product) {
-        $this->productModel = $product;
-    }
-
 
     /*
      * Create control template for localization
@@ -112,43 +99,69 @@ class variantControl extends BaseControl {
     }
     
     
-    /*
-     * Rendering component
-     */
+    public function handleEditProdVarTitle($id){
+        if($this->presenter->getUser()->isInRole('admin')){
+            if($this->presenter->isAjax()){            
+                $content = $_POST['value'];
+                $this->productModel->updateProduct($id, 'ProductVariantName', $content);
+            }
+            if(!$this->isControlInvalid()){
+                $this->presenter->payload->edit = $content;
+                $this->presenter->sendPayload();
+                //$this->invalidateControl('editProdVarTitle'.$id);
+            }
+            else {
+             $this->presenter->redirect('this');
+            }
+        }
+    }
+       
+    public function handleEditProdAmount($id) {        
+        if($this->presenter->getUser()->isInRole('admin')){ 
+            if($this->presenter->isAjax())
+            {            
+                $content = $_POST['value'];
 
-    public function render() {
-
-        $this->template->setFile(__DIR__ . '/ModalControl.latte');
-        $this->template->render();
+                $this->productModel->updateProduct($id, 'PiecesAvailable', $content);
+               
+            }
+            if(!$this->isControlInvalid())
+            {
+                
+                $this->presenter->payload->edit = $content;
+                $this->presenter->sendPayload();
+                $this->invalidateControl('editProdAmount');
+                $this->presenter->invalidateControl('pageheader');
+                 $this->presenter->invalidateControl('page-header');
+                $this->invalidateControl();
+            }
+            else {
+             $this->presenter->redirect('this');
+            }
+        }
     }
     
+    
     public function renderVariant($variants, $shipping) {
-        $this->template->setFile(__DIR__ . '/variantControl.latte');
+        $this->template->setFile(__DIR__ . '/templates/variantControl.latte');
     
 
-     if ($this->presenter->getUser()->isInRole('admin')) {            
-        $this['editPriceForm']->setDefaults(array( 
-                            'price' => $variants['SellingPrice'],
-                            'sale' => $variants['SALE'],
-                            'id' => $variants['ProductID']));
-     }
-        
+            if ($this->presenter->getUser()->isInRole('admin')) {            
+               $this['editPriceForm']->setDefaults(array( 
+                                   'price' => $variants['SellingPrice'],
+                                   'sale' => $variants['SALE'],
+                                   'id' => $variants['ProductID']));
+            }
+
         $this->template->productVariant = $variants;
         $this->template->shippingPrice = $shipping;
         $this->template->render();
     }
     
-    public function renderGallery($id, $title, $content) {
-
-        $this->template->setFile(__DIR__ . '/ModalGalleryControl.latte');
-        $this->template->id = $id;
-        $this->template->title = $title;
-        $this->template->content = $content;
-        $this->template->render();
-    }
     
-    public function renderTracking() {
-        $this->template->setFile(__DIR__ . '/ModalTrackingControl.latte');
+    public function renderJs($variant) {
+        $this->template->setFile(__DIR__ . '/templates/variantJs.latte');
+        $this->template->productVariant = $variant;
         $this->template->render();
     }
     

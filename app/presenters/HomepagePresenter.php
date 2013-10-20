@@ -36,8 +36,8 @@ class HomepagePresenter extends BasePresenter {
     public function injectTranslator(NetteTranslator\Gettext $translator) {
         $this->translator = $translator;
     }
-
     
+        
     protected function createComponentAddVideoForm() {
         $videoForm = new Nette\Application\UI\Form;
         $videoForm->setTranslator($this->translator);

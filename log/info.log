@@ -80,3 +80,4 @@ X-Generated-in: 0.0039
 X-HGenerator: hurvinek.hdc1.cz
 
 Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=5&statusID=3&name=Done&progress=10&do=setStatus
+[2013-10-19 18-41-53] Fatal error: Argument 1 passed to mailControl::__construct() must be an instance of NetteTranslator\Gettext, none given, called in C:\wamp\www\platon\app\components\modules\payment-modules\bankwireModule.php on line 141 and defined in C:\wamp\www\platon\app\components\mail\mailControl.php:22  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=5&statusID=1&name=Pending&progress=1&do=setStatus  @@  exception-2013-10-19-18-41-53-bd651cee057858d1a1b4aff3b55b0120.html

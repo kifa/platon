@@ -554,7 +554,7 @@ class OrderPresenter extends BasePresenter {
             $args = array($row->OrderID, $hash);
             $template->link = $this->presenter->link('//Order:orderDone', $args);
             
-            $mailIT = new mailControl();
+            $mailIT = new mailControl($this->translator);
             $mailIT->sendSuperMail($row->UsersID, 'Message about your order', $template, $adminMail);
     }
     
@@ -584,7 +584,7 @@ class OrderPresenter extends BasePresenter {
                 $template->note = NULL;
             }
             
-            $mailIT = new mailControl();
+            $mailIT = new mailControl($this->translator);
             $mailIT->sendSuperMail($adminMail, 'New Order '.$orderid, $template, $adminMail);
     }
     
@@ -603,7 +603,7 @@ class OrderPresenter extends BasePresenter {
             $template->customer = $row->Name;
             $template->note = $note;
             
-            $mailIT = new mailControl();
+            $mailIT = new mailControl($this->translator);
             $mailIT->sendSuperMail($adminMail, 'Message about order', $template, $row->UserID);
     }
 

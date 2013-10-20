@@ -1,0 +1,41 @@
+<div id="addCategory" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Category'}</h3>
+            </div>
+            {form addCategoryForm}
+    <div class="modal-body">
+                <p>{_'Please fill in these information'}</p>
+    <div class="form-group">
+    {label name /}
+    {input name} </div>
+                <div class="form-group">
+                {label parent /}
+     {input parent}
+                </div>
+    </div>
+    <div class="modal-footer">
+        {input add}
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+    </div>
+        {/form}
+        </div> </div> </div>
+
+
+<div id="addStaticText" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel"><i class="icon-pencil"></i> {_'Add Text'}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{_'Please fill in these information'}</p>
+                      {control addStaticTextForm}
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">{_'Close without adding'}</button>
+            </div>
+        </div> </div> </div>

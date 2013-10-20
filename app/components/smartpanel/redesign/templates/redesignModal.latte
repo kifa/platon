@@ -1,0 +1,147 @@
+<div id="editDesign" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editDesign" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><i class="icon-tint"></i> {_'Redesign your eshop'}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="tabbable">
+                    <ul class="nav nav-pills col-md-3">
+                        <li class="active"><a href="#editLayout" data-toggle="tab"><i class=""></i> {_'Layout'}</a></li>
+                        <li><a href="#editMenu" data-toggle="tab"><i class=""></i> {_'Menu'}</a>
+                        <li><a href="#editProducts" data-toggle="tab"><i class=""></i> {_'Products'}</a></li>
+                        <li><a href="#editProduct" data-toggle="tab"><i class=""></i> {_'Product'}</a></li>
+                           <li><a href="#editHomepage" data-toggle="tab"><i class=""></i> {_'Homepage'}</a></li>
+                           <li><a href="#editSlider" data-toggle="tab"><i class="icon-chevron-right"></i>  {_'Slider'}</a></li>
+                           <li><a href="#editBanner" data-toggle="tab"><i class="icon-chevron-right"></i> {_'Banners'}</a>
+                            <li><a href="#addLogo" data-toggle="tab"><i class=""></i> {_'Upload your logo'}</a></li>
+
+                           <li><a href="#addStyle" data-toggle="tab"><i class=""></i> {_'Add your style.css'}</a></li>
+                        <li><a href="#premium" data-toggle="tab"><i class="icon-star icon-small"></i> {_'Premium design'}</a></li>
+                    </ul>
+                    <div class="tab-content col-md-8">
+                        <div class="tab-pane active" id="editLayout">
+                             <h3>{_'Select your eshop layout'}</h3>
+                            <dl>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'default'" ><i n:tag-if="$layoutSel == 'default'" class="icon icon-ok-sign"></i> {_'Default'}</a></dt>
+                                <dd>{_'Default "traditional" layout. Logo, big top menu, sidebar.'}</dd>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'sidemenu'" ><i n:tag-if="$layoutSel == 'sidemenu'" class="icon icon-ok-sign"></i>{_'Side menu'}</a></dt>
+                                <dd>{_'Layout with side menu.'}</dd>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'topbar'" ><i n:tag-if="$layoutSel == 'topbar'" class="icon icon-ok-sign"></i> {_'Top bar'}</a></dt>
+                                <dd>{_'Application-like layout. Fixed top navigation, sidebar.'}</dd>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'ShopLayout', 'nosidebar'" ><i n:tag-if="$layoutSel == 'nosidebar'" class="icon icon-ok-sign"></i>{_'No sidebar'}</a></dt>
+                                <dd>{_'Wide layout without sidebar.'}</dd>
+                            </dl>
+                        </div>
+
+
+                        <div class="tab-pane" id="editMenu">
+                            <h3>{_'Assign different menus to position you like it.'}</h3>
+
+                            {control menuSwitcherForm}
+                            
+                            <p><i class="icon-info-sign"></i> {_'Quick tip'}: <br>
+                            <dl>
+                                <dt>{_'Categories'}</dt>
+                                <dd>{_'Display all categories in your eshop'}</dd>
+                                
+                                <dt>{_'Info'}</dt>
+                                <dd>{_'Display Info pages (like About us, etc.)'}</dd>
+                                
+                                <dt>{_'Cart'}</dt>
+                                <dd>{_'Display cart and tracking menu'}</dd>
+                                
+                                <dt>{_'Brands'}</dt>
+                                <dd>{_'Display all defined Brands in your eshop'}</dd>
+                                
+                                <dt>{_'All'}</dt>
+                                <dd>{_'Display all info abowe. Suitable for small eshops'}</dd>
+                            </dl>
+                            
+                            </p>
+                        </div>
+
+                        <div class="tab-pane" id="editProducts">
+                              <h3>{_'Choose one of four products layout.'}</h3>
+                            <dl>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', 'fourinline'" ><i n:tag-if="$productMiniSel == 'fourinline'" class="icon icon-ok-sign"></i> {_'4 in line'}</a></dt>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', 'twoinline'" ><i n:tag-if="$productMiniSel == 'twoinline'" class="icon icon-ok-sign"></i> {_'2 in line'}</a></dt>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', 'singleton'" ><i n:tag-if="$productMiniSel == 'singleton'" class="icon icon-ok-sign"></i> {_'Singleton'}</a></dt>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'ProductMiniLayout', 'bigphoto'" ><i n:tag-if="$productMiniSel == 'bigphoto'" class="icon icon-ok-sign"></i> {_'Big photo'}</a></dt>
+                                <hr>
+                            </dl>
+
+                        </div>
+
+                        <div class="tab-pane" id="editProduct">
+                            <h3>{_'Your product page can look like this.'}</h3>
+                            <dl>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'default'" ><i n:tag-if="$productSel == 'default'" class="icon icon-ok-sign"></i> {_'Default'}</a></dt>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'ProductLayout', 'phototime'" ><i n:tag-if="$productSel == 'phototime'" class="icon icon-ok-sign"></i> {_'Photo time'}</a></dt>
+                               <hr>
+                            </dl>
+
+                        </div>
+                        
+                        <div class="tab-pane" id="editHomepage">
+                            <dl class="list-unstyled">
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'HomepageLayout', 'noslider'" ><i n:tag-if="$homepageSel == 'noslider'" class="icon icon-ok-sign"></i> {_'No slider'}</a></dt>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'HomepageLayout', 'slider'" ><i n:tag-if="$homepageSel == 'slider'" class="icon icon-ok-sign"></i> {_'Slider'}</a></dt>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'HomepageLayout', 'twopanels'" ><i n:tag-if="$homepageSel == 'twopanels'" class="icon icon-ok-sign"></i> {_'Two panels'}</a></dt>
+                                <hr>
+                                <dt><a class="btn btn-default" n:href="setShopLayout! 'HomepageLayout', 'fullpanel'" ><i n:tag-if="$homepageSel == 'fullpanel'" class="icon icon-ok-sign"></i> {_'Full Panel'}</a></dt>
+                                <hr>
+                            </dl>
+
+                        </div>
+                        
+                        <div class="tab-pane" id="editSlider">
+                            <h3>{_'Upload your slider photos'}</h3>
+                                       {control addSliderForm}
+                            <p><i class="icon-info-sign"></i> {_'Quick Tip'}: {_'You can set new link without uploading new slider.'} {_'Just select slider position and enter link'}.</p>
+                        
+                        </div>
+                        
+                        <div class="tab-pane" id="editBanner">
+                             <h3>{_'Upload your banner photos'}</h3>
+                                    {control addBannerForm}
+                             <p><i class="icon-info-sign"></i> {_'Quick Tip'}: {_'You can set new link without uploading new banner.'} {_'Just select banner position and enter link'}.</p>
+                        </div>
+                        
+                        
+                        <div class="tab-pane" id="addLogo">
+                        <strong>{_'Upload your logo'}</strong>
+                         {control addLogoForm}
+                         </div>
+                        
+                        <div class="tab-pane" id="addStyle">
+                        {control uploadStyleForm}
+                            <br>
+                            {if $style}
+                            {_'Current style'}: {$style} <a href="{link deleteStyle! $style}"><i class="icon-trash"></i></a>
+                            {/if}
+                        </div>
+                        
+                        <div class="tab-pane" id="premium">
+                            <p>{_'Premium design from our design specialist.'}</p>
+                            <button class="btn btn-danger">Order your design now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{_'Close without saving'}</button>
+            </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div>  

@@ -6,7 +6,7 @@
     
     {if $productVariant->ProductVariantName}
 
- <h4 class="col-md-12 prodVarTitle{$productVariant->ProductID} col-md-12" n:snippet=editProdVarTitle{$productVariant->ProductID}">{$productVariant->ProductVariantName}</h4>
+ <h4 class="col-md-12 prodVarTitle{$productVariant->ProductID} col-md-12">{$productVariant->ProductVariantName}</h4>
     {else}
   <h4 class="col-md-12 col-md-12">{$productVariant->ProductName}</h4>
 {/if}
@@ -26,7 +26,7 @@
       </div>
     {/if}
    <div id="prodPrice{$productVariant->ProductID}" class="col-md-12 text-center">
-             {if $productVariant->SALE > 1}
+             {if $productVariant->SALE > 0.1}
                        <span n:snippet="prodSale{$productVariant->ProductID}" class="">
                            <span class="">- {$productVariant->SALE} / {var $procent = 100 * ($productVariant->SALE / $productVariant->SellingPrice)} {$procent|number}%</span>
                            <span class="" style="text-decoration: line-through;">{$productVariant->SellingPrice},-</span>

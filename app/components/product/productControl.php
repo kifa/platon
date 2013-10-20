@@ -37,7 +37,15 @@ class productControl extends BaseControl{
     }
     
     
-    public function createTemplate($class = NULL)
+    public function __construct(\ShopModel $shopModel, \ProductModel $productModel, 
+                                \CategoryModel $categoryModel, \NetteTranslator\Gettext $translator) {
+        $this->shopModel = $shopModel;
+        $this->productModel = $productModel;
+        $this->categoryModel = $categoryModel;
+        $this->translator = $translator;
+    }
+
+        public function createTemplate($class = NULL)
     {
     $template = parent::createTemplate($class);
     $template->setTranslator($this->translator);

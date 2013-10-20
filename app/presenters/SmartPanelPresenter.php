@@ -13,8 +13,8 @@ use \PdfResponse;
  */
 
 class SmartPanelPresenter extends BasePresenter {
+    
     /* @var OrderModel */
-
     private $orderModel;
 
     /* @var ProductModel */
@@ -40,32 +40,42 @@ class SmartPanelPresenter extends BasePresenter {
 
     protected function startup() {
         parent::startup();
-        $this->orderModel = $this->context->orderModel;
-        $this->productModel = $this->context->productModel;
-        $this->categoryModel = $this->context->categoryModel;
-        $this->shopModel = $this->context->shopModel;
-        $this->userModel = $this->context->userModel;
+        
+        if(!$this->user->isInRole('admin')) {
+            $this->redirect('Sign:in');
+        }
     }
 
-    /*
-     * Action for setting OrderStatus
-     */
-
+  
     public function injectTranslator(NetteTranslator\Gettext $translator) {
         $this->translator = $translator;
     }
     
-    protected function createComponentMail() {
-        $mailControl = new mailControl();
-        $mailControl->setTranslator($this->translator);
-        $mailControl->setProduct($this->productModel);
-        $mailControl->setCategory($this->categoryModel);
-        $mailControl->setBlog($this->blogModel);
-        return $mailControl;
+    public function injectProductModel(\ProductModel $productModel) {
+        parent::injectProductModel($productModel);
+      $this->productModel = $productModel;
+    }
+    
+    public function injectCategoryModel(\CategoryModel $categoryModel) {
+        parent::injectCategoryModel($categoryModel);
+        $this->categoryModel = $categoryModel;
     }
 
+    public function injectOrderModel(\OrderModel $orderModel) {
+        parent::injectOrderModel($orderModel);
+        $this->orderModel = $orderModel;
+    }
     
-     
+    public function injectShopModel(\ShopModel $shopModel) {
+        parent::injectShopModel($shopModel);
+        $this->shopModel = $shopModel;
+    }
+    
+    public function injectUserModel(\UserModel $userModel) {
+        $this->userModel = $userModel;
+    }
+
+
     protected function createComponentGapiModule() {
        
        $gapi = new gapiModule();
@@ -114,21 +124,8 @@ class SmartPanelPresenter extends BasePresenter {
             else {
                  $this->flashMessage($message, 'alert alert-danger');
             }
-            
-          
-            
-                $this->redirect('this');
-            /*
-            
-            if($this->isAjax()) {
-                $this->invalidateControl('content');
-                $this->invalidateControl('script');
-                
-            }
-            else {  
-                $this->redirect('this');
-            }
-            */
+
+            $this->redirect('this');
     }
     
         
@@ -243,7 +240,7 @@ class SmartPanelPresenter extends BasePresenter {
                                        'ZIPCode' => $adress->ZIPCode,
                                        'City' => $adress->City);
             
-            $editAddress = $this['editOrderAddressForm'];
+           
             $editForm = $this['editOrderInfoForm'];
             $this->productInOrder = $this->orderModel->checkRemoveProduct($orderid);
         }
@@ -466,58 +463,15 @@ class SmartPanelPresenter extends BasePresenter {
 
     public function editOrderInfoFormSubmitted($form) {
         if ($this->getUser()->isInRole('admin')) {
-            
             $this->orderModel->updateOrder($form->values->orderID, $form->values->shipper, $form->values->payment);
-            
             $text = $this->translator->translate('Order was sucessfully updated!');
             $message = Html::el('span', ' '.$text);
             $e = Html::el('i')->class('icon-ok-sign left');
             $message->insert(0, $e);
             $this->flashMessage($message, 'alert alert-success');
             $this->redirect('this');
-            
         }
-        
-    }
-    
-     protected function createComponentEditOrderAddressForm() {
-        
-                
-        $editForm = new Nette\Application\UI\Form;
-        $editForm->setTranslator($this->translator);
-        $editForm->addHidden('orderID', $this->orderRow['OrderID']);
-        $editForm->addText('street', 'Street:')
-                ->setDefaultValue($this->orderAddress['Street'])
-                ->setAttribute('class', 'form-control');
-        $editForm->addText('zipcode', 'ZIP:')
-                ->setDefaultValue($this->orderAddress['ZIPCode'])
-                ->setAttribute('class', 'form-control');
-        $editForm->addText('city', 'City:')
-                ->setDefaultValue($this->orderAddress['City'])
-                ->setAttribute('class', 'form-control');
-        $editForm->addSubmit('edit', 'Edit address')
-                    ->setAttribute('class', 'btn btn-success upl form-control')
-                    ->setAttribute('data-loading-text', 'Editing...');
-        $editForm->onSuccess[] = $this->editOrderAddressFormSubmitted;
-        return $editForm;
-    }
-
-    public function editOrderAddressFormSubmitted($form) {
-        if ($this->getUser()->isInRole('admin')) {
-            
-            $this->orderModel->updateOrderAddress($form->values->orderID, $form->values->street, $form->values->zipcode, $form->values->city);
-            
-            $text = $this->translator->translate('Order was sucessfully updated!');
-            $message = Html::el('span', ' '.$text);
-            $e = Html::el('i')->class('icon-ok-sign left');
-            $message->insert(0, $e);
-            $this->flashMessage($message, 'alert alert-success');
-            $this->redirect('this');
-            
-        }
-        
-    }
-    
+    }    
     
     
     protected function createComponentAddProductsForm() {
@@ -910,8 +864,6 @@ class SmartPanelPresenter extends BasePresenter {
      public function renderModules() {
         if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
-        } else {
-                      
         }
     }
 
@@ -936,7 +888,7 @@ class SmartPanelPresenter extends BasePresenter {
             $template->link = $this->presenter->link('//Order:orderDone', $args);
             
             $sub = $this->translator->translate('Your order has new status');
-            $mailIT = new mailControl();
+            $mailIT = new mailControl($this->translator);
             $mailIT->sendSuperMail($row->UsersID, $sub, $template, $adminMail);
     }
 
@@ -955,7 +907,7 @@ class SmartPanelPresenter extends BasePresenter {
             $template->note = $note;
             
             $sub = $this->translator->translate('Message about your order');
-            $mailIT = new mailControl();
+            $mailIT = new mailControl($this->translator);
             $mailIT->sendSuperMail($row->UsersID, $sub, $template, $adminMail);
     }
 }

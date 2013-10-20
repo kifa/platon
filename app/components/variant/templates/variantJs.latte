@@ -1,0 +1,37 @@
+<script>
+    
+     $('#editPrice{$productVariant->ProductID}').toggle(function(){
+                    $('#editProdPrice{$productVariant->ProductID}').show();
+              },
+              function() {
+                  $('#editProdPrice{$productVariant->ProductID}').hide();
+              });
+              
+              $('.prodAmount{$productVariant->ProductID}').editable( {link editProdAmount! $productVariant->ProductID }, {
+                  type      : 'text',
+                  onblur    : 'ignore',
+                  cancel    : {_'Cancel'},
+                  submit    : 'OK', 
+                  cssclass  : 'editForm col-md-12',
+                  indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
+                  tooltip   : {_'Click to edit ...'},
+                  callback : function(value, settings) {
+                     var json = $.parseJSON(value);
+                     $('.prodAmount{$productVariant->ProductID}').text(json.edit);
+                 }
+          });
+          
+          $('.prodVarTitle{$productVariant->ProductID}').editable( {link editProdVarTitle! $productVariant->ProductID }, { 
+                  type      : 'text',
+                  cancel    : {_'Cancel'},
+                  submit    : 'OK',
+                  cssclass  : 'editForm col-md-5',
+                  indicator : '<i class="icon-spinner icon-spin"></i>',
+                  tooltip   : {_'Click to edit ...'},
+                  callback : function(value, settings) {
+                     var json = $.parseJSON(value);
+                     $('.prodVarTitle{$productVariant->ProductID}').text(json.edit);
+                 }
+             });
+             
+    </script>

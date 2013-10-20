@@ -14,35 +14,14 @@ class mailControl extends BaseControl {
 
     /** @var NetteTranslator\Gettext */
     protected $translator;
-    private $categoryModel;
-    private $productModel;
-    private $blogModel;
-    private $shopModel;
 
 
-    public function setCategory($cat) {
-        $this->categoryModel = $cat;
-
-    }
-    
-    public function setShop($shop){
-        $this->shopModel = $shop;
-    }
-
-    public function setBlog($blog) {
-        $this->blogModel = $blog;
-
-    }
-    
-    public function setProduct($pro) {
-        $this->productModel = $pro;
-    }
-    
-    
-   public function setTranslator($translator) {
+    public function __construct(\NetteTranslator\Gettext $translator) {
+        parent::__construct();
         $this->translator = $translator;
     }
-    
+
+      
  
     public function createTemplate($class = NULL)
     {
