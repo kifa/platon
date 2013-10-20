@@ -4,6 +4,7 @@ use Nette\Application\UI,
     Nette\Forms\Form,
     Nette\Utils\Html;
 use Nette\Diagnostics;
+use Nette\Http\Request;
 
 /*
  * Component to render modal window
@@ -43,7 +44,7 @@ class producerControl extends BaseControl {
     
             if($this->presenter->isAjax()){
                //$name = $_POST['id'];
-               $content = $_POST['value'];
+               $content = $this->presenter->context->httpRequest->getPost('value');
                $this->productModel->updateProducer($prodID,'ProducerName', $content);
                $text = $this->translator->translate('was sucessfully updated.');
                $ico = HTML::el('i')->class('icon-ok-sign left');
@@ -70,7 +71,7 @@ class producerControl extends BaseControl {
     
             if($this->presenter->isAjax()){
                //$name = $_POST['id'];
-               $content = $_POST['value'];
+               $content = $this->presenter->context->httpRequest->getPost('value');
                $this->productModel->updateProducer($prodID,'ProducerDescription', $content);
                $text = $this->translator->translate('was sucessfully updated.');
                $ico = HTML::el('i')->class('icon-ok-sign left');

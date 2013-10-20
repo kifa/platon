@@ -4,6 +4,9 @@ use Nette\Forms\Form,
     Nette\Utils\Html,
     Nette\Image;
 use Nette\Mail\Message;
+use Nette\Http\Request;
+use Nette\Http\Session;
+use Nette\Http\SessionSection;
 
 /*
  * class ProductPresenter
@@ -26,28 +29,45 @@ class ProductPresenter extends BasePresenter {
     private $edit;
     private $filter;
 
+    /** @var \Nette\Http\Request @inject */
+    public $httpRequest;
+    
+    
     protected function startup() {
         parent::startup();
-        $this->productModel = $this->context->productModel;
-        $this->categoryModel = $this->context->categoryModel;
-        $this->shopModel = $this->context->shopModel;
-        $this->blogModel = $this->context->blogModel;
-        
+               
         if ($this->getUser()->isInRole('admin')) {
             $this->edit = $this->getSession('edit');
         }
         
         $salt = $this->shopModel->getShopInfo('Salt');
-        $this->filter = $this->getSession('filter'.$salt);
-        /* Kontrola přihlášení
-         * 
-         * if (!$this->getUser()->isInRole('admin')) {
-          $this->redirect('Sign:in');
-          } */
+        $filter = $this->getSession('filter'.$salt);
+        $filter->setExpiration(0, 'filter'.$salt);
+        $this->filter =  $filter;
     }
 
     public function injectTranslator(NetteTranslator\Gettext $translator) {
         $this->translator = $translator;
+    }
+    
+    public function injectBlogModel(\BlogModel $blogModel) {
+        parent::injectBlogModel($blogModel);
+        $this->blogModel = $blogModel;
+    }
+    
+    public function injectShopModel(\ShopModel $shopModel) {
+        parent::injectShopModel($shopModel);
+        $this->shopModel = $shopModel;
+    }
+    
+    public function injectCategoryModel(\CategoryModel $categoryModel) {
+        parent::injectCategoryModel($categoryModel);
+        $this->categoryModel = $categoryModel;
+    }
+    
+    public function injectProductModel(\ProductModel $productModel) {
+        parent::injectProductModel($productModel);
+        $this->productModel = $productModel;
     }
 
     public function handleDeletePhotoCategory($id, $name) {
@@ -364,15 +384,7 @@ class ProductPresenter extends BasePresenter {
             $this->redirect('this');
         }
     }
-
-        public function handleSetCatalogLayout($catID, $layoutID) {
-        if ($this->getUser()->isInRole('admin')) {
-            $this->shopModel->setShopInfo('CatalogLayout', $layoutID);
-            $this->redirect('this', $catID);
-        }
-    }
-
-    
+ 
     
     public function handleEditCatTitle($catid) {
         if($this->getUser()->isInRole('admin')){
@@ -380,8 +392,8 @@ class ProductPresenter extends BasePresenter {
           $this->invalidateControl('bread');
           
             if($this->isAjax()){
-               //$name = $_POST['id'];
-               $content = $_POST['value'];
+                
+               $content = $this->presenter->context->httpRequest->getPost('value');
                $this->categoryModel->updateCategory($catid, $content);
                
            }
@@ -403,7 +415,7 @@ class ProductPresenter extends BasePresenter {
     public function handleEditProdTitle($id){
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            
-                $content = $_POST['value'];
+                $content = $this->presenter->context->httpRequest->getPost('value');
                 $this->productModel->updateProduct($id, 'ProductName', $content);
             }
             if(!$this->isControlInvalid('editProdTitle')){
@@ -424,7 +436,7 @@ class ProductPresenter extends BasePresenter {
     public function handleEditProdDescription($id) {
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            
-                $content = $_POST['value'];
+                $content = $this->presenter->context->httpRequest->getPost('value');
                 $this->productModel->updateProduct($id, 'ProductDescription', $content);
             }
             if(!$this->isControlInvalid('editProdDescription')){
@@ -441,7 +453,7 @@ class ProductPresenter extends BasePresenter {
     public function handleEditProdShort($id) {
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            
-                $content = $_POST['value'];
+                $content = $this->presenter->context->httpRequest->getPost('value');
                 $this->productModel->updateProduct($id, 'ProductShort', $content);
             }
             if(!$this->isControlInvalid('editProdShort')){
@@ -458,7 +470,7 @@ class ProductPresenter extends BasePresenter {
     public function handleEditProdPrice($id, $sellingprice, $sale) {
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            
-                $content = $_POST['value'];
+                $content = $this->presenter->context->httpRequest->getPost('value');
 
                 if ($sale == 0) {
                 $this->productModel->updatePrice($id, $content, $sale);    
@@ -538,7 +550,7 @@ class ProductPresenter extends BasePresenter {
     public function handleEditCatDescription($catid) {
         if($this->getUser()->isInRole('admin')){
             if($this->isAjax()){            
-               $content = $_POST['value']; //odesílaná nová hodnota
+               $content = $this->presenter->context->httpRequest->getPost('value');
                $this->categoryModel->updateCategoryDesc($catid, $content);
 
            }

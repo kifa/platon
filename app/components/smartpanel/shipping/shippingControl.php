@@ -3,6 +3,7 @@
 use Nette\Application\UI,
     Nette\Forms\Form,
     Nette\Utils\Html;
+use Nette\Http\Request;
 
 /*
  * Component to render modal window
@@ -40,7 +41,7 @@ class shippingControl extends BaseControl {
     public function handleDelName($delid) {
        if($this->presenter->getUser()->isInRole('admin')){
             if($this->presenter->isAjax()){            
-               $content = $_POST['value']; //odesílaná nová hodnota
+               $content = $this->presenter->context->httpRequest->getPost('value');
 
                $this->orderModel->updateDeliveryName($delid, $content);
 
@@ -60,7 +61,7 @@ class shippingControl extends BaseControl {
         if($this->presenter->getUser()->isInRole('admin')){
             if($this->presenter->isAjax())
            {            
-               $content = $_POST['value']; //odesílaná nová hodnota
+               $content = $this->presenter->context->httpRequest->getPost('value');
 
                $this->orderModel->updateDeliveryDescription($delid, $content);
 
@@ -80,7 +81,7 @@ class shippingControl extends BaseControl {
     public function handleDelPrice($delid) {
         if($this->presenter->getUser()->isInRole('admin')){
             if($this->presenter->isAjax()){            
-               $content = $_POST['value']; //odesílaná nová hodnota
+               $content = $this->presenter->context->httpRequest->getPost('value');
 
                $this->orderModel->updateDeliveryPrice($delid, $content);
 
@@ -99,7 +100,7 @@ class shippingControl extends BaseControl {
     public function handleDelStatus($delid) {
         if($this->presenter->getUser()->isInRole('admin')){
             if($this->presenter->isAjax()){
-                $content = $_POST['value']; //odesílaná nová hodnota
+                $content = $this->presenter->context->httpRequest->getPost('value');
 
                 $this->orderModel->updateDeliveryStatus($delid, $content);
             }
@@ -118,7 +119,7 @@ class shippingControl extends BaseControl {
         public function handleDelHigher($delid) {
         if($this->presenter->getUser()->isInRole('admin')){
             if($this->presenter->isAjax()){
-                $content = $_POST['value']; //odesílaná nová hodnota
+                $content = $this->presenter->context->httpRequest->getPost('value');
 
                 $this->orderModel->updateHigherDelivery($delid, $content);
             }
@@ -138,7 +139,7 @@ class shippingControl extends BaseControl {
         if($this->presenter->getUser()->isInRole('admin')){
             if($this->presenter->isAjax())
            {            
-               $content = $_POST['value']; //odesílaná nová hodnota
+               $content = $this->presenter->context->httpRequest->getPost('value');
 
                $this->orderModel->updateDeliveryFreefrom($delid, $content);
 

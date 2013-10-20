@@ -855,8 +855,6 @@ class SmartPanelPresenter extends BasePresenter {
     public function renderStats() {
         if (!$this->getUser()->isInRole('admin')) {
             $this->redirect('Sign:in');
-        } else {
-            
         }
     }
     

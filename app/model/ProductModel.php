@@ -8,7 +8,6 @@
  */
 class ProductModel extends Repository {
 
-    
     /**
      * Load Product Catalog
      * @param ?
@@ -996,4 +995,5 @@ AND photo.CoverPhoto = 1');
                          '%'.$query.'%')
                  ->fetchPairs('ProductID');                 
     }
+  
 }

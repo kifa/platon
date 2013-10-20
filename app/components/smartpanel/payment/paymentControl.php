@@ -3,6 +3,7 @@
 use Nette\Application\UI,
     Nette\Forms\Form,
     Nette\Utils\Html;
+use Nette\Http\Request;
 
 /*
  * Component to render modal window
@@ -41,7 +42,7 @@ class paymentControl extends BaseControl {
         if ($this->presenter->getUser()->isInRole('admin')) {
             if ($this->presenter->isAjax()) {
                 //$name = $_POST['id'];
-                $content = $_POST['value'];
+                $content = $this->presenter->context->httpRequest->getPost('value');
                 $this->orderModel->updatePaymentName($paymentID, $content);
 
                 $text = $this->translator->translate('was sucessfully updated.');
@@ -66,7 +67,7 @@ class paymentControl extends BaseControl {
         if ($this->presenter->getUser()->isInRole('admin')) {
             if ($this->presenter->isAjax()) {
                 //$name = $_POST['id'];
-                $content = $_POST['value'];
+                $content = $this->presenter->context->httpRequest->getPost('value');
                 $this->orderModel->updatePaymentPrice($paymentID, $content);
                 $text = $this->translator->translate('was sucessfully updated.');
                 $ico = HTML::el('i')->class('icon-ok-sign left');
@@ -88,7 +89,7 @@ class paymentControl extends BaseControl {
     public function handleEditPaymentStatus($payid) {
         if ($this->presenter->getUser()->isInRole('admin')) {
             if ($this->presenter->isAjax()) {
-                $content = $_POST['value']; //odesílaná nová hodnota
+                $content = $this->presenter->context->httpRequest->getPost('value'); //odesílaná nová hodnota
                 $this->orderModel->updatePaymentStatus($payid, $content);
             }
 
