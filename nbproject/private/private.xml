@@ -13,8 +13,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/wamp/www/platon/app/presenters/SmartPanelPresenter.php</file>
+            <file>file:/C:/wamp/www/platon/app/presenters/BasePresenter.php</file>
             <file>file:/C:/wamp/www/platon/app/components/smartpanel/shipping/shippingControl.php</file>
+            <file>file:/C:/wamp/www/platon/app/components/smartpanel/redesign/templates/redesignModal.latte</file>
+            <file>file:/C:/wamp/www/platon/app/components/smartpanel/redesign/redesignControl.php</file>
             <file>file:/C:/wamp/www/platon/app/templates/SmartPanel/orderDetail.latte</file>
+            <file>file:/C:/wamp/www/platon/app/templates/SmartPanel/default.latte</file>
         </group>
     </open-files>
 </project-private>

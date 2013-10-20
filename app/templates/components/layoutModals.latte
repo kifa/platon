@@ -77,8 +77,8 @@
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">{_'Close without saving'}</button>
     </div>
-    </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+    </div> <!-- /.modal-content -->
+</div> <!-- /.modal-dialog -->
 </div>    
     
 
@@ -110,6 +110,7 @@
         </div>
         <div class="modal-body" n:snippet="textPhoto">
            {foreach $adminAlbum as $id => $photo}
+                {dump $adminAlbum}
                     <div class="clearfix">
                         <div class="col-md-2">
                         <img src="{$basePath}/images/{$albumID}/50-{$photo->PhotoURL}" alt="{$product->ProductName}" class="">
@@ -282,6 +283,7 @@
         </div>
         <div class="modal-body">
            {foreach $adminAlbum as $id => $photo}
+            {dump $adminAlbum}
                     <div class="clearfix">
                         <div class="col-md-2">
                         <img src="{$basePath}/images/static/{$photo->PhotoAlbumID}/s-{$photo->PhotoURL}" alt="{$post->StaticTextName}" class="img-responsive">

@@ -413,7 +413,7 @@ class BlogPresenter extends BasePresenter {
                 $e = HTML::el('span', ' Photo ' . $form->values->image->name . ' ' . $text);
                 $ico = HTML::el('i')->class('icon-ok-sign left');
                 $e->insert(0, $ico);
-                $this->flashMessage($e, 'alert');
+                $this->flashMessage($e, 'alert alert-success');
             }
 
             $this->redirect('this');
@@ -425,14 +425,18 @@ class BlogPresenter extends BasePresenter {
         if ($this->getUser()->isInRole('admin')) {
 
             $albumid = $this->blog->loadPhotoAlbumStatic($spostid);
+            
+            
             if ($albumid == FALSE) {
                 $row = $this->shopModel->loadStaticText($spostid);
                 $albumid = $this->productModel->insertPhotoAlbum($row->StaticTextName, '', NULL, NULL, $spostid);
             } else {
                 $albumid = $this->blog->loadPhotoAlbumStaticID($spostid);
+                $albumid = $albumid['PhotoAlbumID'];
             }
+
             $addPhotoStaticForm = $this['addPhotoStaticForm'];
-            $addPhotoStaticForm->setDefaults(array('name' => 'photoalbum', 'textalbumid' => $albumid['PhotoAlbumID']));
+            $addPhotoStaticForm->setDefaults(array('name' => 'photoalbum', 'textalbumid' => $albumid));
         }
     }
 
