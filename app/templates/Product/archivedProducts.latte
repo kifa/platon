@@ -2,32 +2,28 @@
 <div class="col-md-12">
 <div class="panel panel-default">
   <div class="panel-heading">
-        <h1>Archived products list</h1>
-  </div> <div class="panel-body"></div></div>
+        <h1 class="CatTitle">{_'Archived products'}</h1>
+  </div> <div class="panel-body">
+      <p>{_'Here you see archived products'}. {_'They are unvisible in catalog, but searcheable from Google etc.'}
+      {_'Why is it important?'} {_'Archived products help you increase your ranking and improve SEO'}.
+      {_'Of course, you can definitely delete product from this page.'}
+      </p>
+  </div>
+</div>
 {/block}
+    
 {block content}
-    <table>
+    <table class="table table-striped">
         <tr>
             <th>
-                Product Name
+                {_'Product Name'}
             </th>
             <th>
-                Product Price
+                {_'Product Price'}
             </th>
+            <th></th>
         </tr>
     {foreach $products as $id => $product}        
-            <tr>
-                <td>
-                    <a href="{plink Product:product $product->ProductID, $product->ProductSeoName}">
-                        {$product -> ProductName}
-                    </a>
-                </td>
-                <td>
-                    {$product -> FinalPrice}
-                </td>
-                <td>
-                    <a href="{link showProduct! $id}" title="{_'Publish product'}" class="ajax btn btn-danger btn-sm"><i id="showProduct" class="icon-large icon-eye-open"></i> {_'Unarchive'}</a>
-                </td>
-            </tr>
+            {control product:archived $product}
     {/foreach}
     </table>

@@ -74,7 +74,7 @@ class redesignControl extends BaseControl {
                 } else {
                     $this->shopModel->insertBanner('banner' . $form->values->banner, $form->values->bannerone->name, $form->values->link);
                 }
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/banner/' . $form->values->bannerone->name;
+                $imgUrl = $this->presenter->context->parameters['wwwDir'] . '/images/banner/' . $form->values->bannerone->name;
                 $form->values->bannerone->move($imgUrl);
 
                 $image = Image::fromFile($imgUrl);
@@ -82,7 +82,7 @@ class redesignControl extends BaseControl {
                 if ($image->width > 380) {
 
                     $image->resize(380, null, Image::SHRINK_ONLY);
-                    $imgUrl = $this->context->parameters['wwwDir'] . '/images/banner/' . $form->values->bannerone->name;
+                    $imgUrl = $this->presenter->context->parameters['wwwDir'] . '/images/banner/' . $form->values->bannerone->name;
                     $image->save($imgUrl);
                 }
 
@@ -135,7 +135,7 @@ class redesignControl extends BaseControl {
                 } else {
                     $this->shopModel->insertBanner('slider' . $form->values->slide, $form->values->slideone->name, $form->values->link);
                 }
-                $imgUrl = $this->context->parameters['wwwDir'] . '/images/slider/' . $form->values->slideone->name;
+                $imgUrl = $this->presenter->context->parameters['wwwDir'] . '/images/slider/' . $form->values->slideone->name;
                 $form->values->slideone->move($imgUrl);
 
                 $image = Image::fromFile($imgUrl);
@@ -143,7 +143,7 @@ class redesignControl extends BaseControl {
                 if ($image->width > 1140) {
 
                     $image->resize(1140, null, Image::SHRINK_ONLY);
-                    $imgUrl = $this->context->parameters['wwwDir'] . '/images/slider/' . $form->values->slideone->name;
+                    $imgUrl = $this->presenter->context->parameters['wwwDir'] . '/images/slider/' . $form->values->slideone->name;
                     $image->save($imgUrl);
                 }
 
@@ -182,18 +182,18 @@ class redesignControl extends BaseControl {
 
                 $this->shopModel->setShopInfo('Logo', $form->values->logo->name);
 
-                $logoURL = $this->context->parameters['wwwDir'] . '/images/logo/' . $form->values->logo->name;
+                $logoURL = $this->presenter->context->parameters['wwwDir'] . '/images/logo/' . $form->values->logo->name;
                 $form->values->logo->move($logoURL);
 
                 $logo = Image::fromFile($logoURL);
                 $logo->resize(null, 300, Image::SHRINK_ONLY);
 
-                $logoUrl = $this->context->parameters['wwwDir'] . '/images/logo/300-' . $form->values->logo->name;
+                $logoUrl = $this->presenter->context->parameters['wwwDir'] . '/images/logo/300-' . $form->values->logo->name;
                 $logo->save($logoUrl);
 
                 $logo->resize(null, 90, Image::SHRINK_ONLY);
 
-                $logoUrl = $this->context->parameters['wwwDir'] . '/images/logo/90-' . $form->values->logo->name;
+                $logoUrl = $this->presenter->context->parameters['wwwDir'] . '/images/logo/90-' . $form->values->logo->name;
                 $logo->save($logoUrl);
             }
 
@@ -220,7 +220,7 @@ class redesignControl extends BaseControl {
             if ($form->values->style->isOK()) {
 
                 $this->shopModel->setShopInfo('Style', $form->values->style->name);
-                $styleUrl = $this->context->parameters['wwwDir'] . '/css/themes/' . $form->values->style->name;
+                $styleUrl = $this->presenter->context->parameters['wwwDir'] . '/css/themes/' . $form->values->style->name;
                 $form->values->style->move($styleUrl);
             }
             $this->presenter->redirect('this');
@@ -229,7 +229,7 @@ class redesignControl extends BaseControl {
 
     public function handleDeleteStyle($name) {
         if ($this->presenter->getUser()->isInRole('admin')) {
-            $styleUrl = $this->context->parameters['wwwDir'] . '/css/themes/' . $name;
+            $styleUrl = $this->presenter->context->parameters['wwwDir'] . '/css/themes/' . $name;
             $this->shopModel->setShopInfo('Style', '');
             if ($styleUrl) {
                 unlink($styleUrl);

@@ -111,20 +111,22 @@
     <div class="col-md-2 shopSidebar col-sm-12 col-xs-12">  
         <div class="hidden-xs hidden-sm">        
                     <ul class="nav nav-pills nav-stacked">
-                        {ifCurrent Product:products}
-                                     {control menu:$menuTop 1, $category->HigherCategoryID}
-                                 {else}
-                                    {ifCurrent Product:product}
-                                     {control menu:$menuTop 1, $product->CategoryID}
-                                    {else}
-                                        {control menu:$menuTop 1}
-                                     {/ifCurrent}
-                                 {/ifCurrent}
-                        
+                                               
                          {control menu:$menuSide}
                     </ul>
             {*block #sidebar}
             {/block*}
+                <div>
+        {if $bannerone->BannerLink == NULL}
+                
+            <img n:tag-if="$bannerone->BannerValue != FALSE" src="{$basePath}/images/banner/{$bannerone->BannerValue}" alt="{$shopName}" class="img-responsive">
+            {else}
+                <a href="{$bannerone->BannerLink}">
+                    <img n:tag-if="$bannerone->BannerValue != FALSE" src="{$basePath}/images/banner/{$bannerone->BannerValue}" alt="{$shopName}" class="img-responsive">
+                </a>
+        {/if}
+
+            </div>
        </div>
     </div>
   {/block}

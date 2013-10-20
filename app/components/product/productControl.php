@@ -101,20 +101,40 @@ class productControl extends BaseControl{
         }
     }
 
+
+    
     public function handleShowProduct($catID, $id) {
         if ($this->presenter->getUser()->isInRole('admin')) {
+            try {
             $this->productModel->showProduct($id);
-            
-            if($this->presenter->isAjax()) {
-                $this->invalidateControl();
-                $this->invalidateControl('script');
-            }
-            else {
-            $this->redirect('this', $catID);
+            $this->presenter->flashMessage('Product is successfully visible.', 'alert alert-success');
+                if($this->presenter->isAjax()) {
+                    $this->invalidateControl();
+                    $this->invalidateControl('script');
+                } else {
+                $this->presenter->redirect('this');
+                }
+            } catch (Exception $e) {
+                Nette\Diagnostics\Debugger::log($e);
+                $this->presenter->flashMessage('We are not able to unarchived this product. Try it later please.', 'alert alert-warning');
+                $this->presenter->redirect('this');
             }
         }
     }
     
+    public function handleUnarchiveProduct($catID, $id) {
+        if ($this->presenter->getUser()->isInRole('admin')) {
+            try {
+            $this->productModel->showProduct($id);
+            $this->presenter->flashMessage('Product was successfully back in catalog.', 'alert alert-success');
+            $this->presenter->redirect('Product:product', $id);
+            } catch (Exception $e) {
+                Nette\Diagnostics\Debugger::log($e);
+                $this->presenter->flashMessage('We are not able to unarchived this product. Try it later please.', 'alert alert-warning');
+                $this->presenter->redirect('this');
+            }
+        }
+    }
     
     
     
@@ -133,7 +153,7 @@ class productControl extends BaseControl{
         if($albumID){
             $albumID->PhotoAlbumID;
         }
-        $this->template->setFile(__DIR__ . '/fourinline.latte');   
+        $this->template->setFile(__DIR__ . '/templates/fourinline.latte');   
         $this->template->pieces = $this->productModel->loadTotalPieces($product['ProductID']);
         $this->template->product = $product;
         $this->template->albumID = $albumID;
@@ -148,7 +168,7 @@ class productControl extends BaseControl{
         if($albumID){
             $albumID->PhotoAlbumID;
         }
-        $this->template->setFile(__DIR__ . '/twoinline.latte');   
+        $this->template->setFile(__DIR__ . '/templates/twoinline.latte');   
         $this->template->pieces = $this->productModel->loadTotalPieces($product['ProductID']);
         $this->template->product = $product;
         $this->template->albumID = $albumID;
@@ -163,7 +183,7 @@ class productControl extends BaseControl{
         if($albumID){
             $albumID->PhotoAlbumID;
         }
-        $this->template->setFile(__DIR__ . '/singleton.latte');   
+        $this->template->setFile(__DIR__ . '/templates/singleton.latte');   
         $this->template->pieces = $this->productModel->loadTotalPieces($product['ProductID']);
         $this->template->product = $product;
         $this->template->albumID = $albumID;
@@ -178,12 +198,18 @@ class productControl extends BaseControl{
         if($albumID){
             $albumID->PhotoAlbumID;
         }
-        $this->template->setFile(__DIR__ . '/bigphoto.latte');   
+        $this->template->setFile(__DIR__ . '/templates/bigphoto.latte');   
         $this->template->pieces = $this->productModel->loadTotalPieces($product['ProductID']);
         $this->template->product = $product;
         $this->template->albumID = $albumID;
         $this->template->photo = $this->productModel->loadCoverPhoto($product['ProductID']);
 
+        $this->template->render();
+    }
+    
+    public function renderArchived($product) {
+        $this->template->setFile(__DIR__ . '/templates/archive.latte');
+        $this->template->product = $product;
         $this->template->render();
     }
 }

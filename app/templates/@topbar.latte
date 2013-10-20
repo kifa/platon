@@ -93,6 +93,17 @@
                     </ul>
             {*block #sidebar}
             {/block*}
+                <div>
+        {if $bannerone->BannerLink == NULL}
+                
+            <img n:tag-if="$bannerone->BannerValue != FALSE" src="{$basePath}/images/banner/{$bannerone->BannerValue}" alt="{$shopName}" class="img-responsive">
+            {else}
+                <a href="{$bannerone->BannerLink}">
+                    <img n:tag-if="$bannerone->BannerValue != FALSE" src="{$basePath}/images/banner/{$bannerone->BannerValue}" alt="{$shopName}" class="img-responsive">
+                </a>
+        {/if}
+
+            </div>
        </div>
     </div>
   {/block}
