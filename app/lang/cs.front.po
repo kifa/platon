@@ -1,8 +1,8 @@
 # Gettext keys exported by GettextTranslator and Translation Panel
-# Created: 2013-10-17 12:53:48
+# Created: 2013-10-20 21:11:08
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2013-10-17 12:53+0200\n"
+"PO-Revision-Date: 2013-10-20 21:11+0200\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -258,6 +258,9 @@ msgstr "Název Značky"
 msgid "Brands"
 msgstr "Značky"
 
+msgid "But you can try any other product from category"
+msgstr "Ale můžete zkusit nějaký jiný produkt v kategorii"
+
 msgid "But you cannot really order any coffee or tea. Sorry for that"
 msgstr "Ale není možné uskutečnit opravdovou objednávku. Omlouváme se."
 
@@ -444,6 +447,9 @@ msgstr "Deaktivovat modul"
 msgid "Dear Sir"
 msgstr "Vážený zákazníku"
 
+msgid "Dear customer"
+msgstr "Vážený zákazníku"
+
 msgid "Default"
 msgstr "Základní"
 
@@ -584,6 +590,9 @@ msgstr "Upravte informace o objednávce a klikněte na uložit."
 
 msgid "Edit payment"
 msgstr "Upravit platbu"
+
+msgid "Edit photos"
+msgstr "Upravit fotografie"
 
 msgid "Edit this text and heading by clicking"
 msgstr "Upravte tento text kliknutím na nadpis, nebo na obsah ..."
@@ -903,6 +912,9 @@ msgstr "Poznámka:"
 msgid "Notebook"
 msgstr "Notebook"
 
+msgid "OUT OF STOCK"
+msgstr "Vyprodáno"
+
 msgid "Once we accepted your payment, you will receive confirmation mail."
 msgstr "Jakmile obdržíme platbu, budeme Vás informovat emailem."
 
@@ -977,6 +989,9 @@ msgstr "Fotky"
 
 msgid "Photo:"
 msgstr "Foto:"
+
+msgid "Photos settings."
+msgstr "Nastavení fotek."
 
 msgid "Please complete mandatory field."
 msgstr "Prosím vyplňte povinná pole."
@@ -1350,6 +1365,9 @@ msgstr "Tento web je pouze demo systému"
 msgid "This month"
 msgstr "Tento měsíc"
 
+msgid "Thumbs sucessfully regenerated."
+msgstr "Miniatury úspěšně zregenerovány."
+
 msgid "Title:"
 msgstr "Titulek:"
 
@@ -1400,6 +1418,9 @@ msgstr "Sledovat objednávku"
 
 msgid "Tracking order"
 msgstr "Sledování objednávky"
+
+msgid "Unarchive"
+msgstr "Zveřejnit"
 
 msgid "Unpublish category"
 msgstr "Zneveřejni kategorii"
@@ -1470,6 +1491,9 @@ msgstr "Sklad"
 msgid "We are currenty procesing your order."
 msgstr "Právě připravujeme Vaše zboží."
 
+msgid "We are sorry"
+msgstr "Omlouváme se"
+
 msgid "We have found these results:"
 msgstr "Našli jsme pro Vás tyto výsledky:"
 
@@ -1517,6 +1541,9 @@ msgstr "Můžete nahrát pouze JPG, PNG a GIF obrázky."
 
 msgid "You cannot edit product here!"
 msgstr "Pro úpravu přejděte do kategorie!"
+
+msgid "You have a new message about your order"
+msgstr "Zasíláme Vám novou zprávu k Vaší objednávce"
 
 msgid "You have to add you password twice.."
 msgstr "Je nutné zadat nové heslo dvakrát."
@@ -1623,9 +1650,18 @@ msgstr "osobní převzetí"
 msgid "test our administration"
 msgstr "vyzkoušet naši administraci"
 
+msgid "this product is no longer available to buy"
+msgstr "tento produkt není bohužel v prodeji"
+
+msgid "was removed."
+msgstr "byl odstraněn."
+
 msgid "was successfully placed!"
 msgstr "byla úspěšně přijata."
 
-msgid "You have a new message about your order"
-msgstr "Zasíláme Vám novou zprávu k Vaší objednávce"
+msgid "was sucessfully updated."
+msgstr "byl úspěšně aktualizován."
+
+msgid "Add Banner"
+msgstr "Přidat banner"
 

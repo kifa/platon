@@ -19,11 +19,13 @@ class redesignControl extends BaseControl {
     protected $translator;
     protected $shopModel;
     protected $shopInfo;
+    protected $productModel;
 
 
-    public function __construct(\ShopModel $shopModel,  NetteTranslator\Gettext $translator) {
+    public function __construct(\ShopModel $shopModel, \ProductModel $productModel, NetteTranslator\Gettext $translator) {
         $this->shopModel =  $shopModel;
         $this->translator = $translator;
+        $this->productModel = $productModel;
         
         $this->shopInfo = $this->shopModel->getShopSettings();        
     }
@@ -41,6 +43,42 @@ class redesignControl extends BaseControl {
             $this->presenter->redirect('this');
         }
     }
+    
+    public function handleRegenerateThumb() {
+        foreach ($this->productModel->loadPhotoAlbum('') as $id => $product) {
+            $sizes = $this->shopModel->loadPhotoSize();
+            
+            if ($product->PhotoAlbumID) {
+                foreach ($this->productModel->loadPhotoAlbum($product->ProductID) as $id => $photo) {      
+                    $imgUrl = $this->presenter->context->parameters['wwwDir'] . '/images/' . $product->PhotoAlbumID . '/';
+
+                     
+                    $image = Image::fromFile($imgUrl . $photo->PhotoURL);
+                    $image->resize(null, $sizes['Large']->Value, Image::SHRINK_ONLY);
+
+                    $imgUrl300 = $imgUrl . 'l-' . $photo->PhotoURL;
+                    $image->save($imgUrl300);
+                    
+                    $image = Image::fromFile($imgUrl . $photo->PhotoURL);
+                    $image->resize(null, $sizes['Medium']->Value, Image::SHRINK_ONLY);
+
+                    $imgUrl150 = $imgUrl . 'm-' . $photo->PhotoURL;
+                    $image->save($imgUrl150);
+
+                    $image = Image::fromFile($imgUrl . $photo->PhotoURL);
+                    $image->resize(null, $sizes['Small']->Value, Image::SHRINK_ONLY);
+
+                    $imgUrl50 = $imgUrl . 's-' . $photo->PhotoURL;
+                    $image->save($imgUrl50);
+             
+                }
+            }
+        }
+        $text = $this->translator->translate('Thumbs sucessfully regenerated.');
+        $this->presenter->flashMessage($text, 'alert alert-success');
+        $this->presenter->redirect("this");
+    }
+
 
     protected function createComponentAddBannerForm() {
         if ($this->presenter->getUser()->isInRole('admin')) {

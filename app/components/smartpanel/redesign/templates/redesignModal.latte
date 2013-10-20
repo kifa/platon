@@ -16,7 +16,7 @@
                            <li><a href="#editSlider" data-toggle="tab"><i class="icon-chevron-right"></i>  {_'Slider'}</a></li>
                            <li><a href="#editBanner" data-toggle="tab"><i class="icon-chevron-right"></i> {_'Banners'}</a>
                             <li><a href="#addLogo" data-toggle="tab"><i class=""></i> {_'Upload your logo'}</a></li>
-
+                            <li><a href="#photos" data-toggle="tab"><i class=""></i> {_'Edit photos'}</a></li>
                            <li><a href="#addStyle" data-toggle="tab"><i class=""></i> {_'Add your style.css'}</a></li>
                         <li><a href="#premium" data-toggle="tab"><i class="icon-star icon-small"></i> {_'Premium design'}</a></li>
                     </ul>
@@ -132,10 +132,19 @@
                             {/if}
                         </div>
                         
+                        <div class="tab-pane" id="photos">
+                            <p>{_'Photos settings.'}</p>
+                              <h3>{_'Regenerate Thumbnails'}</h3>
+                                 <a href="{link regenerateThumb!}" id="regen" class="btn btn-primary"><i id="gen" class="icon-spinner"></i> <span class="gen">{_'Click to regenerate!'}</span></a>
+                
+                        </div>
+                        
                         <div class="tab-pane" id="premium">
                             <p>{_'Premium design from our design specialist.'}</p>
                             <button class="btn btn-danger">Order your design now</button>
                         </div>
+                        
+                        
                     </div>
                 </div>
             </div>

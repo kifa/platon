@@ -299,7 +299,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     }
 
     protected function createComponentRedesignControl() {
-        $redesign = new redesignControl($this->shopModel, $this->translator);
+        $redesign = new redesignControl($this->shopModel, $this->productModel, $this->translator);
         $this->addComponent($redesign, 'redesignControl');
         return $redesign;
     }

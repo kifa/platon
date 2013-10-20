@@ -319,18 +319,18 @@ class SmartPanelPresenter extends BasePresenter {
     }
 
     public function handleEditOrderShipping($orderid) {
-        if (!$this->getUser()->isInRole('admin')) {
+        if ($this->getUser()->isInRole('admin')) {
             
             if($this->isAjax()){
-               $name = $_POST['id'];
-               $content = $_POST['value'];
+               $name = $this->presenter->context->httpRequest->getPost('id');
+               $content = $this->presenter->context->httpRequest->getPost('value');
                $this->orderModel->updateOrder($orderid, $content);
                
            }
-           if(!$this->isControlInvalid('shipping')){
+           if(!$this->isControlInvalid('orderShipping')){
                $this->payload->edit = $content;
                $this->sendPayload();
-               $this->invalidateControl('shipping');
+               $this->invalidateControl('orderShipping');
            }  
            
            else {
@@ -737,41 +737,7 @@ class SmartPanelPresenter extends BasePresenter {
      * Render default view of SmartPanel
      */
     
-    public function handleRegenerateThumb() {
-        foreach ($this->productModel->loadPhotoAlbum('') as $id => $product) {
-            $sizes = $this->shopModel->loadPhotoSize();
-            
-            if ($product->PhotoAlbumID) {
-                foreach ($this->productModel->loadPhotoAlbum($product->ProductID) as $id => $photo) {      
-                    $imgUrl = $this->context->parameters['wwwDir'] . '/images/' . $product->PhotoAlbumID . '/';
-
-                     
-                    $image = Image::fromFile($imgUrl . $photo->PhotoURL);
-                    $image->resize(null, $sizes['Large']->Value, Image::SHRINK_ONLY);
-
-                    $imgUrl300 = $imgUrl . 'l-' . $photo->PhotoURL;
-                    $image->save($imgUrl300);
-                    
-                    $image = Image::fromFile($imgUrl . $photo->PhotoURL);
-                    $image->resize(null, $sizes['Medium']->Value, Image::SHRINK_ONLY);
-
-                    $imgUrl150 = $imgUrl . 'm-' . $photo->PhotoURL;
-                    $image->save($imgUrl150);
-
-                    $image = Image::fromFile($imgUrl . $photo->PhotoURL);
-                    $image->resize(null, $sizes['Small']->Value, Image::SHRINK_ONLY);
-
-                    $imgUrl50 = $imgUrl . 's-' . $photo->PhotoURL;
-                    $image->save($imgUrl50);
-             
-                }
-            }
-        }
-        $text = $this->translator->translate('Thumbs sucessfully regenerated.');
-        $this->flashMessage($text, 'alert alert-success');
-        $this->presenter->redirect("this");
-    }
-
+    
     public function handleSetShopInfo($id) {
         if ($this->getUser()->isInRole('admin')) {   
             if($this->isAjax()){
