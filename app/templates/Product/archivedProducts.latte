@@ -25,6 +25,9 @@
                 <td>
                     {$product -> FinalPrice}
                 </td>
+                <td>
+                    <a href="{link showProduct! $id}" title="{_'Publish product'}" class="ajax btn btn-danger btn-sm"><i id="showProduct" class="icon-large icon-eye-open"></i> {_'Unarchive'}</a>
+                </td>
             </tr>
     {/foreach}
     </table>

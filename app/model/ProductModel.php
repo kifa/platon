@@ -386,8 +386,16 @@ AND photo.CoverPhoto = 1');
     }
     
     public function deleteProducer($prodID){
-        return $this->getTable('producer')
+        $update = array(
+            'ProducerID' => 1
+        );
+        
+        $this->getTable('product')
                 ->where('ProducerID',$prodID)
+                ->update($update);
+        
+        return $this->getTable('producerID')
+                ->where('ProducerID', $prodID)
                 ->delete();
     }
     
