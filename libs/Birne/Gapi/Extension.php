@@ -5,7 +5,7 @@ namespace Birne\Gapi;
 /**
  * @author Lukas DAnek
  */
-class Extension extends \Nette\Config\CompilerExtension
+class Extension extends \Nette\DI\CompilerExtension
 {
     const EXTENSION_NAME = 'gapi';
 

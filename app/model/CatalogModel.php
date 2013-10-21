@@ -16,11 +16,11 @@ class CatalogModel extends Repository {
     public function loadCatalog($catID, $filter=NULL) {     
         //load only published products                
         if($catID==''){
-            //return $this->getTable('price')
-                    //->select('price.*, product.*')
-                    //->where('(product.ProductStatusID=2
-                    //    OR product.ProductStatusID=3)
-                    //    AND product.ProductVariants IS NULL');            
+         /*   return $this->getTable('price')
+                    ->select('price.*, product.*')
+                    ->where('(product.ProductStatusID=2
+                       OR product.ProductStatusID=3)
+                        AND product.ProductVariants IS NULL');             */
             return $this->getDB()->query('
                 SELECT *
                 FROM product

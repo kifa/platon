@@ -9,7 +9,7 @@ class Repository extends Nette\Object {
      /** @var Nette\Database\Connection */
      protected $database;
 
-    public function __construct(Nette\Database\Connection $database) {
+    public function __construct(\DibiConnection $database) {
         $this->database = $database;
     }
 

@@ -5,16 +5,19 @@
             <url>app/presenters/SmartPanelPresenter.php</url>
             <bookmark id="1">
                 <name/>
-                <line>732</line>
+                <line>740</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp/www/platon/app/templates/Blog/staticText.latte</file>
-            <file>file:/C:/wamp/www/platon/app/templates/components/layoutModals.latte</file>
-            <file>file:/C:/wamp/www/platon/app/presenters/BlogPresenter.php</file>
+            <file>file:/C:/wamp/www/platon/app/components/product/productControl.php</file>
+            <file>file:/C:/wamp/www/platon/app/components/adminpanel/AdminPanelProductMini.latte</file>
+            <file>file:/C:/wamp/www/platon/app/presenters/BasePresenter.php</file>
+            <file>file:/C:/wamp/www/platon/app/components/adminpanel/AdminPanelControl.php</file>
+            <file>file:/C:/wamp/www/platon/app/presenters/ProductPresenter.php</file>
+            <file>file:/C:/wamp/www/platon/app/components/product/templates/bigphoto.latte</file>
         </group>
     </open-files>
 </project-private>

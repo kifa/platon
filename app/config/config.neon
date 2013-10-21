@@ -23,6 +23,12 @@ common:
 		session:
 			expiration: 30 days
 
+	dibi:
+		host: localhost
+		username: root
+		password: 
+		database: shop
+		lazy: TRUE
 
 	services:
 		authenticator: Authenticator
@@ -36,11 +42,14 @@ common:
 		orderModel: OrderModel
 		userModel: UserModel
 		blogModel: BlogModel
-	netteTranslator:
+	gettextTranslator:
 		lang: cs
 		files:
-			front: %appDir%/lang
-		#translatorModel: TranslatorModel
+			front: %appDir%/lang # for module Front and other non-specified modules
+			admin: %appDir%/lang-admin # for module Admin
+        # optional with defaults
+	#		layout: horizontal # or: vertical
+	#		height: 450
 
 
 	factories:

@@ -85,7 +85,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
      * Inject translator
      * @param NetteTranslator\Gettext
      */
-    public function injectTranslator(NetteTranslator\Gettext $translator) {
+    public function injectTranslator(GettextTranslator\Gettext $translator) {
         $this->translator = $translator;
     }
 
