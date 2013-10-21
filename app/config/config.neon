@@ -45,20 +45,20 @@ common:
 		userModel: UserModel
 		blogModel: BlogModel
 
-                eSection:
-				class: Nette\Http\SessionSection(@session, 'exchange')
-				setup:
-				- setExpiration('+30 days')
-
-		eStorage:
-				class: Exchange\CnbStorage
-		exchange:
-				class: \Exchange\Exchange
-				setup:
-				- setVat(%vat%)
-				- loadCurrency(%currency%, {decimal: 0, symbol: Kč}) # pořadí zároveň definuje výchozí měnu
-				- loadCurrency('usd', {symbol: $ })# první parametr je kód měny, druhý je pole, klíč je vlastnost objektu NumberFormat
-				- loadCurrency('eur', {symbol: € })
+#		eSection:
+#				class: Nette\Http\SessionSection(@session, 'exchange')
+#				setup:
+#				- setExpiration('+30 days')
+#
+#		eStorage:
+#				class: Exchange\CnbStorage
+#		exchange:
+#				class: \Exchange\Exchange
+#				setup:
+#				- setVat(%vat%)
+#				- loadCurrency(%currency%, {decimal: 0, symbol: Kč}) # pořadí zároveň definuje výchozí měnu
+#				- loadCurrency('usd', {symbol: $ })# první parametr je kód měny, druhý je pole, klíč je vlastnost objektu NumberFormat
+#				- loadCurrency('eur', {symbol: € })
 	gettextTranslator:
 		lang: cs
 		files:
