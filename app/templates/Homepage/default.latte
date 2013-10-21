@@ -33,7 +33,7 @@
     <h2>{_'Featured categories'}</h2>
     <div class="btn-group btn-group-justified">
         {foreach $categories as $id => $category}
-            <a href="{plink Product:products $id, $category->CategorySeoName}" class="btn btn-primary btn-lg">{$category->CategorySeoName}</a>
+            <a href="{plink Catalog:default $id, $category->CategorySeoName}" class="btn btn-primary btn-lg">{$category->CategorySeoName}</a>
         {/foreach}
     </div>
    {/if}

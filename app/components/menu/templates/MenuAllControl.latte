@@ -2,7 +2,7 @@
 {foreach $category as $catID => $cat}
  {if !$cat->HigherCategoryID}
   {if $cat->CategoryStatus != 4}
-   <li class="{ifCurrent Product:products $catID, $cat->CategorySeoName}active{/ifCurrent}{if $catID == $ct} active{/if}"><a href="{plink product:products $catID, $cat->CategorySeoName}">
+   <li class="{ifCurrent Catalog:default $catID, $cat->CategorySeoName}active{/ifCurrent}{if $catID == $ct} active{/if}"><a href="{plink Catalog:default $catID, $cat->CategorySeoName}">
      {if $cat->CategoryStatus == 0} <i class="icon-eye-close"></i> {/if}
           {$cat->CategoryName}</a>
    </li>
@@ -10,7 +10,7 @@
   {/if}
 {/foreach}   
 
-   <li class="dropdown {ifCurrent product:productsBrand}active{/ifCurrent}}">
+   <li class="dropdown {ifCurrent Catalog:productsBrand}active{/ifCurrent}}">
    
         <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
     {_'Choose Brand'}
@@ -18,7 +18,7 @@
         </a>
         <ul class="dropdown-menu">
       {foreach $producers as $prodID => $producer}
-            <li class=""><a href="{plink product:productsBrand $prodID, $producer->ProducerName}">{$producer->ProducerName}</a></li> 
+            <li class=""><a href="{plink Catalog:productsBrand $prodID, $producer->ProducerName}">{$producer->ProducerName}</a></li> 
         {/foreach}
         </ul>
     </li>

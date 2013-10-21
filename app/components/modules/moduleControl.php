@@ -20,6 +20,7 @@ class moduleControl extends BaseControl{
     protected $translator;
     private $categoryModel;
     private $productModel;
+    private $catalogModule;
     private $blogModel;
     private $shopModel;
     private $orderModel;
@@ -56,8 +57,12 @@ class moduleControl extends BaseControl{
     public function setShop($shop) {
         $this->shopModel = $shop;
     }
-  
-    public function createTemplate($class = NULL)
+    
+    public function setCatalog($catalog) {
+        $this->catalogModel = $catalog;
+    }
+
+        public function createTemplate($class = NULL)
     {
     $template = parent::createTemplate($class);
     $template->setTranslator($this->translator);
@@ -202,6 +207,7 @@ class moduleControl extends BaseControl{
        $xmlfeed->setOrder($this->orderModel);
        $xmlfeed->setProduct($this->productModel);
        $xmlfeed->setCategory($this->categoryModel);
+       $xmlfeed->setCatalog($this->catalogModule);
        return $xmlfeed;
    }
 

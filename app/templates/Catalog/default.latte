@@ -32,7 +32,7 @@
     <div class="col-md-11">
         <ul class="nav nav-pills">
         {foreach $subcategories as $catID => $cat}
-            <li><a href="{plink product:products $catID, $cat->CategoryName}"><i class="icon-chevron-sign-right"></i>  {$cat->CategoryName}</a></li>
+            <li><a href="{plink Catalog:default $catID, $cat->CategoryName}"><i class="icon-chevron-sign-right"></i>  {$cat->CategoryName}</a></li>
         {/foreach}
       </ul>
     </div>  

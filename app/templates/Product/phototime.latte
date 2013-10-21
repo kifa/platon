@@ -92,7 +92,7 @@
                         
                         {if $product->ProducerName !== 'N/A'}
                         <dt>Brand:</dt>
-                        <dd><a href="{plink product:productsBrand $product->ProducerID, $product->ProducerName}">{$product->ProducerName} - {_'more products'}...</a></dd>
+                        <dd><a href="{plink Catalog:productsBrand $product->ProducerID, $product->ProducerName}">{$product->ProducerName} - {_'more products'}...</a></dd>
                         {/if}
                     </dl>
                 </div>

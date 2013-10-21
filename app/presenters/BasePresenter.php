@@ -17,6 +17,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     private $shopModel;
     private $categoryModel;
     private $productModel;
+    private $catalogModel;
     private $blogModel;
     private $userModel;
     private $cart;
@@ -74,6 +75,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     public function injectUserModel(UserModel $userModel) {
         $this->userModel = $userModel;
+    }
+    
+    public function injectCatalogModel(CatalogModel $catalogModel) {
+        $this->catalogModel = $catalogModel;
     }
 
     /**

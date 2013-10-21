@@ -6,6 +6,9 @@
  * CRUD operations, etc.
  * @author lukas
  */
+
+
+
 class ProductModel extends Repository {
 
     /*
@@ -210,14 +213,7 @@ class ProductModel extends Repository {
                 ->update($insert);
     }
     
-    /*
-     * Count number of product
-     */
-    public function countProducts()
-    {
-        return $this->getTable('product')
-                ->count();
-    }
+   
     
     /*
      * Load Photo Album
@@ -732,20 +728,5 @@ class ProductModel extends Repository {
                 ->fetchPairs('VideoID');
     }
 
-    public function search($query) {       
-        return $this->getTable('price')
-                ->select('price.FinalPrice, price.SALE, price.SellingPrice, 
-                     product.ProductID, product.ProductName, product.PiecesAvailable, 
-                     product.ProductStatusID, product.ProductDescription, product.ProductShort')
-                 ->where('(product.ProductStatusID=2
-                        OR product.ProductStatusID=3)
-                        AND product.ProductVariants IS NULL 
-                        AND (product.ProductName LIKE ?
-                        OR product.ProductShort LIKE ?
-                        OR product.ProductDescription LIKE ?)',
-                         '%'.$query.'%',
-                         '%'.$query.'%',
-                         '%'.$query.'%')
-                 ->fetchPairs('ProductID');                 
-    }  
+    
 }

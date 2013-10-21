@@ -2,7 +2,7 @@
 {foreach $category as $catID => $cat}
  {if !$cat->HigherCategoryID}
   {if $cat->CategoryStatus != 4}
-   <li class="{ifCurrent Product:products $catID, $cat->CategorySeoName}active{/ifCurrent}{if $catID == $ct} active{/if}"><a href="{plink product:products $catID, $cat->CategorySeoName}">
+   <li class="{ifCurrent Catalog:default $catID, $cat->CategorySeoName}active{/ifCurrent}{if $catID == $ct} active{/if}"><a href="{plink Catalog:default $catID, $cat->CategorySeoName}">
      {if $cat->CategoryStatus == 0} <i class="icon-eye-close"></i> {/if}
         {if $cat->CategoryPhoto}
      <img src="{$basePath}/images/category/s-{$cat->CategoryPhoto}" class="img-responsible img-circle" alt="{$cat->CategorySeoName}" >
@@ -15,6 +15,6 @@
 {/foreach}
 
 {if $user->isInRole('admin')}
-   <li><a href="{plink product:ArchivedProducts}">{_"Archived"}</a></li> 
+   <li><a href="{plink Catalog:ArchivedProducts}">{_"Archived"}</a></li> 
    <li><a href="#addCategory" data-toggel="modal" data-target="#addCategory" class="addCategoryButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Category"}</a></li>  
 {/if}

@@ -31,6 +31,7 @@ common:
 		router: @routerFactory::createRouter
 		productModel: ProductModel
 		shopModel: ShopModel
+		catalogModel: CatalogModel
 		categoryModel: CategoryModel
 		orderModel: OrderModel
 		userModel: UserModel

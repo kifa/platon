@@ -19,6 +19,9 @@ class SmartPanelPresenter extends BasePresenter {
 
     /* @var ProductModel */
     private $productModel;
+    
+    /* @var CatalogModel */
+    private $catalogModel;
 
     /* @var CategoryModel */
     private $categoryModel;
@@ -56,7 +59,12 @@ class SmartPanelPresenter extends BasePresenter {
       $this->productModel = $productModel;
     }
     
-    public function injectCategoryModel(\CategoryModel $categoryModel) {
+    public function injectCatalogModel(\CatalogModel $catalogModel) {
+        parent::injectCatalogModel($catalogModel);
+        $this->catalogModel = $catalogModel;
+    }
+
+        public function injectCategoryModel(\CategoryModel $categoryModel) {
         parent::injectCategoryModel($categoryModel);
         $this->categoryModel = $categoryModel;
     }
@@ -482,7 +490,7 @@ class SmartPanelPresenter extends BasePresenter {
         $editProducts->addHidden('orderID', $this->orderRow['OrderID']);
         $editProducts->addHidden('totalProducts', $this->orderRow['TotalProducts'] );
         
-        foreach ($this->productModel->loadCatalogAdmin('') as $id => $product) {
+        foreach ($this->catalogModel->loadCatalogAdmin('') as $id => $product) {
             $products[$product->ProductID] = $product->ProductName;
            
           //  $editProducts->addHidden($product->ProductID, $product->FinalPrice);
@@ -712,7 +720,7 @@ class SmartPanelPresenter extends BasePresenter {
   
     protected function createComponentGrid($name) {
     $grid = new Grido\Grid($this, $name);
-    $grid->setModel($this->productModel->loadCatalog(''));
+    $grid->setModel($this->catalogModel->loadCatalog(''));
     $grid->setTranslator($this->translator);
     $grid->setPrimaryKey('ProducerID');
     $grid->addColumn('ProducerName', 'Name', Column::TYPE_TEXT);
@@ -726,7 +734,7 @@ class SmartPanelPresenter extends BasePresenter {
             $this->redirect('Sign:in');
         } else {
            
-            $this->template->products = $this->productModel->loadCatalog('');
+            $this->template->products = $this->catalogModel->loadCatalog('');
             $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
             
         }
@@ -781,7 +789,7 @@ class SmartPanelPresenter extends BasePresenter {
             $template->registerFilter(new Nette\Latte\Engine);
             $template->registerHelperLoader('Nette\Templating\Helpers::loader');
 
-            $template->products = $this->productModel->loadCatalog("");
+            $template->products = $this->catalogModel->loadCatalog("");
             $template->category = $this->categoryModel->loadCategory("");
 
 
@@ -809,7 +817,7 @@ class SmartPanelPresenter extends BasePresenter {
             $this->template->usr = $this->getUser()->getIdentity();
             $this->template->orders = $this->orderModel->loadLatestOrders();
             $this->template->settings = $this->shopModel->getShopInfoPublic();
-            $this->template->productNumber = $this->productModel->countProducts();
+            $this->template->productNumber = $this->catalogModel->countProducts();
             $this->template->anyVariable = 'any value';
         }
     }

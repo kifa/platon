@@ -3,10 +3,10 @@
   <li><a href="{$basePath}">{_"Home"}</a> <span class="divider"></span></li>
   {foreach $category as $catID => $cat}
     
-  {ifCurrent Product:products $catID, $cat} 
+  {ifCurrent Catalog:default $catID, $cat} 
   <li class="active">{$cat}</a></li>
   {else}
-  <li><a href="{plink product:products $catID, $cat}">{$cat}</a> <span class="divider"></span></li>
+  <li><a href="{plink Catalog:default $catID, $cat}">{$cat}</a> <span class="divider"></span></li>
   {/ifCurrent}
   
   {/foreach}

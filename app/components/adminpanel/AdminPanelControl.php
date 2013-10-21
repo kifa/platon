@@ -90,7 +90,7 @@ class AdminPanelControl extends BaseControl {
             }
             else {
             
-            $this->redirect('Product:products', $catID);
+            $this->redirect('Catalog:default', $catID);
             
             }
         }

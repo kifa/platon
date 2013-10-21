@@ -12,6 +12,7 @@ use Nette\Mail\Message;
 class HomepagePresenter extends BasePresenter {
 
     private $productModel;
+    private $catalogModel;
     private $categoryModel;
     private $shopModel;
     private $blogModel;
@@ -23,6 +24,11 @@ class HomepagePresenter extends BasePresenter {
 
     public function injectTranslator(NetteTranslator\Gettext $translator) {
         $this->translator = $translator;
+    }
+    
+    public function injectCatalogModel(\CatalogModel $catalogModel) {
+        parent::injectCatalogModel($catalogModel);
+        $this->catalogModel = $catalogModel;
     }
 
     public function injectCategoryModel(\CategoryModel $categoryModel) {
@@ -71,7 +77,7 @@ class HomepagePresenter extends BasePresenter {
 
     public function renderDefault() {
 
-        $this->template->products = $this->productModel->loadMainPage();
+        $this->template->products = $this->catalogModel->loadMainPage();
 
         $this->template->slider = 1;
 
@@ -95,7 +101,7 @@ class HomepagePresenter extends BasePresenter {
     public function renderSearch($query) {
         $this->template->query = $query;
         if ($query != NULL || $query != '') {
-            $this->template->products = $this->productModel->search($query);
+            $this->template->products = $this->catalogModel->search($query);
             $this->template->categories = $this->categoryModel->search($query);
             $this->template->posts = $this->blogModel->search($query);
         }

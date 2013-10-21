@@ -124,7 +124,7 @@ class MenuControl extends BaseControl {
     public function addCategoryFormSubmitted($form) {
         if ($this->presenter->getUser()->isInRole('admin')) {
             $row = $this->categoryModel->createCategory($form->values->name, NULL, $form->values->parent);
-            $this->presenter->redirect('Product:products', $row);
+            $this->presenter->redirect('Catalog:default', $row);
         }
     }
     

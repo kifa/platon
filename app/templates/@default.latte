@@ -51,7 +51,7 @@
                     </div>
                         <div class="collapse navbar-collapse navbar-ex1-collapse">
                              <ul class="nav nav-pills navbar-nav" n:snippet="menu">
-                                 {ifCurrent Product:products}
+                                 {ifCurrent Catalog:default}
                                      {control menu:$menuTop 1, $category->HigherCategoryID}
                                  {else}
                                     {ifCurrent Product:product}

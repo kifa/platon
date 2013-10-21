@@ -26,6 +26,7 @@ class xmlFeedModule extends moduleControl {
     private $orderModel;
     private $categoryModel;
     private $productModel;
+    private $catalogModule;
     
     private $view;
     public function setView($view)
@@ -52,6 +53,10 @@ class xmlFeedModule extends moduleControl {
     
     public function setProduct($pro) {
         $this->productModel = $pro;
+    }
+    
+    public function setCatalog($catalog) {
+        $this->catalogModule = $catalog;        
     }
 
     public function createTemplate($class = NULL)
@@ -148,7 +153,7 @@ class xmlFeedModule extends moduleControl {
                  $template->registerFilter(new Nette\Latte\Engine);
                  $template->registerHelperLoader('Nette\Templating\Helpers::loader');
 
-                 $template->products = $this->productModel->loadHeurekaCatalog();
+                 $template->products = $this->catalogModel->loadHeurekaCatalog();
                  $template->category = $this->categoryModel->loadCategory("");
                  
                  $template->save($this->presenter->context->parameters['wwwDir'] . '/heureka.xml');
@@ -161,7 +166,7 @@ class xmlFeedModule extends moduleControl {
                  $template->registerFilter(new Nette\Latte\Engine);
                  $template->registerHelperLoader('Nette\Templating\Helpers::loader');
 
-                 $template->products = $this->productModel->loadHeurekaCatalog();
+                 $template->products = $this->catalogModel->loadHeurekaCatalog();
                  $template->category = $this->categoryModel->loadCategory("");
                  
                  $template->save($this->presenter->context->parameters['wwwDir'] . '/google.xml');
