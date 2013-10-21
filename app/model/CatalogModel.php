@@ -13,7 +13,7 @@ class CatalogModel extends Repository {
      * @param ? example: pozice počátečního znaku
      * @return string
      */
-    public function loadCatalog($catID, $filter=NULL) {     
+    public function loadCatalog($catID, $filter=NULL) {   
         //load only published products                
         if($catID==''){
          /*   return $this->getTable('price')

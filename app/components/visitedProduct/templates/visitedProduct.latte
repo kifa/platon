@@ -1,0 +1,7 @@
+{if $products}
+
+{foreach $products as $id => $product}
+    <a href="{plink Product:product $id, $product}">{$product}</a>
+{/foreach}
+
+{/if}
