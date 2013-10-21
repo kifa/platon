@@ -3,6 +3,7 @@
 use Nette\Forms\Form,
     Nette\Utils\Html,
     Nette\Image;
+use Nette\Utils\Finder;
  
 /**
  * Base presenter for eshop.
@@ -197,14 +198,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         }
         $wwwDir = $this->context->parameters['wwwDir'];
         $files = new \WebLoader\FileCollection($wwwDir . '/css');
+        $files->addFiles(Finder::findFiles('*.css')->from($wwwDir . '/css'));
         $files->addFiles(array(
-            'bootstrap.min.css',
-            'font-awesome-ie7.min.css',
-            'font-awesome.min.css',
+          //  'bootstrap.min.css',
+          //  'font-awesome-ie7.min.css',
+          //  'font-awesome.min.css',
             '/user/theme.css',
             '/themes/' . $style,
-            'jquery.wysiwyg.css',
-            'flag.css'
+          //  'jquery.wysiwyg.css',
+          //  'flag.css'
         ));
 
         // kompilátoru seznam předáme a určíme adresář, kam má kompilovat
@@ -310,6 +312,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $searchControl = new SearchControl();
         $searchControl->setTranslator($this->translator);
         return $searchControl;
+    }
+    
+    protected function createComponentVisitedProduct() {
+        $visited = new visitedProductControl($this->productModel, $this->translator);
+        $this->addComponent($visited, 'visitedProduct');
+        return $visited;
     }
 
 }

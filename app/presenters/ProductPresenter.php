@@ -29,6 +29,7 @@ class ProductPresenter extends BasePresenter {
     private $edit;
     private $filter;
 
+    protected $visited;
     /** @var \Nette\Http\Request @inject */
     public $httpRequest;
     
@@ -44,6 +45,14 @@ class ProductPresenter extends BasePresenter {
         $filter = $this->getSession('filter'.$salt);
         $filter->setExpiration(0, 'filter'.$salt);
         $this->filter =  $filter;
+        
+        if (!isset($this->visited)) {
+            $this->visited = $this->getSession('visited' . $salt);
+            $this->visited->prd = NULL;
+        }
+        $visited = $this->getSession('visited' . $salt);
+        $visited->setExpiration('1 month', 'visited'.$salt);
+        $this->visited = $visited;
     }
 
     public function injectTranslator(NetteTranslator\Gettext $translator) {
@@ -370,11 +379,13 @@ class ProductPresenter extends BasePresenter {
                 $variants = $this->productModel->loadProductVariants($id);
                 
                 foreach($variants as $vid => $variant) {
-                    $return = $this->productModel->insertProductVariant(
-                            $new_id[0],
-                            $variant['ProductVariantName'],
-                            $variant['PiecesAvailable'],//Name
-                            $variant['SellingPrice']);
+                    if($vid != $new_id[0]) {
+                        $return = $this->productModel->insertProductVariant(
+                                $new_id[0],
+                                $variant['ProductVariantName'],
+                                $variant['PiecesAvailable'],//Name
+                                $variant['SellingPrice']);
+                    }
                 }
             }
             catch (Exception $e) {
@@ -384,7 +395,7 @@ class ProductPresenter extends BasePresenter {
             
                      
              
-             $this->redirect('Product:product', $new_id[0], $product['ProductSeoName']);
+             $this->redirect('Product:product', $new_id[0]);
          }
     }
     
@@ -799,6 +810,9 @@ class ProductPresenter extends BasePresenter {
     public function renderProduct($id, $slug) {
         $layout = $this->shopModel->getShopInfo('ProductLayout');
         
+        if(isset($this->visited)) {
+            $this->visited->prd[$id] = $slug;
+        }
        $this->template->setFile( $this->context->parameters['appDir'] . '/templates/Product/' . $layout . '.latte'); 
        if ($this->presenter->getUser()->isInRole('admin')) { 
             if ($this->edit->param != NULL) {
