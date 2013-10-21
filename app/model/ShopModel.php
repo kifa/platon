@@ -33,7 +33,7 @@ class ShopModel extends Repository {
         return $tax['Value'];
     }
     
-    public function getShopInfo($name)
+    /*public function getShopInfo($name)
     {
         if($name != '') {
             $value = $this->getTable('settings')
@@ -46,8 +46,27 @@ class ShopModel extends Repository {
             return $this->getTable('settings')
                     ->fetchPairs('SettingID');
         }
+    }*/
+    public function getShopInfo($name){
+        if($name != '') {
+            /*$value = $this->db
+                    ->select('*')
+                    ->from('settings')
+                    ->where("SettingName = $name")
+                    ->fetch();*/
+            $value = $this->db
+                    ->query("SELECT * FROM settings WHERE SettingName = '%s", $name)->fetch();
+            
+            return $value['Value'];
+        }
+        else{
+            return $this->db
+                    ->select('*')
+                    ->from('settings')
+                    ->fetchPairs('SettingID');
+        }
     }
-    
+
     public function loadPhotoSize() {
         $param = array('Small', 'Medium', 'Large');
          return $this->getTable('settings')
@@ -57,15 +76,22 @@ class ShopModel extends Repository {
     }
 
 
-    public function getShopSettings()
+    /*public function getShopSettings()
     {
             return $this->getTable('settings')
                     ->select('SettingName, Value')
                     ->fetchPairs('SettingName');
       
+    }*/
+    public function getShopSettings(){
+        return $this->db
+                ->select('SettingName, Value')
+                ->from('settings')
+                ->fetchPairs('SettingName', 'Value');
     }
-    
-     public function getShopInfoPublic() {
+
+
+    public function getShopInfoPublic() {
         $param = array('Name', 'Description', 'CompanyAddress', 'TAX', 'OrderMail', 'ContactMail', 'ContactPhone', 'InvoicePrefix', 'GA');
         
         return $this->getTable('settings')

@@ -7,8 +7,13 @@
 
 class Repository extends Nette\Object {
      /** @var Nette\Database\Connection */
-     protected $database;
-
+    protected $db;
+    
+    public function __construct(\DibiConnection $connection) {
+        $this->db = $connection;
+    }
+    
+    /**   
     public function __construct(\DibiConnection $database) {
         $this->database = $database;
     }
@@ -23,7 +28,7 @@ class Repository extends Nette\Object {
      * Vrací všechny řádky z tabulky.
      * @return Nette\Database\Table\Selection
      */
-    public function findAll() {
+  /**   public function findAll() {
         return $this->getTable();
     }
     
@@ -35,5 +40,5 @@ class Repository extends Nette\Object {
     public function getDB(){
         return $this->database;
     }
-
+*/
 }
