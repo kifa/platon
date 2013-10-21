@@ -92,3 +92,7 @@ X-Generated-in: 0.0116
 X-HGenerator: hurvinek.hdc1.cz
 
 Chybi email nebo API klic  @  http://localhost/platon/www/smart-panel/order-detail/cs?orderid=5&statusID=3&name=Done&progress=10&do=setStatus
+[2013-10-21 11-12-10] Nette\Application\AbortException:  in C:\wamp\www\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/catalog/archived-products/cs?product-catID=1009&product-id=30&do=product-showProduct  @@  exception-2013-10-21-11-12-10-bab8993382d41d5646cf88a744ebfa24.html
+[2013-10-21 11-15-42] Nette\Application\AbortException:  in C:\wamp\www\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/catalog/archived-products/cs?product-catID=1009&product-id=30&do=product-showProduct  @@  exception-2013-10-21-11-12-10-bab8993382d41d5646cf88a744ebfa24.html
+[2013-10-21 11-31-31] Nette\Application\AbortException:  in C:\wamp\www\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/catalog/archived-products/cs?product-catID=1009&product-id=33&do=product-showProduct  @@  exception-2013-10-21-11-31-31-fbc9d9148f61703c6a69555b3c5b781f.html
+[2013-10-21 11-37-06] Nette\Application\AbortException:  in C:\wamp\www\platon\libs\Nette\Application\UI\Presenter.php:604  @  http://localhost/platon/www/catalog/archived-products/cs?product-catID=1009&product-id=30&do=product-unarchiveProduct  @@  exception-2013-10-21-11-37-06-935ec570461f17b3f3e939a13832fa16.html

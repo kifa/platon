@@ -261,11 +261,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     }
 
     protected function createComponentAdminPanelControl() {
-        $EditControl = new AdminPanelControl();
-        $EditControl->setTranslator($this->translator);
-        $EditControl->setProduct($this->productModel);
-        $EditControl->setCategory($this->categoryModel);
-        $EditControl->setBlog($this->blogModel);
+        $EditControl = new AdminPanelControl($this->productModel, $this->categoryModel, $this->translator);
+        $this->addComponent($EditControl, 'adminPanelControl');
         return $EditControl;
     }
 

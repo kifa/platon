@@ -62,7 +62,7 @@
     <div class="btn-group"> 
             <button class="btn btn-default" id="editPrice{$productVariant->ProductID}">{_'Edit Price'}</button>
             {if $productVariant->ProductVariantName}
-<a class="btn btn-default ajax pull-left" href="{plink archiveVariantProduct! $productVariant->ProductID}"><i class="icon-trash"></i></a>
+<a class="btn btn-default ajax pull-left" href="{plink archiveVariantProduct! $productVariant->ProductID}" data-action="{_'REMOVE'}" data-confirm="{_'You are about to'} {_'REMOVE'} {_'variant'} - {$productVariant->ProductVariantName|upper}."><i class="icon-trash"></i></a>
             {/if}
     </div>
         {else}

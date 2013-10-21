@@ -57,10 +57,8 @@ class productControl extends BaseControl{
      
     
        protected function createComponentAdminPanelControl() {
-        $EditControl = new AdminPanelControl();
-        $EditControl->setTranslator($this->translator);
-        $EditControl->setProduct($this->productModel);
-        $EditControl->setCategory($this->categoryModel);
+        $EditControl = new AdminPanelControl($this->productModel, $this->categoryModel, $this->translator );
+        $this->addComponent($EditControl, 'adminPanelControl');
         return $EditControl;
        }
 
@@ -112,13 +110,14 @@ class productControl extends BaseControl{
                     $this->invalidateControl();
                     $this->invalidateControl('script');
                 } else {
-                $this->presenter->redirect('this');
+                
                 }
             } catch (Exception $e) {
                 Nette\Diagnostics\Debugger::log($e);
                 $this->presenter->flashMessage('We are not able to unarchived this product. Try it later please.', 'alert alert-warning');
-                $this->presenter->redirect('this');
+                
             }
+            $this->presenter->redirect('this');
         }
     }
     
@@ -127,12 +126,13 @@ class productControl extends BaseControl{
             try {
             $this->productModel->showProduct($id);
             $this->presenter->flashMessage('Product was successfully back in catalog.', 'alert alert-success');
-            $this->presenter->redirect('Product:product', $id);
+            
             } catch (Exception $e) {
                 Nette\Diagnostics\Debugger::log($e);
                 $this->presenter->flashMessage('We are not able to unarchived this product. Try it later please.', 'alert alert-warning');
                 $this->presenter->redirect('this');
             }
+            $this->presenter->redirect('Product:product', $id);
         }
     }
     

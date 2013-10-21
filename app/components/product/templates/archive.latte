@@ -1,13 +1,14 @@
 <tr>
     <td>
         <a href="{plink Product:product $product->ProductID, $product->ProductSeoName}">
-                        {$product -> ProductName}
+                        {$product->ProductName}
         </a>
     </td>
     <td>
-                    {$product -> FinalPrice}
+                    {$product->FinalPrice}
     </td>
     <td>
-        <a href="{link showProduct! $product->CategoryID, $product->ProductID}" title="{_'Publish product'}" class="ajax btn btn-danger btn-sm"><i id="showProduct" class="icon-large icon-eye-open"></i> {_'Unarchive'}</a>
+        <a href="{link unarchiveProduct! $product->CategoryID, $product->ProductID}" data-action="{_'PUBLISH'}" data-confirm="{_'You are about to'} {_'PUBLISH'} - {$product->ProductName|upper}. " title="{_'Publish product'}" class="btn btn-danger btn-sm"><i id="showProduct" class="icon-large icon-eye-open"></i> {_'Unarchive'}</a>
     </td>
 </tr>
+

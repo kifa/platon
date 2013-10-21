@@ -19,38 +19,18 @@ class AdminPanelControl extends BaseControl {
     private $categoryModel;
     private $productModel;
     private $blogModel;
-    private $shopModel;
-    private $orderModel;
+    private $category;
 
-
-
-    public function setTranslator($translator) {
+    
+    public function __construct(ProductModel $productModel, CategoryModel $categoryModel, NetteTranslator\Gettext $translator) {
+        $this->productModel = $productModel;
+        $this->categoryModel = $categoryModel;
         $this->translator = $translator;
+        $this->category = $this->categoryModel->loadCategoryListAdmin();
     }
 
-    public function setCategory($cat) {
-        $this->categoryModel = $cat;
-
-    }
     
-    public function setBlog($blog) {
-        $this->blogModel = $blog;
-
-    }
     
-    public function setProduct($pro) {
-        $this->productModel = $pro;
-    }
-    
-
-    public function setOrder($order) {
-        $this->orderModel = $order;
-    }
-
-    public function setShop($shop) {
-        $this->shopModel = $shop;
-    }
-
     public function createTemplate($class = NULL)
 {
     $template = parent::createTemplate($class);
@@ -97,6 +77,7 @@ class AdminPanelControl extends BaseControl {
     }
 
     public function handleShowProduct($id) {
+
         if ($this->presenter->getUser()->isInRole('admin')) {
             $this->productModel->showProduct($id);
             $this->presenter->flashMessage('Product sucessfully published', 'alert alert-success');
@@ -224,7 +205,7 @@ class AdminPanelControl extends BaseControl {
         $this->template->id = $id;
         $this->template->categor = $cat;
         $this->template->stat = $status;
-        $this->template->categories = $this->categoryModel->loadCategoryListAdmin();
+        $this->template->categories = $this->category;
         $this->template->setFile( __DIR__ . '/AdminPanelProductMini.latte');
         
         $this->template->render();

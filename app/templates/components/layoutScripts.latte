@@ -3,6 +3,28 @@
 {include './GA.latte', GA => $GA}
     
 <script>
+       $(document).ready(function() {
+	$('a[data-confirm]').click(function(ev) {
+		var href = $(this).attr('href');
+		if (!$('#dataConfirmModal').length) {
+			$('body').append('<div id="dataConfirmModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editSeo" aria-hidden="true">\n\
+        <div class="modal-dialog">\n\
+        <div class="modal-content">\n\
+          <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="dataConfirmLabel">{_'Action confirmation'}</h3>\n\
+</div><div class="modal-body"></div><div class="modal-footer">\n\
+<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button><a class="btn btn-primary" id="dataConfirmOK">OK</a></div></div>');
+		} 
+                
+		$('#dataConfirmModal').find('.modal-body').text($(this).attr('data-confirm'));
+		$('#dataConfirmOK').attr('href', href).text($(this).attr('data-action'));
+		$('#dataConfirmModal').modal({ show:true });
+		return false;
+	});
+});
+    </script>
+    
+    
+<script>
 $(document).ready(function() {
 
         $('#trackingButton').toggle(function(){
