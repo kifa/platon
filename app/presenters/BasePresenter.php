@@ -113,22 +113,22 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         parent::beforeRender();
 
         $shopInfo = $this->shopModel->getShopSettings();
-
-        $this->template->shopName = $shopInfo['Name']->Value;
-        $this->template->shopDescription = $shopInfo['Description']->Value;
-        $this->template->shopLogo = $shopInfo['Logo']->Value;
-        $this->template->GA = $shopInfo['GA']->Value;
+        
+        $this->template->shopName = $shopInfo['Name'];
+        $this->template->shopDescription = $shopInfo['Description'];
+        $this->template->shopLogo = $shopInfo['Logo'];
+        $this->template->GA = $shopInfo['GA'];
         $this->template->lang = $this->lang;
 
         $this->template->bannerone = $this->shopModel->loadBannerByType('banner1');
 
         // set theme layout
-        $this->setLayout($shopInfo['ShopLayout']->Value);
+        $this->setLayout($shopInfo['ShopLayout']);
 
-        $this->template->menuTop = $shopInfo['TopMenu']->Value;
-        $this->template->menuSide = $shopInfo['SideMenu']->Value;
-        $this->template->menuFooter = $shopInfo['FooterMenu']->Value;
-        $this->template->productMiniLayout = $shopInfo['ProductMiniLayout']->Value;
+        $this->template->menuTop = $shopInfo['TopMenu'];
+        $this->template->menuSide = $shopInfo['SideMenu'];
+        $this->template->menuFooter = $shopInfo['FooterMenu'];
+        $this->template->productMiniLayout = $shopInfo['ProductMiniLayout'];
 
 
         if ($this->isAjax()) {

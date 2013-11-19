@@ -15,45 +15,93 @@ class CategoryModel extends Repository {
      */
     public function loadCategoryList(){
         $status = array('1', '2');
-        return $this->getTable('category')
+        /*return $this->getTable('category')
                 ->where('CategoryStatus', $status)
-                ->fetchPairs('CategoryID');
+                ->fetchPairs('CategoryID');         
+         */
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('CategoryStatus')
+                ->WHERE('CategoryStatus = %i', $status)
+                ->FETCHPAIRS('CategoryID');                
+        
+        return $row;
     }
     
     public function loadCategoryListAdmin(){
   
-        return $this->getTable('category')->order('CategoryName ASC')->where('CategoryStatus!=', 4)
-                ->fetchPairs('CategoryID');
+        /*return $this->getTable('category')
+                ->order('CategoryName ASC')
+                ->where('CategoryStatus!=', 4)
+                ->fetchPairs('CategoryID');*/
+        
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('category')
+                ->WHERE('CategoryStatus != 4')
+                ->ORDERBY('CategoryName ASC')
+                ->FETCHPAIRS('CategoryID');
+        
+        return $row;
     }
     
     /*
      * Load Category info
      */    
     public function loadCategory($id){
-        return $this->getTable('category')
+        /*return $this->getTable('category')
                 ->where('CategoryID', $id)
-                ->fetch();
+                ->fetch();*/
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('category')
+                ->WHERE('CategoryID = %i', $id)
+                ->FETCH();
+                
+        return $row;
     }    
     
     public function loadChildCategoryList($catID){
-        return $this->getTable('category')
+        /*return $this->getTable('category')
                     ->select('CategoryID, CategoryName')
                      ->where('CategoryStatus',1)
                     ->where('HigherCategoryID',$catID)
-                    ->fetchPairs('CategoryID');
+                    ->fetchPairs('CategoryID');*/
+        $row = $this->db
+                ->SELECT('CategoryID, CategoryName')
+                ->FROM('category')
+                ->WHERE('CategoryStatus = 1
+                    AND HigherCategoryID = %i', $catID)
+                ->FETCHPAIRS('CategoryID');
+                
+        return $row;
     }
     
     public function loadChildCategoryListAdmin($catID){
-        return $this->getTable('category')
+        /*return $this->getTable('category')
                     ->select('CategoryID, CategoryName')
                     ->where('HigherCategoryID',$catID)
-                    ->fetchPairs('CategoryID');
+                    ->fetchPairs('CategoryID');*/
+        $row = $this->db
+                ->SELECT('CategoryID, CategoryName')
+                ->FROM('category')
+                ->WHERE('HigherCategoryID = %i', $catID)
+                ->FETCHPAIRS('CategoryID');
+                
+        return $row;
     }
     
     public function loadFeaturedCategories() {
-        $row = $this->getTable('category')
+        /*$row = $this->getTable('category')
                 ->where('CategoryStatus',2)
-                ->fetchPairs('CategoryID');
+                ->fetchPairs('CategoryID');*/
+        $categoryStatus = 2;
+        
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('category')
+                ->WHERE('CategoryStatus = %i', $categoryStatus);
+                
         if(!$row) return NULL;
         return $row;
     }
@@ -75,8 +123,10 @@ class CategoryModel extends Repository {
             'CategoryStatus' => 0
         );
         
-        $row = $this->getTable('category')
-                ->insert($insert);
+        /*$row = $this->getTable('category')
+                ->insert($insert);*/
+        $row = $this->db
+                ->INSERT('category', $insert);
         
         return $row->CategoryID;        
     }
@@ -98,9 +148,15 @@ class CategoryModel extends Repository {
             'CategoryPhoto' => $photo
             );        
         
-        return $this->getTable('category')
+        /*return $this->getTable('category')
                 ->where('CategoryID',$id)
-                ->update($update);       
+                ->update($update);       */
+        
+        $row = $this->db
+                ->UPDATE('category', $update)
+                ->WHERE('CategoryID = %i', $id);
+        
+        return $row;
     }
     
     public function updateCat($id, $name, $value) {
@@ -108,9 +164,15 @@ class CategoryModel extends Repository {
             $name => $value
             );        
         
-        return $this->getTable('category')
+        /*return $this->getTable('category')
                 ->where('CategoryID',$id)
-                ->update($update);       
+                ->update($update);       */
+        
+        $row = $this->db
+                ->UDPATE('category', $update)
+                ->WHERE('CategoryID = %i', $id);
+        
+        return $row;
     }
 
         public function updateCategoryParent($id, $higher){
@@ -119,9 +181,15 @@ class CategoryModel extends Repository {
             'HigherCategoryID' => $higher
             );        
 
-        return $this->getTable('category')
+        /*return $this->getTable('category')
                 ->where('CategoryID',$id)
-                ->update($update);       
+                ->update($update);       */
+        
+        $row = $this->db
+                ->UPDATE('category', $update)
+                ->WHERE('CategoryID = %i', $id);
+        
+        return $row;        
     }
     
     /*
@@ -133,9 +201,14 @@ class CategoryModel extends Repository {
             'CategoryDescription' => $desc         
             );        
 
-        return $this->getTable('category')
+        /*return $this->getTable('category')
                 ->where('CategoryID', $id)
-                ->update($update);       
+                ->update($update);       */
+        $row = $this->db
+                ->UPDATE('category', $update)
+                ->WHERE('CategoryID = %i', $id);
+        
+        return $row;
     }
 
     /*
@@ -145,9 +218,14 @@ class CategoryModel extends Repository {
      * @return string */    
     public function deleteCategory($catID){
         
-        return $this->getTable('category')
+        /*return $this->getTable('category')
                 ->where('CategoryID',$catID)
-                ->delete();        
+                ->delete();        */
+        $row = $this->db
+                ->DELETE('category')
+                ->WHERE('CategoryID = %i', $catID);
+                
+        return $row;
     }
     
     public function setCategoryStatus($id, $status){
@@ -156,9 +234,15 @@ class CategoryModel extends Repository {
             'CategoryStatus' => $status
             );        
         
-        return $this->getTable('category')
+        /*return $this->getTable('category')
                 ->where('CategoryID',$id)
-                ->update($update);
+                ->update($update);*/
+        
+        $row = $this->db
+                ->UDPATE('category', $update)
+                ->WHERE('CategoryID = %i', $id);
+        
+        return $row;
     }
     
     public function addPhoto($id, $name) {
@@ -166,9 +250,15 @@ class CategoryModel extends Repository {
             'CategoryPhoto' => $name
             );
         
-        return $this->getTable('category')
+        /*return $this->getTable('category')
                 ->where('CategoryID', $id)
-                ->update($update);
+                ->update($update);*/
+        
+        $row = $this->db
+                ->UPDATE('category', $update)
+                ->WHERE('CategoryID = %i', $id);
+        
+        return $row;       
     }
     
     public function deletePhoto($id) {
@@ -176,25 +266,48 @@ class CategoryModel extends Repository {
             'CategoryPhoto' => NULL
             );
         
-        return $this->getTable('category')
+        /*return $this->getTable('category')
                 ->where('CategoryID', $id)
-                ->update($update);
+                ->update($update);*/
+        
+        $row = $this->db
+                ->UPDATE('category', $update)
+                ->WHERE('CategoryID = %i', $id);
+        
+        return $row;
     }
     
     public function getStatusName($categorystatusid) {
-        $row = $this->getTable('categorystatus')
+        /*$row = $this->getTable('categorystatus')
                 ->where('CategoryStatusID', $categorystatusid)
-                ->fetch();
+                ->fetch();*/
+        
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('categorystatus')
+                ->WHERE('CategoryStatusID = %i', $categorystatusid)
+                ->FETCH();
         
         return $row->CategoryStatusName;
     }
     
     public function search($query) {
-        return $this->getTable('category')
+        /*return $this->getTable('category')
                 ->where('CategoryName LIKE ?
                     OR CategoryDescription LIKE ?', 
                         '%'.$query.'%',
                         '%'.$query.'%')
-                ->fetchPairs('CategoryID');
+                ->fetchPairs('CategoryID');*/
+        
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('category')
+                ->WHERE('CategoryName LIKE ?
+                    OR CategoryDescription LIKE ?', 
+                        '%'.$query.'%',
+                        '%'.$query.'%')
+                ->FETCHPAIRS('CategoryID');
+        
+        return $row;
     }
 }

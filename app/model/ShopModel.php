@@ -26,9 +26,14 @@ class ShopModel extends Repository {
      */
     public function getTax()
     {
-        $tax = $this->getTable('settings')
-                ->where('SettingName',"TAX")
-                ->fetch();
+        //$tax = $this->getTable('settings')
+        //        ->where('SettingName',"TAX")
+        //        ->fetch();
+        
+        $tax = $this->db
+                ->SELECT('SettingName, Value')
+                ->WHERE('SettingName', "TAX")
+                ->FETCH();
         
         return $tax['Value'];
     }
@@ -49,30 +54,37 @@ class ShopModel extends Repository {
     }*/
     public function getShopInfo($name){
         if($name != '') {
-            /*$value = $this->db
-                    ->select('*')
-                    ->from('settings')
-                    ->where("SettingName = $name")
-                    ->fetch();*/
             $value = $this->db
-                    ->query("SELECT * FROM settings WHERE SettingName = '%s", $name)->fetch();
+                    ->SELECT('*')
+                    ->FROM('settings')
+                    ->WHERE("SettingName = %s", $name)
+                    ->FETCH();
+            //$value = $this->db
+            //        ->query("SELECT * FROM settings WHERE SettingName = %s", $name)->fetch();
             
             return $value['Value'];
         }
         else{
             return $this->db
-                    ->select('*')
-                    ->from('settings')
-                    ->fetchPairs('SettingID');
+                    ->SELECT('*')
+                    ->FROM('settings')
+                    ->FETCHPAIRS('SettingID', 'SettingName', 'Value');
         }
     }
 
     public function loadPhotoSize() {
         $param = array('Small', 'Medium', 'Large');
-         return $this->getTable('settings')
+         
+        /*return $this->getTable('settings')
                  ->select('SettingName, Value')
                  ->where('SettingName', $param)
-                 ->fetchPairs('SettingName');
+                 ->fetchPairs('SettingName');*/
+        $row = $this->db
+                ->SELECT('SettingName, Value')
+                ->WHERE('SettingName', $param)
+                ->FETCHPAIRS('SettingName', 'Value');
+        
+        return $row;
     }
 
 
@@ -84,19 +96,34 @@ class ShopModel extends Repository {
       
     }*/
     public function getShopSettings(){
-        return $this->db
-                ->select('SettingName, Value')
-                ->from('settings')
-                ->fetchPairs('SettingName', 'Value');
+        //$row = $this->db
+        //        ->select('SettingName, Value')
+        //        ->from('settings');
+                //->fetchPairs('SettingName', 'Value');   
+        //$row =  $this->db
+        //        ->query("SELECT SettingName, Value FROM settings")
+        //        ->fetchPairs('SettingName', 'Value');        
+        $row = $this->db
+                ->SELECT('SettingName, Value')
+                ->FROM('settings')
+                ->FETCHPAIRS('SettingName', 'Value');
+//->FETCHPAIRS('SettingName', 'Value');
+        
+        return $row;
     }
 
 
     public function getShopInfoPublic() {
         $param = array('Name', 'Description', 'CompanyAddress', 'TAX', 'OrderMail', 'ContactMail', 'ContactPhone', 'InvoicePrefix', 'GA');
         
-        return $this->getTable('settings')
+        /*return $this->getTable('settings')
                 ->where('SettingName', $param)
-                ->fetchPairs('SettingID'); 
+                ->fetchPairs('SettingID'); */
+        $row = $this->db
+                ->SELECT('SettingID, SettingName, Value')
+                ->FROM('settings')
+                ->WHERE('SettingName', $param)
+                ->FETCHPAIRS('SettingID');
      }
     
     public function setShopInfo($name, $value)
@@ -105,9 +132,12 @@ class ShopModel extends Repository {
               'Value' => $value  
             );
         
-        return $this->getTable('settings')
+        /*return $this->getTable('settings')
                 ->where('SettingName', $name)
-                ->update($update);
+                ->update($update);*/
+        return $this->db
+                ->UPDATE('settings', $update)
+                ->WHERE('SettingName', $name);
     }
     
     public function setShopInfoByID($id, $value){        
@@ -115,9 +145,12 @@ class ShopModel extends Repository {
               'Value' => $value  
             );
        
-        return $this->getTable('settings')
+        /*return $this->getTable('settings')
                 ->where('SettingID', $id)
-                ->update($update);
+                ->update($update);*/
+        return $this->db
+                ->UPDATE('settings', $update)
+                ->WHERE('SettingID', $id);                
     }
     
     public function insertShopInfo($name, $value){
@@ -126,51 +159,90 @@ class ShopModel extends Repository {
             'Value' => $value
         );
                 
-        return $this->getTable('settings')
-                ->insert($insert);
+        /*return $this->getTable('settings')
+                ->insert($insert);*/
+        return $this->db
+                ->INSERT('settings', $insert);
     }
     
     public function deleteShopInfo($name) {
-        return $this->getTable('settings')
+        /*return $this->getTable('settings')
                 ->where('SettingName', $name)
-                ->delete();
+                ->delete();*/
+        return $this->db
+                ->DELETE('settings')
+                ->WHERE('SettingName', $name);
     }
 
     public function loadStaticText($id){
         if($id==''){
-            return $this->getTable('statictext')
+            /*return $this->getTable('statictext')
                     ->order('StaticTextName')
-                    ->fetchPairs('StaticTextID');
+                    ->fetchPairs('StaticTextID');*/
+            $row = $this->db
+                    ->SELECT('*')
+                    ->FROM('statictext')
+                    ->ORDERBY('StaticTextName')
+                    ->FETCHPAIRS('StaticTextID');
         }
         else{
-            return $this->getTable('statictext')
+            /*return $this->getTable('statictext')
                     ->where('StaticTextID',$id)
-                    ->fetch();
+                    ->fetch();*/
+            $row = $this->db
+                    ->SELECT('*')
+                    ->FROM('statictext')
+                    ->WHERE('StaticTextID', $id)
+                    ->FETCH();
         }
+        return $row;
     }
     
     public function loadActiveStaticText($id){
-        $activeID = $this->getTable('status')
+        /*$activeID = $this->getTable('status')
                 ->where('StatusName','Active')
-                ->fetch();     
+                ->fetch();     */
+        $activeID = $this->db
+                ->SELECT('*')
+                ->FROM('status')
+                ->WHERE('StatusName', 'Active')
+                ->FETCH();
         
         if($id==''){
-            return $this->getTable('statictext')
+            /*return $this->getTable('statictext')
                     ->where('StatusID',$activeID['StatusID'])
                     ->order('StaticTextName')
-                    ->fetchPairs('StaticTextID');
+                    ->fetchPairs('StaticTextID');*/
+            $row = $this->db
+                    ->SELECT('*')
+                    ->FROM('statictext')
+                    ->WHERE('StatusID', $activeID['StatusID'])
+                    ->ORDERBY('StaticTextName')
+                    ->FETCHPAIRS('StaticTextID');
+                    
         }
         else{
-            return $this->getTable('statictext')
-                    ->where('StaticTextID',$id);
+            /*return $this->getTable('statictext')
+                    ->where('StaticTextID',$id);*/
+            $row = $this->db
+                    ->SELECT('*')
+                    ->FROM('statictext')
+                    ->WHERE('StaticTextID', $id);
         }
+        
+        return $row;
     }
     
     public function loadPhotoAlbumStatic($postid){
         
-        $album = $this->getTable('photoalbum')
+        /*$album = $this->getTable('photoalbum')
                 ->where('StaticTextID', $postid)
-                ->fetch();
+                ->fetch();*/
+        $album = $this->db
+                ->SELECT('*')
+                ->FROM('photoalbum')
+                ->WHERE('StaticTextID', $postid)
+                ->FETCH();
         
         if ($album){
             $album = 1;
@@ -186,8 +258,11 @@ class ShopModel extends Repository {
             'StatusID' => $status
         );
         
-        $row = $this->getTable('statictext')
-                ->insert($insert);
+        /*$row = $this->getTable('statictext')
+                ->insert($insert);*/
+        
+        $row = $this->db
+                ->INSERT('statictext', $insert);
         
         return $row->StaticTextID;
     }
@@ -197,15 +272,21 @@ class ShopModel extends Repository {
             $type => $content
         );
         
-        return $this->getTable('statictext')
+        /*return $this->getTable('statictext')
                 ->where('StaticTextID', $id)
-                ->update($update);
+                ->update($update);*/
+        return $this->db
+                ->UPDATE('statictext', $update)
+                ->WHERE('StaticTextID', $id);
     }
     
     public function deleteStaticText($id){
-        return $this->getTable('statictext')
+        /*return $this->getTable('statictext')
                 ->where('StaticTextID', $id)
-                ->delete();
+                ->delete();*/
+        return $this->db
+                ->DELETE('statictext')
+                ->WHERE('StaticTextID', $id);
     }
     
     /*
@@ -222,40 +303,73 @@ class ShopModel extends Repository {
     public function loadModule($id, $type=NULL){
         if($type=NULL){
             if($id==''){
-                return $this->getTable('module')
-                        ->fetchPairs('ModuleID');
+                //return $this->getTable('module')
+                //        ->fetchPairs('ModuleID');
+                $row = $this->db
+                        ->SELECT('*')
+                        ->FROM('module')
+                        ->FETCHPAIRS('ModuleID');
             }
             else{
-                return $this->getTable('module')
+                /*return $this->getTable('module')
                         ->where('ModuleID',$id)
-                        ->fetchPairs('ModuleID');
+                        ->fetchPairs('ModuleID');*/
+                $row = $this->db
+                        ->SELECT('*')
+                        ->FROM('module')
+                        ->WHERE('ModuleID', $id)
+                        ->FETCHPAIRS('ModuleID');
             }
         }
         else{
-            return $this->getTable('module')
+            /*return $this->getTable('module')
                     ->where('ModuleType',$type)
-                    ->fetchPairs('ModuleID');
+                    ->fetchPairs('ModuleID');*/
+            $row = $this->db
+                    ->SELECT('*')
+                    ->FROM('module')
+                    ->WHERE('ModuleType', $type)
+                    ->FETCHPAIRS('ModuleID');
         }
+        
+        return $row;
     }
     
     public function loadModules($type) {
         if ($type == '') {
-            $return = $this->getTable('module')
+            /*$return = $this->getTable('module')
                     ->order('ModuleType, StatusID, ModuleName')
-                    ->fetchPairs('ModuleID');
+                    ->fetchPairs('ModuleID');*/
+            $row = $this->db
+                    ->SELECT('*')
+                    ->FROM('module')
+                    ->ORDERBY('ModuleType, StatusID, ModuleName')
+                    ->FETCHPAIRS('ModuleID');
         }else {
-            $return = $this->getTable('module')
+            /*$return = $this->getTable('module')
                     ->where('ModuleType', $type)
-                    ->fetchPairs('ModuleID');
+                    ->fetchPairs('ModuleID');*/
+            $row = $this->db
+                    ->SELECT('*')
+                    ->FROM('module')
+                    ->WHERE('ModuleType', $type)
+                    ->FETCHPAIRS('ModuleID');
             }
         
-        return $return;
+        return $row;
     }
 
     public function loadModuleByName($name){
-        return $this->getTable('module')
+        /*return $this->getTable('module')
                 ->where('CompModuleName',$name)
-                ->fetch();
+                ->fetch();*/
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('module')
+                ->WHERE('CompModuleName', $name)
+                ->FETCH();
+        
+        return $row;
     }
     
     public function insertModule($name, $compname, $description=NULL, $type='Default', $status='2'){
@@ -267,8 +381,13 @@ class ShopModel extends Repository {
             'StatusID' => $status
         );
         
-        return $this->getTable('module')
-                ->insert($insert);
+        /*return $this->getTable('module')
+                ->insert($insert);*/
+        
+        $row = $this->db
+                ->INSERT('module', $insert);
+        
+        return $row;
     }
     
     public function updateModule($compnameold, $name, $compname, $description, $type, $status){
@@ -280,9 +399,15 @@ class ShopModel extends Repository {
             'StatusID' => $status
         );
         
-        return $this->getTable('module')
+        /*return $this->getTable('module')
                 ->where('CompModuleName', $compnameold)
-                ->update($update);
+                ->update($update);*/
+        
+        $row = $this->db
+                ->UPDATE('module', $update)
+                ->WHERE('CompModuleName', $compnameold);
+        
+        return $row;
     }
     
     public function updateModuleStatus($compname,$status){
@@ -290,18 +415,29 @@ class ShopModel extends Repository {
             'StatusID' => $status
         );
                 
-        return $this->getTable('module')
+        /*return $this->getTable('module')
                 ->where('CompModuleName',$compname)
-                ->update($update);
+                ->update($update);*/
+        $row = $this->db
+                ->UPDATE('module', $update)
+                ->WHERE('CompModuleName', $compname);
     }
     
     public function isModuleActive($compname){
-        $query = $this->getTable('module')
+        /*$query = $this->getTable('module')
                 ->select('module.*,status.*')
                 ->where('module.CompModuleName', $compname)
                 ->where('status.StatusName', 'active')
                 ->fetch();
-    
+                */
+        $query = $this->db
+                ->SELECT('module.*, status.*')
+                ->FROM('module')
+                ->LEFTJOIN('status')->ON('module.StatusID = status.StatusID')
+                ->WHERE('module.CompModuleName', $compname)
+                ->WHERE('status.StatusName', 'active')
+                ->FETCH();
+       
         if($query == ''){
             return FALSE;
         }
@@ -351,25 +487,50 @@ class ShopModel extends Repository {
             'BannerLink' => $link
         );
         
-        return $this->getTable('banner')
-                ->insert($insert);
+        /*return $this->getTable('banner')
+                ->insert($insert);*/
+        $row = $this->db
+                ->INSERT('banner', $insert);
+        
+        return $row;
     }
     
     public function loadBanners(){
-        return $this->getTable('banner')
-                ->fetchPairs('BannerID');
+        /*return $this->getTable('banner')
+                ->fetchPairs('BannerID');*/
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('banner')
+                ->FETCHPAIRS('BannerID');
+        
+        return $row;
     }
     
     public function loadBannerByID($id){
-        return $this->getTable('banner')
+        /*return $this->getTable('banner')
                 ->where('BannerID', $id)
-                ->fetch();
+                ->fetch();*/
+        
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('banner')
+                ->WHERE('BannerID', $id)
+                ->FETCH();
+        
+        return $row;
     }
     
     public function loadBannerByType($type){
-        return $this->getTable('banner')
+        /*return $this->getTable('banner')
                 ->where('BannerType', $type)
-                ->fetch();
+                ->fetch();*/
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('banner')
+                ->WHERE('BannerType = %s', $type)
+                ->FETCH();
+        
+        return $row;
     }
 
     public function updateBanner($id, $value, $link){
@@ -378,9 +539,14 @@ class ShopModel extends Repository {
             'BannerLink' => $link
         );
         
-        return $this->getTable('banner')
+        /*return $this->getTable('banner')
                 ->update($update)
-                ->where('BannerID', $id);
+                ->where('BannerID', $id);*/
+        $row = $this->db
+                ->UPDATE('banner', $update)
+                ->WHERE('BannerID', $id);
+        
+        return $row;
     }
 
     public function updateBannerByType($type, $value, $link){
@@ -396,6 +562,11 @@ class ShopModel extends Repository {
                 'BannerLink' => $link
              );
         }
-        return $this->getTable('banner')->where('BannerType', $type)->update($update);
+        //return $this->getTable('banner')->where('BannerType', $type)->update($update);
+        $row = $this->db
+                ->UPDATE('banner', $update)
+                ->WHERE('BannerType', $type);
+        
+        return $row;
     }       
 }
