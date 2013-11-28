@@ -19,7 +19,7 @@ class CategoryModel extends Repository {
                 ->where('CategoryStatus', $status)
                 ->fetchPairs('CategoryID');         
          */
-        $row = $this->db
+        $row = $this->db                
                 ->SELECT('*')
                 ->FROM('CategoryStatus')
                 ->WHERE('CategoryStatus = %i', $status)

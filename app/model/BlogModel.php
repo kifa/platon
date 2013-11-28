@@ -8,43 +8,83 @@
 class BlogModel extends Repository {
     
     public function loadCategoryList($id='1'){
-        return $this->getTable('category')
+        /*return $this->getTable('category')
                 ->where('CategoryStatus', $id)
                 ->fetchPairs('CategoryID');
+         */
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('category')
+                ->WHERE('CategoryStatus = %i', $id)
+                ->FETCHPAIRS('CategoryID');
+                
+        return $row;
     }
     
     public function loadCategory($id = NULL){
         if($id == NULL) {
-            return $this->getTable('category')
+            /*return $this->getTable('category')
                     ->where('CategoryID', 99)
-                    ->fetch();
+                    ->fetch();*/
+            $row = $this->db
+                    ->SELECT('*')
+                    ->FROM('category')
+                    ->WHERE('CategoryID = 99')
+                    ->FETCH();
         }
         else {
-            return $this->getTable('category')
+            /*return $this->getTable('category')
                     ->where('CategoryID', $id)
-                    ->fetch();
+                    ->fetch();*/
+            $row = $this->db
+                    ->SELECT('*')
+                    ->FROM('category')
+                    ->WHERE('CategoryID = %i', $id)
+                    ->FETCH();
         }
+        
+        return $row;
     }
     
     public function loadPosts($id = NULL) {
         
         if($id == NULL) {
-           return $this->getTable('blog')
+           /*return $this->getTable('blog')
                    ->order('BlogID DESC')
-                   ->fetchPairs('BlogID');                       
+                   ->fetchPairs('BlogID');                       */
+            $row = $this->db
+                    ->SELECT('*')
+                    ->FROM('blog')
+                    ->ORDERBY('BlogID DESC')
+                    ->FETCHPAIRS('BlogID');
         }
         else {
-            return $this->getTable('blog')
+            /*return $this->getTable('blog')
                     ->where('CategoryID', $id)
                     ->order('BlogID DESC')
-                    ->fetchPairs('BlogID');    
+                    ->fetchPairs('BlogID');    */
+            $row = $this->db
+                    ->SELECT('*')
+                    ->FROM('blog')
+                    ->WHERE('CategoryID = %i', $id)
+                    ->ORDERBY('BlogID DESC')
+                    ->FETCHPAIRS('BlogID');
         }
+        
+        return $row;
     }
     
     public function loadPost($postid){
-        return $this->getTable('blog')
+        /*return $this->getTable('blog')
                 ->where('BlogID', $postid)
-                ->fetch();        
+                ->fetch();        */
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('blog')
+                ->WHERE('BlogID = %i', $postid)
+                ->FETCH();
+        
+        return $row;
     }
 
     public function insertPost($name, $categoryID, $content, $product = NULL) {
@@ -56,10 +96,14 @@ class BlogModel extends Repository {
             'CategoryID' => $categoryID
         );
         
-        $return = $this->getTable('blog')
+        /*$return = $this->getTable('blog')
                 ->insert($insert);
         
-        return $return->BlogID;
+        return $return->BlogID;*/
+        $row = $this->db
+                ->INSERT('blog', $insert);
+        
+        return $row;
     }
     
     public function updatePost($id, $where, $content) {
@@ -67,23 +111,41 @@ class BlogModel extends Repository {
           $where => $content,
         );        
         
-        return $this->getTable('blog')
+        /*return $this->getTable('blog')
                 ->where('BlogID', $id)
-                ->update($update);
+                ->update($update);*/
+        
+        $row = $this->db
+                ->UPDATE('blog', $update)
+                ->WHERE('BlogID = %i', $id);
+        
+        return $row;
     }
 
     public function deletePost($id) {
-        return $this->getTable('blog')
+        /*return $this->getTable('blog')
                 ->where('BlogID', $id)
-                ->delete();
+                ->delete();*/
+        $row = $this->db
+                ->DELETE('blog')
+                ->WHERE('BlogID = %i', $id);
+        
+        return $row;        
     }
     
     public function loadCoverPhoto($id){        
-        $photo = $this->getTable('photo')
+        /*$photo = $this->getTable('photo')
                 ->select('photo.PhotoURL, photoalbum.BlogID')
                 ->where('photoalbum.BlogID',$id)
                 ->where('photo.CoverPhoto','1')
-                ->fetch();
+                ->fetch();*/
+        $photo = $this->db
+                ->SELECT('photo.PhotoURL, photoalbum.BlogID')
+                ->FROM('photoalbum')
+                ->JOIN('photo')->ON('photo.PhotoAlbumID = photoalbum.PhotoAlbumID')
+                ->WHERE('photoalbum.BlogID = %i'
+                        . 'AND photo.CoverPhoto = 1', $id)
+                ->FETCH();
         
         if($photo["PhotoURL"]==""){
             $photo["PhotoURL"]=1;
@@ -94,24 +156,42 @@ class BlogModel extends Repository {
         
     public function loadPhotoAlbum($id){
         if($id==''){
-            return $this->getTable('PhotoAlbum');
+            /*return $this->getTable('PhotoAlbum');*/
+            $row = $this->db
+                    ->SELECT('*')
+                    ->FROM('photoalbum');                    
         }
         else{
-            return $this->getTable('photo')
+            /*return $this->getTable('photo')
                     ->select('photo.*,photoalbum.*')
                     ->where('photoalbum.blogID',$id)
-                    ->fetchPairs('PhotoID');            
-        }                                        
+                    ->fetchPairs('PhotoID');            */
+            $row = $this->db
+                    ->SELECT('photo.*, photoalbum.*')
+                    ->FROM('photoalbum')
+                    ->JOIN('photo')->ON('photo.PhotoAlbumID = photoalbum.PhotoAlbumID')
+                    ->WHERE('photoalbum.BlogID = %i', $id)
+                    ->FETCHPAIRS('photo.PhotoID');
+        }           
+        return $row;
     }
  
     public function loadPhotoAlbumID($postid){
         if($postid==''){
-            $photoalbum = $this->getTable('photoalbum');
+            /*$photoalbum = $this->getTable('photoalbum');*/
+            $photoalbum = $this->db
+                    ->SELECT('*')
+                    ->FROM('photoalbum');  
         }
         else{            
-            $photoalbum = $this->getTable('photoalbum')
+            /*$photoalbum = $this->getTable('photoalbum')
                     ->where('photoalbum.blogID',$postid)
-                    ->fetch();            
+                    ->fetch();            */
+            $photoalbum = $this->db
+                    ->SELECT('*')
+                    ->FROM('photoalbum')
+                    ->WHERE('photoalbum.BlogID = %i', $postid)
+                    ->FETCH();
         }
         
         if($photoalbum == FALSE){
@@ -128,9 +208,14 @@ class BlogModel extends Repository {
             return NULL;
         }
         else{            
-            $photoalbum = $this->getTable('photoalbum')
+            /*$photoalbum = $this->getTable('photoalbum')
                     ->where('photoalbum.StaticTextID',$spostid)
-                    ->fetch();            
+                    ->fetch();            */
+            $photoalbum = $this->db
+                    ->SELECT('*')
+                    ->FROM('photoalbum')
+                    ->WHERE('photoalbum.StaticTextID = %i', $spostid)
+                    ->FETCH();
         }
         
         if($photoalbum == FALSE){
@@ -144,22 +229,42 @@ class BlogModel extends Repository {
     
     public function loadPhotoAlbumStatic($spostid){
         if($spostid==''){
-            return $this->getTable('photoalbum');
+            /*return $this->getTable('photoalbum');*/
+            $row = $this->db
+                    ->SELECT('*')
+                    ->FROM('photoalbum');
         }
         else{
-            return $this->getTable('photo')
+            /*return $this->getTable('photo')
                     ->select('photo.*,photoalbum.*')
                     ->where('photoalbum.StaticTextID', $spostid)
-                    ->fetchPairs('PhotoID');            
+                    ->fetchPairs('PhotoID');            */
+            $row = $this->db
+                    ->SELECT('photo.*, photoalbum.*')
+                    ->FROM('photoalbum')
+                    ->JOIN('photo')->ON('photo.PhotoAlbumID = photoalbum.PhotoAlbumID')
+                    ->WHERE('photoalbum.StaticTextID = %i', $spostid)
+                    ->FETCHPAIRS('PhotoID');
         }
+        return $row;
     }
     
     public function search($query) {
-        return $this->getTable('blog')
+        /*return $this->getTable('blog')
                 ->where('BlogName LIKE ?
                     OR BlogContent LIKE ?',
                         '%'.$query.'%',
                         '%'.$query.'%')
-                ->fetchPairs('BlogID');            
+                ->fetchPairs('BlogID');            */
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('blog')
+                ->WHERE('BlogName LIKE ?'
+                        . 'OR BlogContent LIKE ?',
+                        '%'.$query.'%',
+                        '%'.$query.'%')
+                ->FETCHPAIRS('BlogID');
+        
+        return $row;
     }
 }

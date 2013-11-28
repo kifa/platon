@@ -741,9 +741,5 @@ class OrderModel extends Repository {
     public function search($query) {
         return $this->getTable('orders')
 			->fetchPairs('OrderID');
-    }
-
-   
+    }  
 }
-
-

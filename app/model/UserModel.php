@@ -9,11 +9,15 @@ class UserModel extends Repository{
         
     public function findByName($username)
     {       
-        return $this->getTable('users')
+        /*return $this->getTable('users')
                 ->where('UsersID', $username)
-                ->fetch();
+                ->fetch();*/
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('users')
+                ->WHERE('UsersID = %s', $username)
+                ->FETCH();
     }
-    
      
     public function userAdd($name, $username, $password) {
         $insert = array(
@@ -22,8 +26,11 @@ class UserModel extends Repository{
             'Name' => $name
         );
         
-        $this->getTable('users')
-                ->insert($insert);
+        /*$this->getTable('users')
+                ->insert($insert);*/
+        $this->db
+            ->INSERT('users', $insert);
+
     } 
     
      public function setPassword($username, $password) {
@@ -31,9 +38,12 @@ class UserModel extends Repository{
             'Password' => Authenticator::calculateHash($password)
         );
          
-        $this->getTable('users')
+        /*$this->getTable('users')
                 ->where('UsersID', $username)
-                ->update($update);
+                ->update($update);*/
+        $this->db
+                ->UPDATE('users')
+                ->WHERE('UsersID = $s', $username);              
     }
     
     public function insertUser($UsersID,$name,$phone){
@@ -43,8 +53,12 @@ class UserModel extends Repository{
                 'PhoneNumber' => $phone,
                 );
         
-        return $this->getTable('users')
-                ->insert($insert);
+        /*return $this->getTable('users')
+                ->insert($insert);*/
+        $row = $this->db
+                ->INSERT('users', $insert);
+        
+        return $row;
     }
     
     public function updateUser($UsersID,$name,$phone){
@@ -53,9 +67,14 @@ class UserModel extends Repository{
                 'PhoneNumber' => $phone,
                 );
         
-        return $this->getTable('users')
+        /*return $this->getTable('users')
                 ->where('UsersID',$UsersID)
-                ->update($update);
+                ->update($update);*/
+        $row = $this->db
+                ->UPDATE('users')
+                ->WHERE('UsersID = %s', $UsersID);
+        
+        return $row;
     }
     
     
@@ -68,8 +87,12 @@ class UserModel extends Repository{
             'City' => $city
         );
         
-        return $this->getTable('address')
-                ->insert($insert);
+        /*return $this->getTable('address')
+                ->insert($insert);*/
+        $row = $this->db
+                ->INSERT('address', $insert);
+        
+        return $row;
     }
     
     public function updateAddress($usersID,$street,$city,$zip){
@@ -80,20 +103,34 @@ class UserModel extends Repository{
             'City' => $city
         );
         
-        return $this->getTable('address')
+        /*return $this->getTable('address')
                 ->where('UsersID',$usersID)
-                ->update($update);
+                ->update($update);*/
+        $row = $this->db
+                ->UPDATE('address', $update)
+                ->WHERE('UsersID = $s', $usersID);
+        
+        return $row;
     }
 
     public function countAddress(){
-        return $this->getTable('address')
-                ->count();
+        /*return $this->getTable('address')
+                ->count();*/
+        $row = $this->db
+                ->COUNT('address');
+        
+        return $row;
     }
     
     public function isUser($usr){
-        $row = $this->getTable('users')
+        /*$row = $this->getTable('users')
                 ->where('UsersID', $usr)
-                ->fetch();
+                ->fetch();*/
+        $row = $this->db
+                ->SELECT('*')
+                ->FROM('users')
+                ->WHERE('UsersID = %s', $usr)
+                ->FETCH();
         
         if(!$row){
             return FALSE;
