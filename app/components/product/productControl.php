@@ -197,7 +197,7 @@ class productControl extends BaseControl{
         $albumID = $this->productModel->loadPhotoAlbumID($product['ProductID']);
         if($albumID){
             $albumID->PhotoAlbumID;
-        }
+        }       
                 
         $this->template->setFile(__DIR__ . '/templates/bigphoto.latte');   
         $this->template->pieces = $this->productModel->loadTotalPieces($product['ProductID']);
