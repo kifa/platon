@@ -150,13 +150,13 @@ class productControl extends BaseControl{
     public function renderFourinline($product) {
         
         $albumID = $this->productModel->loadPhotoAlbumID($product['ProductID']);
-        if($albumID){
+        if($albumID){            
             $albumID->PhotoAlbumID;
         }
         $this->template->setFile(__DIR__ . '/templates/fourinline.latte');   
         $this->template->pieces = $this->productModel->loadTotalPieces($product['ProductID']);
         $this->template->product = $product;
-        $this->template->albumID = $albumID;
+        $this->template->albumID = $albumID['PhotoAlbumID'];
         $this->template->photo = $this->productModel->loadCoverPhoto($product['ProductID']);
 
         $this->template->render();
@@ -171,7 +171,7 @@ class productControl extends BaseControl{
         $this->template->setFile(__DIR__ . '/templates/twoinline.latte');   
         $this->template->pieces = $this->productModel->loadTotalPieces($product['ProductID']);
         $this->template->product = $product;
-        $this->template->albumID = $albumID;
+        $this->template->albumID = $albumID['PhotoAlbumID'];
         $this->template->photo = $this->productModel->loadCoverPhoto($product['ProductID']);
 
         $this->template->render();
@@ -186,7 +186,7 @@ class productControl extends BaseControl{
         $this->template->setFile(__DIR__ . '/templates/singleton.latte');   
         $this->template->pieces = $this->productModel->loadTotalPieces($product['ProductID']);
         $this->template->product = $product;
-        $this->template->albumID = $albumID;
+        $this->template->albumID = $albumID['PhotoAlbumID'];
         $this->template->photo = $this->productModel->loadCoverPhoto($product['ProductID']);
 
         $this->template->render();
@@ -198,10 +198,11 @@ class productControl extends BaseControl{
         if($albumID){
             $albumID->PhotoAlbumID;
         }
+                
         $this->template->setFile(__DIR__ . '/templates/bigphoto.latte');   
         $this->template->pieces = $this->productModel->loadTotalPieces($product['ProductID']);
         $this->template->product = $product;
-        $this->template->albumID = $albumID;
+        $this->template->albumID = $albumID['PhotoAlbumID'];
         $this->template->photo = $this->productModel->loadCoverPhoto($product['ProductID']);
 
         $this->template->render();

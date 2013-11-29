@@ -26,8 +26,6 @@ class CategoryModel extends Repository {
                         . 'OR CategoryStatus = 2')
                 ->FETCHASSOC('CategoryID');
         
-        dump($row);
-        
         return $row;
     }
     

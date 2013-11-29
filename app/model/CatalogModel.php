@@ -287,7 +287,7 @@ class CatalogModel extends Repository {
                 ->FROM('product')
                 ->JOIN('price')->ON('price.ProductID = product.ProductID')
                 ->JOIN('category')->ON('category.CategoryID = product.CategoryID')
-                ->WHERE('product>ProductStatus = 3
+                ->WHERE('product.ProductStatusID = 3
                     AND product.ProductVariants IS NULL
                     AND (category.CategoryStatus = 1
                     OR category.CategoryStatus = 2)');

@@ -509,6 +509,7 @@ class ProductModel extends Repository {
                     ->FROM('attrib')
                     ->WHERE('AttribID = %i', $id);
         }
+        
         return $row;
     }
 
@@ -654,9 +655,9 @@ class ProductModel extends Repository {
                 ->SELECT('photo.PhotoURL, photoalbum.ProductID')
                 ->FROM('photo')
                 ->JOIN('photoalbum')->ON('photoalbum.PhotoAlbumID = photo.PhotoAlbumID')
-                ->WHERE('photoalbum.ProductID = %i'
+                ->WHERE('photoalbum.ProductID = %i '
                         . 'AND photo.CoverPhoto = 1', $id)
-                ->FETCH();
+                ->FETCH();               
                 
         return $row;
     }
@@ -692,7 +693,7 @@ class ProductModel extends Repository {
                 ->update($setCover);*/
         $this->db
                 ->UPDATE('photo', $unsetCover)
-                ->WHERE('CoverPhoto = 1'
+                ->WHERE('CoverPhoto = 1 '
                         . 'AND PhotoAlbumID = %i', $albumID);
         
         $this->db
@@ -764,7 +765,7 @@ class ProductModel extends Repository {
                 ->SELECT('delivery.DeliveryPrice, status.StatusName')
                 ->FROM('delivery')
                 ->JOIN('status')->ON('delivery.StatusID = status.StatusID')
-                ->WHERE('DeliveryPrice != 0'
+                ->WHERE('DeliveryPrice != 0 '
                         . 'AND status.StatusName = %s', 'active')
                 ->ORDERBY('DeliveryPrice')
                 ->FETCHASSOC('DeliveryPrice');
@@ -881,7 +882,7 @@ class ProductModel extends Repository {
                 ->SELECT('price.*, product.*')
                 ->FROM('price')
                 ->JOIN('product')->ON('product.ProductID = price.ProductID')
-                ->WHERE('product.ProductVariants = %i'
+                ->WHERE('product.ProductVariants = %i '
                         . 'AND product.ProductStatusID != 0', $id)
                 ->FETCHASSOC('ProductID');
         
@@ -976,7 +977,7 @@ class ProductModel extends Repository {
         $variant = $this->db
                 ->SELECT('ProductID')
                 ->FROM('product')
-                ->WHERE('ProductStatusID != 0'
+                ->WHERE('ProductStatusID != 0 '
                         . 'AND ProductVariants = %i', $id)
                 ->FETCH();
                       
@@ -985,9 +986,9 @@ class ProductModel extends Repository {
                     ->where('ProductVariants = ?', $id)
                     ->sum('PiecesAvailable');*/
             $pieces = $this->db
-                    ->SUM('PiecesAvailable')
+                    ->SELECT('SUM(PiecesAvailable)')
                     ->FROM('product')
-                    ->WHERE('ProductVariants = %i', $id);           
+                    ->WHERE('ProductVariants = %i', $id);
         }
         else{
             /*$pieces = $this->getTable('product')
@@ -997,10 +998,10 @@ class ProductModel extends Repository {
                     ->SELECT('PiecesAvailable')
                     ->FROM('product')
                     ->WHERE('ProductID = %i', $id)
-                    ->FETCH();
+                    ->FETCH();                        
             
-            $pieces = $pieces['PiecesAvailable'];
-        }
+            //$pieces = $pieces['PiecesAvailable'];
+        }       
         
         return($pieces);
     }

@@ -143,7 +143,7 @@ class BlogModel extends Repository {
                 ->SELECT('photo.PhotoURL, photoalbum.BlogID')
                 ->FROM('photoalbum')
                 ->JOIN('photo')->ON('photo.PhotoAlbumID = photoalbum.PhotoAlbumID')
-                ->WHERE('photoalbum.BlogID = %i'
+                ->WHERE('photoalbum.BlogID = %i '
                         . 'AND photo.CoverPhoto = 1', $id)
                 ->FETCH();
         

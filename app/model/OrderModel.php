@@ -555,7 +555,7 @@ class OrderModel extends Repository {
         $detail = $this->db
                 ->SELECT('*')
                 ->FROM('orderdetails')
-                ->WHERE('OrderID = %i'
+                ->WHERE('OrderID = %i '
                         . 'AND ProductID = %i', $orderid, $product)
                 ->FETCH();
         
@@ -627,7 +627,8 @@ class OrderModel extends Repository {
                         ->SELECT('payment.*, status.*')
                         ->FROM('payment')
                         ->JOIN('status')->ON('status.StatusID = payment.StatusID')
-                        ->WHERE('status.StatusName = "active" OR status.StatusName = "non-active"')
+                        ->WHERE('status.StatusName = "active" '
+                                . 'OR status.StatusName = "non-active"')
                         ->FETCHASSOC('PaymentID');
             }
             else
@@ -800,7 +801,8 @@ class OrderModel extends Repository {
                         ->SELECT('delivery.*, status.*')
                         ->FROM('delivery')
                         ->JOIN('status')->ON('status.StatusID = delivery.StatusID')
-                        ->WHERE('status.StatusName = "active" OR status.StatusName = "non-active"')
+                        ->WHERE('status.StatusName = "active" '
+                                . 'OR status.StatusName = "non-active"')
                         ->FETCHASSOC('DeliveryID');                
             }
             else
@@ -828,7 +830,7 @@ class OrderModel extends Repository {
                         ->SELECT('delivery.*, status.*')
                         ->FROM('delivery')
                         ->JOIN('status')->ON('status.StatusID = delivery.StatusID')
-                        ->WHERE('delivery.HigherDelivery IS NULL'
+                        ->WHERE('delivery.HigherDelivery IS NULL '
                                 . 'AND status.StatusName = %s', $switch)
                         ->FETCHASSOC('DeliveryID');
             }
@@ -893,7 +895,7 @@ class OrderModel extends Repository {
             ->SELECT('delivery.*, status.*')
             ->FROM('delivery')
             ->JOIN('status')->ON('status.StatusID = delivery.StatusID')
-            ->WHERE('status.StatusName = "active"'
+            ->WHERE('status.StatusName = "active" '
                     . 'AND delivery.HigherDelivery = %i', $higher)                
             ->FETCHASSOC('DeliveryID');
     }
