@@ -766,7 +766,7 @@ class ProductModel extends Repository {
                 ->FROM('delivery')
                 ->JOIN('status')->ON('delivery.StatusID = status.StatusID')
                 ->WHERE('DeliveryPrice != 0 '
-                        . 'AND status.StatusName = %s', 'active')
+                        . 'AND status.StatusName = "active"')
                 ->ORDERBY('DeliveryPrice')
                 ->FETCHASSOC('DeliveryPrice');
         

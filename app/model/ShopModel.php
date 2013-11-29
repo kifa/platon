@@ -32,7 +32,7 @@ class ShopModel extends Repository {
         
         $tax = $this->db
                 ->SELECT('SettingName, Value')
-                ->WHERE('SettingName', "TAX")
+                ->WHERE('SettingName = "TAX"')
                 ->FETCH();
         
         return $tax['Value'];
@@ -68,7 +68,7 @@ class ShopModel extends Repository {
             return $this->db
                     ->SELECT('*')
                     ->FROM('settings')
-                    ->FETCHASSOC('SettingID', 'SettingName', 'Value');
+                    ->FETCHASSOC('SettingID');
         }
     }
 
@@ -81,8 +81,8 @@ class ShopModel extends Repository {
                  ->fetchPairs('SettingName');*/
         $row = $this->db
                 ->SELECT('SettingName, Value')
-                ->WHERE('SettingName', $param)
-                ->FETCHASSOC('SettingName', 'Value');
+                ->WHERE('SettingName = %s', $param)
+                ->FETCHASSOC('SettingName');
         
         return $row;
     }
@@ -121,7 +121,7 @@ class ShopModel extends Repository {
         $row = $this->db
                 ->SELECT('SettingID, SettingName, Value')
                 ->FROM('settings')
-                ->WHERE('SettingName', $param)
+                ->WHERE('SettingName = %s', $param)
                 ->FETCHASSOC('SettingID');
      }
     
@@ -136,7 +136,7 @@ class ShopModel extends Repository {
                 ->update($update);*/
         return $this->db
                 ->UPDATE('settings', $update)
-                ->WHERE('SettingName', $name);
+                ->WHERE('SettingName = %s', $name);
     }
     
     public function setShopInfoByID($id, $value){        
@@ -149,7 +149,7 @@ class ShopModel extends Repository {
                 ->update($update);*/
         return $this->db
                 ->UPDATE('settings', $update)
-                ->WHERE('SettingID', $id);                
+                ->WHERE('SettingID = %i', $id);                
     }
     
     public function insertShopInfo($name, $value){
@@ -170,7 +170,7 @@ class ShopModel extends Repository {
                 ->delete();*/
         return $this->db
                 ->DELETE('settings')
-                ->WHERE('SettingName', $name);
+                ->WHERE('SettingName = %s', $name);
     }
 
     public function loadStaticText($id){
@@ -191,7 +191,7 @@ class ShopModel extends Repository {
             $row = $this->db
                     ->SELECT('*')
                     ->FROM('statictext')
-                    ->WHERE('StaticTextID', $id)
+                    ->WHERE('StaticTextID = %i', $id)
                     ->FETCH();
         }
         return $row;
@@ -204,7 +204,7 @@ class ShopModel extends Repository {
         $activeID = $this->db
                 ->SELECT('*')
                 ->FROM('status')
-                ->WHERE('StatusName', 'Active')
+                ->WHERE('StatusName = "active"')
                 ->FETCH();
         
         if($id==''){
@@ -215,8 +215,8 @@ class ShopModel extends Repository {
             $row = $this->db
                     ->SELECT('*')
                     ->FROM('statictext')
-                    ->WHERE('StatusID', $activeID['StatusID'])
-                    ->ORDERBY('StaticTextName')
+                    ->WHERE('StatusID = %i', $activeID['StatusID'])
+                    ->orderBy('StaticTextName')
                     ->FETCHASSOC('StaticTextID');
                     
         }
@@ -226,7 +226,7 @@ class ShopModel extends Repository {
             $row = $this->db
                     ->SELECT('*')
                     ->FROM('statictext')
-                    ->WHERE('StaticTextID', $id);
+                    ->WHERE('StaticTextID = %i', $id);
         }
         
         return $row;
@@ -240,7 +240,7 @@ class ShopModel extends Repository {
         $album = $this->db
                 ->SELECT('*')
                 ->FROM('photoalbum')
-                ->WHERE('StaticTextID', $postid)
+                ->WHERE('StaticTextID = %i', $postid)
                 ->FETCH();
         
         if ($album){
@@ -276,7 +276,7 @@ class ShopModel extends Repository {
                 ->update($update);*/
         return $this->db
                 ->UPDATE('statictext', $update)
-                ->WHERE('StaticTextID', $id);
+                ->WHERE('StaticTextID = %i', $id);
     }
     
     public function deleteStaticText($id){
@@ -285,7 +285,7 @@ class ShopModel extends Repository {
                 ->delete();*/
         return $this->db
                 ->DELETE('statictext')
-                ->WHERE('StaticTextID', $id);
+                ->WHERE('StaticTextID = %i', $id);
     }
     
     /*
@@ -316,7 +316,7 @@ class ShopModel extends Repository {
                 $row = $this->db
                         ->SELECT('*')
                         ->FROM('module')
-                        ->WHERE('ModuleID', $id)
+                        ->WHERE('ModuleID = %i', $id)
                         ->FETCHASSOC('ModuleID');
             }
         }
@@ -327,7 +327,7 @@ class ShopModel extends Repository {
             $row = $this->db
                     ->SELECT('*')
                     ->FROM('module')
-                    ->WHERE('ModuleType', $type)
+                    ->WHERE('ModuleType = %s', $type)
                     ->FETCHASSOC('ModuleID');
         }
         
@@ -351,7 +351,7 @@ class ShopModel extends Repository {
             $row = $this->db
                     ->SELECT('*')
                     ->FROM('module')
-                    ->WHERE('ModuleType', $type)
+                    ->WHERE('ModuleType = %s', $type)
                     ->FETCHASSOC('ModuleID');
             }
         
@@ -365,7 +365,7 @@ class ShopModel extends Repository {
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('module')
-                ->WHERE('CompModuleName', $name)
+                ->WHERE('CompModuleName = %s', $name)
                 ->FETCH();
         
         return $row;
@@ -404,7 +404,7 @@ class ShopModel extends Repository {
         
         $row = $this->db
                 ->UPDATE('module', $update)
-                ->WHERE('CompModuleName', $compnameold);
+                ->WHERE('CompModuleName = %s', $compnameold);
         
         return $row;
     }
@@ -419,7 +419,7 @@ class ShopModel extends Repository {
                 ->update($update);*/
         $row = $this->db
                 ->UPDATE('module', $update)
-                ->WHERE('CompModuleName', $compname);
+                ->WHERE('CompModuleName = %s', $compname);
     }
     
     public function isModuleActive($compname){
@@ -433,8 +433,8 @@ class ShopModel extends Repository {
                 ->SELECT('module.*, status.*')
                 ->FROM('module')
                 ->LEFTJOIN('status')->ON('module.StatusID = status.StatusID')
-                ->WHERE('module.CompModuleName', $compname)
-                ->WHERE('status.StatusName', 'active')
+                ->WHERE('module.CompModuleName = %s ' .
+                    'AND status.StatusName =  "active"', $compname)
                 ->FETCH();
        
         if($query == ''){
@@ -513,7 +513,7 @@ class ShopModel extends Repository {
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('banner')
-                ->WHERE('BannerID', $id)
+                ->WHERE('BannerID = %i', $id)
                 ->FETCH();
         
         return $row;
@@ -543,7 +543,7 @@ class ShopModel extends Repository {
                 ->where('BannerID', $id);*/
         $row = $this->db
                 ->UPDATE('banner', $update)
-                ->WHERE('BannerID', $id);
+                ->WHERE('BannerID = %i', $id);
         
         return $row;
     }
@@ -564,7 +564,7 @@ class ShopModel extends Repository {
         //return $this->getTable('banner')->where('BannerType', $type)->update($update);
         $row = $this->db
                 ->UPDATE('banner', $update)
-                ->WHERE('BannerType', $type);
+                ->WHERE('BannerType = %s', $type);
         
         return $row;
     }       
