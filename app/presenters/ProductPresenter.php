@@ -614,7 +614,7 @@ class ProductPresenter extends BasePresenter {
       
             $askForm = new Nette\Application\UI\Form;
             $askForm->setTranslator($this->translator);
-            $askForm->addTextArea('note', 'Question:', 7, 4)
+            $askForm->addTextArea('note', 'Question:')
                     ->setAttribute('class', 'form-control')
                     ->setRequired('Please enter your question.');
             $askForm->addText('email', 'Email:')
