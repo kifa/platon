@@ -107,6 +107,7 @@ class ShopModel extends Repository {
                 ->SELECT('SettingName, Value')
                 ->FROM('settings')
                 ->FETCHPAIRS('SettingName', 'Value');
+        
 //->FETCHPAIRS('SettingName', 'Value');
         
         return $row;
