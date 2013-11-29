@@ -361,7 +361,7 @@ class CatalogModel extends Repository {
                          '%'.$query.'%',
                          '%'.$query.'%',
                          '%'.$query.'%')
-                 ->fetchPairs('ProductID');
+                 ->FETCHASSOC('ProductID');
         $row = $this->db
                 ->SELECT('price.FinalPrice, price.SALE, price.SellingPrice, 
                      product.ProductID, product.ProductName, product.PiecesAvailable, 
@@ -377,7 +377,7 @@ class CatalogModel extends Repository {
                          '%'.$query.'%',
                          '%'.$query.'%',
                          '%'.$query.'%')
-                ->FETCHPAIRS('ProductID');                
+                ->FETCHASSOC('ProductID');                
                 
         return $row;
     }  

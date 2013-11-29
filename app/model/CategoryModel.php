@@ -21,9 +21,12 @@ class CategoryModel extends Repository {
          */
         $row = $this->db                
                 ->SELECT('*')
-                ->FROM('CategoryStatus')
-                ->WHERE('CategoryStatusID = %i', $status)
-                ->FETCHPAIRS('CategoryID');                
+                ->FROM('category')
+                ->WHERE('CategoryStatus = 1 '
+                        . 'OR CategoryStatus = 2')
+                ->FETCHASSOC('CategoryID');
+        
+        dump($row);
         
         return $row;
     }
@@ -40,7 +43,7 @@ class CategoryModel extends Repository {
                 ->FROM('category')
                 ->WHERE('CategoryStatus != 4')
                 ->ORDERBY('CategoryName ASC')
-                ->FETCHPAIRS('CategoryID');
+                ->FETCHASSOC('CategoryID');
         
         return $row;
     }
@@ -70,10 +73,10 @@ class CategoryModel extends Repository {
         $row = $this->db
                 ->SELECT('CategoryID, CategoryName')
                 ->FROM('category')
-                ->WHERE('CategoryStatus = 1
-                    AND HigherCategoryID = %i', $catID)
-                ->FETCHPAIRS('CategoryID');
-                
+                ->WHERE('CategoryStatus = 1 ' .
+                    'AND HigherCategoryID = %i', $catID)
+                ->FETCHASSOC('CategoryID');
+        
         return $row;
     }
     
@@ -86,7 +89,7 @@ class CategoryModel extends Repository {
                 ->SELECT('CategoryID, CategoryName')
                 ->FROM('category')
                 ->WHERE('HigherCategoryID = %i', $catID)
-                ->FETCHPAIRS('CategoryID');
+                ->FETCHASSOC('CategoryID');
                 
         return $row;
     }
@@ -100,7 +103,8 @@ class CategoryModel extends Repository {
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('category')
-                ->WHERE('CategoryStatus = %i', $categoryStatus);
+                ->WHERE('CategoryStatus = %i', $categoryStatus)
+                ->FETCHASSOC('CategoryID');
                 
         if(!$row) return NULL;
         return $row;
@@ -306,7 +310,7 @@ class CategoryModel extends Repository {
                     OR CategoryDescription LIKE ?', 
                         '%'.$query.'%',
                         '%'.$query.'%')
-                ->FETCHPAIRS('CategoryID');
+                ->FETCHASSOC('CategoryID');
         
         return $row;
     }

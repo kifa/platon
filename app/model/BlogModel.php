@@ -16,7 +16,7 @@ class BlogModel extends Repository {
                 ->SELECT('*')
                 ->FROM('category')
                 ->WHERE('CategoryStatus = %i', $id)
-                ->FETCHPAIRS('CategoryID');
+                ->FETCHASSOC('CategoryID');
                 
         return $row;
     }
@@ -56,7 +56,7 @@ class BlogModel extends Repository {
                     ->SELECT('*')
                     ->FROM('blog')
                     ->ORDERBY('BlogID DESC')
-                    ->FETCHPAIRS('BlogID');
+                    ->FETCHASSOC('BlogID');
         }
         else {
             /*return $this->getTable('blog')
@@ -68,7 +68,7 @@ class BlogModel extends Repository {
                     ->FROM('blog')
                     ->WHERE('CategoryID = %i', $id)
                     ->ORDERBY('BlogID DESC')
-                    ->FETCHPAIRS('BlogID');
+                    ->FETCHASSOC('BlogID');
         }
         
         return $row;
@@ -171,7 +171,7 @@ class BlogModel extends Repository {
                     ->FROM('photoalbum')
                     ->JOIN('photo')->ON('photo.PhotoAlbumID = photoalbum.PhotoAlbumID')
                     ->WHERE('photoalbum.BlogID = %i', $id)
-                    ->FETCHPAIRS('photo.PhotoID');
+                    ->FETCHASSOC('photo.PhotoID');
         }           
         return $row;
     }
@@ -244,7 +244,7 @@ class BlogModel extends Repository {
                     ->FROM('photoalbum')
                     ->JOIN('photo')->ON('photo.PhotoAlbumID = photoalbum.PhotoAlbumID')
                     ->WHERE('photoalbum.StaticTextID = %i', $spostid)
-                    ->FETCHPAIRS('PhotoID');
+                    ->FETCHASSOC('PhotoID');
         }
         return $row;
     }
@@ -263,7 +263,7 @@ class BlogModel extends Repository {
                         . 'OR BlogContent LIKE ?',
                         '%'.$query.'%',
                         '%'.$query.'%')
-                ->FETCHPAIRS('BlogID');
+                ->FETCHASSOC('BlogID');
         
         return $row;
     }
