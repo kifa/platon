@@ -988,7 +988,8 @@ class ProductModel extends Repository {
             $pieces = $this->db
                     ->SELECT('SUM(PiecesAvailable) AS PiecesAvailable')
                     ->FROM('product')
-                    ->WHERE('ProductVariants = %i', $id);            
+                    ->WHERE('ProductVariants = %i', $id)
+                    ->fetchSingle();            
         }
         else{
             /*$pieces = $this->getTable('product')
@@ -998,7 +999,7 @@ class ProductModel extends Repository {
                     ->SELECT('PiecesAvailable')
                     ->FROM('product')
                     ->WHERE('ProductID = %i', $id)
-                    ->FETCH();              
+                    ->fetchSingle();              
             //$pieces = $pieces['PiecesAvailable'];
         }       
         
