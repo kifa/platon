@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ca6e047dc509d7bdb2a558667220f310",
+    "hash": "22186340addee58288daef04f8aca0b8",
     "packages": [
         {
             "name": "castamir/pdf-response",
@@ -236,12 +236,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/janmarek/WebLoader.git",
-                "reference": "d48cc80a6cf8d939daca1551a687db82f4da5603"
+                "reference": "b51478e2d302aa98cc9c64a9f55779071621f2c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/janmarek/WebLoader/zipball/d48cc80a6cf8d939daca1551a687db82f4da5603",
-                "reference": "d48cc80a6cf8d939daca1551a687db82f4da5603",
+                "url": "https://api.github.com/repos/janmarek/WebLoader/zipball/b51478e2d302aa98cc9c64a9f55779071621f2c9",
+                "reference": "b51478e2d302aa98cc9c64a9f55779071621f2c9",
                 "shasum": ""
             },
             "require": {
@@ -250,6 +250,9 @@
             "require-dev": {
                 "mockery/mockery": "0.7.*",
                 "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "leafo/lessphp": "Lessphp is a composer for LESS written in PHP."
             },
             "type": "library",
             "autoload": {
@@ -278,7 +281,48 @@
                 "nette",
                 "webloader"
             ],
-            "time": "2013-07-03 22:23:40"
+            "time": "2013-11-24 01:08:23"
+        },
+        {
+            "name": "leafo/lessphp",
+            "version": "v0.3.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leafo/lessphp.git",
+                "reference": "a11a6141b5715162b933c405379765d817891c5d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leafo/lessphp/zipball/a11a6141b5715162b933c405379765d817891c5d",
+                "reference": "a11a6141b5715162b933c405379765d817891c5d",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "lessc.inc.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Leaf Corcoran",
+                    "email": "leafot@gmail.com",
+                    "homepage": "http://leafo.net"
+                }
+            ],
+            "description": "lessphp is a compiler for LESS written in PHP.",
+            "homepage": "http://leafo.net/lessphp/",
+            "time": "2013-03-02 16:13:31"
         },
         {
             "name": "mpdf/mpdf",
@@ -328,12 +372,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/nette.git",
-                "reference": "39b480c311f9c88320ca4a343f864198fb65af52"
+                "reference": "5a47534e106a40f00306acc3ae56628ac9e0b4f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/nette/zipball/39b480c311f9c88320ca4a343f864198fb65af52",
-                "reference": "39b480c311f9c88320ca4a343f864198fb65af52",
+                "url": "https://api.github.com/repos/nette/nette/zipball/5a47534e106a40f00306acc3ae56628ac9e0b4f6",
+                "reference": "5a47534e106a40f00306acc3ae56628ac9e0b4f6",
                 "shasum": ""
             },
             "require": {
@@ -394,7 +438,7 @@
                 "neon",
                 "templating"
             ],
-            "time": "2013-10-15 22:07:48"
+            "time": "2013-11-28 14:50:41"
         },
         {
             "name": "schmutzka/gettexttranslator",
@@ -453,12 +497,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/tester.git",
-                "reference": "4f46271816885ed38e8d55b9d3d9fa37182cd312"
+                "reference": "b1bc89b634376154214552d3e984364e24855573"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/tester/zipball/4f46271816885ed38e8d55b9d3d9fa37182cd312",
-                "reference": "4f46271816885ed38e8d55b9d3d9fa37182cd312",
+                "url": "https://api.github.com/repos/nette/tester/zipball/b1bc89b634376154214552d3e984364e24855573",
+                "reference": "b1bc89b634376154214552d3e984364e24855573",
                 "shasum": ""
             },
             "require": {
@@ -497,7 +541,7 @@
                 "testing",
                 "unit"
             ],
-            "time": "2013-09-13 12:50:22"
+            "time": "2013-11-18 00:03:02"
         }
     ],
     "aliases": [
@@ -507,6 +551,7 @@
     "stability-flags": {
         "nette/nette": 20,
         "janmarek/webloader": 20,
+        "leafo/lessphp": 20,
         "nette/tester": 20
     },
     "platform": {

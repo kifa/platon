@@ -21,9 +21,11 @@ class CategoryModel extends Repository {
          */
         $row = $this->db                
                 ->SELECT('*')
-                ->FROM('CategoryStatus')
-                ->WHERE('CategoryStatusID = %i', $status)
-                ->FETCHPAIRS('CategoryID');                
+                ->FROM('category')
+                ->WHERE('CategoryStatus = 1 '
+                        . 'OR CategoryStatus = 2')
+                ->FETCHASSOC('CategoryID');
+        dump($row);
         
         return $row;
     }
@@ -70,8 +72,8 @@ class CategoryModel extends Repository {
         $row = $this->db
                 ->SELECT('CategoryID, CategoryName')
                 ->FROM('category')
-                ->WHERE('CategoryStatus = 1
-                    AND HigherCategoryID = %i', $catID)
+                ->WHERE('CategoryStatus = 1 ' .
+                    'AND HigherCategoryID = %i', $catID)
                 ->FETCHPAIRS('CategoryID');
                 
         return $row;
