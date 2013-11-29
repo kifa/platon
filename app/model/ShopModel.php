@@ -68,7 +68,7 @@ class ShopModel extends Repository {
             return $this->db
                     ->SELECT('*')
                     ->FROM('settings')
-                    ->FETCHPAIRS('SettingID', 'SettingName', 'Value');
+                    ->FETCHASSOC('SettingID', 'SettingName', 'Value');
         }
     }
 
@@ -82,7 +82,7 @@ class ShopModel extends Repository {
         $row = $this->db
                 ->SELECT('SettingName, Value')
                 ->WHERE('SettingName', $param)
-                ->FETCHPAIRS('SettingName', 'Value');
+                ->FETCHASSOC('SettingName', 'Value');
         
         return $row;
     }
@@ -123,7 +123,7 @@ class ShopModel extends Repository {
                 ->SELECT('SettingID, SettingName, Value')
                 ->FROM('settings')
                 ->WHERE('SettingName', $param)
-                ->FETCHPAIRS('SettingID');
+                ->FETCHASSOC('SettingID');
      }
     
     public function setShopInfo($name, $value)
@@ -183,7 +183,7 @@ class ShopModel extends Repository {
                     ->SELECT('*')
                     ->FROM('statictext')
                     ->ORDERBY('StaticTextName')
-                    ->FETCHPAIRS('StaticTextID');
+                    ->FETCHASSOC('StaticTextID');
         }
         else{
             /*return $this->getTable('statictext')
@@ -218,7 +218,7 @@ class ShopModel extends Repository {
                     ->FROM('statictext')
                     ->WHERE('StatusID', $activeID['StatusID'])
                     ->ORDERBY('StaticTextName')
-                    ->FETCHPAIRS('StaticTextID');
+                    ->FETCHASSOC('StaticTextID');
                     
         }
         else{
@@ -308,7 +308,7 @@ class ShopModel extends Repository {
                 $row = $this->db
                         ->SELECT('*')
                         ->FROM('module')
-                        ->FETCHPAIRS('ModuleID');
+                        ->FETCHASSOC('ModuleID');
             }
             else{
                 /*return $this->getTable('module')
@@ -318,7 +318,7 @@ class ShopModel extends Repository {
                         ->SELECT('*')
                         ->FROM('module')
                         ->WHERE('ModuleID', $id)
-                        ->FETCHPAIRS('ModuleID');
+                        ->FETCHASSOC('ModuleID');
             }
         }
         else{
@@ -329,7 +329,7 @@ class ShopModel extends Repository {
                     ->SELECT('*')
                     ->FROM('module')
                     ->WHERE('ModuleType', $type)
-                    ->FETCHPAIRS('ModuleID');
+                    ->FETCHASSOC('ModuleID');
         }
         
         return $row;
@@ -344,7 +344,7 @@ class ShopModel extends Repository {
                     ->SELECT('*')
                     ->FROM('module')
                     ->ORDERBY('ModuleType, StatusID, ModuleName')
-                    ->FETCHPAIRS('ModuleID');
+                    ->FETCHASSOC('ModuleID');
         }else {
             /*$return = $this->getTable('module')
                     ->where('ModuleType', $type)
@@ -353,7 +353,7 @@ class ShopModel extends Repository {
                     ->SELECT('*')
                     ->FROM('module')
                     ->WHERE('ModuleType', $type)
-                    ->FETCHPAIRS('ModuleID');
+                    ->FETCHASSOC('ModuleID');
             }
         
         return $row;
@@ -501,7 +501,7 @@ class ShopModel extends Repository {
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('banner')
-                ->FETCHPAIRS('BannerID');
+                ->FETCHASSOC('BannerID');
         
         return $row;
     }

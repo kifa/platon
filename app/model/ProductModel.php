@@ -432,7 +432,7 @@ class ProductModel extends Repository {
                     ->FROM('parameters')
                     ->JOIN('attrib')->ON('attrib.AttribID = parameters.AttribID')
                     ->JOIN('unit')->ON('unit.UnitID = parameters.UnitID')
-                    ->FETCHPAIRS('ParameterID');
+                    ->FETCHASSOC('ParameterID');
         }
         else {
             /*return $this->getTable('parameters')
@@ -444,7 +444,7 @@ class ProductModel extends Repository {
                     ->JOIN('attrib')->ON('attrib.AttribID = parameters.AttribID')
                     ->JOIN('unit')->ON('unit.UnitID = parameters.UnitID')
                     ->WHERE('ProductID = %i', $id)
-                    ->FETCHPAIRS('ParameterID');
+                    ->FETCHASSOC('ParameterID');
         }
         
         return $row;
@@ -559,7 +559,7 @@ class ProductModel extends Repository {
             $row = $this->db
                     ->SELECT('*')
                     ->FROM('unit')
-                    ->FETCHPAIRS('UnitID');
+                    ->FETCHASSOC('UnitID');
         }
         else {
             /*return $this->getTable('unit')
@@ -719,7 +719,7 @@ class ProductModel extends Repository {
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('producer')
-                ->FETCHPAIRS('ProducerID');
+                ->FETCHASSOC('ProducerID');
         
         return $row;
     }
@@ -767,7 +767,7 @@ class ProductModel extends Repository {
                 ->WHERE('DeliveryPrice != 0'
                         . 'AND status.StatusName = %s', 'active')
                 ->ORDERBY('DeliveryPrice')
-                ->FETCHPAIRS('DeliveryPrice');
+                ->FETCHASSOC('DeliveryPrice');
         
         $price = reset($delivery);
         
@@ -805,7 +805,7 @@ class ProductModel extends Repository {
                 ->SELECT('*')
                 ->FROM('comment')
                 ->WHERE('ProductID = %i', $id)
-                ->FETCHPAIRS('CommentID');
+                ->FETCHASSOC('CommentID');
         
         return $row;
     }
@@ -827,7 +827,7 @@ class ProductModel extends Repository {
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('comment')
-                ->FETCHPAIRS('CommentID');
+                ->FETCHASSOC('CommentID');
         
         return $row;
     }
@@ -840,7 +840,7 @@ class ProductModel extends Repository {
                 ->SELECT('*')
                 ->FROM('comment')
                 ->ORDERBY('DafeOfAdded DESC')
-                ->FETCHPAIRS('CommentID');
+                ->FETCHASSOC('CommentID');
         
         return $row;
     }
@@ -883,7 +883,7 @@ class ProductModel extends Repository {
                 ->JOIN('product')->ON('product.ProductID = price.ProductID')
                 ->WHERE('product.ProductVariants = %i'
                         . 'AND product.ProductStatusID != 0', $id)
-                ->FETCHPAIRS('ProductID');
+                ->FETCHASSOC('ProductID');
         
         if($row==FALSE){
             /*$row = $this->getTable('price')
@@ -895,7 +895,7 @@ class ProductModel extends Repository {
                 ->FROM('price')
                 ->JOIN('product')->ON('product.ProductID = price.ProductID')
                 ->WHERE('product.ProductID = %i', $id)
-                ->FETCHPAIRS('ProductID');
+                ->FETCHASSOC('ProductID');
         };                
         
         return $row;             
@@ -1040,7 +1040,7 @@ class ProductModel extends Repository {
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('video')
-                ->FETCHPAIRS('VideoID');
+                ->FETCHASSOC('VideoID');
         
         return $row;
     }
@@ -1067,7 +1067,7 @@ class ProductModel extends Repository {
                 ->SELECT('*')
                 ->FROM('video')
                 ->WHERE('ProductID = %i', $id)
-                ->FETCHPAIRS('VideoID');
+                ->FETCHASSOC('VideoID');
         
         return $row;
     }
@@ -1080,7 +1080,7 @@ class ProductModel extends Repository {
                 ->SELECT('*')
                 ->FROM('video')
                 ->WHERE('BlogID = %i', $id)
-                ->FETCHPAIRS('VideoID');
+                ->FETCHASSOC('VideoID');
         
         return $row;
     }
@@ -1093,7 +1093,7 @@ class ProductModel extends Repository {
                 ->SELECT('*')
                 ->FROM('video')
                 ->WHERE('StaticTextID = %i', $id)
-                ->FETCHPAIRS('VideoID');
+                ->FETCHASSOC('VideoID');
         
         return $row;
     }

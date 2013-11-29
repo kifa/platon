@@ -55,7 +55,7 @@ class OrderModel extends Repository {
                 ->JOIN('payment')->ON('payment.PaymentID = orders.PaymentID')
                 ->JOIN('users')->ON('users.UsersID = orders.UsersID')
                 ->JOIN('status')->ON('status.StatusID = orders.StatusID')
-                ->FETCHPAIRS('OrderID');
+                ->FETCHASSOC('OrderID');
         
         return $row;
     }
@@ -79,7 +79,7 @@ class OrderModel extends Repository {
                 ->JOIN('users')->ON('users.UsersID = orders.UsersID')
                 ->JOIN('status')->ON('status.StatusID = orders.StatusID')
                 ->WHERE('orders.OrderID = %i', $id)
-                ->FETCHPAIRS('OrderID');
+                ->FETCH();
         
         return $row;
     }
@@ -234,7 +234,7 @@ class OrderModel extends Repository {
                 ->SELECT('*')
                 ->FROM('notes')
                 ->WHERE('OrderID = %i', $id)
-                ->FETCHPAIRS('NotesID');
+                ->FETCHASSOC('NotesID');
         
         return $row;
     }
@@ -433,7 +433,7 @@ class OrderModel extends Repository {
                 ->JOIN('status')->ON('status.StatusID = orders.StatusID')
                 ->WHERE('orders.Read = 0')
                 ->ORDERBY('orders.OrderID DESC')
-                ->FETCHPAIRS('OrderID');
+                ->FETCHASSOC('OrderID');
                 
         return $row;
     }
@@ -455,7 +455,7 @@ class OrderModel extends Repository {
                 ->WHERE('orders.StatusID != 3')
                 ->ORDERBY('orders.OrderID DESC')
                 ->LIMIT(10)
-                ->FETCHPAIRS('OrderID');
+                ->FETCHASSOC('OrderID');
         
         return $row;
 }
@@ -577,7 +577,7 @@ class OrderModel extends Repository {
                     ->SELECT('*')
                     ->FROM('orderstatus')
                     ->ORDERBY('StatusProgress')
-                    ->FETCHPAIRS('OrderStatusID');
+                    ->FETCHASSOC('OrderStatusID');
         }
         else
         {
@@ -628,7 +628,7 @@ class OrderModel extends Repository {
                         ->FROM('payment')
                         ->JOIN('status')->ON('status.StatusID = payment.StatusID')
                         ->WHERE('status.StatusName = "active" OR status.StatusName = "non-active"')
-                        ->FETCHPAIRS('PaymentID');
+                        ->FETCHASSOC('PaymentID');
             }
             else
             {
@@ -654,7 +654,7 @@ class OrderModel extends Repository {
                         ->FROM('payment')
                         ->JOIN('status')->ON('status.StatusID = payment.StatusID')
                         ->WHERE('status.StatusName = %s', $switch)
-                        ->FETCHPAIRS('PaymentID');
+                        ->FETCHASSOC('PaymentID');
             }
             else
             {
@@ -801,7 +801,7 @@ class OrderModel extends Repository {
                         ->FROM('delivery')
                         ->JOIN('status')->ON('status.StatusID = delivery.StatusID')
                         ->WHERE('status.StatusName = "active" OR status.StatusName = "non-active"')
-                        ->FETCHPAIRS('DeliveryID');                
+                        ->FETCHASSOC('DeliveryID');                
             }
             else
             {
@@ -830,7 +830,7 @@ class OrderModel extends Repository {
                         ->JOIN('status')->ON('status.StatusID = delivery.StatusID')
                         ->WHERE('delivery.HigherDelivery IS NULL'
                                 . 'AND status.StatusName = %s', $switch)
-                        ->FETCHPAIRS('DeliveryID');
+                        ->FETCHASSOC('DeliveryID');
             }
             else
             {
@@ -877,7 +877,7 @@ class OrderModel extends Repository {
                 ->SELECT('*')
                 ->FROM('delivery')
                 ->WHERE('status.StatusName = "active" OR status.StatusName = "non-active"')
-                ->FETCHPAIRS('DeliveryID');
+                ->FETCHASSOC('DeliveryID');
         
         return $return;
     }
@@ -895,7 +895,7 @@ class OrderModel extends Repository {
             ->JOIN('status')->ON('status.StatusID = delivery.StatusID')
             ->WHERE('status.StatusName = "active"'
                     . 'AND delivery.HigherDelivery = %i', $higher)                
-            ->FETCHPAIRS('DeliveryID');
+            ->FETCHASSOC('DeliveryID');
     }
     
     public function loadDeliveryPrice($id){
@@ -1107,7 +1107,7 @@ class OrderModel extends Repository {
             $row = $this->db
                     ->SELECT('*')
                     ->FROM('status')
-                    ->FETCHPAIRS('StatusID');
+                    ->FETCHASSOC('StatusID');
         }
         else{
             /*return $this->getTable('status')
@@ -1127,7 +1127,7 @@ class OrderModel extends Repository {
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('orders')
-                ->FETCHPAIRS('OrderID');
+                ->FETCHASSOC('OrderID');
         
         return $row;
     }  
