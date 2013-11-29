@@ -26,40 +26,27 @@ class MenuControl extends BaseControl {
     private $orderModel;
 
 
+    
+    public function __construct(\CategoryModel $categoryModel, \ProductModel $productModel,
+                                \BlogModel $blogModel, \ShopModel $shopModel,
+ \GettextTranslator\Gettext $translator) {
+        
+        $this->categoryModel = $categoryModel;
+        $this->productModel = $productModel;
+        $this->blogModel = $blogModel;
+        $this->shopModel = $shopModel;
+        $this->translator = $translator;
+    }
 
     public function setCart($cart) {
         $this->cart = $cart;
     }
 
-    public function setTranslator($translator) {
-        $this->translator = $translator;
-    }
-
-    public function setCategory($cat) {
-        $this->categoryModel = $cat;
-
-    }
-    
-    public function setBlog($blog) {
-        $this->blogModel = $blog;
-
-    }
-    
-    public function setProduct($pro) {
-        $this->productModel = $pro;
-    }
     
     public function setUserTracking($usertracking) {
         $this->usertracking = $usertracking;
     }
 
-    public function setOrder($order) {
-        $this->orderModel = $order;
-    }
-
-    public function setShop($shop) {
-        $this->shopModel = $shop;
-    }
     
     public function createTemplate($class = NULL) {
     $template = parent::createTemplate($class);

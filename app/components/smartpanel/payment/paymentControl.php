@@ -16,7 +16,7 @@ class paymentControl extends BaseControl {
     protected $orderModel;
     private $row;
 
-    public function __construct(\OrderModel $orderModel, \NetteTranslator\Gettext $translator) {
+    public function __construct(\OrderModel $orderModel, \GettextTranslator\Gettext $translator) {
         parent::__construct();
 
         $this->orderModel = $orderModel;

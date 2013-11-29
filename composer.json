@@ -18,11 +18,12 @@
 	},
 	"require": {
 		"php": ">= 5.3.0",
-		"nette/nette": "@dev",
+		"nette/nette": "dev-master",
                 "h4kuna/exchange": ">= 4.0.1",
                 "schmutzka/gettexttranslator": ">= 2.0.2",
                 "castamir/pdf-response": ">= 2.0",
                 "janmarek/webloader": "dev-master",
+                "leafo/lessphp": "0.3.*@dev",
                 "dibi/dibi": ">= 2.0"
 	},
     "require-dev": {

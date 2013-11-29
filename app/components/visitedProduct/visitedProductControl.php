@@ -14,11 +14,11 @@ class visitedProductControl extends BaseControl{
      /** @persistent */
     public $lang;
 
-    /** @var NetteTranslator\Gettext */
+    /** @var GettextTranslator\Gettext */
     protected $translator;
     private $productModel;
 
-    public function __construct(\ProductModel $productModel, \NetteTranslator\Gettext $translator) {
+    public function __construct(\ProductModel $productModel, \GettextTranslator\Gettext $translator) {
         $this->productModel = $productModel;
         $this->translator = $translator;
     }

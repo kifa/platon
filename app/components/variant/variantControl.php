@@ -17,7 +17,7 @@ class variantControl extends BaseControl {
     private $row;
     
     
-    public function __construct(\ProductModel $productModel, \NetteTranslator\Gettext $translator) {
+    public function __construct(\ProductModel $productModel, \GettextTranslator\Gettext $translator) {
         $this->productModel = $productModel;
         $this->translator = $translator;
     }

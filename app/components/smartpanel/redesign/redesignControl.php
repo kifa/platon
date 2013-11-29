@@ -22,7 +22,7 @@ class redesignControl extends BaseControl {
     protected $productModel;
 
 
-    public function __construct(\ShopModel $shopModel, \ProductModel $productModel, NetteTranslator\Gettext $translator) {
+    public function __construct(\ShopModel $shopModel, \ProductModel $productModel, \GettextTranslator\Gettext $translator) {
         $this->shopModel =  $shopModel;
         $this->translator = $translator;
         $this->productModel = $productModel;

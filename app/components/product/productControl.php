@@ -38,7 +38,7 @@ class productControl extends BaseControl{
     
     
     public function __construct(\ShopModel $shopModel, \ProductModel $productModel, 
-                                \CategoryModel $categoryModel, \NetteTranslator\Gettext $translator) {
+                                \CategoryModel $categoryModel, \GettextTranslator\Gettext $translator) {
         $this->shopModel = $shopModel;
         $this->productModel = $productModel;
         $this->categoryModel = $categoryModel;

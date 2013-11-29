@@ -39,6 +39,11 @@ $configurator->onCompile[] = function ($configurator, $compiler) {
     $compiler->addExtension('dibi', new DibiNette21Extension);
 };
 
+$configurator->onCompile[] = function ($configurator, $compiler) {
+    $compiler->addExtension('exchangeExtension', new h4kuna\Exchange\DI\ExchangeExtension());
+};
+
+
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon', $configurator::NONE); // none section

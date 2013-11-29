@@ -18,10 +18,11 @@ class SearchControl extends BaseControl {
     /** @var NetteTranslator\Gettext */
     protected $translator;
    
-    public function setTranslator($translator) {
-        $this->translator = $translator;
-    }
     
+    public function __construct(\GettextTranslator\Gettext $translator) 
+    {
+        $this->translator = $translator;
+    }   
     
     public function createTemplate($class = NULL)
 {

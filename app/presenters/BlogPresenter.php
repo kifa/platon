@@ -23,7 +23,7 @@ class BlogPresenter extends BasePresenter {
         parent::startup();
     }
 
-    public function injectTranslator(NetteTranslator\Gettext $translator) {
+    public function injectTranslator(\GettextTranslator\Gettext $translator) {
         $this->translator = $translator;
     }
 

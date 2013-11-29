@@ -22,7 +22,7 @@ class AdminPanelControl extends BaseControl {
     private $category;
 
     
-    public function __construct(ProductModel $productModel, CategoryModel $categoryModel, NetteTranslator\Gettext $translator) {
+    public function __construct(ProductModel $productModel, CategoryModel $categoryModel, GettextTranslator\Gettext $translator) {
         $this->productModel = $productModel;
         $this->categoryModel = $categoryModel;
         $this->translator = $translator;

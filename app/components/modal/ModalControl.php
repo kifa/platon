@@ -13,20 +13,12 @@ class ModalControl extends BaseControl {
      /* @var Gettext\translator */
     protected $translator;
     
-    private $service;
+    private $orderModel;
     
     
-    
-    /* 
-     *Settin Translator to implement localization
-     * 
-     * @param Nette\Gettext\translator
-     * @return void
-     */
-
-    
-   public function setTranslator($translator) {
+    public function __construct(OrderModel $orderModel, \GettextTranslator\Gettext $translator) {
         $this->translator = $translator;
+        $this->orderModel = $orderModel;
     }
     
     /*
@@ -41,10 +33,6 @@ class ModalControl extends BaseControl {
     $template->setTranslator($this->translator);
 
     return $template;
-    }
-
-    public function setService(OrderModel $service) {
-        $this->service = $service;
     }
 
     protected function createComponentTrackingForm(){
@@ -69,7 +57,7 @@ class ModalControl extends BaseControl {
     }
     
     public function trackingFormSubmitted($form) {
-        $row = $this->service->loadOrder($form->values->order);
+        $row = $this->orderModel->loadOrder($form->values->order);
         $e = Html::el('i')->class('icon-warning-sign');
         
         if (!$row) {

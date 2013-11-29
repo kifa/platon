@@ -52,6 +52,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         if (!isset($this->gapisession)) {
             $this->gapisession = $this->getSession('gapitoken');
         }
+        
+//        $this->context->exchangeExtension->registerAsHelper($this->template);
     }
 
     public function injectProductModel(ProductModel $productModel) {
@@ -113,7 +115,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         parent::beforeRender();
 
         $shopInfo = $this->shopModel->getShopSettings();
-        
+
         $this->template->shopName = $shopInfo['Name'];
         $this->template->shopDescription = $shopInfo['Description'];
         $this->template->shopLogo = $shopInfo['Logo'];
@@ -183,13 +185,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         }
     }
 
-    protected function createComponentBaseControl() {
+    protected function createComponentBaseControl() 
+    {
         $base = new BaseControl();
         $this->addComponent($base, 'baseControl');
         return $base;
     }
 
-    public function createComponentCss() {
+    public function createComponentCss() 
+    {
         // připravíme seznam souborů
         // FileCollection v konstruktoru může dostat výchozí adresář, pak není potřeba psát absolutní cesty
         $style = $this->shopModel->getShopInfo('Style');
@@ -216,7 +220,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
     }
 
-    public function createComponentJs() {
+    public function createComponentJs() 
+    {
         $wwwDir = $this->context->parameters['wwwDir'];
         $files = new \WebLoader\FileCollection($wwwDir . '/js');
         // můžeme načíst i externí js
@@ -240,48 +245,47 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         return new \WebLoader\Nette\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
     }
 
-    protected function createComponentMenu() {
-        $menuControl = new MenuControl();
+    protected function createComponentMenu() 
+    {
+        $menuControl = new MenuControl($this->categoryModel, $this->productModel, 
+                                       $this->blogModel, $this->shopModel, $this->translator);
         $menuControl->setCart($this->cart);
-        $menuControl->setCategory($this->categoryModel);
-        $menuControl->setProduct($this->productModel);
-        $menuControl->setBlog($this->blogModel);
-        $menuControl->setTranslator($this->translator);
-        $menuControl->setShop($this->shopModel);
-        $menuControl->setOrder($this->orderModel);
         $menuControl->setUserTracking($this->usertracking);
-
         $this->addComponent($menuControl, 'menu');
         return $menuControl;
     }
 
-    protected function createComponentModalControl() {
-        $modalControl = new ModalControl();
-        $modalControl->setTranslator($this->translator);
-        $modalControl->setService($this->orderModel);
+    protected function createComponentModalControl() 
+    {
+        $modalControl = new ModalControl($this->orderModel, $this->translator);
+        $this->addComponent($modalControl, 'modalControl');
         return $modalControl;
     }
 
-    protected function createComponentAdminPanelControl() {
+    protected function createComponentAdminPanelControl() 
+    {
         $EditControl = new AdminPanelControl($this->productModel, $this->categoryModel, $this->translator);
         $this->addComponent($EditControl, 'adminPanelControl');
         return $EditControl;
     }
 
-    protected function createComponentProduct() {
+    protected function createComponentProduct() 
+    {
         $productControl = new productControl($this->shopModel, $this->productModel, $this->categoryModel, $this->translator);
         $this->addComponent($productControl, 'product');
         return $productControl;
     }
 
-    protected function createComponentMail() {
+    protected function createComponentMail() 
+    {
         $mailControl = new mailControl($this->translator);
         $this->addComponent($mailControl, 'mailControl');
         return $mailControl;
     }
 
-    protected function createComponentSmartPanelBar() {
-        $smartPanelBar = newSmartPanelBarControl();
+  /*  protected function createComponentSmartPanelBar() 
+    {
+        $smartPanelBar = new SmartPanelBarControl();
         $smartPanelBar->setTranslator($this->translator);
         $smartPanelBar->setProduct($this->productModel);
         $smartPanelBar->setCategory($this->categoryModel);
@@ -289,8 +293,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $smartPanelBar->setShop($this->shopModel);
         return $smartPanelBar;
     }
-
-    protected function createComponentModuleControl() {
+*/
+    protected function createComponentModuleControl() 
+    {
         $moduleControl = new moduleControl;
         $moduleControl->setTranslator($this->translator);
         $moduleControl->setProduct($this->productModel);
@@ -302,22 +307,32 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         return $moduleControl;
     }
 
-    protected function createComponentRedesignControl() {
+    protected function createComponentRedesignControl()
+    {
         $redesign = new redesignControl($this->shopModel, $this->productModel, $this->translator);
         $this->addComponent($redesign, 'redesignControl');
         return $redesign;
     }
 
-    protected function createComponentSearchControl() {
-        $searchControl = new SearchControl();
-        $searchControl->setTranslator($this->translator);
+    protected function createComponentSearchControl()
+    {
+        $searchControl = new SearchControl($this->translator);
+        $this->addComponent($searchControl, 'search');
         return $searchControl;
     }
     
-    protected function createComponentVisitedProduct() {
+    protected function createComponentVisitedProduct()
+    {
         $visited = new visitedProductControl($this->productModel, $this->translator);
         $this->addComponent($visited, 'visitedProduct');
         return $visited;
+    }
+    
+    protected function createComponentProductImageControl()
+    {
+        $productImage = new productImageControl($this->shopModel, $this->productModel, $this->translator);
+        $this->addComponent($productImage, 'productImage');
+        return $productImage;
     }
 
 }

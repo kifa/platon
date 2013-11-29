@@ -16,7 +16,7 @@ class mailControl extends BaseControl {
     protected $translator;
 
 
-    public function __construct(\NetteTranslator\Gettext $translator) {
+    public function __construct(\Gettext\Gettext $translator) {
         parent::__construct();
         $this->translator = $translator;
     }

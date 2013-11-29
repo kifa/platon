@@ -26,7 +26,7 @@ class SignPresenter extends BasePresenter {
         $this->users = $this->context->userModel;
     }
 
-    public function injectTranslator(NetteTranslator\Gettext $translator) {
+    public function injectTranslator(GettextTranslator\Gettext $translator) {
         $this->translator = $translator;
     }
     
