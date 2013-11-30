@@ -125,7 +125,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('address', $update)
-                ->WHERE('UsersID = %s', $user);
+                ->WHERE('UsersID = %s', $user)
+                ->EXECUTE();
         
         return $row;
     }
@@ -150,7 +151,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('address', $update)
-                ->WHERE('UsersID = %s', $user['UsersID']);
+                ->WHERE('UsersID = %s', $user['UsersID'])
+                ->EXECUTE();
 
         return $row;
     }
@@ -175,7 +177,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('address', $update)
-                ->WHERE('UsersID = %s', $user['UsersID']);
+                ->WHERE('UsersID = %s', $user['UsersID'])
+                ->EXECUTE();
         
         return $row;
     }
@@ -201,7 +204,8 @@ class OrderModel extends Repository {
        
         $row = $this->db
                 ->UPDATE('address', $update)
-                ->WHERE('UsersID = %s', $user['UsersID']);
+                ->WHERE('UsersID = %s', $user['UsersID'])
+                ->EXECUTE();
         
         return $row;                
     }
@@ -252,7 +256,8 @@ class OrderModel extends Repository {
 			->insert($insert);
          */
         $row = $this->db
-                ->INSERT('notes', $insert);
+                ->INSERT('notes', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -309,7 +314,8 @@ class OrderModel extends Repository {
 			/*$row = $this->getTable('orders')
 				->insert($insert);*/
                         $row = $this->db
-                                ->INSERT('orders', $insert);
+                                ->INSERT('orders', $insert)
+                                ->EXECUTE();
 			
 			$lastorderid = $row['OrderID'];
 			
@@ -348,7 +354,7 @@ class OrderModel extends Repository {
         $productPrice = $this->loadOrder($orderid)->ProductsPrice;
         $total = $productPrice + $deliveryPaymentPrice;
         
-        $insert = array(
+        $update = array(
                 'DeliveryID' => $shipping,
                 'PaymentID' => $payment,
                 'DeliveryPaymentPrice' => $deliveryPaymentPrice,
@@ -358,9 +364,10 @@ class OrderModel extends Repository {
         
         /*return $this->getTable('orders')
 			->where('OrderID',$orderid)
-			->update($insert);*/
+			->update($update);*/
         $row = $this->db
-                ->INSERT('orders', $insert);
+                ->UPDATE('orders', $update)
+                ->EXECUTE();
         
         return $row;        
     }
@@ -413,7 +420,8 @@ class OrderModel extends Repository {
 			->update($update);        */
         $row = $this->db
                 ->UDPATE('orders', $update)
-                ->WHERE('OrderID = %i', $orderid);
+                ->WHERE('OrderID = %i', $orderid)
+                ->EXECUTE();
         
         return $row;
     }
@@ -470,7 +478,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('orders', $update)
-                ->WHERE('OrderID', $orderid);
+                ->WHERE('OrderID', $orderid)
+                ->EXECUTE();
         
         return $row;
     }
@@ -497,7 +506,7 @@ class OrderModel extends Repository {
         $products = $order->ProductsPrice;
         
          //updating order total info
-        $insert = array(
+        $update = array(
                 'TotalPrice' => $total - $price,
                 'ProductsPrice' => $products + $price
                 );   
@@ -506,8 +515,9 @@ class OrderModel extends Repository {
 			->where('OrderID',$orderid)
 			->update($insert);*/
         $row = $this->db
-                ->UPDATE('orders', $insert)
-                ->WHERE('OrderID = %i', $orderid);
+                ->UPDATE('orders', $update)
+                ->WHERE('OrderID = %i', $orderid)
+                ->EXECUTE();
         
         return $row;
     }
@@ -540,7 +550,8 @@ class OrderModel extends Repository {
          */
         
         $row = $this->db
-                ->INSERT('orderdetails', $insert);
+                ->INSERT('orderdetails', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -606,7 +617,8 @@ class OrderModel extends Repository {
         /*return $this->getTable('orderstatus')
 			->insert($insert);*/
         $row = $this->db
-                ->INSERT('orderstatus', $insert);
+                ->INSERT('orderstatus', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -701,7 +713,8 @@ class OrderModel extends Repository {
         /*return $this->getTable('payment')
 			->insert($insert);*/
         $row = $this->db
-                ->INSERT('payment', $insert);
+                ->INSERT('payment', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -719,7 +732,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('payment', $update)
-                ->WHERE('PaymentID = %i', $id);
+                ->WHERE('PaymentID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -735,7 +749,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('payment', $update)
-                ->WHERE('PaymentID = %i', $id);
+                ->WHERE('PaymentID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -751,7 +766,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('payment', $update)
-                ->WHERE('PaymentID = %i', $id);
+                ->WHERE('PaymentID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -766,7 +782,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('payment', $update)
-                ->WHERE('PaymentID = %i', $id);
+                ->WHERE('PaymentID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -780,7 +797,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
             ->UPDATE('payment', $update)
-            ->WHERE('PaymentID = %i', $id);
+            ->WHERE('PaymentID = %i', $id)
+            ->EXECUTE();
         
         return $row;
     }
@@ -931,7 +949,8 @@ class OrderModel extends Repository {
         /*return $this->getTable('delivery')
 			->insert($insert);*/
         $row = $this->db
-                ->INSERT('delivery', $insert);
+                ->INSERT('delivery', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -947,7 +966,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('delivery', $update)
-                ->WHERE('DeliveryID = %i', $id);
+                ->WHERE('DeliveryID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -963,7 +983,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('delivery', $update)
-                ->WHERE('DeliveryID = %i', $id);
+                ->WHERE('DeliveryID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -979,7 +1000,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('delivery', $update)
-                ->WHERE('DeliveryID = %i', $id);
+                ->WHERE('DeliveryID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -995,7 +1017,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('delivery', $update)
-                ->WHERE('DeliveryID = %i', $id);
+                ->WHERE('DeliveryID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -1010,7 +1033,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('delivery', $update)
-                ->WHERE('DeliveryID = %i', $id);
+                ->WHERE('DeliveryID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -1025,7 +1049,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('delivery', $update)
-                ->WHERE('DeliveryID = %i', $id);
+                ->WHERE('DeliveryID = %i', $id)
+                ->EXECUTE();
         
         return $row;                
     }
@@ -1039,7 +1064,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('delivery', $update)
-                ->WHERE('DeliveryID = %i', $id);
+                ->WHERE('DeliveryID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -1053,7 +1079,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('delivery', $update)
-                ->WHERE('HigherDelivery = %i', $higher);
+                ->WHERE('HigherDelivery = %i', $higher)
+                ->EXECUTE();
         
         return $row;
     }
@@ -1097,7 +1124,8 @@ class OrderModel extends Repository {
 			->update($update);*/
         $row = $this->db
                 ->UPDATE('orders', $update)
-                ->WHERE('OrderID = %i', $orderid);
+                ->WHERE('OrderID = %i', $orderid)
+                ->EXECUTE();
         
         return $row;
     }

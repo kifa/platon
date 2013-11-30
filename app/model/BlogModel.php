@@ -101,7 +101,8 @@ class BlogModel extends Repository {
         
         return $return->BlogID;*/
         $row = $this->db
-                ->INSERT('blog', $insert);
+                ->INSERT('blog', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -117,7 +118,8 @@ class BlogModel extends Repository {
         
         $row = $this->db
                 ->UPDATE('blog', $update)
-                ->WHERE('BlogID = %i', $id);
+                ->WHERE('BlogID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -128,7 +130,8 @@ class BlogModel extends Repository {
                 ->delete();*/
         $row = $this->db
                 ->DELETE('blog')
-                ->WHERE('BlogID = %i', $id);
+                ->WHERE('BlogID = %i', $id)
+                ->EXECUTE();
         
         return $row;        
     }

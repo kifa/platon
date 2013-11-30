@@ -70,7 +70,8 @@ class ProductModel extends Repository {
         /*$row = $this->getTable('product')
                 ->insert($insert);   */
         $row = $this->db
-                ->INSERT('product', $insert);
+                ->INSERT('product', $insert)
+                ->EXECUTE();
         
         $lastprodid = $row["ProductID"];        
        
@@ -103,7 +104,8 @@ class ProductModel extends Repository {
                 ->update($update);*/
             $row = $this->db
                     ->UPDATE('product', $update)
-                    ->WHERE('ProductID = %i', $id);
+                    ->WHERE('ProductID = %i', $id)
+                    ->EXECUTE();
             
             return $row;
     }
@@ -123,7 +125,8 @@ class ProductModel extends Repository {
                 ->update($update);*/
         $row = $this->db
                 ->UPDATE('price', $update)
-                ->WHERE('ProductID = %i', $id);
+                ->WHERE('ProductID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -175,7 +178,8 @@ class ProductModel extends Repository {
                 ->update($update);*/
         $row = $this->db
                 ->UPDATE('price', $update)
-                ->WHERE('ProductID = %i', $prodid);
+                ->WHERE('ProductID = %i', $prodid)
+                ->EXECUTE();
     
         return $row;
     }
@@ -202,7 +206,8 @@ class ProductModel extends Repository {
                 ->update($update);*/
         $row = $this->db
                 ->UPDATE('product', $update)
-                ->WHERE('ProductID = %i', $id);
+                ->WHERE('ProductID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -223,7 +228,8 @@ class ProductModel extends Repository {
                 ->update($insert);*/
         $row = $this->db
                 ->UPDATE('product', $update)
-                ->WHERE('ProductID = %i', $id);
+                ->WHERE('ProductID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -238,14 +244,16 @@ class ProductModel extends Repository {
                 ->update($update);*/
              $this->db
                      ->UPDATE('product', $update)
-                     ->WHERE('ProducerID = %i', $prodID);
+                     ->WHERE('ProducerID = %i', $prodID)
+                     ->EXECUTE();
         
         /*return $this->getTable('producer')
                 ->where('ProducerID', $prodID)
                 ->delete();*/
              $row = $this->db
                      ->DELETE('producer')
-                     ->WHERE('ProducerID = %i', $prodID);
+                     ->WHERE('ProducerID = %i', $prodID)
+                     ->EXECUTE();
              
              return $row;
     }
@@ -260,7 +268,8 @@ class ProductModel extends Repository {
                 ->update($insert);*/
         $row = $this->db
                 ->UPDATE('product', $update)
-                ->WHERE('ProductID = %i', $id);
+                ->WHERE('ProductID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -275,7 +284,8 @@ class ProductModel extends Repository {
                 ->update($insert);*/
         $row = $this->db
                 ->UPDATE('product', $update)
-                ->WHERE('ProductID = %i', $id);
+                ->WHERE('ProductID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -335,7 +345,8 @@ class ProductModel extends Repository {
         /*$row = $this->getTable('photoalbum')
                 ->insert($insert);*/
         $row = $this->db
-                ->INSERT('photoalbum', $insert);
+                ->INSERT('photoalbum', $insert)
+                ->EXECUTE();
         
         return $row["PhotoAlbumID"];
     }
@@ -363,7 +374,8 @@ class ProductModel extends Repository {
                 ->delete();*/
         $row = $this->db
                 ->DELETE('photo')
-                ->WHERE('PhotoID = $i', $id);
+                ->WHERE('PhotoID = $i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -378,7 +390,8 @@ class ProductModel extends Repository {
                 ->update($update);*/
          $row = $this->db
                  ->UPDATE('photo', $update)
-                 ->WHERE('PhotoID = %i', $id);
+                 ->WHERE('PhotoID = %i', $id)
+                 ->EXECUTE();
          
          return $row;
     }
@@ -399,7 +412,8 @@ class ProductModel extends Repository {
         /*return $this->getTable('photo')
                 ->insert($insert);*/
         $row = $this->db
-                ->INSERT('photo', $insert);
+                ->INSERT('photo', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -417,7 +431,8 @@ class ProductModel extends Repository {
         /*return $this->getTable('price')
                 ->insert($insert);*/
         $row = $this->db
-                ->INSERT('price', $insert);
+                ->INSERT('price', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -462,7 +477,8 @@ class ProductModel extends Repository {
         /*return $this->getTable('parameters')
                 ->insert($insert);*/
         $row = $this->db
-                ->INSERT('parameters', $insert);
+                ->INSERT('parameters', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -478,7 +494,8 @@ class ProductModel extends Repository {
                 ->update($update);*/
         $row = $this->db
                 ->UPDATE('parameters', $update)
-                ->WHERE('ParametersID = %i', $paramID);
+                ->WHERE('ParametersID = %i', $paramID)
+                ->EXECUTE();
                 
         return $row;
     }
@@ -489,7 +506,8 @@ class ProductModel extends Repository {
                 ->delete();*/
         $row = $this->db
                 ->DELETE('parameters')
-                ->WHERE('ParameterID = %i', $paramID);
+                ->WHERE('ParameterID = %i', $paramID)
+                ->EXECUTE();
         
         return $row;
     }
@@ -531,7 +549,8 @@ class ProductModel extends Repository {
             /*return $this->getTable('attrib')
                     ->insert($insert);*/
             return $this->db
-                    ->INSERT('attrib', $insert);
+                ->INSERT('attrib', $insert)
+                ->EXECUTE();
         }
         else {            
             return $row->AttribID;
@@ -548,7 +567,8 @@ class ProductModel extends Repository {
                 ->update($update);*/
         $row = $this->db
                 ->UPDATE('attrib', $update)
-                ->WHERE('AttribID = %i', $id);
+                ->WHERE('AttribID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -582,23 +602,25 @@ class ProductModel extends Repository {
         /*return $this->getTable('unit')
                 ->insert($insert);*/
         $row = $this->db
-                ->INSERT('unit', $insert);
+                ->INSERT('unit', $insert)
+                ->EXECUTE();
         
         return $row;
     }
     
     public function updateUnit($id,$name,$short){
-        $insert = array(
+        $update = array(
             'UnitName' => $name,
             'UnitShort' => $short
         );
         
         /*return $this->getTable('unit')
                 ->where('UnitID',$id)
-                ->update($insert);*/
+                ->update($update);*/
         $row = $this->db
-                ->UPDATE('unit', $insert)
-                ->WHERE('UnitID = %i', $id);
+                ->UPDATE('unit', $update)
+                ->WHERE('UnitID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -618,7 +640,8 @@ class ProductModel extends Repository {
         /*return $this->getTable('documentation')
                 ->insert($insert);*/
         $row = $this->db
-                ->INSERT('documentation', $insert);
+                ->INSERT('documentation', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -640,7 +663,8 @@ class ProductModel extends Repository {
                 ->delete();*/
         $row = $this->db
                 ->DELETE('documentation')
-                ->WHERE('DocumentID = %i', $id);
+                ->WHERE('DocumentID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -694,11 +718,13 @@ class ProductModel extends Repository {
         $this->db
                 ->UPDATE('photo', $unsetCover)
                 ->WHERE('CoverPhoto = 1 '
-                        . 'AND PhotoAlbumID = %i', $albumID);
+                        . 'AND PhotoAlbumID = %i', $albumID)
+                ->EXECUTE();
         
         $this->db
                 ->UDPATE('photo', $setCover)
-                ->WHERE('PhotoID = %i', $photo);
+                ->WHERE('PhotoID = %i', $photo)
+                ->EXECUTE();
     }
     
     public function loadProducer($prodid){
@@ -734,7 +760,8 @@ class ProductModel extends Repository {
         /*return $this->getTable('producer')
                 ->insert($insert);*/
         $row = $this->db
-                ->INSERT('producer', $insert);
+                ->INSERT('producer', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -749,7 +776,8 @@ class ProductModel extends Repository {
                 ->update($update);*/
         $row = $this->db
                 ->UPDATE('producer', $update)
-                ->WHERE('ProducerID = %i', $id);
+                ->WHERE('ProducerID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }      
@@ -793,7 +821,8 @@ class ProductModel extends Repository {
         /*return $this->getTable('comment')
                 ->insert($insert);*/
         $row = $this->db
-                ->INSERT('comment', $insert);
+                ->INSERT('comment', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -817,7 +846,8 @@ class ProductModel extends Repository {
                 ->delete();*/
         $row = $this->db
                 ->DELETE('comment')
-                ->WHERE('CommentID = %i', $commentid);
+                ->WHERE('CommentID = %i', $commentid)
+                ->EXECUTE();
         
         return $row;
     }
@@ -942,7 +972,8 @@ class ProductModel extends Repository {
         /*$row = $this->getTable('product')
                 ->insert($insert);   */
         $row = $this->db
-                ->INSERT('product', $insert);
+                ->INSERT('product', $insert)
+                ->EXECUTE();
         
         $lastprodid = $row["ProductID"];        
         
@@ -963,7 +994,8 @@ class ProductModel extends Repository {
         /*return $this->getTable('parameters')
                 ->insert($insert);*/
         $row = $this->db
-                ->INSERT('parameters', $insert);
+                ->INSERT('parameters', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -1018,7 +1050,8 @@ class ProductModel extends Repository {
         /*return $this->getTable('video')
                 ->insert($insert);*/
         $row = $this->db
-                ->INSERT('video', $insert);
+                ->INSERT('video', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -1030,7 +1063,8 @@ class ProductModel extends Repository {
         
         $row = $this->db
                 ->DELETE('video')
-                ->WHERE('VideoID = %i', $videoID);
+                ->WHERE('VideoID = %i', $videoID)
+                ->EXECUTE();
         
         return $row;
     }

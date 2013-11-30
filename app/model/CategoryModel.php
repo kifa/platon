@@ -128,7 +128,8 @@ class CategoryModel extends Repository {
         /*$row = $this->getTable('category')
                 ->insert($insert);*/
         $row = $this->db
-                ->INSERT('category', $insert);
+                ->INSERT('category', $insert)
+                ->EXECUTE();
         
         return $row->CategoryID;        
     }
@@ -156,7 +157,8 @@ class CategoryModel extends Repository {
         
         $row = $this->db
                 ->UPDATE('category', $update)
-                ->WHERE('CategoryID = %i', $id);
+                ->WHERE('CategoryID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -172,7 +174,8 @@ class CategoryModel extends Repository {
         
         $row = $this->db
                 ->UDPATE('category', $update)
-                ->WHERE('CategoryID = %i', $id);
+                ->WHERE('CategoryID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -189,7 +192,8 @@ class CategoryModel extends Repository {
         
         $row = $this->db
                 ->UPDATE('category', $update)
-                ->WHERE('CategoryID = %i', $id);
+                ->WHERE('CategoryID = %i', $id)
+                ->EXECUTE();
         
         return $row;        
     }
@@ -208,7 +212,8 @@ class CategoryModel extends Repository {
                 ->update($update);       */
         $row = $this->db
                 ->UPDATE('category', $update)
-                ->WHERE('CategoryID = %i', $id);
+                ->WHERE('CategoryID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -225,7 +230,8 @@ class CategoryModel extends Repository {
                 ->delete();        */
         $row = $this->db
                 ->DELETE('category')
-                ->WHERE('CategoryID = %i', $catID);
+                ->WHERE('CategoryID = %i', $catID)
+                ->EXECUTE();
                 
         return $row;
     }
@@ -242,7 +248,8 @@ class CategoryModel extends Repository {
         
         $row = $this->db
                 ->UDPATE('category', $update)
-                ->WHERE('CategoryID = %i', $id);
+                ->WHERE('CategoryID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
@@ -258,7 +265,8 @@ class CategoryModel extends Repository {
         
         $row = $this->db
                 ->UPDATE('category', $update)
-                ->WHERE('CategoryID = %i', $id);
+                ->WHERE('CategoryID = %i', $id)
+                ->EXECUTE();
         
         return $row;       
     }
@@ -274,7 +282,8 @@ class CategoryModel extends Repository {
         
         $row = $this->db
                 ->UPDATE('category', $update)
-                ->WHERE('CategoryID = %i', $id);
+                ->WHERE('CategoryID = %i', $id)
+                ->EXECUTE();
         
         return $row;
     }
