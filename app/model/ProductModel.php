@@ -767,9 +767,9 @@ class ProductModel extends Repository {
                 ->JOIN('status')->ON('delivery.StatusID = status.StatusID')
                 ->WHERE('DeliveryPrice != 0 '
                         . 'AND status.StatusName = "active"')
-                ->ORDERBY('DeliveryPrice')
-                ->FETCHASSOC('DeliveryPrice');
-        
+                ->orderBy('DeliveryPrice')
+                ->FETCHASSOC('DeliveryPrice');        
+                
         $price = reset($delivery);
         
         if($price) {
@@ -840,7 +840,7 @@ class ProductModel extends Repository {
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('comment')
-                ->ORDERBY('DafeOfAdded DESC')
+                ->orderBy('DafeOfAdded DESC')
                 ->FETCHASSOC('CommentID');
         
         return $row;

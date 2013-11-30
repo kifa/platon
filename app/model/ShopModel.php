@@ -113,7 +113,7 @@ class ShopModel extends Repository {
 
 
     public function getShopInfoPublic() {
-        $param = array('Name', 'Description', 'CompanyAddress', 'TAX', 'OrderMail', 'ContactMail', 'ContactPhone', 'InvoicePrefix', 'GA');
+        $param = array('Name', 'Description', 'CompanyAddress', 'TAX', 'orderByMail', 'ContactMail', 'ContactPhone', 'InvoicePrefix', 'GA');
         
         /*return $this->getTable('settings')
                 ->where('SettingName', $param)
@@ -181,7 +181,7 @@ class ShopModel extends Repository {
             $row = $this->db
                     ->SELECT('*')
                     ->FROM('statictext')
-                    ->ORDERBY('StaticTextName')
+                    ->orderBy('StaticTextName')
                     ->FETCHASSOC('StaticTextID');
         }
         else{
@@ -342,7 +342,7 @@ class ShopModel extends Repository {
             $row = $this->db
                     ->SELECT('*')
                     ->FROM('module')
-                    ->ORDERBY('ModuleType, StatusID, ModuleName')
+                    ->orderBy('ModuleType, StatusID, ModuleName')
                     ->FETCHASSOC('ModuleID');
         }else {
             /*$return = $this->getTable('module')

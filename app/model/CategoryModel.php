@@ -40,7 +40,7 @@ class CategoryModel extends Repository {
                 ->SELECT('*')
                 ->FROM('category')
                 ->WHERE('CategoryStatus != 4')
-                ->ORDERBY('CategoryName ASC')
+                ->orderBy('CategoryName ASC')
                 ->FETCHASSOC('CategoryID');
         
         return $row;

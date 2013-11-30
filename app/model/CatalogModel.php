@@ -65,7 +65,7 @@ class CatalogModel extends Repository {
                     $row = $this->db
                             ->SELECT('price.*, product.*')
                             ->FROM('price')
-                            ->JOIN('product.*')->ON('product.ProductID = price.ProductID')
+                            ->JOIN('product')->ON('product.ProductID = price.ProductID')
                             ->WHERE('(product.ProductStatusID = 2
                                 OR product.ProductStatusID = 3)
                                 AND product.ProductVariants IS NULL
@@ -123,7 +123,7 @@ class CatalogModel extends Repository {
                                     OR product.ProductStatusID=3)
                                     AND product.ProductVariants IS NULL
                                     AND product.CategoryID = %i', $catID)
-                            ->ORDERBY($filter[0] .' '. $filter[1]);
+                            ->orderBy($filter[0] .' '. $filter[1]);
                 }
                 else{
                     /*
@@ -150,7 +150,7 @@ class CatalogModel extends Repository {
                                     AND product.ProductVariants IS NULL
                                     AND (product.CategoryID = %i
                                     OR category.HigherCategoryID = %i', $catID, $catID)
-                            ->ORDERBY($filter[0] .' '. $filter[1]);
+                            ->orderBy($filter[0] .' '. $filter[1]);
                 }                
                 return $result;
             }
@@ -348,7 +348,7 @@ class CatalogModel extends Repository {
     }
     
     public function search($query) {       
-        return $this->getTable('price')
+        /*return $this->getTable('price')
                 ->select('price.FinalPrice, price.SALE, price.SellingPrice, 
                      product.ProductID, product.ProductName, product.PiecesAvailable, 
                      product.ProductStatusID, product.ProductDescription, product.ProductShort')
@@ -361,7 +361,7 @@ class CatalogModel extends Repository {
                          '%'.$query.'%',
                          '%'.$query.'%',
                          '%'.$query.'%')
-                 ->FETCHASSOC('ProductID');
+                 ->FETCHASSOC('ProductID');*/
         $row = $this->db
                 ->SELECT('price.FinalPrice, price.SALE, price.SellingPrice, 
                      product.ProductID, product.ProductName, product.PiecesAvailable, 

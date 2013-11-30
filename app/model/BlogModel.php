@@ -55,7 +55,7 @@ class BlogModel extends Repository {
             $row = $this->db
                     ->SELECT('*')
                     ->FROM('blog')
-                    ->ORDERBY('BlogID DESC')
+                    ->orderBy('BlogID DESC')
                     ->FETCHASSOC('BlogID');
         }
         else {
@@ -67,7 +67,7 @@ class BlogModel extends Repository {
                     ->SELECT('*')
                     ->FROM('blog')
                     ->WHERE('CategoryID = %i', $id)
-                    ->ORDERBY('BlogID DESC')
+                    ->orderBy('BlogID DESC')
                     ->FETCHASSOC('BlogID');
         }
         

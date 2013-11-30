@@ -432,7 +432,7 @@ class OrderModel extends Repository {
                 ->JOIN('users')->ON('users.UsersID = orders.UsersID')
                 ->JOIN('status')->ON('status.StatusID = orders.StatusID')
                 ->WHERE('orders.Read = 0')
-                ->ORDERBY('orders.OrderID DESC')
+                ->orderBy('orders.OrderID DESC')
                 ->FETCHASSOC('OrderID');
                 
         return $row;
@@ -453,7 +453,7 @@ class OrderModel extends Repository {
                 ->JOIN('users')->ON('users.UsersID = orders.UsersID')
                 ->JOIN('status')->ON('status.StatusID = orders.StatusID')
                 ->WHERE('orders.StatusID != 3')
-                ->ORDERBY('orders.OrderID DESC')
+                ->orderBy('orders.OrderID DESC')
                 ->LIMIT(10)
                 ->FETCHASSOC('OrderID');
         
@@ -576,7 +576,7 @@ class OrderModel extends Repository {
             $row = $this->db
                     ->SELECT('*')
                     ->FROM('orderstatus')
-                    ->ORDERBY('StatusProgress')
+                    ->orderBy('StatusProgress')
                     ->FETCHASSOC('OrderStatusID');
         }
         else
