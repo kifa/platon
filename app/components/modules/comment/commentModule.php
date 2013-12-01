@@ -116,7 +116,7 @@ class commentModule extends moduleControl {
                     ->setRequired('Please fill document name')
                     ->setAttribute('class', 'col-md-10');
             $addComment->addHidden('productid', $this->id);
-            $addComment->addTextArea('content', 'Review', 20, 5)
+            $addComment->addTextArea('content', 'Review')
                     ->setAttribute('class', 'col-md-10');
             $addComment->addText('author', 'Your name:')
                     ->setRequired('Please fill document name')

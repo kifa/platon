@@ -131,7 +131,7 @@ class documentModule extends moduleControl {
             $addPhoto->addUpload('doc', 'Document:')
                     ->addRule(FORM::MAX_FILE_SIZE, 'Maximálně 2MB', 6400 * 1024)
                     ->setAttribute('class', 'col-md-10');
-            $addPhoto->addText('desc', 'Description', 20, 100)
+            $addPhoto->addText('desc', 'Description')
                     ->setAttribute('class', 'col-md-10');
             $addPhoto->addSubmit('add', 'Add Document')
                     ->setAttribute('class', 'btn btn-primary upl')

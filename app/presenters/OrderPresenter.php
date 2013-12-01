@@ -226,24 +226,24 @@ class OrderPresenter extends BasePresenter {
 
         $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
         $cartForm->addGroup('Delivery info');
-        $cartForm->addText('name', 'Name:', 40, 100)
+        $cartForm->addText('name', 'Name:')
                 ->addRule(Form::FILLED, 'Would you fill your name, please?')
                 ->setAttribute('class', 'form-control');
-        $cartForm->addText('phone', 'Phone:', 40, 100)
+        $cartForm->addText('phone', 'Phone:')
                 ->setAttribute('class', 'form-control');
-        $cartForm->addText('email', 'Email:', 40, 100)
+        $cartForm->addText('email', 'Email:')
                 ->setEmptyValue('@')
                 ->addRule(Form::EMAIL, 'Would you fill your email, please?')
                 ->addRule(Form::FILLED, 'Would you fill your name, please?')
                 ->setAttribute('class', 'form-control');
         $cartForm->addGroup('Address');
-        $cartForm->addText('address', 'Street:', 60, 100)
+        $cartForm->addText('address', 'Street:')
                 ->addRule(Form::FILLED)
                 ->setAttribute('class', 'form-control');
-        $cartForm->addText('city', 'City:', 40, 100)
+        $cartForm->addText('city', 'City:')
                 ->addRule(Form::FILLED)
                 ->setAttribute('class', 'form-control');
-        $cartForm->addText('zip', 'ZIP:', 40, 100)
+        $cartForm->addText('zip', 'ZIP:')
                 ->addRule(Form::FILLED)
                 ->setAttribute('class', 'form-control');
         $cartForm->addGroup('Shipping');
@@ -281,7 +281,7 @@ class OrderPresenter extends BasePresenter {
                 ->setAttribute('data-toggle', 'modal')
                 ->setAttribute('data-target', "#terms");
          $cartForm->addGroup('Notes');
-        $cartForm->addTextArea('note', 'Note:', 50, 4)
+        $cartForm->addTextArea('note', 'Note:')
                 ->setAttribute('class', 'form-control');
         $cartForm->addHidden('shipping','shipping')
                 ->setDefaultValue($defaultShipping);

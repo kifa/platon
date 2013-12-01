@@ -23,7 +23,7 @@ common:
 			password: ''
 
 		session:
-			expiration: 30 days
+			expiration: 50 days
 
 	dibi:
 		host: localhost

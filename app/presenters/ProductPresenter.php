@@ -677,7 +677,7 @@ class ProductPresenter extends BasePresenter {
                 $editForm->addGroup($param->AttribName);
                 $editForm->addText($param->ParameterID, 'Value:')
                         ->setDefaultValue($param->Val);
-                $editForm->addSelect('unit' . $param->ParameterID, 'Select unit:', $units, 1, 4)
+                $editForm->addSelect('unit' . $param->ParameterID, 'Select unit:', $units)
                         ->setPrompt($prompt)
                         ->setDefaultValue($param->UnitID);
             }
