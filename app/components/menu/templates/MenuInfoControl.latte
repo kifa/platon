@@ -1,18 +1,18 @@
-<h3 class="menuHeader">{_'Info'}</h3>
+<h3 class="menuHeader">{_menu.m.info}</h3>
 {foreach $menu as $postID => $post}
 <li class="{ifCurrent Blog:staticText $postID}active{/ifCurrent}"><a href="{plink Blog:staticText $postID}">{$post->StaticTextName}</a></li> 
 {/foreach}
     <li class="dropdown{ifCurrent Blog:category} active{/ifCurrent}{ifCurrent Homepage:photos} active{/ifCurrent}">
         <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="icon-large icon-instagram"></i> 
-            {_'Blog and Gallery'}
+            {_menu.m.blog-gal}
                     <b class="caret"></b>
                 </a>
         <ul class="dropdown-menu">
-            <li class="{ifCurrent Blog:category}active{/ifCurrent}"><a href="{plink Blog:category}"><i class="icon-large icon-star-empty"></i> {_"Blog"}</a></li>
-            <li class="{ifCurrent Homepage:photos}active{/ifCurrent}"><a href="{plink Homepage:photos}"><i class="icon-large icon-instagram"></i> {_"Photo gallery"}</a></li>
+            <li class="{ifCurrent Blog:category}active{/ifCurrent}"><a href="{plink Blog:category}"><i class="icon-large icon-star-empty"></i> {_menu.m.blog}</a></li>
+            <li class="{ifCurrent Homepage:photos}active{/ifCurrent}"><a href="{plink Homepage:photos}"><i class="icon-large icon-instagram"></i> {_menu.m.gallery}</a></li>
         </ul>
     </li>
-    <li class="{ifCurrent Homepage:contact}active{/ifCurrent}"><a href="{plink Homepage:contact}"><i class="icon-large icon-phone"></i> {_"Contact"}</a></li>
+    <li class="{ifCurrent Homepage:contact}active{/ifCurrent}"><a href="{plink Homepage:contact}"><i class="icon-large icon-phone"></i> {_menu.m.contact}</a></li>
 {if $user->isInRole('admin')}
     <li><a href="#addStaticText" data-toggel="modal" data-target="#addStaticText" class="addStaticTextButton"><i class="icon-large icon-plus-sign-alt"></i> {_"ADD Text"}</a></li>
 {/if}

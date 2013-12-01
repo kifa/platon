@@ -1,10 +1,10 @@
-arch:
-    arch-title: 'Archived products'
-    arch-info: 'Here you see archived products. They are unvisible in catalog, but searcheable from Google etc. Why is it important? Archived products help you increase your ranking and improve SEO. Of course, you can definitely delete product from this page.'
-    product:'Product Name'
-    price: 'Product Price'
 sort:
     price: 'Price'
     name: 'Name'
-    sale:'Sale'
+    sale: 'Sale'
     stock: 'In Stock'
+arch:
+    arch-title: 'Archived products'
+    arch-info: 'Here you see archived products. They are unvisible in catalog, but searcheable from Google etc. Why is it important? Archived products help you increase your ranking and improve SEO. Of course, you can definitely delete product from this page.'    
+    product: 'Product Name'
+    price: 'Product Price'

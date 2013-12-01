@@ -14,7 +14,7 @@
             <li n:snippet="prodPrice{$productVariant->ProductID}" class="col-md-3 text-center">
     {if $user->isInRole('admin')}
      <div id="editProdPrice{$productVariant->ProductID}" class="col-md-12" style="display: none;">
-      <p>{_'Discount'}:</p>
+      <p>{_product.front.discount}:</p>
            <div class="btn-group">
 
            <a href="{link setSale! $productVariant->ProductID, 5, 'percent'}" class="ajax btn btn-default discountbtn">5%</a>
@@ -46,10 +46,10 @@
                     {elseif $productVariant->PiecesAvailable < 1 }
                             <span class="label label-default col-md-12">
                         {/if}
-<span class="col-md-12 text-center">{_"In stock"}</span> <span class="prodAmount{$productVariant->ProductID} col-md-12 text-center" n:snippet="prodAmount{$productVariant->ProductID}">{if $productVariant->PiecesAvailable > 0}{$productVariant->PiecesAvailable}{else}0{/if}</span></span>
+<span class="col-md-12 text-center">{_product.front.in-stock}</span> <span class="prodAmount{$productVariant->ProductID} col-md-12 text-center" n:snippet="prodAmount{$productVariant->ProductID}">{if $productVariant->PiecesAvailable > 0}{$productVariant->PiecesAvailable}{else}0{/if}</span></span>
                             <br>
     <span class="label label-default col-md-12">
-                             <span class="">{_"Shipping"} {_'from'}</span> 
+                             <span class="">{_product.front.shipping} {_product.front.from}</span> 
                              <span class="">{$shippingPrice|number},-</span></span>                            
 
 </li>
@@ -67,7 +67,7 @@
     </div>
         {else}
              <a href="{plink addToCart! $productVariant->ProductID, "1"}" class="btn btn-success ajax addToCart">
-                <i class="icon-shopping-cart"></i> {_'Buy'}</a>
+                <i class="icon-shopping-cart"></i> {_control.button.buy}</a>
         {/if}  
     
 </li>

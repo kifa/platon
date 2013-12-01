@@ -4,3 +4,5 @@ button:
     close-without: 'Close without saving'
     click-to-edit: 'Click to edit ...'
     close: 'Close'
+    buy: 'Buy'
+    view: 'View'

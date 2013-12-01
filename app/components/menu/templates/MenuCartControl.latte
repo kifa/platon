@@ -1,7 +1,7 @@
 <div n:snippet="cart">
-        <a href="{plink Order:cart}"><i class="icon-large icon-shopping-cart"></i> {_"Cart"} {if $cart > 0}<span class="label label-danger">{$cart}</span>{else}<span class="label label-default">0</span>{/if}</a> | 
-        <a href="#tracking" data-toggel="modal" data-target="#tracking" id="trackingButton"><i class="icon-large icon-search"></i> {_"Track order"}</a>
+        <a href="{plink Order:cart}"><i class="icon-large icon-shopping-cart"></i> {_menu.m.cart} {if $cart > 0}<span class="label label-danger">{$cart}</span>{else}<span class="label label-default">0</span>{/if}</a> | 
+        <a href="#tracking" data-toggel="modal" data-target="#tracking" id="trackingButton"><i class="icon-large icon-search"></i> {_menu.m.track}</a>
         {if !$user->isLoggedIn()}
-         | <a href="{plink Sign:in}">{_"Sign In"} <i class="icon-signin"></i></a>
+         | <a href="{plink Sign:in}">{_menu.m.sign} <i class="icon-signin"></i></a>
         {/if}
 </div>

@@ -12,15 +12,15 @@
                     {if $pieces > 5}
             <span class="label label-info">{$pieces}</span>
                     {elseif $pieces > 0}
-            <span class="label label-warning">{$pieces} {_'LAST'}</span>
+            <span class="label label-warning">{$pieces} {_product.front.last}</span>
                     {else}
-            <span class="label label-default"> {_'SOLD OUT'}</span>
+            <span class="label label-default"> {_product.front.sold-out}</span>
                     {/if}
             {if $product->ProductStatusID == 3}
-                <span class="label label-danger"><i class="icon-thumbs-up icon-large"></i> {_'HOT'}</span>
+                <span class="label label-danger"><i class="icon-thumbs-up icon-large"></i> {_product.front.hot}</span>
             {/if}
             {if $product->SALE > 1}
-                <span class="label label-warning"><i class="icon-money icon-large"></i> {_'SALE'}</span>
+                <span class="label label-warning"><i class="icon-money icon-large"></i> {_product.front.sale}</span>
             {/if}
             </div>
     
@@ -49,8 +49,8 @@
          
             <div class="col-md-12 btn-group btn-group-justified">
                 
-                        <a href="{plink addToCart! $product->ProductID, "1"}" class="ajax btn btn-success col-md-6 addToCart"><i class="icon-shopping-cart icon-large"></i> {_"Buy"}</a>
-                         <a href="{plink Product:product $product->ProductID, $product->ProductSeoName}" class="btn btn-primary col-md-5 viewProduct"><i class="icon-info-sign icon-large"></i> {_"View"}</a>         
+                        <a href="{plink addToCart! $product->ProductID, "1"}" class="ajax btn btn-success col-md-6 addToCart"><i class="icon-shopping-cart icon-large"></i> {_control.button.buy}</a>
+                         <a href="{plink Product:product $product->ProductID, $product->ProductSeoName}" class="btn btn-primary col-md-5 viewProduct"><i class="icon-info-sign icon-large"></i> {_control.button.view}</a>         
             </div> 
           
           </div>
