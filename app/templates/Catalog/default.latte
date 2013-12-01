@@ -45,7 +45,7 @@
 <div>   
     
     <ul class="nav nav-list">
-        <li class="nav-header">Menu</li>
+        <li class="nav-header">{_control.nav.menu}</li>
 
                         {control menu:$menuSide}
         <li class="divider"></li>
@@ -59,26 +59,26 @@
 <div class="col-md-12 shopProducts" n:snippet="products">    
    <div class="btn-toolbar sortingMenu">
     <div class="btn-group">
-        <a n:href="setFilter! 'price', 'ASC'" class="btn btn-default ajax">{_'Price'}</a>
+        <a n:href="setFilter! 'price', 'ASC'" class="btn btn-default ajax">{_catalog.sort.price}</a>
         <a n:href="setFilter! 'price', 'ASC'" class="btn btn-default ajax"><i class="icon-sort-by-order"></i></a>
         <a n:href="setFilter! 'price', 'DESC'" class="btn btn-default ajax"><i class="icon-sort-by-order-alt"></i></a>
     </div>
     
     <div class="btn-group">
-        <a n:href="setFilter! 'product', 'ASC'" class="btn btn-default ajax">{_'Name'}</a>
+        <a n:href="setFilter! 'product', 'ASC'" class="btn btn-default ajax">{_catalog.sort.name}</a>
         <a n:href="setFilter! 'product', 'ASC'" class="btn btn-default ajax"><i class="icon-sort-by-alphabet"></i></a>
         <a n:href="setFilter! 'product', 'DESC'" class="btn btn-default ajax"><i class="icon-sort-by-alphabet-alt"></i></a>
         
     </div>
     
     <div class="btn-group">
-        <a n:href="setFilter! 'sale', 'DESC'" class="btn btn-default ajax">{_'Sale'}</a>
+        <a n:href="setFilter! 'sale', 'DESC'" class="btn btn-default ajax">{_catalog.sort.sale}</a>
         <a n:href="setFilter! 'sale', 'ASC'" class="btn btn-default ajax"><i class="icon-sort-up"></i></a>
         <a n:href="setFilter! 'sale', 'DESC'" class="btn btn-default ajax"><i class="icon-sort-down"></i></a>
     </div>
     
     <div class="btn-group">
-        <a n:href="setFilter! 'pieces', 'DESC'" class="btn btn-default ajax">{_'In Stock'}</a>
+        <a n:href="setFilter! 'pieces', 'DESC'" class="btn btn-default ajax">{_catalog.sort.stock}</a>
         <a n:href="setFilter! 'pieces', 'ASC'" class="btn btn-default ajax"><i class="icon-sort-up"></i></a>
         <a n:href="setFilter! 'pieces', 'DESC'" class="btn btn-default ajax"><i class="icon-sort-down"></i></a>
     </div>
@@ -157,7 +157,7 @@
          cancel    : {_'Cancel'},
          submit    : 'OK',
          indicator : '<i class="icon-spinner icon-spin"></i>',
-         tooltip   : 'Click to edit ...',
+         tooltip   : {_control.button.click-to-edit},
          callback : function(value, settings) {
             var json = $.parseJSON(value);
             $('.CatTitle').text(json.edit);
@@ -172,7 +172,7 @@
          colls     : '15',
          rows      : '10',
          indicator : '<i class="icon-spinner icon-spin"></i>',
-         tooltip   : '{_'Click to edit'} ...',
+         tooltip   : {_control.button.click-to-edit},
          wysiwyg   : { controls : { separator04         : { visible : true },
                                insertOrderedList   : { visible : true },
                                insertUnorderedList : { visible : true }

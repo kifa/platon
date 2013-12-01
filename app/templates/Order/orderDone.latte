@@ -2,7 +2,7 @@
 {block pageheader}
 
 <div class="page-header">
-        <h1 n:block="title">{_'#'}{$order->OrderID} | {_'Order summary'} <small> {_'Complete summary order'}.</small></h1>
+        <h1 n:block="title">{_'#'}{$order->OrderID} | {_order.done.order-title} <small> {_order.done.order-info}.</small></h1>
 </div>
 
 {/block}
@@ -13,7 +13,7 @@
       <div class="col-md-8 alert alert-block">
                 <div class="col-md-12">
                     <p>
-                    <i class="icon-spinner icon-spin left icon-large"></i><strong> {_'Status'}:</strong>&nbsp;
+                    <i class="icon-spinner icon-spin left icon-large"></i><strong> {_order.done.status}:</strong>&nbsp;
                 {$order->StatusName} - {$order->StatusDescription}
                     </p>
                 </div>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-md-12">
                 <ul class="list-inline">
-                    <li>{_'Next progress'}:</li>
+                    <li>{_order.done.next}:</li>
                     {foreach $statuses as $id => $status}
                     {if !($iterator->isFirst())}
                     <li>{if $status->StatusName == $order->StatusName}<strong>{$status->StatusName}</strong>{else}{$status->StatusName}{/if}
@@ -35,7 +35,7 @@
                 
                 {if $order->StatusProgress == 1}
                 <div class="alert alert-warning">
-                    <div><strong>{_'Please pay your order by clicking on button Buy Now'}:</strong>
+                    <div><strong>{_order.done.paypal-info}:</strong>
                     </div>
     
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -60,14 +60,14 @@
     <div class="col-md-4">
     <div class="col-md-12">
 <div class="alert-success alert">
-    <p><i class="icon-info-sign"></i><strong> {_'Thank you for your order!'}</strong><br>
-    {_'We are currenty procesing your order.'} {_'Here you can check order status.'} {_'Link to this page has been sent to your email.'}
+    <p><i class="icon-info-sign"></i><strong> {_order.done.thanks}</strong><br>
+    {_order.done.thank-message}
     </p>
 
 </div>
 <div class="alert alert-block">
-    <p><i class="icon-envelope"></i><strong> {_'Questions?'}</strong>
-        <a href="#addNote" data-toggel="modal" data-target="#addNote" id="addNoteButton" class="btn btn-primary">{_'Ask anything!'}</a>
+    <p><i class="icon-envelope"></i><strong> {_order.done.qa-title}</strong>
+        <a href="#addNote" data-toggel="modal" data-target="#addNote" id="addNoteButton" class="btn btn-primary">{_order.done.qa-button}</a>
     </p>
 </div>
 </div>
@@ -78,10 +78,10 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>{_'Product Name'}</th>
-                        <th>{_'Amount'}</th>
-                        <th>{_'Item price'}</th>
-                        <th>{_'Total price'}</th>
+                        <th>{_order.cart.product}</th>
+                        <th>{_order.cart.amount}</th>
+                        <th>{_order.cart.item-price}</th>
+                        <th>{_order.cart.total-price}</th>
 
                     </tr>
                 </thead>
@@ -91,12 +91,7 @@
 
 
                     <tr>
-                        <td>{*if $product->PhotoAlbumID}
-                     <img src="{$basePath}/images/{$product->PhotoAlbumID}/{$product->PhotoURL}" class="img-circle" style="width: 38px;"/>
-
-                {else}
-                   <img src="{$basePath}/images/no_image.jpg" class="img-circle" class="col-md-2" style="width: 38px;"/>
-                {/if*}
+                        <td>
                         </td>
                         {if $product->ProductVariantName}
                     <td><a href="{plink Product:product $product->ProductVariants, $product->ProductName}">{$product->ProductName}</a> - {$product->ProductVariantName}</td>
@@ -114,9 +109,9 @@
 
                <tr>
                     <td colspan="2"></td>
-                    <td><strong >{_'Products'}:</strong>$&nbsp;{$grandtotal|number:2}</td>
-                    <td><strong >{_'Shipping'}:</strong>$&nbsp;{$shipping = $order->DeliveryPrice}</td>
-                    <td><strong >{_'Total'}:</strong>$&nbsp;{$grandtotal += $shipping}</td>
+                    <td><strong >{_order.cart.product}:</strong>$&nbsp;{$grandtotal|number:2}</td>
+                    <td><strong >{_order.cart.shipping}:</strong>$&nbsp;{$shipping = $order->DeliveryPrice}</td>
+                    <td><strong >{_order.cart.total}:</strong>$&nbsp;{$grandtotal += $shipping}</td>
                 </tr>
                 </tbody>
             </table>
@@ -125,15 +120,15 @@
        
         <div class="col-md-4">
         <div class="panel panel-default">
-               <div class="panel-heading"><i class="icon-user left icon-large"></i> {_'Your contact'}:</div>
+               <div class="panel-heading"><i class="icon-user left icon-large"></i> {_order.done.account}:</div>
             <div class="panel-body">
                 <dl class="">
-                    <dt>{_'Name'}:</dt> <dd>{$order->Name}</dd>
-                    <dt>{_'Email'}:</dt> <dd>{$order->UsersID}</dd>
-                    <dt>{_'Phone'}:</dt> <dd>{if $order->PhoneNumber != ''}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
+                    <dt>{_order.info.name}:</dt> <dd>{$order->Name}</dd>
+                    <dt>{_order.info.email}:</dt> <dd>{$order->UsersID}</dd>
+                    <dt>{_order.info.phone}:</dt> <dd>{if $order->PhoneNumber != ''}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
                 
         {if $order->CompanyName != ""}
-                <dt>{_'Company'}:</dt>
+                <dt>{_order.info.company}:</dt>
                 <dd>{$order->CompanyName}</dd>
         {/if}
                     </dl>
@@ -142,17 +137,17 @@
         
         <div class="col-md-4">
             <div class="panel panel-default">
-               <div class="panel-heading"> {_'Order data'}</div>
+               <div class="panel-heading"> {_order.done.orderinfo}</div>
                 <div class="panel-body">
 
                     <dl class="">
-                        <dt><i class="icon-calendar icon-large left"></i> {_'Date created'}:</dt>
+                        <dt><i class="icon-calendar icon-large left"></i> {_order.info.datecreated}:</dt>
                         <dd> {$order->DateCreated|date:'%d.%m.%Y'}</dd>
                     
-                         <dt><i class="icon-truck icon-large left"></i> {_'Shipping'}:</dt>
+                         <dt><i class="icon-truck icon-large left"></i> {_order.cart.shipping}:</dt>
                         <dd> {$order->DeliveryName}</dd>
                         
-                         <dt><i class="icon-money icon-large left"></i> {_'Payment'}:</dt>
+                         <dt><i class="icon-money icon-large left"></i> {_order.cart.payment}:</dt>
                         <dd> {$order->PaymentName}</dd>
                     </dl>
                 </div>
@@ -161,13 +156,13 @@
           
         <div class="col-md-4">
         <div class="panel panel-default">
-               <div class="panel-heading"><i class="icon-home left icon-large"></i> {_'Your address'}</div>
+               <div class="panel-heading"><i class="icon-home left icon-large"></i> {_order.done.address}</div>
           <div class="panel-body">
                <dl class="">
               
-                <dt>{_'Street'}:</dt> <dd>{$address->Street}</dd>
-                <dt>{_'City'}:</dt> <dd>{$address->City}</dd>
-                <dt>{_'ZIP'}:</dt> <dd>{$address->ZIPCode}</dd>
+                <dt>{_order.info.street}:</dt> <dd>{$address->Street}</dd>
+                <dt>{_order.info.city}:</dt> <dd>{$address->City}</dd>
+                <dt>{_order.info.zip}:</dt> <dd>{$address->ZIPCode}</dd>
             </dl>     
                  
             </div>
@@ -177,7 +172,7 @@
     <div class="col-md-12">
         <div class="col-md-11 alert {$order->Note ? 'alert-danger' : 'alert-success'}">
             <div class="col-md-12">
-                <i class="icon-paper-clip left icon-large"></i><strong> {_'Questions & notes'}:</strong>
+                <i class="icon-paper-clip left icon-large"></i><strong> {_order.done.qa-notes}:</strong>
                     {foreach $notes as $note}
                 <p>{$note->NotesName} - {$note->NotesDescription} - {$note->NotesDate}</p>
                 {/foreach}
@@ -199,16 +194,16 @@
     <div class="modal-content">
       <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h3 id="myModalLabel"><i class="icon-envelope"></i> {_'Add Note'}</h3>
+              <h3 id="myModalLabel"><i class="icon-envelope"></i> {_modals.order.addnote}</h3>
             </div>
             <div class="modal-body">
-                <p>{_'Add any note to this order'}</p>
+                <p>{_modals.order.addnote-info}</p>
                               {control addNoteForm}
 
             </div>
             <div class="modal-footer">
                 
-              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+              <button class="btn" data-dismiss="modal" aria-hidden="true">{_control.button.close-without}</button>
             </div>
     </div>
                   </div>

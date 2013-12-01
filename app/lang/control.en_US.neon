@@ -1,0 +1,6 @@
+nav:
+    menu: "Menu"
+button:
+    close-without: 'Close without saving'
+    click-to-edit: 'Click to edit ...'
+    close: 'Close'

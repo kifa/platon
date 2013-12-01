@@ -13,7 +13,7 @@ use Nette\Forms\Form,
 class MenuControl extends BaseControl {
 
     /** @persistent */
-    public $lang;
+    public $locale;
 
     /** @var NetteTranslator\Gettext */
     protected $translator;
@@ -29,7 +29,7 @@ class MenuControl extends BaseControl {
     
     public function __construct(\CategoryModel $categoryModel, \ProductModel $productModel,
                                 \BlogModel $blogModel, \ShopModel $shopModel,
- \GettextTranslator\Gettext $translator) {
+ \Kdyby\Translation\Translator $translator) {
         
         $this->categoryModel = $categoryModel;
         $this->productModel = $productModel;

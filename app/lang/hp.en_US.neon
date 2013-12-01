@@ -1,0 +1,21 @@
+hp:
+    featured-products: 'Featured products'
+    featured-categories: 'Featured categories'
+    featured-video: 'Featured video'
+contact:
+    contact-title: 'Contact us'
+    contact-info: 'Do you have any question? Ask us! We will be happy.'
+    write-us: 'Write to us'
+    respond-info: 'We will respond as soon as possible.'
+    company-info: 'Company info'
+    address: 'Address'
+search:
+    search-title: 'Search'
+    search-info: 'Search and discover our eshop.'
+    search-term-q: 'You are looking for'
+    search-term-a: 'We have found these results:'
+    categories: 'Categories'
+    products: 'Products'
+    posts: 'Posts'
+    cannot: 'Cannot find what are you looking for?'
+    contact: 'Contact us'

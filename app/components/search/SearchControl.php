@@ -13,13 +13,13 @@ use Nette\Forms\Form,
 class SearchControl extends BaseControl {
 
     /** @persistent */
-    public $lang;
+    public $locale;
 
     /** @var NetteTranslator\Gettext */
     protected $translator;
    
     
-    public function __construct(\GettextTranslator\Gettext $translator) 
+    public function __construct(\Kdyby\Translation\Translator $translator) 
     {
         $this->translator = $translator;
     }   

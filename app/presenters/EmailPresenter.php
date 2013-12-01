@@ -23,7 +23,7 @@ class EmailPresenter extends BasePresenter {
         $this->categoryModel = $this->context->categoryModel;
    }
 
-    public function injectTranslator(GettextTranslator\Gettext $translator) {
+    public function injectTranslator(\Kdyby\Translation\Translator $translator) {
         $this->translator = $translator;
     }
     

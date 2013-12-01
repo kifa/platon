@@ -13,26 +13,26 @@
 <div class="col-md-11" n:snippet="products">    
    <div class="btn-toolbar sortingMenu">
     <div class="btn-group">
-        <a n:href="setFilter! 'price', 'ASC'" class="btn btn-default ajax">{_'Price'}</a>
+        <a n:href="setFilter! 'price', 'ASC'" class="btn btn-default ajax">{_catalog.sort.price}</a>
         <a n:href="setFilter! 'price', 'ASC'" class="btn btn-default ajax"><i class="icon-sort-by-order"></i></a>
         <a n:href="setFilter! 'price', 'DESC'" class="btn btn-default ajax"><i class="icon-sort-by-order-alt"></i></a>
     </div>
     
     <div class="btn-group">
-        <a n:href="setFilter! 'product', 'ASC'" class="btn btn-default ajax">{_'Name'}</a>
+        <a n:href="setFilter! 'product', 'ASC'" class="btn btn-default ajax">{_catalog.sort.name}</a>
         <a n:href="setFilter! 'product', 'ASC'" class="btn btn-default ajax"><i class="icon-sort-by-alphabet"></i></a>
         <a n:href="setFilter! 'product', 'DESC'" class="btn btn-default ajax"><i class="icon-sort-by-alphabet-alt"></i></a>
         
     </div>
     
     <div class="btn-group">
-        <a n:href="setFilter! 'sale', 'DESC'" class="btn btn-default ajax">{_'Sale'}</a>
+        <a n:href="setFilter! 'sale', 'DESC'" class="btn btn-default ajax">{_catalog.sort.sale}</a>
         <a n:href="setFilter! 'sale', 'ASC'" class="btn btn-default ajax"><i class="icon-sort-up"></i></a>
         <a n:href="setFilter! 'sale', 'DESC'" class="btn btn-default ajax"><i class="icon-sort-down"></i></a>
     </div>
     
     <div class="btn-group">
-        <a n:href="setFilter! 'pieces', 'DESC'" class="btn btn-default ajax">{_'In Stock'}</a>
+        <a n:href="setFilter! 'pieces', 'DESC'" class="btn btn-default ajax">{_catalog.sort.stock}</a>
         <a n:href="setFilter! 'pieces', 'ASC'" class="btn btn-default ajax"><i class="icon-sort-up"></i></a>
         <a n:href="setFilter! 'pieces', 'DESC'" class="btn btn-default ajax"><i class="icon-sort-down"></i></a>
     </div>

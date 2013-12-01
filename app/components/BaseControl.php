@@ -8,10 +8,16 @@ use Nette\Application\UI;
 class BaseControl extends UI\Control {
     
     /** @persistent */
-    public $lang;
+    public $locale;
 
     /** @var NetteTranslator\Gettext */
     protected $translator;
 
-    
+    protected function createTemplate($class = NULL)
+    {
+    $template = parent::createTemplate($class);
+    $template->registerHelperLoader(callback($this->translator->createTemplateHelpers(), 'loader'));
+
+    return $template;
+    }
 }

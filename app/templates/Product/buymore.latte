@@ -7,7 +7,7 @@
 {if $user->isInRole('admin')}
 
     <div class="span12">
-             <div class="alert alert-error span12"><i class="icon-info-sign"></i> {_'You are logged in as admin. You can simply edit this product by clicking on Title, Description etc. More info?'}</div>
+             <div class="alert alert-error span12"><i class="icon-info-sign"></i> {_alert.info.you-are-admin}</div>
 
             <div class="btn-group">
                 <a class="btn"><i class="icon-sitemap"></i> {_'Choose Category'}</a>
@@ -80,16 +80,16 @@
                     {if $product->PiecesAvailable > 5}
             <span class="badge badge-info">{$product->PiecesAvailable}</span>
                     {elseif $product->PiecesAvailable > 0}
-            <span class="badge badge-warning">{$product->PiecesAvailable} {_'LAST'}</span>
+            <span class="badge badge-warning">{$product->PiecesAvailable} {_product.front.last}</span>
                     {else}
-            <span class="badge badge-inverse">{_'OUT OF STOCK'}</span>
+            <span class="badge badge-inverse">{_product.front.out-of-stock}</span>
                     
                     {/if}
             {if $product->ProductStatusID == 3}
-                <span class="badge badge-inverse"><i class="icon-thumbs-up icon-large"></i> {_'HOT'}</span>
+                <span class="badge badge-inverse"><i class="icon-thumbs-up icon-large"></i> {_product.front.hot}</span>
             {/if}
             {if $product->SALE > 1}
-                <span class="badge badge-important"><i class="icon-money icon-large"></i> {_'SALE'}</span>
+                <span class="badge badge-important"><i class="icon-money icon-large"></i> {_product.front.sale}</span>
             {/if}
            
             </small></h1>
@@ -110,9 +110,9 @@
     <div class="span6" style="min-height: 114px;">
         <div class="tabbable span12 pull-right">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#info" data-toggle="tab"><i class="icon-info-sign"></i> {_'Info'}</a></li>
-                <li><a href="#spec" data-toggle="tab"><i class="icon-list"></i> {_'Spec'}</a></li>
-                <li><a href="#ask" data-toggle="tab"><i class="icon-comment"></i> {_'Ask'}</a></li>
+                <li class="active"><a href="#info" data-toggle="tab"><i class="icon-info-sign"></i> {_product.front.info}</a></li>
+                <li><a href="#spec" data-toggle="tab"><i class="icon-list"></i> {_product.front.spec}</a></li>
+                <li><a href="#ask" data-toggle="tab"><i class="icon-comment"></i> {_product.front.ask}</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="info">
@@ -126,7 +126,7 @@
                         <dt>{$parameter->AttribName}:</dt>
                         <dd>{$parameter->Val}{$parameter->UnitShort}</dd>
                         {/foreach}      
-                        <dt>{_'Producer'}:</dt>
+                        <dt>{_product.front.producer}:</dt>
                         <dd>{$product->ProducerName}</dd>
                     </dl>
                 </div>
@@ -137,7 +137,7 @@
                        <ul class="errors" n:if="$form->hasErrors()">
                                <li n:foreach="$form->errors as $error">{$error}</li>
                        </ul>
-                    <span class="help-block"><i class="icon-info-sign"></i> {_'We will respond as soon as possible.'}</span>
+                    <span class="help-block"><i class="icon-info-sign"></i> {_product.info.respond-info}</span>
                     <fieldset class="span10">
                            {label note /}
                            {input note}

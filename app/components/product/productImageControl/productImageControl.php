@@ -9,7 +9,7 @@ use Nette\Forms\Form,
 class productImageControl extends BaseControl {
 
     /** @persistent */
-    public $lang;
+    public $locale;
 
     /** @var NetteTranslator\Gettext */
     protected $translator;

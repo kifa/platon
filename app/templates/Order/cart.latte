@@ -2,7 +2,7 @@
 {block pageheader}
 
         <div class="page-header">
-            <h1 n:block="title"><i class="icon-shopping-cart"></i> {_'Your cart'} <small class="hidden-xs">{_'Here you can complete your order. Just fill fields bellow.'}</small></h1>
+            <h1 n:block="title"><i class="icon-shopping-cart"></i> {_order.cart.cart-title} <small class="hidden-xs">{_order.cart.info}</small></h1>
         </div>
 
 {/block}
@@ -14,10 +14,10 @@
     <thead>
                 <tr>
                     <th ></th>
-                    <th>{_'Product'}</th>
-                    <th >{_'Amount'}</th>
-                    <th >{_'Price'}</th>
-                    <th >{_'Subtotal'}</th>
+                    <th>{_order.cart.product}</th>
+                    <th >{_order.cart.amount}</th>
+                    <th >{_order.cart.price}</th>
+                    <th >{_order.cart.subtotal}</th>
                     <th></th>
                     
                 </tr>
@@ -37,7 +37,7 @@
                     <td><a href="{plink Product:product $product->ProductID, $product->ProductName}">{$product->ProductName}   </a></td>
                     {/if}
                     
-                    <td><a href="{plink addAmount! $id}" class="ajax"><i class="icon-plus-sign"></i></a> {$amnt} {_'pcs'}
+                    <td><a href="{plink addAmount! $id}" class="ajax"><i class="icon-plus-sign"></i></a> {$amnt} {_order.cart.pcs}
                         
                         <a href="{plink removeAmount! $id}" class="ajax"><i class="icon-minus-sign"></i></a></td>
                     <td><span>{$product->FinalPrice},-</span></td>
@@ -51,10 +51,10 @@
                
                 <tr>
                     <td></td>
-                    <td><a href="#orderform" class="btn btn-danger btn-sm"><i class="icon-arrow-down"></i> {_'Continue checkout'}</a></td>
-                    <td colspan="1"> <strong>{_'Shipping'}:</strong> <br>
-                         <span class="shipping">{_'not selected'}</span></td>
-                    <td colspan="2" class="text-left"> <strong>{_'Grand Total'}:</strong><br>
+                    <td><a href="#orderform" class="btn btn-danger btn-sm"><i class="icon-arrow-down"></i> {_order.cart.checkout}</a></td>
+                    <td colspan="1"> <strong>{_order.checkout.shipping}:</strong> <br>
+                         <span class="shipping">{_order.checkout.not-selected}</span></td>
+                    <td colspan="2" class="text-left"> <strong>{_order.checkout.grandtotal}:</strong><br>
                         <span class="ordertotal">{$grandtotal},-</span></td>
 
                 </tr>
@@ -69,7 +69,7 @@
         
         {form cartForm role => form}
  <div class="col-md-11 cartPart">           
-<legend id="orderform"><span class="label label-success">1</span> {_'Choose your delivery option'}</legend>
+<legend id="orderform"><span class="label label-success">1</span> {_order.cart.choose-delivery}</legend>
     <div class="controls col-md-12">
        <div class="form-group col-md-5">
            {ifset $lowerShippers}
@@ -91,11 +91,11 @@
         
         </div>
         {/ifset}
-        <div class="col-md-10 margin5"><strong>{_'Selected shipping:'} </strong><span class="shipping">{_'not selected'}</span></div>
+        <div class="col-md-10 margin5"><strong>{_order.cart.shipping-sel}: </strong><span class="shipping">{_order.cart.not-selected}</span></div>
     </div>
     </div>
  <div class="col-md-11 cartPart">
-<legend><span class="label label-success">2</span> {_'Fill contact information'}</legend>
+<legend><span class="label label-success">2</span> {_order.cart.fill-contact}</legend>
             <div class="controls col-md-5">
                 <div class="form-group">
                 {label name /}
@@ -132,19 +132,19 @@
             </div>    
  </div> 
  <div class="col-md-11 cartPart">
-<legend><span class="label label-success">3</span> {_'Select Payment method'}</legend>
+<legend><span class="label label-success">3</span> {_order.cart.fill-payment}</legend>
             <div class="controls col-md-4">
                 {label payment /}
                 {input payment}
             </div>
  </div>
          <div class="col-md-11 cartPart">
-<legend><span class="label label-success">4</span> {_'Finish your order'}</legend>
+<legend><span class="label label-success">4</span> {_order.cart.fill-finish}</legend>
             <div class="controls col-md-5">
                 {input send}
                 <hr>
                 {input termButton}
-                {_'I accept Terms and condition.'}
+                {_order.cart.terms-agreed}
                 
             </div>
              <div class="controls col-md-6">
@@ -159,11 +159,11 @@
                         <div class="col-md-2">                    
                             <i class="icon-shopping-cart icon-4x"></i></div>
                         <div class="col-md-10">
-                            <h4 class="col-md-4"><strong class="col-md-12">{_'Products'}:</strong><br>
+                            <h4 class="col-md-4"><strong class="col-md-12">{_order.cart.product}:</strong><br>
                                     <span class="col-md-12">{$grandtotal},-</span></h4>
-                            <h4 class="col-md-4"><strong class="col-md-12">{_'Shipping'}:</strong> <br>
-                                <span class="shipping col-md-12">{_'not selected'}</span></h4>
-                            <h4 class="col-md-4"><strong class="col-md-12">{_'Total'}:</strong><br>
+                            <h4 class="col-md-4"><strong class="col-md-12">{_order.cart.shipping}:</strong> <br>
+                                <span class="shipping col-md-12">{_order.cart.not-seleced}</span></h4>
+                            <h4 class="col-md-4"><strong class="col-md-12">{_order.cart.total}:</strong><br>
                                     <span class="ordertotal col-md-12">{$grandtotal},-</span></h4>
                         </div>
                     </div> 

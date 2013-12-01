@@ -16,7 +16,7 @@ class ModalControl extends BaseControl {
     private $orderModel;
     
     
-    public function __construct(OrderModel $orderModel, \GettextTranslator\Gettext $translator) {
+    public function __construct(OrderModel $orderModel, \Kdyby\Translation\Translator $translator) {
         $this->translator = $translator;
         $this->orderModel = $orderModel;
     }

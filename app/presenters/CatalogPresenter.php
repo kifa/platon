@@ -50,7 +50,7 @@ class CatalogPresenter extends BasePresenter  {
         $this->filter =  $filter;
     }
     
-    public function injectTranslator(GettextTranslator\Gettext $translator) {
+    public function injectTranslator(\Kdyby\Translation\Translator $translator) {
         $this->translator = $translator;
     }
     

@@ -17,16 +17,16 @@
                     {if $pieces > 5}
             <span class="label label-success">{$pieces}</span>
                     {elseif $pieces > 0}
-            <span class="label label-warning">{$pieces} {_'LAST'}</span>
+            <span class="label label-warning">{$pieces} {_product.front.last}</span>
                     {else}
-            <span class="label label-default">{_'OUT OF STOCK'}</span>
+            <span class="label label-default">{_product.front.out-of-stock}</span>
                     
                     {/if}
             {if $product->ProductStatusID == 3}
-                <span class="label label-danger"><i class="icon-thumbs-up "></i> {_'HOT'}</span>
+                <span class="label label-danger"><i class="icon-thumbs-up "></i> {_product.front.hot}</span>
             {/if}
             {if $product->SALE > 1}
-                <span class="label label-warning"><i class="icon-money"></i> {_'SALE'}</span>
+                <span class="label label-warning"><i class="icon-money"></i> {_product.front.sale}</span>
             {/if}
            
             </small></h1>
@@ -47,9 +47,9 @@
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="tabbable col-md-12 ">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#info" data-toggle="tab"><i class="icon-info-sign"></i> {_'Info'}</a></li>
-                <li><a href="#spec" data-toggle="tab"><i class="icon-list"></i> {_'Spec'}</a></li>
-                <li><a href="#ask" data-toggle="tab"><i class="icon-comment"></i> {_'Ask'}</a></li>
+                <li class="active"><a href="#info" data-toggle="tab"><i class="icon-info-sign"></i> {_product.front.info}</a></li>
+                <li><a href="#spec" data-toggle="tab"><i class="icon-list"></i> {_product.front.specs}</a></li>
+                <li><a href="#ask" data-toggle="tab"><i class="icon-comment"></i> {_product.front.ask}</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="info">
@@ -65,7 +65,7 @@
                         {/foreach}   
                         
                         {if $product->ProducerName !== 'N/A'}
-                        <dt>Brand:</dt>
+                        <dt>{_product.front.producer}</dt>
                         <dd><a href="{plink Catalog:productsBrand $product->ProducerID, $product->ProducerName}">{$product->ProducerName} - {_'more products'}...</a></dd>
                         {/if}
                     </dl>
@@ -99,7 +99,7 @@
                         </div>   
                        {/form}
                   {/snippet}
-                    <span class="help-block"><i class="icon-info-sign"></i> {_'We will reply as soon as possible.'}</span>
+                    <span class="help-block"><i class="icon-info-sign"></i> {_product.front.respond-info}</span>
                 </div>
             </div>
         </div>
@@ -153,7 +153,7 @@
 {else}
     <div class="alert alert-info col-md-11 text-center">
     
-        <h3>{_'Dear customer'}, {_'this product is no longer available to buy'}. {_'We are sorry'}. {_'But you can try any other product from category'} {*$category->CategoryName*} </h3>
+        <h3>{_product.front.dear-customer}</h3>
         <br>
         <a href="#" class="btn btn-primary btn-lg">{*$category->CategoryName*} TABLETY</a>
     </div> 
@@ -163,7 +163,7 @@
 
     
     <div class="col-md-11">
-        <h3 class="col-md-12"><i class="icon-info-sign"></i> {_'Information about product'}</h3>
+        <h3 class="col-md-12"><i class="icon-info-sign"></i> {_product.front.info-large}</h3>
         <div class="col-md-8">
          <div class="prodDescription col-md-12 text-justified" n:snippet="prodDescription">{!$product->ProductDescription}</div>
          <hr>
@@ -172,7 +172,7 @@
            
    
             {if $user->isInRole('admin')}
- <div class="col-md-12">{_'Photo:'}
+ <div class="col-md-12">{_product.front.photo}:
         {form addPhotoForm class => 'form-inline col-md-12'}
         <div class="form-group col-md-12">
             <div class="input-group col-md-5">
@@ -201,7 +201,7 @@
                         <div class="col-md-12">
                            {if $videos} 
                             <br>
-                            <h3>{_'Product Video'}</h3>
+                            <h3>{_product.front.video}</h3>
                             
                             {/if}
                            {if $user->isInRole('admin')}
@@ -242,7 +242,7 @@
     {control menu:admin}
 {/if}
     <ul class="nav nav-list">
-        <li class="nav-header">Menu</li>
+        <li class="nav-header">{_control.nav.menu}</li>
 
           {control menu:side}
         
@@ -271,7 +271,7 @@
                   cancel    : {_'Cancel'},
                   submit    : 'OK',
                   indicator : '<i class="icon-spinner icon-spin"></i>',
-                  tooltip   : {_'Click to edit ...'},
+                  tooltip   : {_control.button.click-to-edit},
                   callback : function(value, settings) {
                      var json = $.parseJSON(value);
                      $('.prodTitle').text(json.edit);
@@ -287,7 +287,7 @@
                   colls     : '15',
                   rows      : '15',
                   indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
-                  tooltip   : {_'Click to edit ...'},
+                  tooltip   : {_control.button.click-to-edit},
                   wysiwyg   : { controls : { separator04         : { visible : true },
                                         insertOrderedList   : { visible : true },
                                         insertUnorderedList : { visible : true }
@@ -307,7 +307,7 @@
                   colls     : '6',
                   rows      : '7', 
                   indicator : '<i class="icon-spinner icon-spin icon-large"></i>',
-                  tooltip   : {_'Click to edit ...'},
+                  tooltip   : {_control.button.click-to-edit},
                   callback : function(value, settings) {
                      var json = $.parseJSON(value);
                      $('.prodShort').text(json.edit);
