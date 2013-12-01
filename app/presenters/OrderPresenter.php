@@ -226,7 +226,7 @@ class OrderPresenter extends BasePresenter {
 
         $cartForm->addProtection('Vypršel časový limit, odešlete formulář znovu');
         $cartForm->addGroup('Delivery info');
-        $cartForm->addText('name', 'Name:')
+        $cartForm->addText('name', 'order.form.name')
                 ->addRule(Form::FILLED, 'Would you fill your name, please?')
                 ->setAttribute('class', 'form-control');
         $cartForm->addText('phone', 'Phone:')

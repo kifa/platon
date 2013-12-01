@@ -2,11 +2,11 @@
 {if $user->isInRole('admin')}
 
        <div class="span12 smartPanelBar">
-                <a class="btn btn-default" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a> |
+                <a class="btn btn-default" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_smart.menu.back}</a> |
                 <a class="btn btn-default" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
             </div>
 <div class="page-header span12">
-<h1 n:block="title"><i class="icon-spinner"></i> Orders <small>Here you see all orders placed in your shop.</small></h1>
+<h1 n:block="title"><i class="icon-spinner"></i> {_smart.orders.orders} <small>{_smart.orders.orders-info}</small></h1>
 </div>
 {/if}
 {/block}
@@ -18,10 +18,10 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>{_'Date'}</th>
-                    <th>{_'Customer'}</th>
-                    <th>{_'Total Payment'}</th>
-                    <th>{_'Status'}</th>
+                    <th>{_smart.orders.date}</th>
+                    <th>{_smart.orders.customer}</th>
+                    <th>{_smart.orders.total-payment}</th>
+                    <th>{_smart.orders.status}</th>
                     <th></th>
                 </tr>
             </thead>

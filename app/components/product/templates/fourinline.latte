@@ -10,7 +10,7 @@
             
             <div class="col-md-12 col-xs-12 pull-left row">
                     {if $pieces > 5}
-            <span class="label label-info" title="{_product.front.in-stock}">{$pieces}</span>
+            <span class="label label-info" title="{_product.front.instock}">{$pieces}</span>
                     {elseif $pieces > 0}
             <span class="label label-warning">{$pieces} {_product.front.last}</span>
                     {else}

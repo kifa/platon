@@ -3,12 +3,12 @@
 
        <div class="col-md-12 smartPanelBar">
                        <div class="col-md-10">
-                <a class="btn btn-default" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a> |
+                <a class="btn btn-default" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_smart.menu.back}</a> |
                 <a class="btn btn-default" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
             </div>
         </div>
 <div class="page-header">
-    <h1 n:block="title"><i class="icon-retweet"></i> {_'Warehouse'} <small>{_'Change stock in one place.'}</small></h1>
+    <h1 n:block="title"><i class="icon-retweet"></i> {_smart.menu.warehouse} <small>{_smart.warehouse.wh-info}</small></h1>
 
     </div>
 {/if}
@@ -20,8 +20,8 @@
 
     <div class="tabbable"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#prod"  data-toggle="tab">{_'Products'}</a></li>
-            <li><a href="#cat"  data-toggle="tab">{_'Category'}</a></li>
+            <li class="active"><a href="#prod"  data-toggle="tab">{_smart.warehouse.products}</a></li>
+            <li><a href="#cat"  data-toggle="tab">{_smart.warehouse.category}</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="prod">
@@ -32,10 +32,10 @@
                             <tr>
                                 <th>#</th>
                                 <th></th>
-                                <th>{_'Name'}</th>
-                                <th class="text-right">{_'Price'}</th>
-                                <th class="text-right">{_'Stock'}</th>
-                                 <th class="text-right">{_'Total Value'}</th>
+                                <th>{_smart.warehouse.name}</th>
+                                <th class="text-right">{_smart.warehouse.price}</th>
+                                <th class="text-right">{_smart.warehouse.stock}</th>
+                                 <th class="text-right">{_smart.warehouse.total-value}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -57,7 +57,7 @@
 
                         {/foreach}
                             <tr class="success">
-                                <td colspan="5" class="text-right"><strong>{_'Total Warehouse Value'}:</strong></td>
+                                <td colspan="5" class="text-right"><strong>{_smart.warehouse.total}:</strong></td>
                                 <td class="text-right">{$supertotal|number},-</td>
                             </tr>
                         </tbody>
@@ -69,9 +69,9 @@
                             <tr>
                                 <th>#</th>
                                 <th></th>
-                                <th>{_'Name'}</th>
-                                <th>{_'Products'}</th>
-                                <th>{_'Total Value'}</th>
+                                <th>{_smart.warehouse.name}</th>
+                                <th>{_smart.warehouse.products}</th>
+                                <th>{_smart.warehouse-total-value}</th>
                                 <th></th>
                             </tr>
                         </thead>

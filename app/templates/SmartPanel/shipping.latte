@@ -2,13 +2,13 @@
 {if $user->isInRole('admin')}
 
             <div class="col-md-12 smartPanelBar">
-                <a class="btn btn-default" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a> |
+                <a class="btn btn-default" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_smart.menu.back}</a> |
                 <a class="btn btn-default" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
             </div>
 
 
 <div class="page-header col-md-12">
-    <h1 n:block="title"><i class="icon-truck"></i> {_'Shipping'} <small>{_'Here you see all shipping methods.'}</small></h1>
+    <h1 n:block="title"><i class="icon-truck"></i> {_smart.menu.shipping} <small>{_smart.shipping.shipping-info}</small></h1>
 
    </div>
 {/if}
@@ -20,8 +20,8 @@
 
     <div class="tabbable col-md-12"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#overal"  data-toggle="tab">{_'Overal'}</a></li>
-            <li><a href="#addShip"  data-toggle="tab">{_'Add Shipping'}</a></li>
+            <li class="active"><a href="#overal"  data-toggle="tab">{_smart.shipping.overal}</a></li>
+            <li><a href="#addShip"  data-toggle="tab">{_smart.shipping.add-shipping}</a></li>
         </ul>
         <div class="tab-content col-md-12">
             <div class="tab-pane active" id="overal">

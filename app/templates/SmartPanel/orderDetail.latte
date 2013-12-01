@@ -47,30 +47,30 @@
 
 
 <div class="col-md-12 smartPanelBar">
-        <a class="btn btn-default" href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_"Back to Orders"}</a> 
+        <a class="btn btn-default" href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_smart.menu.back}</a> 
         <div class="btn-group">
         {if $order->OrderID != 1}
-        <a class="btn btn-default" href="{plink SmartPanel:orderDetail $order->OrderID - 1 }"><i class="icon-arrow-left"></i> {_"Prev Order"}</a> 
+        <a class="btn btn-default" href="{plink SmartPanel:orderDetail $order->OrderID - 1 }"><i class="icon-arrow-left"></i> {_smart.orders.prev}</a> 
         {/if}
         {if $nextOrder}
-        <a class="btn btn-default" href="{plink SmartPanel:orderDetail $order->OrderID + 1}"><i class="icon-arrow-right"></i> {_"Next Order"}</a> 
+        <a class="btn btn-default" href="{plink SmartPanel:orderDetail $order->OrderID + 1}"><i class="icon-arrow-right"></i> {_smart.order.next}</a> 
         {/if}
         </div>
         <div class="btn-group">
         {if $order->StatusProgress !== 10}
-        <a class="btn btn-default" href="#editOrderInfo" data-toggel="modal" data-target="#editOrderInfo" id="editOrderInfoButton"><i class="icon-large icon-list"></i> {_"Edit Order Info"}</a> 
-        <a class="btn btn-default" href="#editProducts" data-toggel="modal" data-target="#editProducts" id="editProductsButton"><i class="icon-large icon-download"></i> {_"Edit Products"}</a> 
+        <a class="btn btn-default" href="#editOrderInfo" data-toggel="modal" data-target="#editOrderInfo" id="editOrderInfoButton"><i class="icon-large icon-list"></i> {_smart.orders.edit-order}</a> 
+        <a class="btn btn-default" href="#editProducts" data-toggel="modal" data-target="#editProducts" id="editProductsButton"><i class="icon-large icon-download"></i> {_smart.orders.edit-products}</a> 
         </div>
          {if $order->StatusProgress !== 0}
-        <a class="btn btn-default" href="#cancelOrder" data-toggel="modal" data-target="#cancelOrder" id="cancelOrderButton"><i class="icon-large icon-ban-circle"></i> {_"Cancel order"}</a> 
+        <a class="btn btn-default" href="#cancelOrder" data-toggel="modal" data-target="#cancelOrder" id="cancelOrderButton"><i class="icon-large icon-ban-circle"></i> {_smart.orders.cancel}</a> 
         {/if}
         {/if}
         <a class="btn btn-default" href="#"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
-        <a href="{plink generateInvoice! $order->OrderID}" class="btn btn-default"><i class="icon-download icon-large"></i> {_'Download INVOICE'}</a>
+        <a href="{plink generateInvoice! $order->OrderID}" class="btn btn-default"><i class="icon-download icon-large"></i> {_smart.orders.invoice-down}</a>
 </div>
 
 <div class="page-header col-md-12">
-    <h1 n:block="title">{$order->OrderID} <i class="icon-angle-right"></i> {_'Order summary'} <small> {_'Order administration'}.</small></h1>
+    <h1 n:block="title">{$order->OrderID} <i class="icon-angle-right"></i> {_smart.orders.title} <small> {_smart.orders.info}.</small></h1>
 </div>
 
     
@@ -108,11 +108,11 @@
 
         <div class="col-md-6 alert {$order->Note ? 'alert-danger' : 'alert-success'}">
             <div class="col-md-12">
-                <i class="icon-paper-clip left icon-large"></i><strong> {_'Note'}:</strong>
+                <i class="icon-paper-clip left icon-large"></i><strong> {_smart.orders.note}:</strong>
                     {foreach $notes as $note}
                 <p>{$note->NotesName} - {$note->NotesDescription} - {$note->NotesDate}</p>
                 {/foreach}
-                 <a class="btn btn-default" href="#addNote" data-toggel="modal" data-target="#addNote" id="addNoteButton"><i class="icon-large icon-plus-sign"></i> {_"Add note"}</a> 
+                 <a class="btn btn-default" href="#addNote" data-toggel="modal" data-target="#addNote" id="addNoteButton"><i class="icon-large icon-plus-sign"></i> {_smart.orders.add-note}</a> 
             </div>
         </div>
         
@@ -125,10 +125,10 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>{_'Product Name'}</th>
-                    <th>{_'Amount'}</th>
-                    <th>{_'Item price'}</th>
-                    <th>{_'Total price'}</th>
+                    <th>{_smart.orders.product}</th>
+                    <th>{_smart.orders.amount}</th>
+                    <th>{_smart.orders.item-price}</th>
+                    <th>{_smart.orders.total}</th>
                     <th></th>
 
                 </tr>
@@ -170,9 +170,9 @@
             <tfoot>
                 <tr>
                     <td colspan="2"></td>
-                    <td><strong >{_'Products'}:</strong> $&nbsp;{$grandtotal}</td>
-                    <td><strong >{_'Shipping'}:</strong> $&nbsp;{$shipping = $order->DeliveryPrice}</td>
-                    <td><strong >{_'Total'}:</strong> $&nbsp;{$grandtotal += $shipping}</td>
+                    <td><strong >{_smart.orders.products}:</strong> $&nbsp;{$grandtotal}</td>
+                    <td><strong >{_smart.orders.shipping}:</strong> $&nbsp;{$shipping = $order->DeliveryPrice}</td>
+                    <td><strong >{_smart.orders.total}:</strong> $&nbsp;{$grandtotal += $shipping}</td>
                 
                 
                 </tr>
@@ -183,64 +183,64 @@
     <div class="row">
             <div class="col-md-4">
         <div class="panel panel-default" n:snippet="orderInfo">
-               <div class="panel-heading"> {_'Order data'}</div>
+               <div class="panel-heading"> {_smart.orders.order-info}</div>
                 <div class="panel-body"> 
 
             <div class="col-md-12">
                 <p>
-                    <i class="icon-calendar icon-large left"></i> {_'Date created'}:&nbsp;
+                    <i class="icon-calendar icon-large left"></i> {_smart.orders.datacreated}:&nbsp;
                     <strong>{$order->DateCreated|date:'%d.%m.%Y'}</strong>
                 </p>
             </div>
 
             <div class="col-md-12">
                 <p>
-                    <i class="icon-truck icon-large left"></i> {_'Shipping'}:&nbsp;
+                    <i class="icon-truck icon-large left"></i> {_smart.orders.shipping}:&nbsp;
                     <strong class="orderShipping" n:snippet="orderShipping">{$order->DeliveryName}</strong>
                 </p>
             </div>
 
             <div class="col-md-12">
                 <p>
-                    <i class="icon-money icon-large left"></i> {_'Payment'}:&nbsp;
+                    <i class="icon-money icon-large left"></i> {_smart.orders.payment}:&nbsp;
                     <strong class="orderPayment" n:snippet="orderPayment">{$order->PaymentName}</strong>
                 </p>
             </div>
-              <span class="muted col-md-12"><i class="icon-info-sign"></i> {_'EDIT shipping and payment by Double-clicking.'}</span>
+              <span class="muted col-md-12"><i class="icon-info-sign"></i> {_smart.orders.edit}</span>
         </div>
 </div></div>
             <div class="col-md-4">
         <div class="panel panel-default">
-                <div class="panel-heading"><i class="icon-user left icon-large"></i><strong> {_'Contact'}:</strong></div>
+                <div class="panel-heading"><i class="icon-user left icon-large"></i><strong> {_smart.orders.contact}:</strong></div>
               
                   <div class="panel-body">
                 <dl>
-                    <dd class="col-md-12"><span class="col-md-3">{_'Name'}:</span><strong class="orderName col-md-8" n:snippet="orderName">{$order->Name}</strong></dd>
-                    <dd class="col-md-12"><span class="col-md-3">{_'Email'}:</span><strong class="col-md-8">{$order->UsersID}</strong></dd>
-                    <dd class="col-md-12"><span class="col-md-3">{_'Phone'}:</span><strong class="orderPhone col-md-8" n:snippet="orderPhone">{if $order->PhoneNumber}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
+                    <dd class="col-md-12"><span class="col-md-3">{_smart.orders.name}:</span><strong class="orderName col-md-8" n:snippet="orderName">{$order->Name}</strong></dd>
+                    <dd class="col-md-12"><span class="col-md-3">{_smart.orders.email}:</span><strong class="col-md-8">{$order->UsersID}</strong></dd>
+                    <dd class="col-md-12"><span class="col-md-3">{_smart.orders.phone}:</span><strong class="orderPhone col-md-8" n:snippet="orderPhone">{if $order->PhoneNumber}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
 
         {if $order->CompanyName != ""}
-                    <dt>{_'Company'}:</dt>
+                    <dt>{_smart.orders.company}:</dt>
                     <dd>{$order->CompanyName}</dd>
         {/if}
                 </dl>
             </div>
-          <span class="muted col-md-12"><i class="icon-info-sign"></i> {_'EDIT name and phone by Double-clicking.'}</span>
+          <span class="muted col-md-12"><i class="icon-info-sign"></i> {_smart.orders.edit}</span>
         </div></div>
 
     <div class="col-md-4">
          <div class="panel panel-default">
-             <div class="panel-heading"><i class="icon-home left icon-large"></i><strong> {_'Address'}:</strong></div>
+             <div class="panel-heading"><i class="icon-home left icon-large"></i><strong> {_smart.orders.address}:</strong></div>
  <div class="panel-body">
                 <dl class="col-md-12">
 
-                    <dd class="col-md-12"><span class="col-md-3">{_'Street'}:</span><strong class="orderStreet col-md-8" n:snippet="orderStreet">{$address->Street}</strong></dd>
-                    <dd class="col-md-12"><span class="col-md-3">{_'City'}:</span><strong class="orderCity col-md-8" n:snippet="orderCity">{$address->City}</strong></dd>
-                    <dd class="col-md-12"><span class="col-md-3">{_'ZIP'}:</span><strong class="orderZIP col-md-8" n:snippet="orderZIP">{$address->ZIPCode}</strong></dd>
+                    <dd class="col-md-12"><span class="col-md-3">{_smart.orders.street}:</span><strong class="orderStreet col-md-8" n:snippet="orderStreet">{$address->Street}</strong></dd>
+                    <dd class="col-md-12"><span class="col-md-3">{_smart.orders.city}:</span><strong class="orderCity col-md-8" n:snippet="orderCity">{$address->City}</strong></dd>
+                    <dd class="col-md-12"><span class="col-md-3">{_smart.orders.zip}:</span><strong class="orderZIP col-md-8" n:snippet="orderZIP">{$address->ZIPCode}</strong></dd>
                 </dl> 
 
             </div>
-        <span class="muted col-md-12"><i class="icon-info-sign"></i> {_'EDIT address by Double-clicking.'}</span>
+        <span class="muted col-md-12"><i class="icon-info-sign"></i> {_smart.orders.edit}</span>
         </div></div>
 
         
@@ -321,7 +321,7 @@ $(document).ready(function() {
                 type      : 'select',
                 submit    : 'OK',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
+                tooltip   : {_control.button.click-to-edit},
                 callback : function(value, settings) {
                    var json = $.parseJSON(value);
                    $('.orderShipping').text(json.edit);
@@ -333,7 +333,7 @@ $(document).ready(function() {
                 type      : 'select',
                 submit    : 'OK',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
+                tooltip   : {_control.button.click-to-edit},
                 callback : function(value, settings) {
                    var json = $.parseJSON(value);
                    $('.orderShipping').text(json.edit);
@@ -346,7 +346,7 @@ $(document).ready(function() {
                 cancel    : {_'Cancel'},
                 event     : 'click',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
+                tooltip   : {_control.button.click-to-edit},
                 callback : function(value, settings) {
                    var json = $.parseJSON(value);
                    $('.orderStreet').text(json.edit);
@@ -359,7 +359,7 @@ $(document).ready(function() {
                 submit    : 'OK',
                 event     : 'click',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
+                tooltip   : {_control.button.click-to-edit},
                 callback : function(value, settings) {
                    var json = $.parseJSON(value);
                    $('.orderCity').text(json.edit);
@@ -372,7 +372,7 @@ $(document).ready(function() {
                 submit    : 'OK',
                 event     : 'click',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
+                tooltip   : {_control.button.click-to-edit},
                 callback : function(value, settings) {
                    var json = $.parseJSON(value);
                    $('.orderZIP').text(json.edit);
@@ -385,7 +385,7 @@ $(document).ready(function() {
                 submit    : 'OK',
                 event     : 'click',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
+                tooltip   : {_control.button.click-to-edit},
                 callback : function(value, settings) {
                    var json = $.parseJSON(value);
                    $('.orderPhone').text(json.edit);
@@ -397,7 +397,7 @@ $(document).ready(function() {
                 submit    : 'OK',
                 event     : 'click',
                 indicator : '<i class="icon-spinner icon-spin"></i>',
-                tooltip   : 'Click to edit ...',
+                tooltip   : {_control.button.click-to-edit},
                 callback : function(value, settings) {
                    var json = $.parseJSON(value);
                    $('.orderName').text(json.edit);

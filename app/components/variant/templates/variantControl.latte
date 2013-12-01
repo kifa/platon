@@ -46,7 +46,7 @@
                     {elseif $productVariant->PiecesAvailable < 1 }
                             <span class="label label-default col-md-12">
                         {/if}
-<span class="col-md-12 text-center">{_product.front.in-stock}</span> <span class="prodAmount{$productVariant->ProductID} col-md-12 text-center" n:snippet="prodAmount{$productVariant->ProductID}">{if $productVariant->PiecesAvailable > 0}{$productVariant->PiecesAvailable}{else}0{/if}</span></span>
+<span class="col-md-12 text-center">{_product.front.instock}</span> <span class="prodAmount{$productVariant->ProductID} col-md-12 text-center" n:snippet="prodAmount{$productVariant->ProductID}">{if $productVariant->PiecesAvailable > 0}{$productVariant->PiecesAvailable}{else}0{/if}</span></span>
                             <br>
     <span class="label label-default col-md-12">
                              <span class="">{_product.front.shipping} {_product.front.from}</span> 

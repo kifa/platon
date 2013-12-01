@@ -1,11 +1,11 @@
 {block pageheader}
 {if $user->isInRole('admin')}
 <div class="page-header">
-    <h1 n:block="title"><i class="icon-bar-chart"></i> {_'Stats'} <small>{_'Magical numbers that improve your sales.'}</small></h1>
+    <h1 n:block="title"><i class="icon-bar-chart"></i> {_smart.menu.stats} <small>{_smart.stats.stats-info}</small></h1>
 
 <div class="row">
             <div class="col-md-10 smartPanelBar">
-                <a class="btn btn-default" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_"Back to SmartPanel"}</a>
+                <a class="btn btn-default" href="{plink SmartPanel:default }"><i class="icon-lightbulb"></i> {_smart.menu.back}</a>
             </div>
         </div>
     </div>
@@ -18,8 +18,8 @@
 
     <div class="tabbable"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#overal"  data-toggle="tab">{_'Overal'}</a></li>
-            <li><a href="#addShip"  data-toggle="tab">{_'Category'}</a></li>
+            <li class="active"><a href="#overal"  data-toggle="tab">{_smart.stats.overal}</a></li>
+            <li><a href="#addShip"  data-toggle="tab">{_smart.stats.ctaegory}</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="overal">

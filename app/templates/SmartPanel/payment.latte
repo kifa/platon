@@ -7,7 +7,7 @@
             </div>
 
 <div class="page-header col-md-12">
-<h1 n:block="title"><i class="icon-money"></i> {_'Payment'} <small>{_'Here you see all payment methods.'}</small></h1>
+<h1 n:block="title"><i class="icon-money"></i> {_smart.menu.payment} <small>{_smart.payment.payment-info}</small></h1>
 </div>
 {/if}
 {/block}
@@ -18,8 +18,8 @@
 
     <div class="tabbable"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#overal"  data-toggle="tab">{_'Overal'}</a></li>
-            <li><a href="#addPay"  data-toggle="tab">{_'Add Payment'}</a></li>
+            <li class="active"><a href="#overal"  data-toggle="tab">{_smart.payment.overal}</a></li>
+            <li><a href="#addPay"  data-toggle="tab">{_smart.payment.add-payment}</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="overal">

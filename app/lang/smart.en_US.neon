@@ -1,0 +1,99 @@
+menu:
+    orders: "Orders"
+    brands: "Brands"
+    warehouse: "Warehouse"
+    shipping: "Shipping"
+    payment: "Payment"
+    modules: "New functions"
+    stats: "Stats"
+    smart-panel: "Smart Panel"
+    dashboard:  'Dashboard'
+    smart-info: "Here is all you need!"
+    back: "Back to SmartPanel"
+panel:
+    overal: 'Overal'
+    account: 'Account'
+    shop-info: 'Shop info'
+    other: 'Other'
+    latest-orders: 'Latest Orders'
+    all-orders: 'All orders'
+    date: 'Date'
+    customer: 'Customer'
+    total: 'Total'
+    status: 'Status'
+    more-stats: 'More stats'
+    subs: 'Your subscription'
+    upgrade: 'Upgrade'
+    products: 'Products'
+    users: 'Users'
+    storage: 'Storage'
+    account-info: 'Account Info'
+    name: 'Name'
+    change-pass: 'Change password'
+    shop-edit: 'Edit your shop info'
+    option: 'Option'
+    change: 'Change value by clicking'
+    generate-sitemap: 'Generate Sitemap'
+    sitemap-click: 'Click to Generate!'
+    regetext: 'Regenerating...'
+modules:
+    modules-info: 'Here you see all possible function you can activated.'
+orders:
+    orders: 'Orders'
+    orders-info: 'Here you see all orders placed in your shop.'
+    prev: "Prev Order"
+    next: "Next Order"
+    edit-order: "Edit Order Info"
+    edit-products: "Edit Products"
+    cancel: "Cancel order"
+    invoice-down: 'Download INVOICE'
+    title: 'Order summary'
+    info: 'Order administration'
+    note: 'Note'
+    add-note: "Add note"
+    product: 'Product Name'
+    amount: 'Amount'
+    item-price: 'Item price'
+    products: 'Products'
+    shipping: 'Shipping'
+    payment: 'Payment'
+    total: 'Total'
+    order-info: 'Order data'
+    datacreated: 'Date created'
+    edit: 'EDIT shipping and payment by Double-clicking.'
+    contact: 'Contact'
+    name: 'Name'
+    email: 'Email'
+    phone: 'Phone'
+    company: 'Company'
+    address: 'Address'
+    street: 'Street'
+    city: 'City'
+    zip: 'ZIP'
+    date: 'Date'
+    customer: 'Customer'
+    total-payment: 'Total Payment'
+    status: 'Status'
+payment:
+    payment-info: 'Here you see all payment methods.'
+    overal: 'Overal'
+    add-payment: 'Add Payment'
+brand:
+    brand-info: 'Here you can add and edit brands and producers.'
+shipping:
+    shipping-info: 'Here you see all shipping methods.'
+    overal: 'Overal'
+    add-shipping: 'Add Shipping'
+stats:
+    stats-info: 'Magical numbers that improve your sales.'
+    overal: 'Overal'
+    category: 'Category'
+warehouse:
+    wh-info: 'Change stock in one place.'
+    products: 'Products'
+    category: 'Category'
+    name: 'Name'
+    price: 'Price'
+    stock: 'Stock'
+    total-value: 'Total Value'
+    total: 'Total Warehouse Value'

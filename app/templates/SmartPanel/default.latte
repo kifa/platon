@@ -2,19 +2,19 @@
 {block pageheader}
 {if $user->isInRole('admin')}
        <div class="col-md-12 smartPanelBar">
-                <a class="btn btn-default" href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_"Orders"}</a> 
-                <a class="btn btn-default" href="{plink SmartPanel:producers }"><i class="icon-bookmark"></i> {_"Brands"}</a> 
-                <a class="btn btn-default" href="{plink SmartPanel:warehouse }"><i class="icon-retweet"></i> {_"Warehouse"}</a> 
-                <a class="btn btn-default" href="{plink SmartPanel:shipping }"><i class="icon-truck"></i> {_"Shipping"}</a> 
-                <a class="btn btn-default" href="{plink SmartPanel:payment }"><i class="icon-money"></i> {_"Payment"}</a> 
+                <a class="btn btn-default" href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_smart.menu.orders}</a> 
+                <a class="btn btn-default" href="{plink SmartPanel:producers }"><i class="icon-bookmark"></i> {_smart.menu.brands}</a> 
+                <a class="btn btn-default" href="{plink SmartPanel:warehouse }"><i class="icon-retweet"></i> {_smart.menu.warehouse}</a> 
+                <a class="btn btn-default" href="{plink SmartPanel:shipping }"><i class="icon-truck"></i> {_smart.menu.shipping}</a> 
+                <a class="btn btn-default" href="{plink SmartPanel:payment }"><i class="icon-money"></i> {_smart.menu.payment}</a> 
                                 
-                <a class="btn btn-default" href="{plink SmartPanel:modules }"><i class="icon-upload-alt"></i> {_"New functions"}</a> 
+                <a class="btn btn-default" href="{plink SmartPanel:modules }"><i class="icon-upload-alt"></i> {_smart.menu.modules}</a> 
 
-                <a class="btn btn-default" href="{plink SmartPanel:stats }"><i class="icon-large icon-bar-chart"></i> {_"Stats"}</a>
+                <a class="btn btn-default" href="{plink SmartPanel:stats }"><i class="icon-large icon-bar-chart"></i> {_smart.menu.stats}</a>
             </div>
      
 <div class="page-header col-md-12">
-        <h1 n:block="title"><i class="icon-lightbulb"></i> {_"Smart Panel"} {_'Dashboard'}<small> {_"Here is all you need!"}</small></h1>
+        <h1 n:block="title"><i class="icon-lightbulb"></i> {_smart.menu.smart-panel} {_smart.menu.dashboard}<small> {_smart.menu.smart-info}</small></h1>
 </div>
 
 {/if}
@@ -26,23 +26,23 @@
 
    <div class="tabbable col-md-12"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#overal"  data-toggle="tab">{_'Overal'}</a></li>
-          <li><a href="#account"  data-toggle="tab">{_'Account'}</a></li>
-          <li><a href="#shopinfo"  data-toggle="tab">{_'Shop info'}</a></li>
-          <li><a href="#other"  data-toggle="tab">{_'Other'}</a></li>
+          <li class="active"><a href="#overal"  data-toggle="tab">{_smart.panel.overal}</a></li>
+          <li><a href="#account"  data-toggle="tab">{_smart.panel.account}</a></li>
+          <li><a href="#shopinfo"  data-toggle="tab">{_smart.panel.shop-info}</a></li>
+          <li><a href="#other"  data-toggle="tab">{_smart.panel.other}</a></li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane active" id="overal">
               <div class="col-md-7"> 
-              <h3>{_'Latest Orders'} <small><a n:href="SmartPanel:orders">{_'All orders'} <i class="icon-spinner"></i></a></small></h3>
+              <h3>{_smart.panel.latest-orders} <small><a n:href="SmartPanel:orders">{_smart.panel.all-orders} <i class="icon-spinner"></i></a></small></h3>
                 <table class="table">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>{_'Date'}</th>
-                            <th>{_'Customer'}</th>
-                            <th>{_'Total'}</th>
-                            <th>{_'Status'}</th>
+                            <th>{_smart.panel.date}</th>
+                            <th>{_smart.panel.customer}</th>
+                            <th>{_smart.panel.total}</th>
+                            <th>{_smart.panel.status}</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -64,7 +64,7 @@
               </div>
               
               <div class="col-md-4">
-                  <h3>{_'Stats'} <small><a n:href="SmartPanel:stats">{_'More stats'} <i class="icon-bar-chart"></i></a></small></h3>
+                  <h3>{_smart.menu.stats} <small><a n:href="SmartPanel:stats">{_smart.panel.more-stats} <i class="icon-bar-chart"></i></a></small></h3>
                  {control gapiModule:smartPanelMini}
               </div>
               
@@ -76,31 +76,31 @@
           <div class="tab-pane" id="account">
               
             <div class="col-md-7">
-                <h3><i class="icon-road"></i> {_'Your subscription'} <button class="btn btn-warning"><i class="icon-upload-alt"></i> {_'Upgrade'}</button></h3>
+                <h3><i class="icon-road"></i> {_smart.panel.subs} <button class="btn btn-warning"><i class="icon-upload-alt"></i> {_smart.menu.upgrade}</button></h3>
             
            <div class="col-md-5">
-                <span>{_'Products'}:</span>
+                <span>{_smart.panel.products}:</span>
                 <div class="progress progress-success">
                     <div class="progress-bar" style="width: {$productNumber}%"></div>
                 </div>
-                <span>{_'Users'}:</span>
+                <span>{_smart.panel.users}:</span>
                 <div class="progress progress-success">
                     <div class="progress-bar" style="width: 40%"></div>
                 </div>
-                <span>{_'Storage'}:</span>
+                <span>{_smart.panel.storage}:</span>
                 <div class="progress progress-warning">
                     <div class="progress-bar" style="width: 60%"></div>
                 </div>
              </div>
              <div class="col-md-5 alert alert-success">
                  <dl class="">
-                     <dt><i class="icon-star"></i> {_'Products'}</dt>
+                     <dt><i class="icon-star"></i> {_smart.panel.products}</dt>
                      <dd>{$productNumber} / 100</dd>
                      
-                     <dt><i class="icon-user"></i> {_'Users'}</dt>
+                     <dt><i class="icon-user"></i> {_smart.panel.users}</dt>
                      <dd>1 / 3</dd>
                      
-                     <dt><i class="icon-hdd"></i> {_'Storage'}</dt>
+                     <dt><i class="icon-hdd"></i> {_smart.panel.storage}</dt>
                      <dd>450MB / 600MB</dd>
                      
                  </dl>       
@@ -109,23 +109,23 @@
             </div>
               
             <div class="col-md-5">
-            <h3><i class="icon-user"></i> {_'Account Info'}</h3>
-            {_'Name'}: {$usr->FirstName}
+            <h3><i class="icon-user"></i> {_smart.panel.account-info}</h3>
+            {_smart.panel.name}: {$usr->FirstName}
               </div>
             <div class="col-md-5">    
-                <h3><i class="icon-lock"></i> {_'Change password'}</h3>
+                <h3><i class="icon-lock"></i> {_smart.panel.change-pass}</h3>
              {*control newUserForm*}
                  {control passwordForm}   
             </div>
           </div>
             
           <div class="tab-pane" id="shopinfo">
-              <h3>{_'Edit your shop info'}</h3>
+              <h3>{_smart.panel.shop-edit}</h3>
               <div class="col-md-5">
                   <table n:snippet="shopinfo" class="table table-bordered">
                       <thead>
-                        <th>{_'Option'}</th>
-                        <th><i class="icon-success-sign"></i> {_'Change value by clicking'}</th>
+                        <th>{_smart.panel.option}</th>
+                        <th><i class="icon-success-sign"></i> {_smart.panel.change}</th>
                       </thead>
                       <tbody>
 
@@ -146,8 +146,8 @@
             
          <div class="tab-pane" id="other">
               
-                <h3>{_'Generate Sitemap'}</h3>
-                <a href="{plink sitemap!}" class="btn btn-primary"><i id="gen" class="icon-spinner"></i> {_'Click to Generate!'}</a>
+                <h3>{_smart.panel.generate-sitemap}</h3>
+                <a href="{plink sitemap!}" class="btn btn-primary"><i id="gen" class="icon-spinner"></i> {_smart.panel.sitemap-click}</a>
                 
                
          </div>
@@ -172,7 +172,7 @@
     $('#regen').click(function() { 
                 
                 $('#gen').attr('class', 'icon-spin icon-spinner');
-                $('.gen').text('Regenerating...');
+                $('.gen').text({_smart.panel.regetext});
                 $('#regen').attr('class', 'btn btn-primary disabled');
             });
      
@@ -185,7 +185,7 @@
                                         cancel    : {_'Cancel'},
                                         submit    : 'OK',
                                         indicator : '<i class="icon-spinner icon-spin"></i>',
-                                        tooltip   : 'Click to edit ...',
+                                        tooltip   : {_control.button.click-to-edit},
                                         callback : function(value, settings) {
                                            var json = $.parseJSON(value);
                                            $('.shopinfo-{$id}').text(json.edit);
