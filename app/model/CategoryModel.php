@@ -313,8 +313,8 @@ class CategoryModel extends Repository {
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('category')
-                ->WHERE('CategoryName LIKE ?
-                    OR CategoryDescription LIKE ?', 
+                ->WHERE('CategoryName LIKE %s ' .
+                        'OR CategoryDescription LIKE %s', 
                         '%'.$query.'%',
                         '%'.$query.'%')
                 ->FETCHASSOC('CategoryID');

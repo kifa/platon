@@ -695,8 +695,12 @@ class OrderModel extends Repository {
                 ->FROM('payment')
                 ->WHERE('PaymentID = %i', $id)
                 ->FETCH();
-			
-        return $payment['PaymentPrice'];
+	
+        $row = $payment['PaymentPrice'];
+        
+        dump('$row');
+        
+        return $row;
     }
 
     /*
