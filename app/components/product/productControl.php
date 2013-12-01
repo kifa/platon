@@ -12,7 +12,7 @@ use Nette\Forms\Form,
 class productControl extends BaseControl{
     
      /** @persistent */
-    public $lang;
+    public $locale;
 
     /** @var NetteTranslator\Gettext */
     protected $translator;
@@ -38,7 +38,7 @@ class productControl extends BaseControl{
     
     
     public function __construct(\ShopModel $shopModel, \ProductModel $productModel, 
-                                \CategoryModel $categoryModel, \GettextTranslator\Gettext $translator) {
+                                \CategoryModel $categoryModel, \Kdyby\Translation\Translator $translator) {
         $this->shopModel = $shopModel;
         $this->productModel = $productModel;
         $this->categoryModel = $categoryModel;

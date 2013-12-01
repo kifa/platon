@@ -12,13 +12,13 @@ use Nette\Forms\Form,
 class visitedProductControl extends BaseControl{
     
      /** @persistent */
-    public $lang;
+    public $locale;
 
     /** @var GettextTranslator\Gettext */
     protected $translator;
     private $productModel;
 
-    public function __construct(\ProductModel $productModel, \GettextTranslator\Gettext $translator) {
+    public function __construct(\ProductModel $productModel, \Kdyby\Translation\Translator $translator) {
         $this->productModel = $productModel;
         $this->translator = $translator;
     }

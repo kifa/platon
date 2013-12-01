@@ -18,7 +18,7 @@ use Nette\Forms\Form,
 class xmlFeedModule extends moduleControl {
     
      /** @persistent */
-    public $lang;
+    public $locale;
 
     /** @var NetteTranslator\Gettext */
     protected $translator;

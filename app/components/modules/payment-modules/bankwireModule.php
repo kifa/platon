@@ -17,7 +17,7 @@ use Nette\Forms\Form,
 class bankwireModule extends moduleControl {
 
     /** @persistent */
-    public $lang;
+    public $locale;
 
     /** @var NetteTranslator\Gettext */
     protected $translator;

@@ -14,7 +14,7 @@ use Nette\Forms\Form,
 class redesignControl extends BaseControl {
     
     /** @persistent */
-    public $lang;
+    public $locale;
     
     protected $translator;
     protected $shopModel;
@@ -22,7 +22,7 @@ class redesignControl extends BaseControl {
     protected $productModel;
 
 
-    public function __construct(\ShopModel $shopModel, \ProductModel $productModel, \GettextTranslator\Gettext $translator) {
+    public function __construct(\ShopModel $shopModel, \ProductModel $productModel, \Kdyby\Translation\Translator $translator) {
         $this->shopModel =  $shopModel;
         $this->translator = $translator;
         $this->productModel = $productModel;

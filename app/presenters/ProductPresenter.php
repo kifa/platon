@@ -55,7 +55,7 @@ class ProductPresenter extends BasePresenter {
         $this->visited = $visited;
     }
 
-    public function injectTranslator(GettextTranslator\Gettext $translator) {
+    public function injectTranslator(\Kdyby\Translation\Translator $translator) {
         $this->translator = $translator;
     }
     

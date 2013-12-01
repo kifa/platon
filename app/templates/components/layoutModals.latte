@@ -10,17 +10,17 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title"><i class="icon-star"></i> {_'Product SEO'}</h4>
+            <h4 class="modal-title"><i class="icon-star"></i> {_modals.admin.product-seo}</h4>
           </div>
              
     {form productSeoForm}
 
           <div class="modal-body">
-              <p class="muted">{_'Why is important to edit this field?'}
+              <p class="muted">{_modals.admin.seo-why}
               <ul>
-                  <li>{_'Your product will be easier to find on Google etc.'}</li>
-                  <li>{_'It helps to increase your eshop ranking.'}</li>
-                  <li>{_'All this lead to increase your selling power.'}</li>
+                  <li>{_modals.admin.seo-one}</li>
+                  <li>{_modals.admin.seo-two}</li>
+                  <li>{_modals.admin.seo-three}</li>
               </ul>
               
               </p>
@@ -33,7 +33,7 @@
         <div class="modal-footer">
                           {input set}
 
-             <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_'Close without saving'}</button>
+             <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">{_control.button.close-without}</button>
         </div>
             {/form}
 
@@ -46,14 +46,14 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title"><i class="icon-list"></i> {_'Edit Specification'}</h4>
+          <h4 class="modal-title"><i class="icon-list"></i> {_modals.admin.param-name}</h4>
         </div>
         <div class="modal-body">
           <div class="tabbable">
                 <ul class="nav nav-tabs">
-                    {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> {_'Edit Specs'}</a></li> {/if}
-                    <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> {_'Add Spec'}</a>
-                    {if $parameter} <li><a href="#deleteParams" data-toggle="tab"><i class="icon-trash"></i> {_'Delete Spec'}</a></li> {/if}
+                    {if $parameter} <li class="active"><a href="#editParams" data-toggle="tab"><i class="icon-pencil"></i> {_modals.admin.param-edit}</a></li> {/if}
+                    <li {if !$parameter}class="active"{/if}><a href="#addParam" data-toggle="tab"><i class="icon-plus"></i> {_modals.admin.param-add}</a>
+                    {if $parameter} <li><a href="#deleteParams" data-toggle="tab"><i class="icon-trash"></i> {_modals.admin.param-delete}</a></li> {/if}
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane {if $parameter}active{/if}" id="editParams">

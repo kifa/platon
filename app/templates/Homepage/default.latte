@@ -19,7 +19,7 @@
     <div class="col-md-12" n:snippet="content">
 
 <div class="row homepageProductsList" n:snippet="products">
-    <h2>{_'Featured products'}</h2>
+    <h2>{_hp.hp.featured-products}</h2>
       
             {foreach $products as $id => $product}
  
@@ -30,7 +30,7 @@
         
 <div class="row homepageCategoriesList" n:snippet="homepageCategories">
    {if $categories} 
-    <h2>{_'Featured categories'}</h2>
+    <h2>{_hp.hp.featured-categories}</h2>
     <div class="btn-group btn-group-justified">
         {foreach $categories as $id => $category}
             <a href="{plink Catalog:default $id, $category->CategorySeoName}" class="btn btn-primary btn-lg">{$category->CategorySeoName}</a>
@@ -61,7 +61,7 @@ $('.carousel').carousel()
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">{_'Featured video'}</h4>
+        <h4 class="modal-title">{_hp.hp.featured-video}</h4>
       </div>
       <div class="modal-body">
 
@@ -72,7 +72,7 @@ $('.carousel').carousel()
           {/if}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{_'Close'}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{_control.button.close}</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

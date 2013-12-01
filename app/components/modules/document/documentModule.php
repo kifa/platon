@@ -12,7 +12,7 @@ use Nette\Application\UI;
 class documentModule extends moduleControl {
 
     /** @persistent */
-    public $lang;
+    public $locale;
 
     /** @var NetteTranslator\Gettext */
     protected $translator;

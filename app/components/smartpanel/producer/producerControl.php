@@ -17,7 +17,7 @@ class producerControl extends BaseControl {
     protected $translator;
     private $row;
 
-    public function __construct(\ProductModel $productModel, \GettextTranslator\Gettext $translator) {
+    public function __construct(\ProductModel $productModel, \Kdyby\Translation\Translator $translator) {
         parent::__construct();
 
         $this->productModel = $productModel;

@@ -6,7 +6,7 @@
 
 {block pageheader}
 <div class="page-header">
-    <h1 n:block="title"><i class="icon-search"></i> {_'Search'} <small>{_'Search and discover our eshop.'}</small></h1>
+    <h1 n:block="title"><i class="icon-search"></i> {_hp.search.search-title} <small>{_hp.search.search-info}</small></h1>
 
 </div>
 
@@ -18,14 +18,14 @@
     {if $query}
     
     <div class="col-md-10">
-        <h4>{_'You are looking for'} <i>{$query}</i>? {_'We have found these results:'}</h4>
+        <h4>{_hp.search.search-term-q} <i>{$query}</i>? {_hp.search.search-term-a}</h4>
     </div>
     
     
 
     {if $categories}
     <div class="col-md-10">
-        <h4>{_'Categories'}</h4>
+        <h4>{_hp.search.categories}</h4>
   <table class="table">
               <tbody>        
 {foreach $categories as $catid => $category}
@@ -44,7 +44,7 @@
     
     {if $products}
     <div class="col-md-10">
-        <h4>{_'Products'}</h4>
+        <h4>{_hp.search.products}</h4>
         <div class="row homepageProductsList" n:snippet="products">
       
             {foreach $products as $id => $product}
@@ -60,7 +60,7 @@
         
     {if $posts}
     <div class="col-md-10">
-        <h4>{_'Posts'}</h4>
+        <h4>{_hp.search.posts}</h4>
          <table class="table">
               <tbody>
         {foreach $posts as $postid => $post}
@@ -80,7 +80,7 @@
     
     {control searchControl}
     <div class="col-md-12 margin5">
-    {_'Cannot find what are you looking for?'} <a href="{plink Homepage:contact}" class="btn btn-primary"><i class="icon-phone"></i> {_'Contact us'}</a>
+    {_hp.search.cannot} <a href="{plink Homepage:contact}" class="btn btn-primary"><i class="icon-phone"></i> {_hp.search.contact}</a>
     </div>
     {/if}
 
@@ -92,7 +92,7 @@
 {block sidebar}
 <div class="col-md-3">
     <ul class="nav nav-list">
-        <li class="nav-header"><i class="icon-group icon-large"></i> {_'Company info'}</a></li>
+        <li class="nav-header"><i class="icon-group icon-large"></i> {_hp.contact.company-info}</a></li>
         <li class="divider"></li>
         <li><strong>{$companyName}</strong></li>
         {if $companyPhone}
@@ -100,7 +100,7 @@
         {/if}
         <li><i class="icon-envelope"></i> {$companyMail}</li>
         <li class="divider"></li>
-        <li><i class="icon-home"></i> <strong>{_'Address'}</strong></li>
+        <li><i class="icon-home"></i> <strong>{_hp.contact.address}</strong></li>
         <li>{$companyAddress}</li>
     </ul>
 

@@ -1,0 +1,13 @@
+admin:
+    product-seo: 'Product SEO'
+    seo-why: 'Why is important to edit this field?'
+    seo-one: 'Your product will be easier to find on Google etc.'
+    seo-two: 'It helps to increase your eshop ranking.'
+    seo-three: 'All this lead to increase your selling power.'
+    product-param: 'Edit Specification'
+    param-edit: 'Edit Specs'
+    param-add: 'Add Spec'
+    param-delete: 'Delete Spec'
+order:
+    addnote: 'Add Note'
+    addnote-info: 'Add any note to this order'

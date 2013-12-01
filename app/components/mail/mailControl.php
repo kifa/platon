@@ -10,13 +10,13 @@ use Nette\Mail\Message;
 class mailControl extends BaseControl {
     
       /** @persistent */
-    public $lang;
+    public $locale;
 
     /** @var NetteTranslator\Gettext */
     protected $translator;
 
 
-    public function __construct(\Gettext\Gettext $translator) {
+    public function __construct(\Kdyby\Translation\Translator $translator) {
         parent::__construct();
         $this->translator = $translator;
     }

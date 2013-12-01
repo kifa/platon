@@ -13,10 +13,10 @@
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-             <li><a n:href="this, lang => br" >{if $lang == "br"}<i class="icon-ok-sign"></i> {/if}<img src="{$basePath}/img/blank.gif" class="flag flag-br" alt="Brazil" /> Português</a></li>
-            <li><a n:href="this, lang => en" >{if $lang == "en"}<i class="icon-ok-sign"></i> {/if}<img src="{$basePath}/img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
-            <li><a n:href="this, lang => cs" >{if $lang == "cs"}<i class="icon-ok-sign"></i> {/if}<img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" /> Česky</a></li>
-            <li><a n:href="this, lang => de" >{if $lang == "de"}<i class="icon-ok-sign"></i> {/if}<img src="{$basePath}/img/blank.gif" class="flag flag-de" alt="Deutsch" /> Deutsch</a></li>
+             <li><a n:href="this, locale => br" >{if $locale == "br"}<i class="icon-ok-sign"></i> {/if}<img src="{$basePath}/img/blank.gif" class="flag flag-br" alt="Brazil" /> Português</a></li>
+            <li><a n:href="this, locale => en" >{if $locale == "en"}<i class="icon-ok-sign"></i> {/if}<img src="{$basePath}/img/blank.gif" class="flag flag-gb" alt="English" /> English</a></li>
+            <li><a n:href="this, locale => cs" >{if $locale == "cs"}<i class="icon-ok-sign"></i> {/if}<img src="{$basePath}/img/blank.gif" class="flag flag-cz" alt="Česky" /> Česky</a></li>
+            <li><a n:href="this, locale => de" >{if $locale == "de"}<i class="icon-ok-sign"></i> {/if}<img src="{$basePath}/img/blank.gif" class="flag flag-de" alt="Deutsch" /> Deutsch</a></li>
         </ul>
     </div> 
 {if $user->isInRole('admin')}

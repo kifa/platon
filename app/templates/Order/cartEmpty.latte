@@ -1,11 +1,11 @@
 {var $robots = noindex}
 {block pageheader}
  <div class="page-header">
-        <h1 n:block="title">{_'Your cart'} <small>{_'It seems to be empty.'}</small></h1>
+        <h1 n:block="title">{_order.cart.cart-title} <small>{_order.cart.empty}</small></h1>
         </div>
 {/block}
 {block content}
 <div class="col-md-12">
-    <p>{_'Don´t worry and start'} <a href="{plink Homepage:default}" class="btn btn-lg btn-success">{_'SHOPPING NOW'}</a>.</p>
+    <p>{_order.cart.empty-one} <a href="{plink Homepage:default}" class="btn btn-lg btn-success">{_order.cart.empty-two}</a>.</p>
 </div>
 {/block}

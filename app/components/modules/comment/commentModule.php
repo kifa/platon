@@ -12,7 +12,7 @@ use Nette\Forms\Form,
 class commentModule extends moduleControl {
 
     /** @persistent */
-    public $lang;
+    public $locale;
 
     /** @var NetteTranslator\Gettext */
     protected $translator;

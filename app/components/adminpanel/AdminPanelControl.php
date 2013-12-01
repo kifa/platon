@@ -12,7 +12,7 @@ use Nette\Forms\Container;
 class AdminPanelControl extends BaseControl {
     
     /** @persistent */
-    public $lang;
+    public $locale;
 
     /** @var NetteTranslator\Gettext */
     protected $translator;
@@ -22,7 +22,7 @@ class AdminPanelControl extends BaseControl {
     private $category;
 
     
-    public function __construct(ProductModel $productModel, CategoryModel $categoryModel, GettextTranslator\Gettext $translator) {
+    public function __construct(ProductModel $productModel, CategoryModel $categoryModel, \Kdyby\Translation\Translator $translator) {
         $this->productModel = $productModel;
         $this->categoryModel = $categoryModel;
         $this->translator = $translator;

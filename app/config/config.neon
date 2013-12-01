@@ -45,23 +45,11 @@ common:
 		userModel: UserModel
 		blogModel: BlogModel
 	extensions:
-		exchangeExtension: h4kuna\Exchange\DI\ExchangeExtension
-	exchangeExtension:
-		currencies: {
-			czk: [decimal: 5, symbol: 'Kč', point: ',', thousand: ' ', mask: 'S 1', zeroClear: true]
-			usd: [symbol: '$']
-			gbp: [mask: 'S1', thousand: '.', symbol: '£', decimal: 0] }
-		vat: 20.5
-		vatIn: false
-		vatOut: false	
-	gettextTranslator:
-		lang: cs
-		files:
-			front: %appDir%/lang # for module Front and other non-specified modules
-			admin: %appDir%/lang-admin # for module Admin
-        # optional with defaults
-	#		layout: horizontal # or: vertical
-	#		height: 450
+		console: Kdyby\Console\DI\ConsoleExtension
+		translation: Kdyby\Translation\DI\TranslationExtension
+	translation:
+		default: cs
+		fallback: [cs_CZ, cs]
 
 
 	factories:

@@ -30,19 +30,13 @@ $webloaderExtension->install($configurator);
 $gapiExtension = new \Birne\Gapi\Extension();
 $gapiExtension->install($configurator);
 
-// Translation setup
-$configurator->onCompile[] = function ($configurator, $compiler) {
-    $compiler->addExtension('gettextTranslator', new GettextTranslator\DI\Extension);
-};
 
 $configurator->onCompile[] = function ($configurator, $compiler) {
     $compiler->addExtension('dibi', new DibiNette21Extension);
 };
 
-$configurator->onCompile[] = function ($configurator, $compiler) {
-    $compiler->addExtension('exchangeExtension', new h4kuna\Exchange\DI\ExchangeExtension());
-};
 
+Kdyby\Translation\DI\TranslationExtension::register($configurator);
 
 // Create Dependency Injection container from config.neon file
 $configurator->addConfig(__DIR__ . '/config/config.neon');
@@ -52,7 +46,7 @@ $configurator->addConfig(__DIR__ . '/config/config.local.neon', $configurator::N
 $container = $configurator->createContainer();
 
 $router = new RouteList;
-
+/*
 Route::addStyle('slug');
 Route::setStyleProperty('slug', Route::FILTER_OUT, function($url) {
     return Strings::webalize($url);
@@ -77,10 +71,10 @@ $router[] = new Route('informace/<spostid>[-<slug>][/<lang [a-z]{2}>]', 'Blog:st
 $router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
 
 $router[] = new Route('<presenter>/<action>[/<lang [a-z]{2}>]', 'Homepage:default');
+*/
+
+$router[] = new Route('[<locale=cs cs|en>/]<presenter>/<action>', "Homepage:default");
 
 $container->addService('router', $router);
-
-
-
 
 return $container;

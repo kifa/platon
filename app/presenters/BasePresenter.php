@@ -29,7 +29,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     public $backlink;
 
     /** @persistent */
-    public $lang;
+    public $locale;
 
     /** @var NetteTranslator\Gettext */
     protected $translator;
@@ -52,6 +52,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         if (!isset($this->gapisession)) {
             $this->gapisession = $this->getSession('gapitoken');
         }
+        
         
 //        $this->context->exchangeExtension->registerAsHelper($this->template);
     }
@@ -88,20 +89,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
      * Inject translator
      * @param NetteTranslator\Gettext
      */
-    public function injectTranslator(GettextTranslator\Gettext $translator) {
+    public function injectTranslator(\Kdyby\Translation\Translator $translator) {
         $this->translator = $translator;
     }
 
-    public function createTemplate($class = NULL) {
+    public function createTemplate($class = NULL)
+    {
         $template = parent::createTemplate($class);
-
-        // pokud není nastaven, použijeme defaultní z configu
-        if (!isset($this->lang)) {
-            $this->lang = $this->translator->getLang();
-        }
-
-        $this->translator->setLang($this->lang); // nastavíme jazyk
-        $template->setTranslator($this->translator);
+        $template->registerHelperLoader(callback($this->translator->createTemplateHelpers(), 'loader'));
 
         return $template;
     }
@@ -120,7 +115,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         $this->template->shopDescription = $shopInfo['Description'];
         $this->template->shopLogo = $shopInfo['Logo'];
         $this->template->GA = $shopInfo['GA'];
-        $this->template->lang = $this->lang;
+        $this->template->locale = $this->locale;
 
         $this->template->bannerone = $this->shopModel->loadBannerByType('banner1');
 
@@ -136,7 +131,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         if ($this->isAjax()) {
             $this->invalidateControl('flashMessages');
         }
-
+        
     }
 
     public function handleAddToCart($product, $amnt) {
@@ -202,15 +197,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         }
         $wwwDir = $this->context->parameters['wwwDir'];
         $files = new \WebLoader\FileCollection($wwwDir . '/css');
-        $files->addFiles(Finder::findFiles('*.css')->from($wwwDir . '/css'));
+   //     $files->addFiles(Finder::findFiles('*.css')->from($wwwDir . '/css'));
         $files->addFiles(array(
-          //  'bootstrap.min.css',
-          //  'font-awesome-ie7.min.css',
-          //  'font-awesome.min.css',
+            'bootstrap.min.css',
+            'font-awesome-ie7.min.css',
+            'font-awesome.min.css',
             '/user/theme.css',
             '/themes/' . $style,
-          //  'jquery.wysiwyg.css',
-          //  'flag.css'
+            'jquery.wysiwyg.css',
+            'flag.css'
         ));
 
         // kompilátoru seznam předáme a určíme adresář, kam má kompilovat

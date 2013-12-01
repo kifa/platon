@@ -3,11 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-<<<<<<< HEAD
-    "hash": "ada80f234c63a75f5c4a26bec8ba82e4",
-=======
-    "hash": "22186340addee58288daef04f8aca0b8",
->>>>>>> 04aa88197c43c53e2f43674f5e23184f4aad6bb6
+    "hash": "f022ee8ce734fc75662f2867c26e883c",
     "packages": [
         {
             "name": "castamir/pdf-response",
@@ -288,6 +284,125 @@
             "time": "2013-11-24 01:08:23"
         },
         {
+            "name": "kdyby/console",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kdyby/Console.git",
+                "reference": "d69a4dd1af6c79739f8bf9cbe021f58db615bf49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kdyby/Console/zipball/d69a4dd1af6c79739f8bf9cbe021f58db615bf49",
+                "reference": "d69a4dd1af6c79739f8bf9cbe021f58db615bf49",
+                "shasum": ""
+            },
+            "require": {
+                "nette/nette": "@dev",
+                "symfony/console": "~2.3"
+            },
+            "require-dev": {
+                "nette/tester": "@dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Kdyby\\Console\\": "src/"
+                },
+                "classmap": [
+                    "src/Kdyby/Console/CliPresenter.php",
+                    "src/Kdyby/Console/exceptions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Filip Procházka",
+                    "homepage": "http://filip-prochazka.com"
+                }
+            ],
+            "description": "Symfony Console integration for Kdyby components",
+            "homepage": "http://kdyby.org",
+            "keywords": [
+                "console",
+                "kdyby",
+                "nette"
+            ],
+            "time": "2013-11-02 12:44:52"
+        },
+        {
+            "name": "kdyby/translation",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kdyby/Translation.git",
+                "reference": "138a97222f62578b360aca26d8474f16822083c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kdyby/Translation/zipball/138a97222f62578b360aca26d8474f16822083c5",
+                "reference": "138a97222f62578b360aca26d8474f16822083c5",
+                "shasum": ""
+            },
+            "require": {
+                "nette/nette": "@dev",
+                "symfony/config": "~2.3",
+                "symfony/translation": "~2.3"
+            },
+            "require-dev": {
+                "nette/tester": "@dev",
+                "symfony/console": "~2.3"
+            },
+            "suggest": {
+                "kdyby/console": "If you wanna use extract command and much others, install also console.",
+                "symfony/locale": "Locale component provides fallback code to handle cases when the intl extension is missing."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Kdyby\\Translation": "src/"
+                },
+                "classmap": [
+                    "src/Kdyby/Translation/exceptions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Filip Procházka",
+                    "homepage": "http://filip-prochazka.com"
+                }
+            ],
+            "description": "Integration of Symfony/Translation into Nette Framework",
+            "homepage": "http://kdyby.org",
+            "keywords": [
+                "kdyby",
+                "nette",
+                "translation"
+            ],
+            "time": "2013-11-23 12:02:53"
+        },
+        {
             "name": "leafo/lessphp",
             "version": "v0.3.9",
             "source": {
@@ -445,53 +560,207 @@
             "time": "2013-11-28 14:50:41"
         },
         {
-            "name": "schmutzka/gettexttranslator",
-            "version": "2.0.12",
+            "name": "symfony/config",
+            "version": "v2.3.7",
+            "target-dir": "Symfony/Component/Config",
             "source": {
                 "type": "git",
-                "url": "https://github.com/TomasVotruba/GettextTranslator.git",
-                "reference": "126092219ea846b6facf2e25fae45488116695c4"
+                "url": "https://github.com/symfony/Config.git",
+                "reference": "1ced3d6c88b22df8cd1fe5209dbd6a89df362a29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/GettextTranslator/zipball/126092219ea846b6facf2e25fae45488116695c4",
-                "reference": "126092219ea846b6facf2e25fae45488116695c4",
+                "url": "https://api.github.com/repos/symfony/Config/zipball/1ced3d6c88b22df8cd1fe5209dbd6a89df362a29",
+                "reference": "1ced3d6c88b22df8cd1fe5209dbd6a89df362a29",
                 "shasum": ""
             },
             "require": {
-                "nette/nette": ">=2.1-dev",
-                "php": ">=5.3.0"
+                "php": ">=5.3.3",
+                "symfony/filesystem": "~2.3"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                }
+            },
             "autoload": {
-                "classmap": [
-                    "GettextTranslator/"
-                ]
+                "psr-0": {
+                    "Symfony\\Component\\Config\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-3-Clause"
+                "MIT"
             ],
             "authors": [
                 {
-                    "name": "Patrik Votoček",
-                    "email": "patrik@votocek.cz",
-                    "homepage": "http://patrik.votocek.cz",
-                    "role": "Developer"
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
                 },
                 {
-                    "name": "Tomáš Votruba",
-                    "homepage": "http://tomasvotruba.cz"
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
                 }
             ],
-            "description": "Translator for Nette (PHP framework).",
-            "homepage": "http://addons2.nette.org/schmutzka/gettexttranslator",
-            "keywords": [
-                "gettext",
-                "nette",
-                "translator"
+            "description": "Symfony Config Component",
+            "homepage": "http://symfony.com",
+            "time": "2013-09-19 09:45:20"
+        },
+        {
+            "name": "symfony/console",
+            "version": "v2.3.7",
+            "target-dir": "Symfony/Component/Console",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Console.git",
+                "reference": "00848d3e13cf512e77c7498c2b3b0192f61f4b18"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/00848d3e13cf512e77c7498c2b3b0192f61f4b18",
+                "reference": "00848d3e13cf512e77c7498c2b3b0192f61f4b18",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/event-dispatcher": "~2.1"
+            },
+            "suggest": {
+                "symfony/event-dispatcher": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Console\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
             ],
-            "time": "2013-09-20 09:11:16"
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Console Component",
+            "homepage": "http://symfony.com",
+            "time": "2013-11-13 21:27:40"
+        },
+        {
+            "name": "symfony/filesystem",
+            "version": "v2.3.7",
+            "target-dir": "Symfony/Component/Filesystem",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Filesystem.git",
+                "reference": "2b8995042086c5552c94d33b5553c492e9cfc00e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/2b8995042086c5552c94d33b5553c492e9cfc00e",
+                "reference": "2b8995042086c5552c94d33b5553c492e9cfc00e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Filesystem\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Filesystem Component",
+            "homepage": "http://symfony.com",
+            "time": "2013-09-19 09:45:20"
+        },
+        {
+            "name": "symfony/translation",
+            "version": "v2.3.7",
+            "target-dir": "Symfony/Component/Translation",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Translation.git",
+                "reference": "e0012648d7fc96d8f03bb7ca4d5e44f471a15417"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Translation/zipball/e0012648d7fc96d8f03bb7ca4d5e44f471a15417",
+                "reference": "e0012648d7fc96d8f03bb7ca4d5e44f471a15417",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/config": "~2.0",
+                "symfony/yaml": "~2.2"
+            },
+            "suggest": {
+                "symfony/config": "",
+                "symfony/yaml": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Translation\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Translation Component",
+            "homepage": "http://symfony.com",
+            "time": "2013-11-13 21:27:40"
         }
     ],
     "packages-dev": [
@@ -554,6 +823,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "nette/nette": 20,
+        "kdyby/translation": 20,
+        "kdyby/console": 20,
         "janmarek/webloader": 20,
         "leafo/lessphp": 20,
         "nette/tester": 20
