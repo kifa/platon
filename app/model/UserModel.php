@@ -29,7 +29,8 @@ class UserModel extends Repository{
         /*$this->getTable('users')
                 ->insert($insert);*/
         $this->db
-            ->INSERT('users', $insert);
+            ->INSERT('users', $insert)
+            ->EXECUTE();
 
     } 
     
@@ -42,8 +43,9 @@ class UserModel extends Repository{
                 ->where('UsersID', $username)
                 ->update($update);*/
         $this->db
-                ->UPDATE('users')
-                ->WHERE('UsersID = $s', $username);              
+            ->UPDATE('users')
+            ->WHERE('UsersID = $s', $username)
+            ->EXECUTE();              
     }
     
     public function insertUser($UsersID,$name,$phone){
@@ -56,7 +58,8 @@ class UserModel extends Repository{
         /*return $this->getTable('users')
                 ->insert($insert);*/
         $row = $this->db
-                ->INSERT('users', $insert);
+                ->INSERT('users', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -72,7 +75,8 @@ class UserModel extends Repository{
                 ->update($update);*/
         $row = $this->db
                 ->UPDATE('users')
-                ->WHERE('UsersID = %s', $UsersID);
+                ->WHERE('UsersID = %s', $UsersID)
+                ->EXECUTE();
         
         return $row;
     }
@@ -90,7 +94,8 @@ class UserModel extends Repository{
         /*return $this->getTable('address')
                 ->insert($insert);*/
         $row = $this->db
-                ->INSERT('address', $insert);
+                ->INSERT('address', $insert)
+                ->EXECUTE();
         
         return $row;
     }
@@ -108,7 +113,8 @@ class UserModel extends Repository{
                 ->update($update);*/
         $row = $this->db
                 ->UPDATE('address', $update)
-                ->WHERE('UsersID = $s', $usersID);
+                ->WHERE('UsersID = $s', $usersID)
+                ->EXECUTE();
         
         return $row;
     }

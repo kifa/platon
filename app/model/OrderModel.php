@@ -296,7 +296,7 @@ class OrderModel extends Repository {
             $insert =  array(
                  //'OrderID' => $id, //automaticky!
                 //'StatusID' => $status, //automaticky!
-                'UsersID' => $user,  //nepraktické, aby se pouzivalo "novak", "admin"
+                'UsersID' => $user,  
                 'ProductsPrice' => $price,
                 'DeliveryPaymentPrice' => $deliverypaymentprice,
                 'TaxPrice' => $finaltax, //
@@ -315,15 +315,19 @@ class OrderModel extends Repository {
 				->insert($insert);*/
                         $row = $this->db
                                 ->INSERT('orders', $insert)
-                                ->EXECUTE();
+                                ->EXECUTE();			                        
+                        
+			//$lastorderid = $row['OrderID'];
 			
-			$lastorderid = $row['OrderID'];
-			
+                        $lastorderid = $this->db
+                                ->getInsertId();
+                        
+                        dump($lastorderid);
 			if($note != ''){
 				$this->addNote($lastorderid, $user, $note);
 			}
-			
-			return $row;
+                        
+			return $lastorderid;
     }
     
     public function updateOrder($orderid, $shipping, $payment=NULL) {
@@ -696,9 +700,7 @@ class OrderModel extends Repository {
                 ->WHERE('PaymentID = %i', $id)
                 ->FETCH();
 	
-        $row = $payment['PaymentPrice'];
-        
-        dump('$row');
+        $row = $payment['PaymentPrice'];        
         
         return $row;
     }
