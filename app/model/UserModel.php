@@ -12,11 +12,14 @@ class UserModel extends Repository{
         /*return $this->getTable('users')
                 ->where('UsersID', $username)
                 ->fetch();*/
+        
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('users')
-                ->WHERE('UsersID = %s', $username)
+                ->WHERE('UsersID LIKE %s', $username)                
                 ->FETCH();
+        
+        dump($row);
     }
      
     public function userAdd($name, $username, $password) {
