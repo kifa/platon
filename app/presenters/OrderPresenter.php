@@ -201,8 +201,8 @@ class OrderPresenter extends BasePresenter {
                 $form->values->payment,
                 $form->values->note
         );
-        
-        $orderid = $order->OrderID;
+
+        $orderid = $order['OrderID'];
         
         //STEP 4 - insert Order Details and assign them to Order
         foreach ($this->cart->prd as $id => $amnt) {

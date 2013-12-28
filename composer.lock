@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "f022ee8ce734fc75662f2867c26e883c",
+    "hash": "fb65c0360778b69c0b0f5617d23c4f6c",
     "packages": [
         {
             "name": "castamir/pdf-response",

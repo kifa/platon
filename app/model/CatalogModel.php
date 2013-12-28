@@ -368,12 +368,12 @@ class CatalogModel extends Repository {
                      product.ProductStatusID, product.ProductDescription, product.ProductShort')
                 ->FROM('price')
                 ->JOIN('product')->ON('product.ProductID = price.ProductID')
-                ->WHERE('(product.ProductStatusID=2
-                        OR product.ProductStatusID=3)
-                        AND product.ProductVariants IS NULL 
-                        AND (product.ProductName LIKE ?
-                        OR product.ProductShort LIKE ?
-                        OR product.ProductDescription LIKE ?)',
+                ->WHERE('(product.ProductStatusID=2 ' .
+                        'OR product.ProductStatusID=3) ' .
+                        'AND product.ProductVariants IS NULL ' .
+                        'AND (product.ProductName LIKE %s ' .
+                        'OR product.ProductShort LIKE %s ' .
+                        'OR product.ProductDescription LIKE %s)',
                          '%'.$query.'%',
                          '%'.$query.'%',
                          '%'.$query.'%')

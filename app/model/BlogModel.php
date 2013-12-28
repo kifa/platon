@@ -262,8 +262,8 @@ class BlogModel extends Repository {
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('blog')
-                ->WHERE('BlogName LIKE ?'
-                        . 'OR BlogContent LIKE ?',
+                ->WHERE('BlogName LIKE %s '
+                        . 'OR BlogContent LIKE %s',
                         '%'.$query.'%',
                         '%'.$query.'%')
                 ->FETCHASSOC('BlogID');
