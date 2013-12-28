@@ -313,21 +313,31 @@ class OrderModel extends Repository {
 			
 			/*$row = $this->getTable('orders')
 				->insert($insert);*/
-                        $row = $this->db
-                                ->INSERT('orders', $insert)
-                                ->EXECUTE();			                        
-                        
-			//$lastorderid = $row['OrderID'];
-			
                         $lastorderid = $this->db
-                                ->getInsertId();
+                                ->INSERT('orders', $insert)
+                                ->EXECUTE(dibi::IDENTIFIER);			                                                
+                        
+			//$lastorderid = $row['OrderID'];                        
+			
+                        //$lastorderid = $this->db
+                        //        ->getInsertId();
                         
                         dump($lastorderid);
+                        
 			if($note != ''){
 				$this->addNote($lastorderid, $user, $note);
 			}
                         
-			return $lastorderid;
+                        $lastOrder = $this->db
+                                ->SELECT('*')
+                                ->FROM('orders')
+                                ->WHERE('OrderID = %i', $lastorderid)
+                                ->FETCH();
+                        
+                            dump($lastOrder);
+                            
+                            return $lastOrder;
+			//return $lastorderid;
     }
     
     public function updateOrder($orderid, $shipping, $payment=NULL) {

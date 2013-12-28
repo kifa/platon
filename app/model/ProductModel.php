@@ -69,11 +69,11 @@ class ProductModel extends Repository {
         );
         /*$row = $this->getTable('product')
                 ->insert($insert);   */
-        $row = $this->db
+        $lastprodid = $this->db
                 ->INSERT('product', $insert)
-                ->EXECUTE();
+                ->EXECUTE(dibi::IDENTIFIER);
         
-        $lastprodid = $row["ProductID"];        
+        //$lastprodid = $row["ProductID"];        
        
         $albumid = $this->insertPhotoAlbum($name, $description,$lastprodid, null);
         
@@ -971,11 +971,11 @@ class ProductModel extends Repository {
         
         /*$row = $this->getTable('product')
                 ->insert($insert);   */
-        $row = $this->db
+        $lastprodid = $this->db
                 ->INSERT('product', $insert)
-                ->EXECUTE();
+                ->EXECUTE(dibi::IDENTIFIER);
         
-        $lastprodid = $row["ProductID"];        
+        //$lastprodid = $row["ProductID"];        
         
         $this->insertPrice($lastprodid, $price);               
         
