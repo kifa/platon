@@ -8,7 +8,7 @@ class OrderNoteForm extends BaseForm{
     public $translator;
     
     public function build() {
-        $this->addTranslator($this->translator);
+        $this->setTranslator($this->translator);
         $this->addHidden('orderID', '');
         $this->addHidden('userName', '');
         $this->addTextArea('note', 'Your Note:')
