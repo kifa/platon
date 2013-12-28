@@ -93,10 +93,12 @@ class OrderModel extends Repository {
 			->where('UsersID',$user)
 			->fetch();*/
         $user = $this->db
-                ->SELECT('UserID')
+                ->SELECT('UsersID')
                 ->FROM('orders')
-                ->WHERE('OrderID = %i', $id);                        
+                ->WHERE('OrderID = %i', $id)
+                ->FETCHSINGLE('UsersID');                                        
         
+        dump($user);
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('address')
