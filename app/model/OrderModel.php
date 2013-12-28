@@ -72,12 +72,12 @@ class OrderModel extends Repository {
 			->where('orders.OrderID',$id)
 			->fetch();*/
         $row = $this->db
-                ->SELECT('orders.*, delivery.*, payment.*, users.*, status.*')
+                ->SELECT('orders.*, delivery.*, payment.*, users.*, orderstatus.*')
                 ->FROM('orders')
                 ->JOIN('delivery')->ON('delivery.DeliveryID = orders.DeliveryID')
                 ->JOIN('payment')->ON('payment.PaymentID = orders.PaymentID')
                 ->JOIN('users')->ON('users.UsersID = orders.UsersID')
-                ->JOIN('status')->ON('status.StatusID = orders.StatusID')
+                ->JOIN('orderstatus')->ON('orderstatus.OrderStatusID = orders.StatusID')
                 ->WHERE('orders.OrderID = %i', $id)
                 ->FETCH();
         
@@ -95,14 +95,13 @@ class OrderModel extends Repository {
         $user = $this->db
                 ->SELECT('UserID')
                 ->FROM('orders')
-                ->WHERE('OrderID = %i', $id);
+                ->WHERE('OrderID = %i', $id);                        
         
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('address')
                 ->WHERE('UsersID = %s', $user)
-                ->FETCH();
-        
+                ->FETCH();        
         return $row;
     }
     
