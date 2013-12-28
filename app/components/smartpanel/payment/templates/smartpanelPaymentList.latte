@@ -2,9 +2,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>{_'Name'}</th>
-                                <th>{_'Price'}</th>
-                                <th>{_'Status'}</th>
+                                <th>{_control.default.name}</th>
+                                <th>{_control.default.price}</th>
+                                <th>{_control.default.status}</th>
                                 <th class="col-md-2"></th>
                             </tr>
                         </thead>
@@ -25,6 +25,6 @@
                                 
                             </tr>                     
                         {/foreach}
-                            <tr><td colspan="4"><span class="muted"><i class="icon-large icon-info-sign"></i> {_"Edit by clicking on any value"}</td></tr>
+                            <tr><td colspan="4"><span class="muted"><i class="icon-large icon-info-sign"></i> {_control.button.click-value-edit}</td></tr>
                         </tbody>
                     </table>

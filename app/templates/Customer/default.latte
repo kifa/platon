@@ -1,0 +1,41 @@
+{block head}<title>{_'Your '}{$shopName}</title>{/block}
+
+{block slider}
+{/block}
+
+{block contents}
+    <div class="col-md-12" n:snippet="content">
+
+        
+        
+        <div class="col-md-6">
+        <div class="panel panel-default">
+               <div class="panel-heading"><i class="icon-user left icon-large"></i> <h3>{_cus.home.profile}</h3>:</div>
+               <img src="" class="img-circle center" >
+            <div class="panel-body">
+                <dl class="">
+                    <dt>{_order.info.name}:</dt> <dd>{$order->Name}</dd>
+                    <dt>{_order.info.email}:</dt> <dd>{$order->UsersID}</dd>
+                    <dt>{_order.info.phone}:</dt> <dd>{if $order->PhoneNumber != ''}{$order->PhoneNumber}{else}not available{/if}</strong></dd>
+                
+        {if $order->CompanyName != ""}
+                <dt>{_order.info.company}:</dt>
+                <dd>{$order->CompanyName}</dd>
+        {/if}
+                    </dl>
+            </div>
+</div> 
+
+{/block}
+
+{block #sidebars}
+<!-- -->
+{/block}
+
+{block script}
+
+{/block}
+
+{block modal}
+
+{/block}

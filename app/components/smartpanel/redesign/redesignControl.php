@@ -79,6 +79,23 @@ class redesignControl extends BaseControl {
         $this->presenter->redirect("this");
     }
 
+    protected function createComponentAddVideoForm() {
+        $videoForm = new Nette\Application\UI\Form;
+        $videoForm->setTranslator($this->translator);
+        $videoForm->addTextArea('video', 'Video embed code')
+                ->setAttribute('class', 'form-control');
+        $videoForm->addSubmit('add', 'Add video')
+                ->setAttribute('class', 'btn btn-success form-control');
+        $videoForm->onSuccess[] = $this->addVideoFormSubmitted;
+        return $videoForm;
+    }
+
+    public function addVideoFormSubmitted($form) {
+        if ($this->presenter->getUser()->isInRole('admin')) {
+            $this->shopModel->setShopInfo('homepageVideo', $form->values->video);
+            $this->presenter->redirect('this');
+        }
+    }
 
     protected function createComponentAddBannerForm() {
         if ($this->presenter->getUser()->isInRole('admin')) {

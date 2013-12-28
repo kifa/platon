@@ -1,6 +1,6 @@
 <div class="col-md-12" n:snippet="productMenu">
 <div class="btn-group">
-                <a class="btn btn-default btn-sm"><i class="icon-sitemap"></i> {_'Choose Category'}</a>
+                <a class="btn btn-default btn-sm"><i class="icon-sitemap"></i> {_cp.adminpanel.choosecategory}</a>
                 <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
@@ -17,7 +17,7 @@
             </div>
 
             <div class="btn-group">
-                <a class="btn btn-default btn-sm">{_'Choose Brand'}</a>
+                <a class="btn btn-default btn-sm">{_cp.adminpanel.choosebrand}</a>
                 <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
@@ -36,26 +36,26 @@
     
               {if $stat == 3} 
                 <a href="{link setProductStatus! $id, 2}" class="btn btn-default btn-sm ajax active"><i class="icon-thumbs-up"></i></a>
-                <a href="{link hideProduct! $id}" title="{_'Hide product'}" class="ajax btn btn-default btn-sm"><i id="hideProduct" class="icon-large icon-eye-close"></i> {_'Hide'}</a>                
-                <a href="{link deleteProduct! $id, $categor}" title="{_'Archive product'}" class="ajax btn btn-default btn-sm "><i id="deleteProduct" class="icon-large icon-inbox"></i> {_'Archive'}</a>
+                <a href="{link hideProduct! $id}" title="{_'Hide product'}" class="ajax btn btn-default btn-sm"><i id="hideProduct" class="icon-large icon-eye-close"></i> {_cp.adminpanel.hide}</a>                
+                <a href="{link deleteProduct! $id, $categor}" title="{_'Archive product'}" class="ajax btn btn-default btn-sm "><i id="deleteProduct" class="icon-large icon-inbox"></i> {_cp.adminpanel.archive}</a>
               {else}
                     <a href="{link setProductStatus! $id, 3}" class="btn btn-default btn-sm ajax"><i class="icon-thumbs-up"></i></a> 
                     {if $stat == 0}
-                        <a href="{link showProduct! $id}" title="{_'Publish product'}" class="ajax btn btn-danger btn-sm"><i id="showProduct" class="icon-large icon-eye-open"></i> {_'Unarchive'}</a>
+                        <a href="{link showProduct! $id}" title="{_'Publish product'}" class="ajax btn btn-danger btn-sm"><i id="showProduct" class="icon-large icon-eye-open"></i> {_cp.adminpanel.unarchive}</a>
                     {/if}
                   {if $stat == 1}
-                    <a href="{link showProduct! $id}" title="{_'Publish product'}" class="ajax btn btn-danger btn-sm"><i id="showProduct" class="icon-large icon-eye-open"></i> {_'Publish'}</a>
-                    <a href="{link deleteProduct! $id, $categor}" title="{_'Archive product'}" class="ajax btn btn-default btn-sm "><i id="deleteProduct" class="icon-large icon-inbox"></i> {_'Archive'}</a>
+                    <a href="{link showProduct! $id}" title="{_'Publish product'}" class="ajax btn btn-danger btn-sm"><i id="showProduct" class="icon-large icon-eye-open"></i> {_cp.adminpanel.publish}</a>
+                    <a href="{link deleteProduct! $id, $categor}" title="{_'Archive product'}" class="ajax btn btn-default btn-sm "><i id="deleteProduct" class="icon-large icon-inbox"></i> {_cp.adminpanel.archive}</a>
                   {elseif $stat == 2}
-                    <a href="{link hideProduct! $id}" title="{_'Hide product'}" class="ajax btn btn-default btn-sm"><i id="hideProduct" class="icon-large icon-eye-close"></i> {_'Hide'}</a>
-                    <a href="{link deleteProduct! $id, $categor}" title="{_'Archive product'}" class="ajax btn btn-default btn-sm "><i id="deleteProduct" class="icon-large icon-inbox"></i> {_'Archive'}</a>
+                    <a href="{link hideProduct! $id}" title="{_'Hide product'}" class="ajax btn btn-default btn-sm"><i id="hideProduct" class="icon-large icon-eye-close"></i> {_cp.adminpanel.hide}</a>
+                    <a href="{link deleteProduct! $id, $categor}" title="{_'Archive product'}" class="ajax btn btn-default btn-sm "><i id="deleteProduct" class="icon-large icon-inbox"></i> {_cp.adminpanel.archive}</a>
                   {/if}
                {/if}
-                    <a href="{plink duplicateProduct! $id}" class="btn btn-default btn-sm">{_'Duplicate product'}</a>
+                    <a href="{plink duplicateProduct! $id}" class="btn btn-default btn-sm">{_cp.adminpanel.duplicate}</a>
             </div>
             <div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editParam" id="editParamButton"><i class="icon-list"></i> {_"Edit Specs"}</button>
-                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editSeo" id="editSeoButton"><i class="icon-star"></i> {_"Edit SEO"}</button>
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editParam" id="editParamButton"><i class="icon-list"></i> {_cp.adminpanel.editspecs}</button>
+                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editSeo" id="editSeoButton"><i class="icon-star"></i> {_cp.adminpanel.editseo}</button>
 
             </div>
             <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#stats" id="statsButton"><i class="icon-bar-chart"></i> {_"Stats"}</button>

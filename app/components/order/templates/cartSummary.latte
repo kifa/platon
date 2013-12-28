@@ -1,0 +1,24 @@
+    <div class="col-md-2 col-xs-12 alert alert-success">
+        <h3><i class="icon-shopping-cart"></i> {_order.cart.cart-title}:</h3>
+{var $grandtotal = 0}
+{foreach $cart as $id => $products}
+    {foreach $products as $amnt => $product}
+                {var $subtotal = $amnt * $product->FinalPrice}                   
+                    {if $product->ProductVariantName}
+                    {$product->ProductName} - {$product->ProductVariantName}
+                    {else}
+                    {$product->ProductName}
+                    {/if}
+                   {var $grandtotal = $grandtotal + $subtotal}
+        <hr>
+    {/foreach}
+{/foreach}
+<br>
+                <h4>{_order.cart.subtotal}:</h4>
+                {$grandtotal},-
+                <h4>{_order.cart.shipping}:</h4>
+                <span class="shipping">{_order.checkout.not-selected}</span>
+                <h4>{_order.cart.total}:</h4>
+        <h3 class="ordertotal">{$grandtotal},-</h3>
+                
+    </div>

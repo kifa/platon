@@ -1,0 +1,23 @@
+adminpanel:
+    addproduct: "Add Product"
+    addcategoryphoto: "Add Category Photo"
+    publishcategory: 'Publish category'
+    unpublishcategory: 'Unpublish category'
+    featurecategory: 'Feature category!'
+    deletecategory: "Delete Category"
+    parentcategory: 'Parent Category'
+    noparent: '--No parent--'
+    editseo: "Edit SEO"
+    choosecategory: 'Choose Category'
+    choosebrand: 'Choose Brand'
+    hide: 'Hide'
+    archive: 'Archive'
+    unarchive: 'Unarchive'
+    publish: 'Publish'
+    duplicate: 'Duplicate product'
+    editspecs: "Edit Specs"
+    publish-info: 'You are about to PUBLISH'
+product:
+    admin: "Admin"
+redesign:
+    title: 'ReDesign'

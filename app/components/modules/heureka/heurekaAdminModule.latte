@@ -2,10 +2,10 @@
 <div class="alert alert-info">
     <strong><i class="icon-ok-sign"></i> {$name}</strong>
     <p>{$desc}</p>
-    <a n:href="updateXML!" class="btn btn-primary">{_'Update'} HEUREKA XML</a>
-    <a class="btn btn-warning" n:href="uninstallModule">{_'Deactivate Module'}</a>
+    <a n:href="updateXML!" class="btn btn-primary">{_module.default.update} HEUREKA XML</a>
+    <a class="btn btn-warning" n:href="uninstallModule">{_module.default.deactivate}</a>
     <hr>
-    <p><strong>{_'Settings'} - {_'current key:'} {$key}</strong></p>
+    <p><strong>{_module.heureka.settings} - {_module.heureka.key}: {$key}</strong></p>
     {control updateForm}
     
 </div>

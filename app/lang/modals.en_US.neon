@@ -11,3 +11,5 @@ admin:
 order:
     addnote: 'Add Note'
     addnote-info: 'Add any note to this order'
+track:
+    track-title: 'Track your order'

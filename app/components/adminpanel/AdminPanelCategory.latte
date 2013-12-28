@@ -1,19 +1,19 @@
 <div class="col-md-12" n:snippet="controlPanel">
-     <button class="btn btn-default" type="button" data-toggle="modal" data-target="#addProduct"><i class="icon-plus"></i> {_"Add Product"}</button>
+     <button class="btn btn-default" type="button" data-toggle="modal" data-target="#addProduct"><i class="icon-plus"></i> {_cp.adminpanel.addproduct}</button>
                 <div class="btn-group">
                     <a href="#" class="btn btn-default"><i class="icon-bar-chart"></i> {_"Stats"}</a>
                         {if $photo == NULL}
                     
                         {/if}
-                    <a href="#addCategoryPhoto" class="btn btn-default" data-toggel="modal" data-target="#addCategoryPhoto" id="addCategoryPhotoButton"><i class="icon-camera-retro"></i> {_"Add Category Photo"}</a>
+                    <a href="#addCategoryPhoto" class="btn btn-default" data-toggel="modal" data-target="#addCategoryPhoto" id="addCategoryPhotoButton"><i class="icon-camera-retro"></i> {_cp.adminpanel.addcategoryphoto}</a>
 
                 </div>
 
                 <div class="btn-group" n:snippet="categoryStatus">
                             {if $stat == 0}
-                    <a class="btn btn-default ajax btn-success" href="{link setCategoryStatus! $categor, 1}" ><i class="icon-eye-open"></i> {_'Publish category'}</a>
+                    <a class="btn btn-default ajax btn-success" href="{link setCategoryStatus! $categor, 1}" ><i class="icon-eye-open"></i> {_cp.adminpanel.publishcategory}</a>
                            {elseif $stat >= 1}
-                    <a class="btn btn-default ajax" href="{link setCategoryStatus! $categor, 0}" ><i class="icon-eye-close"></i> {_'Unpublish category'}</a>
+                    <a class="btn btn-default ajax" href="{link setCategoryStatus! $categor, 0}" ><i class="icon-eye-close"></i> {_cp.adminpanel.unpublishcategory}</a>
                    {/if}
                     <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
@@ -21,25 +21,25 @@
                     <ul class="dropdown-menu">
                         {if $stat == 2}
                         <li><a href="{link setCategoryStatus! $categor, 1}" class="ajax">
-                        <i class="icon-ok-sign"></i>{_'Feature category!'}</a></li>
+                        <i class="icon-ok-sign"></i>{_cp.adminpanel.featurecategory}</a></li>
                         {else}
                         <li><a href="{link setCategoryStatus! $categor, 2}" class="ajax">
-                        {_'Feature category!'}</a></li>
+                        {_cp.adminpanel.featurecategory}</a></li>
                         {/if}
-                        <li><a href="#deleteCategory" data-toggel="modal" data-target="#deleteCategory" id="deleteCategoryButton"><i class="icon-trash"></i> {_"Delete Category"}</a>
+                        <li><a href="#deleteCategory" data-toggel="modal" data-target="#deleteCategory" id="deleteCategoryButton"><i class="icon-trash"></i> {_cp.adminpanel.deletecategory}</a>
                         </li>
                     </ul>
                 </div>
                 
                 <div class="btn-group">
-                    <a class="btn btn-default"><i class="icon-sitemap"></i> {_'Parent Category'}</a>
+                    <a class="btn btn-default"><i class="icon-sitemap"></i> {_cp.adminpanel.parentcategory}</a>
                     <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" n:snippet="parentCategory">
                         <li class="parentcat"><a href="{link setParentCategory!  $categor, NULL }" class="ajax">
                         {if $higher == NULL}<i class="icon-ok-sign"></i>{/if}
-                        {_'--No parent--'}</a></li> 
+                        {_cp.adminpanel.noparent}</a></li> 
                         
                         {foreach $categories as $catID => $cat}
                         {if $categor != $catID & $cat->CategoryStatus != 3}
@@ -52,7 +52,7 @@
                     </ul>
                 </div>
      
-                     <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editSeo" id="editSeoButton"><i class="icon-star"></i> {_"Edit SEO"}</button>
+                     <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editSeo" id="editSeoButton"><i class="icon-star"></i> {_cp.adminpanel.editseo}</button>
 
                                 
    </div>

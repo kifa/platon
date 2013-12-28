@@ -5,7 +5,7 @@
          cancel    : {_'Cancel'},
          submit    : 'OK',
          indicator : '<i class="icon-spinner icon-spin"></i>',
-         tooltip   : 'Click to edit ...',
+         tooltip   : {_control.button.click-to-edit},
          callback : function(value, settings) {
             var json = $.parseJSON(value);
             $('.prodName-{$prod->ProducerID}').text(json.edit);
@@ -18,7 +18,7 @@
             cancel    : {_'Cancel'},
             submit    : 'OK',
             indicator : '<i class="icon-spinner icon-spin"></i>',
-            tooltip   : 'Click to edit ...',
+            tooltip   : {_control.button.click-to-edit},
             callback : function(value, settings) {
                var json = $.parseJSON(value);
                $('.prodDesc-{$prod->ProducerID}').text(json.edit);

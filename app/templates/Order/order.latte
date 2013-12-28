@@ -1,0 +1,183 @@
+{var $robots = noindex}
+{block pageheader}
+
+        <div class="page-header">
+            <h1 n:block="title">{_order.cart.order-title} <small class="hidden-xs">{_order.cart.order-info}</small></h1>
+        </div>
+
+{/block}
+    
+{block content}
+<div class="col-md-12" n:snippet="cartTable">    
+<div class="col-md-9">
+    <div class="">
+        {form orderForm role => form}
+ <div class="col-md-11 cartPart">           
+<legend id="orderform"><span class="label label-success">1</span> {_order.cart.choose-delivery}</legend>
+    <div class="controls col-md-12">
+       <div class="form-group col-md-5">
+           {ifset $lowerShippers}
+            {label shippers /}
+            {/ifset}
+             <div class="input-group">
+           
+            {input shippers}
+            </div>
+        </div>
+        {ifset $lowerShippers}
+         <div class="form-group col-md-5">
+          {foreach $lowerShippers as $lower}
+                {label lowerShippers$lower /}
+             <div class="input-group">
+                {input lowerShippers$lower}
+            </div>
+            {/foreach}
+        
+        </div>
+        {/ifset}
+        <div class="col-md-10 margin5"><strong>{_order.cart.shipping-sel}: </strong><span class="shipping">{_order.cart.not-selected}</span></div>
+    </div>
+    </div>
+ <div class="col-md-11 cartPart">
+<legend><span class="label label-success">2</span> {_order.cart.fill-contact}</legend>
+            <div class="controls col-md-5">
+                <div class="form-group">
+                {label name /}
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-user"></i></span>
+                {input name}
+                </div></div>
+                    <div class="form-group">
+                {label phone /}
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon-phone"></i></span>
+                {input phone}
+                </div></div>
+                    <div class="form-group">
+                {label email /}
+                <div class="input-group">
+                    <span class="input-group-addon">@</span>
+                {input email}
+                </div></div>
+            </div>
+            <div class="controls col-md-6">
+                <div class="form-group">
+                {label address /}
+                {input address}
+                </div>
+                <div class="form-group">
+                {label city /}
+                {input city}
+                </div>
+                <div class="form-group">
+                {label zip /}
+                {input zip}
+                </div>
+            </div>    
+ </div> 
+ <div class="col-md-11 cartPart">
+<legend><span class="label label-success">3</span> {_order.cart.fill-payment}</legend>
+            <div class="controls col-md-4">
+                {label payment /}
+                {input payment}
+            </div>
+ </div>
+         <div class="col-md-11 cartPart">
+<legend><span class="label label-success">4</span> {_order.cart.fill-finish}</legend>
+            <div class="controls col-md-5">
+                {input send}
+                <hr>
+                {input termButton}
+                {_order.cart.terms-agreed}
+                
+            </div>
+             <div class="controls col-md-6">
+                {label note /}
+                {input note}
+                 {input shipping}
+            </div>
+         </div>
+        {/form}
+    </div>
+    
+    
+    
+    
+      </div> 
+{control modalControl:info terms, $terms->StaticTextName, $terms->StaticTextContent}
+    
+
+</div>
+{/block}
+
+{block sidebars}
+    
+{control cartControl:summary}
+    
+{/block}
+
+    {block script}
+<script>
+
+        var sp = new Array(); 
+        {foreach $shippers as $id => $value}
+                sp[{$id}] = {$value};
+        {/foreach}
+        
+        
+        var pm = new Array();
+        {foreach $payment as $id => $value}
+                pm[{$id}] = {$value};
+        {/foreach}
+        
+       
+        var shipping = 0;
+        var payment = 0;
+
+        $('select[name="shippers"]').change(function() {
+            i = $('select[name="shippers"] option:selected').val();
+            shipping = sp[i];
+             var grandtotal = shipping + {$grandtotal} + payment;
+        
+        g = $('select[name="shippers"] option:selected').text();
+        $('.shipping').html(g);
+        $('.ordertotal').html(grandtotal + ',-'); 
+        $('input[name=shipping]').val(i);
+        //$('select[name="shippers"] option:selected').text().html().appendTo('#orderform');
+        });
+        
+        
+         {ifset $lowerShippers}
+          {foreach $lowerShippers as $lower}
+                    
+        $('select[name="lowerShippers{!$lower}"]').change(function() {
+            i = $('select[name="lowerShippers{!$lower}"] option:selected').val();
+            shipping = sp[i];
+             var grandtotal = shipping + {$grandtotal} + payment;
+        $('input[name=shipping]').val(i);
+        g = $('select[name="lowerShippers{!$lower}"] option:selected').text();
+        $('.shipping').html(g);
+        
+        $('.ordertotal').html(grandtotal + ',-'); 
+        });
+        $('#sel0').fadeOut();
+        
+        $('#sel{!$lower}').fadeIn();
+        
+        {/foreach}
+        {/ifset}
+                
+        $('select[name=payment]').change(function() {
+            p = $('select[name=payment] option:selected').val();         
+            payment = pm[p];
+
+            var grandtotal = payment + {$grandtotal} + shipping;
+        $('.ordertotal').html(grandtotal + ',-'); 
+        });
+        
+            $('.ajax').click(function(){
+    $(this).html('<i class="icon-spinner icon-spin"></i>');
+});
+</script>
+{/block}
+

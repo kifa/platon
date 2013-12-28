@@ -6,7 +6,7 @@ $('.paymentName-{$payment->PaymentID}').editable( {link editPaymentName! $paymen
          cancel    : {_'Cancel'},
          submit    : 'OK',
          indicator : '<i class="icon-spinner icon-spin"></i>',
-         tooltip   : 'Click to edit ...',
+         tooltip   : {_control.button.click-to-edit},
          callback : function(value, settings) {
             var json = $.parseJSON(value);
             $('.paymentName-{$payment->PaymentID}').text(json.edit);
@@ -19,7 +19,7 @@ $('.paymentName-{$payment->PaymentID}').editable( {link editPaymentName! $paymen
          cancel    : {_'Cancel'},
          submit    : 'OK',
          indicator : '<i class="icon-spinner icon-spin"></i>',
-         tooltip   : 'Click to edit ...',
+         tooltip   : {_control.button.click-to-edit},
          callback : function(value, settings) {
             var json = $.parseJSON(value);
             $('.paymentPrice-{$payment->PaymentID}').text(json.edit);
@@ -32,7 +32,7 @@ $('.paymentName-{$payment->PaymentID}').editable( {link editPaymentName! $paymen
             cancel    : {_'Cancel'},
             submit    : 'OK',
             indicator : '<i class="icon-spinner icon-spin"></i>',
-            tooltip   : 'Click to edit ...',
+            tooltip   : {_control.button.click-to-edit},
             callback : function(value, settings) {
                var json = $.parseJSON(value);
                $('.paymentStatus-{$payment->PaymentID}').text(json.edit);
