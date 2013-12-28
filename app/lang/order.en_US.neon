@@ -4,7 +4,7 @@ cart:
     cart-empty: 'It seems to be empty.'
     empty-one: 'Don´t worry and start'
     empty-two: 'SHOPPING NOW'
-    product: 'Product'
+    product: 'Products'
     amount: 'Amount'
     price: 'Price'
     subtotal: 'Subtotal'
@@ -23,6 +23,8 @@ cart:
     item-price: 'Item price'
     total-price: 'Total price'
     payment: 'Payment'
+    order-title: 'Your order'
+    order-info: 'Just select shipping method and fill your contact information. And our products are coming to you.'
 done:
     order-title: 'Order summary'
     order-info: 'Complete summary order'

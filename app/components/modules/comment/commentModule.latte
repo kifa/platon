@@ -1,6 +1,6 @@
 {if $status == 1}
 <div class="panel panel-default">
-    <div class="panel-heading"><strong><i class="icon-check"></i> {_'Review'}</strong></div>
+    <div class="panel-heading"><strong><i class="icon-check"></i> {_module.comment.review}</strong></div>
   <div class="panel-body">
 
             {if $comments}
@@ -8,7 +8,7 @@
                 {foreach $comments as $id => $comment}
                     <li><strong>{$comment->CommentTitle}</strong>{$comment->CommentContent}
                                    {if $user->isInRole('admin')}
-                            <a href="{link deleteComment! $id}"><i class="icon-trash" ></i> {_'Delete comment'}</a></li>
+                            <a href="{link deleteComment! $id}"><i class="icon-trash" ></i> {_module.comment.deletecomment}</a></li>
                                       {/if}
                               {/foreach}
                 </ul>
@@ -39,11 +39,11 @@
         {/form}
             </div>
     {if $user->isInRole('admin')}
-            <p class="muted"><i class="icon-info-sign"></i> {_'To remove this module visit'} <a href='{plink smartPanel:modules}' >{_'SmartPanel'}</a>
+            <p class="muted"><i class="icon-info-sign"></i> {_module.comment.toremove-one} <a href='{plink smartPanel:modules}' >{_smart.menu.smart-panel}</a>
                 </p>
     {/if}
   </div>
 </div>
 {elseif $user->isInRole('admin')}
-<a n:href='installModule' class="btn btn-primary">{_'Add Comments module'}</a>
+<a n:href='installModule' class="btn btn-primary">{_module.comment.addmodule}</a>
 {/if}

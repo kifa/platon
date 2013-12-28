@@ -1,0 +1,25 @@
+default:
+    deactivate: 'Deactivate Module'
+    activate: 'Install module'
+    toremove-one: 'To remove this module visit'
+    update: 'Update'
+    settings: 'Settings' 
+comment: 
+    review: 'Review'
+    deletecomment: 'Delete comment'
+    toremove-one: 'To remove this module visit'
+    addmodule: 'Add Comments module'
+    latest-title: 'Latest Comments & Reviews'
+    more: 'More comments'
+    date: 'Date'
+    subject: 'Subject'
+    name: 'Name'
+    status: 'Status'
+docs:
+    title: 'Docs'
+    download: 'Download'
+    delete: 'Delete document'
+    addmodule: 'Add Documents module'
+heureka:
+    settings: 'Settings'
+    key: 'current key'

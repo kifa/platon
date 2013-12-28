@@ -3,6 +3,15 @@ nav:
 button:
     close-without: 'Close without saving'
     click-to-edit: 'Click to edit ...'
+    click-value-edit: "Edit by clicking on any value"
     close: 'Close'
     buy: 'Buy'
     view: 'View'
+    next: 'Next'
+    prev: 'Prev'
+default:
+    name: 'Name'
+    product: 'Product'
+    date: 'Date'
+    status: 'Status'
+    desc: 'Description'

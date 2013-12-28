@@ -6,9 +6,9 @@
                 <img style="" src="{$content}">
             </div>
             <div class='lightbox-footer'>
-                {if $id !== 0}<a data-toggle="lightbox" href="#photo{$id-1}" data-dismiss="lightbox" class="btn btn-small btn-primary"><i class="icon-arrow-left"></i> Prev</a>{/if}
-                <a data-toggle="lightbox" href="#photo{$id+1}" data-dismiss="lightbox" class="btn btn-small btn-primary"><i class="icon-arrow-right"></i> Next</a>
-                <a href="#" data-dismiss="lightbox" class="btn btn-small btn-primary"><i class="icon-remove"></i> Close</a>
+                {if $id !== 0}<a data-toggle="lightbox" href="#photo{$id-1}" data-dismiss="lightbox" class="btn btn-small btn-primary"><i class="icon-arrow-left"></i> {_control.button.prev}</a>{/if}
+                <a data-toggle="lightbox" href="#photo{$id+1}" data-dismiss="lightbox" class="btn btn-small btn-primary"><i class="icon-arrow-right"></i> {_control.button.next}</a>
+                <a href="#" data-dismiss="lightbox" class="btn btn-small btn-primary"><i class="icon-remove"></i> {_control.button.close}</a>
 
             </div>
         </div>

@@ -15,35 +15,7 @@
 
             
 <div class="col-md-12">
-    <div class="col-md-6">
-        
- {snippet form}       
-         {form contactForm class => ajax}
-<ul class="errors" n:if="$form->hasErrors()">
-        <li n:foreach="$form->errors as $error">{$error}</li>
-</ul>
-
-      <legend><i class="icon-envelope"></i> {_hp.contact.write-us}</legend>
-      <div class="form-group">
-    {label note /}
-    {input note}
-      </div>
-    
-      <div class="form-group">
-    {label email /}
-    <div class="input-group">
-        <span class="input-group-addon">@</span>
-    {input email}
-    </div>
-      </div>
-      <div class="form-group">
-     {input send}
-      </div>
-     <span class="help-block"><i class="icon-info-sign"></i> {_hp.contact.respond-info}</span>
-
-{/form}
-{/snippet}
-    </div>
+    {control contactControl}
     <div class="col-md-5" n:snippet="contactBlock">
     <legend class="contactHeading" n:snippet="contactHeading">{$post->StaticTextName}</legend>
         {if $user->isInRole('admin')}
@@ -77,6 +49,11 @@
         <li class="divider"></li>
         <li><i class="icon-home"></i> <strong>{_hp.contact.address}</strong></li>
         <li>{$companyAddress}</li>
+        {if $account}
+        <li class="divider"></li>
+        <li><i class="icon-money"></i> <strong>{_hp.contact.account}</strong></li>
+        <li>{$account}</li>
+        {/if}
     </ul>
     </div>
     </div>

@@ -8,7 +8,7 @@
                     {$product->FinalPrice}
     </td>
     <td>
-        <a href="{link unarchiveProduct! $product->CategoryID, $product->ProductID}" data-action="{_'PUBLISH'}" data-confirm="{_'You are about to'} {_'PUBLISH'} - {$product->ProductName|upper}. " title="{_'Publish product'}" class="btn btn-danger btn-sm"><i id="showProduct" class="icon-large icon-eye-open"></i> {_'Unarchive'}</a>
+        <a href="{link unarchiveProduct! $product->CategoryID, $product->ProductID}" data-action="{_cp.adminpanel.publish}" data-confirm="{_cp.adminpanel.publish-info} - {$product->ProductName|upper}. " title="{_cp.adminpanel.publish}" class="btn btn-danger btn-sm"><i id="showProduct" class="icon-large icon-eye-open"></i> {_cp.adminpanel.unarchive}</a>
     </td>
 </tr>
 

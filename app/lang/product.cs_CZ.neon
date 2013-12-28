@@ -1,5 +1,20 @@
-common:
-
-production < common:
-
-development < common:
+front:
+    last: 'LAST'
+    out-of-stock: 'OUT OF STOCK'
+    sold-out: 'SOLD OUT'
+    hot: 'HOT'
+    sale: 'SALE'
+    info: 'Info'
+    specs: 'Spec'
+    ask: 'Ask'
+    instock: 'In Stock'
+    popular: 'Popular product'
+    producer: 'Producer'
+    respond-info: 'We will respond as soon as possible.'
+    dear-customer: 'Dear customer, this product is no longer available to buy. We are sorry . But you can try any other product from category.'
+    info-large: 'Information about product'
+    photo: 'Photo'
+    video: 'Product Video'
+    discount: 'Discount'
+    shipping: 'Shipping'
+    from: 'from'

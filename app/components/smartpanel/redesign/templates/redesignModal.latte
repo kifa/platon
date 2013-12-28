@@ -18,7 +18,6 @@
                             <li><a href="#addLogo" data-toggle="tab"><i class=""></i> {_'Upload your logo'}</a></li>
                             <li><a href="#photos" data-toggle="tab"><i class=""></i> {_'Edit photos'}</a></li>
                            <li><a href="#addStyle" data-toggle="tab"><i class=""></i> {_'Add your style.css'}</a></li>
-                        <li><a href="#premium" data-toggle="tab"><i class="icon-star icon-small"></i> {_'Premium design'}</a></li>
                     </ul>
                     <div class="tab-content col-md-8">
                         <div class="tab-pane active" id="editLayout">
@@ -102,7 +101,9 @@
                                 <dt><a class="btn btn-default" n:href="setShopLayout! 'HomepageLayout', 'fullpanel'" ><i n:tag-if="$homepageSel == 'fullpanel'" class="icon icon-ok-sign"></i> {_'Full Panel'}</a></dt>
                                 <hr>
                             </dl>
-
+                            
+                             <h3>{_'Add homepage Video'}</h3>
+                                       {control addVideoForm}
                         </div>
                         
                         <div class="tab-pane" id="editSlider">

@@ -1,0 +1,29 @@
+<div class="col-md-6">
+        
+ {snippet}       
+  {form contactForm class => ajax}
+    <ul class="errors" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $error">{$error}</li>
+    </ul>
+
+    <legend><i class="icon-envelope"></i> {_hp.contact.write-us}</legend>
+    <div class="form-group">
+        {label note /}
+        {input note}
+    </div>
+    
+    <div class="form-group">
+       {label email /}
+    <div class="input-group">
+        <span class="input-group-addon">@</span>
+    {input email}
+    </div>
+      </div>
+      <div class="form-group">
+     {input send}
+      </div>
+     <span class="help-block"><i class="icon-info-sign"></i> {_hp.contact.respond-info}</span>
+
+{/form}
+{/snippet}
+    </div>
