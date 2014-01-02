@@ -1,0 +1,11 @@
+{if $news}
+<div class="alert alert-success">
+    <p>{_alert.smart.we-have-news}</p>
+    {if $orders > 0}
+    <p>{_alert.smart.you-have} {$orders} {_alert.smart.orders}</p>
+    {/if}
+    {if $comments > 0 }
+    <p>{_alert.smart.you-have} {$comments} {_alert.smart.comments}</p>
+    {/if}
+    </div>
+{/if}

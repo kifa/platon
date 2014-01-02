@@ -1,3 +1,8 @@
 info:
     cookies: 'Cookies help us deliver our services. By using our services, you agree to our use of cookies.'
     you-are-admin: 'You are logged in as admin. You can simply edit this category by clicking on Title, Description or panel bellow etc. More info?'
+smart:
+    we-have-news: 'Here are some news for you:'
+    you-have: 'You have'
+    orders: ' NEW orders'
+    comments: 'NEW comments'

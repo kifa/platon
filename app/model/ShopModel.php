@@ -113,7 +113,7 @@ class ShopModel extends Repository {
 
 
     public function getShopInfoPublic() {
-        $param = array('Name', 'Description', 'CompanyAddress', 'TAX', 'orderByMail', 'ContactMail', 'ContactPhone', 'InvoicePrefix', 'GA');
+        $param = array('Name', 'Description', 'CompanyAddress', 'TAX', 'orderByMail', 'ContactMail', 'ContactPhone', 'InvoicePrefix', 'GA', 'Account');
         
         /*return $this->getTable('settings')
                 ->where('SettingName', $param)

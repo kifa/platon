@@ -150,9 +150,13 @@ class SmartPanelPresenter extends BasePresenter {
     
     }
     
-    
+    protected function createComponentNewsControl() {
+        $news = new NewsControl($this->orderModel, $this->productModel,$this->translator);
+        return $news;
+    }
 
-        protected function createComponentPasswordForm() {
+    
+    protected function createComponentPasswordForm() {
         $form = new Nette\Application\UI\Form;
         $form->setTranslator($this->translator);
         $form->addHidden('login', $this->getUser()->getIdentity()->id);
