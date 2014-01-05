@@ -64,7 +64,6 @@ class OrderPresenter extends BasePresenter {
      * Handle for removing item from Cart
      */
 
-    
     public function createComponentCartControl() {
         $cart = new CartControl($this->shopModel, $this->productModel, 
                                 $this->translator, $this->orderModel, $this->cart);
@@ -115,7 +114,7 @@ class OrderPresenter extends BasePresenter {
     public function renderOrder() {
             
             if (!$this->cart->numberItems > 0) {
-                $this->setView('cartEmpty');
+                $this->redirect('cartEmpty');
             }
             foreach ($this->cart->prd as $id => $amnt) {
 

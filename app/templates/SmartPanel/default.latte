@@ -1,6 +1,6 @@
 {var $robots = noindex}
 {block pageheader}
-{if $user->isInRole('admin')}
+
        <div class="col-md-12 smartPanelBar">
                 <a class="btn btn-default" href="{plink SmartPanel:orders }"><i class="icon-spinner"></i> {_smart.menu.orders}</a> 
                 <a class="btn btn-default" href="{plink SmartPanel:producers }"><i class="icon-bookmark"></i> {_smart.menu.brands}</a> 
@@ -17,13 +17,12 @@
         <h1 n:block="title"><i class="icon-lightbulb"></i> {_smart.menu.smart-panel} {_smart.menu.dashboard}<small> {_smart.menu.smart-info}</small></h1>
 </div>
 
-{/if}
 {/block}
 
 {block content}
 <div class="col-md-11"> 
-    {if $user->isInRole('admin')}
-
+{control newsControl}
+    
    <div class="tabbable col-md-12"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">
           <li class="active"><a href="#overal"  data-toggle="tab">{_smart.panel.overal}</a></li>
@@ -153,9 +152,6 @@
          </div>
         </div>
    </div>
-
-    
-    {/if}
 </div>
 {/block}
 
