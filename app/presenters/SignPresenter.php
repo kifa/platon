@@ -21,17 +21,21 @@ class SignPresenter extends BasePresenter {
      
     protected function startup() {
         parent::startup();
-
-        $this->authenticator = $this->context->authenticator;
-        $this->users = $this->context->userModel;
     }
 
     public function injectTranslator(\Kdyby\Translation\Translator $translator) {
         $this->translator = $translator;
     }
     
+    public function injectUserModel(\UserModel $user) {
+        $this->users = $user;
+    }
     
-    protected function createComponentSignInForm() {
+    public function injectAuthenticator(\Authenticator $auth) {
+        $this->authenticator = $auth;
+    }
+
+        protected function createComponentSignInForm() {
         $form = new UI\Form;
 
         $form->setTranslator($this->translator);

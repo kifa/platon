@@ -53,9 +53,7 @@ class HomepagePresenter extends BasePresenter {
     }
 
     public function actionDefault() {
-        if ($this->getUser()->isInRole('admin')) {
-            $this['addVideoForm'];
-        }
+        
     }
 
     public function renderDefault() {

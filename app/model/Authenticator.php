@@ -20,10 +20,19 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
 
     private $users;
 
-    public function __construct(UserModel $users) {
+    /*public function __construct(UserModel $users) {
         $this->users = $users;
-    }
+    }*/
+    
+ protected function startup() {
+      parent::startup();
+ }
 
+ 
+ public function injectUserModel(\UserModel $user) {
+        $this->users = $user;
+    }
+    
     /**
      * Performs an authentication.
      * @return Nette\Security\Identity
@@ -33,6 +42,8 @@ class Authenticator extends Nette\Object implements NS\IAuthenticator {
         list($username, $password) = $credentials;
         $row = $this->users->findByName($username);
 
+        dump($row);
+       dump($this->users);
        
         if (!$row) {
             throw new NS\AuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);

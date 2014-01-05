@@ -19,7 +19,8 @@ class UserModel extends Repository{
                 ->WHERE('UsersID LIKE %s', $username)                
                 ->FETCH();
         
-        dump($user);
+        return $user;
+        
     }
      
     public function userAdd($name, $username, $password) {

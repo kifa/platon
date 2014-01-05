@@ -28,13 +28,14 @@ class MenuControl extends BaseControl {
 
     
     public function __construct(\CategoryModel $categoryModel, \ProductModel $productModel,
-                                \BlogModel $blogModel, \ShopModel $shopModel,
+                                \BlogModel $blogModel, \ShopModel $shopModel, \OrderModel $order, 
  \Kdyby\Translation\Translator $translator) {
         
         $this->categoryModel = $categoryModel;
         $this->productModel = $productModel;
         $this->blogModel = $blogModel;
         $this->shopModel = $shopModel;
+        $this->orderModel = $order;
         $this->translator = $translator;
     }
 

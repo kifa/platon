@@ -243,7 +243,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     protected function createComponentMenu() 
     {
         $menuControl = new MenuControl($this->categoryModel, $this->productModel, 
-                                       $this->blogModel, $this->shopModel, $this->translator);
+                                       $this->blogModel, $this->shopModel, $this->orderModel, $this->translator);
         $menuControl->setCart($this->cart);
         $menuControl->setUserTracking($this->usertracking);
         $this->addComponent($menuControl, 'menu');
