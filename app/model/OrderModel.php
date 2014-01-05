@@ -508,8 +508,8 @@ class OrderModel extends Repository {
 			->count();*/
         $row = $this->db
                 ->SELECT("COUNT(*)")
-                ->FROM('orders')
-                ->WHERE('DateCreated > ', $date);
+                ->FROM('orders')               
+                ->WHERE('DateCreated > 2014-01-05');
                 //->FETCHSINGLE();
         
         return $row;

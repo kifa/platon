@@ -886,8 +886,9 @@ class ProductModel extends Repository {
                 ->count();*/
         $row = $this->db
                 ->SELECT("COUNT(*)")
-                ->FROM('comment')
+                ->FROM('comment')               
                 ->WHERE('DateOfAdded >', $date);
+                //->FETCHSINGLE();
         
         return $row;
     }
