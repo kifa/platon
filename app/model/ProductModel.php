@@ -885,12 +885,14 @@ class ProductModel extends Repository {
                 ->where('DateOfAdded>',$date)
                 ->count();*/
         $row = $this->db
-                ->SELECT("COUNT(*)")
+                ->SELECT("CommentID")
                 ->FROM('comment')               
-                ->WHERE('DateOfAdded >', $date);
+                ->WHERE("DateOfAdded > %t", $date);
                 //->FETCHSINGLE();
         
-        return $row;
+        $count = count($row);
+        
+        return $count;
     }
     
     public function loadVariantParams($id){

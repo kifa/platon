@@ -507,12 +507,14 @@ class OrderModel extends Repository {
 			->where('DateCreated>',$date)
 			->count();*/
         $row = $this->db
-                ->SELECT("COUNT(*)")
+                ->SELECT("OrderID")
                 ->FROM('orders')               
-                ->WHERE('DateCreated > 2014-01-05');
+                ->WHERE("DateCreated > %t", $date);
                 //->FETCHSINGLE();
         
-        return $row;
+        $count = count($row);
+        
+        return $count;
     }
 
     public function removeOrderProducts($orderid, $product) {
