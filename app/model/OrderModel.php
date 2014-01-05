@@ -507,8 +507,10 @@ class OrderModel extends Repository {
 			->where('DateCreated>',$date)
 			->count();*/
         $row = $this->db
-                ->COUNT('orders')
+                ->SELECT("COUNT(*)")
+                ->FROM('orders')
                 ->WHERE('DateCreated > ', $date);
+                //->FETCHSINGLE();
         
         return $row;
     }
@@ -542,7 +544,8 @@ class OrderModel extends Repository {
 			->where('OrderID', $orderid)
 			->count();*/
         $row = $this->db
-                ->COUNT('orderdetails')
+                ->SELECT("COUNT(*)")
+                ->FROM('orderdetails')
                 ->WHERE('OrderID = %i', $orderid);
         
         return $row;
@@ -1106,7 +1109,8 @@ class OrderModel extends Repository {
         /*return $this->getTable('orders')
 			->count();*/
         $row = $this->db
-                ->COUNT('orders');
+                ->SELECT("COUNT(*)")
+                ->FROM('orders');
         
         return $row;        
     }
@@ -1116,7 +1120,8 @@ class OrderModel extends Repository {
         /*return $this->getTable('orderdetails')
 			->count();*/
         $row = $this->db
-                ->COUNT('orderdetails');
+                ->SELECT("COUNT(*)")
+                ->FROM('orderdetails');
         
         return $row;
     }
@@ -1126,7 +1131,8 @@ class OrderModel extends Repository {
         /*return $this->getTable('delivery')
 			->count();*/
         $row = $this->db
-                ->COUNT('delivery');
+                ->SELECT("COUNT(*)")
+                ->FROM('delivery');
         
         return $row;
     }

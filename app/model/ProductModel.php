@@ -885,7 +885,8 @@ class ProductModel extends Repository {
                 ->where('DateOfAdded>',$date)
                 ->count();*/
         $row = $this->db
-                ->COUNT('comment')
+                ->SELECT("COUNT(*)")
+                ->FROM('comment')
                 ->WHERE('DateOfAdded >', $date);
         
         return $row;
