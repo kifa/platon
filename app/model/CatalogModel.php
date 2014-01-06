@@ -340,9 +340,8 @@ class CatalogModel extends Repository {
         /*return $this->getTable('product')
                 ->count();
          */
-        $row = $this->db
-                ->COUNT('*')
-                ->FROM('product');
+        $row = $this->db->select('COUNT(*)')
+                ->FROM('product')->fetchSingle();
         
         return $row;
     }

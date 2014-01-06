@@ -870,7 +870,7 @@ class ProductModel extends Repository {
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('comment')
-                ->orderBy('DafeOfAdded DESC')
+                ->orderBy('DateOfAdded DESC')
                 ->FETCHASSOC('CommentID');
         
         return $row;
@@ -881,12 +881,10 @@ class ProductModel extends Repository {
             $date =  date('Y-m-d H:i:s');
         }
         
-        /*return $this->getTable('comment')
-                ->where('DateOfAdded>',$date)
-                ->count();*/
-        $row = $this->db
-                ->COUNT('comment')
-                ->WHERE('DateOfAdded >', $date);
+        $date = "DateOfAdded > ' ". $date . "'";
+        
+        $row = $this->db->select('COUNT(*)')->from("comment")
+                ->WHERE($date)->fetchSingle();
         
         return $row;
     }

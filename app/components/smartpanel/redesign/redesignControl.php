@@ -54,19 +54,19 @@ class redesignControl extends BaseControl {
 
                      
                     $image = Image::fromFile($imgUrl . $photo->PhotoURL);
-                    $image->resize(null, $sizes['Large']->Value, Image::SHRINK_ONLY);
+                    $image->resize(null, $sizes['Large'], Image::SHRINK_ONLY);
 
                     $imgUrl300 = $imgUrl . 'l-' . $photo->PhotoURL;
                     $image->save($imgUrl300);
                     
                     $image = Image::fromFile($imgUrl . $photo->PhotoURL);
-                    $image->resize(null, $sizes['Medium']->Value, Image::SHRINK_ONLY);
+                    $image->resize(null, $sizes['Medium'], Image::SHRINK_ONLY);
 
                     $imgUrl150 = $imgUrl . 'm-' . $photo->PhotoURL;
                     $image->save($imgUrl150);
 
                     $image = Image::fromFile($imgUrl . $photo->PhotoURL);
-                    $image->resize(null, $sizes['Small']->Value, Image::SHRINK_ONLY);
+                    $image->resize(null, $sizes['Small'], Image::SHRINK_ONLY);
 
                     $imgUrl50 = $imgUrl . 's-' . $photo->PhotoURL;
                     $image->save($imgUrl50);
@@ -304,13 +304,13 @@ class redesignControl extends BaseControl {
             $menuSwitcherForm->setTranslator($this->translator);
             $menuSwitcherForm->addSelect('topMenu', 'Top Main Menu', $menus)
                     ->setAttribute('class', 'form-control')
-                    ->setDefaultValue($this->shopInfo['TopMenu']->Value);
+                    ->setDefaultValue($this->shopInfo['TopMenu']);
             $menuSwitcherForm->addSelect('sideMenu', 'Side Menu', $menus)
                     ->setAttribute('class', 'form-control')
-                    ->setDefaultValue($this->shopInfo['SideMenu']->Value);
+                    ->setDefaultValue($this->shopInfo['SideMenu']);
             $menuSwitcherForm->addSelect('footerMenu', 'Footer Menu', $menus)
                     ->setAttribute('class', 'form-control')
-                    ->setDefaultValue($this->shopInfo['FooterMenu']->Value);
+                    ->setDefaultValue($this->shopInfo['FooterMenu']);
             $menuSwitcherForm->addSubmit('save', 'Set menus')
                     ->setAttribute('class', 'form-control upl btn btn-primary')
                     ->setAttribute('data-loading-text', 'Setting...');
@@ -338,11 +338,11 @@ class redesignControl extends BaseControl {
     
     public function renderModal() {
        $this->template->setFile(__DIR__ . '/templates/redesignModal.latte');
-       $this->template->layoutSel = $this->shopInfo['ShopLayout']->Value;
-       $this->template->productMiniSel = $this->shopInfo['ProductMiniLayout']->Value;
-       $this->template->homepageSel = $this->shopInfo['HomepageLayout']->Value;
-       $this->template->productSel = $this->shopInfo['ProductLayout']->Value;
-       $this->template->style = $this->shopInfo['Style']->Value;
+       $this->template->layoutSel = $this->shopInfo['ShopLayout'];
+       $this->template->productMiniSel = $this->shopInfo['ProductMiniLayout'];
+       $this->template->homepageSel = $this->shopInfo['HomepageLayout'];
+       $this->template->productSel = $this->shopInfo['ProductLayout'];
+       $this->template->style = $this->shopInfo['Style'];
        $this->template->render(); 
     }
     

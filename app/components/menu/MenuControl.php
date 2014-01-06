@@ -218,6 +218,7 @@ class MenuControl extends BaseControl {
             $this->template->setFile(__DIR__ . '/templates/MenuSmartPanelControl.latte');
             $news = $this->orderModel->loadUnreadOrdersCount($this->usertracking->date);
             $comments = $this->productModel->loadUnreadCommentsCount($this->usertracking->date);
+
             $this->template->news = $news + $comments;
             $this->template->render();
           }

@@ -6,11 +6,14 @@ class NewsControl extends BaseControl {
     protected $translator;
     private $orderModel;
     private $productModel;
-    
-    public function __construct(\OrderModel $orderModel, \ProductModel $productModel, \Kdyby\Translation\Translator $translator) {
+    private $usertracking;
+
+
+    public function __construct(\OrderModel $orderModel, \ProductModel $productModel, $usertracking, \Kdyby\Translation\Translator $translator) {
         $this->orderModel = $orderModel;
         $this->productModel = $productModel;
         $this->translator = $translator;
+        $this->usertracking = $usertracking;
     }
     
     public function render() {

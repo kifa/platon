@@ -121,8 +121,9 @@ class ShopModel extends Repository {
         $row = $this->db
                 ->SELECT('SettingID, SettingName, Value')
                 ->FROM('settings')
-                ->WHERE('SettingName = %s', $param)
+                ->WHERE('SettingName IN %in', $param)
                 ->FETCHASSOC('SettingID');
+        return $row;
      }
     
     public function setShopInfo($name, $value)

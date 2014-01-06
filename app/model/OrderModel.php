@@ -503,12 +503,13 @@ class OrderModel extends Repository {
         if ($date == NULL) {
             $date =  date('Y-m-d H:i:s');
         }
+        //dump($date);
         /*return $this->getTable('orders')
 			->where('DateCreated>',$date)
 			->count();*/
-        $row = $this->db
-                ->COUNT('orders')
-                ->WHERE('DateCreated > ', $date);
+        $date = "DateCreated > ' ". $date . "'";
+        $row = $this->db->select('COUNT(*)')->from('orders')
+                ->WHERE($date)->fetchSingle();
         
         return $row;
     }
@@ -541,8 +542,7 @@ class OrderModel extends Repository {
         /*return $this->getTable('orderdetails')
 			->where('OrderID', $orderid)
 			->count();*/
-        $row = $this->db
-                ->COUNT('orderdetails')
+        $row = $this->db->select("COUNT('orderdetails')")
                 ->WHERE('OrderID = %i', $orderid);
         
         return $row;

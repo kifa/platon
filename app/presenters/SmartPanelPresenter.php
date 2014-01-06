@@ -151,7 +151,7 @@ class SmartPanelPresenter extends BasePresenter {
     }
     
     protected function createComponentNewsControl() {
-        $news = new NewsControl($this->orderModel, $this->productModel,$this->translator);
+        $news = new NewsControl($this->orderModel, $this->productModel,  $this->usertracking, $this->translator);
         return $news;
     }
 
@@ -160,9 +160,9 @@ class SmartPanelPresenter extends BasePresenter {
         $form = new Nette\Application\UI\Form;
         $form->setTranslator($this->translator);
         $form->addHidden('login', $this->getUser()->getIdentity()->id);
-        $form->addPassword('newPassword', 'New password:', 30)
+        $form->addPassword('newPassword', 'New password:')
                 ->addRule(Form::MIN_LENGTH, 'New password has to have %d letters.', 6);
-        $form->addPassword('confirmPassword', 'New Password again:', 30)
+        $form->addPassword('confirmPassword', 'New Password again:')
                 ->addRule(Form::FILLED, 'You have to add you password twice..')
                 ->addRule(Form::EQUAL, 'Filled passwords has to match.', $form['newPassword']);
         $form->addSubmit('set', 'Change password');
@@ -817,7 +817,7 @@ class SmartPanelPresenter extends BasePresenter {
             $this->redirect('Sign:in');
         } else {
             $this->usertracking->date = date("Y-m-d H:i:s");
-            
+
             $this->template->usr = $this->getUser()->getIdentity();
             $this->template->orders = $this->orderModel->loadLatestOrders();
             $this->template->settings = $this->shopModel->getShopInfoPublic();
