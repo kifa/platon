@@ -886,7 +886,9 @@ class ProductModel extends Repository {
         $row = $this->db->select('COUNT(*)')->from("comment")
                 ->WHERE($date)->fetchSingle();
         
-        return $row;
+        $count = count($row);
+        
+        return $count;
     }
     
     public function loadVariantParams($id){

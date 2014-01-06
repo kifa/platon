@@ -127,7 +127,8 @@ class UserModel extends Repository{
         /*return $this->getTable('address')
                 ->count();*/
         $row = $this->db
-                ->COUNT('address');
+                ->SELECT("COUNT(*)")
+                ->FROM('address');
         
         return $row;
     }

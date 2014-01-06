@@ -511,7 +511,9 @@ class OrderModel extends Repository {
         $row = $this->db->select('COUNT(*)')->from('orders')
                 ->WHERE($date)->fetchSingle();
         
-        return $row;
+        $count = count($row);
+        
+        return $count;
     }
 
     public function removeOrderProducts($orderid, $product) {
@@ -1106,7 +1108,8 @@ class OrderModel extends Repository {
         /*return $this->getTable('orders')
 			->count();*/
         $row = $this->db
-                ->COUNT('orders');
+                ->SELECT("COUNT(*)")
+                ->FROM('orders');
         
         return $row;        
     }
@@ -1116,7 +1119,8 @@ class OrderModel extends Repository {
         /*return $this->getTable('orderdetails')
 			->count();*/
         $row = $this->db
-                ->COUNT('orderdetails');
+                ->SELECT("COUNT(*)")
+                ->FROM('orderdetails');
         
         return $row;
     }
@@ -1126,7 +1130,8 @@ class OrderModel extends Repository {
         /*return $this->getTable('delivery')
 			->count();*/
         $row = $this->db
-                ->COUNT('delivery');
+                ->SELECT("COUNT(*)")
+                ->FROM('delivery');
         
         return $row;
     }
