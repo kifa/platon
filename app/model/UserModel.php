@@ -78,8 +78,8 @@ class UserModel extends Repository{
                 ->where('UsersID',$UsersID)
                 ->update($update);*/
         $row = $this->db
-                ->UPDATE('users')
-                ->WHERE('UsersID = %s', $UsersID)
+                ->UPDATE("users", $update)
+                ->WHERE("UsersID = %i", $UsersID)
                 ->EXECUTE();
         
         return $row;
@@ -116,8 +116,8 @@ class UserModel extends Repository{
                 ->where('UsersID',$usersID)
                 ->update($update);*/
         $row = $this->db
-                ->UPDATE('address', $update)
-                ->WHERE('UsersID = $s', $usersID)
+                ->UPDATE("address", $update)
+                ->WHERE("UsersID = %i", $usersID)
                 ->EXECUTE();
         
         return $row;

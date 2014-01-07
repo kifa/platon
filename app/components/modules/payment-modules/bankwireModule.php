@@ -26,30 +26,18 @@ class bankwireModule extends moduleControl {
     
     private $view;
    
+    public function __construct(\ShopModel $shopModel, \OrderModel $orderModel, 
+            \Kdyby\Translation\Translator $translator) {
+        $this->shopModel = $shopModel;
+        $this->orderModel = $orderModel;
+        $this->translator = $translator;
+    }
+
     public function setView($view)
     {
         $this->view = $view;
     }
 
-    public function setTranslator($translator) {
-        $this->translator = $translator;
-    }
-
-    public function setShop($shop) {
-        $this->shopModel = $shop;
-    }
-
-    public function setOrder($order) {
-        $this->orderModel = $order;
-    }
-
-    public function createTemplate($class = NULL) {
-        $template = parent::createTemplate($class);
-        $template->setTranslator($this->translator);
-        // případně $this->translator přes konstrukt/inject
-
-        return $template;
-    }
 
     /*     * ***************************************************************
      * HANDLE
@@ -95,28 +83,21 @@ class bankwireModule extends moduleControl {
     
     
     public function actionOrder($orderInfo) {
-             
-         if($this->shopModel->isModuleActive('bankwire')) {
-          
-             $bankwireID = $this->shopModel->getShopInfo('bankwireID');
-                 
-           if ($orderInfo['Progress'] == 1 & $orderInfo['Payment'] == $bankwireID) {
-               $this->sendStatusMail($orderInfo['OrderID']);
-               
-           }
-        
-        }
-
+           
     }
     
-    protected function sendStatusMail($orderid) {
+    public function sendMail($orderID) {
+        $mail = $this->sendStatusMail($orderID);
+             return $mail;
+    }
+
+        protected function sendStatusMail($orderid) {
        
         
-             $row = $this->orderModel->loadOrder($orderid);
-             $adminMail = $this->shopModel->getShopInfo('OrderMail');
-             $shopName = $this->shopModel->getShopInfo('Name');
-             $account = $this->shopModel->getShopInfo('Account');
-             
+            $row = $this->orderModel->loadOrder($orderid);
+            $adminMail = $this->shopModel->getShopInfo('OrderMail');
+            $shopName = $this->shopModel->getShopInfo('Name');
+            $account = $this->shopModel->getShopInfo('Account'); 
             
             $template = new Nette\Templating\FileTemplate($this->presenter->context->parameters['appDir'] . '/templates/Email/bankwireStatus.latte');
                         
@@ -138,7 +119,7 @@ class bankwireModule extends moduleControl {
 
             $info = $this->translator->translate('Payment Information');
         try {  
-            $mailIT = new mailControl();
+            $mailIT = new mailControl($this->translator);
             $this->addComponent($mailIT, 'mail');
             
             $mailIT->sendSuperMail($row->UsersID, $info, $template, $adminMail);           
@@ -146,6 +127,8 @@ class bankwireModule extends moduleControl {
           }  catch (Exception $e) {
             \Nette\Diagnostics\Debugger::log($e);
             }
+            
+         return TRUE;
     }
 
 

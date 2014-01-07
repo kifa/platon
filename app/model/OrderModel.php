@@ -98,7 +98,7 @@ class OrderModel extends Repository {
                 ->WHERE('OrderID = %i', $id)
                 ->FETCHSINGLE('UsersID');                                        
         
-        dump($user);
+ 
         $row = $this->db
                 ->SELECT('*')
                 ->FROM('address')
@@ -323,8 +323,7 @@ class OrderModel extends Repository {
                         //$lastorderid = $this->db
                         //        ->getInsertId();
                         
-                        dump($lastorderid);
-                        
+                 
 			if($note != ''){
 				$this->addNote($lastorderid, $user, $note);
 			}
@@ -335,7 +334,7 @@ class OrderModel extends Repository {
                                 ->WHERE('OrderID = %i', $lastorderid)
                                 ->FETCH();
                         
-                            dump($lastOrder);
+                           
                             
                             return $lastOrder;
 			//return $lastorderid;

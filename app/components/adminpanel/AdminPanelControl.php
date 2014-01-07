@@ -48,9 +48,9 @@ class AdminPanelControl extends BaseControl {
             
             if($this->presenter->isAjax())
             {            
-              $this->parent->invalidateControl();
-                $this->presenter->invalidateControl('products');
-                $this->presenter->invalidateControl('script');
+              $this->parent->redrawControl();
+                $this->presenter->redrawControl('products');
+                $this->presenter->redrawControl('script');
             }
             
             else {
@@ -63,9 +63,9 @@ class AdminPanelControl extends BaseControl {
         if ($this->presenter->getUser()->isInRole('admin')) {
             $this->productModel->updateProduct($id, 'ProductStatusID', 0);
             if($this->presenter->isAjax()) {
-               $this->parent->invalidateControl();
-                $this->presenter->invalidateControl('products');
-                $this->presenter->invalidateControl('script');
+               $this->parent->redrawControl();
+                $this->presenter->redrawControl('products');
+                $this->presenter->redrawControl('script');
                 
             }
             else {
@@ -83,9 +83,9 @@ class AdminPanelControl extends BaseControl {
             $this->presenter->flashMessage('Product sucessfully published', 'alert alert-success');
             
             if($this->presenter->isAjax()) {
-               $this->parent->invalidateControl();
-                $this->presenter->invalidateControl('products');
-                $this->presenter->invalidateControl('script');
+               $this->parent->redrawControl();
+                $this->presenter->redrawControl('products');
+                $this->presenter->redrawControl('script');
                 
             }
             else {
@@ -99,9 +99,9 @@ class AdminPanelControl extends BaseControl {
             if($this->presenter->isAjax())
             {            
                 $this->productModel->updateProduct($id, 'ProductStatusID', $statusid);
-                $this->parent->invalidateControl();
-                $this->presenter->invalidateControl('products');
-                $this->presenter->invalidateControl('script');
+                $this->parent->redrawControl();
+                $this->presenter->redrawControl('products');
+                $this->presenter->redrawControl('script');
             }
             else {
              $this->presenter->redirect('this');
@@ -114,10 +114,11 @@ class AdminPanelControl extends BaseControl {
             if($this->presenter->isAjax())
             {            
                 $this->productModel->updateProduct($id, 'CategoryID', $catid);
-                $this->parent->invalidateControl();
-                $this->presenter->invalidateControl('products');
-                $this->presenter->invalidateControl('bread');
-                $this->presenter->invalidateControl('script');
+               // $this->parent->redrawControl();
+                $this->redrawControl();
+                $this->presenter->redrawControl('products');
+                $this->presenter->redrawControl('bread');
+                $this->presenter->redrawControl('script');
                 
 
             }
@@ -132,9 +133,9 @@ class AdminPanelControl extends BaseControl {
             if($this->presenter->isAjax())
             {            
                 $this->productModel->updateProduct($id, 'ProducerID', $producerid);
-                $this->parent->invalidateControl();
-                $this->presenter->invalidateControl('products');
-                $this->presenter->invalidateControl('script');
+                $this->parent->redrawControl();
+                $this->presenter->redrawControl('products');
+                $this->presenter->redrawControl('script');
 
             }
             else {
@@ -154,8 +155,8 @@ class AdminPanelControl extends BaseControl {
             $this->presenter->flashMessage($e, 'alert alert-success');
             
             if($this->presenter->isAjax()) {
-                $this->parent->invalidateControl();
-                $this->presenter->invalidateControl('script');
+                $this->parent->redrawControl();
+                $this->presenter->redrawControl('script');
 
             }
             else {
@@ -171,10 +172,10 @@ class AdminPanelControl extends BaseControl {
                 
             if($this->presenter->isAjax())
            {            
-                $this->parent->invalidateControl();
-                $this->presenter->invalidateControl('bread');
-                $this->presenter->invalidateControl('menu');
-                $this->presenter->invalidateControl('script');
+                $this->parent->redrawControl();
+                $this->presenter->redrawControl('bread');
+                $this->presenter->redrawControl('menu');
+                $this->presenter->redrawControl('script');
 
            }
            else {

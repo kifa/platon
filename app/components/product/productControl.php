@@ -89,7 +89,7 @@ class productControl extends BaseControl{
             
             if($this->presenter->isAjax())
             {            
-              $this->invalidateControl('products');
+              $this->redrawControl('products');
               $this->invalidateControl('script');
             }
             
@@ -107,7 +107,7 @@ class productControl extends BaseControl{
             $this->productModel->showProduct($id);
             $this->presenter->flashMessage('Product is successfully visible.', 'alert alert-success');
                 if($this->presenter->isAjax()) {
-                    $this->invalidateControl();
+                    $this->redrawControl();
                     $this->invalidateControl('script');
                 } else {
                 
@@ -212,5 +212,9 @@ class productControl extends BaseControl{
         $this->template->setFile(__DIR__ . '/templates/archive.latte');
         $this->template->product = $product;
         $this->template->render();
+    }
+    
+    public function render() {
+        
     }
 }

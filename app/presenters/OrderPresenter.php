@@ -63,6 +63,12 @@ class OrderPresenter extends BasePresenter {
     /*
      * Handle for removing item from Cart
      */
+    
+    public function beforeRender() {
+        parent::beforeRender();
+        $actions = array('cart', 'orderDone', 'cartEmpty', 'order');
+        if(!in_array($this->getAction(), $actions)) $this->setView('cart');
+    }
 
     public function createComponentCartControl() {
         $cart = new CartControl($this->shopModel, $this->productModel, 
@@ -225,26 +231,24 @@ class OrderPresenter extends BasePresenter {
                 \Nette\Diagnostics\Debugger::log($e);
         }
         
+        
+        $bankwireID = $this->shopModel->getShopInfo('bankwireID');
+
+        if($form->values->payment == $bankwireID) {
+            $bankwire = new bankwireModule($this->shopModel, $this->orderModel, $this->translator);
+            $this->addComponent($bankwire, 'bankwire');
+            $bank = $bankwire->sendMail($orderid);
+        }
+
         foreach ($this->cart->prd as $id => $amnt) {
              $this->productModel->decreaseProduct($id, $this->cart->prd[$id]);
         }
 
         unset($this->cart->prd);
         $this->cart->numberItems = 0;
-
-        $module = $this->createComponentModuleControl();
-        $module->setParent($this);
-        $orderInfo =  array('Shipping' => $form->values->shipping,
-                                 'Payment' => $form->values->payment,
-                                'OrderID' => $orderid,
-                                // 'Total' => $row->TotalPrice,
-                                 'TotalProducts' => $total,
-                                  'Note' => $form->values->note,
-                                 'Progress' => 1);
-
-         $module->actionOrder($orderInfo);
-         $track = md5($form->values->email . $orderid . $order->DateCreated);
-         $this->redirect('Order:orderDone', $orderid, $track);
+        
+        $track = md5($form->values->email . $orderid . $order->DateCreated);
+        $this->redirect('Order:orderDone', $orderid, $track);
     }
 
     protected function createComponentAddNoteForm() {                       
@@ -308,6 +312,7 @@ class OrderPresenter extends BasePresenter {
    
     protected function createComponentMail() {
         $mailControl = new mailControl($this->translator);
+        $this->addComponent($mailControl, 'mailControl');
         return $mailControl;
     }
 
@@ -329,6 +334,7 @@ class OrderPresenter extends BasePresenter {
         $template->link = $this->presenter->link('//Order:orderDone', $args);
 
         $mailIT = new mailControl($this->translator);
+        $this->addComponent($mailIT, 'mailCustomer');
         $mailIT->sendSuperMail($row->UsersID, 'Message about your order', $template, $adminMail);
     }
     
@@ -357,6 +363,7 @@ class OrderPresenter extends BasePresenter {
         }
 
         $mailIT = new mailControl($this->translator);
+        $this->addComponent($mailIT, 'mailAdmin');
         $mailIT->sendSuperMail($adminMail, 'New Order '.$orderid, $template, $adminMail);
     }
     
@@ -375,6 +382,6 @@ class OrderPresenter extends BasePresenter {
         $template->note = $note;
 
         $mailIT = new mailControl($this->translator);
-        $mailIT->sendSuperMail($adminMail, 'Message about order', $template, $row->UserID);
+        $mailIT->sendSuperMail($adminMail, 'Message about order', $template, $row->UsersID);
     }
 }
